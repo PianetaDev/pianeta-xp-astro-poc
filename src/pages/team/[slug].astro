@@ -31,6 +31,14 @@ const jsonLd = {
   ...(data.location && { homeLocation: { '@type': 'Place', name: data.location } }),
 };
 
+const metaInline = [
+  data.role && { label: 'Ruolo', value: data.role },
+  data.employment && { label: 'Rapporto', value: data.employment },
+  data.since && { label: 'Dal', value: String(new Date(data.since).getFullYear()) },
+  data.location && { label: 'Dove', value: data.location },
+  data.email && { label: 'Email', value: data.email, href: `mailto:${data.email}` },
+].filter(Boolean);
+
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Team', href: '/team' }];
 if (data.role) eyebrowParts.push({ label: data.role });
 ---
@@ -46,15 +54,9 @@ if (data.role) eyebrowParts.push({ label: data.role });
     backLabel="Tutto il team"
     nextItem={nextItem}
     byline={{ meta: [data.role, data.location].filter(Boolean) }}
+    metaInline={metaInline}
     jsonLd={jsonLd}
   >
-    <Fragment slot="meta">
-      {data.role && <div><dt>Ruolo</dt><dd>{data.role}</dd></div>}
-      {data.employment && <div><dt>Rapporto</dt><dd>{data.employment}</dd></div>}
-      {data.since && <div><dt>Dal</dt><dd>{new Date(data.since).getFullYear()}</dd></div>}
-      {data.location && <div><dt>Dove</dt><dd>{data.location}</dd></div>}
-      {data.email && <div><dt>Email</dt><dd><a href={`mailto:${data.email}`} class="meta-link">{data.email}</a></dd></div>}
-    </Fragment>
     <Content />
   </DetailPage>
 </BaseLayout>

@@ -25,6 +25,13 @@ if (data.date) eyebrowParts.push({ label: formatDate(data.date) });
 
 const related = (data.relatedWork || []).map((slug: string) => ({ type: 'work', slug }));
 
+const metaInline = [
+  data.authors?.length && { label: 'Autori', value: data.authors.join(', ') },
+  data.date && { label: 'Data', value: formatDate(data.date) },
+  data.issue && { label: 'Numero', value: '#' + data.issue },
+  data.tags?.length && { label: 'Tag', value: data.tags.join(' · ') },
+].filter(Boolean);
+
 const url = new URL(`/bulletin/${item.id}`, Astro.site).toString();
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -53,14 +60,9 @@ const jsonLd = {
     relatedTitle="Case study collegati"
     nextItem={nextItem}
     byline={{ authors: data.authors, date: data.date ? formatDate(data.date) : undefined, meta: data.issue ? [`#${data.issue}`] : undefined }}
+    metaInline={metaInline}
     jsonLd={jsonLd}
   >
-    <Fragment slot="meta">
-      {data.authors && data.authors.length > 0 && <div><dt>Autori</dt><dd>{data.authors.join(', ')}</dd></div>}
-      {data.date && <div><dt>Data</dt><dd>{formatDate(data.date)}</dd></div>}
-      {data.issue && <div><dt>Numero</dt><dd>#{data.issue}</dd></div>}
-      {data.tags && data.tags.length > 0 && <div><dt>Tag</dt><dd>{data.tags.join(' · ')}</dd></div>}
-    </Fragment>
     <Content />
   </DetailPage>
 </BaseLayout>

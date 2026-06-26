@@ -23,6 +23,12 @@ const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Servizi', hr
 
 const related = caseStudies.map((slug) => ({ type: 'work', slug }));
 
+const metaInline = [
+  data.team?.length && { label: 'Team', value: data.team.join(', ') },
+  data.deliverables?.length && { label: 'Deliverables', value: data.deliverables.length + ' voci' },
+  data.pricing?.label && { label: 'Pricing', value: data.pricing.label },
+].filter(Boolean);
+
 const url = new URL(`/services/${item.id}`, Astro.site).toString();
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -49,22 +55,9 @@ const jsonLd = {
     related={related}
     relatedTitle="Case study"
     nextItem={nextItem}
+    metaInline={metaInline}
     jsonLd={jsonLd}
   >
-    <Fragment slot="meta">
-      {data.deliverables && data.deliverables.length > 0 && (
-        <div>
-          <dt>Deliverables</dt>
-          <dd>
-            <ul style="margin:0;padding:0;list-style:none;">
-              {data.deliverables.map((d: string) => <li style="padding:4px 0;border-bottom:1px solid rgba(14,17,22,0.06);">{d}</li>)}
-            </ul>
-          </dd>
-        </div>
-      )}
-      {data.team && data.team.length > 0 && <div><dt>Team</dt><dd>{data.team.join(', ')}</dd></div>}
-      {data.pricing?.label && <div><dt>Pricing</dt><dd>{data.pricing.label}</dd></div>}
-    </Fragment>
     <Content />
   </DetailPage>
 </BaseLayout>

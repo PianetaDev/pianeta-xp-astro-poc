@@ -19,6 +19,15 @@ const cover = data.cover || data.ogImage;
 const live = data.links?.live;
 const bulletinRefs: string[] = data.links?.bulletin || [];
 
+const metaInline = [
+  data.client && { label: 'Cliente', value: data.client },
+  data.sector && { label: 'Settore', value: data.sector },
+  data.year && { label: 'Anno', value: String(data.year) },
+  data.category && { label: 'Categoria', value: data.category },
+  data.team?.length && { label: 'Team', value: data.team.join(', ') },
+  live && { label: 'Live', value: new URL(live).hostname, href: live, external: true },
+].filter(Boolean);
+
 const url = new URL(`/work/${item.id}`, Astro.site).toString();
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -52,16 +61,9 @@ const related = bulletinRefs.map((slug) => ({ type: 'bulletin', slug }));
     backLabel="Tutti i lavori"
     related={related}
     nextItem={nextItem}
+    metaInline={metaInline}
     jsonLd={jsonLd}
   >
-    <Fragment slot="meta">
-      {data.client && <div><dt>Cliente</dt><dd>{data.client}</dd></div>}
-      {data.sector && <div><dt>Settore</dt><dd>{data.sector}</dd></div>}
-      {data.year && <div><dt>Anno</dt><dd>{data.year}</dd></div>}
-      {data.category && <div><dt>Categoria</dt><dd>{data.category}</dd></div>}
-      {data.team && data.team.length > 0 && <div><dt>Team</dt><dd>{data.team.join(', ')}</dd></div>}
-      {live && <div><dt>Live</dt><dd><a href={live} target="_blank" rel="noopener" class="meta-link">{new URL(live).hostname} ↗</a></dd></div>}
-    </Fragment>
     <Content />
   </DetailPage>
 </BaseLayout>

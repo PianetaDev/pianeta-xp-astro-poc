@@ -44,6 +44,14 @@ const jsonLd = {
   industry: 'Design & Technology',
 };
 
+const metaInline = [
+  data.employmentType && { label: 'Contratto', value: data.employmentType },
+  data.location && { label: 'Dove', value: data.location },
+  data.team && { label: 'Team', value: data.team },
+  data.startDate && { label: 'Inizio', value: data.startDate },
+  { label: 'Per candidarsi', value: applyEmail, href: `mailto:${applyEmail}` },
+];
+
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Careers', href: '/careers' }];
 if (data.employmentType) eyebrowParts.push({ label: data.employmentType });
 if (data.location) eyebrowParts.push({ label: data.location });
@@ -58,15 +66,9 @@ if (data.location) eyebrowParts.push({ label: data.location });
     backHref="/careers"
     backLabel="Tutte le posizioni"
     nextItem={nextItem}
+    metaInline={metaInline}
     jsonLd={jsonLd}
   >
-    <Fragment slot="meta">
-      {data.employmentType && <div><dt>Contratto</dt><dd>{data.employmentType}</dd></div>}
-      {data.location && <div><dt>Dove</dt><dd>{data.location}</dd></div>}
-      {data.team && <div><dt>Team</dt><dd>{data.team}</dd></div>}
-      {data.startDate && <div><dt>Inizio</dt><dd>{data.startDate}</dd></div>}
-      <div><dt>Per candidarsi</dt><dd><a href={`mailto:${applyEmail}`} class="meta-link">{applyEmail}</a></dd></div>
-    </Fragment>
     <Content />
   </DetailPage>
 </BaseLayout>

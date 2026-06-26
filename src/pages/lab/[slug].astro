@@ -17,6 +17,13 @@ const data: any = item.data;
 const title = data.title || item.id;
 const cover = data.cover || data.ogImage;
 
+const metaInline = [
+  data.kind && { label: 'Tipo', value: data.kind },
+  data.year && { label: 'Anno', value: String(data.year) },
+  data.status && { label: 'Stato', value: data.status },
+  data.tags?.length && { label: 'Tag', value: data.tags.join(' · ') },
+].filter(Boolean);
+
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Lab', href: '/lab' }];
 if (data.kind) eyebrowParts.push({ label: data.kind });
 if (data.year) eyebrowParts.push({ label: String(data.year) });
@@ -32,13 +39,8 @@ if (data.year) eyebrowParts.push({ label: String(data.year) });
     backHref="/lab"
     backLabel="Tutti gli esperimenti"
     nextItem={nextItem}
+    metaInline={metaInline}
   >
-    <Fragment slot="meta">
-      {data.kind && <div><dt>Tipo</dt><dd>{data.kind}</dd></div>}
-      {data.year && <div><dt>Anno</dt><dd>{data.year}</dd></div>}
-      {data.status && <div><dt>Stato</dt><dd>{data.status}</dd></div>}
-      {data.tags && data.tags.length > 0 && <div><dt>Tag</dt><dd>{data.tags.join(' · ')}</dd></div>}
-    </Fragment>
     <Content />
   </DetailPage>
 </BaseLayout>

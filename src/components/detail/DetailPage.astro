@@ -3,6 +3,7 @@ interface CtaProp { label: string; href?: string; action?: string; external?: bo
 interface RelatedItem { type: string; slug: string; label?: string; }
 interface NextItem { type: string; slug: string; title: string; deck?: string; cover?: string; kicker?: string; }
 interface BylineProp { authors?: string[]; date?: string; meta?: string[]; }
+interface MetaItem { label: string; value: string; href?: string; external?: boolean; }
 
 interface Props {
   eyebrowParts?: Array<{ label: string; href?: string }>;
@@ -18,6 +19,7 @@ interface Props {
   relatedTitle?: string;
   nextItem?: NextItem;
   byline?: BylineProp;
+  metaInline?: MetaItem[];
   jsonLd?: any;
 }
 const {
@@ -34,6 +36,7 @@ const {
   relatedTitle = 'Approfondimenti',
   nextItem,
   byline,
+  metaInline = [],
   jsonLd,
 } = Astro.props;
 
@@ -94,10 +97,20 @@ const renderCta = (c: CtaProp, cls: string) => {
     <p class="detail-byline">{bylineParts.join(' · ')}</p>
   )}
 
+  {metaInline.length > 0 && (
+    <ul class="detail-meta-inline">
+      {metaInline.map((m) => (
+        <li>
+          <span class="detail-meta-label">{m.label}</span>
+          {m.href
+            ? <a class="detail-meta-value" href={m.href} {...(m.external ? { target: '_blank', rel: 'noopener' } : {})}>{m.value}{m.external && ' ↗'}</a>
+            : <span class="detail-meta-value">{m.value}</span>}
+        </li>
+      ))}
+    </ul>
+  )}
+
   <section class="detail-body">
-    <aside class="detail-meta">
-      <slot name="meta" />
-    </aside>
     <div class="detail-prose prose-eclag">
       <slot />
     </div>

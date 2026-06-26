@@ -86,23 +86,23 @@
 .detail-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .detail-hero.is-portrait { aspect-ratio: 3/4; max-width: 480px; }
 .detail-byline { max-width: 880px; margin: -32px auto 56px; text-align: center; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: rgba(14,17,22,0.55); font-weight: 500; }
-.detail-body { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 1080px; margin: 0 auto; }
-@media (min-width: 900px) {
-  .detail-body { grid-template-columns: 240px 1fr; gap: 64px; }
-}
-.detail-meta { display: flex; flex-direction: column; gap: 18px; font-size: 14px; align-self: start; position: sticky; top: 24px; }
-.detail-meta dt { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.45); margin-bottom: 4px; }
-.detail-meta dd { margin: 0; color: #0e1116; line-height: 1.5; }
-.detail-meta .meta-link { color: var(--cta-primary); text-decoration: none; }
-.detail-meta .meta-link:hover { text-decoration: underline; }
+.detail-body { display: block; max-width: 720px; margin: 0 auto; }
+
+/* Meta inline — pills sotto la cover */
+.detail-meta-inline { list-style: none; padding: 0; margin: 0 auto 56px; max-width: 880px; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; align-items: baseline; }
+.detail-meta-inline li { display: inline-flex; gap: 8px; align-items: baseline; font-size: 13px; line-height: 1.4; }
+.detail-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); font-weight: 500; }
+.detail-meta-value { color: #0e1116; font-weight: 500; }
+a.detail-meta-value { color: var(--cta-primary); text-decoration: none; }
+a.detail-meta-value:hover { text-decoration: underline; }
 .detail-prose { font-size: 1.0625rem; line-height: 1.7; max-width: 65ch; }
 .detail-prose :first-child { margin-top: 0; }
 /* Double-column body on desktop — alla Deux Huit Huit */
-@media (min-width: 1100px) {
+@media (min-width: 900px) {
   .detail-prose {
-    max-width: none;
+    max-width: 720px;
     column-count: 2;
-    column-gap: 56px;
+    column-gap: 40px;
     column-fill: balance;
     orphans: 3;
     widows: 3;
