@@ -16,12 +16,12 @@ const nav = [
   { href: '/careers',  label: 'Careers',  icon: 'lucide:briefcase-business' },
 ];
 
-const railStyle = 'position:fixed;left:0;top:0;bottom:0;width:88px;background:#0e1116;color:#fff;border-right:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;z-index:100;';
-const brandStyle = 'display:block;padding:18px 10px 22px;color:#fff;text-decoration:none;';
+const railStyle = 'position:fixed;left:0;top:0;bottom:0;width:88px;background:#ffffff;color:#0e1116;border-right:1px solid rgba(0,0,0,0.08);display:flex;flex-direction:column;z-index:100;';
+const brandStyle = 'display:block;padding:18px 10px 22px;color:#0e1116;text-decoration:none;';
 const wordmarkStyle = 'font-weight:900;font-size:11px;line-height:1.1;letter-spacing:1px;text-align:center;margin:0;';
 const navStyle = 'flex:1;display:flex;flex-direction:column;gap:2px;padding:0 6px;overflow-y:auto;';
-const linkBase = 'display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;border-radius:8px;color:rgba(255,255,255,0.85);text-decoration:none;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:500;';
-const linkActive = 'background:#fff;color:#0e1116;';
+const linkBase = 'display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;border-radius:8px;color:rgba(14,17,22,0.78);text-decoration:none;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:500;';
+const linkActive = 'background:#0e1116;color:#fff;';
 ---
 <aside style={railStyle} aria-label="Main navigation" class="site-rail">
   <a href="/" style={brandStyle}>
@@ -47,9 +47,9 @@ const linkActive = 'background:#fff;color:#0e1116;';
     })}
   </nav>
 
-  <div style="padding:0 14px 20px;font-size:10px;color:rgba(255,255,255,0.5);">
-    <a href="/privacy" style="display:block;color:rgba(255,255,255,0.5);text-decoration:none;margin-top:6px;">Privacy</a>
-    <a href="/cookie" style="display:block;color:rgba(255,255,255,0.5);text-decoration:none;margin-top:6px;">Cookie</a>
+  <div style="padding:0 14px 20px;font-size:10px;color:rgba(14,17,22,0.5);">
+    <a href="/privacy" style="display:block;color:rgba(14,17,22,0.5);text-decoration:none;margin-top:6px;">Privacy</a>
+    <a href="/cookie" style="display:block;color:rgba(14,17,22,0.5);text-decoration:none;margin-top:6px;">Cookie</a>
   </div>
 </aside>
 
@@ -67,8 +67,8 @@ const linkActive = 'background:#fff;color:#0e1116;';
   document.querySelectorAll('.site-rail-link').forEach((el) => {
     const orig = el.getAttribute('style') || '';
     el.addEventListener('mouseenter', () => {
-      if (orig.includes('#fff;color:#0e1116')) return;
-      el.setAttribute('style', orig + 'background:rgba(255,255,255,0.08);color:#fff;');
+      if (orig.includes('#0e1116;color:#fff')) return;
+      el.setAttribute('style', orig + 'background:rgba(0,0,0,0.05);color:#0e1116;');
     });
     el.addEventListener('mouseleave', () => el.setAttribute('style', orig));
   });
