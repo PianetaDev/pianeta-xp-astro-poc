@@ -4,11 +4,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 <BaseLayout title="Iscriviti al Bulletin — Pianeta.Studio">
   <section class="px-6 lg:px-12 pt-16 pb-16 max-w-[720px]">
     <h1 class="text-4xl font-black mb-4">Iscriviti al Bulletin</h1>
-    <p class="text-ink/70 mb-8">Una mail al mese su sustainable creativity, design e tecnologia.</p>
+    <p class="text-black/70 mb-8">Una mail al mese su sustainable creativity, design e tecnologia.</p>
     <form action="/api/newsletter/subscribe" method="post" class="flex flex-col gap-4 max-w-md">
       <input type="email" name="email" required placeholder="tu@email.it" class="border border-black/20 rounded-md px-4 py-3 bg-white"/>
       <button type="submit" class="bg-ink text-bg px-6 py-3 rounded-md font-semibold">Iscrivimi</button>
     </form>
-    <p class="text-xs text-ink/50 mt-4">Iscrivendoti accetti la nostra <a class="underline" href="/privacy">privacy</a>.</p>
+    <p class="text-xs text-black/50 mt-4">Iscrivendoti accetti la nostra <a class="underline" href="/privacy">privacy</a>.</p>
   </section>
 </BaseLayout>

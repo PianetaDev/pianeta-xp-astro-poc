@@ -11,13 +11,26 @@ export async function getStaticPaths() {
 const { item } = Astro.props;
 const { Content } = await render(item);
 const title = item.data.title || item.id;
+const cover = item.data.cover || item.data.ogImage;
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={item.data.description} ogImage={item.data.ogImage || item.data.cover}>
-  <article class="px-6 lg:px-12 pt-16 pb-16 max-w-[820px]">
-    <header class="mb-8">
-      <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3">{title}</h1>
-      {item.data.description && <p class="text-lg text-ink/70">{item.data.description}</p>}
-    </header>
+  {cover && (
+    <div class="aspect-[16/9] bg-black/5 overflow-hidden">
+      <img src={cover} alt={title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover" />
+    </div>
+  )}
+  <article class="px-6 lg:px-12 pt-10 pb-16 max-w-[820px] mx-auto">
+    <p class="text-xs uppercase tracking-wider text-black/50 mb-4">
+      <a href="/work" class="hover:underline">Work</a>
+      {item.data.category && <span> · {item.data.category}</span>}
+    </p>
+    <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-4">{title}</h1>
+    {item.data.description && <p class="text-xl text-black/70 mb-8">{item.data.description}</p>}
+    <dl class="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm border-t border-black/10 pt-6 mb-10">
+      {item.data.client && <div><dt class="text-black/40 uppercase tracking-wider text-[10px] mb-1">Cliente</dt><dd>{item.data.client}</dd></div>}
+      {item.data.year && <div><dt class="text-black/40 uppercase tracking-wider text-[10px] mb-1">Anno</dt><dd>{item.data.year}</dd></div>}
+      {item.data.category && <div><dt class="text-black/40 uppercase tracking-wider text-[10px] mb-1">Categoria</dt><dd>{item.data.category}</dd></div>}
+    </dl>
     <div class="prose-eclag">
       <Content />
     </div>

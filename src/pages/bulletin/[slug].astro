@@ -13,10 +13,15 @@ const { Content } = await render(item);
 const title = item.data.title || item.id;
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={item.data.description} ogImage={item.data.ogImage || item.data.cover}>
+  {(item.data.cover || item.data.photo || item.data.ogImage) && (
+    <div class="aspect-[16/9] bg-black/5 overflow-hidden">
+      <img src={item.data.cover || item.data.photo || item.data.ogImage} alt={title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover" />
+    </div>
+  )}
   <article class="px-6 lg:px-12 pt-16 pb-16 max-w-[820px]">
     <header class="mb-8">
       <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3">{title}</h1>
-      {item.data.description && <p class="text-lg text-ink/70">{item.data.description}</p>}
+      {item.data.description && <p class="text-lg text-black/70">{item.data.description}</p>}
     </header>
     <div class="prose-eclag">
       <Content />

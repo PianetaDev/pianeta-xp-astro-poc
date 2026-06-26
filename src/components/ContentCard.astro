@@ -15,8 +15,8 @@ const { title, excerpt = '', href, image, meta } = Astro.props;
     </div>
   )}
   <div class="p-4">
-    {meta && <div class="text-[11px] uppercase tracking-widest text-ink/50 mb-1">{meta}</div>}
+    {meta && <div class="text-[11px] uppercase tracking-widest text-black/50 mb-1">{meta}</div>}
     <h3 class="font-bold text-base leading-tight mb-1">{title}</h3>
-    {excerpt && <p class="text-sm text-ink/70 line-clamp-2">{excerpt}</p>}
+    {excerpt && <p class="text-sm text-black/70 line-clamp-2">{excerpt}</p>}
   </div>
 </a>
