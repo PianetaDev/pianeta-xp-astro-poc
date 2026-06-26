@@ -1,5 +1,4 @@
 ---
-// Rail: SEMPRE visibile. Mobile = 56px solo icone. Desktop = 88px icone+label.
 import { Icon } from 'astro-icon/components';
 
 interface Props {
@@ -17,38 +16,32 @@ const nav = [
   { href: '/careers',  label: 'Careers',  icon: 'lucide:briefcase-business' },
 ];
 ---
-<aside
-  class="site-rail"
-  aria-label="Main navigation"
->
-  <a href="/" class="block px-2 md:px-3 pt-4 md:pt-5 pb-4 md:pb-6 text-black hover:opacity-70 transition">
-    <p class="font-black text-[9px] md:text-[11px] leading-tight tracking-wider text-center md:text-left">PIANETA<br>.STUDIO</p>
-    <p class="hidden md:block text-[9px] text-black/50 mt-1 italic">Sustainable Creativity™</p>
+<aside class="site-rail" aria-label="Main navigation">
+  <a href="/" class="site-rail-brand">
+    <p class="site-rail-wordmark">PIANETA<br>.STUDIO</p>
+    <p class="site-rail-tagline">Sustainable Creativity™</p>
   </a>
 
-  <nav class="flex-1 flex flex-col gap-1 px-1 md:px-2 overflow-y-auto">
+  <nav class="site-rail-nav">
     {nav.map((l) => {
       const isActive = l.href === '/' ? current === '/' : current.startsWith(l.href);
       return (
         <a
           href={l.href}
           aria-label={l.label}
-          class:list={[
-            'rail-link flex flex-col items-center gap-0.5 md:gap-1 px-1 py-2 md:py-3 rounded transition hover:bg-black/5 text-black',
-            isActive && 'bg-black text-white hover:bg-black',
-          ]}
+          class:list={['site-rail-link', isActive && 'is-active']}
         >
-          <Icon name={l.icon} width="20" height="20" />
-          <span class="hidden md:block text-[10px] uppercase tracking-wider font-medium">{l.label}</span>
+          <Icon name={l.icon} width="22" height="22" />
+          <span class="site-rail-link-label">{l.label}</span>
         </a>
       );
     })}
   </nav>
 
-  <div class="hidden md:block px-3 pb-5 text-[10px] text-black/50 space-y-1.5">
-    <p class="uppercase tracking-wider">IT / EN</p>
-    <a href="/privacy" class="block hover:text-black transition">Privacy</a>
-    <a href="/cookie" class="block hover:text-black transition">Cookie</a>
+  <div class="site-rail-foot">
+    <p class="site-rail-locale">IT / EN</p>
+    <a href="/privacy">Privacy</a>
+    <a href="/cookie">Cookie</a>
   </div>
 </aside>
 
@@ -58,20 +51,98 @@ const nav = [
     left: 0;
     top: 0;
     bottom: 0;
-    width: 56px;
-    background: #ffffff;
-    border-right: 1px solid rgba(0,0,0,0.1);
+    width: 64px;
+    background: #0e1116;
+    color: #ffffff;
+    border-right: 1px solid rgba(255,255,255,0.06);
     display: flex;
     flex-direction: column;
-    z-index: 30;
+    z-index: 40;
   }
   @media (min-width: 768px) {
-    .site-rail { width: 88px; }
+    .site-rail { width: 96px; }
   }
-  main.site-main {
-    margin-left: 56px;
+  main.site-main { margin-left: 64px; }
+  @media (min-width: 768px) {
+    main.site-main { margin-left: 96px; }
+  }
+
+  .site-rail-brand {
+    display: block;
+    padding: 18px 10px 22px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .site-rail-brand:hover { opacity: .75; }
+  .site-rail-wordmark {
+    font-weight: 900;
+    font-size: 10px;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0;
   }
   @media (min-width: 768px) {
-    main.site-main { margin-left: 88px; }
+    .site-rail-wordmark { font-size: 12px; text-align: left; padding-left: 4px; }
+  }
+  .site-rail-tagline {
+    display: none;
+    font-size: 9px;
+    color: rgba(255,255,255,0.45);
+    margin: 4px 0 0 4px;
+    font-style: italic;
+  }
+  @media (min-width: 768px) { .site-rail-tagline { display: block; } }
+
+  .site-rail-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 6px;
+    overflow-y: auto;
+  }
+  .site-rail-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 4px;
+    border-radius: 8px;
+    color: rgba(255,255,255,0.78);
+    text-decoration: none;
+    transition: background .15s, color .15s;
+  }
+  .site-rail-link:hover { background: rgba(255,255,255,0.08); color: #ffffff; }
+  .site-rail-link.is-active { background: #ffffff; color: #0e1116; }
+  .site-rail-link-label {
+    display: none;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  @media (min-width: 768px) { .site-rail-link-label { display: block; } }
+
+  .site-rail-foot {
+    display: none;
+    padding: 0 14px 20px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+  }
+  @media (min-width: 768px) { .site-rail-foot { display: block; } }
+  .site-rail-foot a {
+    display: block;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    margin-top: 6px;
+    transition: color .15s;
+  }
+  .site-rail-foot a:hover { color: #ffffff; }
+  .site-rail-locale {
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 8px;
   }
 </style>
