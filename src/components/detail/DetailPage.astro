@@ -69,7 +69,12 @@ const renderCta = (c: CtaProp, cls: string) => {
 
   {cover && (
     <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
-      <img src={cover} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+      <picture>
+        {/^.*\.(png|jpe?g)$/i.test(cover) && (
+          <source srcset={cover.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+        )}
+        <img src={cover} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+      </picture>
     </div>
   )}
 

@@ -12,7 +12,12 @@ const { href, title, deck, kicker, image, portrait = false } = Astro.props;
 <a href={href} class:list={['index-card', portrait && 'is-portrait']}>
   {image && (
     <div class="index-card-img">
-      <img src={image} alt={title} loading="lazy" decoding="async" />
+      <picture>
+        {/^.*\.(png|jpe?g)$/i.test(image) && (
+          <source srcset={image.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+        )}
+        <img src={image} alt={title} loading="lazy" decoding="async" />
+      </picture>
     </div>
   )}
   <div class="index-card-body">
