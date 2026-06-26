@@ -1,6 +1,16 @@
-// TODO: stub during Astro 5 migration. Original used Nuxt auto-imports (useState, useFetch, navigateTo).
-// Re-implement with vanilla Vue 3 + fetch when wiring real islands.
-import { ref } from 'vue';
-export default function () {
-  return { state: ref(null) };
+import { watch } from 'vue'
+import { useRoute } from '~/lib/nuxt-shims'
+import { useAlbaFloater } from './useAlbaFloater'
+
+export function useAlbaContext() {
+  const route = useRoute()
+  const { setContext } = useAlbaFloater()
+  watch(
+    () => (route.meta as any)?.alba as any,
+    (alba) => {
+      if (alba) setContext({ context: alba.context, contextSlug: alba.contextSlug, suggested: alba.suggested })
+      else setContext({})
+    },
+    { immediate: true }
+  )
 }

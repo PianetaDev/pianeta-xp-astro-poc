@@ -2,16 +2,26 @@
 import '../styles/global.css';
 import SiteRail from '../components/SiteRail.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import CookieConsent from '../components/vue/site/consent/CookieConsent.vue';
+import MobileMenu from '../components/vue/site/MobileMenu.vue';
+import SiteRailFlyout from '../components/vue/site/SiteRailFlyout.vue';
+import NewsletterPopup from '../components/vue/site/newsletter/NewsletterPopup.vue';
+import HireUsLauncher from '../components/vue/site/HireUsLauncher.vue';
+import HireUsDrawer from '../components/vue/site/hire-us/HireUsDrawer.vue';
+import AlbaFloater from '../components/vue/site/alba/AlbaFloater.vue';
+import SiteArtifactPane from '../components/vue/site/SiteArtifactPane.vue';
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
   chrome?: boolean;
+  minimal?: boolean;
 }
 
-const { title, description = '', ogImage = '/og/work-eclag.png', chrome = true } = Astro.props;
+const { title, description = '', ogImage = '/og/work-eclag.png', chrome = true, minimal = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const showIslands = chrome && !minimal;
 ---
 <!doctype html>
 <html lang="it">
@@ -38,11 +48,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 
     {chrome && <SiteFooter />}
 
-    {chrome && (
-      <Fragment>
-        {/* TODO: Vue island mounts (Alba/HireUs/Cookie/Newsletter/Rail/MobileMenu).
-            Stubbed during migration — re-enable once components are ported. */}
-      </Fragment>
+    {showIslands && (
+      <>
+        <CookieConsent client:idle />
+        <MobileMenu client:idle />
+        <SiteRailFlyout client:idle />
+        <NewsletterPopup client:idle />
+        <HireUsLauncher client:idle />
+        <HireUsDrawer client:idle />
+        <AlbaFloater client:idle />
+        <SiteArtifactPane client:visible />
+      </>
     )}
   </body>
 </html>

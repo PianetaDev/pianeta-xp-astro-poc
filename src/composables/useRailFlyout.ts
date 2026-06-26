@@ -1,6 +1,18 @@
-// TODO: stub during Astro 5 migration. Original used Nuxt auto-imports (useState, useFetch, navigateTo).
-// Re-implement with vanilla Vue 3 + fetch when wiring real islands.
-import { ref } from 'vue';
-export default function () {
-  return { state: ref(null) };
+import { useState } from '~/lib/nuxt-shims'
+
+type RailSection = 'work' | 'bulletin' | 'services' | 'team' | 'lab' | 'careers'
+
+export const useRailFlyout = () => {
+  const open = useState<RailSection | null>('rail-flyout', () => null)
+
+  const show = (section: RailSection) => { open.value = section }
+  const hide = () => { open.value = null }
+  const toggle = (section: RailSection) => {
+    open.value = open.value === section ? null : section
+  }
+  // backwards-compat noops
+  const cancelClose = () => {}
+  const scheduleClose = () => {}
+
+  return { open, show, hide, toggle, cancelClose, scheduleClose }
 }
