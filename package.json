@@ -9,7 +9,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "optimize:images": "node scripts/optimize-images.mjs",
-    "sync:alba": "node scripts/sync-alba.mjs"
+    "sync:alba": "node scripts/sync-alba.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -36,6 +38,10 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "sharp": "^0.35.2"
+    "@vitest/ui": "^4.1.9",
+    "dotenv": "^17.4.2",
+    "happy-dom": "^20.10.6",
+    "sharp": "^0.35.2",
+    "vitest": "^4.1.9"
   }
 }
