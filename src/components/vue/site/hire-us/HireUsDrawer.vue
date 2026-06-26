@@ -10,8 +10,15 @@ const drawer = useHireUsDrawer()
 const onKeydown = (e: KeyboardEvent) => {
   if (e.key === 'Escape' && drawer.isOpen.value) drawer.close()
 }
-onMounted(() => window.addEventListener('keydown', onKeydown))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
+const onExternalOpen = () => drawer.open()
+onMounted(() => {
+  window.addEventListener('keydown', onKeydown)
+  window.addEventListener('hire-us:open', onExternalOpen)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKeydown)
+  window.removeEventListener('hire-us:open', onExternalOpen)
+})
 
 const onReset = () => {
   if (typeof window !== 'undefined') {

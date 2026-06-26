@@ -172,18 +172,24 @@ const ldJson = {
         </a>
       )}
 
-      {/* Hire Us CTA — md (drawer not available in POC → linka /contact) */}
-      <a
-        href="/contact"
-        class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
+      {/* Hire Us CTA — md (apre drawer Vue island via window event) */}
+      <button
+        type="button"
+        class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer w-full text-left"
         style="background: #0e1116;"
+        data-action="open-hire-us"
       >
         <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
           <div class="flex-1"></div>
           <div class="font-black text-lg md:text-2xl leading-tight">Lavoriamo insieme?</div>
           <div class="text-xs md:text-sm opacity-75 mt-1">Parla con Alba →</div>
         </div>
-      </a>
+      </button>
+      <script is:inline>
+        document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => {
+          b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open')))
+        })
+      </script>
 
       {/* 11. Bulletin CTA */}
       <a

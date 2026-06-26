@@ -1,9 +1,14 @@
 <script setup lang="ts">
+import { onMounted, onBeforeUnmount } from 'vue'
 import { useAlbaFloater } from '~/composables/useAlbaFloater'
 import ClientOnly from '~/components/vue/shims/ClientOnly.vue'
 import AlbaTakeover from './AlbaTakeover.vue'
 
 const { open, openPanel } = useAlbaFloater()
+
+const onExternalOpen = () => openPanel()
+onMounted(() => window.addEventListener('alba:open', onExternalOpen))
+onBeforeUnmount(() => window.removeEventListener('alba:open', onExternalOpen))
 </script>
 
 <template>
