@@ -42,7 +42,7 @@ const showIslands = chrome && !minimal;
   <body class="bg-[#fafaf7] text-[#0e1116] antialiased">
     {chrome && <SiteRail current={Astro.url.pathname} />}
 
-    <main class={chrome ? 'md:ml-[88px]' : ''}>
+    <main class={chrome ? 'ml-[56px] md:ml-[88px]' : ''}>
       <slot />
     </main>
 

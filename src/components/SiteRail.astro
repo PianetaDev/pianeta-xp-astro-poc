@@ -1,5 +1,5 @@
 ---
-// Lateral rail (88px) — static, no JS, icone Lucide via astro-icon
+// Rail: SEMPRE visibile. Mobile = 56px solo icone. Desktop = 88px icone+label.
 import { Icon } from 'astro-icon/components';
 
 interface Props {
@@ -18,33 +18,34 @@ const nav = [
 ];
 ---
 <aside
-  class="site-rail fixed left-0 top-0 bottom-0 w-[88px] border-r border-black/10 bg-white hidden md:flex flex-col z-30"
+  class="site-rail fixed left-0 top-0 bottom-0 w-[56px] md:w-[88px] border-r border-black/10 bg-white flex flex-col z-30"
   aria-label="Main navigation"
 >
-  <a href="/" class="block px-3 pt-5 pb-6 text-black hover:opacity-70 transition">
-    <p class="font-black text-[11px] leading-tight tracking-wider">PIANETA<br>.STUDIO</p>
-    <p class="text-[9px] text-black/50 mt-1 italic">Sustainable Creativity™</p>
+  <a href="/" class="block px-2 md:px-3 pt-4 md:pt-5 pb-4 md:pb-6 text-black hover:opacity-70 transition">
+    <p class="font-black text-[9px] md:text-[11px] leading-tight tracking-wider text-center md:text-left">PIANETA<br>.STUDIO</p>
+    <p class="hidden md:block text-[9px] text-black/50 mt-1 italic">Sustainable Creativity™</p>
   </a>
 
-  <nav class="flex-1 flex flex-col gap-1 px-2 overflow-y-auto">
+  <nav class="flex-1 flex flex-col gap-1 px-1 md:px-2 overflow-y-auto">
     {nav.map((l) => {
       const isActive = l.href === '/' ? current === '/' : current.startsWith(l.href);
       return (
         <a
           href={l.href}
+          aria-label={l.label}
           class:list={[
-            'rail-link flex flex-col items-center gap-1 px-1 py-3 rounded transition hover:bg-black/5 text-black',
+            'rail-link flex flex-col items-center gap-0.5 md:gap-1 px-1 py-2 md:py-3 rounded transition hover:bg-black/5 text-black',
             isActive && 'bg-black text-white hover:bg-black',
           ]}
         >
           <Icon name={l.icon} width="20" height="20" />
-          <span class="text-[10px] uppercase tracking-wider font-medium">{l.label}</span>
+          <span class="hidden md:block text-[10px] uppercase tracking-wider font-medium">{l.label}</span>
         </a>
       );
     })}
   </nav>
 
-  <div class="px-3 pb-5 text-[10px] text-black/50 space-y-1.5">
+  <div class="hidden md:block px-3 pb-5 text-[10px] text-black/50 space-y-1.5">
     <p class="uppercase tracking-wider">IT / EN</p>
     <a href="/privacy" class="block hover:text-black transition">Privacy</a>
     <a href="/cookie" class="block hover:text-black transition">Cookie</a>
