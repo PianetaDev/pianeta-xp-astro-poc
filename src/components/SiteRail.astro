@@ -1,25 +1,52 @@
 ---
-// Lateral rail (88px) — static, no JS
+// Lateral rail (88px) — static, no JS, icone Lucide via astro-icon
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  current?: string;
+}
+const { current = '' } = Astro.props;
+
 const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/work', label: 'Work' },
-  { href: '/bulletin', label: 'Bull.' },
-  { href: '/services', label: 'Serv.' },
-  { href: '/team', label: 'Team' },
-  { href: '/lab', label: 'Lab' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/',         label: 'Home',     icon: 'lucide:home' },
+  { href: '/work',     label: 'Work',     icon: 'lucide:briefcase' },
+  { href: '/bulletin', label: 'Bulletin', icon: 'lucide:newspaper' },
+  { href: '/services', label: 'Services', icon: 'lucide:sparkles' },
+  { href: '/team',     label: 'Team',     icon: 'lucide:users' },
+  { href: '/lab',      label: 'Lab',      icon: 'lucide:flask-conical' },
+  { href: '/careers',  label: 'Careers',  icon: 'lucide:briefcase-business' },
 ];
 ---
-<aside class="fixed left-0 top-0 bottom-0 w-[88px] border-r border-black/10 bg-bg hidden md:flex flex-col items-center justify-between py-6 z-10">
-  <a href="/" class="flex flex-col items-center gap-2 text-[10px] font-black tracking-[0.15em] uppercase leading-tight text-center">
-    <span style="writing-mode: vertical-rl; transform: rotate(180deg);">PIANETA.STUDIO</span>
+<aside
+  class="site-rail fixed left-0 top-0 bottom-0 w-[88px] border-r border-black/10 bg-white hidden lg:flex flex-col z-30"
+  aria-label="Main navigation"
+>
+  <a href="/" class="block px-3 pt-5 pb-6 text-black hover:opacity-70 transition">
+    <p class="font-black text-[11px] leading-tight tracking-wider">PIANETA<br>.STUDIO</p>
+    <p class="text-[9px] text-black/50 mt-1 italic">Sustainable Creativity™</p>
   </a>
-  <nav class="flex flex-col gap-4 text-[10px] font-semibold uppercase tracking-widest">
-    {nav.map((item) => (
-      <a href={item.href} class="hover:underline">{item.label}</a>
-    ))}
+
+  <nav class="flex-1 flex flex-col gap-1 px-2 overflow-y-auto">
+    {nav.map((l) => {
+      const isActive = l.href === '/' ? current === '/' : current.startsWith(l.href);
+      return (
+        <a
+          href={l.href}
+          class:list={[
+            'rail-link flex flex-col items-center gap-1 px-1 py-3 rounded transition hover:bg-black/5 text-black',
+            isActive && 'bg-black text-white hover:bg-black',
+          ]}
+        >
+          <Icon name={l.icon} width="20" height="20" />
+          <span class="text-[10px] uppercase tracking-wider font-medium">{l.label}</span>
+        </a>
+      );
+    })}
   </nav>
-  <div class="text-[9px] font-medium tracking-wider text-ink/60 text-center leading-tight">
-    Sustainable<br/>Creativity™
+
+  <div class="px-3 pb-5 text-[10px] text-black/50 space-y-1.5">
+    <p class="uppercase tracking-wider">IT / EN</p>
+    <a href="/privacy" class="block hover:text-black transition">Privacy</a>
+    <a href="/cookie" class="block hover:text-black transition">Cookie</a>
   </div>
 </aside>

@@ -39,10 +39,10 @@ const showIslands = chrome && !minimal;
     <meta name="twitter:card" content="summary_large_image" />
     <slot name="head" />
   </head>
-  <body class="bg-bg text-ink antialiased">
-    {chrome && <SiteRail />}
+  <body class="bg-[#fafaf7] text-[#0e1116] antialiased">
+    {chrome && <SiteRail current={Astro.url.pathname} />}
 
-    <main class={chrome ? 'md:ml-[88px]' : ''}>
+    <main class={chrome ? 'lg:ml-[88px]' : ''}>
       <slot />
     </main>
 
