@@ -1,6 +1,7 @@
 ---
 interface CtaProp { label: string; href?: string; action?: string; external?: boolean; }
 interface RelatedItem { type: string; slug: string; label?: string; }
+interface NextItem { type: string; slug: string; title: string; deck?: string; cover?: string; kicker?: string; }
 
 interface Props {
   eyebrowParts?: Array<{ label: string; href?: string }>;
@@ -14,6 +15,7 @@ interface Props {
   backLabel?: string;
   related?: RelatedItem[];
   relatedTitle?: string;
+  nextItem?: NextItem;
   jsonLd?: any;
 }
 const {
@@ -28,6 +30,7 @@ const {
   backLabel,
   related = [],
   relatedTitle = 'Approfondimenti',
+  nextItem,
   jsonLd,
 } = Astro.props;
 
@@ -105,11 +108,79 @@ const renderCta = (c: CtaProp, cls: string) => {
     </section>
   )}
 
+  {nextItem && (
+    <section class="detail-next">
+      <p class="detail-next-eyebrow">Continua a leggere</p>
+      <a href={`/${nextItem.type}/${nextItem.slug}`} class="detail-next-card">
+        {nextItem.cover && (
+          <div class="detail-next-img">
+            <picture>
+              {/^.*\.(png|jpe?g)$/i.test(nextItem.cover) && (
+                <source srcset={nextItem.cover.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
+              )}
+              <img src={nextItem.cover} alt={nextItem.title} loading="lazy" decoding="async" />
+            </picture>
+          </div>
+        )}
+        <div class="detail-next-body">
+          {nextItem.kicker && <p class="detail-next-kicker">{nextItem.kicker}</p>}
+          <h3 class="detail-next-title">{nextItem.title}</h3>
+          {nextItem.deck && <p class="detail-next-deck">{nextItem.deck}</p>}
+          <p class="detail-next-arrow">Leggi →</p>
+        </div>
+      </a>
+    </section>
+  )}
+
+  <section class="detail-share">
+    <p class="detail-share-label">Condividi</p>
+    <div class="detail-share-row">
+      <button type="button" class="share-btn" data-share="native" aria-label="Condividi (sistema)">↗ Condividi</button>
+      <button type="button" class="share-btn" data-share="copy" aria-label="Copia link">⧉ Copia link</button>
+      <a class="share-btn" data-share="email" href="#" aria-label="Email">✉ Email</a>
+      <a class="share-btn" data-share="whatsapp" target="_blank" rel="noopener" href="#" aria-label="WhatsApp">WhatsApp</a>
+      <a class="share-btn" data-share="linkedin" target="_blank" rel="noopener" href="#" aria-label="LinkedIn">LinkedIn</a>
+      <a class="share-btn" data-share="x" target="_blank" rel="noopener" href="#" aria-label="X">X</a>
+    </div>
+  </section>
+
   {backHref && (
     <footer class="detail-foot">
       <a href={backHref} class="cta-btn cta-ghost">← {backLabel || 'Indietro'}</a>
     </footer>
   )}
+
+  <script is:inline>
+    (() => {
+      const init = () => {
+        const url = window.location.href;
+        const title = document.title;
+        const enc = encodeURIComponent;
+        document.querySelectorAll('a[data-share="email"]').forEach((a) => { a.href = `mailto:?subject=${enc(title)}&body=${enc(title + '\n' + url)}`; });
+        document.querySelectorAll('a[data-share="whatsapp"]').forEach((a) => { a.href = `https://wa.me/?text=${enc(title + ' — ' + url)}`; });
+        document.querySelectorAll('a[data-share="linkedin"]').forEach((a) => { a.href = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`; });
+        document.querySelectorAll('a[data-share="x"]').forEach((a) => { a.href = `https://x.com/intent/post?text=${enc(title)}&url=${enc(url)}`; });
+
+        const native = document.querySelector('[data-share="native"]');
+        if (native) {
+          if (!navigator.share) { native.style.display = 'none'; }
+          else native.addEventListener('click', () => navigator.share({ title, url }).catch(() => {}));
+        }
+        const copyBtn = document.querySelector('[data-share="copy"]');
+        if (copyBtn) {
+          copyBtn.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(url);
+              const orig = copyBtn.textContent;
+              copyBtn.textContent = '✓ Copiato';
+              setTimeout(() => { copyBtn.textContent = orig; }, 1600);
+            } catch {}
+          });
+        }
+      };
+      document.addEventListener('astro:page-load', init);
+    })();
+  </script>
 
   <script is:inline>
     document.querySelectorAll('[data-action="open-hire-us"]').forEach((b) => {

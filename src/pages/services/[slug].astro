@@ -2,14 +2,16 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DetailPage from '../../components/detail/DetailPage.astro';
 import { getCollection, render } from 'astro:content';
+import { pickNextItem, toNextProp } from '../../lib/next-item';
 
 export const prerender = true;
 export async function getStaticPaths() {
   const items = await getCollection('services');
-  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+  return items.map((item) => ({ params: { slug: item.id }, props: { item, allItems: items } }));
 }
 
-const { item } = Astro.props;
+const { item, allItems } = Astro.props as any;
+const nextItem = toNextProp(pickNextItem(allItems, item.id), 'services');
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
@@ -46,6 +48,7 @@ const jsonLd = {
     backLabel="Tutti i servizi"
     related={related}
     relatedTitle="Case study"
+    nextItem={nextItem}
     jsonLd={jsonLd}
   >
     <Fragment slot="meta">
