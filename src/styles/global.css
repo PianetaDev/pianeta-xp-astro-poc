@@ -103,8 +103,7 @@
     max-width: none;
     column-count: 2;
     column-gap: 56px;
-    column-fill: balance-all;
-    column-rule: 1px solid rgba(14,17,22,0.06);
+    column-fill: balance;
     orphans: 3;
     widows: 3;
   }
@@ -113,8 +112,11 @@
     break-after: avoid;
     break-before: avoid;
   }
-  .detail-prose > :first-child { margin-top: 0; }
-  /* Allow paragraphs to span columns naturally — balance > unbroken paragraphs */
+  .detail-prose > :first-child,
+  .detail-prose p:first-child,
+  .detail-prose h2 + p,
+  .detail-prose h3 + p { margin-top: 0; padding-top: 0; }
+  .detail-prose p { margin-top: 0; margin-bottom: 1.05rem; }
 }
 .detail-related { max-width: 1080px; margin: 96px auto 48px; padding-top: 48px; border-top: 1px solid var(--pianeta-border); }
 .detail-related-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 20px; }
