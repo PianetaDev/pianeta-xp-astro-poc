@@ -24,10 +24,17 @@ vi.mock('@anthropic-ai/sdk', () => {
 // Stub Supabase service-role client
 vi.mock('../../../src/lib/server/alba/supabase', () => ({
   albaSupabase: () => ({
+    rpc: () => Promise.resolve({ data: 1, error: null }),
     from: () => ({
       insert: () => Promise.resolve({ error: null }),
       update: () => ({ eq: () => Promise.resolve({ error: null }) }),
-      select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { uid: 'u', msg_count: 0, tokens_in: 0, tokens_out: 0, cost_eur: 0 }, error: null }) }) }),
+      upsert: () => Promise.resolve({ error: null }),
+      select: () => ({
+        eq: () => ({
+          eq: () => ({ maybeSingle: () => Promise.resolve({ data: null, error: null }) }),
+          maybeSingle: () => Promise.resolve({ data: { uid: 'u', msg_count: 0, tokens_in: 0, tokens_out: 0, cost_eur: 0 }, error: null }),
+        }),
+      }),
     }),
   }),
 }));

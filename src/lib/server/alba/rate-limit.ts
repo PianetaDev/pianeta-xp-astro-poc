@@ -17,15 +17,22 @@ export interface RateLimitVerdict {
 
 async function incrementAndGet(scope: string, date: string): Promise<number> {
   const sb = albaSupabase();
-  const { data, error } = await sb.rpc('alba_rate_limit_inc', { p_scope: scope, p_date: date });
-  if (error) {
-    // Fallback: SELECT + UPSERT (slower but works without the function)
-    const { data: existing } = await sb.from('alba_rate_limits').select('count').eq('scope', scope).eq('date', date).maybeSingle();
-    const next = (existing?.count ?? 0) + 1;
-    await sb.from('alba_rate_limits').upsert({ scope, date, count: next }, { onConflict: 'scope,date' });
-    return next;
+  // Try RPC first (atomic). Fallback to SELECT + UPSERT if function missing.
+  if (typeof (sb as any).rpc === 'function') {
+    try {
+      const { data, error } = await (sb as any).rpc('alba_rate_limit_inc', { p_scope: scope, p_date: date });
+      if (!error && data != null) return Number(data);
+    } catch { /* fall through */ }
   }
-  return Number(data);
+  try {
+    const sel = sb.from('alba_rate_limits').select('count').eq('scope', scope).eq('date', date).maybeSingle();
+    const { data: existing } = await sel;
+    const next = ((existing as any)?.count ?? 0) + 1;
+    await (sb.from('alba_rate_limits') as any).upsert({ scope, date, count: next }, { onConflict: 'scope,date' });
+    return next;
+  } catch {
+    return 0; // fail-open: non bloccare il chat per problemi rate-limit infrastrutturali
+  }
 }
 
 export async function checkAndIncrementRateLimit(args: {
