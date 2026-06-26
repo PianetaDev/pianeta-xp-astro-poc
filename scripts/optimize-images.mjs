@@ -4,7 +4,7 @@ import { join, extname, basename, dirname } from 'path';
 
 const ROOT = 'public';
 const DIRS = ['og', 'choosetoseethem', 'team'];
-const MIN_SIZE = 100 * 1024; // 100KB
+const MIN_SIZE = 5 * 1024; // 5KB — every meaningful image gets a webp
 const MAX_DIM = 1600;
 const CARD_DIM = 800; // smaller thumb for index cards
 const WEBP_QUALITY = 80;
