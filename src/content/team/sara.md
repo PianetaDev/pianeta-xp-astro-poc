@@ -6,7 +6,7 @@ since: "2024-01-01"
 employment: "freelance"
 location: "Remoto"
 email: "sara@pianeta.studio"
-photo: "/team/sara.jpg"
+photo: "/og/placeholder.svg"
 order: 30
 description: "Motion & Visual Designer · animazione, traduzione visiva, brand"
 date: 2026-06-23

@@ -6,7 +6,7 @@ since: "2020-01-01"
 employment: "dipendente"
 location: "Milano (nomadic, remote-first)"
 email: "foss@pianeta.studio"
-photo: "/team/foss.jpg"
+photo: "/og/placeholder.svg"
 order: 20
 description: "Senior Designer · UI/UX Lead · design system per organizzazioni della sostenibilità"
 date: 2026-06-23
