@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('campaigns');
+const items = all.sort((a: any, b: any) => {
+  const da = a.data.startDate ? new Date(a.data.startDate).getTime() : 0;
+  const db = b.data.startDate ? new Date(b.data.startDate).getTime() : 0;
+  return db - da;
+});
+
+const statusLabel = (s?: string) => ({
+  draft: '📝 Draft', review: '👀 Review', live: '🟢 Live', paused: '⏸ Pausa', closed: '✅ Chiusa'
+}[s || ''] || '—');
+
+const fmt = (n?: number) => n != null ? n.toLocaleString('it-IT') : '—';
+const fmtEur = (n?: number) => n != null ? '€ ' + n.toLocaleString('it-IT', { maximumFractionDigits: 0 }) : '—';
+---
+<BaseLayout title="Admin — Campagne" description="Pannello interno gestione campagne" chrome={true} minimal={false}>
+  <div class="index-page">
+    <header class="index-head">
+      <p class="index-eyebrow">Admin · Interno</p>
+      <h1 class="index-title">Campagne</h1>
+      <p class="index-deck">Stato delle campagne live, in review e in chiusura. Spend + KPI sincronizzati da Google Ads API (in setup).</p>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;">
+        <a href="/admin/campaigns/new" class="cta-btn cta-primary">+ Nuova campagna</a>
+      </div>
+    </header>
+
+    {items.length === 0 ? (
+      <div class="index-empty">Nessuna campagna ancora. <a href="/admin/campaigns/new" class="meta-link">Crea la prima →</a></div>
+    ) : (
+      <table class="campaigns-table">
+        <thead>
+          <tr><th>Campagna</th><th>Canale</th><th>Obiettivo</th><th>Stato</th><th>Spend</th><th>Impressions</th><th>Conv.</th></tr>
+        </thead>
+        <tbody>
+          {items.map((it: any) => (
+            <tr>
+              <td><a href={`/admin/campaigns/${it.id}`} class="campaign-link">{it.data.title || it.id}</a></td>
+              <td>{it.data.channel || '—'}</td>
+              <td>{it.data.objective || '—'}</td>
+              <td>{statusLabel(it.data.status)}</td>
+              <td>{fmtEur(it.data.spend)}</td>
+              <td>{fmt(it.data.impressions)}</td>
+              <td>{fmt(it.data.conversions)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
+
+  <style>
+    .campaigns-table { width: 100%; max-width: 1100px; margin: 0 auto; border-collapse: collapse; font-size: 14px; }
+    .campaigns-table th, .campaigns-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--pianeta-border); }
+    .campaigns-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); font-weight: 600; }
+    .campaign-link { color: #0e1116; text-decoration: none; font-weight: 600; }
+    .campaign-link:hover { color: var(--cta-primary); }
+  </style>
+</BaseLayout>

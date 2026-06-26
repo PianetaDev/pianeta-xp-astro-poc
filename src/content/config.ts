@@ -42,4 +42,25 @@ const careers = defineCollection({
   schema: baseSchema,
 });
 
-export const collections = { work, bulletin, services, team, lab, careers };
+const campaigns = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/campaigns' }),
+  schema: baseSchema.extend({
+    channel: z.enum(['google-ads', 'meta-ads', 'linkedin-ads', 'tiktok-ads', 'organic']).optional(),
+    objective: z.enum(['awareness', 'traffic', 'leads', 'conversions', 'engagement']).optional(),
+    status: z.enum(['draft', 'review', 'live', 'paused', 'closed']).optional(),
+    startDate: z.coerce.date().optional(),
+    endDate: z.coerce.date().optional(),
+    budgetTotal: z.number().optional(),
+    spend: z.number().optional(),
+    impressions: z.number().optional(),
+    clicks: z.number().optional(),
+    conversions: z.number().optional(),
+    landingPage: z.string().optional(),
+    audience: z.string().optional(),
+    creatives: z.array(z.string()).optional(),
+    googleAdsCampaignId: z.string().optional(),
+    notes: z.string().optional(),
+  }),
+});
+
+export const collections = { work, bulletin, services, team, lab, careers, campaigns };

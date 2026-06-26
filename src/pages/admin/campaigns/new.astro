@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Nuova campagna — Admin" description="Brief intake nuova campagna" minimal={false}>
+  <div class="index-page" style="max-width:720px;">
+    <header class="index-head">
+      <p class="index-eyebrow">Admin · Campagne</p>
+      <h1 class="index-title">Nuova campagna</h1>
+      <p class="index-deck">Brief minimo. Salva una bozza markdown in <code>src/content/campaigns/</code> dopo conferma.</p>
+    </header>
+
+    <form id="new-campaign" class="campaign-form">
+      <label>Nome <input name="title" required placeholder="es. Bulletin Q3 2026 — leads" /></label>
+      <label>Slug <input name="slug" required pattern="[a-z0-9-]+" placeholder="bulletin-q3-2026-leads" /></label>
+      <label>Descrizione <textarea name="description" rows="2" placeholder="Una frase: cosa promuove, a chi, perché ora."></textarea></label>
+
+      <div class="row-2">
+        <label>Canale
+          <select name="channel">
+            <option value="google-ads" selected>Google Ads</option>
+            <option value="meta-ads">Meta Ads</option>
+            <option value="linkedin-ads">LinkedIn Ads</option>
+            <option value="tiktok-ads">TikTok Ads</option>
+            <option value="organic">Organic</option>
+          </select>
+        </label>
+        <label>Obiettivo
+          <select name="objective">
+            <option value="leads" selected>Lead</option>
+            <option value="traffic">Traffic</option>
+            <option value="awareness">Awareness</option>
+            <option value="conversions">Conversions</option>
+            <option value="engagement">Engagement</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row-2">
+        <label>Inizio <input type="date" name="startDate" /></label>
+        <label>Fine <input type="date" name="endDate" /></label>
+      </div>
+
+      <label>Budget totale (EUR) <input type="number" name="budgetTotal" min="0" step="50" /></label>
+      <label>Landing page <input name="landingPage" placeholder="https://xp.pianeta.studio/…" /></label>
+      <label>Audience <textarea name="audience" rows="2" placeholder="Età, geo, interessi, keyword..."></textarea></label>
+      <label>Note <textarea name="notes" rows="3"></textarea></label>
+
+      <button type="submit" class="cta-btn cta-primary">Salva bozza</button>
+
+      <pre id="output" class="output" hidden></pre>
+    </form>
+  </div>
+
+  <style>
+    .campaign-form { display: flex; flex-direction: column; gap: 16px; max-width: 640px; margin: 0 auto; }
+    .campaign-form label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: rgba(14,17,22,0.55); font-weight: 600; }
+    .campaign-form input, .campaign-form select, .campaign-form textarea { font: inherit; font-size: 15px; color: #0e1116; text-transform: none; letter-spacing: normal; padding: 10px 14px; border: 1px solid var(--pianeta-border-strong); border-radius: 10px; background: #fff; font-weight: 400; }
+    .campaign-form input:focus, .campaign-form select:focus, .campaign-form textarea:focus { outline: 2px solid var(--cta-primary); border-color: transparent; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .output { margin-top: 20px; padding: 16px; background: #0e1116; color: #E9FF1F; border-radius: 12px; font-family: ui-monospace, monospace; font-size: 12px; white-space: pre-wrap; }
+  </style>
+
+  <script is:inline>
+    document.getElementById('new-campaign').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd.entries());
+      const r = await fetch('/api/admin/campaigns/create', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const out = document.getElementById('output');
+      out.hidden = false;
+      const j = await r.json().catch(() => ({ error: 'invalid response' }));
+      out.textContent = JSON.stringify(j, null, 2);
+    });
+  </script>
+</BaseLayout>
