@@ -54,24 +54,33 @@ const linkActive = 'background:#0e1116;color:#fff;';
 </aside>
 
 <script is:inline>
-  // Bridge rail icon click → SiteRailFlyout Vue island
-  document.querySelectorAll('.site-rail-link[data-rail-section]').forEach((el) => {
-    el.addEventListener('click', (e) => {
+  (() => {
+    const fire = (name, detail) => window.dispatchEvent(new CustomEvent(name, { detail }));
+
+    document.querySelectorAll('.site-rail-link[data-rail-section]').forEach((el) => {
       const section = el.getAttribute('data-rail-section');
       if (!section) return;
-      e.preventDefault();
-      window.dispatchEvent(new CustomEvent('rail-flyout:open', { detail: section }));
+      el.addEventListener('click', (e) => { e.preventDefault(); fire('rail-flyout:open', section); });
+      el.addEventListener('mouseenter', () => fire('rail-flyout:open', section));
+      el.addEventListener('focus', () => fire('rail-flyout:open', section));
     });
-  });
-  // Hover highlight (no CSS dep)
-  document.querySelectorAll('.site-rail-link').forEach((el) => {
-    const orig = el.getAttribute('style') || '';
-    el.addEventListener('mouseenter', () => {
-      if (orig.includes('#0e1116;color:#fff')) return;
-      el.setAttribute('style', orig + 'background:rgba(0,0,0,0.05);color:#0e1116;');
+
+    const rail = document.querySelector('.site-rail');
+    if (rail) {
+      rail.addEventListener('mouseenter', () => fire('rail-flyout:cancel-close'));
+      rail.addEventListener('mouseleave', () => fire('rail-flyout:schedule-close'));
+    }
+
+    // Hover highlight (no CSS dep)
+    document.querySelectorAll('.site-rail-link').forEach((el) => {
+      const orig = el.getAttribute('style') || '';
+      el.addEventListener('mouseenter', () => {
+        if (orig.includes('#0e1116;color:#fff')) return;
+        el.setAttribute('style', orig + 'background:rgba(0,0,0,0.05);color:#0e1116;');
+      });
+      el.addEventListener('mouseleave', () => el.setAttribute('style', orig));
     });
-    el.addEventListener('mouseleave', () => el.setAttribute('style', orig));
-  });
+  })();
 </script>
 
 <style is:global>

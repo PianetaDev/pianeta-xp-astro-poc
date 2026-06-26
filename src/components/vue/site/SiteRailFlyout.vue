@@ -47,21 +47,41 @@ function onDocClick(e: MouseEvent) {
   hide()
 }
 function onKey(e: KeyboardEvent) { if (e.key === 'Escape') hide() }
+
+let closeTimer: number | null = null
+const CLOSE_DELAY = 220
+function cancelClose() {
+  if (closeTimer !== null) { clearTimeout(closeTimer); closeTimer = null }
+}
+function scheduleClose() {
+  cancelClose()
+  closeTimer = window.setTimeout(() => { hide(); closeTimer = null }, CLOSE_DELAY)
+}
+
 function onExternalOpen(e: Event) {
   const detail = (e as CustomEvent).detail
   if (typeof detail === 'string') {
+    cancelClose()
     open.value = detail as any
   }
 }
+const onPanelEnter = () => cancelClose()
+const onPanelLeave = () => scheduleClose()
+
 onMounted(() => {
   document.addEventListener('click', onDocClick, true)
   document.addEventListener('keydown', onKey)
   window.addEventListener('rail-flyout:open', onExternalOpen)
+  window.addEventListener('rail-flyout:cancel-close', cancelClose)
+  window.addEventListener('rail-flyout:schedule-close', scheduleClose)
 })
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocClick, true)
   document.removeEventListener('keydown', onKey)
   window.removeEventListener('rail-flyout:open', onExternalOpen)
+  window.removeEventListener('rail-flyout:cancel-close', cancelClose)
+  window.removeEventListener('rail-flyout:schedule-close', scheduleClose)
+  cancelClose()
 })
 
 function meta(item: ContentItem, type: string) {
@@ -91,6 +111,8 @@ function meta(item: ContentItem, type: string) {
       v-if="open && current"
       ref="panelRef"
       class="rail-flyout"
+      @mouseenter="onPanelEnter"
+      @mouseleave="onPanelLeave"
     >
       <header class="px-6 pt-6 pb-3 flex items-center justify-between border-b border-black/5">
         <div class="flex items-center gap-2">
