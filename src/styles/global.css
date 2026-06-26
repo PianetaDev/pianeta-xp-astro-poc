@@ -24,8 +24,8 @@
   --pianeta-accent: #1f5b8f;
   --pianeta-highlight: #E9FF1F;
   /* CTA — arancio primario, blu secondario */
-  --cta-primary: #ff6a1a;
-  --cta-primary-hover: #ff8438;
+  --cta-primary: #FF6B33;
+  --cta-primary-hover: #ff8458;
   --cta-primary-ink: #ffffff;
   --cta-secondary: #1f5b8f;
   --cta-secondary-hover: #2a6ea5;
@@ -136,7 +136,7 @@
 .detail-share-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0; }
 .detail-share-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--pianeta-border); color: var(--pianeta-text); font-size: 13px; font-weight: 500; cursor: pointer; text-decoration: none; transition: border-color 150ms, background 150ms; }
-.share-btn:hover { border-color: var(--cta-primary); background: rgba(255,106,26,0.05); }
+.share-btn:hover { border-color: var(--cta-primary); background: rgba(255,107,51,0.06); }
 
 /* Index pages — section cards grid */
 .index-page { max-width: 1280px; margin: 0 auto; padding: 56px 32px 96px; }

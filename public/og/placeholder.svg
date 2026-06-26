@@ -5,8 +5,8 @@
       <stop offset="1" stop-color="#f1f0ea"/>
     </linearGradient>
     <radialGradient id="orb" cx="0.5" cy="0.5" r="0.6">
-      <stop offset="0" stop-color="#ff8438"/>
-      <stop offset="1" stop-color="#ff6a1a"/>
+      <stop offset="0" stop-color="#ff8458"/>
+      <stop offset="1" stop-color="#FF6B33"/>
     </radialGradient>
   </defs>
   <rect width="800" height="1000" fill="url(#bg)"/>
