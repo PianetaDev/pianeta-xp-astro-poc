@@ -25,6 +25,7 @@ if (data.year) eyebrowParts.push({ label: String(data.year) });
     title={title}
     deck={data.description}
     cover={cover}
+    primaryCta={data.links?.external ? { label: 'Apri ' + (data.title || 'progetto') + ' ↗', href: data.links.external, external: true } : undefined}
     secondaryCta={{ label: 'Lavoriamo insieme', action: 'open-hire-us' }}
     backHref="/lab"
     backLabel="Tutti gli esperimenti"

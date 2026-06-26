@@ -19,8 +19,8 @@ const nav = [
 const railStyle = 'position:fixed;left:0;top:0;bottom:0;width:88px;background:#ffffff;color:#0e1116;border-right:1px solid rgba(0,0,0,0.08);display:flex;flex-direction:column;z-index:100;';
 const brandStyle = 'display:block;padding:18px 10px 22px;color:#0e1116;text-decoration:none;';
 const wordmarkStyle = 'font-weight:900;font-size:11px;line-height:1.1;letter-spacing:1px;text-align:center;margin:0;';
-const navStyle = 'flex:1;display:flex;flex-direction:column;gap:2px;padding:0 6px;overflow-y:auto;';
-const linkBase = 'display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;border-radius:8px;color:rgba(14,17,22,0.78);text-decoration:none;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:500;';
+const navStyle = 'flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 6px;overflow-y:auto;';
+const linkBase = 'display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:8px;color:rgba(14,17,22,0.78);text-decoration:none;font-size:9px;text-transform:uppercase;letter-spacing:0.8px;font-weight:500;';
 const linkActive = 'background:#0e1116;color:#fff;';
 ---
 <aside style={railStyle} aria-label="Main navigation" class="site-rail">
@@ -40,7 +40,7 @@ const linkActive = 'background:#0e1116;color:#fff;';
           class="site-rail-link"
           style={linkBase + (isActive ? linkActive : '')}
         >
-          <Icon name={l.icon} width="22" height="22" />
+          <Icon name={l.icon} width="16" height="16" />
           <span>{l.label}</span>
         </a>
       );
