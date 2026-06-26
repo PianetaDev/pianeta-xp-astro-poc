@@ -1,0 +1,116 @@
+---
+interface CtaProp { label: string; href?: string; action?: string; external?: boolean; }
+interface RelatedItem { type: string; slug: string; label?: string; }
+
+interface Props {
+  eyebrowParts?: Array<{ label: string; href?: string }>;
+  title: string;
+  deck?: string;
+  cover?: string;
+  heroPortrait?: boolean;
+  primaryCta?: CtaProp;
+  secondaryCta?: CtaProp;
+  backHref?: string;
+  backLabel?: string;
+  related?: RelatedItem[];
+  relatedTitle?: string;
+}
+const {
+  eyebrowParts = [],
+  title,
+  deck,
+  cover,
+  heroPortrait = false,
+  primaryCta,
+  secondaryCta,
+  backHref,
+  backLabel,
+  related = [],
+  relatedTitle = 'Approfondimenti',
+} = Astro.props;
+
+const renderCta = (c: CtaProp, cls: string) => {
+  if (c.href) {
+    const attrs = c.external ? { target: '_blank', rel: 'noopener' } : {};
+    return { tag: 'a' as const, href: c.href, attrs, cls, label: c.label };
+  }
+  return { tag: 'button' as const, attrs: c.action ? { 'data-action': c.action, type: 'button' } : { type: 'button' }, cls, label: c.label };
+};
+---
+<article class="detail-page">
+
+  <header class="detail-head">
+    {eyebrowParts.length > 0 && (
+      <p class="detail-eyebrow">
+        {eyebrowParts.map((p, i) => (
+          <>
+            {i > 0 && <span> · </span>}
+            {p.href ? <a href={p.href}>{p.label}</a> : <span>{p.label}</span>}
+          </>
+        ))}
+      </p>
+    )}
+    <h1 class="detail-title">{title}</h1>
+    {deck && <p class="detail-deck">{deck}</p>}
+
+    {(primaryCta || secondaryCta) && (
+      <div class="detail-cta-row">
+        {primaryCta && (primaryCta.href
+          ? <a href={primaryCta.href} class="cta-btn cta-primary" {...(primaryCta.external ? { target: '_blank', rel: 'noopener' } : {})}>{primaryCta.label}</a>
+          : <button type="button" class="cta-btn cta-primary" data-action={primaryCta.action}>{primaryCta.label}</button>
+        )}
+        {secondaryCta && (secondaryCta.href
+          ? <a href={secondaryCta.href} class="cta-btn cta-secondary" {...(secondaryCta.external ? { target: '_blank', rel: 'noopener' } : {})}>{secondaryCta.label}</a>
+          : <button type="button" class="cta-btn cta-secondary" data-action={secondaryCta.action}>{secondaryCta.label}</button>
+        )}
+      </div>
+    )}
+  </header>
+
+  {cover && (
+    <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
+      <img src={cover} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+    </div>
+  )}
+
+  <section class="detail-body">
+    <aside class="detail-meta">
+      <slot name="meta" />
+    </aside>
+    <div class="detail-prose prose-eclag">
+      <slot />
+    </div>
+  </section>
+
+  <slot name="after" />
+
+  {related.length > 0 && (
+    <section class="detail-related">
+      <h2 class="detail-related-title">{relatedTitle}</h2>
+      <ul class="detail-related-list">
+        {related.map((r) => (
+          <li><a href={`/${r.type}/${r.slug}`} class="detail-related-card">
+            <span class="detail-related-kicker">{r.type}</span>
+            <span class="detail-related-name">{r.label || r.slug.replace(/-/g, ' ')}</span>
+            <span class="detail-related-arrow">→</span>
+          </a></li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {backHref && (
+    <footer class="detail-foot">
+      <a href={backHref} class="cta-btn cta-ghost">← {backLabel || 'Indietro'}</a>
+    </footer>
+  )}
+
+  <script is:inline>
+    document.querySelectorAll('[data-action="open-hire-us"]').forEach((b) => {
+      b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open')));
+    });
+    document.querySelectorAll('[data-action="open-alba"]').forEach((b) => {
+      b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('alba:open')));
+    });
+  </script>
+</article>

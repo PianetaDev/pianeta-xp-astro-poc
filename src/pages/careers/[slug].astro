@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import DetailPage from '../../components/detail/DetailPage.astro';
 import { getCollection, render } from 'astro:content';
 
 export const prerender = true;
@@ -10,21 +11,32 @@ export async function getStaticPaths() {
 
 const { item } = Astro.props;
 const { Content } = await render(item);
-const title = item.data.title || item.id;
+const data: any = item.data;
+const title = data.title || item.id;
+const cover = data.cover || data.ogImage;
+const applyEmail = data.applyEmail || 'people@pianeta.studio';
+
+const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Careers', href: '/careers' }];
+if (data.employmentType) eyebrowParts.push({ label: data.employmentType });
+if (data.location) eyebrowParts.push({ label: data.location });
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={item.data.description} ogImage={item.data.ogImage || item.data.cover}>
-  {(item.data.cover || item.data.photo || item.data.ogImage) && (
-    <div class="aspect-[16/9] bg-black/5 overflow-hidden">
-      <img src={item.data.cover || item.data.photo || item.data.ogImage} alt={title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover" />
-    </div>
-  )}
-  <article class="px-6 lg:px-12 pt-16 pb-16 max-w-[820px]">
-    <header class="mb-8">
-      <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3">{title}</h1>
-      {item.data.description && <p class="text-lg text-black/70">{item.data.description}</p>}
-    </header>
-    <div class="prose-eclag">
-      <Content />
-    </div>
-  </article>
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>
+  <DetailPage
+    eyebrowParts={eyebrowParts}
+    title={title}
+    deck={data.description}
+    cover={cover}
+    primaryCta={{ label: 'Candidati', href: `mailto:${applyEmail}?subject=${encodeURIComponent('Candidatura — ' + title)}` }}
+    backHref="/careers"
+    backLabel="Tutte le posizioni"
+  >
+    <Fragment slot="meta">
+      {data.employmentType && <div><dt>Contratto</dt><dd>{data.employmentType}</dd></div>}
+      {data.location && <div><dt>Dove</dt><dd>{data.location}</dd></div>}
+      {data.team && <div><dt>Team</dt><dd>{data.team}</dd></div>}
+      {data.startDate && <div><dt>Inizio</dt><dd>{data.startDate}</dd></div>}
+      <div><dt>Per candidarsi</dt><dd><a href={`mailto:${applyEmail}`} class="meta-link">{applyEmail}</a></dd></div>
+    </Fragment>
+    <Content />
+  </DetailPage>
 </BaseLayout>

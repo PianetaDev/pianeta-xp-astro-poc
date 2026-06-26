@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import DetailPage from '../../components/detail/DetailPage.astro';
 import { getCollection, render } from 'astro:content';
 
 export const prerender = true;
@@ -10,21 +11,43 @@ export async function getStaticPaths() {
 
 const { item } = Astro.props;
 const { Content } = await render(item);
-const title = item.data.title || item.id;
+const data: any = item.data;
+const title = data.title || item.id;
+const cover = data.cover || data.ogImage;
+const caseStudies: string[] = data.caseStudies || [];
+const ctaLabel = data.pricing?.cta || 'Parla con Alba';
+
+const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Servizi', href: '/services' }];
+
+const related = caseStudies.map((slug) => ({ type: 'work', slug }));
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={item.data.description} ogImage={item.data.ogImage || item.data.cover}>
-  {(item.data.cover || item.data.photo || item.data.ogImage) && (
-    <div class="aspect-[16/9] bg-black/5 overflow-hidden">
-      <img src={item.data.cover || item.data.photo || item.data.ogImage} alt={title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover" />
-    </div>
-  )}
-  <article class="px-6 lg:px-12 pt-16 pb-16 max-w-[820px]">
-    <header class="mb-8">
-      <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3">{title}</h1>
-      {item.data.description && <p class="text-lg text-black/70">{item.data.description}</p>}
-    </header>
-    <div class="prose-eclag">
-      <Content />
-    </div>
-  </article>
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>
+  <DetailPage
+    eyebrowParts={eyebrowParts}
+    title={title}
+    deck={data.description}
+    cover={cover}
+    primaryCta={{ label: ctaLabel, action: 'open-alba' }}
+    secondaryCta={{ label: 'Lavoriamo insieme', action: 'open-hire-us' }}
+    backHref="/services"
+    backLabel="Tutti i servizi"
+    related={related}
+    relatedTitle="Case study"
+  >
+    <Fragment slot="meta">
+      {data.deliverables && data.deliverables.length > 0 && (
+        <div>
+          <dt>Deliverables</dt>
+          <dd>
+            <ul style="margin:0;padding:0;list-style:none;">
+              {data.deliverables.map((d: string) => <li style="padding:4px 0;border-bottom:1px solid rgba(14,17,22,0.06);">{d}</li>)}
+            </ul>
+          </dd>
+        </div>
+      )}
+      {data.team && data.team.length > 0 && <div><dt>Team</dt><dd>{data.team.join(', ')}</dd></div>}
+      {data.pricing?.label && <div><dt>Pricing</dt><dd>{data.pricing.label}</dd></div>}
+    </Fragment>
+    <Content />
+  </DetailPage>
 </BaseLayout>
