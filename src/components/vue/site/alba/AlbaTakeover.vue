@@ -14,6 +14,9 @@ const AlbaChat = defineAsyncComponent(() => import('~/components/vue/alba/AlbaCh
 const initialPrompt = ref<string | null>(null)
 watch(open, (o) => {
   if (o) initialPrompt.value = consumePendingPrompt()
+  if (typeof document !== 'undefined') {
+    document.body.classList.toggle('alba-open', !!o)
+  }
 })
 
 watch(() => route.fullPath, () => { if (open.value) closePanel() })
@@ -119,6 +122,20 @@ const onTouchEnd = () => {
 }
 @media (min-width: 1280px) {
   .alba-panel { max-width: 560px; }
+}
+
+/* 3-pannel layout: quando Alba apre, il main centrale si rimpicciolisce */
+@media (min-width: 1024px) {
+  main.site-main { transition: padding-right 280ms cubic-bezier(0.16, 1, 0.3, 1); }
+  body.alba-open main.site-main { padding-right: 480px; }
+  body.alba-open footer.site-main { padding-right: 480px; }
+}
+@media (min-width: 1280px) {
+  body.alba-open main.site-main { padding-right: 560px; }
+  body.alba-open footer.site-main { padding-right: 560px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  main.site-main { transition: none !important; }
 }
 /* Mobile: bottom-sheet 85vh */
 @media (max-width: 767px) {
