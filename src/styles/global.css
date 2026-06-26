@@ -94,8 +94,17 @@
 .detail-meta dd { margin: 0; color: #0e1116; line-height: 1.5; }
 .detail-meta .meta-link { color: var(--cta-primary); text-decoration: none; }
 .detail-meta .meta-link:hover { text-decoration: underline; }
-.detail-prose { font-size: 1.0625rem; line-height: 1.7; }
+.detail-prose { font-size: 1.0625rem; line-height: 1.7; max-width: 65ch; }
 .detail-prose :first-child { margin-top: 0; }
+/* Double-column body on desktop — alla Deux Huit Huit */
+@media (min-width: 1100px) {
+  .detail-prose { max-width: none; column-count: 2; column-gap: 48px; column-fill: balance; }
+  .detail-prose h2, .detail-prose h3, .detail-prose blockquote, .detail-prose hr, .detail-prose figure, .detail-prose img, .detail-prose ul, .detail-prose ol {
+    column-span: all;
+    break-after: avoid;
+  }
+  .detail-prose p { break-inside: avoid-column; }
+}
 .detail-related { max-width: 1080px; margin: 96px auto 48px; padding-top: 48px; border-top: 1px solid var(--pianeta-border); }
 .detail-related-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 20px; }
 .detail-related-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
