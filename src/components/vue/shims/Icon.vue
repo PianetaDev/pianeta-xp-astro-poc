@@ -1,11 +1,31 @@
 <script setup lang="ts">
-// Minimal Icon shim: shows a tiny circle placeholder. Real icons would need lucide-vue-next.
-defineProps<{ name?: string; size?: string | number }>()
+import { computed } from 'vue'
+import * as Lucide from 'lucide-vue-next'
+
+const props = defineProps<{
+  name?: string
+  size?: string | number
+}>()
+
+// Convert "lucide:flask-conical" → "FlaskConical"
+function toPascal(s: string): string {
+  return s.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('')
+}
+
+const component = computed(() => {
+  if (!props.name) return null
+  const raw = props.name.replace(/^lucide:/, '')
+  const pascal = toPascal(raw)
+  return (Lucide as any)[pascal] || (Lucide as any).Circle
+})
+
+const sizeValue = computed(() => {
+  if (typeof props.size === 'number') return props.size
+  if (typeof props.size === 'string') return parseInt(props.size, 10) || 16
+  return 16
+})
 </script>
+
 <template>
-  <span class="inline-block align-middle" :style="{ width: (size || 16) + 'px', height: (size || 16) + 'px' }" :data-icon="name">
-    <svg viewBox="0 0 16 16" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-      <circle cx="8" cy="8" r="5" />
-    </svg>
-  </span>
+  <component v-if="component" :is="component" :size="sizeValue" stroke-width="1.75" aria-hidden="true" />
 </template>
