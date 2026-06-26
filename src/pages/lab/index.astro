@@ -1,28 +1,39 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import ContentCard from '../../components/ContentCard.astro';
+import IndexCard from '../../components/detail/IndexCard.astro';
 import { getCollection } from 'astro:content';
 
-const items = await getCollection('lab');
-const title = 'Lab';
+const all = await getCollection('lab');
+const items = all
+  .filter((i: any) => i.data.draft !== true)
+  .sort((a: any, b: any) => {
+    const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+    return db - da;
+  });
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={`${title} di Pianeta.Studio`}>
-  <Hero eyebrow="Pianeta.Studio" title={title} />
-  <section class="px-6 lg:px-12 pb-16 max-w-[1100px]">
+<BaseLayout title="Lab — Pianeta.Studio" description="Esperimenti e ricerca da Pianeta.Studio. Carbon farming, neuromarketing, AI per la creatività.">
+  <div class="index-page">
+    <header class="index-head">
+      <p class="index-eyebrow">Pianeta.Studio</p>
+      <h1 class="index-title">Lab</h1>
+      <p class="index-deck">R&D e sperimentazione. AI validation, neuromarketing, carbon-aware design.</p>
+    </header>
+
     {items.length === 0 ? (
-      <p class="text-black/60">Nessun contenuto pubblicato.</p>
+      <div class="index-empty">Sperimentazioni in arrivo. Scrivici a <a href="mailto:lab@pianeta.studio" class="meta-link" style="color:var(--cta-primary);">lab@pianeta.studio</a> per collaborare.</div>
     ) : (
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((it) => (
-          <ContentCard
-            title={it.data.title || it.id}
-            excerpt={it.data.description}
+      <div class="index-grid">
+        {items.map((it: any) => (
+          <IndexCard
             href={`/lab/${it.id}`}
-            image={it.data.cover}
+            title={it.data.title || it.id}
+            deck={it.data.description}
+            kicker={it.data.kind}
+            image={it.data.cover || it.data.ogImage}
           />
         ))}
       </div>
     )}
-  </section>
+  </div>
 </BaseLayout>

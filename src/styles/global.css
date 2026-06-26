@@ -100,6 +100,27 @@
 .detail-related-arrow { color: var(--cta-primary); font-weight: 700; }
 .detail-foot { max-width: 1080px; margin: 64px auto 0; display: flex; justify-content: center; }
 
+/* Index pages — section cards grid */
+.index-page { max-width: 1280px; margin: 0 auto; padding: 56px 32px 96px; }
+.index-head { max-width: 880px; margin: 0 auto 48px; text-align: center; }
+.index-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 16px; }
+.index-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 20px; }
+.index-deck { font-size: 1.125rem; color: rgba(14,17,22,0.65); line-height: 1.5; margin: 0 auto; max-width: 640px; }
+.index-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .index-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .index-grid { grid-template-columns: 1fr 1fr 1fr; } }
+.index-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--pianeta-border); border-radius: 20px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color 150ms, transform 200ms; }
+.index-card:hover { border-color: var(--cta-primary); transform: translateY(-2px); }
+.index-card-img { aspect-ratio: 16/10; background: rgba(14,17,22,0.04); overflow: hidden; }
+.index-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 400ms; }
+.index-card:hover .index-card-img img { transform: scale(1.03); }
+.index-card.is-portrait .index-card-img { aspect-ratio: 1/1; }
+.index-card-body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.index-card-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); }
+.index-card-title { font-weight: 800; font-size: 1.0625rem; line-height: 1.25; letter-spacing: -0.01em; margin: 0; }
+.index-card-deck { font-size: 0.875rem; color: rgba(14,17,22,0.65); line-height: 1.45; margin: 0; }
+.index-empty { text-align: center; padding: 48px 20px; color: rgba(14,17,22,0.55); border: 1px dashed var(--pianeta-border-strong); border-radius: 16px; }
+
 .reveal-pre { opacity: 0; transition: opacity 900ms ease-out; will-change: opacity; }
 .reveal-in { opacity: 1 !important; }
 @media (prefers-reduced-motion: reduce) {

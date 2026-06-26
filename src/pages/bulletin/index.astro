@@ -1,28 +1,44 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import ContentCard from '../../components/ContentCard.astro';
+import IndexCard from '../../components/detail/IndexCard.astro';
 import { getCollection } from 'astro:content';
 
-const items = await getCollection('bulletin');
-const title = 'Bulletin';
+const all = await getCollection('bulletin');
+const items = all
+  .filter((i: any) => i.data.draft !== true)
+  .sort((a: any, b: any) => {
+    const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+    return db - da;
+  });
+const fmt = (d?: Date) => d ? new Date(d).toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={`${title} di Pianeta.Studio`}>
-  <Hero eyebrow="Pianeta.Studio" title={title} />
-  <section class="px-6 lg:px-12 pb-16 max-w-[1100px]">
+<BaseLayout title="Bulletin — Pianeta.Studio" description="Articoli, casi reali, ricerca. 1-2 al mese da Pianeta.Studio.">
+  <div class="index-page">
+    <header class="index-head">
+      <p class="index-eyebrow">Pianeta.Studio</p>
+      <h1 class="index-title">Bulletin</h1>
+      <p class="index-deck">Articoli, casi reali, ricerca. 1-2 al mese.</p>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="/bulletin/iscrivimi" class="cta-btn cta-primary">Iscriviti</a>
+        <a href="/bulletin/preferenze" class="cta-btn cta-ghost">Preferenze</a>
+      </div>
+    </header>
+
     {items.length === 0 ? (
-      <p class="text-black/60">Nessun contenuto pubblicato.</p>
+      <div class="index-empty">Nessun articolo pubblicato.</div>
     ) : (
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((it) => (
-          <ContentCard
-            title={it.data.title || it.id}
-            excerpt={it.data.description}
+      <div class="index-grid">
+        {items.map((it: any) => (
+          <IndexCard
             href={`/bulletin/${it.id}`}
-            image={it.data.cover}
+            title={it.data.title || it.id}
+            deck={it.data.description}
+            kicker={fmt(it.data.date)}
+            image={it.data.cover || it.data.ogImage}
           />
         ))}
       </div>
     )}
-  </section>
+  </div>
 </BaseLayout>

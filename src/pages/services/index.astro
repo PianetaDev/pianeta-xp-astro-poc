@@ -1,28 +1,42 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import ContentCard from '../../components/ContentCard.astro';
+import IndexCard from '../../components/detail/IndexCard.astro';
 import { getCollection } from 'astro:content';
 
-const items = await getCollection('services');
-const title = 'Services';
+const all = await getCollection('services');
+const items = all
+  .filter((i: any) => i.data.draft !== true)
+  .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999));
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={`${title} di Pianeta.Studio`}>
-  <Hero eyebrow="Pianeta.Studio" title={title} />
-  <section class="px-6 lg:px-12 pb-16 max-w-[1100px]">
+<BaseLayout title="Servizi — Pianeta.Studio" description="Sustainable Creativity: Design & Technology come servizio. Co-design + AI validation + UX validation.">
+  <div class="index-page">
+    <header class="index-head">
+      <p class="index-eyebrow">Pianeta.Studio</p>
+      <h1 class="index-title">Servizi</h1>
+      <p class="index-deck">Co-design + AI validation + UX validation. Standard aperti, codice consegnato.</p>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">Lavoriamo insieme</button>
+        <button type="button" class="cta-btn cta-secondary" data-action="open-alba">Parla con Alba</button>
+      </div>
+      <script is:inline>
+        document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open'))));
+        document.querySelectorAll('[data-action="open-alba"]').forEach(b => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('alba:open'))));
+      </script>
+    </header>
+
     {items.length === 0 ? (
-      <p class="text-black/60">Nessun contenuto pubblicato.</p>
+      <div class="index-empty">Nessun servizio pubblicato.</div>
     ) : (
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((it) => (
-          <ContentCard
-            title={it.data.title || it.id}
-            excerpt={it.data.description}
+      <div class="index-grid">
+        {items.map((it: any) => (
+          <IndexCard
             href={`/services/${it.id}`}
-            image={it.data.cover}
+            title={it.data.title || it.id}
+            deck={it.data.description}
+            image={it.data.cover || it.data.ogImage}
           />
         ))}
       </div>
     )}
-  </section>
+  </div>
 </BaseLayout>

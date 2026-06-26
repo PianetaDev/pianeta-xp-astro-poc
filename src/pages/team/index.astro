@@ -1,28 +1,36 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import ContentCard from '../../components/ContentCard.astro';
+import IndexCard from '../../components/detail/IndexCard.astro';
 import { getCollection } from 'astro:content';
 
-const items = await getCollection('team');
-const title = 'Team';
+const all = await getCollection('team');
+const items = all
+  .filter((i: any) => i.data.draft !== true)
+  .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999));
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={`${title} di Pianeta.Studio`}>
-  <Hero eyebrow="Pianeta.Studio" title={title} />
-  <section class="px-6 lg:px-12 pb-16 max-w-[1100px]">
+<BaseLayout title="Team — Pianeta.Studio" description="Le persone dietro Pianeta.Studio.">
+  <div class="index-page">
+    <header class="index-head">
+      <p class="index-eyebrow">Pianeta.Studio</p>
+      <h1 class="index-title">Team</h1>
+      <p class="index-deck">Persone che progettano, programmano, ricercano. Studio nomade, sedi a Milano · Ardea · Sicilia.</p>
+    </header>
+
     {items.length === 0 ? (
-      <p class="text-black/60">Nessun contenuto pubblicato.</p>
+      <div class="index-empty">Nessun profilo pubblicato.</div>
     ) : (
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((it) => (
-          <ContentCard
-            title={it.data.title || it.id}
-            excerpt={it.data.description}
+      <div class="index-grid">
+        {items.map((it: any) => (
+          <IndexCard
             href={`/team/${it.id}`}
-            image={it.data.cover}
+            title={it.data.name || it.data.title || it.id}
+            deck={it.data.role}
+            kicker={it.data.location}
+            image={it.data.photo || it.data.cover}
+            portrait={true}
           />
         ))}
       </div>
     )}
-  </section>
+  </div>
 </BaseLayout>

@@ -1,28 +1,33 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Hero from '../../components/Hero.astro';
-import ContentCard from '../../components/ContentCard.astro';
+import IndexCard from '../../components/detail/IndexCard.astro';
 import { getCollection } from 'astro:content';
 
-const items = await getCollection('careers');
-const title = 'Careers';
+const all = await getCollection('careers');
+const items = all.filter((i: any) => i.data.draft !== true);
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={`${title} di Pianeta.Studio`}>
-  <Hero eyebrow="Pianeta.Studio" title={title} />
-  <section class="px-6 lg:px-12 pb-16 max-w-[1100px]">
+<BaseLayout title="Careers — Pianeta.Studio" description="Posizioni aperte in Pianeta.Studio. Design, ricerca, sviluppo.">
+  <div class="index-page">
+    <header class="index-head">
+      <p class="index-eyebrow">Pianeta.Studio</p>
+      <h1 class="index-title">Careers</h1>
+      <p class="index-deck">Cerchiamo persone curiose, con un'attenzione vera alle conseguenze del nostro lavoro.</p>
+    </header>
+
     {items.length === 0 ? (
-      <p class="text-black/60">Nessun contenuto pubblicato.</p>
+      <div class="index-empty">Nessuna posizione attiva al momento. Scrivici comunque a <a href="mailto:people@pianeta.studio" class="meta-link" style="color:var(--cta-primary);">people@pianeta.studio</a> — leggiamo tutto.</div>
     ) : (
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((it) => (
-          <ContentCard
-            title={it.data.title || it.id}
-            excerpt={it.data.description}
+      <div class="index-grid">
+        {items.map((it: any) => (
+          <IndexCard
             href={`/careers/${it.id}`}
-            image={it.data.cover}
+            title={it.data.title || it.id}
+            deck={it.data.description}
+            kicker={[it.data.employmentType, it.data.location].filter(Boolean).join(' · ')}
+            image={it.data.cover || it.data.ogImage}
           />
         ))}
       </div>
     )}
-  </section>
+  </div>
 </BaseLayout>

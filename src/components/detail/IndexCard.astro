@@ -1,0 +1,23 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  deck?: string;
+  kicker?: string;
+  image?: string;
+  portrait?: boolean;
+}
+const { href, title, deck, kicker, image, portrait = false } = Astro.props;
+---
+<a href={href} class:list={['index-card', portrait && 'is-portrait']}>
+  {image && (
+    <div class="index-card-img">
+      <img src={image} alt={title} loading="lazy" decoding="async" />
+    </div>
+  )}
+  <div class="index-card-body">
+    {kicker && <span class="index-card-kicker">{kicker}</span>}
+    <h3 class="index-card-title">{title}</h3>
+    {deck && <p class="index-card-deck">{deck}</p>}
+  </div>
+</a>
