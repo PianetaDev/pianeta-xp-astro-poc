@@ -25,8 +25,8 @@ await mkdir(OUT_DIR, { recursive: true });
 for (const { from, to } of ASSETS) {
   const src = join(ALBA_ROOT, from);
   if (!(await exists(src))) {
-    console.error(`[sync-alba-assets] MISSING: ${src}`);
-    process.exit(1);
+    console.warn(`[sync-alba-assets] skip (alba repo non clonato come sibling): ${from}`);
+    continue;
   }
   const content = await readFile(src);
   await writeFile(join(OUT_DIR, to), content);
