@@ -10,9 +10,10 @@
     "astro": "astro",
     "optimize:images": "node scripts/optimize-images.mjs",
     "sync:alba": "node scripts/sync-alba-assets.mjs",
-    "prebuild": "node scripts/sync-alba-assets.mjs",
+    "prebuild": "node scripts/sync-alba-assets.mjs && node scripts/sync-alba.mjs",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "sync:alba:prod": "node scripts/sync-alba.mjs"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

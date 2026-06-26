@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-// Sync assets dalla repo PianetaDev/alba → src/lib/alba-assets/
-// Usa `gh api` per i repo privati (auth via gh CLI).
-// Run: `pnpm sync:alba` o automaticamente pre-build via `pnpm prebuild`.
+// Sync assets dalla repo PianetaDev/alba → src/lib/server/alba/_assets/
+// Usa `gh api` per i repo privati (auth via gh CLI o GH_TOKEN env).
+// Run: `pnpm sync:alba:prod` o automaticamente pre-build su Vercel via prebuild.
 
 import { execFileSync } from 'child_process';
 import { mkdirSync, writeFileSync } from 'fs';
@@ -9,7 +9,7 @@ import { dirname, join } from 'path';
 
 const REPO = 'PianetaDev/alba';
 const BRANCH = 'main';
-const OUT_DIR = 'src/lib/alba-assets';
+const OUT_DIR = 'src/lib/server/alba/_assets';
 
 const FILES = [
   { src: 'prompts/system/current.md',  dst: 'system-prompt.md' },
