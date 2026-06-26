@@ -33,13 +33,55 @@ const url = new URL(`/services/${item.id}`, Astro.site).toString();
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
+  '@id': url,
   name: title,
   description: data.description,
   url,
   image: data.ogImage || cover,
-  provider: { '@type': 'Organization', name: 'Pianeta.Studio', url: 'https://xp.pianeta.studio' },
-  serviceType: title,
+  serviceType: data.category || title,
+  category: 'Design & Technology · Sustainable Creativity',
+  provider: {
+    '@type': 'Organization',
+    name: 'Pianeta.Studio',
+    legalName: 'PIANETA.STUDIO S.R.L. S.B.',
+    taxID: 'IT06037730873',
+    url: 'https://xp.pianeta.studio',
+    sameAs: ['https://pianeta.studio', 'https://atlas.pianeta.green/atlas'],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'info@pianeta.studio',
+      contactType: 'sales',
+      availableLanguage: ['it', 'en'],
+    },
+  },
   areaServed: { '@type': 'AdministrativeArea', name: 'Europa' },
+  audience: { '@type': 'BusinessAudience', name: 'PMI, B-Corp, organizzazioni sostenibilità & food/agri' },
+  ...(data.deliverables && Array.isArray(data.deliverables) && data.deliverables.length > 0 && {
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Deliverable inclusi',
+      itemListElement: data.deliverables.map((d: string, i: number) => ({
+        '@type': 'Offer',
+        position: i + 1,
+        itemOffered: { '@type': 'Service', name: d },
+      })),
+    },
+  }),
+  ...(caseStudies.length > 0 && {
+    workExample: caseStudies.map((slug: string) => ({
+      '@type': 'CreativeWork',
+      url: new URL(`/work/${slug}`, Astro.site).toString(),
+    })),
+  }),
+  potentialAction: {
+    '@type': 'ContactAction',
+    name: 'Lavoriamo insieme',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://xp.pianeta.studio/contact',
+      actionPlatform: ['https://schema.org/DesktopWebPlatform', 'https://schema.org/MobileWebPlatform'],
+    },
+  },
 };
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>

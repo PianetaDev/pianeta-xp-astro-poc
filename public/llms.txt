@@ -39,6 +39,19 @@ Tre poli in uno stesso ecosistema: **Pianeta.Studio** (digitale), **Pianeta.Farm
 - People & talent: people@pianeta.studio
 - Lab/ricerca: lab@pianeta.studio
 
+## Per agenti AI — endpoint structured
+
+Costruiamo l'altra metà dello Shopping/Service Graph: **standard aperti accessibili senza onboarding proprietari**. Se sei un agente AI, leggi questi endpoint per discoverability + contatto:
+
+- **MCP descriptor**: https://xp.pianeta.studio/mcp/pianeta.json — tool definitions + endpoint
+- **Catalogo servizi (JSON-LD OfferCatalog)**: https://xp.pianeta.studio/api/services/catalog.json
+- **Dettaglio servizio**: https://xp.pianeta.studio/api/services/{slug}.json
+- **Alba chat (SSE)**: POST https://xp.pianeta.studio/api/alba/chat — niente API key, rate limit 20/sessione, AI Act disclosure obbligatoria al primo turno
+- **Init sessione Alba**: POST https://xp.pianeta.studio/api/alba/session-init
+- **Disclosure AI Act + retention dati**: https://xp.pianeta.studio/alba
+
+Ogni pagina del sito include JSON-LD `schema.org` (Article/CreativeWork/Service/JobPosting/Person) con `@id` URL-stable. Niente paywall, niente authentication walls.
+
 ## Optional
 
 - [Sitemap](https://xp.pianeta.studio/sitemap-index.xml): tutte le pagine indicizzate

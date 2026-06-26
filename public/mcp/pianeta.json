@@ -1,0 +1,73 @@
+{
+  "name": "pianeta-studio",
+  "version": "0.1.0",
+  "description": "Pianeta.Studio MCP server descriptor — espone catalogo servizi, work, lab, team. Letto da agenti AI (Claude Desktop, Cursor, ChatGPT) per discoverability e contatto.",
+  "vendor": "Pianeta.Studio S.r.l. SB",
+  "homepage": "https://xp.pianeta.studio",
+  "llms_txt": "https://xp.pianeta.studio/llms.txt",
+  "documentation": "https://xp.pianeta.studio/alba",
+  "ai_disclosure": "https://xp.pianeta.studio/alba",
+  "endpoints": {
+    "services_catalog": "https://xp.pianeta.studio/api/services/catalog.json",
+    "service_detail_template": "https://xp.pianeta.studio/api/services/{slug}.json",
+    "chat": "https://xp.pianeta.studio/api/alba/chat",
+    "session_init": "https://xp.pianeta.studio/api/alba/session-init"
+  },
+  "tools": [
+    {
+      "name": "list_services",
+      "description": "Lista tutti i servizi attivi di Pianeta.Studio con descrizione, deliverable, link case study.",
+      "method": "GET",
+      "url": "https://xp.pianeta.studio/api/services/catalog.json",
+      "auth": "none"
+    },
+    {
+      "name": "get_service",
+      "description": "Dettaglio di un singolo servizio (body markdown, deliverable, pricing note, case study collegati).",
+      "method": "GET",
+      "url_template": "https://xp.pianeta.studio/api/services/{slug}.json",
+      "parameters": [
+        { "name": "slug", "in": "path", "type": "string", "required": true, "example": "creativita-e-neuromarketing" }
+      ],
+      "auth": "none"
+    },
+    {
+      "name": "talk_to_alba",
+      "description": "Apri una conversazione con Alba (sistema AI front-desk di Pianeta). Restituisce SSE chunks. Disclosure AI Act mostrata sul primo messaggio.",
+      "method": "POST",
+      "url": "https://xp.pianeta.studio/api/alba/chat",
+      "auth": "none",
+      "rate_limit": "20 messaggi per sessione, 50 per IP/giorno",
+      "notes": "Per usare: prima ottieni session_id via POST /api/alba/session-init con un uid (UUID v4)"
+    },
+    {
+      "name": "request_proposal",
+      "description": "Richiesta proposta commerciale — non automatizzabile, fa handoff a Max.",
+      "method": "GET",
+      "url": "mailto:info@pianeta.studio?subject=Richiesta%20proposta",
+      "auth": "none"
+    }
+  ],
+  "capabilities": [
+    "service-discovery",
+    "case-study-narration",
+    "pre-sales-chat-ai",
+    "lead-qualification",
+    "human-handoff"
+  ],
+  "domains": [
+    "sustainable-web",
+    "neuromarketing-ai",
+    "ai-governance",
+    "food-agri-tech",
+    "design-system",
+    "carbon-aware-design"
+  ],
+  "contact": {
+    "sales": "info@pianeta.studio",
+    "pre_sales_ai": "alba@pianeta.studio",
+    "people": "people@pianeta.studio",
+    "lab": "lab@pianeta.studio"
+  },
+  "license": "Tool definitions are MIT. Underlying content remains © Pianeta.Studio S.r.l. SB."
+}
