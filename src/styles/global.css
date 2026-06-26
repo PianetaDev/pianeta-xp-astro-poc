@@ -1,0 +1,19 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/900.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { background: #fafaf7; color: #0e1116; }
+  body { font-family: 'Inter', system-ui, sans-serif; }
+}
+
+.prose-eclag h2 { font-size: 1.75rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
+.prose-eclag h3 { font-size: 1.25rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem; }
+.prose-eclag p { margin-bottom: 1rem; line-height: 1.7; }
+.prose-eclag a { text-decoration: underline; text-underline-offset: 3px; }
+.prose-eclag strong { font-weight: 700; }
+.prose-eclag ul { margin: 1rem 0; padding-left: 1.25rem; list-style: disc; }

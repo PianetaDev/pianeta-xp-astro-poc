@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description = '', ogImage = '/og/work-eclag.png' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+---
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class="bg-bg text-ink antialiased">
+    <aside class="fixed left-0 top-0 bottom-0 w-[88px] border-r border-black/10 bg-bg hidden md:flex flex-col items-center justify-between py-6 z-10">
+      <a href="/" class="flex flex-col items-center gap-2 text-[10px] font-black tracking-[0.15em] uppercase leading-tight text-center">
+        <span style="writing-mode: vertical-rl; transform: rotate(180deg);">PIANETA.STUDIO</span>
+      </a>
+      <nav class="flex flex-col gap-4 text-[10px] font-semibold uppercase tracking-widest">
+        <a href="/" class="hover:underline">Home</a>
+        <a href="/work/eclag" class="hover:underline">Work</a>
+        <a href="/bulletin" class="hover:underline">Bull.</a>
+      </nav>
+      <div class="text-[9px] font-medium tracking-wider text-ink/60 text-center leading-tight">
+        Sustainable<br/>Creativity™
+      </div>
+    </aside>
+
+    <main class="md:ml-[88px]">
+      <slot />
+    </main>
+
+    <footer class="md:ml-[88px] border-t border-black/10 mt-16">
+      <div class="px-6 lg:px-12 py-8 max-w-[1100px] flex flex-wrap gap-4 justify-between text-xs text-ink/60">
+        <div>© 2026 Pianeta.Studio S.r.l. SB · Sustainable Creativity dal 2016</div>
+        <div>P.IVA 06037730873</div>
+      </div>
+    </footer>
+  </body>
+</html>
