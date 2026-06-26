@@ -47,13 +47,21 @@ function onDocClick(e: MouseEvent) {
   hide()
 }
 function onKey(e: KeyboardEvent) { if (e.key === 'Escape') hide() }
+function onExternalOpen(e: Event) {
+  const detail = (e as CustomEvent).detail
+  if (typeof detail === 'string') {
+    open.value = detail as any
+  }
+}
 onMounted(() => {
   document.addEventListener('click', onDocClick, true)
   document.addEventListener('keydown', onKey)
+  window.addEventListener('rail-flyout:open', onExternalOpen)
 })
 onBeforeUnmount(() => {
   document.removeEventListener('click', onDocClick, true)
   document.removeEventListener('keydown', onKey)
+  window.removeEventListener('rail-flyout:open', onExternalOpen)
 })
 
 function meta(item: ContentItem, type: string) {
@@ -82,7 +90,7 @@ function meta(item: ContentItem, type: string) {
     <div
       v-if="open && current"
       ref="panelRef"
-      class="rail-flyout fixed top-0 left-[88px] h-screen w-[360px] bg-white border-r border-black/10 z-40 shadow-xl flex flex-col"
+      class="rail-flyout"
     >
       <header class="px-6 pt-6 pb-3 flex items-center justify-between border-b border-black/5">
         <div class="flex items-center gap-2">
@@ -140,3 +148,22 @@ function meta(item: ContentItem, type: string) {
     </div>
   </Transition>
 </template>
+
+<style>
+.rail-flyout {
+  position: fixed;
+  top: 0;
+  left: 64px;
+  height: 100vh;
+  width: 360px;
+  background: #ffffff;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  z-index: 35;
+}
+@media (min-width: 768px) {
+  .rail-flyout { left: 96px; }
+}
+</style>

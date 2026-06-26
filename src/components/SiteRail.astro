@@ -25,10 +25,12 @@ const nav = [
   <nav class="site-rail-nav">
     {nav.map((l) => {
       const isActive = l.href === '/' ? current === '/' : current.startsWith(l.href);
+      const section = l.href === '/' ? null : l.href.replace('/', '');
       return (
         <a
           href={l.href}
           aria-label={l.label}
+          data-rail-section={section}
           class:list={['site-rail-link', isActive && 'is-active']}
         >
           <Icon name={l.icon} width="22" height="22" />
@@ -37,6 +39,17 @@ const nav = [
       );
     })}
   </nav>
+
+  <script is:inline>
+    document.querySelectorAll('.site-rail-link[data-rail-section]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        const section = el.getAttribute('data-rail-section');
+        if (!section) return;
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent('rail-flyout:open', { detail: section }));
+      });
+    });
+  </script>
 
   <div class="site-rail-foot">
     <p class="site-rail-locale">IT / EN</p>
