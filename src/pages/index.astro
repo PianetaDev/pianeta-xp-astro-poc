@@ -1,51 +1,212 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import ContentCard from '../components/ContentCard.astro';
 import { getCollection } from 'astro:content';
 
-const work = (await getCollection('work')).slice(0, 4);
-const bulletin = (await getCollection('bulletin')).slice(0, 3);
+// Sort helper: date desc, drafts excluded
+const byDateDesc = (a: any, b: any) => {
+  const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return db - da;
+};
+const live = (e: any) => e.data.draft !== true;
+
+const featuredWork = (await getCollection('work')).filter(live).sort(byDateDesc);
+const bulletin = (await getCollection('bulletin')).filter(live).sort(byDateDesc);
+const services = (await getCollection('services')).filter(live).sort(byDateDesc);
+const team = (await getCollection('team')).filter(live);
+const teamCount = team.length;
+
+const w0 = featuredWork[0];
+const b0 = bulletin[0];
+const b1 = bulletin[1];
+const b2 = bulletin[2];
+const s0 = services[0];
+
+const description = 'Studio di design & technology. Lavori, articoli, esperimenti.';
+const title = 'Pianeta.Studio — Sustainable Creativity dal 2016';
+
+const ldJson = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://xp.pianeta.studio/#organization',
+  name: 'Pianeta.Studio',
+  alternateName: 'PIANETA.STUDIO S.R.L. S.B.',
+  legalName: 'PIANETA.STUDIO S.R.L. SOCIETÀ BENEFIT',
+  url: 'https://xp.pianeta.studio',
+  logo: { '@type': 'ImageObject', url: 'https://xp.pianeta.studio/logo.png', width: 512, height: 512 },
+  description: 'Studio di design e technology · Sustainable Creativity dal 2016 · Italian Benefit Corporation operating at the intersection of sustainable design, technology, and social impact.',
+  slogan: 'Sustainable Creativity dal 2016. Design & Technology, una sola disciplina.',
+  foundingDate: '2023-09-14',
+  founder: { '@type': 'Person', name: 'Massimiliano Mauro', jobTitle: 'Founder & Strategic Director' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Via IV Novembre 18',
+    addressLocality: 'San Giovanni La Punta',
+    addressRegion: 'CT',
+    postalCode: '95037',
+    addressCountry: 'IT',
+  },
+  taxID: '06037730873',
+  vatID: '06037730873',
+  areaServed: ['IT', 'EU'],
+  knowsLanguage: ['it', 'en'],
+  email: 'info@pianeta.studio',
+  sameAs: [
+    'https://www.linkedin.com/company/pianeta-studio/',
+    'https://github.com/PianetaDev',
+    'https://www.instagram.com/pianeta.studio/',
+    'https://pianeta.green',
+    'https://atlas.pianeta.green',
+  ],
+};
 ---
-<BaseLayout title="Pianeta.Studio — Sustainable Creativity" description="Design & Technology, una sola disciplina. Sustainable Creativity dal 2016.">
-  <Hero
-    eyebrow="Sustainable Creativity dal 2016"
-    title="Trasformiamo brief in opportunità."
-    subtitle="Co-design, AI validation, UX validation. Standard aperti. Codice consegnato. Carbon budget e performance budget come vincoli tecnici verificabili."
-  />
+<BaseLayout title={title} description={description} ogImage="/og/home.png">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(ldJson)} />
+  </Fragment>
 
-  <section class="px-6 lg:px-12 py-12 max-w-[1100px]">
-    <div class="flex items-baseline justify-between mb-6">
-      <h2 class="text-2xl font-black">Work</h2>
-      <a href="/work" class="text-sm underline">Tutti i progetti →</a>
-    </div>
-    <div class="grid sm:grid-cols-2 gap-4">
-      {work.map((w) => (
-        <ContentCard
-          title={w.data.title || w.id}
-          excerpt={w.data.description}
-          href={`/work/${w.id}`}
-          image={w.data.cover}
-          meta={w.data.client}
-        />
-      ))}
-    </div>
-  </section>
+  <div class="home-page p-4 md:p-8 max-w-[1600px] mx-auto">
+    <div
+      class="bento-grid grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 auto-rows-[180px] md:auto-rows-[220px]"
+      style="grid-auto-flow: dense;"
+    >
 
-  <section class="px-6 lg:px-12 py-12 max-w-[1100px]">
-    <div class="flex items-baseline justify-between mb-6">
-      <h2 class="text-2xl font-black">Bulletin</h2>
-      <a href="/bulletin" class="text-sm underline">Tutti i post →</a>
+      {/* 1. ECLAG video featured xl (3×2) */}
+      <a
+        href={w0 ? `/work/${w0.id}` : '/work/eclag'}
+        class="bento-tile relative rounded-2xl overflow-hidden group block col-span-3 row-span-2 cursor-pointer"
+      >
+        <video
+          poster="/choosetoseethem/cover-v3.png"
+          autoplay
+          muted
+          loop
+          playsinline
+          class="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="https://pub-4c166b51c33040fd98b8f75c2963296e.r2.dev/choosetoseethem/video-restore-web.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 group-hover:from-black/70 transition duration-500"></div>
+        <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
+          <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">Featured · ECLAG</div>
+          <div class="flex-1"></div>
+          <div class="font-black text-lg md:text-2xl leading-tight">{w0?.data.title || 'Choose to See Them'}</div>
+          <div class="text-xs md:text-sm opacity-75 mt-1">{(w0?.data.client || 'ECLAG') + ' · ' + (w0?.data.year || 2026)}</div>
+        </div>
+      </a>
+
+      {/* 3. Bulletin #1 — md (col-span-2 row-span-1) */}
+      {b0 && (
+        <a
+          href={`/bulletin/${b0.id}`}
+          class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
+          style="background: #E9FF1F;"
+        >
+          <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-black">
+            <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">{'Bulletin' + (b0.data.issue ? ' · #' + b0.data.issue : '')}</div>
+            <div class="flex-1"></div>
+            <div class="font-black text-lg md:text-2xl leading-tight">{b0.data.title}</div>
+          </div>
+        </a>
+      )}
+
+      {/* 4. Bulletin #2 — md */}
+      {b1 && (
+        <a
+          href={`/bulletin/${b1.id}`}
+          class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
+          style="background: #1f5b8f;"
+        >
+          <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
+            <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">{'Bulletin' + (b1.data.issue ? ' · #' + b1.data.issue : '')}</div>
+            <div class="flex-1"></div>
+            <div class="font-black text-lg md:text-2xl leading-tight">{b1.data.title}</div>
+          </div>
+        </a>
+      )}
+
+      {/* 5. Service teaser — md */}
+      {s0 && (
+        <a
+          href={`/services/${s0.id}`}
+          class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
+          style="background: #f7f1d9;"
+        >
+          <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-black">
+            <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">Services</div>
+            <div class="flex-1"></div>
+            <div class="font-black text-lg md:text-2xl leading-tight">{s0.data.title}</div>
+            <div class="text-xs md:text-sm opacity-75 mt-1">{s0.data.description}</div>
+          </div>
+        </a>
+      )}
+
+      {/* 6. Team strip — wide */}
+      <a
+        href="/team"
+        class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
+        style="background: #fafaf7;"
+      >
+        <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-black">
+          <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">Persone</div>
+          <div class="flex-1"></div>
+          <div class="font-black text-lg md:text-2xl leading-tight">
+            {teamCount > 0 ? `${teamCount} voci dentro Pianeta` : '5 voci dentro Pianeta'}
+          </div>
+          <div class="text-xs md:text-sm opacity-75 mt-1">Conosci il team →</div>
+        </div>
+      </a>
+
+      {/* 7. Bulletin #3 — sm */}
+      {b2 && (
+        <a
+          href={`/bulletin/${b2.id}`}
+          class="bento-tile relative rounded-2xl overflow-hidden group block col-span-1 row-span-1 cursor-pointer"
+          style="background: #1f7a3a;"
+        >
+          <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
+            <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">{'Bulletin' + (b2.data.issue ? ' · #' + b2.data.issue : '')}</div>
+            <div class="flex-1"></div>
+            <div class="font-black text-lg md:text-2xl leading-tight">{b2.data.title}</div>
+          </div>
+        </a>
+      )}
+
+      {/* Hire Us CTA — md (drawer not available in POC → linka /contact) */}
+      <a
+        href="/contact"
+        class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
+        style="background: #0e1116;"
+      >
+        <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
+          <div class="flex-1"></div>
+          <div class="font-black text-lg md:text-2xl leading-tight">Lavoriamo insieme?</div>
+          <div class="text-xs md:text-sm opacity-75 mt-1">Parla con Alba →</div>
+        </div>
+      </a>
+
+      {/* 11. Bulletin CTA */}
+      <a
+        href="/bulletin/iscrivimi"
+        class="col-span-2 row-span-1 rounded-2xl overflow-hidden bg-[#fafaf7] p-5 md:p-6 flex flex-col justify-between group hover:bg-[#f1f0ea] transition"
+      >
+        <div>
+          <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium mb-3">Bulletin</div>
+          <p class="font-black text-lg leading-tight">Iscriviti al Bulletin</p>
+          <p class="text-xs opacity-75 mt-1">Articoli, casi reali, ricerca. 1-2 al mese. Topic selezionabili.</p>
+        </div>
+        <p class="mt-4 text-xs font-medium underline underline-offset-4 group-hover:translate-x-1 transition">
+          Vai al form →
+        </p>
+      </a>
+
+      {/* 12. Wordmark decorativo */}
+      <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden bg-[#fafaf7] flex items-end p-5 md:p-6">
+        <span class="font-black text-5xl md:text-7xl tracking-tight leading-none text-black select-none">
+          PIANETA.<br />STUDIO
+        </span>
+      </div>
+
     </div>
-    <div class="grid sm:grid-cols-3 gap-4">
-      {bulletin.map((b) => (
-        <ContentCard
-          title={b.data.title || b.id}
-          excerpt={b.data.description}
-          href={`/bulletin/${b.id}`}
-          image={b.data.cover}
-        />
-      ))}
-    </div>
-  </section>
+  </div>
 </BaseLayout>
