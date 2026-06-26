@@ -50,7 +50,7 @@ const metaInline = [
   data.team && { label: 'Team', value: data.team },
   data.startDate && { label: 'Inizio', value: data.startDate },
   { label: 'Per candidarsi', value: applyEmail, href: `mailto:${applyEmail}` },
-];
+].filter(Boolean);
 
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Careers', href: '/careers' }];
 if (data.employmentType) eyebrowParts.push({ label: data.employmentType });
