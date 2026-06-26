@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "tools": [
     {
       "name": "search_kb",
@@ -35,15 +35,17 @@
     },
     {
       "name": "book_call",
-      "description": "Prepara il link Cal.com per fissare una call con Max. Se l'utente ha già detto giorno+ora specifici, passali in preferred_slot e chiama SUBITO il tool — non fare interrogatorio prima, qualifica in parallelo dopo. Se non c'è slot, link generico per scegliere.",
+      "description": "Fissa una call con Max. Fa 3 cose: salva email utente, manda email-brief a Max con la conversazione e l'eventuale slot suggerito, ritorna URL Cal.com con disponibilità real-time. NON promette slot: lo slot suggerito va come informazione a Max, ma l'utente sceglie sull'agenda Cal.com. Richiede user_email — chiedila al primo turno utile.",
       "input_schema": {
         "type": "object",
         "properties": {
-          "topic": { "type": "string", "description": "Argomento sintetico. Anche generico ('primo contatto') va bene." },
-          "preferred_slot": { "type": "string", "description": "Slot esatto se l'utente l'ha proposto, es. 'lunedì 30 giugno 15:00'. Vuoto se non specificato." },
-          "preferred_window": { "type": "string", "description": "Finestra approssimativa, es. 'questa settimana pomeriggio'. Usa solo se preferred_slot vuoto." }
+          "user_email": { "type": "string", "format": "email", "description": "Email dell'utente. OBBLIGATORIA. Se non l'hai, chiedila prima di chiamare il tool." },
+          "user_name": { "type": "string", "description": "Nome se l'hai. Vuoto se no." },
+          "topic": { "type": "string", "description": "Cosa vuole discutere (sintetico, 1-2 righe). Anche generico ('primo contatto') va bene." },
+          "preferred_slot": { "type": "string", "description": "Slot suggerito dall'utente se l'ha menzionato, es. 'lunedì 30 giugno 15:00'. Verrà passato a Max come suggerimento, NON garantito." },
+          "preferred_window": { "type": "string", "description": "Finestra approssimativa, es. 'questa settimana pomeriggio'." }
         },
-        "required": ["topic"]
+        "required": ["user_email", "topic"]
       }
     },
     {

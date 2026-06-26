@@ -56,23 +56,85 @@ function buildCalUrl(slot?: string, topic?: string): string {
   return qs ? `${base}?${qs}` : base;
 }
 
-async function bookCall(args: { topic: string; preferred_slot?: string; preferred_window?: string }, ctx: { uid: string; session_id: string }): Promise<AlbaToolResult> {
+async function bookCall(
+  args: { user_email: string; user_name?: string; topic: string; preferred_slot?: string; preferred_window?: string },
+  ctx: { uid: string; session_id: string }
+): Promise<AlbaToolResult> {
+  // Validazione minima email (server-side)
+  if (!args.user_email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(args.user_email)) {
+    return { ok: false, error: 'user_email mancante o non valida — chiedi all\'utente la sua email prima di richiamare il tool' };
+  }
+
   const url = buildCalUrl(args.preferred_slot || args.preferred_window, args.topic);
-  // Log event
+  const sb = albaSupabase();
+
+  // 1) Salva email + nome sull'user
   try {
-    await albaSupabase().from('alba_events').insert({
-      uid: ctx.uid,
-      session_id: ctx.session_id,
-      event: 'call_booked',
-      payload: { topic: args.topic, slot: args.preferred_slot ?? null, window: args.preferred_window ?? null, url },
-    });
+    await sb.from('alba_users').update({
+      email: args.user_email,
+      first_name: args.user_name ?? null,
+    }).eq('uid', ctx.uid);
   } catch { /* fire-and-forget */ }
+
+  // 2) Manda email-brief a Max (e CC all'utente) via Resend
+  const resendKey = process.env.RESEND_API_KEY;
+  let emailSent = false;
+  let emailError: string | null = null;
+  if (resendKey) {
+    const slotLine = args.preferred_slot
+      ? `**Slot suggerito dall'utente**: ${args.preferred_slot} *(non garantito — Max sceglie da Cal.com)*`
+      : args.preferred_window
+      ? `**Finestra preferita**: ${args.preferred_window}`
+      : `**Slot**: nessuno proposto — l'utente sceglierà da Cal.com`;
+    const brief = [
+      `Contatto da Alba (AI di gruppo · sessione ${ctx.session_id.slice(0, 8)}).`,
+      '',
+      `**Da**: ${args.user_name ? args.user_name + ' — ' : ''}${args.user_email}`,
+      `**Topic**: ${args.topic}`,
+      slotLine,
+      '',
+      `**Link Cal.com agenda**: ${url}`,
+      '',
+      `Per esportare la conversazione completa: GET /api/alba/export-my-data?uid=${ctx.uid}`,
+    ].join('\n');
+    try {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { 'authorization': `Bearer ${resendKey}`, 'content-type': 'application/json' },
+        body: JSON.stringify({
+          from: 'Alba — Pianeta.Studio <alba@pianeta.studio>',
+          to: ['info@pianeta.studio'],
+          cc: [args.user_email],
+          reply_to: args.user_email,
+          subject: `Nuovo contatto da Alba — ${args.user_name ?? args.user_email}`,
+          text: brief,
+        }),
+      });
+      emailSent = res.ok;
+      if (!res.ok) emailError = `resend ${res.status}: ${(await res.text()).slice(0, 200)}`;
+    } catch (e: any) {
+      emailError = `fetch failed: ${e?.message}`;
+    }
+  }
+
+  // 3) Log eventi (email_captured + call_booked)
+  try {
+    await sb.from('alba_events').insert([
+      { uid: ctx.uid, session_id: ctx.session_id, event: 'email_captured', payload: { email: args.user_email, source: 'book_call' } },
+      { uid: ctx.uid, session_id: ctx.session_id, event: 'call_booked', payload: { topic: args.topic, slot: args.preferred_slot ?? null, window: args.preferred_window ?? null, url, email_sent: emailSent } },
+    ]);
+  } catch { /* fire-and-forget */ }
+
+  const summaryParts = [
+    emailSent ? `Email mandata a Max e a ${args.user_email}` : `Email NON inviata (${emailError ?? 'Resend non configurato'})`,
+    `Agenda di Max: ${url}`,
+    args.preferred_slot ? `Suggerimento utente "${args.preferred_slot}" passato a Max — sceglierà dall'agenda` : null,
+  ].filter(Boolean);
+
   return {
     ok: true,
-    data: { cal_url: url, slot: args.preferred_slot ?? null },
-    human_summary: args.preferred_slot
-      ? `Link Cal.com per ${args.preferred_slot}: ${url}`
-      : `Link Cal.com (Max sceglie lo slot): ${url}`,
+    data: { cal_url: url, slot: args.preferred_slot ?? null, email_sent: emailSent, user_email: args.user_email },
+    human_summary: summaryParts.join(' · '),
   };
 }
 
