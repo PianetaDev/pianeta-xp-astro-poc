@@ -7,3 +7,6 @@ dist
 !.env.example
 .vercel
 .env*.local
+
+# Alba assets sincronizzati a build-time da PianetaDev/alba
+src/lib/server/alba/_assets/
