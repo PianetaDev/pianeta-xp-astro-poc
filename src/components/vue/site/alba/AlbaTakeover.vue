@@ -13,13 +13,7 @@ const AlbaChat = defineAsyncComponent(() => import('~/components/vue/alba/AlbaCh
 
 const initialPrompt = ref<string | null>(null)
 watch(open, (o) => {
-  if (typeof document === 'undefined') return
-  if (o) {
-    initialPrompt.value = consumePendingPrompt()
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
-  }
+  if (o) initialPrompt.value = consumePendingPrompt()
 })
 
 watch(() => route.fullPath, () => { if (open.value) closePanel() })
@@ -29,97 +23,202 @@ const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && open.value) clos
 onMounted(() => window.addEventListener('keydown', onKey))
 onBeforeUnmount(() => {
   if (typeof window !== 'undefined') window.removeEventListener('keydown', onKey)
-  if (typeof document !== 'undefined') document.body.style.overflow = ''
 })
+
+// Mobile bottom-sheet: drag-to-close
+const sheetRef = ref<HTMLElement | null>(null)
+const dragStartY = ref<number | null>(null)
+const dragDeltaY = ref(0)
+const onTouchStart = (e: TouchEvent) => { dragStartY.value = e.touches[0].clientY; dragDeltaY.value = 0 }
+const onTouchMove = (e: TouchEvent) => {
+  if (dragStartY.value === null) return
+  const dy = e.touches[0].clientY - dragStartY.value
+  if (dy > 0) dragDeltaY.value = dy
+}
+const onTouchEnd = () => {
+  if (dragDeltaY.value > 120) closePanel()
+  dragStartY.value = null
+  dragDeltaY.value = 0
+}
 </script>
 
 <template>
   <Teleport to="body">
-    <Transition
-      enter-active-class="transition duration-300 ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition duration-200 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
+    <Transition name="alba-panel">
       <div
         v-if="open"
+        ref="sheetRef"
         role="dialog"
         aria-label="Alba — AI di Pianeta.Studio"
-        class="alba-takeover fixed inset-0 lg:left-[88px] z-[55] bg-[linear-gradient(135deg,#fdf6f0_0%,#fcf1ec_30%,#fbeef0_60%,#f7eef7_100%)] flex flex-col"
+        class="alba-panel"
+        :style="{ transform: dragDeltaY > 0 ? `translateY(${dragDeltaY}px)` : '' }"
       >
-        <header class="flex items-center justify-between px-6 md:px-10 py-4 border-b border-black/5 bg-white/60 backdrop-blur-sm">
-          <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-pink-300 via-orange-200 to-yellow-100 flex items-center justify-center text-sm font-bold">A</div>
+        <div class="alba-panel-handle" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" aria-hidden="true" />
+
+        <header class="alba-head">
+          <div class="alba-head-id">
+            <div class="alba-avatar">A</div>
             <div>
-              <p class="text-sm font-bold leading-tight">Alba</p>
-              <p class="text-[11px] text-black/55 leading-tight">AI di gruppo · Pianeta.Studio</p>
+              <p class="alba-name">Alba</p>
+              <p class="alba-sub">AI di Pianeta.Studio</p>
             </div>
           </div>
-          <div class="flex items-center gap-1.5 text-[11px] text-black/50">
-            <span class="hidden sm:inline">Esc per chiudere</span>
-            <button @click="closePanel" aria-label="Chiudi Alba" class="ml-2 w-9 h-9 rounded-full hover:bg-black/5 flex items-center justify-center text-black/70">
-              <Icon name="lucide:x" :size="18" />
-            </button>
-          </div>
+          <button @click="closePanel" aria-label="Chiudi Alba" class="alba-close">
+            <Icon name="lucide:x" :size="18" />
+          </button>
         </header>
 
-        <div class="flex-1 flex min-h-0">
-          <div class="flex-1 flex flex-col min-w-0">
-            <div class="flex-1 overflow-hidden flex flex-col items-center">
-              <div class="w-full max-w-[760px] flex-1 flex flex-col min-h-0 px-4 md:px-6">
-                <AlbaChat
-                  :open="true"
-                  :embedded="true"
-                  :initial-prompt="initialPrompt"
-                  :page-context="{ context: ctx.context, contextSlug: ctx.contextSlug }"
-                  :suggested="ctx.suggested || []"
-                  @suggested-click="onSuggested"
-                />
-              </div>
-            </div>
-          </div>
-
-          <Transition
-            enter-active-class="transition duration-300 ease-out"
-            enter-from-class="opacity-0 translate-x-6"
-            enter-to-class="opacity-100 translate-x-0"
-            leave-active-class="transition duration-200 ease-in"
-            leave-from-class="opacity-100"
-            leave-to-class="opacity-0 translate-x-6"
-          >
-            <aside
-              v-if="artifact"
-              class="hidden lg:flex flex-col w-[520px] xl:w-[620px] border-l border-black/10 bg-white"
-            >
-              <div class="flex items-center justify-between px-5 py-3 border-b border-black/5">
-                <div class="flex items-center gap-2 min-w-0">
-                  <Icon name="lucide:file-text" :size="14" class="text-black/50 flex-shrink-0" />
-                  <p class="text-xs uppercase tracking-wider font-semibold truncate">{{ artifact.title }}</p>
-                </div>
-                <button @click="closeArtifact" aria-label="Chiudi artefatto" class="text-black/40 hover:text-black p-1">
-                  <Icon name="lucide:x" :size="14" />
-                </button>
-              </div>
-              <div class="flex-1 overflow-y-auto p-5 text-sm">
-                <component
-                  v-if="artifact.kind === 'html'"
-                  :is="'div'"
-                  v-html="artifact.payload"
-                />
-                <pre v-else class="text-xs whitespace-pre-wrap font-mono">{{ JSON.stringify(artifact.payload, null, 2) }}</pre>
-              </div>
-            </aside>
-          </Transition>
+        <div class="alba-body">
+          <AlbaChat
+            :open="true"
+            :embedded="true"
+            :initial-prompt="initialPrompt"
+            :page-context="{ context: ctx.context, contextSlug: ctx.contextSlug }"
+            :suggested="ctx.suggested || []"
+            @suggested-click="onSuggested"
+          />
         </div>
+
+        <Transition name="artifact">
+          <aside v-if="artifact" class="alba-artifact">
+            <div class="alba-artifact-head">
+              <div class="alba-artifact-title">
+                <Icon name="lucide:file-text" :size="14" />
+                <span>{{ artifact.title }}</span>
+              </div>
+              <button @click="closeArtifact" aria-label="Chiudi artefatto" class="alba-close-sm">
+                <Icon name="lucide:x" :size="14" />
+              </button>
+            </div>
+            <div class="alba-artifact-body">
+              <div v-if="artifact.kind === 'html'" v-html="artifact.payload" />
+              <pre v-else>{{ JSON.stringify(artifact.payload, null, 2) }}</pre>
+            </div>
+          </aside>
+        </Transition>
       </div>
     </Transition>
   </Teleport>
 </template>
 
-<style scoped>
+<style>
+.alba-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(135deg, #fdf6f0 0%, #fcf1ec 30%, #fbeef0 60%, #f7eef7 100%);
+  border-left: 1px solid rgba(14,17,22,0.08);
+  box-shadow: -20px 0 60px rgba(14,17,22,0.12);
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+  transition: transform 200ms ease-out;
+}
+@media (min-width: 1280px) {
+  .alba-panel { max-width: 560px; }
+}
+/* Mobile: bottom-sheet 85vh */
+@media (max-width: 767px) {
+  .alba-panel {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 85vh;
+    border-left: 0;
+    border-top: 1px solid rgba(14,17,22,0.08);
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -20px 60px rgba(14,17,22,0.18);
+  }
+}
+
+.alba-panel-handle {
+  display: none;
+  width: 48px;
+  height: 5px;
+  background: rgba(14,17,22,0.25);
+  border-radius: 999px;
+  margin: 8px auto 0;
+  flex-shrink: 0;
+  cursor: grab;
+  touch-action: none;
+}
+@media (max-width: 767px) {
+  .alba-panel-handle { display: block; }
+}
+
+.alba-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(14,17,22,0.06);
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+}
+.alba-head-id { display: flex; align-items: center; gap: 10px; }
+.alba-avatar {
+  width: 36px; height: 36px; border-radius: 999px;
+  background: linear-gradient(135deg, #fbcfe8, #fed7aa, #fef3c7);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 14px; color: #0e1116;
+}
+.alba-name { font-size: 14px; font-weight: 700; margin: 0; line-height: 1.1; }
+.alba-sub { font-size: 11px; color: rgba(14,17,22,0.55); margin: 2px 0 0; line-height: 1.1; }
+.alba-close, .alba-close-sm {
+  background: transparent; border: 0;
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(14,17,22,0.7);
+  cursor: pointer;
+  transition: background 150ms;
+}
+.alba-close:hover, .alba-close-sm:hover { background: rgba(14,17,22,0.05); }
+.alba-close-sm { width: 28px; height: 28px; }
+
+.alba-body { flex: 1; overflow: hidden; display: flex; flex-direction: column; padding: 0 16px; }
+
+.alba-artifact {
+  position: absolute;
+  right: 100%;
+  top: 0; bottom: 0;
+  width: 520px;
+  background: #fff;
+  border-left: 1px solid rgba(14,17,22,0.06);
+  border-right: 1px solid rgba(14,17,22,0.08);
+  box-shadow: -10px 0 30px rgba(14,17,22,0.06);
+  display: flex; flex-direction: column;
+}
+@media (max-width: 1023px) { .alba-artifact { display: none; } }
+.alba-artifact-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(14,17,22,0.06);
+}
+.alba-artifact-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+  color: rgba(14,17,22,0.6);
+}
+.alba-artifact-body { flex: 1; overflow-y: auto; padding: 18px; font-size: 14px; }
+.alba-artifact-body pre { font-size: 12px; white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, monospace; }
+
+/* Enter/leave: slide from right desktop, slide from bottom mobile */
+.alba-panel-enter-active, .alba-panel-leave-active { transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms; }
+.alba-panel-enter-from, .alba-panel-leave-to { transform: translateX(100%); opacity: 0; }
+@media (max-width: 767px) {
+  .alba-panel-enter-from, .alba-panel-leave-to { transform: translateY(100%); opacity: 1; }
+}
+.artifact-enter-active, .artifact-leave-active { transition: transform 240ms ease-out, opacity 200ms; }
+.artifact-enter-from, .artifact-leave-to { opacity: 0; transform: translateX(20px); }
 @media (prefers-reduced-motion: reduce) {
-  .alba-takeover * { transition-duration: 0ms !important; }
+  .alba-panel, .alba-panel-enter-active, .alba-panel-leave-active,
+  .artifact-enter-active, .artifact-leave-active { transition: none !important; }
 }
 </style>
