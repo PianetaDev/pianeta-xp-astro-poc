@@ -20,7 +20,7 @@ watch(() => route.path, close)
 </script>
 
 <template>
-  <div class="lg:hidden">
+  <div class="md:hidden">
     <button @click="open = true" aria-label="Open menu" class="fixed top-4 left-4 z-30 bg-white border border-black/10 p-2">
       <Icon name="lucide:menu" :size="20" />
     </button>
