@@ -6,8 +6,8 @@ location: "Milano · Ardea · remoto"
 team: "Studio direction"
 startDate: "Q3 2026"
 applyEmail: "people@pianeta.studio"
-ogImage: "/og/handbook.png"
-cover: "/og/handbook.png"
+ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder.svg"
 date: 2026-06-26
 locale: it
 draft: false

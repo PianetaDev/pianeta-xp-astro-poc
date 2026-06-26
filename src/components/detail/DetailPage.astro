@@ -70,16 +70,14 @@ const renderCta = (c: CtaProp, cls: string) => {
     )}
   </header>
 
-  {cover && (
-    <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
-      <picture>
-        {/^.*\.(png|jpe?g)$/i.test(cover) && (
-          <source srcset={cover.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
-        )}
-        <img src={cover} alt={title} loading="eager" fetchpriority="high" decoding="async" />
-      </picture>
-    </div>
-  )}
+  <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
+    <picture>
+      {/^.*\.(png|jpe?g)$/i.test(cover || '') && (
+        <source srcset={(cover || '').replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+      )}
+      <img src={cover || '/og/placeholder.svg'} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+    </picture>
+  </div>
 
   <section class="detail-body">
     <aside class="detail-meta">

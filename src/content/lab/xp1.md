@@ -4,8 +4,8 @@ description: "Programma di ricerca interno: misurare e ridurre l'impronta CO₂ 
 kind: "Programma R&D"
 year: 2026
 status: "In corso"
-ogImage: "/og/bollettino-lab.png"
-cover: "/og/bollettino-lab.png"
+ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder.svg"
 date: 2026-06-01
 locale: it
 draft: false

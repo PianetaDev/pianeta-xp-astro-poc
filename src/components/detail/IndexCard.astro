@@ -8,18 +8,17 @@ interface Props {
   portrait?: boolean;
 }
 const { href, title, deck, kicker, image, portrait = false } = Astro.props;
+const cover = image || '/og/placeholder.svg';
 ---
 <a href={href} class:list={['index-card', portrait && 'is-portrait']}>
-  {image && (
-    <div class="index-card-img">
-      <picture>
-        {/^.*\.(png|jpe?g)$/i.test(image) && (
-          <source srcset={image.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
-        )}
-        <img src={image} alt={title} loading="lazy" decoding="async" />
-      </picture>
-    </div>
-  )}
+  <div class="index-card-img">
+    <picture>
+      {/^.*\.(png|jpe?g)$/i.test(cover) && (
+        <source srcset={cover.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
+      )}
+      <img src={cover} alt={title} loading="lazy" decoding="async" />
+    </picture>
+  </div>
   <div class="index-card-body">
     {kicker && <span class="index-card-kicker">{kicker}</span>}
     <h3 class="index-card-title">{title}</h3>

@@ -4,8 +4,8 @@ description: "Workflow e tooling per produrre report di ricerca lunghi e verific
 kind: "Prodotto R&D"
 year: 2026
 status: "In sviluppo"
-ogImage: "/og/handbook.png"
-cover: "/og/handbook.png"
+ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder.svg"
 date: 2026-06-15
 locale: it
 draft: false
