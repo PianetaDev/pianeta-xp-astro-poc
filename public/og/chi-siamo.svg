@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-label="Pianeta.Studio — Sustainable Creativity">
+  <defs>
+    <radialGradient id="g1" cx="0.2" cy="0.85" r="0.7">
+      <stop offset="0" stop-color="#ff7a2b"/>
+      <stop offset="1" stop-color="#ff5a14"/>
+    </radialGradient>
+    <radialGradient id="g2" cx="0.6" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#ff8a3a"/>
+      <stop offset="1" stop-color="#ff5a14"/>
+    </radialGradient>
+    <radialGradient id="g3" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#ff9447"/>
+      <stop offset="1" stop-color="#ff661a"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#1a3a2a"/>
+  <ellipse cx="320" cy="680" rx="280" ry="260" fill="url(#g1)"/>
+  <ellipse cx="640" cy="380" rx="200" ry="190" fill="url(#g2)"/>
+  <ellipse cx="900" cy="640" rx="150" ry="140" fill="url(#g3)"/>
+  <ellipse cx="1180" cy="290" rx="120" ry="110" fill="url(#g2)" opacity="0.95"/>
+  <ellipse cx="1380" cy="560" rx="90" ry="85" fill="url(#g1)" opacity="0.9"/>
+  <text x="80" y="200" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="64" fill="#ffffff" letter-spacing="-2">We amplify ideas</text>
+  <text x="80" y="270" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="64" fill="#ffffff" letter-spacing="-2">that drive positive change</text>
+  <text x="80" y="340" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="64" fill="#ffffff" letter-spacing="-2">for people and planet.</text>
+  <text x="80" y="800" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="28" fill="#ffffff" opacity="0.95">Sustainable Creativity: Design &amp; Technology</text>
+  <text x="80" y="850" font-family="Inter, system-ui, sans-serif" font-weight="500" font-size="18" fill="#ffffff" opacity="0.6" letter-spacing="2">PIANETA.STUDIO — DAL 2016</text>
+</svg>
