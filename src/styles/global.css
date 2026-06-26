@@ -17,6 +17,13 @@
   --pianeta-muted-strong: rgba(14, 17, 22, 0.70);
   --pianeta-accent: #1f5b8f;
   --pianeta-highlight: #E9FF1F;
+  /* CTA — arancio primario, blu secondario */
+  --cta-primary: #ff6a1a;
+  --cta-primary-hover: #ff8438;
+  --cta-primary-ink: #ffffff;
+  --cta-secondary: #1f5b8f;
+  --cta-secondary-hover: #2a6ea5;
+  --cta-secondary-ink: #ffffff;
   --r-sm: 0.5rem;
   --r-md: 1rem;
   --r-lg: 1.5rem;
@@ -42,6 +49,23 @@
 .prose-eclag a { text-decoration: underline; text-underline-offset: 3px; }
 .prose-eclag strong { font-weight: 700; }
 .prose-eclag ul { margin: 1rem 0; padding-left: 1.25rem; list-style: disc; }
+
+/* CTA buttons — pill shape, arancio primario, blu secondario */
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600; font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 150ms ease, transform 150ms ease;
+}
+.cta-btn:hover { transform: translateY(-1px); }
+.cta-primary { background: var(--cta-primary); color: var(--cta-primary-ink); }
+.cta-primary:hover { background: var(--cta-primary-hover); }
+.cta-secondary { background: var(--cta-secondary); color: var(--cta-secondary-ink); }
+.cta-secondary:hover { background: var(--cta-secondary-hover); }
+.cta-ghost { background: transparent; color: var(--pianeta-text); border: 1px solid var(--pianeta-border-strong); }
+.cta-ghost:hover { background: rgba(14,17,22,0.04); }
 
 .reveal-pre { opacity: 0; transition: opacity 900ms ease-out; will-change: opacity; }
 .reveal-in { opacity: 1 !important; }

@@ -10,29 +10,212 @@ export async function getStaticPaths() {
 
 const { item } = Astro.props;
 const { Content } = await render(item);
-const title = item.data.title || item.id;
-const cover = item.data.cover || item.data.ogImage;
+const data: any = item.data;
+const title = data.title || item.id;
+const cover = data.cover || data.ogImage;
+const live = data.links?.live;
+const bulletinRefs: string[] = data.links?.bulletin || [];
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={item.data.description} ogImage={item.data.ogImage || item.data.cover}>
-  {cover && (
-    <div class="aspect-[16/9] bg-black/5 overflow-hidden">
-      <img src={cover} alt={title} loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover" />
-    </div>
-  )}
-  <article class="px-6 lg:px-12 pt-10 pb-16 max-w-[820px] mx-auto">
-    <p class="text-xs uppercase tracking-wider text-black/50 mb-4">
-      <a href="/work" class="hover:underline">Work</a>
-      {item.data.category && <span> · {item.data.category}</span>}
-    </p>
-    <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-[1.05] mb-4">{title}</h1>
-    {item.data.description && <p class="text-xl text-black/70 mb-8">{item.data.description}</p>}
-    <dl class="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm border-t border-black/10 pt-6 mb-10">
-      {item.data.client && <div><dt class="text-black/40 uppercase tracking-wider text-[10px] mb-1">Cliente</dt><dd>{item.data.client}</dd></div>}
-      {item.data.year && <div><dt class="text-black/40 uppercase tracking-wider text-[10px] mb-1">Anno</dt><dd>{item.data.year}</dd></div>}
-      {item.data.category && <div><dt class="text-black/40 uppercase tracking-wider text-[10px] mb-1">Categoria</dt><dd>{item.data.category}</dd></div>}
-    </dl>
-    <div class="prose-eclag">
-      <Content />
-    </div>
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || data.cover}>
+  <article class="work-detail">
+
+    <header class="work-detail-head">
+      <p class="work-eyebrow">
+        <a href="/work">Work</a>
+        {data.category && <span> · {data.category}</span>}
+        {data.year && <span> · {data.year}</span>}
+      </p>
+      <h1 class="work-title">{title}</h1>
+      {data.description && <p class="work-deck">{data.description}</p>}
+
+      <div class="work-cta-row">
+        {live && (
+          <a href={live} target="_blank" rel="noopener" class="cta-btn cta-primary">
+            <span>▶</span><span>Visita il sito</span>
+          </a>
+        )}
+        <button type="button" class="cta-btn cta-secondary" data-action="open-hire-us">
+          Lavoriamo insieme
+        </button>
+      </div>
+    </header>
+
+    {cover && (
+      <div class="work-hero">
+        <img src={cover} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+      </div>
+    )}
+
+    <section class="work-body">
+      <aside class="work-meta">
+        {data.client && <div><dt>Cliente</dt><dd>{data.client}</dd></div>}
+        {data.sector && <div><dt>Settore</dt><dd>{data.sector}</dd></div>}
+        {data.year && <div><dt>Anno</dt><dd>{data.year}</dd></div>}
+        {data.category && <div><dt>Categoria</dt><dd>{data.category}</dd></div>}
+        {data.team && data.team.length > 0 && (
+          <div><dt>Team</dt><dd>{data.team.join(', ')}</dd></div>
+        )}
+        {live && (
+          <div>
+            <dt>Live</dt>
+            <dd><a href={live} target="_blank" rel="noopener" class="meta-link">{new URL(live).hostname} ↗</a></dd>
+          </div>
+        )}
+      </aside>
+
+      <div class="work-prose prose-eclag">
+        <Content />
+      </div>
+    </section>
+
+    {bulletinRefs.length > 0 && (
+      <section class="work-related">
+        <h2 class="work-related-title">Approfondimenti</h2>
+        <ul class="work-related-list">
+          {bulletinRefs.map((slug) => (
+            <li><a href={`/bulletin/${slug}`} class="work-related-card">
+              <span class="work-related-kicker">Bulletin</span>
+              <span class="work-related-name">{slug.replace(/-/g, ' ')}</span>
+              <span class="work-related-arrow">→</span>
+            </a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <footer class="work-foot">
+      <a href="/work" class="cta-btn cta-ghost">← Tutti i lavori</a>
+    </footer>
+
+    <script is:inline>
+      document.querySelectorAll('[data-action="open-hire-us"]').forEach((b) => {
+        b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open')));
+      });
+    </script>
   </article>
+
+  <style>
+    .work-detail {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 64px 32px 96px;
+    }
+    .work-detail-head {
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 56px;
+    }
+    .work-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(14,17,22,0.55);
+      margin: 0 0 28px;
+    }
+    .work-eyebrow a { color: inherit; text-decoration: none; }
+    .work-eyebrow a:hover { color: #0e1116; }
+    .work-title {
+      font-size: clamp(2.25rem, 5vw, 4.25rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin: 0 0 24px;
+    }
+    .work-deck {
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      color: rgba(14,17,22,0.65);
+      line-height: 1.5;
+      margin: 0 auto 36px;
+      max-width: 720px;
+    }
+    .work-cta-row {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+
+    .work-hero {
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(14,17,22,0.04);
+      aspect-ratio: 16/10;
+      margin-bottom: 64px;
+    }
+    .work-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .work-body {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    @media (min-width: 900px) {
+      .work-body { grid-template-columns: 240px 1fr; gap: 64px; }
+    }
+    .work-meta {
+      display: flex; flex-direction: column; gap: 18px;
+      font-size: 14px;
+      align-self: start;
+      position: sticky; top: 24px;
+    }
+    .work-meta dt {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(14,17,22,0.45);
+      margin-bottom: 4px;
+    }
+    .work-meta dd {
+      margin: 0;
+      color: #0e1116;
+      line-height: 1.5;
+    }
+    .meta-link { color: var(--cta-primary); text-decoration: none; }
+    .meta-link:hover { text-decoration: underline; }
+
+    .work-prose { font-size: 1.0625rem; line-height: 1.7; }
+    .work-prose :first-child { margin-top: 0; }
+
+    .work-related {
+      max-width: 1080px;
+      margin: 96px auto 48px;
+      padding-top: 48px;
+      border-top: 1px solid var(--pianeta-border);
+    }
+    .work-related-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(14,17,22,0.55);
+      margin: 0 0 20px;
+    }
+    .work-related-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .work-related-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 20px 24px;
+      background: #fff;
+      border: 1px solid var(--pianeta-border);
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 150ms;
+    }
+    .work-related-card:hover { border-color: var(--cta-primary); }
+    .work-related-kicker {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(14,17,22,0.5);
+    }
+    .work-related-name { font-weight: 700; text-transform: capitalize; }
+    .work-related-arrow { color: var(--cta-primary); font-weight: 700; }
+
+    .work-foot {
+      max-width: 1080px;
+      margin: 64px auto 0;
+      display: flex; justify-content: center;
+    }
+  </style>
 </BaseLayout>
