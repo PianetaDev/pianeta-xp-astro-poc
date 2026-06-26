@@ -21,6 +21,24 @@ locale: it
 draft: false
 type: work
 tags: ["campagna", "neuromarketing", "advocacy", "ai-validation"]
+tour:
+  enabled: true
+  chapters:
+    - title: "Il committente e il problema"
+      key_facts:
+        - "ECLAG è una coalizione europea per i diritti dei minori online"
+        - "Rischio iniziale: una campagna 'corretta' ma invisibile, poco condivisibile"
+    - title: "Il metodo di validazione"
+      key_facts:
+        - "3 concept candidati"
+        - "Validazione AI con MiroFish Swarm + neural prediction"
+        - "Selezione concept con punteggio condiviso PRIMA della produzione"
+    - title: "Il risultato"
+      key_facts:
+        - "3 video prodotti"
+        - "18 analisi neuro"
+        - "3 settimane time-to-market"
+        - "Live su choosetoseethem.childsafetyineurope.com"
 ---
 
 **TLDR.** Una campagna video europea in tre atti — *Erase · Highlight · Restore* — sui diritti dei minori online, validata con il nostro stack di analisi neurale predittiva prima della produzione. **3 video · 18 analisi neuro · 3 settimane** di lavoro. Live su [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com).

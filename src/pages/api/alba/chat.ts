@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 import { albaSupabase } from '../../../lib/server/alba/supabase';
 import { getSystemPrompt, getTools } from '../../../lib/server/alba/assets';
+import { checkAndIncrementRateLimit, checkDailyCostCap, addToDailyCost } from '../../../lib/server/alba/rate-limit';
 import type { AlbaChatChunk, AlbaPageContext } from '../../../lib/alba/session-types';
 
 export const prerender = false;
@@ -23,7 +24,7 @@ function sseChunk(chunk: AlbaChatChunk): Uint8Array {
   return new TextEncoder().encode(`data: ${JSON.stringify(chunk)}\n\n`);
 }
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, clientAddress }) => {
   const body = (await request.json().catch(() => null)) as ChatRequest | null;
   if (!body || !body.uid || !UUID_RE.test(body.uid) || !body.session_id || !UUID_RE.test(body.session_id) || !Array.isArray(body.messages)) {
     return new Response(JSON.stringify({ error: 'invalid request' }), {
@@ -37,6 +38,31 @@ export const POST: APIRoute = async ({ request }) => {
 
   const anthropic = new Anthropic({ apiKey });
   const sb = albaSupabase();
+
+  // Guard: daily cost cap
+  const costVerdict = await checkDailyCostCap();
+  if (!costVerdict.ok) {
+    return new Response(`data: ${JSON.stringify({ type: 'error', message: costVerdict.reason })}\n\n`, {
+      status: 200,
+      headers: { 'content-type': 'text/event-stream' },
+    });
+  }
+
+  // Guard: rate limits (per session, per uid, per IP, global)
+  const { data: sess0 } = await sb.from('alba_sessions').select('msg_count').eq('id', body.session_id).maybeSingle();
+  const ip = clientAddress || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+  const rlVerdict = await checkAndIncrementRateLimit({
+    uid: body.uid,
+    ip,
+    sessionMsgCount: sess0?.msg_count ?? 0,
+  });
+  if (!rlVerdict.ok) {
+    return new Response(`data: ${JSON.stringify({ type: 'error', message: rlVerdict.reason })}\n\n`, {
+      status: 200,
+      headers: { 'content-type': 'text/event-stream' },
+    });
+  }
+
   const systemPrompt = await getSystemPrompt();
   const toolRegistry = await getTools();
 
@@ -100,6 +126,7 @@ export const POST: APIRoute = async ({ request }) => {
             cost_eur: Number(((sess.cost_eur ?? 0) + costEur).toFixed(4)),
           }).eq('id', body.session_id);
         }
+        await addToDailyCost(costEur);
 
         controller.enqueue(sseChunk({
           type: 'done',
