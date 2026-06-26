@@ -2,6 +2,25 @@
 import { ref, watch, nextTick, onMounted } from 'vue'
 import { useAlbaSession } from '~/composables/useAlbaSession'
 import type { AlbaChatChunk } from '~/lib/alba/session-types'
+import MarkdownIt from 'markdown-it'
+
+// Renderer markdown safe: linkify auto, no html raw, target _blank per link esterni
+const md = new MarkdownIt({ html: false, linkify: true, breaks: true })
+const defaultRender = md.renderer.rules.link_open || function (tokens, idx, options, env, self) {
+  return self.renderToken(tokens, idx, options)
+}
+md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+  const t = tokens[idx]
+  const href = t.attrGet('href') || ''
+  if (/^https?:/i.test(href)) {
+    t.attrSet('target', '_blank')
+    t.attrSet('rel', 'noopener noreferrer')
+  }
+  return defaultRender(tokens, idx, options, env, self)
+}
+function renderMd(text: string): string {
+  return md.render(text || '')
+}
 
 interface Msg { role: 'user' | 'assistant'; content: string; handoff?: boolean; toolHint?: string }
 
@@ -168,7 +187,7 @@ function close() { emit('close') }
     <div class="alba-modal" style="display:contents">
       <div ref="scrollEl" class="alba-body">
         <div v-for="(m, i) in messages" :key="i" :class="['alba-msg', m.role]">
-          <div class="alba-bubble" v-html="m.content.split('\n').map(l => l ? l : '&nbsp;').join('<br/>')"></div>
+          <div class="alba-bubble alba-bubble-md" v-html="renderMd(m.content)"></div>
           <p v-if="m.toolHint" class="italic text-sm text-black/50">{{ m.toolHint }}</p>
           <div v-if="m.handoff" class="alba-handoff-tag">→ Max viene avvisato</div>
         </div>
@@ -216,7 +235,7 @@ function close() { emit('close') }
 
           <div ref="scrollEl" class="alba-body">
             <div v-for="(m, i) in messages" :key="i" :class="['alba-msg', m.role]">
-              <div class="alba-bubble" v-html="m.content.split('\n').map(l => l ? l : '&nbsp;').join('<br/>')"></div>
+              <div class="alba-bubble alba-bubble-md" v-html="renderMd(m.content)"></div>
               <p v-if="m.toolHint" class="italic text-sm text-black/50">{{ m.toolHint }}</p>
               <div v-if="m.handoff" class="alba-handoff-tag">→ Max viene avvisato</div>
             </div>
