@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "0.1.0",
+  "tools": [
+    {
+      "name": "search_kb",
+      "description": "Cerca nella knowledge base interna di Pianeta.Studio (services, work, team, brand, faq). Usa SEMPRE prima di rispondere a domande di contenuto.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "Query semantica" },
+          "sections": {
+            "type": "array",
+            "items": { "enum": ["about", "services", "work", "team", "brand", "faq"] },
+            "description": "Sezioni KB da cercare. Vuoto = tutte."
+          },
+          "top_k": { "type": "integer", "default": 5, "minimum": 1, "maximum": 12 }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "route_to_human",
+      "description": "Passa la conversazione a Max o al responsabile. Usa quando supera i tuoi limiti (pricing, contratti, scope) o l'utente lo chiede.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "reason": { "type": "string", "description": "Perché si fa handoff (sintetico)" },
+          "summary": { "type": "string", "description": "Riassunto della conversazione" },
+          "user_contact": { "type": "string", "description": "Email/nome utente se disponibile" },
+          "urgency": { "enum": ["low", "normal", "high"], "default": "normal" }
+        },
+        "required": ["reason", "summary"]
+      }
+    },
+    {
+      "name": "book_call",
+      "description": "Propone slot di call con Max via Calendly/Cal.com. Solo dopo qualificazione minima (chi sei, cosa serve).",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "topic": { "type": "string" },
+          "preferred_window": { "type": "string", "description": "Es. 'questa settimana pomeriggio'" }
+        },
+        "required": ["topic"]
+      }
+    },
+    {
+      "name": "send_brief_email",
+      "description": "Manda un brief riassuntivo a info@pianeta.studio + all'utente.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "user_email": { "type": "string", "format": "email" },
+          "user_name": { "type": "string" },
+          "brief": { "type": "string", "description": "Markdown — 200-400 parole" }
+        },
+        "required": ["user_email", "brief"]
+      }
+    }
+  ]
+}
