@@ -32,5 +32,13 @@ export const DELETE: APIRoute = async ({ request, url }) => {
   return new Response(JSON.stringify({ error: 'uid or email required' }), { status: 400, headers: { 'content-type': 'application/json' } });
 };
 
-// Permette POST per browser sender-beacon API
+// Permette POST per browser sender-beacon API + per ambienti che bloccano DELETE
 export const POST: APIRoute = async (ctx) => DELETE(ctx);
+export const GET: APIRoute = async () => new Response(
+  JSON.stringify({
+    info: 'GDPR forget-me endpoint',
+    usage: 'DELETE or POST with ?uid=<uuid> or ?email=<email>',
+    contact: 'info@pianeta.studio',
+  }),
+  { status: 200, headers: { 'content-type': 'application/json' } }
+);
