@@ -4,6 +4,8 @@
 
 import { albaSupabase } from './supabase';
 import { getKb } from './assets';
+import { createGoogleCalendarEvent } from './google-calendar';
+import * as chrono from 'chrono-node';
 
 export interface AlbaToolResult {
   ok: boolean;
@@ -65,8 +67,31 @@ async function bookCall(
     return { ok: false, error: 'user_email mancante o non valida — chiedi all\'utente la sua email prima di richiamare il tool' };
   }
 
-  const url = buildCalUrl(args.preferred_slot || args.preferred_window, args.topic);
   const sb = albaSupabase();
+
+  // Parse preferred_slot (es. "lunedì alle 15", "30 giugno 14:30") via chrono-node IT
+  let parsedStart: Date | null = null;
+  if (args.preferred_slot) {
+    const results = chrono.it.parse(args.preferred_slot, new Date(), { forwardDate: true });
+    if (results.length > 0 && results[0].start) parsedStart = results[0].start.date();
+  }
+
+  // Se abbiamo un orario parsabile, prova a creare l'evento direttamente su Google Calendar
+  let gcalResult: { ok: boolean; event_id?: string; html_link?: string; meet_url?: string; error?: string } | null = null;
+  if (parsedStart) {
+    const endDate = new Date(parsedStart.getTime() + 30 * 60 * 1000); // 30 min
+    gcalResult = await createGoogleCalendarEvent({
+      summary: `Pianeta.Studio ↔ ${args.user_name || args.user_email} · ${args.topic}`,
+      description: `Brief Alba (sessione ${ctx.session_id.slice(0, 8)})\n\n${args.topic}\n\nContatto utente: ${args.user_email}\nLink conversazione export: /api/alba/export-my-data?uid=${ctx.uid}`,
+      start: parsedStart.toISOString(),
+      end: endDate.toISOString(),
+      timeZone: 'Europe/Rome',
+      attendees: [args.user_email, process.env.ALBA_CALENDAR_OWNER_EMAIL || 'info@pianeta.studio'],
+      addMeet: true,
+    });
+  }
+
+  const url = buildCalUrl(args.preferred_slot || args.preferred_window, args.topic);
 
   // 1) Salva email + nome sull'user
   try {
@@ -121,19 +146,34 @@ async function bookCall(
   try {
     await sb.from('alba_events').insert([
       { uid: ctx.uid, session_id: ctx.session_id, event: 'email_captured', payload: { email: args.user_email, source: 'book_call' } },
-      { uid: ctx.uid, session_id: ctx.session_id, event: 'call_booked', payload: { topic: args.topic, slot: args.preferred_slot ?? null, window: args.preferred_window ?? null, url, email_sent: emailSent } },
+      { uid: ctx.uid, session_id: ctx.session_id, event: 'call_booked', payload: { topic: args.topic, slot: args.preferred_slot ?? null, window: args.preferred_window ?? null, url, email_sent: emailSent, gcal_event_id: gcalResult?.event_id ?? null, gcal_ok: gcalResult?.ok ?? null } },
     ]);
   } catch { /* fire-and-forget */ }
 
-  const summaryParts = [
-    emailSent ? `Email mandata a Max e a ${args.user_email}` : `Email NON inviata (${emailError ?? 'Resend non configurato'})`,
-    `Agenda di Max: ${url}`,
-    args.preferred_slot ? `Suggerimento utente "${args.preferred_slot}" passato a Max — sceglierà dall'agenda` : null,
-  ].filter(Boolean);
+  // Costruisci summary in base a cosa è andato a buon fine
+  const summaryParts: string[] = [];
+  if (gcalResult?.ok) {
+    summaryParts.push(`Evento Google Calendar creato per ${parsedStart!.toLocaleString('it-IT', { dateStyle: 'full', timeStyle: 'short' })}`);
+    if (gcalResult.meet_url) summaryParts.push(`Google Meet: ${gcalResult.meet_url}`);
+    if (gcalResult.html_link) summaryParts.push(`Evento: ${gcalResult.html_link}`);
+    summaryParts.push(`Invito mandato automaticamente a ${args.user_email} e a Max`);
+  } else {
+    if (gcalResult && !gcalResult.ok) summaryParts.push(`(Google Calendar non disponibile: ${gcalResult.error}. Fallback a link Cal.com.)`);
+    summaryParts.push(emailSent ? `Email brief mandata a Max e a ${args.user_email}` : `Email NON inviata`);
+    summaryParts.push(`Agenda Max: ${url}`);
+    if (args.preferred_slot) summaryParts.push(`Suggerimento utente "${args.preferred_slot}" passato a Max`);
+  }
 
   return {
     ok: true,
-    data: { cal_url: url, slot: args.preferred_slot ?? null, email_sent: emailSent, user_email: args.user_email },
+    data: {
+      cal_url: url,
+      slot: args.preferred_slot ?? null,
+      email_sent: emailSent,
+      user_email: args.user_email,
+      gcal: gcalResult ?? null,
+      parsed_start: parsedStart?.toISOString() ?? null,
+    },
     human_summary: summaryParts.join(' · '),
   };
 }
