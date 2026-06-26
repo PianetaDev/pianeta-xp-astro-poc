@@ -45,6 +45,7 @@ if (data.role) eyebrowParts.push({ label: data.role });
     backHref="/team"
     backLabel="Tutto il team"
     nextItem={nextItem}
+    byline={{ meta: [data.role, data.location].filter(Boolean) }}
     jsonLd={jsonLd}
   >
     <Fragment slot="meta">

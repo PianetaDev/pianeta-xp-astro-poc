@@ -46,8 +46,8 @@ const related = bulletinRefs.map((slug) => ({ type: 'bulletin', slug }));
     title={title}
     deck={data.description}
     cover={cover}
-    primaryCta={live ? { label: 'Visita il sito', href: live, external: true } : undefined}
-    secondaryCta={{ label: 'Lavoriamo insieme', action: 'open-hire-us' }}
+    primaryCta={{ label: 'Lavoriamo insieme', action: 'open-hire-us' }}
+    secondaryCta={live ? { label: 'Visita il sito ↗', href: live, external: true } : undefined}
     backHref="/work"
     backLabel="Tutti i lavori"
     related={related}

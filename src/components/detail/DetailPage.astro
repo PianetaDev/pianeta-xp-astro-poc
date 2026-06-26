@@ -2,6 +2,7 @@
 interface CtaProp { label: string; href?: string; action?: string; external?: boolean; }
 interface RelatedItem { type: string; slug: string; label?: string; }
 interface NextItem { type: string; slug: string; title: string; deck?: string; cover?: string; kicker?: string; }
+interface BylineProp { authors?: string[]; date?: string; meta?: string[]; }
 
 interface Props {
   eyebrowParts?: Array<{ label: string; href?: string }>;
@@ -16,6 +17,7 @@ interface Props {
   related?: RelatedItem[];
   relatedTitle?: string;
   nextItem?: NextItem;
+  byline?: BylineProp;
   jsonLd?: any;
 }
 const {
@@ -31,8 +33,14 @@ const {
   related = [],
   relatedTitle = 'Approfondimenti',
   nextItem,
+  byline,
   jsonLd,
 } = Astro.props;
+
+const bylineParts: string[] = [];
+if (byline?.authors?.length) bylineParts.push('di ' + byline.authors.join(', '));
+if (byline?.date) bylineParts.push(byline.date);
+if (byline?.meta?.length) bylineParts.push(...byline.meta);
 
 const renderCta = (c: CtaProp, cls: string) => {
   if (c.href) {
@@ -81,6 +89,10 @@ const renderCta = (c: CtaProp, cls: string) => {
       <img src={cover || '/og/placeholder.svg'} alt={title} loading="eager" fetchpriority="high" decoding="async" />
     </picture>
   </div>
+
+  {bylineParts.length > 0 && (
+    <p class="detail-byline">{bylineParts.join(' · ')}</p>
+  )}
 
   <section class="detail-body">
     <aside class="detail-meta">

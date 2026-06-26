@@ -52,6 +52,7 @@ const jsonLd = {
     related={related}
     relatedTitle="Case study collegati"
     nextItem={nextItem}
+    byline={{ authors: data.authors, date: data.date ? formatDate(data.date) : undefined, meta: data.issue ? [`#${data.issue}`] : undefined }}
     jsonLd={jsonLd}
   >
     <Fragment slot="meta">
