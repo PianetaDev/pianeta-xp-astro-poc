@@ -85,7 +85,7 @@ const ldJson = {
       {/* 2. Wordmark — square */}
       <a href="/bulletin/chi-siamo" class="bento-tile t-square t-cream bento-wordmark">
         <div class="bento-wordmark-stack">
-          <span class="bento-wordmark-text">PIANETA.<br />STUDIO</span>
+          <img src="/brand/logo-horizontal-black.svg" alt="Pianeta.Studio" class="bento-wordmark-logo" width="282" height="80" loading="lazy" decoding="async" />
           <p class="bento-sub">Sustainable Creativity dal 2016 · Società Benefit · Design &amp; Technology</p>
         </div>
       </a>
@@ -325,13 +325,11 @@ const ldJson = {
       gap: 14px;
       width: 100%;
     }
-    .bento-wordmark-text {
-      font-weight: 900;
-      font-size: clamp(1.7rem, 4vw, 2.6rem);
-      letter-spacing: -0.03em;
-      line-height: 0.95;
-      color: #0e1116;
-      user-select: none;
+    .bento-wordmark-logo {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      display: block;
     }
   </style>
 </BaseLayout>
