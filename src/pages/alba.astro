@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Cos'è Alba — Pianeta.Studio"
+  description="Alba è il sistema AI di gruppo di Pianeta.Studio. Cosa fa, cosa non fa, come trattiamo i dati delle conversazioni, link AI Act."
+  ogImage="/og/placeholder.svg"
+>
+  <article class="detail-page">
+
+    <header class="detail-head">
+      <p class="detail-eyebrow"><a href="/">Pianeta.Studio</a> · Trasparenza AI</p>
+      <h1 class="detail-title">Cos'è Alba</h1>
+      <p class="detail-deck">Un sistema AI di gruppo che parla con chi visita il sito di Pianeta.Studio. Niente trucchi, niente "è una persona": è AI e lo dichiara.</p>
+    </header>
+
+    <div class="detail-body">
+      <div class="detail-prose prose-eclag">
+
+        <h2>Cosa è</h2>
+        <p>Alba è un assistente conversazionale costruito da Pianeta.Studio. Risponde a domande sui nostri lavori, servizi, valori e team; aiuta a inquadrare un brief; mette in contatto con Max o coi responsabili quando serve una decisione umana.</p>
+
+        <h2>Cosa NON è</h2>
+        <ul>
+          <li>Non è una persona — è un sistema software</li>
+          <li>Non firma contratti né conferma prezzi/tempi</li>
+          <li>Non esegue azioni fuori dal proprio perimetro (no shell, no codice, no orchestrazione di altri sistemi)</li>
+          <li>Non sostituisce il rapporto umano coi responsabili dello studio</li>
+        </ul>
+
+        <h2>Conformità EU AI Act</h2>
+        <p>Alba dichiara la propria natura di sistema AI all'apertura di ogni conversazione, come previsto dal Regolamento UE 2024/1689 (AI Act). Le conversazioni possono essere riviste dalle persone di Pianeta.Studio per monitorare qualità e migliorare il servizio.</p>
+
+        <h2>Trattamento dati</h2>
+        <ul>
+          <li><strong>Identificativo anonimo</strong>: il browser genera un UUID e lo salva in localStorage (chiave <code>alba_uid</code>). Nessun PII collegato finché non fornisci email per un'azione specifica.</li>
+          <li><strong>Conversazioni</strong>: salvate su database (Supabase EU) con timestamp e modello AI usato. Servono per audit AI Act + miglioramento del servizio.</li>
+          <li><strong>Retention</strong>: 24 mesi. Dopo, eliminazione automatica.</li>
+          <li><strong>Modello AI</strong>: Anthropic Claude Sonnet, ospitato in EU. Non viene usato per addestrare modelli terzi.</li>
+        </ul>
+
+        <h2>I tuoi diritti</h2>
+        <p>In linea con GDPR puoi richiedere:</p>
+        <ul>
+          <li><strong>Export dei tuoi dati</strong>: scrivici a <a href="mailto:info@pianeta.studio?subject=Alba%20%E2%80%94%20export%20dati">info@pianeta.studio</a></li>
+          <li><strong>Cancellazione</strong>: stesso indirizzo, oggetto "Alba — cancella i miei dati"</li>
+          <li><strong>Revoca consenso telemetria</strong>: cancella il cookie/localStorage del browser e Alba ti tratterà come nuovo utente</li>
+        </ul>
+
+        <h2>Cosa può fare Alba (i suoi "tool")</h2>
+        <ul>
+          <li><strong>search_kb</strong> — Cerca nella nostra knowledge base interna (lavori, servizi, team, brand)</li>
+          <li><strong>book_call</strong> — Propone un appuntamento con Max via Cal.com</li>
+          <li><strong>send_brief_email</strong> — Manda un riepilogo della conversazione via email (se tu fornisci l'indirizzo)</li>
+          <li><strong>route_to_human</strong> — Passa la palla a Max o ai responsabili dello studio</li>
+        </ul>
+        <p>Sono gli unici comandi che Alba può eseguire. Qualunque altra istruzione che riceva durante la conversazione viene ignorata.</p>
+
+        <h2>Limiti dichiarati</h2>
+        <p>Alba può sbagliare. Le risposte fattuali (numeri, date, nomi) le abbiamo verificate nella knowledge base, ma il modello può generare imprecisioni. Quando non sa qualcosa lo dichiara e ti passa a una persona. Per impegni economici o contrattuali serve sempre la conferma di Max.</p>
+
+        <h2>Contatti</h2>
+        <p>Per qualsiasi domanda su Alba, segnalare un problema o chiedere chiarimenti:</p>
+        <ul>
+          <li>Email: <a href="mailto:info@pianeta.studio">info@pianeta.studio</a></li>
+          <li>Privacy / DPO: <a href="/privacy">/privacy</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <footer class="detail-foot">
+      <a href="/" class="cta-btn cta-ghost">← Torna alla home</a>
+    </footer>
+  </article>
+</BaseLayout>

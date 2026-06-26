@@ -46,7 +46,25 @@ function create() {
     }
   }
 
-  return { uid, sessionId, variant, initializing, initSession };
+  function trackEvent(event: string, payload?: Record<string, unknown>): void {
+    if (!uid.value) return;
+    try {
+      void fetch('/api/alba/event', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          uid: uid.value,
+          session_id: sessionId.value,
+          event,
+          variant: variant.value,
+          payload: payload ?? null,
+        }),
+        keepalive: true,
+      }).catch(() => { /* fire-and-forget */ });
+    } catch { /* never throw on telemetry */ }
+  }
+
+  return { uid, sessionId, variant, initializing, initSession, trackEvent };
 }
 
 export function useAlbaSession() {

@@ -10,6 +10,7 @@ import NewsletterPopup from '../components/vue/site/newsletter/NewsletterPopup.v
 import HireUsLauncher from '../components/vue/site/HireUsLauncher.vue';
 import HireUsDrawer from '../components/vue/site/hire-us/HireUsDrawer.vue';
 import AlbaFloater from '../components/vue/site/alba/AlbaFloater.vue';
+import AlbaProactivePopup from '../components/vue/site/alba/AlbaProactivePopup.vue';
 import SiteArtifactPane from '../components/vue/site/SiteArtifactPane.vue';
 
 interface Props {
@@ -61,6 +62,7 @@ const showIslands = chrome && !minimal;
         <HireUsLauncher client:only="vue" />
         <HireUsDrawer client:only="vue" />
         <AlbaFloater client:only="vue" />
+        <AlbaProactivePopup client:only="vue" />
         <SiteArtifactPane client:only="vue" />
       </>
     )}
