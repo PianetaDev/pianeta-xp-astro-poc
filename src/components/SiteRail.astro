@@ -15,14 +15,20 @@ const nav = [
   { href: '/lab',      label: 'Lab',      icon: 'lucide:flask-conical' },
   { href: '/careers',  label: 'Careers',  icon: 'lucide:briefcase-business' },
 ];
+
+const railStyle = 'position:fixed;left:0;top:0;bottom:0;width:88px;background:#0e1116;color:#fff;border-right:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;z-index:100;';
+const brandStyle = 'display:block;padding:18px 10px 22px;color:#fff;text-decoration:none;';
+const wordmarkStyle = 'font-weight:900;font-size:11px;line-height:1.1;letter-spacing:1px;text-align:center;margin:0;';
+const navStyle = 'flex:1;display:flex;flex-direction:column;gap:2px;padding:0 6px;overflow-y:auto;';
+const linkBase = 'display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 4px;border-radius:8px;color:rgba(255,255,255,0.85);text-decoration:none;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:500;';
+const linkActive = 'background:#fff;color:#0e1116;';
 ---
-<aside class="site-rail" aria-label="Main navigation">
-  <a href="/" class="site-rail-brand">
-    <p class="site-rail-wordmark">PIANETA<br>.STUDIO</p>
-    <p class="site-rail-tagline">Sustainable Creativity™</p>
+<aside style={railStyle} aria-label="Main navigation" class="site-rail">
+  <a href="/" style={brandStyle}>
+    <p style={wordmarkStyle}>PIANETA<br>.STUDIO</p>
   </a>
 
-  <nav class="site-rail-nav">
+  <nav style={navStyle}>
     {nav.map((l) => {
       const isActive = l.href === '/' ? current === '/' : current.startsWith(l.href);
       const section = l.href === '/' ? null : l.href.replace('/', '');
@@ -31,131 +37,43 @@ const nav = [
           href={l.href}
           aria-label={l.label}
           data-rail-section={section}
-          class:list={['site-rail-link', isActive && 'is-active']}
+          class="site-rail-link"
+          style={linkBase + (isActive ? linkActive : '')}
         >
           <Icon name={l.icon} width="22" height="22" />
-          <span class="site-rail-link-label">{l.label}</span>
+          <span>{l.label}</span>
         </a>
       );
     })}
   </nav>
 
-  <script is:inline>
-    document.querySelectorAll('.site-rail-link[data-rail-section]').forEach((el) => {
-      el.addEventListener('click', (e) => {
-        const section = el.getAttribute('data-rail-section');
-        if (!section) return;
-        e.preventDefault();
-        window.dispatchEvent(new CustomEvent('rail-flyout:open', { detail: section }));
-      });
-    });
-  </script>
-
-  <div class="site-rail-foot">
-    <p class="site-rail-locale">IT / EN</p>
-    <a href="/privacy">Privacy</a>
-    <a href="/cookie">Cookie</a>
+  <div style="padding:0 14px 20px;font-size:10px;color:rgba(255,255,255,0.5);">
+    <a href="/privacy" style="display:block;color:rgba(255,255,255,0.5);text-decoration:none;margin-top:6px;">Privacy</a>
+    <a href="/cookie" style="display:block;color:rgba(255,255,255,0.5);text-decoration:none;margin-top:6px;">Cookie</a>
   </div>
 </aside>
 
+<script is:inline>
+  // Bridge rail icon click → SiteRailFlyout Vue island
+  document.querySelectorAll('.site-rail-link[data-rail-section]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      const section = el.getAttribute('data-rail-section');
+      if (!section) return;
+      e.preventDefault();
+      window.dispatchEvent(new CustomEvent('rail-flyout:open', { detail: section }));
+    });
+  });
+  // Hover highlight (no CSS dep)
+  document.querySelectorAll('.site-rail-link').forEach((el) => {
+    const orig = el.getAttribute('style') || '';
+    el.addEventListener('mouseenter', () => {
+      if (orig.includes('#fff;color:#0e1116')) return;
+      el.setAttribute('style', orig + 'background:rgba(255,255,255,0.08);color:#fff;');
+    });
+    el.addEventListener('mouseleave', () => el.setAttribute('style', orig));
+  });
+</script>
+
 <style is:global>
-  .site-rail {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 64px;
-    background: #0e1116;
-    color: #ffffff;
-    border-right: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    flex-direction: column;
-    z-index: 40;
-  }
-  @media (min-width: 768px) {
-    .site-rail { width: 96px; }
-  }
-  main.site-main { margin-left: 64px; }
-  @media (min-width: 768px) {
-    main.site-main { margin-left: 96px; }
-  }
-
-  .site-rail-brand {
-    display: block;
-    padding: 18px 10px 22px;
-    color: #ffffff;
-    text-decoration: none;
-    transition: opacity .2s;
-  }
-  .site-rail-brand:hover { opacity: .75; }
-  .site-rail-wordmark {
-    font-weight: 900;
-    font-size: 10px;
-    line-height: 1.1;
-    letter-spacing: 1px;
-    text-align: center;
-    margin: 0;
-  }
-  @media (min-width: 768px) {
-    .site-rail-wordmark { font-size: 12px; text-align: left; padding-left: 4px; }
-  }
-  .site-rail-tagline {
-    display: none;
-    font-size: 9px;
-    color: rgba(255,255,255,0.45);
-    margin: 4px 0 0 4px;
-    font-style: italic;
-  }
-  @media (min-width: 768px) { .site-rail-tagline { display: block; } }
-
-  .site-rail-nav {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 0 6px;
-    overflow-y: auto;
-  }
-  .site-rail-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 10px 4px;
-    border-radius: 8px;
-    color: rgba(255,255,255,0.78);
-    text-decoration: none;
-    transition: background .15s, color .15s;
-  }
-  .site-rail-link:hover { background: rgba(255,255,255,0.08); color: #ffffff; }
-  .site-rail-link.is-active { background: #ffffff; color: #0e1116; }
-  .site-rail-link-label {
-    display: none;
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  @media (min-width: 768px) { .site-rail-link-label { display: block; } }
-
-  .site-rail-foot {
-    display: none;
-    padding: 0 14px 20px;
-    font-size: 10px;
-    color: rgba(255,255,255,0.5);
-  }
-  @media (min-width: 768px) { .site-rail-foot { display: block; } }
-  .site-rail-foot a {
-    display: block;
-    color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    margin-top: 6px;
-    transition: color .15s;
-  }
-  .site-rail-foot a:hover { color: #ffffff; }
-  .site-rail-locale {
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin: 0 0 8px;
-  }
+  main.site-main { margin-left: 88px; }
 </style>
