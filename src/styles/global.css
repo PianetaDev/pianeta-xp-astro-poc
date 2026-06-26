@@ -117,10 +117,10 @@
 @media (min-width: 1100px) { .index-grid { grid-template-columns: 1fr 1fr 1fr; } }
 .index-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--pianeta-border); border-radius: 20px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color 150ms, transform 200ms; }
 .index-card:hover { border-color: var(--cta-primary); transform: translateY(-2px); }
-.index-card-img { aspect-ratio: 16/10; background: rgba(14,17,22,0.04); overflow: hidden; }
+.index-card-img { aspect-ratio: 4/5; background: rgba(14,17,22,0.04); overflow: hidden; }
 .index-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 400ms; }
 .index-card:hover .index-card-img img { transform: scale(1.03); }
-.index-card.is-portrait .index-card-img { aspect-ratio: 1/1; }
+.index-card.is-portrait .index-card-img { aspect-ratio: 3/4; }
 .index-card-body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
 .index-card-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); }
 .index-card-title { font-weight: 800; font-size: 1.0625rem; line-height: 1.25; letter-spacing: -0.01em; margin: 0; }
