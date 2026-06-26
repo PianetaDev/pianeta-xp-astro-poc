@@ -50,14 +50,14 @@ const showIslands = chrome && !minimal;
 
     {showIslands && (
       <>
-        <CookieConsent client:idle />
-        <MobileMenu client:idle />
-        <SiteRailFlyout client:idle />
-        <NewsletterPopup client:idle />
-        <HireUsLauncher client:idle />
-        <HireUsDrawer client:idle />
-        <AlbaFloater client:idle />
-        <SiteArtifactPane client:visible />
+        <CookieConsent client:only="vue" />
+        <MobileMenu client:only="vue" />
+        <SiteRailFlyout client:only="vue" />
+        <NewsletterPopup client:only="vue" />
+        <HireUsLauncher client:only="vue" />
+        <HireUsDrawer client:only="vue" />
+        <AlbaFloater client:only="vue" />
+        <SiteArtifactPane client:only="vue" />
       </>
     )}
   </body>
