@@ -14,6 +14,7 @@ interface Props {
   backLabel?: string;
   related?: RelatedItem[];
   relatedTitle?: string;
+  jsonLd?: any;
 }
 const {
   eyebrowParts = [],
@@ -27,6 +28,7 @@ const {
   backLabel,
   related = [],
   relatedTitle = 'Approfondimenti',
+  jsonLd,
 } = Astro.props;
 
 const renderCta = (c: CtaProp, cls: string) => {
@@ -37,6 +39,7 @@ const renderCta = (c: CtaProp, cls: string) => {
   return { tag: 'button' as const, attrs: c.action ? { 'data-action': c.action, type: 'button' } : { type: 'button' }, cls, label: c.label };
 };
 ---
+{jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 <article class="detail-page">
 
   <header class="detail-head">

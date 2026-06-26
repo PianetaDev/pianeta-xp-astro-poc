@@ -15,6 +15,20 @@ const data: any = item.data;
 const title = data.name || data.title || item.id;
 const cover = data.photo || data.cover || data.ogImage;
 
+const url = new URL(`/team/${item.id}`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: data.name || title,
+  jobTitle: data.role,
+  description: data.description,
+  url,
+  image: data.photo || cover,
+  email: data.email,
+  worksFor: { '@type': 'Organization', name: 'Pianeta.Studio', url: 'https://xp.pianeta.studio' },
+  ...(data.location && { homeLocation: { '@type': 'Place', name: data.location } }),
+};
+
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Team', href: '/team' }];
 if (data.role) eyebrowParts.push({ label: data.role });
 ---
@@ -28,6 +42,7 @@ if (data.role) eyebrowParts.push({ label: data.role });
     primaryCta={data.email ? { label: 'Scrivigli', href: `mailto:${data.email}`, external: false } : undefined}
     backHref="/team"
     backLabel="Tutto il team"
+    jsonLd={jsonLd}
   >
     <Fragment slot="meta">
       {data.role && <div><dt>Ruolo</dt><dd>{data.role}</dd></div>}

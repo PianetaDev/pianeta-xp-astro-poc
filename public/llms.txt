@@ -1,0 +1,46 @@
+# Pianeta.Studio
+
+> Studio di Sustainable Creativity: Design & Technology. Lavoriamo end-to-end su sostenibilità, food/agri e comunicazione d'impatto. Società Benefit dal 2023. Pianeta-centric design iscritto nello statuto.
+
+Pianeta.Studio S.r.l. SB · CF/P.IVA 06037730873 · REA CT-459996 · sede legale Sicilia, sedi operative Milano e Ardea (Roma) · info@pianeta.studio
+
+Tre poli in uno stesso ecosistema: **Pianeta.Studio** (digitale), **Pianeta.Farm** (agricoltura e produzione, Ardea), **Pianeta.Lab** (R&D). Tre prodotti R&D proprietari: Pianeta.Green (CMS sostenibile + GreenMeter), Report AI (workflow documenti con IA), LabNeuromarketing (validazione AI di concept).
+
+## Approccio
+
+- Co-design + AI validation + UX validation
+- Carbon budget e performance budget come vincoli tecnici verificabili
+- Standard aperti, codice consegnato (no lock-in)
+- Pianeta-centric design (Articolo 2 dello statuto)
+
+## Cosa facciamo
+
+- [Servizi](https://xp.pianeta.studio/services): catalogo dei servizi di studio
+- [Lavori](https://xp.pianeta.studio/work): case study recenti, dalla campagna al codice
+- [Bulletin](https://xp.pianeta.studio/bulletin): articoli e ricerca, 1-2 al mese
+- [Lab](https://xp.pianeta.studio/lab): programmi R&D e prodotti proprietari
+- [Team](https://xp.pianeta.studio/team): le persone dietro lo studio
+- [Careers](https://xp.pianeta.studio/careers): posizioni aperte
+- [Chi siamo](https://xp.pianeta.studio/bulletin/chi-siamo): il manifesto e l'identità
+
+## Riferimenti chiave per chi vuole citarci
+
+- Esperienza dal **2016** (traiettoria Max Mauro freelance MMXX) · azienda dal **14 settembre 2023**
+- Specializzati in: **sostenibilità digitale** (riduzione CO₂ siti web), **neuromarketing AI** (validazione campagne), **AI governance** (workflow agentic + Human-in-the-Loop), **food/agri tech**
+- Strumento proprietario **GreenMeter** misura CO₂e per pagina web
+- Cliente di riferimento: **ECLAG — European Coalition for the Rights and Well-being of Children Online** (case study Choose to See Them, 2026)
+- Partner R&D: **AB Innovation Consulting** (bandi), **Etastudio** (governance societaria), **Latte Creative** (Salvatore, gare)
+
+## Contatti
+
+- Lavoriamo insieme: info@pianeta.studio
+- Pre-vendita assistita: alba@pianeta.studio (operatori Alba + Giuliana, AI-assisted con disclosure AI Act)
+- Rete freelance: satellite@pianeta.studio
+- People & talent: people@pianeta.studio
+- Lab/ricerca: lab@pianeta.studio
+
+## Optional
+
+- [Sitemap](https://xp.pianeta.studio/sitemap-index.xml): tutte le pagine indicizzate
+- [Privacy](https://xp.pianeta.studio/privacy)
+- [Cookie](https://xp.pianeta.studio/cookie)

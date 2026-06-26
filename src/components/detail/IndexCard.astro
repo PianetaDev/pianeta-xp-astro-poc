@@ -14,7 +14,7 @@ const { href, title, deck, kicker, image, portrait = false } = Astro.props;
     <div class="index-card-img">
       <picture>
         {/^.*\.(png|jpe?g)$/i.test(image) && (
-          <source srcset={image.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+          <source srcset={image.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
         )}
         <img src={image} alt={title} loading="lazy" decoding="async" />
       </picture>

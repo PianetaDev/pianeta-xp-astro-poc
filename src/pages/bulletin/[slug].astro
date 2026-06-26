@@ -22,6 +22,21 @@ if (data.issue) eyebrowParts.push({ label: `#${data.issue}` });
 if (data.date) eyebrowParts.push({ label: formatDate(data.date) });
 
 const related = (data.relatedWork || []).map((slug: string) => ({ type: 'work', slug }));
+
+const url = new URL(`/bulletin/${item.id}`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: data.description,
+  image: data.ogImage || cover,
+  url,
+  datePublished: data.date ? new Date(data.date).toISOString() : undefined,
+  author: (data.authors || ['Pianeta.Studio']).map((a: string) => ({ '@type': 'Person', name: a })),
+  publisher: { '@type': 'Organization', name: 'Pianeta.Studio', logo: { '@type': 'ImageObject', url: 'https://xp.pianeta.studio/favicon.svg' } },
+  keywords: (data.tags || []).join(', ') || undefined,
+  mainEntityOfPage: url,
+};
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>
   <DetailPage
@@ -34,6 +49,7 @@ const related = (data.relatedWork || []).map((slug: string) => ({ type: 'work', 
     backLabel="Tutti gli articoli"
     related={related}
     relatedTitle="Case study collegati"
+    jsonLd={jsonLd}
   >
     <Fragment slot="meta">
       {data.authors && data.authors.length > 0 && <div><dt>Autori</dt><dd>{data.authors.join(', ')}</dd></div>}

@@ -6,7 +6,9 @@ const ROOT = 'public';
 const DIRS = ['og', 'choosetoseethem', 'team'];
 const MIN_SIZE = 100 * 1024; // 100KB
 const MAX_DIM = 1600;
+const CARD_DIM = 800; // smaller thumb for index cards
 const WEBP_QUALITY = 80;
+const CARD_QUALITY = 72;
 const PNG_QUALITY = 85;
 
 async function walk(dir) {
@@ -37,11 +39,17 @@ for (const d of DIRS) {
     const dir = dirname(file);
     const base = basename(file, ext);
 
-    // Generate WebP @ MAX_DIM
+    // Generate WebP @ MAX_DIM for hero
     const webpPath = join(dir, base + '.webp');
     try {
       await sharp(file).resize(MAX_DIM, MAX_DIM, { fit: 'inside', withoutEnlargement: true }).webp({ quality: WEBP_QUALITY }).toFile(webpPath);
     } catch (e) { console.error('webp fail', file, e.message); continue; }
+
+    // Generate smaller WebP card thumbnail @ CARD_DIM
+    const cardPath = join(dir, base + '-card.webp');
+    try {
+      await sharp(file).resize(CARD_DIM, CARD_DIM, { fit: 'inside', withoutEnlargement: true }).webp({ quality: CARD_QUALITY }).toFile(cardPath);
+    } catch (e) { console.error('card fail', file, e.message); }
 
     // Shrink original png/jpg in place
     const tmpPath = file + '.tmp';

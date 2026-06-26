@@ -17,6 +17,21 @@ const cover = data.cover || data.ogImage;
 const live = data.links?.live;
 const bulletinRefs: string[] = data.links?.bulletin || [];
 
+const url = new URL(`/work/${item.id}`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: title,
+  description: data.description,
+  url,
+  image: data.ogImage || cover,
+  dateCreated: data.date ? new Date(data.date).toISOString() : undefined,
+  dateModified: data.updated ? new Date(data.updated).toISOString() : undefined,
+  creator: { '@type': 'Organization', name: 'Pianeta.Studio', url: 'https://xp.pianeta.studio' },
+  ...(data.client && { sourceOrganization: { '@type': 'Organization', name: data.client } }),
+  ...(live && { sameAs: live }),
+  keywords: (data.tags || []).join(', ') || undefined,
+};
 const eyebrowParts = [{ label: 'Work', href: '/work' }];
 if (data.category) eyebrowParts.push({ label: data.category });
 if (data.year) eyebrowParts.push({ label: String(data.year) });
@@ -34,6 +49,7 @@ const related = bulletinRefs.map((slug) => ({ type: 'bulletin', slug }));
     backHref="/work"
     backLabel="Tutti i lavori"
     related={related}
+    jsonLd={jsonLd}
   >
     <Fragment slot="meta">
       {data.client && <div><dt>Cliente</dt><dd>{data.client}</dd></div>}

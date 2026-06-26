@@ -65,154 +65,257 @@ const ldJson = {
     <script type="application/ld+json" set:html={JSON.stringify(ldJson)} />
   </Fragment>
 
-  <div class="home-page p-4 md:p-8 max-w-[1600px] mx-auto">
-    <div
-      class="bento-grid grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-6 auto-rows-[180px] md:auto-rows-[220px]"
-      style="grid-auto-flow: dense;"
-    >
+  <div class="home-page">
+    <div class="bento-grid">
 
-      {/* 1. ECLAG video featured xl (3×2) */}
-      <a
-        href={w0 ? `/work/${w0.id}` : '/work/eclag'}
-        class="bento-tile relative rounded-2xl overflow-hidden group block col-span-3 row-span-2 cursor-pointer"
-      >
-        <video
-          poster="/choosetoseethem/cover-v3.png"
-          autoplay
-          muted
-          loop
-          playsinline
-          class="absolute inset-0 w-full h-full object-cover"
-        >
+      {/* 1. Featured ECLAG video — tall portrait (col-1 row-span-3) */}
+      <a href={w0 ? `/work/${w0.id}` : '/work/eclag'} class="bento-tile t-tall t-dark">
+        <video poster="/choosetoseethem/cover-v3.png" autoplay muted loop playsinline class="bento-video">
           <source src="https://pub-4c166b51c33040fd98b8f75c2963296e.r2.dev/choosetoseethem/video-restore-web.mp4" type="video/mp4" />
         </video>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 group-hover:from-black/70 transition duration-500"></div>
-        <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
-          <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">Featured · ECLAG</div>
-          <div class="flex-1"></div>
-          <div class="font-black text-lg md:text-2xl leading-tight">{w0?.data.title || 'Choose to See Them'}</div>
-          <div class="text-xs md:text-sm opacity-75 mt-1">{(w0?.data.client || 'ECLAG') + ' · ' + (w0?.data.year || 2026)}</div>
+        <div class="bento-grad" />
+        <div class="bento-content">
+          <p class="bento-kicker">Featured · ECLAG</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title-xl">{w0?.data.title || 'Choose to See Them'}</h2>
+          <p class="bento-sub">{(w0?.data.client || 'ECLAG') + ' · ' + (w0?.data.year || 2026)}</p>
         </div>
       </a>
 
-      {/* 3. Bulletin #1 — md (col-span-2 row-span-1) */}
+      {/* 2. Wordmark — square */}
+      <div class="bento-tile t-square t-cream bento-wordmark">
+        <span>PIANETA.<br />STUDIO</span>
+      </div>
+
+      {/* 3. Bulletin #1 — yellow medium */}
       {b0 && (
-        <a
-          href={`/bulletin/${b0.id}`}
-          class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
-          style="background: #E9FF1F;"
-        >
-          <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-black">
-            <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">{'Bulletin' + (b0.data.issue ? ' · #' + b0.data.issue : '')}</div>
-            <div class="flex-1"></div>
-            <div class="font-black text-lg md:text-2xl leading-tight">{b0.data.title}</div>
+        <a href={`/bulletin/${b0.id}`} class="bento-tile t-medium" style="background:#E9FF1F;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Bulletin' + (b0.data.issue ? ' · #' + b0.data.issue : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b0.data.title}</h2>
           </div>
         </a>
       )}
 
-      {/* 4. Bulletin #2 — md */}
-      {b1 && (
-        <a
-          href={`/bulletin/${b1.id}`}
-          class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
-          style="background: #1f5b8f;"
-        >
-          <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
-            <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">{'Bulletin' + (b1.data.issue ? ' · #' + b1.data.issue : '')}</div>
-            <div class="flex-1"></div>
-            <div class="font-black text-lg md:text-2xl leading-tight">{b1.data.title}</div>
-          </div>
-        </a>
-      )}
-
-      {/* 5. Service teaser — md */}
-      {s0 && (
-        <a
-          href={`/services/${s0.id}`}
-          class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
-          style="background: #f7f1d9;"
-        >
-          <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-black">
-            <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">Services</div>
-            <div class="flex-1"></div>
-            <div class="font-black text-lg md:text-2xl leading-tight">{s0.data.title}</div>
-            <div class="text-xs md:text-sm opacity-75 mt-1">{s0.data.description}</div>
-          </div>
-        </a>
-      )}
-
-      {/* 6. Team strip — wide */}
-      <a
-        href="/team"
-        class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer"
-        style="background: #fafaf7;"
-      >
-        <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-black">
-          <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">Persone</div>
-          <div class="flex-1"></div>
-          <div class="font-black text-lg md:text-2xl leading-tight">
-            {teamCount > 0 ? `${teamCount} voci dentro Pianeta` : '5 voci dentro Pianeta'}
-          </div>
-          <div class="text-xs md:text-sm opacity-75 mt-1">Conosci il team →</div>
-        </div>
-      </a>
-
-      {/* 7. Bulletin #3 — sm */}
-      {b2 && (
-        <a
-          href={`/bulletin/${b2.id}`}
-          class="bento-tile relative rounded-2xl overflow-hidden group block col-span-1 row-span-1 cursor-pointer"
-          style="background: #1f7a3a;"
-        >
-          <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
-            <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium">{'Bulletin' + (b2.data.issue ? ' · #' + b2.data.issue : '')}</div>
-            <div class="flex-1"></div>
-            <div class="font-black text-lg md:text-2xl leading-tight">{b2.data.title}</div>
-          </div>
-        </a>
-      )}
-
-      {/* Hire Us CTA — md (apre drawer Vue island via window event) */}
-      <button
-        type="button"
-        class="bento-tile relative rounded-2xl overflow-hidden group block col-span-2 row-span-1 cursor-pointer w-full text-left"
-        style="background: #0e1116;"
-        data-action="open-hire-us"
-      >
-        <div class="relative z-10 h-full flex flex-col p-5 md:p-6 text-white">
-          <div class="flex-1"></div>
-          <div class="font-black text-lg md:text-2xl leading-tight">Lavoriamo insieme?</div>
-          <div class="text-xs md:text-sm opacity-75 mt-1">Parla con Alba →</div>
+      {/* 4. Hire Us CTA — orange */}
+      <button type="button" class="bento-tile t-medium t-orange" data-action="open-hire-us">
+        <div class="bento-content">
+          <p class="bento-kicker">Studio</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">Lavoriamo insieme?</h2>
+          <p class="bento-sub">Parla con Alba →</p>
         </div>
       </button>
+
+      {/* 5. Bulletin #2 — blue */}
+      {b1 && (
+        <a href={`/bulletin/${b1.id}`} class="bento-tile t-medium t-blue">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Bulletin' + (b1.data.issue ? ' · #' + b1.data.issue : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b1.data.title}</h2>
+          </div>
+        </a>
+      )}
+
+      {/* 6. Service — cream tall */}
+      {s0 && (
+        <a href={`/services/${s0.id}`} class="bento-tile t-tall" style="background:#f7f1d9;">
+          <div class="bento-content">
+            <p class="bento-kicker">Servizio</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-lg">{s0.data.title}</h2>
+            <p class="bento-sub">{s0.data.description}</p>
+          </div>
+        </a>
+      )}
+
+      {/* 7. Team — light */}
+      <a href="/team" class="bento-tile t-medium t-cream">
+        <div class="bento-content">
+          <p class="bento-kicker">Persone</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">{teamCount > 0 ? `${teamCount} voci dentro Pianeta` : '5 voci dentro Pianeta'}</h2>
+          <p class="bento-sub">Conosci il team →</p>
+        </div>
+      </a>
+
+      {/* 8. Bulletin #3 — green */}
+      {b2 && (
+        <a href={`/bulletin/${b2.id}`} class="bento-tile t-medium" style="background:#1f7a3a; color:#fff;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Bulletin' + (b2.data.issue ? ' · #' + b2.data.issue : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b2.data.title}</h2>
+          </div>
+        </a>
+      )}
+
+      {/* 9. Lab — black */}
+      <a href="/lab" class="bento-tile t-medium t-dark">
+        <div class="bento-content">
+          <p class="bento-kicker">Lab</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">R&D in corso</h2>
+          <p class="bento-sub">XP1 · Report AI · LabNeuro →</p>
+        </div>
+      </a>
+
+      {/* 10. Careers — bright */}
+      <a href="/careers" class="bento-tile t-medium" style="background:#FFE7C2;">
+        <div class="bento-content">
+          <p class="bento-kicker">Careers</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">Cerchiamo un AI Manager</h2>
+          <p class="bento-sub">Vedi posizione →</p>
+        </div>
+      </a>
+
+      {/* 11. Bulletin CTA — pale */}
+      <a href="/bulletin/iscrivimi" class="bento-tile t-medium t-cream">
+        <div class="bento-content">
+          <p class="bento-kicker">Bulletin</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">Iscriviti</h2>
+          <p class="bento-sub">1-2 al mese. Topic selezionabili.</p>
+        </div>
+      </a>
+
       <script is:inline>
         document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => {
           b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open')))
         })
       </script>
 
-      {/* 11. Bulletin CTA */}
-      <a
-        href="/bulletin/iscrivimi"
-        class="col-span-2 row-span-1 rounded-2xl overflow-hidden bg-[#fafaf7] p-5 md:p-6 flex flex-col justify-between group hover:bg-[#f1f0ea] transition"
-      >
-        <div>
-          <div class="text-[10px] uppercase tracking-wider opacity-70 font-medium mb-3">Bulletin</div>
-          <p class="font-black text-lg leading-tight">Iscriviti al Bulletin</p>
-          <p class="text-xs opacity-75 mt-1">Articoli, casi reali, ricerca. 1-2 al mese. Topic selezionabili.</p>
-        </div>
-        <p class="mt-4 text-xs font-medium underline underline-offset-4 group-hover:translate-x-1 transition">
-          Vai al form →
-        </p>
-      </a>
-
-      {/* 12. Wordmark decorativo */}
-      <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden bg-[#fafaf7] flex items-end p-5 md:p-6">
-        <span class="font-black text-5xl md:text-7xl tracking-tight leading-none text-black select-none">
-          PIANETA.<br />STUDIO
-        </span>
-      </div>
-
     </div>
   </div>
+
+  <style>
+    .home-page {
+      padding: 16px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) { .home-page { padding: 32px; } }
+
+    .bento-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr;
+      grid-auto-rows: 220px;
+      grid-auto-flow: dense;
+    }
+    @media (min-width: 700px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; grid-auto-rows: 200px; }
+    }
+    @media (min-width: 1100px) {
+      .bento-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; grid-auto-rows: 220px; }
+    }
+
+    .bento-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border: 0;
+      background: #fafaf7;
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
+      transition: transform 250ms ease;
+    }
+    .bento-tile:hover { transform: translateY(-2px); }
+
+    /* Sizes — desktop layout */
+    .t-tall   { grid-row: span 2; }
+    .t-medium { grid-row: span 1; }
+    .t-square { grid-row: span 1; }
+    @media (min-width: 1100px) {
+      .t-tall   { grid-row: span 3; }
+      .t-medium { grid-row: span 1; }
+      .t-square { grid-row: span 1; }
+    }
+
+    /* Color variants */
+    .t-dark   { background: #0e1116; color: #ffffff; }
+    .t-cream  { background: #fafaf7; color: #0e1116; }
+    .t-blue   { background: #1f5b8f; color: #ffffff; }
+    .t-orange { background: #ff6a1a; color: #ffffff; }
+
+    .bento-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 22px;
+    }
+    .bento-spacer { flex: 1; }
+    .bento-kicker {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      opacity: 0.7;
+      margin: 0;
+      font-weight: 500;
+    }
+    .bento-title {
+      font-size: clamp(1.05rem, 2vw, 1.45rem);
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin: 0;
+    }
+    .bento-title-lg {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin: 0;
+    }
+    .bento-title-xl {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin: 0;
+    }
+    .bento-sub {
+      font-size: 13px;
+      opacity: 0.75;
+      margin: 6px 0 0;
+      line-height: 1.4;
+    }
+
+    .bento-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .bento-grad {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.65), transparent 60%);
+      z-index: 1;
+    }
+
+    .bento-wordmark {
+      display: flex;
+      align-items: flex-end;
+      padding: 22px;
+    }
+    .bento-wordmark span {
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      color: #0e1116;
+      user-select: none;
+    }
+  </style>
 </BaseLayout>

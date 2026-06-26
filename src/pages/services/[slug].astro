@@ -20,6 +20,19 @@ const ctaLabel = data.pricing?.cta || 'Parla con Alba';
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Servizi', href: '/services' }];
 
 const related = caseStudies.map((slug) => ({ type: 'work', slug }));
+
+const url = new URL(`/services/${item.id}`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: title,
+  description: data.description,
+  url,
+  image: data.ogImage || cover,
+  provider: { '@type': 'Organization', name: 'Pianeta.Studio', url: 'https://xp.pianeta.studio' },
+  serviceType: title,
+  areaServed: { '@type': 'AdministrativeArea', name: 'Europa' },
+};
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>
   <DetailPage
@@ -33,6 +46,7 @@ const related = caseStudies.map((slug) => ({ type: 'work', slug }));
     backLabel="Tutti i servizi"
     related={related}
     relatedTitle="Case study"
+    jsonLd={jsonLd}
   >
     <Fragment slot="meta">
       {data.deliverables && data.deliverables.length > 0 && (

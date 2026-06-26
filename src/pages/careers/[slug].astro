@@ -16,6 +16,32 @@ const title = data.title || item.id;
 const cover = data.cover || data.ogImage;
 const applyEmail = data.applyEmail || 'people@pianeta.studio';
 
+const url = new URL(`/careers/${item.id}`, Astro.site).toString();
+// JobPosting feeds Google Jobs — critical SEO for careers
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'JobPosting',
+  title,
+  description: data.description,
+  url,
+  datePosted: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
+  validThrough: data.validThrough,
+  employmentType: data.employmentType,
+  hiringOrganization: {
+    '@type': 'Organization',
+    name: 'Pianeta.Studio',
+    sameAs: 'https://xp.pianeta.studio',
+    logo: 'https://xp.pianeta.studio/favicon.svg',
+  },
+  jobLocation: data.location ? {
+    '@type': 'Place',
+    address: { '@type': 'PostalAddress', addressLocality: data.location, addressCountry: 'IT' },
+  } : undefined,
+  applicantLocationRequirements: { '@type': 'Country', name: 'IT' },
+  applicationContact: { '@type': 'ContactPoint', email: applyEmail },
+  industry: 'Design & Technology',
+};
+
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Careers', href: '/careers' }];
 if (data.employmentType) eyebrowParts.push({ label: data.employmentType });
 if (data.location) eyebrowParts.push({ label: data.location });
@@ -29,6 +55,7 @@ if (data.location) eyebrowParts.push({ label: data.location });
     primaryCta={{ label: 'Candidati', href: `mailto:${applyEmail}?subject=${encodeURIComponent('Candidatura — ' + title)}` }}
     backHref="/careers"
     backLabel="Tutte le posizioni"
+    jsonLd={jsonLd}
   >
     <Fragment slot="meta">
       {data.employmentType && <div><dt>Contratto</dt><dd>{data.employmentType}</dd></div>}
