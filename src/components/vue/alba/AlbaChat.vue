@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, watch, nextTick, onMounted } from 'vue'
-import { $fetch } from '~/lib/nuxt-shims'
+import { useAlbaSession } from '~/composables/useAlbaSession'
+import type { AlbaChatChunk } from '~/lib/alba/session-types'
 
-interface Msg { role: 'user' | 'assistant'; content: string; handoff?: boolean }
+interface Msg { role: 'user' | 'assistant'; content: string; handoff?: boolean; toolHint?: string }
 
 const props = defineProps<{
   open: boolean
@@ -16,10 +17,11 @@ const emit = defineEmits<{
   (e: 'suggested-click', prompt: string): void
 }>()
 
+const albaSession = useAlbaSession()
+
 const messages = ref<Msg[]>([])
 const input = ref('')
 const sending = ref(false)
-const sessionId = ref<string>('')
 const scrollEl = ref<HTMLElement | null>(null)
 
 const APERTURA = `Ciao, sono Alba — l'AI di gruppo di Pianeta.Studio.
@@ -28,25 +30,8 @@ Sono qui per ascoltarti e capire come Pianeta può esserti utile. Mi racconti co
 
 —Alba, AI di Pianeta.Studio · Le decisioni significative passano per Max.`
 
-function uuid() {
-  if (typeof crypto !== 'undefined' && (crypto as any).randomUUID) return (crypto as any).randomUUID()
-  return 'sess-' + Math.random().toString(36).slice(2) + Date.now().toString(36)
-}
-
-function ensureSession() {
-  if (typeof window === 'undefined') return
-  const stored = window.localStorage.getItem('alba_session')
-  if (stored && /^[a-zA-Z0-9-]{8,64}$/.test(stored)) {
-    sessionId.value = stored
-  } else {
-    sessionId.value = uuid()
-    window.localStorage.setItem('alba_session', sessionId.value)
-  }
-}
-
 watch(() => props.open, (o) => {
   if (o) {
-    ensureSession()
     if (!messages.value.length) {
       messages.value = [{ role: 'assistant', content: APERTURA }]
     }
@@ -69,7 +54,6 @@ watch(() => props.initialPrompt, (p) => {
 
 onMounted(() => {
   if (props.embedded) {
-    ensureSession()
     if (!messages.value.length) {
       messages.value = [{ role: 'assistant', content: APERTURA }]
     }
@@ -104,23 +88,68 @@ function scrollLastIntoView() {
 async function send() {
   const text = input.value.trim()
   if (!text || sending.value) return
+
+  if (!albaSession.sessionId.value) {
+    await albaSession.initSession({ url: typeof window !== 'undefined' ? window.location.pathname : '/' })
+  }
+  if (!albaSession.sessionId.value) return
+
   messages.value.push({ role: 'user', content: text })
   input.value = ''
   sending.value = true
   await nextTick(); scrollBottom()
+
+  // Placeholder for streamed assistant response
+  const asstIdx = messages.value.push({ role: 'assistant', content: '' }) - 1
+
   try {
-    const payload = messages.value.slice(-10).map(m => ({ role: m.role, content: m.content }))
-    const res = await $fetch<{ reply: string; handoff_to_max: boolean; handoff_reason: string | null; session_id: string }>('/api/alba/chat', {
+    const res = await fetch('/api/alba/chat', {
       method: 'POST',
-      body: { messages: payload, session_id: sessionId.value, pageContext: props.pageContext },
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        uid: albaSession.uid.value,
+        session_id: albaSession.sessionId.value,
+        messages: messages.value.slice(0, -1).slice(-10).map(m => ({ role: m.role, content: m.content })),
+        page_context: { url: typeof window !== 'undefined' ? window.location.pathname : '/' },
+      }),
     })
-    if (res.session_id) sessionId.value = res.session_id
-    messages.value.push({ role: 'assistant', content: res.reply, handoff: res.handoff_to_max })
-  } catch (e: any) {
-    messages.value.push({
-      role: 'assistant',
-      content: 'Mi spiace, qualcosa è andato storto. Scrivimi direttamente a max@pianeta.studio.\n\n—Alba, AI di Pianeta.Studio · Le decisioni significative passano per Max.',
-    })
+
+    if (!res.ok || !res.body) {
+      messages.value[asstIdx].content = '⚠️ Errore di connessione. Riprova.'
+      return
+    }
+
+    const reader = res.body.getReader()
+    const decoder = new TextDecoder()
+    let buf = ''
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      buf += decoder.decode(value, { stream: true })
+      let nl: number
+      while ((nl = buf.indexOf('\n\n')) !== -1) {
+        const raw = buf.slice(0, nl)
+        buf = buf.slice(nl + 2)
+        if (!raw.startsWith('data:')) continue
+        const json = raw.slice(5).trim()
+        try {
+          const chunk = JSON.parse(json) as AlbaChatChunk
+          if (chunk.type === 'text') {
+            messages.value[asstIdx].content += chunk.delta
+            await nextTick(); scrollBottom()
+          } else if (chunk.type === 'tool_use') {
+            messages.value[asstIdx].toolHint = `Sto consultando ${chunk.name}…`
+          } else if (chunk.type === 'error') {
+            messages.value[asstIdx].content += `\n⚠️ ${chunk.message}`
+          } else if (chunk.type === 'done') {
+            messages.value[asstIdx].toolHint = undefined
+          }
+        } catch { /* ignore malformed chunk */ }
+      }
+    }
+  } catch {
+    messages.value[asstIdx].content = 'Mi spiace, qualcosa è andato storto. Scrivimi direttamente a max@pianeta.studio.\n\n—Alba, AI di Pianeta.Studio · Le decisioni significative passano per Max.'
   } finally {
     sending.value = false
     await nextTick(); scrollLastIntoView()
@@ -140,6 +169,7 @@ function close() { emit('close') }
       <div ref="scrollEl" class="alba-body">
         <div v-for="(m, i) in messages" :key="i" :class="['alba-msg', m.role]">
           <div class="alba-bubble" v-html="m.content.split('\n').map(l => l ? l : '&nbsp;').join('<br/>')"></div>
+          <p v-if="m.toolHint" class="italic text-sm text-black/50">{{ m.toolHint }}</p>
           <div v-if="m.handoff" class="alba-handoff-tag">→ Max viene avvisato</div>
         </div>
         <div v-if="props.suggested && props.suggested.length && messages.length === 1" class="flex flex-wrap gap-2 p-3">
@@ -187,6 +217,7 @@ function close() { emit('close') }
           <div ref="scrollEl" class="alba-body">
             <div v-for="(m, i) in messages" :key="i" :class="['alba-msg', m.role]">
               <div class="alba-bubble" v-html="m.content.split('\n').map(l => l ? l : '&nbsp;').join('<br/>')"></div>
+              <p v-if="m.toolHint" class="italic text-sm text-black/50">{{ m.toolHint }}</p>
               <div v-if="m.handoff" class="alba-handoff-tag">→ Max viene avvisato</div>
             </div>
             <div v-if="props.suggested && props.suggested.length && messages.length === 1" class="flex flex-wrap gap-2 p-3">
