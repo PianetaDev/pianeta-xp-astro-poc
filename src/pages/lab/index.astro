@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ContentCard from '../../components/ContentCard.astro';
+import { getCollection } from 'astro:content';
+
+const items = await getCollection('lab');
+const title = 'Lab';
+---
+<BaseLayout title={`${title} — Pianeta.Studio`} description={`${title} di Pianeta.Studio`}>
+  <Hero eyebrow="Pianeta.Studio" title={title} />
+  <section class="px-6 lg:px-12 pb-16 max-w-[1100px]">
+    {items.length === 0 ? (
+      <p class="text-ink/60">Nessun contenuto pubblicato.</p>
+    ) : (
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {items.map((it) => (
+          <ContentCard
+            title={it.data.title || it.id}
+            excerpt={it.data.description}
+            href={`/lab/${it.id}`}
+            image={it.data.cover}
+          />
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

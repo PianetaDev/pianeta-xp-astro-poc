@@ -1,7 +1,8 @@
 {
   "name": "pianeta-xp-astro-poc",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,13 +10,21 @@
     "astro": "astro"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "onlyBuiltDependencies": ["esbuild", "sharp", "@parcel/watcher"]
   },
   "dependencies": {
-    "astro": "^4.16.18",
+    "astro": "^5.0.0",
+    "@astrojs/vue": "^5.0.0",
+    "@astrojs/vercel": "^8.0.0",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.1.4",
     "tailwindcss": "^3.4.17",
-    "@fontsource/inter": "^5.1.0"
+    "vue": "^3.5.13",
+    "@fontsource/inter": "^5.1.0",
+    "resend": "^4.0.0",
+    "stripe": "^17.4.0",
+    "@anthropic-ai/sdk": "^0.32.0",
+    "@supabase/supabase-js": "^2.46.2",
+    "zod": "^3.23.8"
   }
 }

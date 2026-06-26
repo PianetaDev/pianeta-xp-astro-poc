@@ -1,0 +1,22 @@
+---
+interface Props {
+  title: string;
+  excerpt?: string;
+  href: string;
+  image?: string;
+  meta?: string;
+}
+const { title, excerpt = '', href, image, meta } = Astro.props;
+---
+<a href={href} class="group block border border-black/10 rounded-pianeta bg-white overflow-hidden hover:border-black/30 transition">
+  {image && (
+    <div class="aspect-[16/10] bg-black/5 overflow-hidden">
+      <img src={image} alt={title} loading="lazy" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform" />
+    </div>
+  )}
+  <div class="p-4">
+    {meta && <div class="text-[11px] uppercase tracking-widest text-ink/50 mb-1">{meta}</div>}
+    <h3 class="font-bold text-base leading-tight mb-1">{title}</h3>
+    {excerpt && <p class="text-sm text-ink/70 line-clamp-2">{excerpt}</p>}
+  </div>
+</a>

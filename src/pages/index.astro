@@ -1,10 +1,51 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ContentCard from '../components/ContentCard.astro';
+import { getCollection } from 'astro:content';
+
+const work = (await getCollection('work')).slice(0, 4);
+const bulletin = (await getCollection('bulletin')).slice(0, 3);
 ---
-<BaseLayout title="Pianeta.Studio — Astro POC" description="POC statico per benchmark GreenMeter">
-  <section class="px-6 lg:px-12 py-20 max-w-[1100px]">
-    <h1 class="text-4xl md:text-6xl font-black tracking-tight">Pianeta.Studio</h1>
-    <p class="mt-4 text-lg text-ink/70">Astro static POC — confronto GreenMeter.</p>
-    <p class="mt-8"><a href="/work/eclag" class="underline underline-offset-4 font-semibold">→ Vedi work/eclag</a></p>
+<BaseLayout title="Pianeta.Studio — Sustainable Creativity" description="Design & Technology, una sola disciplina. Sustainable Creativity dal 2016.">
+  <Hero
+    eyebrow="Sustainable Creativity dal 2016"
+    title="Trasformiamo brief in opportunità."
+    subtitle="Co-design, AI validation, UX validation. Standard aperti. Codice consegnato. Carbon budget e performance budget come vincoli tecnici verificabili."
+  />
+
+  <section class="px-6 lg:px-12 py-12 max-w-[1100px]">
+    <div class="flex items-baseline justify-between mb-6">
+      <h2 class="text-2xl font-black">Work</h2>
+      <a href="/work" class="text-sm underline">Tutti i progetti →</a>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      {work.map((w) => (
+        <ContentCard
+          title={w.data.title || w.id}
+          excerpt={w.data.description}
+          href={`/work/${w.id}`}
+          image={w.data.cover}
+          meta={w.data.client}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 lg:px-12 py-12 max-w-[1100px]">
+    <div class="flex items-baseline justify-between mb-6">
+      <h2 class="text-2xl font-black">Bulletin</h2>
+      <a href="/bulletin" class="text-sm underline">Tutti i post →</a>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-4">
+      {bulletin.map((b) => (
+        <ContentCard
+          title={b.data.title || b.id}
+          excerpt={b.data.description}
+          href={`/bulletin/${b.id}`}
+          image={b.data.cover}
+        />
+      ))}
+    </div>
   </section>
 </BaseLayout>

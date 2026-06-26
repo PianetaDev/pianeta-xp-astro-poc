@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const items = await getCollection('team');
+  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const { Content } = await render(item);
+const title = item.data.title || item.id;
+---
+<BaseLayout title={`${title} — Pianeta.Studio`} description={item.data.description} ogImage={item.data.ogImage || item.data.cover}>
+  <article class="px-6 lg:px-12 pt-16 pb-16 max-w-[820px]">
+    <header class="mb-8">
+      <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-3">{title}</h1>
+      {item.data.description && <p class="text-lg text-ink/70">{item.data.description}</p>}
+    </header>
+    <div class="prose-eclag">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

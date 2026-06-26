@@ -1,11 +1,13 @@
 import { defineConfig } from 'astro/config';
+import vue from '@astrojs/vue';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 
-// GitHub Pages deploy: PianetaDev/pianeta-xp-astro-poc
-// Lives under /pianeta-xp-astro-poc/ subpath.
 export default defineConfig({
-  site: 'https://pianetadev.github.io',
-  base: '/pianeta-xp-astro-poc',
-  integrations: [tailwind()],
+  site: 'https://xp.pianeta.studio',
+  output: 'server',
+  adapter: vercel(),
+  integrations: [vue(), tailwind(), sitemap()],
   compressHTML: true,
 });

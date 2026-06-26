@@ -1,0 +1,25 @@
+---
+// Lateral rail (88px) — static, no JS
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/work', label: 'Work' },
+  { href: '/bulletin', label: 'Bull.' },
+  { href: '/services', label: 'Serv.' },
+  { href: '/team', label: 'Team' },
+  { href: '/lab', label: 'Lab' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+<aside class="fixed left-0 top-0 bottom-0 w-[88px] border-r border-black/10 bg-bg hidden md:flex flex-col items-center justify-between py-6 z-10">
+  <a href="/" class="flex flex-col items-center gap-2 text-[10px] font-black tracking-[0.15em] uppercase leading-tight text-center">
+    <span style="writing-mode: vertical-rl; transform: rotate(180deg);">PIANETA.STUDIO</span>
+  </a>
+  <nav class="flex flex-col gap-4 text-[10px] font-semibold uppercase tracking-widest">
+    {nav.map((item) => (
+      <a href={item.href} class="hover:underline">{item.label}</a>
+    ))}
+  </nav>
+  <div class="text-[9px] font-medium tracking-wider text-ink/60 text-center leading-tight">
+    Sustainable<br/>Creativity™
+  </div>
+</aside>
