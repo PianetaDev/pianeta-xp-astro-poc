@@ -12,7 +12,7 @@ ogImage: "/og/work-eclag.png"
 hero:
   type: "image"
   src: "/og/work-eclag.png"
-services: ["neuromarketing-lab"]
+services: ["neuromarketing-lab", "ai-validation-swarm"]
 team: ["max", "sara", "ludovica", "foss"]
 links:
   live: "https://choosetoseethem.childsafetyineurope.com/"
