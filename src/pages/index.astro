@@ -17,7 +17,7 @@ const team = (await getCollection('team')).filter(live);
 const teamCount = team.length;
 
 const w0 = featuredWork[0];
-const w1 = featuredWork[1];
+const otherWork = featuredWork.slice(1); // tutti gli altri work dopo il featured
 const b0 = bulletin[0];
 const b1 = bulletin[1];
 const b2 = bulletin[2];
@@ -141,18 +141,18 @@ const ldJson = {
         </a>
       )}
 
-      {/* 7. Work #2 — image cover tall (uguale a Featured per equilibrio) */}
-      {w1 && (
-        <a href={`/work/${w1.id}`} class="bento-tile t-tall" style={`background-image:url('${(w1.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
+      {/* 7. Tutti gli altri work (image cover) — auto-popola da featuredWork.slice(1) */}
+      {otherWork.map((w: any, i: number) => (
+        <a href={`/work/${w.id}`} class={`bento-tile ${i === 0 ? 't-tall' : 't-medium'}`} style={`background-image:url('${(w.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
           <div class="bento-grad" />
           <div class="bento-content">
-            <p class="bento-kicker">{'Work · ' + (w1.data.year || '')}</p>
+            <p class="bento-kicker">{'Work · ' + (w.data.year || '')}</p>
             <div class="bento-spacer" />
-            <h2 class="bento-title-xl">{w1.data.title}</h2>
-            <p class="bento-sub">{w1.data.client || w1.data.description}</p>
+            <h2 class={i === 0 ? 'bento-title-xl' : 'bento-title'}>{w.data.title}</h2>
+            <p class="bento-sub">{w.data.client || w.data.description}</p>
           </div>
         </a>
-      )}
+      ))}
 
       {/* 8. Team — light */}
       <a href="/team" class="bento-tile t-medium t-cream">
