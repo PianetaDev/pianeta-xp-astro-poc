@@ -1,65 +1,34 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { SERVICE_CATEGORIES, PROCESS_PHASES, getPhaseTag } from '../../lib/services-categories';
 
-const work = (await getCollection('work')).filter((i: any) => !i.data.draft);
-const findWork = (slug: string) => work.find((w: any) => w.id === slug);
+const all = (await getCollection('services')).filter((i: any) => !i.data.draft);
 
-const macros = [
-  {
-    key: 'strategy',
-    title: 'Strategy & validation',
-    intro: 'Aiutiamo a decidere prima di costruire. AI validation come secondo parere quantitativo sulle scelte creative, brand strategy, posizionamento, definizione di metriche di impatto.',
-    items: [
-      { title: 'AI validation di campagne', question: 'I tuoi concept reggono il test di un pubblico simulato prima della produzione?', caseSlug: 'eclag', caseLabel: 'Choose to See Them — ECLAG' },
-      { title: 'Neuromarketing e predizione neurale', question: 'Sai dove l\'occhio si ferma, quando la mente lascia andare? Numeri prima di andare in stampa.', caseSlug: 'eclag', caseLabel: 'ECLAG (analisi neuro 18 frame)' },
-      { title: 'Brand strategy & posizionamento', question: 'Il tuo brand racconta dove sta andando, o solo dove è stato?', caseSlug: 'untwist', caseLabel: 'UNTWIST — BC3' },
-    ],
-  },
-  {
-    key: 'design',
-    title: 'Design — editorial, brand, sistemi',
-    intro: 'Identità visive che reggono nel tempo, sistemi di design replicabili, editoriale che fa parlare la ricerca scientifica al pubblico vero. Co-design come metodo, non come slogan.',
-    items: [
-      { title: 'Editorial & educational design', question: 'Una metafora visiva risparmia 1000 parole. Sai qual è la metafora del tuo progetto?', caseSlug: 'untwist', caseLabel: 'UNTWIST · nodi e fili' },
-      { title: 'Brand identity', question: 'Il logo è solo un\'icona, o porta in tasca un sistema operativo?', caseSlug: null, caseLabel: null },
-      { title: 'Design system multi-brand', question: 'Quanti progetti riusciresti a far partire stamattina senza chiamare un designer?', caseSlug: null, caseLabel: null },
-    ],
-  },
-  {
-    key: 'technology',
-    title: 'Technology — sustainable web & products',
-    intro: 'CMS proprietario Stack Terra, performance budget e carbon budget come vincoli verificabili in CI, hosting carbon-neutral. Standard aperti, codice consegnato, repo del cliente.',
-    items: [
-      { title: 'Siti sostenibili con carbon budget', question: 'Il tuo sito pesa meno di 500KB e gira su rinnovabili? Possiamo misurarlo.', caseSlug: null, caseLabel: 'Stack Terra · EPOS · Susdef · Apotheke' },
-      { title: 'CMS proprietario (Stack Terra)', question: 'I tuoi contenuti sono editabili dal team operativo, non solo dai dev?', caseSlug: null, caseLabel: null },
-      { title: 'Performance & accessibility audit', question: 'Quanto perdi in conversioni per 1 secondo di TTI? Te lo diciamo con i tuoi numeri.', caseSlug: null, caseLabel: null },
-    ],
-  },
-  {
-    key: 'sustainability',
-    title: 'R&D & sustainability framework',
-    intro: 'Framework ESG proprietario Atlas, audit GreenMeter per misurare CO₂ pagina, programma XP1 sulle esperienze digitali a basso impatto. Non solo dichiarazioni: numeri tracciabili.',
-    items: [
-      { title: 'Atlas — framework ESG', question: 'Hai un linguaggio comune tra studio, clienti, fornitori per ESG?', caseSlug: null, caseLabel: 'atlas.pianeta.green/atlas ↗' },
-      { title: 'GreenMeter audit CO₂', question: 'Qual è il grade del tuo sito? A+ o D? Lo misuriamo gratis.', caseSlug: null, caseLabel: 'pianeta.green ↗' },
-      { title: 'Carbon budget come spec tecnica', question: 'Vuoi che i tuoi vincoli di sostenibilità diventino verificabili come quelli di performance?', caseSlug: null, caseLabel: null },
-    ],
-  },
-];
+const byCategory = (key: string) =>
+  all
+    .filter((i: any) => i.data.category === key)
+    .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999));
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'OfferCatalog',
   name: 'Servizi Pianeta.Studio',
-  itemListElement: macros.flatMap((m, mi) => m.items.map((it, i) => ({
-    '@type': 'Offer',
-    position: mi * 10 + i + 1,
-    itemOffered: { '@type': 'Service', name: it.title, category: m.title, provider: { '@type': 'Organization', name: 'Pianeta.Studio' } },
-  }))),
+  itemListElement: SERVICE_CATEGORIES.flatMap((c, ci) =>
+    byCategory(c.key).map((s: any, i: number) => ({
+      '@type': 'Offer',
+      position: ci * 100 + i + 1,
+      itemOffered: {
+        '@type': 'Service',
+        name: s.data.title,
+        category: c.title,
+        url: new URL(`/services/${s.id}`, Astro.site).toString(),
+      },
+    }))
+  ),
 };
 ---
-<BaseLayout title="Servizi — Pianeta.Studio" description="4 aree di pratica: Strategy & validation · Design · Technology · R&D & sustainability. Co-design + AI validation + standard aperti.">
+<BaseLayout title="Servizi — Pianeta.Studio" description="Quattro categorie di pratica: Strategic Design Consultancy · Visualization & Storytelling · Products & Systems · Data & AI.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
@@ -68,7 +37,7 @@ const jsonLd = {
     <header class="index-head">
       <p class="index-eyebrow">Sustainable Creativity · Design & Technology</p>
       <h1 class="index-title">I servizi</h1>
-      <p class="index-deck">Quattro aree di pratica che si parlano. Co-design + AI validation + UX validation come metodo. Standard aperti, codice consegnato, niente lock-in.</p>
+      <p class="index-deck">Quattro aree di pratica che si parlano. Co-design + AI validation + standard aperti. Niente lock-in.</p>
       <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">Lavoriamo insieme</button>
         <a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>
@@ -78,52 +47,129 @@ const jsonLd = {
       </script>
     </header>
 
-    <section class="services-macros">
-      {macros.map((m) => (
-        <article class="services-macro">
-          <header class="services-macro-head">
-            <h2 class="services-macro-title">{m.title}</h2>
-            <p class="services-macro-intro">{m.intro}</p>
-          </header>
-
-          <ul class="services-sub-list">
-            {m.items.map((it) => (
-              <li class="services-sub">
-                <h3 class="services-sub-title">{it.title}</h3>
-                <p class="services-sub-question">{it.question}</p>
-                {it.caseSlug ? (
-                  <a href={`/work/${it.caseSlug}`} class="services-sub-case">→ {it.caseLabel}</a>
-                ) : it.caseLabel ? (
-                  <span class="services-sub-case is-static">→ {it.caseLabel}</span>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        </article>
+    <section class="process-bar" aria-label="Le 4 fasi del processo">
+      {PROCESS_PHASES.map((p) => (
+        <a href={`/processo#${p.anchor}`} class="process-chip">
+          <span class="process-chip-num">{p.num}</span>
+          <span class="process-chip-title">{p.title}</span>
+        </a>
       ))}
     </section>
 
+    <section class="services-macros">
+      {SERVICE_CATEGORIES.map((cat) => {
+        const items = byCategory(cat.key);
+        return (
+          <article class="services-macro" id={cat.key}>
+            <header class="services-macro-head">
+              <h2 class="services-macro-title">{cat.title}</h2>
+              <p class="services-macro-intro">{cat.intro}</p>
+            </header>
+
+            <ul class="services-l2-list">
+              {items.map((s: any) => (
+                <li>
+                  <a href={`/services/${s.id}`} class="services-l2-row">
+                    <span class="services-l2-icon">{s.data.icon || '•'}</span>
+                    <span class="services-l2-content">
+                      <span class="services-l2-title">{s.data.title}</span>
+                      {s.data.description && <span class="services-l2-deck">{s.data.description}</span>}
+                    </span>
+                    {s.data.processPhase != null && (
+                      <span class="services-l2-phase">→ Fase {s.data.processPhase}</span>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        );
+      })}
+    </section>
+
     <footer class="detail-foot" style="border-top:1px solid var(--pianeta-border); padding-top:48px; margin-top:96px;">
-      <a href="/processo" class="cta-btn cta-ghost">Vedi il processo →</a>
+      <a href="/processo" class="cta-btn cta-ghost">Vedi il processo completo →</a>
     </footer>
   </div>
 
   <style>
-    .services-macros { margin-top: 80px; display: flex; flex-direction: column; gap: 80px; }
-    .services-macro { display: grid; grid-template-columns: 1fr; gap: 32px; padding-bottom: 64px; border-bottom: 1px solid var(--pianeta-border); }
+    .process-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 40px auto 64px;
+      max-width: 900px;
+    }
+    @media (min-width: 800px) { .process-bar { grid-template-columns: repeat(4, 1fr); } }
+    .process-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--pianeta-text);
+      transition: border-color 150ms;
+    }
+    .process-chip:hover { border-color: var(--cta-primary); }
+    .process-chip-num {
+      font-weight: 900;
+      color: var(--cta-primary);
+      font-size: 18px;
+      line-height: 1;
+    }
+    .process-chip-title {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .services-macros { margin-top: 32px; display: flex; flex-direction: column; gap: 64px; }
+    .services-macro {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--pianeta-border);
+    }
     .services-macro:last-child { border-bottom: 0; padding-bottom: 0; }
     @media (min-width: 900px) { .services-macro { grid-template-columns: 280px 1fr; gap: 56px; } }
     .services-macro-head { position: sticky; top: 24px; align-self: start; }
-    .services-macro-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 12px; }
-    .services-macro-intro { font-size: 14px; color: rgba(14,17,22,0.65); line-height: 1.55; margin: 0; }
+    .services-macro-title {
+      font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 0 0 12px;
+    }
+    .services-macro-intro { font-size: 14px; color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
 
-    .services-sub-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 28px; }
-    .services-sub { padding: 24px 0; border-bottom: 1px solid var(--pianeta-border); }
-    .services-sub:last-child { border-bottom: 0; }
-    .services-sub-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); font-weight: 600; margin: 0 0 8px; }
-    .services-sub-question { font-size: clamp(1.1rem, 1.8vw, 1.45rem); font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; margin: 0 0 12px; color: #0e1116; }
-    .services-sub-case { display: inline-flex; font-size: 13px; color: var(--cta-primary); text-decoration: none; font-weight: 600; }
-    .services-sub-case:hover { text-decoration: underline; }
-    .services-sub-case.is-static { color: rgba(14,17,22,0.5); font-weight: 500; }
+    .services-l2-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .services-l2-row {
+      display: grid;
+      grid-template-columns: 32px 1fr auto;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 8px;
+      border-bottom: 1px solid var(--pianeta-border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 150ms;
+    }
+    .services-l2-row:hover { background: rgba(255,107,51,0.06); }
+    .services-l2-icon { font-size: 20px; line-height: 1; }
+    .services-l2-content { display: flex; flex-direction: column; gap: 4px; }
+    .services-l2-title { font-size: 16px; font-weight: 700; color: var(--pianeta-text); }
+    .services-l2-deck { font-size: 13px; color: var(--pianeta-muted); line-height: 1.45; }
+    .services-l2-phase {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--cta-primary);
+      font-weight: 600;
+      align-self: center;
+      white-space: nowrap;
+    }
   </style>
 </BaseLayout>
