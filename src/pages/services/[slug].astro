@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import DetailPage from '../../components/detail/DetailPage.astro';
 import { getCollection, render } from 'astro:content';
 import { pickNextItem, toNextProp } from '../../lib/next-item';
+import { getCategoryByKey, getPhaseTag } from '../../lib/services-categories';
 
 export const prerender = true;
 export async function getStaticPaths() {
@@ -11,22 +12,33 @@ export async function getStaticPaths() {
 }
 
 const { item, allItems } = Astro.props as any;
-const nextItem = toNextProp(pickNextItem(allItems, item.id), 'services');
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
 const cover = data.cover || data.ogImage;
 const caseStudies: string[] = data.caseStudies || [];
-const ctaLabel = data.pricing?.cta || 'Parla con Alba';
+const relatedServiceSlugs: string[] = data.relatedServices || [];
+
+const category = data.category ? getCategoryByKey(data.category) : null;
+const phaseTag = getPhaseTag(data.processPhase);
 
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Servizi', href: '/services' }];
+if (category) eyebrowParts.push({ label: category.title, href: `/services#${category.key}` });
 
-const related = caseStudies.map((slug) => ({ type: 'work', slug }));
+// Sibling services (stessa categoria, escluso corrente, top 3)
+const siblings = allItems
+  .filter((s: any) => s.data.category === data.category && s.id !== item.id && !s.data.draft)
+  .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999))
+  .slice(0, 3);
+
+const relatedFromCaseStudies = caseStudies.map((slug: string) => ({ type: 'work', slug }));
+
+const nextItem = toNextProp(pickNextItem(allItems, item.id), 'services');
 
 const metaInline = [
+  category && { label: 'Categoria', value: category.title, href: `/services#${category.key}` },
+  phaseTag && { label: 'Fase process', value: phaseTag, href: '/processo' },
   data.team?.length && { label: 'Team', value: data.team.join(', ') },
-  data.deliverables?.length && { label: 'Deliverables', value: data.deliverables.length + ' voci' },
-  data.pricing?.label && { label: 'Pricing', value: data.pricing.label },
 ].filter(Boolean);
 
 const url = new URL(`/services/${item.id}`, Astro.site).toString();
@@ -38,25 +50,11 @@ const jsonLd = {
   description: data.description,
   url,
   image: data.ogImage || cover,
-  serviceType: data.category || title,
-  category: 'Design & Technology · Sustainable Creativity',
-  provider: {
-    '@type': 'Organization',
-    name: 'Pianeta.Studio',
-    legalName: 'PIANETA.STUDIO S.R.L. S.B.',
-    taxID: 'IT06037730873',
-    url: 'https://xp.pianeta.studio',
-    sameAs: ['https://pianeta.studio', 'https://atlas.pianeta.green/atlas'],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      email: 'info@pianeta.studio',
-      contactType: 'sales',
-      availableLanguage: ['it', 'en'],
-    },
-  },
+  serviceType: category?.title || title,
+  category: category?.title || 'Design & Technology',
+  provider: { '@type': 'Organization', name: 'Pianeta.Studio', url: 'https://xp.pianeta.studio' },
   areaServed: { '@type': 'AdministrativeArea', name: 'Europa' },
-  audience: { '@type': 'BusinessAudience', name: 'PMI, B-Corp, organizzazioni sostenibilità & food/agri' },
-  ...(data.deliverables && Array.isArray(data.deliverables) && data.deliverables.length > 0 && {
+  ...(data.deliverables?.length && {
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Deliverable inclusi',
@@ -67,21 +65,6 @@ const jsonLd = {
       })),
     },
   }),
-  ...(caseStudies.length > 0 && {
-    workExample: caseStudies.map((slug: string) => ({
-      '@type': 'CreativeWork',
-      url: new URL(`/work/${slug}`, Astro.site).toString(),
-    })),
-  }),
-  potentialAction: {
-    '@type': 'ContactAction',
-    name: 'Lavoriamo insieme',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://xp.pianeta.studio/contact',
-      actionPlatform: ['https://schema.org/DesktopWebPlatform', 'https://schema.org/MobileWebPlatform'],
-    },
-  },
 };
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>
@@ -91,10 +74,10 @@ const jsonLd = {
     deck={data.description}
     cover={cover}
     primaryCta={{ label: 'Lavoriamo insieme', action: 'open-hire-us' }}
-    secondaryCta={{ label: ctaLabel, action: 'open-alba' }}
+    secondaryCta={{ label: 'Come lavoriamo', href: '/processo' }}
     backHref="/services"
     backLabel="Tutti i servizi"
-    related={related}
+    related={relatedFromCaseStudies}
     relatedTitle="Case study"
     nextItem={nextItem}
     metaInline={metaInline}
@@ -102,5 +85,113 @@ const jsonLd = {
     jsonLd={jsonLd}
   >
     <Content />
+
+    {(data.inputClient?.length || data.deliverables?.length) && (
+      <div class="service-blocks">
+        {data.inputClient?.length > 0 && (
+          <section class="service-block">
+            <h3 class="service-block-title">Input Client</h3>
+            <ul class="service-block-list">
+              {data.inputClient.map((d: string) => <li>{d}</li>)}
+            </ul>
+          </section>
+        )}
+        {data.deliverables?.length > 0 && (
+          <section class="service-block is-highlight">
+            <h3 class="service-block-title">Deliverables Pianeta</h3>
+            <ul class="service-block-list">
+              {data.deliverables.map((d: string) => <li>{d}</li>)}
+            </ul>
+          </section>
+        )}
+      </div>
+    )}
+
+    {siblings.length > 0 && (
+      <section class="service-siblings">
+        <h3 class="service-siblings-title">Altri servizi in {category?.title || 'questa categoria'}</h3>
+        <ul class="service-siblings-list">
+          {siblings.map((s: any) => (
+            <li>
+              <a href={`/services/${s.id}`} class="service-sibling-card">
+                <span class="service-sibling-icon">{s.data.icon || '•'}</span>
+                <div>
+                  <span class="service-sibling-title">{s.data.title}</span>
+                  {s.data.description && <span class="service-sibling-deck">{s.data.description}</span>}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
   </DetailPage>
+
+  <style is:global>
+    .service-blocks {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin: 56px 0 32px;
+    }
+    @media (min-width: 800px) { .service-blocks { grid-template-columns: 1fr 1fr; gap: 32px; } }
+    .service-block {
+      padding: 24px 28px;
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 16px;
+    }
+    .service-block.is-highlight { border-color: var(--cta-primary); }
+    .service-block-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--pianeta-muted);
+      font-weight: 700;
+      margin: 0 0 14px;
+    }
+    .service-block.is-highlight .service-block-title { color: var(--cta-primary); }
+    .service-block-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .service-block-list li {
+      padding-left: 20px;
+      position: relative;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .service-block-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--cta-primary);
+      font-weight: 700;
+    }
+
+    .service-siblings { margin: 56px 0 32px; padding-top: 32px; border-top: 1px solid var(--pianeta-border); }
+    .service-siblings-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--pianeta-muted);
+      font-weight: 700;
+      margin: 0 0 16px;
+    }
+    .service-siblings-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    @media (min-width: 700px) { .service-siblings-list { grid-template-columns: 1fr 1fr 1fr; } }
+    .service-sibling-card {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      padding: 16px;
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 150ms;
+    }
+    .service-sibling-card:hover { border-color: var(--cta-primary); }
+    .service-sibling-icon { font-size: 18px; }
+    .service-sibling-title { display: block; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .service-sibling-deck { display: block; font-size: 12px; color: var(--pianeta-muted); line-height: 1.4; }
+  </style>
 </BaseLayout>
