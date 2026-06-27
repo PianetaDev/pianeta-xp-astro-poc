@@ -1,26 +1,30 @@
 ---
+import { detectLocale, t, localizePath } from '../lib/i18n/strings';
 const year = new Date().getFullYear();
+const locale = detectLocale(Astro.url.pathname);
+const itHref = localizePath(Astro.url.pathname, 'it');
+const enHref = localizePath(Astro.url.pathname, 'en');
 ---
 <footer class="site-main site-footer">
   <div class="site-footer-inner">
     <div class="site-footer-brand">
       <img src="/brand/logo-horizontal-color.svg" alt="Pianeta.Studio" width="282" height="80" class="site-footer-logo" loading="lazy" decoding="async" />
       <div class="site-footer-badges">
-        <span class="badge-benefit" aria-label="Società Benefit dal 2023">
+        <span class="badge-benefit" aria-label={t(locale, 'footer_societa_benefit')}>
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6.5L12 16l-6 3 1.5-6.5-4.5-4 6-.5z"/></svg>
-          Società Benefit
+          {t(locale, 'footer_societa_benefit')}
         </span>
-        <a class="badge-green" href="https://pianeta.green/https:%2F%2Fxp.pianeta.studio" target="_blank" rel="noopener" aria-label="Misurato A+ su pianeta.green — verifica live">
+        <a class="badge-green" href="https://pianeta.green/https:%2F%2Fxp.pianeta.studio" target="_blank" rel="noopener" aria-label="Carbon footprint A+ on pianeta.green">
           <span class="badge-green-grade">A+</span>
           <span class="badge-green-meta">
-            <span class="badge-green-title">Carbon footprint</span>
-            <span class="badge-green-sub">Misurato con GreenMeter ↗</span>
+            <span class="badge-green-title">{t(locale, 'footer_carbon')}</span>
+            <span class="badge-green-sub">{t(locale, 'footer_misurato')}</span>
           </span>
         </a>
       </div>
     </div>
     <div class="site-footer-meta">
-      <p class="site-footer-tagline">Sustainable Creativity</p>
+      <p class="site-footer-tagline">{t(locale, 'footer_tagline')}</p>
       <address class="site-footer-address">
         Pianeta.Studio S.r.l. Società Benefit<br />
         Via IV Novembre, 18, 95037 San Giovanni La Punta, CT, Italy
@@ -46,6 +50,10 @@ const year = new Date().getFullYear();
         <a href="https://www.linkedin.com/company/pianeta-studio/" target="_blank" rel="noopener">LinkedIn</a>
       </p>
       <p class="site-footer-copy">© {year} Pianeta.Studio S.r.l. SB — All rights reserved</p>
+      <div class="locale-switcher" data-locale-set role="group" aria-label="Language">
+        <a href={itHref} class={locale === 'it' ? 'is-active' : ''} aria-current={locale === 'it' ? 'true' : 'false'} hreflang="it">IT</a>
+        <a href={enHref} class={locale === 'en' ? 'is-active' : ''} aria-current={locale === 'en' ? 'true' : 'false'} hreflang="en">EN</a>
+      </div>
       <div class="theme-switcher" role="group" aria-label="Tema visivo">
         <button type="button" data-theme-set="light" aria-label="Tema chiaro">☀</button>
         <button type="button" data-theme-set="auto" aria-label="Tema automatico (segue il tramonto sui server Pianeta)">◐</button>
@@ -107,6 +115,11 @@ const year = new Date().getFullYear();
   .site-footer-copy { font-size: 11px; opacity: 0.7; }
   .site-footer-links { display: flex; gap: 14px; flex-wrap: wrap; margin: 0; }
   @media (min-width: 800px) { .site-footer-links { justify-content: flex-end; } }
+
+  .locale-switcher { display: inline-flex; gap: 4px; margin-top: 6px; padding: 4px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 999px; }
+  .locale-switcher a { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 28px; padding: 0 8px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; color: var(--pianeta-muted); text-decoration: none; transition: background 150ms, color 150ms; }
+  .locale-switcher a:hover { color: var(--pianeta-text); background: var(--pianeta-border); }
+  .locale-switcher a.is-active { background: var(--cta-primary); color: var(--cta-primary-ink); }
 
   .theme-switcher { display: inline-flex; gap: 4px; margin-top: 6px; padding: 4px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 999px; }
   .theme-switcher button { width: 28px; height: 28px; padding: 0; border: 0; background: transparent; color: var(--pianeta-muted); font-size: 14px; border-radius: 999px; cursor: pointer; transition: background 150ms, color 150ms; }

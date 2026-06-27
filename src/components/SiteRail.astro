@@ -1,19 +1,22 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { detectLocale, t, localizePath } from '../lib/i18n/strings';
 
 interface Props {
   current?: string;
 }
 const { current = '' } = Astro.props;
+const locale = detectLocale(Astro.url.pathname);
+const prefix = locale === 'en' ? '/en' : '';
 
 const nav = [
-  { href: '/',         label: 'Hub',      icon: 'lucide:home' },
-  { href: '/work',     label: 'Work',     icon: 'lucide:briefcase' },
-  { href: '/bulletin', label: 'Bulletin', icon: 'lucide:newspaper' },
-  { href: '/services', label: 'Services', icon: 'lucide:sparkles' },
-  { href: '/team',     label: 'Team',     icon: 'lucide:users' },
-  { href: '/lab',      label: 'Lab',      icon: 'lucide:flask-conical' },
-  { href: '/careers',  label: 'Careers',  icon: 'lucide:briefcase-business' },
+  { href: localizePath('/',         locale), label: t(locale, 'nav_hub'),      icon: 'lucide:home',              section: null      },
+  { href: localizePath('/work',     locale), label: t(locale, 'nav_work'),     icon: 'lucide:briefcase',         section: 'work'    },
+  { href: localizePath('/bulletin', locale), label: t(locale, 'nav_bulletin'), icon: 'lucide:newspaper',         section: 'bulletin'},
+  { href: localizePath('/services', locale), label: t(locale, 'nav_services'), icon: 'lucide:sparkles',          section: 'services'},
+  { href: localizePath('/team',     locale), label: t(locale, 'nav_team'),     icon: 'lucide:users',             section: 'team'    },
+  { href: localizePath('/lab',      locale), label: t(locale, 'nav_lab'),      icon: 'lucide:flask-conical',     section: 'lab'     },
+  { href: localizePath('/careers',  locale), label: t(locale, 'nav_careers'),  icon: 'lucide:briefcase-business',section: 'careers' },
 ];
 
 const railStyle = 'position:fixed;left:0;top:0;bottom:0;width:88px;background:#ffffff;color:#0e1116;border-right:1px solid rgba(0,0,0,0.08);display:flex;flex-direction:column;z-index:100;';
@@ -24,20 +27,20 @@ const linkBase = 'display:flex;flex-direction:column;align-items:center;gap:3px;
 const linkActive = 'background:#0e1116;color:#fff;';
 ---
 <aside style={railStyle} aria-label="Main navigation" class="site-rail">
-  <a href="/" style={brandStyle} aria-label="Pianeta.Studio — home">
+  <a href={locale === 'en' ? '/en' : '/'} style={brandStyle} aria-label="Pianeta.Studio — home">
     <img src="/brand/logo-mark-orange.svg" alt="" width="36" height="24" style="display:block;margin:0 auto 8px;width:36px;height:auto;" />
     <p style="font-weight:900;font-size:9px;line-height:1.1;letter-spacing:0.5px;text-align:center;margin:0;color:#0e1116;">PIANETA<br>STUDIO</p>
   </a>
 
   <nav style={navStyle}>
     {nav.map((l) => {
-      const isActive = l.href === '/' ? current === '/' : current.startsWith(l.href);
-      const section = l.href === '/' ? null : l.href.replace('/', '');
+      const home = locale === 'en' ? '/en' : '/';
+      const isActive = l.href === home ? current === home : current.startsWith(l.href);
       return (
         <a
           href={l.href}
           aria-label={l.label}
-          data-rail-section={section}
+          data-rail-section={l.section}
           class="site-rail-link"
           style={linkBase + (isActive ? linkActive : '')}
         >
