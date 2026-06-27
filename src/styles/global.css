@@ -262,6 +262,23 @@ a.detail-meta-value:hover { text-decoration: underline; }
 .index-card-deck { font-size: 0.875rem; color: rgba(14,17,22,0.65); line-height: 1.45; margin: 0; }
 .index-empty { text-align: center; padding: 48px 20px; color: rgba(14,17,22,0.55); border: 1px dashed var(--pianeta-border-strong); border-radius: 16px; }
 
+/* Print CSS — detail pages stampabili come PDF */
+@media print {
+  .site-rail, .site-footer, .alba-launcher, .alba-popup, .alba-panel,
+  .detail-share, .detail-next, .detail-foot, .process-bar,
+  .site-rail-flyout, footer.site-main, [data-action] { display: none !important; }
+  main.site-main, .site-footer { margin-left: 0 !important; padding: 0 !important; }
+  body { background: white !important; color: black !important; }
+  .detail-page { max-width: 100% !important; padding: 16px 0 !important; }
+  .detail-hero { max-width: 100% !important; aspect-ratio: 16/9 !important; page-break-inside: avoid; }
+  .detail-title { font-size: 2rem !important; }
+  .detail-deck { font-size: 1.05rem !important; color: #333 !important; }
+  .detail-prose { max-width: 100% !important; column-count: 1 !important; font-size: 11pt !important; line-height: 1.5 !important; }
+  .detail-prose h2, .detail-prose h3 { page-break-after: avoid; }
+  .detail-prose p, .detail-prose li { page-break-inside: avoid; }
+  a[href]:not([href^="#"])::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; }
+}
+
 /* Reveal-on-scroll — fade + slide-up à la IKEA */
 .reveal-pre {
   opacity: 0;

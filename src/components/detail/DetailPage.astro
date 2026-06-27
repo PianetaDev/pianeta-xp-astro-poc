@@ -74,6 +74,7 @@ const renderCta = (c: CtaProp, cls: string) => {
 
     {(primaryCta || secondaryCta) && (
       <div class="detail-cta-row">
+        <button type="button" class="cta-btn cta-ghost detail-listen" data-listen aria-label="Ascolta questa pagina"><span aria-hidden="true">▶</span> Ascolta</button>
         {primaryCta && (primaryCta.href
           ? <a href={primaryCta.href} class="cta-btn cta-primary" {...(primaryCta.external ? { target: '_blank', rel: 'noopener' } : {})}>{primaryCta.label}</a>
           : <button type="button" class="cta-btn cta-primary" data-action={primaryCta.action}>{primaryCta.label}</button>
@@ -179,6 +180,57 @@ const renderCta = (c: CtaProp, cls: string) => {
 
   <script is:inline>
     (() => {
+      // Audio "Ascolta" — Web Speech Synthesis, browser-native, zero cost
+      const listenInit = () => {
+        const btn = document.querySelector('[data-listen]');
+        if (!btn) return;
+        if (!('speechSynthesis' in window)) { btn.style.display = 'none'; return; }
+
+        let utter = null;
+        let playing = false;
+        let paused = false;
+
+        function getText() {
+          const title = document.querySelector('.detail-title')?.textContent || '';
+          const deck = document.querySelector('.detail-deck')?.textContent || '';
+          const prose = document.querySelector('.detail-prose')?.textContent || '';
+          return `${title}. ${deck}. ${prose}`.replace(/\s+/g, ' ').trim();
+        }
+        function setLabel(text) {
+          btn.innerHTML = `<span aria-hidden="true">${text === 'Ascolta' ? '▶' : (text === 'Pausa' ? '⏸' : '▶')}</span> ${text}`;
+        }
+        function stop() {
+          window.speechSynthesis.cancel();
+          playing = false; paused = false;
+          setLabel('Ascolta');
+        }
+        btn.addEventListener('click', () => {
+          if (!playing) {
+            const text = getText();
+            if (!text) return;
+            utter = new SpeechSynthesisUtterance(text);
+            utter.lang = document.documentElement.lang === 'en' ? 'en-US' : 'it-IT';
+            utter.rate = 1.0;
+            utter.onend = stop;
+            utter.onerror = stop;
+            window.speechSynthesis.speak(utter);
+            playing = true; paused = false;
+            setLabel('Pausa');
+          } else if (!paused) {
+            window.speechSynthesis.pause();
+            paused = true;
+            setLabel('Riprendi');
+          } else {
+            window.speechSynthesis.resume();
+            paused = false;
+            setLabel('Pausa');
+          }
+        });
+        // Stop on page navigation
+        document.addEventListener('astro:before-preparation', stop);
+      };
+      document.addEventListener('astro:page-load', listenInit);
+
       const init = () => {
         const url = window.location.href;
         const title = document.title;

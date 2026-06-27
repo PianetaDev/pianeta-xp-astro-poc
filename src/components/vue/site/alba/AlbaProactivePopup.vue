@@ -22,6 +22,16 @@ function buildPrompt(): { title: string; sub: string } {
   const path = window.location.pathname;
   if (path.startsWith('/work/eclag'))
     return { title: 'Stai guardando ECLAG', sub: 'Ti racconto come l\'abbiamo fatto in 2 minuti?' };
+  if (path.startsWith('/work/bc3-rebranding'))
+    return { title: 'Il sistema visivo di BC3', sub: 'Vuoi capire come abbiamo unificato 30+ sotto-brand?' };
+  if (path.startsWith('/work/untwist'))
+    return { title: 'UNTWIST · nodi e fili', sub: 'La metafora ha cambiato come BC3 racconta la ricerca. Ti spiego?' };
+  if (path.startsWith('/work/childfund'))
+    return { title: 'Data storytelling per i diritti', sub: 'Ti racconto come abbiamo dato voce ai bambini con il design?' };
+  if (path.startsWith('/work/aries'))
+    return { title: 'Aries · open science visiva', sub: 'Sistema infografico AI + Open Science. Curioso?' };
+  if (path.startsWith('/work/'))
+    return { title: 'Curioso di questo progetto?', sub: 'Posso raccontarti il dietro le quinte.' };
   if (path.startsWith('/services/'))
     return { title: 'Domanda su questo servizio?', sub: 'Posso spiegartelo e dirti se fa al caso vostro.' };
   if (path.startsWith('/lab/'))

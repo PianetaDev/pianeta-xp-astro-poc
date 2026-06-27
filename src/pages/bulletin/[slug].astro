@@ -25,9 +25,16 @@ if (data.date) eyebrowParts.push({ label: formatDate(data.date) });
 
 const related = (data.relatedWork || []).map((slug: string) => ({ type: 'work', slug }));
 
+// Reading time: ~225 parole/min
+const bodyLen = item.body?.length ?? 0;
+const wordCount = Math.max(1, Math.round(bodyLen / 5.5));
+const minutes = Math.max(1, Math.round(wordCount / 225));
+const readingTime = data.readingTime || `${minutes} min`;
+
 const metaInline = [
   data.authors?.length && { label: 'Autori', value: data.authors.join(', ') },
   data.date && { label: 'Data', value: formatDate(data.date) },
+  { label: 'Lettura', value: readingTime },
   data.issue && { label: 'Numero', value: '#' + data.issue },
   data.tags?.length && { label: 'Tag', value: data.tags.join(' · ') },
 ].filter(Boolean);
