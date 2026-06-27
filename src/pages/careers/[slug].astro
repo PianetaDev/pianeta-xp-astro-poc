@@ -67,6 +67,7 @@ if (data.location) eyebrowParts.push({ label: data.location });
     backLabel="Tutte le posizioni"
     nextItem={nextItem}
     metaInline={metaInline}
+    twoCol={(item.body?.length ?? 0) > 2400}
     jsonLd={jsonLd}
   >
     <Content />

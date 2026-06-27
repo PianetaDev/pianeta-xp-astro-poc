@@ -40,6 +40,7 @@ if (data.year) eyebrowParts.push({ label: String(data.year) });
     backLabel="Tutti gli esperimenti"
     nextItem={nextItem}
     metaInline={metaInline}
+    twoCol={(item.body?.length ?? 0) > 2400}
   >
     <Content />
   </DetailPage>

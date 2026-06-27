@@ -55,6 +55,7 @@ if (data.role) eyebrowParts.push({ label: data.role });
     nextItem={nextItem}
     byline={{ meta: [data.role, data.location].filter(Boolean) }}
     metaInline={metaInline}
+    twoCol={(item.body?.length ?? 0) > 2400}
     jsonLd={jsonLd}
   >
     <Content />
