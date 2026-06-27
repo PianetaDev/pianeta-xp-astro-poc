@@ -172,6 +172,34 @@ const ldJson = {
         </a>
       )}
 
+      {/* Client wall — tile larga */}
+      <a href="/work" class="bento-tile t-tall t-cream bento-clientwall">
+        <div class="bento-content">
+          <p class="bento-kicker">Hanno scelto di lavorare con noi</p>
+          <div class="bento-spacer" />
+          <ul class="clientwall-list" aria-label="Clienti e partner">
+            <li>Armani</li>
+            <li>Prada</li>
+            <li>La Repubblica</li>
+            <li>Wired</li>
+            <li>Plenitude</li>
+            <li>BC3</li>
+            <li>ChildFund</li>
+            <li>WeWorld</li>
+            <li>ECLAG</li>
+            <li>Sant'Egidio</li>
+            <li>ARIES</li>
+            <li>ArtPay</li>
+            <li>Morsy</li>
+            <li>Latte Creative</li>
+            <li>EPOS</li>
+            <li>Susdef</li>
+            <li>Apotheke</li>
+          </ul>
+          <p class="bento-sub" style="margin-top:16px;">Vedi i lavori →</p>
+        </div>
+      </a>
+
       {/* 9. Lab — black */}
       <a href="/lab" class="bento-tile t-medium t-dark">
         <div class="bento-content">
@@ -344,6 +372,37 @@ const ldJson = {
       max-width: 240px;
       height: auto;
       display: block;
+    }
+    .bento-clientwall .clientwall-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: baseline;
+    }
+    .bento-clientwall .clientwall-list li {
+      font-weight: 800;
+      font-size: clamp(0.95rem, 1.6vw, 1.25rem);
+      letter-spacing: -0.01em;
+      color: #0e1116;
+      line-height: 1.15;
+      white-space: nowrap;
+    }
+    .bento-clientwall .clientwall-list li + li::before {
+      content: '·';
+      margin-right: 16px;
+      color: rgba(14,17,22,0.3);
+      font-weight: 400;
+    }
+    :root[data-theme="dark"] .bento-clientwall .clientwall-list li,
+    :root[data-theme="auto"][data-sun="night"] .bento-clientwall .clientwall-list li {
+      color: #f5f4ee;
+    }
+    :root[data-theme="dark"] .bento-clientwall .clientwall-list li + li::before,
+    :root[data-theme="auto"][data-sun="night"] .bento-clientwall .clientwall-list li + li::before {
+      color: rgba(245,244,238,0.3);
     }
   </style>
 </BaseLayout>
