@@ -31,9 +31,10 @@ const ogImageResolved = ogType && ogSlug
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const showIslands = chrome && !minimal;
 const dataSun = isNightInItaly() ? 'night' : 'day';
+const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/') ? 'en' : 'it';
 ---
 <!doctype html>
-<html lang="it" data-theme="auto" data-sun={dataSun}>
+<html lang={locale} data-theme="auto" data-sun={dataSun}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
