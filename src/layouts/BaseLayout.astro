@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+import { isNightInItaly } from '../lib/server/sun';
 import SiteRail from '../components/SiteRail.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import CookieConsent from '../components/vue/site/consent/CookieConsent.vue';
@@ -24,9 +25,10 @@ interface Props {
 const { title, description = '', ogImage = '/og/work-eclag.png', chrome = true, minimal = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const showIslands = chrome && !minimal;
+const dataSun = isNightInItaly() ? 'night' : 'day';
 ---
 <!doctype html>
-<html lang="it">
+<html lang="it" data-theme="auto" data-sun={dataSun}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -42,9 +44,20 @@ const showIslands = chrome && !minimal;
     <meta property="og:type" content="article" />
     <meta name="twitter:card" content="summary_large_image" />
     <ClientRouter />
+    <script is:inline>
+      // Theme: legge localStorage prima del paint per evitare flash
+      (() => {
+        try {
+          const saved = localStorage.getItem('pianeta-theme');
+          if (saved === 'light' || saved === 'dark' || saved === 'auto') {
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <slot name="head" />
   </head>
-  <body class="bg-[#fafaf7] text-[#0e1116] antialiased">
+  <body class="site-body antialiased" style="background:var(--pianeta-bg); color:var(--pianeta-text); transition:background 280ms ease, color 280ms ease;">
     {chrome && <SiteRail current={Astro.url.pathname} />}
 
     <main class={chrome ? 'site-main' : ''}>

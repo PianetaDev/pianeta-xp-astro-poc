@@ -141,14 +141,14 @@ const ldJson = {
         </a>
       )}
 
-      {/* 7. Work #2 — image cover (auto pesca w1 dalla collection) */}
+      {/* 7. Work #2 — image cover tall (uguale a Featured per equilibrio) */}
       {w1 && (
-        <a href={`/work/${w1.id}`} class="bento-tile t-medium" style={`background-image:url('${(w1.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
+        <a href={`/work/${w1.id}`} class="bento-tile t-tall" style={`background-image:url('${(w1.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
           <div class="bento-grad" />
           <div class="bento-content">
             <p class="bento-kicker">{'Work · ' + (w1.data.year || '')}</p>
             <div class="bento-spacer" />
-            <h2 class="bento-title">{w1.data.title}</h2>
+            <h2 class="bento-title-xl">{w1.data.title}</h2>
             <p class="bento-sub">{w1.data.client || w1.data.description}</p>
           </div>
         </a>

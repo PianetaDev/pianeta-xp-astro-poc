@@ -13,7 +13,8 @@
 @tailwind utilities;
 
 :root {
-  /* Brand */
+  color-scheme: light dark;
+  /* Brand — light */
   --pianeta-text: #0e1116;
   --pianeta-bg: #fafaf7;
   --pianeta-bg-card: #ffffff;
@@ -42,6 +43,63 @@
   --s-8: 2rem;
   --s-12: 3rem;
   --s-16: 4rem;
+}
+
+/* Dark theme tokens — applied when [data-theme="dark"] OR [data-theme="auto"][data-sun="night"] */
+:root[data-theme="dark"],
+:root[data-theme="auto"][data-sun="night"] {
+  --pianeta-text: #f5f4ee;
+  --pianeta-bg: #0e1116;
+  --pianeta-bg-card: #1a1d23;
+  --pianeta-border: rgba(245, 244, 238, 0.10);
+  --pianeta-border-strong: rgba(245, 244, 238, 0.22);
+  --pianeta-muted: rgba(245, 244, 238, 0.58);
+  --pianeta-muted-strong: rgba(245, 244, 238, 0.78);
+  --pianeta-accent: #4a8fc4;
+  --cta-secondary: #4a8fc4;
+  --cta-secondary-hover: #6aa5d4;
+}
+:root[data-theme="dark"] body,
+:root[data-theme="auto"][data-sun="night"] body {
+  background: #0e1116 !important;
+  color: #f5f4ee !important;
+}
+
+/* Componenti che hanno colori hard-coded → dark overrides */
+:root[data-theme="dark"] .site-rail,
+:root[data-theme="auto"][data-sun="night"] .site-rail {
+  background: #1a1d23 !important;
+  border-right-color: rgba(245,244,238,0.08) !important;
+}
+:root[data-theme="dark"] .site-rail [style*="color:#0e1116"],
+:root[data-theme="dark"] .site-rail [style*="color: #0e1116"],
+:root[data-theme="auto"][data-sun="night"] .site-rail [style*="color:#0e1116"] {
+  color: #f5f4ee !important;
+}
+:root[data-theme="dark"] .index-card,
+:root[data-theme="dark"] .detail-related-card,
+:root[data-theme="dark"] .detail-next-card,
+:root[data-theme="dark"] .process-step,
+:root[data-theme="dark"] .share-btn,
+:root[data-theme="auto"][data-sun="night"] .index-card,
+:root[data-theme="auto"][data-sun="night"] .detail-related-card,
+:root[data-theme="auto"][data-sun="night"] .detail-next-card,
+:root[data-theme="auto"][data-sun="night"] .process-step,
+:root[data-theme="auto"][data-sun="night"] .share-btn {
+  background: #1a1d23 !important;
+}
+:root[data-theme="dark"] .bento-tile.t-cream,
+:root[data-theme="auto"][data-sun="night"] .bento-tile.t-cream {
+  background: #1a1d23 !important;
+  color: #f5f4ee !important;
+}
+:root[data-theme="dark"] .bento-wordmark-logo,
+:root[data-theme="auto"][data-sun="night"] .bento-wordmark-logo {
+  filter: invert(1) hue-rotate(180deg);
+}
+:root[data-theme="dark"] .site-footer-logo,
+:root[data-theme="auto"][data-sun="night"] .site-footer-logo {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 @layer base {

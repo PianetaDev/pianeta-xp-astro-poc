@@ -18,6 +18,31 @@ const year = new Date().getFullYear();
         <a href="/contact">Contatti</a>
         <a href="/llms.txt">llms.txt</a>
       </p>
+      <div class="theme-switcher" role="group" aria-label="Tema visivo">
+        <button type="button" data-theme-set="light" aria-label="Tema chiaro">☀</button>
+        <button type="button" data-theme-set="auto" aria-label="Tema automatico (segue il tramonto sui server Pianeta)">◐</button>
+        <button type="button" data-theme-set="dark" aria-label="Tema scuro">☾</button>
+      </div>
+      <script is:inline>
+        (() => {
+          const root = document.documentElement;
+          const sync = () => {
+            const cur = root.getAttribute('data-theme') || 'auto';
+            document.querySelectorAll('[data-theme-set]').forEach((b) => {
+              b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-set') === cur));
+            });
+          };
+          document.querySelectorAll('[data-theme-set]').forEach((b) => {
+            b.addEventListener('click', () => {
+              const v = b.getAttribute('data-theme-set');
+              root.setAttribute('data-theme', v);
+              try { localStorage.setItem('pianeta-theme', v); } catch (e) {}
+              sync();
+            });
+          });
+          sync();
+        })();
+      </script>
     </div>
   </div>
 </footer>
@@ -41,7 +66,12 @@ const year = new Date().getFullYear();
   .site-footer-links { display: flex; gap: 16px; flex-wrap: wrap; margin: 0; }
   @media (min-width: 700px) { .site-footer-links { justify-content: flex-end; } }
   .site-footer-links a { color: inherit; text-decoration: none; }
-  .site-footer-links a:hover { color: #0e1116; text-decoration: underline; }
+  .site-footer-links a:hover { color: var(--pianeta-text); text-decoration: underline; }
+
+  .theme-switcher { display: inline-flex; gap: 4px; margin-top: 6px; padding: 4px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 999px; }
+  .theme-switcher button { width: 28px; height: 28px; padding: 0; border: 0; background: transparent; color: var(--pianeta-muted); font-size: 14px; border-radius: 999px; cursor: pointer; transition: background 150ms, color 150ms; }
+  .theme-switcher button:hover { color: var(--pianeta-text); background: var(--pianeta-border); }
+  .theme-switcher button[aria-pressed="true"] { background: var(--cta-primary); color: var(--cta-primary-ink); }
 
   /* 3-pannel sync col main quando Alba apre */
   @media (min-width: 1024px) {
