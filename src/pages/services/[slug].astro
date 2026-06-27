@@ -67,7 +67,7 @@ const jsonLd = {
   }),
 };
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="services" ogSlug={item.id}>
   <DetailPage
     eyebrowParts={eyebrowParts}
     title={title}

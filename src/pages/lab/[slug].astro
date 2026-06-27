@@ -28,7 +28,7 @@ const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Lab', href: 
 if (data.kind) eyebrowParts.push({ label: data.kind });
 if (data.year) eyebrowParts.push({ label: String(data.year) });
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="lab" ogSlug={item.id}>
   <DetailPage
     eyebrowParts={eyebrowParts}
     title={title}

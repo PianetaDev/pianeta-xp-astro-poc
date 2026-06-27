@@ -49,7 +49,7 @@ if (data.year) eyebrowParts.push({ label: String(data.year) });
 
 const related = bulletinRefs.map((slug) => ({ type: 'bulletin', slug }));
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover}>
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="work" ogSlug={item.id}>
   <DetailPage
     eyebrowParts={eyebrowParts}
     title={title}
