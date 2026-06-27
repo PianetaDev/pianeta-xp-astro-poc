@@ -4,12 +4,13 @@ import { join, extname, basename, dirname } from 'path';
 
 const ROOT = 'public';
 const DIRS = ['og', 'choosetoseethem', 'team'];
-const MIN_SIZE = 5 * 1024; // 5KB — every meaningful image gets a webp
-const MAX_DIM = 1600;
-const CARD_DIM = 800; // smaller thumb for index cards
-const WEBP_QUALITY = 80;
-const CARD_QUALITY = 72;
-const PNG_QUALITY = 85;
+const MIN_SIZE = 5 * 1024;
+const MAX_DIM = 1280;       // era 1600 — più che sufficiente per hero detail page
+const CARD_DIM = 720;       // era 800 — index card thumb
+const WEBP_QUALITY = 72;    // era 80
+const CARD_QUALITY = 60;    // era 72
+const AVIF_QUALITY = 50;    // AVIF è più efficiente di webp
+const PNG_QUALITY = 80;
 
 async function walk(dir) {
   const out = [];
@@ -39,17 +40,29 @@ for (const d of DIRS) {
     const dir = dirname(file);
     const base = basename(file, ext);
 
-    // Generate WebP @ MAX_DIM for hero
+    // Generate WebP @ MAX_DIM (hero) — strip metadata
     const webpPath = join(dir, base + '.webp');
     try {
-      await sharp(file).resize(MAX_DIM, MAX_DIM, { fit: 'inside', withoutEnlargement: true }).webp({ quality: WEBP_QUALITY }).toFile(webpPath);
+      await sharp(file).rotate().resize(MAX_DIM, MAX_DIM, { fit: 'inside', withoutEnlargement: true }).webp({ quality: WEBP_QUALITY, effort: 6 }).toFile(webpPath);
     } catch (e) { console.error('webp fail', file, e.message); continue; }
+
+    // Generate AVIF (better compression than webp) — hero
+    const avifPath = join(dir, base + '.avif');
+    try {
+      await sharp(file).rotate().resize(MAX_DIM, MAX_DIM, { fit: 'inside', withoutEnlargement: true }).avif({ quality: AVIF_QUALITY, effort: 6 }).toFile(avifPath);
+    } catch (e) { console.error('avif fail', file, e.message); }
 
     // Generate smaller WebP card thumbnail @ CARD_DIM
     const cardPath = join(dir, base + '-card.webp');
     try {
-      await sharp(file).resize(CARD_DIM, CARD_DIM, { fit: 'inside', withoutEnlargement: true }).webp({ quality: CARD_QUALITY }).toFile(cardPath);
+      await sharp(file).rotate().resize(CARD_DIM, CARD_DIM, { fit: 'inside', withoutEnlargement: true }).webp({ quality: CARD_QUALITY, effort: 6 }).toFile(cardPath);
     } catch (e) { console.error('card fail', file, e.message); }
+
+    // Generate AVIF card thumb
+    const cardAvifPath = join(dir, base + '-card.avif');
+    try {
+      await sharp(file).rotate().resize(CARD_DIM, CARD_DIM, { fit: 'inside', withoutEnlargement: true }).avif({ quality: AVIF_QUALITY - 5, effort: 6 }).toFile(cardAvifPath);
+    } catch (e) { /* ok */ }
 
     // Shrink original png/jpg in place
     const tmpPath = file + '.tmp';
