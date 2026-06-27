@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, nextTick, onMounted } from 'vue'
+import { ref, watch, nextTick, onMounted, computed } from 'vue'
 import { useAlbaSession } from '~/composables/useAlbaSession'
 import type { AlbaChatChunk } from '~/lib/alba/session-types'
 import MarkdownIt from 'markdown-it'
@@ -42,6 +42,16 @@ const messages = ref<Msg[]>([])
 const input = ref('')
 const sending = ref(false)
 const scrollEl = ref<HTMLElement | null>(null)
+
+const DEFAULT_CHIPS = [
+  { label: 'Vedi i lavori', prompt: 'Mostrami i vostri lavori più recenti' },
+  { label: 'Cosa fate', prompt: 'In due righe: di cosa si occupa Pianeta.Studio?' },
+  { label: 'Lavoriamo insieme', prompt: 'Vorrei fare una call con Max, founder di Pianeta.Studio' },
+]
+
+const showChips = computed(() => {
+  return messages.value.filter(m => m.role === 'user').length === 0
+})
 
 const APERTURA = `Ciao, sono Alba — l'AI di gruppo di Pianeta.Studio.
 
@@ -104,8 +114,8 @@ function scrollLastIntoView() {
   })
 }
 
-async function send() {
-  const text = input.value.trim()
+async function send(directText?: string) {
+  const text = directText?.trim() || input.value.trim()
   if (!text || sending.value) return
 
   if (!albaSession.sessionId.value) {
@@ -200,6 +210,15 @@ function close() { emit('close') }
             {{ s }}
           </button>
         </div>
+        <div v-if="showChips" class="alba-chips">
+          <button
+            v-for="(c, i) in DEFAULT_CHIPS"
+            :key="i"
+            type="button"
+            class="alba-chip"
+            @click="send(c.prompt)"
+          >{{ c.label }}</button>
+        </div>
         <div v-if="sending" class="alba-msg assistant">
           <div class="alba-bubble alba-typing"><span></span><span></span><span></span></div>
         </div>
@@ -247,6 +266,15 @@ function close() { emit('close') }
               >
                 {{ s }}
               </button>
+            </div>
+            <div v-if="showChips" class="alba-chips">
+              <button
+                v-for="(c, i) in DEFAULT_CHIPS"
+                :key="i"
+                type="button"
+                class="alba-chip"
+                @click="send(c.prompt)"
+              >{{ c.label }}</button>
             </div>
             <div v-if="sending" class="alba-msg assistant">
               <div class="alba-bubble alba-typing"><span></span><span></span><span></span></div>
@@ -394,4 +422,25 @@ function close() { emit('close') }
 
 .alba-fade-enter-active, .alba-fade-leave-active { transition: opacity 0.2s ease; }
 .alba-fade-enter-from, .alba-fade-leave-to { opacity: 0; }
+
+.alba-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 8px 14px 16px;
+}
+.alba-chip {
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.65);
+  border: 1px solid rgba(14,17,22,0.10);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #0e1116;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+}
+.alba-chip:hover {
+  background: #ffffff;
+  border-color: var(--cta-primary, #FF6B33);
+  color: var(--cta-primary, #FF6B33);
+}
 </style>
