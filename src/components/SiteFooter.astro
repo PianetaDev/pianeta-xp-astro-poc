@@ -50,7 +50,7 @@ const year = new Date().getFullYear();
 <style is:global>
   .site-footer {
     margin-left: 88px;
-    border-top: 1px solid rgba(14,17,22,0.08);
+    border-top: 1px solid var(--pianeta-border);
     margin-top: 80px;
     padding: 40px 32px 64px;
     transition: padding-right 280ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -61,7 +61,7 @@ const year = new Date().getFullYear();
   .site-footer-logo { width: 160px; height: auto; display: block; }
   .badge-benefit { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(255,107,51,0.10); color: var(--cta-primary); border: 1px solid rgba(255,107,51,0.25); border-radius: 999px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
   .badge-benefit svg { fill: var(--cta-primary); }
-  .site-footer-meta { font-size: 12px; color: rgba(14,17,22,0.6); display: flex; flex-direction: column; gap: 6px; }
+  .site-footer-meta { font-size: 12px; color: var(--pianeta-muted); display: flex; flex-direction: column; gap: 6px; }
   @media (min-width: 700px) { .site-footer-meta { text-align: right; } }
   .site-footer-links { display: flex; gap: 16px; flex-wrap: wrap; margin: 0; }
   @media (min-width: 700px) { .site-footer-links { justify-content: flex-end; } }

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AlbaRotatingPrompts from '../components/vue/site/alba/AlbaRotatingPrompts.vue';
 import { getCollection } from 'astro:content';
 
 // Sort helper: date desc, drafts excluded
@@ -107,15 +108,10 @@ const ldJson = {
         </a>
       )}
 
-      {/* 4. Hire Us CTA — orange */}
-      <button type="button" class="bento-tile t-medium t-orange" data-action="open-hire-us">
-        <div class="bento-content">
-          <p class="bento-kicker">Studio</p>
-          <div class="bento-spacer" />
-          <h2 class="bento-title">Lavoriamo insieme?</h2>
-          <p class="bento-sub">Parla con Alba →</p>
-        </div>
-      </button>
+      {/* 4. Alba rotating prompts — orange (sostituisce Hire Us CTA statica) */}
+      <div class="bento-tile t-medium t-orange">
+        <AlbaRotatingPrompts client:visible />
+      </div>
 
       {/* 5. Bulletin #2 — blue */}
       {b1 && (
