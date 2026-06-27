@@ -80,3 +80,4 @@ Se l'orario non è parsabile o Google Calendar fallisce, fallback: brief email a
 - **403 al callback** → state mismatch, lancia di nuovo `/start` dal browser
 - **"GOOGLE_CLIENT_ID missing"** dopo deploy → controlla env Vercel Production e ridepoya
 - **Eventi non creati** ma Alba dice "fatto" → controlla logs Vercel function `/api/alba/chat` per errore `gcalResult.error`
+# google oauth env active 2026-06-27T05:22:30Z
