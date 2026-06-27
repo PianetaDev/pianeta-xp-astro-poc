@@ -48,6 +48,7 @@ async function init() {
     if (dismissed.value || floater.open.value) return;
     prompt.value = buildPrompt();
     visible.value = true;
+    window.dispatchEvent(new CustomEvent('alba:popup-shown'));
     session.trackEvent('popup_shown', { url: window.location.pathname, after_ms: delay });
   }, delay);
 }
@@ -57,6 +58,7 @@ function onClick() {
   visible.value = false;
   dismissed.value = true;
   sessionStorage.setItem(SS_DISMISSED, '1');
+  window.dispatchEvent(new CustomEvent('alba:popup-closed'));
   floater.openPanel();
 }
 
@@ -65,6 +67,7 @@ function onDismiss() {
   visible.value = false;
   dismissed.value = true;
   sessionStorage.setItem(SS_DISMISSED, '1');
+  window.dispatchEvent(new CustomEvent('alba:popup-closed'));
 }
 
 onMounted(init);
