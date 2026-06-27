@@ -1,6 +1,6 @@
 {
   "name": "pianeta-studio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Pianeta.Studio MCP server descriptor — espone catalogo servizi, work, lab, team. Letto da agenti AI (Claude Desktop, Cursor, ChatGPT) per discoverability e contatto.",
   "vendor": "Pianeta.Studio S.r.l. SB",
   "homepage": "https://xp.pianeta.studio",
@@ -10,6 +10,14 @@
   "endpoints": {
     "services_catalog": "https://xp.pianeta.studio/api/services/catalog.json",
     "service_detail_template": "https://xp.pianeta.studio/api/services/{slug}.json",
+    "work_catalog": "https://xp.pianeta.studio/api/work/catalog.json",
+    "work_detail_template": "https://xp.pianeta.studio/api/work/{slug}.json",
+    "bulletin_catalog": "https://xp.pianeta.studio/api/bulletin/catalog.json",
+    "bulletin_detail_template": "https://xp.pianeta.studio/api/bulletin/{slug}.json",
+    "lab_catalog": "https://xp.pianeta.studio/api/lab/catalog.json",
+    "lab_detail_template": "https://xp.pianeta.studio/api/lab/{slug}.json",
+    "team_catalog": "https://xp.pianeta.studio/api/team/catalog.json",
+    "team_detail_template": "https://xp.pianeta.studio/api/team/{slug}.json",
     "chat": "https://xp.pianeta.studio/api/alba/chat",
     "session_init": "https://xp.pianeta.studio/api/alba/session-init"
   },
@@ -41,6 +49,74 @@
       "notes": "Per usare: prima ottieni session_id via POST /api/alba/session-init con un uid (UUID v4)"
     },
     {
+      "name": "list_works",
+      "description": "Lista tutti i progetti portfolio di Pianeta.Studio con client, anno, categoria, settore, servizi usati e link live.",
+      "method": "GET",
+      "url": "https://xp.pianeta.studio/api/work/catalog.json",
+      "auth": "none"
+    },
+    {
+      "name": "get_work",
+      "description": "Dettaglio di un singolo progetto portfolio (body markdown, client, team, live_url, servizi collegati).",
+      "method": "GET",
+      "url_template": "https://xp.pianeta.studio/api/work/{slug}.json",
+      "parameters": [
+        { "name": "slug", "in": "path", "type": "string", "required": true, "example": "eclag" }
+      ],
+      "auth": "none"
+    },
+    {
+      "name": "list_bulletin_articles",
+      "description": "Lista tutti gli articoli editoriali del Bulletin di Pianeta.Studio con data, autori, tag e link al progetto correlato.",
+      "method": "GET",
+      "url": "https://xp.pianeta.studio/api/bulletin/catalog.json",
+      "auth": "none"
+    },
+    {
+      "name": "get_bulletin_article",
+      "description": "Dettaglio di un singolo articolo del Bulletin (body markdown completo, autori, related work).",
+      "method": "GET",
+      "url_template": "https://xp.pianeta.studio/api/bulletin/{slug}.json",
+      "parameters": [
+        { "name": "slug", "in": "path", "type": "string", "required": true, "example": "swarm-neural-prediction" }
+      ],
+      "auth": "none"
+    },
+    {
+      "name": "list_lab_projects",
+      "description": "Lista tutti i progetti R&D e strumenti proprietari di Pianeta.Lab con kind, status, anno e link esterno.",
+      "method": "GET",
+      "url": "https://xp.pianeta.studio/api/lab/catalog.json",
+      "auth": "none"
+    },
+    {
+      "name": "get_lab_project",
+      "description": "Dettaglio di un singolo progetto R&D (body markdown, kind, status, external_link).",
+      "method": "GET",
+      "url_template": "https://xp.pianeta.studio/api/lab/{slug}.json",
+      "parameters": [
+        { "name": "slug", "in": "path", "type": "string", "required": true, "example": "atlas" }
+      ],
+      "auth": "none"
+    },
+    {
+      "name": "list_team",
+      "description": "Lista tutti i membri del team di Pianeta.Studio con ruolo, tipo di impiego, sede e data inizio.",
+      "method": "GET",
+      "url": "https://xp.pianeta.studio/api/team/catalog.json",
+      "auth": "none"
+    },
+    {
+      "name": "get_team_member",
+      "description": "Dettaglio di un singolo membro del team (bio completa, expertise, email se disponibile).",
+      "method": "GET",
+      "url_template": "https://xp.pianeta.studio/api/team/{slug}.json",
+      "parameters": [
+        { "name": "slug", "in": "path", "type": "string", "required": true, "example": "max" }
+      ],
+      "auth": "none"
+    },
+    {
       "name": "request_proposal",
       "description": "Richiesta proposta commerciale — non automatizzabile, fa handoff a Max.",
       "method": "GET",
@@ -53,7 +129,11 @@
     "case-study-narration",
     "pre-sales-chat-ai",
     "lead-qualification",
-    "human-handoff"
+    "human-handoff",
+    "case-study-discovery",
+    "editorial-feed",
+    "r-and-d-discovery",
+    "people-discovery"
   ],
   "domains": [
     "sustainable-web",
