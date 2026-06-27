@@ -1,47 +1,17 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref, computed } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useAlbaFloater } from '~/composables/useAlbaFloater'
 import { useAlbaSession } from '~/composables/useAlbaSession'
 import ClientOnly from '~/components/vue/shims/ClientOnly.vue'
 import AlbaTakeover from './AlbaTakeover.vue'
 
-const { open, openPanel, openWithPrompt } = useAlbaFloater()
+const { open, openPanel } = useAlbaFloater()
 const session = useAlbaSession()
 const popupVisible = ref(false)
 
-// null = etichetta "Parla con Alba" base. Le altre = prompt cliccabili.
-const ROTATING_PROMPTS: (string | null)[] = [
-  null,
-  'Mostrami i lavori più recenti',
-  'Posso fissare una call con Max?',
-  'Cosa fate per la sostenibilità?',
-  'Raccontami il caso ECLAG',
-  'Cercate persone nel team?',
-  null,
-  'Come funziona la validazione AI?',
-  'Vedi il framework Atlas',
-]
-const ROTATE_MS = 4500
-
-const idx = ref(0)
-let timer: number | null = null
-
-const currentPrompt = computed(() => ROTATING_PROMPTS[idx.value])
-const label = computed(() => currentPrompt.value || 'Parla con Alba')
-
-function rotate() {
-  idx.value = (idx.value + 1) % ROTATING_PROMPTS.length
-}
-
 function onClick() {
-  const p = currentPrompt.value
-  if (p) {
-    session.trackEvent('floater_prompt_clicked', { prompt: p, index: idx.value })
-    openWithPrompt(p)
-  } else {
-    session.trackEvent('floater_clicked', { url: typeof window !== 'undefined' ? window.location.pathname : '/' })
-    openPanel()
-  }
+  session.trackEvent('floater_clicked', { url: typeof window !== 'undefined' ? window.location.pathname : '/' })
+  openPanel()
 }
 
 const onExternalOpen = () => openPanel()
@@ -52,13 +22,11 @@ onMounted(() => {
   window.addEventListener('alba:open', onExternalOpen)
   window.addEventListener('alba:popup-shown', onPopupShown)
   window.addEventListener('alba:popup-closed', onPopupClosed)
-  timer = window.setInterval(rotate, ROTATE_MS)
 })
 onBeforeUnmount(() => {
   window.removeEventListener('alba:open', onExternalOpen)
   window.removeEventListener('alba:popup-shown', onPopupShown)
   window.removeEventListener('alba:popup-closed', onPopupClosed)
-  if (timer !== null) clearInterval(timer)
 })
 </script>
 
@@ -66,13 +34,11 @@ onBeforeUnmount(() => {
   <button
     v-if="!open && !popupVisible"
     @click="onClick"
-    :aria-label="currentPrompt ? `Apri Alba con: ${currentPrompt}` : 'Apri chat Alba'"
+    aria-label="Apri chat Alba"
     class="alba-launcher"
   >
     <span class="alba-launcher-avatar">A</span>
-    <Transition name="alba-launcher-fade" mode="out-in">
-      <span class="alba-launcher-label" :key="idx">{{ label }}</span>
-    </Transition>
+    <span class="alba-launcher-label">Parla con Alba</span>
   </button>
 
   <ClientOnly>
@@ -97,7 +63,6 @@ onBeforeUnmount(() => {
   box-shadow: 0 10px 30px rgba(14,17,22,0.25);
   cursor: pointer;
   font: inherit;
-  max-width: calc(100vw - 32px);
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 .alba-launcher:hover {
@@ -117,21 +82,9 @@ onBeforeUnmount(() => {
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 280px;
 }
-
-.alba-launcher-fade-enter-active,
-.alba-launcher-fade-leave-active {
-  transition: opacity 340ms cubic-bezier(0.16,1,0.3,1), transform 340ms cubic-bezier(0.16,1,0.3,1);
-}
-.alba-launcher-fade-enter-from { opacity: 0; transform: translateY(6px); }
-.alba-launcher-fade-leave-to { opacity: 0; transform: translateY(-6px); }
 
 @media (prefers-reduced-motion: reduce) {
-  .alba-launcher-fade-enter-active,
-  .alba-launcher-fade-leave-active { transition: none !important; }
   .alba-launcher:hover { transform: none; }
 }
 </style>

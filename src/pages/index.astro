@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import AlbaRotatingPrompts from '../components/vue/site/alba/AlbaRotatingPrompts.vue';
 import { getCollection } from 'astro:content';
 
 // Sort helper: date desc, drafts excluded
@@ -108,10 +107,20 @@ const ldJson = {
         </a>
       )}
 
-      {/* 4. Alba rotating prompts — orange (sostituisce Hire Us CTA statica) */}
-      <div class="bento-tile t-medium t-orange">
-        <AlbaRotatingPrompts client:visible />
-      </div>
+      {/* 4. Hire Us / Parla con Alba — orange CTA statica */}
+      <button type="button" class="bento-tile t-medium t-orange" data-action="open-alba">
+        <div class="bento-content">
+          <p class="bento-kicker">Studio</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">Parla con Alba</h2>
+          <p class="bento-sub">L'AI di gruppo di Pianeta.Studio · ti aiuta a inquadrare brief, fissare call, capire i nostri lavori.</p>
+        </div>
+      </button>
+      <script is:inline>
+        document.querySelectorAll('[data-action="open-alba"]').forEach((b) => {
+          b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('alba:open')));
+        });
+      </script>
 
       {/* 5. Bulletin #2 — blue */}
       {b1 && (
