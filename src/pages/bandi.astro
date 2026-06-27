@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const cosaFacciamo = [
+  {
+    title: 'Mappiamo il bando giusto',
+    body: 'Analizziamo la tua situazione (PMI/startup/grande), il tipo di progetto, la regione e troviamo i bandi che danno copertura concreta al lavoro che vuoi fare.',
+  },
+  {
+    title: 'Costruiamo il progetto finanziabile',
+    body: 'Il design + dev che ti servono, scritti nel linguaggio del bando, con KPI e milestone che possono essere rendicontati senza sorprese in fase di chiusura.',
+  },
+  {
+    title: 'Ti accompagniamo in rendicontazione',
+    body: 'AB Innovation gestisce la pratica burocratica, noi consegniamo i deliverable allineati ai requisiti. Una sola filiera, due competenze.',
+  },
+];
+
+const aree = [
+  {
+    emoji: '🌋',
+    nome: 'Sicilia',
+    bandi: ['Voucher digitalizzazione PMI', 'Bandi regionali green & sostenibilità', 'Sostegno startup innovative'],
+  },
+  {
+    emoji: '🏔️',
+    nome: 'Lombardia',
+    bandi: ['Marchi+ (internazionalizzazione)', 'SIMEST', 'Bandi regionali innovazione digitale'],
+  },
+  {
+    emoji: '🏛️',
+    nome: 'Lazio',
+    bandi: ['Voucher digitalizzazione PMI', 'Bandi cultura & editoria', 'Sostegno startup innovative'],
+  },
+];
+
+const step = [
+  { num: '01', title: 'Audit gratuito (30 min)', body: 'Del tuo progetto + obiettivo. Capiamo insieme se ha senso provare la via bando.' },
+  { num: '02', title: 'Mappatura bandi', body: 'Disponibili nella tua regione + stima di budget e tempi.' },
+  { num: '03', title: 'Preventivo', body: 'Progetto + costo + copertura attesa dal bando, in chiaro.' },
+  { num: '04', title: 'Application + delivery', body: 'AB prepara la pratica, noi entriamo in design+dev a partire dall\'approvazione.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Bandi e finanziamenti',
+  serviceType: 'Bandi e finanziamenti',
+  provider: {
+    '@type': 'Organization',
+    name: 'Pianeta.Studio',
+    url: 'https://pianeta.studio',
+  },
+  areaServed: ['Sicilia', 'Lombardia', 'Lazio'],
+  description: 'Presidio bandi italiani per progetti design + dev. In partnership con AB Innovation Consulting su Sicilia, Lombardia, Lazio.',
+};
+---
+<BaseLayout title="Bandi e finanziamenti · Pianeta.Studio" description="Presidiamo i bandi italiani che possono finanziare il design e lo sviluppo del tuo prossimo progetto. Partnership con AB Innovation Consulting su Sicilia, Lombardia, Lazio.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="detail-page index-page" style="max-width:1080px;">
+    <header class="index-head">
+      <p class="index-eyebrow">Servizi</p>
+      <h1 class="index-title">Bandi e finanziamenti</h1>
+      <p class="index-deck">Hai un progetto e cerchi come finanziarlo? Insieme ad AB Innovation Consulting presidiamo i bandi che possono coprire il design e lo sviluppo del tuo prossimo lavoro su Sicilia, Lombardia, Lazio.</p>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">Lavoriamo insieme</button>
+        <a href="/processo" class="cta-btn cta-ghost">Vedi come lavoriamo</a>
+      </div>
+      <script is:inline>
+        document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open'))));
+      </script>
+    </header>
+
+    <section class="bandi-section">
+      <h2 class="bandi-section-title">Cosa facciamo</h2>
+      <div class="bandi-grid bandi-grid-3">
+        {cosaFacciamo.map((c) => (
+          <article class="bandi-card">
+            <h3 class="bandi-card-title">{c.title}</h3>
+            <p class="bandi-card-body">{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="bandi-section">
+      <h2 class="bandi-section-title">Aree coperte</h2>
+      <div class="bandi-grid bandi-grid-3">
+        {aree.map((a) => (
+          <article class="bandi-area-box">
+            <div class="bandi-area-emoji" aria-hidden="true">{a.emoji}</div>
+            <h3 class="bandi-area-name">{a.nome}</h3>
+            <ul class="bandi-area-list">
+              {a.bandi.map((b) => <li>{b}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="bandi-section">
+      <h2 class="bandi-section-title">Come si parte</h2>
+      <ol class="bandi-steps">
+        {step.map((s) => (
+          <li class="bandi-step">
+            <div class="bandi-step-num">{s.num}</div>
+            <div class="bandi-step-content">
+              <h3 class="bandi-step-title">{s.title}</h3>
+              <p class="bandi-step-body">{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <footer class="detail-foot" style="border-top:1px solid var(--pianeta-border); padding-top:48px; margin-top:96px;">
+      <div class="bandi-partner-box">
+        <strong>Partner ufficiale: AB Innovation Consulting</strong>
+        <span>Contratto attivo Sicilia · Lombardia · Lazio dal 14 maggio 2026</span>
+      </div>
+    </footer>
+  </div>
+
+  <style>
+    .bandi-section { margin-top: 96px; }
+    .bandi-section-title {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 32px;
+    }
+    .bandi-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .bandi-grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 960px) {
+      .bandi-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+    .bandi-card {
+      padding: 28px;
+      background: #fff;
+      border: 1px solid var(--pianeta-border);
+      border-radius: 20px;
+      transition: border-color 200ms;
+    }
+    .bandi-card:hover { border-color: var(--cta-primary); }
+    .bandi-card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin: 0 0 12px;
+    }
+    .bandi-card-body {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: rgba(14,17,22,0.78);
+      margin: 0;
+    }
+    .bandi-area-box {
+      padding: 28px;
+      background: var(--pianeta-cream, #f6efe4);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 20px;
+      transition: border-color 200ms, transform 200ms;
+    }
+    .bandi-area-box:hover { border-color: var(--cta-primary); transform: translateY(-2px); }
+    .bandi-area-emoji {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .bandi-area-name {
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px;
+    }
+    .bandi-area-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .bandi-area-list li {
+      font-size: 0.9rem;
+      color: rgba(14,17,22,0.78);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .bandi-area-list li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: var(--cta-primary);
+      font-weight: 700;
+    }
+    .bandi-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bandi-step {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid var(--pianeta-border);
+      border-radius: 16px;
+      transition: border-color 200ms;
+    }
+    .bandi-step:hover { border-color: var(--cta-primary); }
+    @media (min-width: 640px) {
+      .bandi-step { grid-template-columns: 80px 1fr; gap: 24px; align-items: start; padding: 28px 32px; }
+    }
+    .bandi-step-num {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--cta-primary);
+    }
+    .bandi-step-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+    }
+    .bandi-step-body {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(14,17,22,0.78);
+      margin: 0;
+    }
+    .bandi-partner-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 20px 24px;
+      background: var(--pianeta-cream, #f6efe4);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .bandi-partner-box strong { font-weight: 800; }
+    .bandi-partner-box span { color: rgba(14,17,22,0.7); }
+  </style>
+</BaseLayout>
