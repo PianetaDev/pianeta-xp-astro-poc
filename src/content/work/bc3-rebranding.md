@@ -12,7 +12,7 @@ ogImage: "/og/work-bc3-cover.png"
 hero:
   type: "image"
   src: "/og/work-bc3-cover.png"
-services: ["creativita-e-neuromarketing"]
+services: ["neuromarketing-lab"]
 team: ["max", "foss"]
 credits:
   - role: "Communication Manager (BC3)"

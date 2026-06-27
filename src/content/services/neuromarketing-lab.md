@@ -1,24 +1,29 @@
 ---
-title: "Creatività e neuromarketing"
-description: "Validazione AI di campagne video e audio integrata nel processo creativo standard. Un secondo parere quantitativo sulle scelte creative — prima di rendere il video, prima di andare in produzione."
-icon: "lucide:brain"
+title: "Neuromarketing Lab"
+description: "Validation AI di campagne video e audio con Swarm Intelligence e Neural Prediction. Un secondo parere quantitativo sulle scelte creative — prima di rendere il video, prima di andare in produzione."
+category: "data-ai"
+processPhase: 2
+icon: "🧠"
 cover: "/og/service-creativita-neuromarketing.png"
 ogImage: "/og/service-creativita-neuromarketing.png"
-order: 5
+order: 1
+inputClient:
+  - "Concept video o audio"
+  - "Brief creativo + KPI target"
+  - "Audience definita"
+  - "Feedback su iterazioni"
+deliverables:
+  - "Report di validazione concept (Swarm + Neural)"
+  - "Heatmap predittive frame-by-frame"
+  - "Recommendation operative su montaggio/mix"
+  - "Iterazione validation post-edit"
+  - "Lezioni operative finali"
+caseStudies: ["eclag"]
+relatedServices: ["ai-validation-swarm"]
 locale: it
 draft: false
 type: service
-date: 2026-06-24
-updated: 2026-06-24
-deliverables:
-  - "Concept selection con panel multi-agente"
-  - "Iterazione neuro su audio, montaggio, mix"
-  - "Consegna video + report lezioni operative"
-pricing:
-  label: "Incluso nel processo creativo standard — nessun extra-fee"
-  cta: "Parla con Alba"
-caseStudies: ["eclag"]
-team: ["max", "sara", "ludovica"]
+date: 2026-06-27
 ---
 
 **TLDR.** Un secondo parere quantitativo sulle scelte creative — prima di rendere il video, prima di andare in produzione. Usiamo simulazione multi-agente e analisi neurale predittiva integrate nel processo creativo standard, senza extra-fee.

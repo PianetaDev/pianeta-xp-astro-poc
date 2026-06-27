@@ -12,7 +12,7 @@ ogImage: "/og/work-untwist.png"
 hero:
   type: "image"
   src: "/og/work-untwist.png"
-services: ["creativita-e-neuromarketing"]
+services: ["neuromarketing-lab"]
 team: ["max", "sara", "ludovica", "foss"]
 links:
   live: "https://untwist.bc3research.org"

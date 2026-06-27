@@ -106,7 +106,7 @@ Il [bulletin sulla campagna ECLAG](/bulletin/validare-una-campagna-prima-di-prod
 
 → [Choose to See Them — ECLAG](/work/eclag): il caso studio applicato.
 → [Validare una campagna video prima di produrla](/bulletin/validare-una-campagna-prima-di-produrla): la storia operativa, le sette lezioni, cosa applicheremo ai prossimi progetti.
-→ [Creatività e neuromarketing](/services/creativita-e-neuromarketing): il servizio.
+→ [Creatività e neuromarketing](/services/neuromarketing-lab): il servizio.
 
 ## Riferimenti
 

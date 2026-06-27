@@ -12,7 +12,7 @@ ogImage: "/og/work-eclag.png"
 hero:
   type: "image"
   src: "/og/work-eclag.png"
-services: ["creativita-e-neuromarketing"]
+services: ["neuromarketing-lab"]
 team: ["max", "sara", "ludovica", "foss"]
 links:
   live: "https://choosetoseethem.childsafetyineurope.com/"
@@ -89,4 +89,4 @@ Campagne video o audio con componente emotiva significativa: advocacy, ONG, sani
 
 **Parla con Alba → [info@pianeta.studio](mailto:info@pianeta.studio)**
 
-Vedi anche: [Service · Creatività e neuromarketing](/services/creativita-e-neuromarketing)
+Vedi anche: [Service · Creatività e neuromarketing](/services/neuromarketing-lab)

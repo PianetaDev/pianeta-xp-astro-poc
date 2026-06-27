@@ -122,7 +122,7 @@ Sì. Funziona su singoli spot, contenuti formativi, asset fundraising, brand vid
 ## Vedi anche
 
 → [Choose to See Them — il caso ECLAG](/work/eclag)
-→ [Service · Creatività e neuromarketing](/services/creativita-e-neuromarketing)
+→ [Service · Creatività e neuromarketing](/services/neuromarketing-lab)
 → La campagna live su [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com)
 
 ## Parlane con Alba

@@ -14,7 +14,7 @@ const SS_DISMISSED = 'alba_popup_dismissed';
 const DEFAULT_DELAY_MS = 30_000;
 const ROUTE_DELAY_MS: Record<string, number> = {
   '/work/eclag': 15_000,
-  '/services/creativita-e-neuromarketing': 18_000,
+  '/services/neuromarketing-lab': 18_000,
   '/lab/atlas': 18_000,
 };
 
