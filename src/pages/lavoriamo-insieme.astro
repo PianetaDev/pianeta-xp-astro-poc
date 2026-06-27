@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Lavoriamo insieme — Pianeta.Studio"
+  description="Rispondiamo a tutte le richieste entro 24h. Scope chiaro entro 1 settimana. Form intake qualificato o booking diretto su Cal.com."
+  ogImage="/og/placeholder.svg"
+>
+  <article class="detail-page">
+
+    <header class="detail-head intake-hero">
+      <p class="detail-eyebrow"><a href="/">Pianeta.Studio</a> · Contatti</p>
+      <h1 class="detail-title">Lavoriamo insieme</h1>
+      <p class="detail-deck">Rispondiamo a tutte le richieste entro 24h. Scope chiaro entro 1 settimana.</p>
+      <div class="trust-badges">
+        <span class="badge">🌱 GreenMeter A+</span>
+        <span class="badge">⚖ Società Benefit</span>
+      </div>
+    </header>
+
+    <div class="detail-body">
+
+      <form id="intakeForm" class="intake-form" method="POST" action="/api/lead/intake">
+        <div class="grid">
+
+          <label class="field">
+            <span class="lbl">Nome <em>*</em></span>
+            <input type="text" name="nome" required autocomplete="name" />
+          </label>
+
+          <label class="field">
+            <span class="lbl">Email <em>*</em></span>
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+
+          <label class="field">
+            <span class="lbl">Azienda</span>
+            <input type="text" name="azienda" autocomplete="organization" />
+          </label>
+
+          <label class="field">
+            <span class="lbl">Tipo progetto</span>
+            <select name="projectType">
+              <option value="">— scegli —</option>
+              <option>Brand identity</option>
+              <option>Sito web</option>
+              <option>Editorial</option>
+              <option>Report</option>
+              <option>Data storytelling</option>
+              <option>AI validation</option>
+              <option>Neuromarketing</option>
+              <option>Altro</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="lbl">Budget range</span>
+            <select name="budget">
+              <option value="">— scegli —</option>
+              <option>&lt; 10K</option>
+              <option>10–30K</option>
+              <option>30–80K</option>
+              <option>80–200K</option>
+              <option>200K+</option>
+              <option>Non so ancora</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span class="lbl">Timeline</span>
+            <select name="timeline">
+              <option value="">— scegli —</option>
+              <option>Subito (entro 4 sett.)</option>
+              <option>Quest'autunno</option>
+              <option>Q1 2027</option>
+              <option>Esplorativo</option>
+            </select>
+          </label>
+
+          <label class="field field-full">
+            <span class="lbl">Descrizione <em>*</em></span>
+            <textarea name="descrizione" required rows="6" placeholder="Raccontaci il progetto, gli obiettivi, eventuali vincoli..."></textarea>
+          </label>
+
+        </div>
+
+        <div class="form-foot">
+          <p class="form-error" id="formError" hidden></p>
+          <button class="cta-btn cta-primary" type="submit" id="submitBtn">Invia richiesta</button>
+        </div>
+      </form>
+
+      <div id="thankYou" class="thank-you" hidden>
+        <h2>Grazie.</h2>
+        <p>Ti rispondiamo entro 24h.</p>
+      </div>
+
+      <section class="alt-cta">
+        <h2>Preferisci bookare diretto?</h2>
+        <p>Salta il form e prendi 30 minuti sull'agenda di Max.</p>
+        <a class="cta-btn cta-ghost" href="https://cal.com/maxmauro" target="_blank" rel="noopener">Prenota una call di 30 min →</a>
+      </section>
+
+    </div>
+
+    <footer class="detail-foot trust-foot">
+      <p>Tutte le richieste leggiamo entro 24h · Max risponde personalmente.</p>
+    </footer>
+  </article>
+
+  <style>
+    .intake-hero { max-width: 720px; margin: 0 auto; text-align: center; }
+    .trust-badges { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .intake-form { max-width: 760px; margin: 2.5rem auto 1.5rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem 1rem;
+    }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .field-full { grid-column: 1 / -1; }
+    .lbl { font-size: 0.85rem; font-weight: 600; opacity: 0.85; }
+    .lbl em { color: #c00; font-style: normal; }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid rgba(0,0,0,0.2);
+      border-radius: 8px;
+      font: inherit;
+      background: transparent;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: currentColor;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.08);
+    }
+    .field textarea { resize: vertical; min-height: 8rem; }
+
+    .form-foot {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .form-error { color: #c00; font-size: 0.9rem; margin: 0; }
+
+    .thank-you {
+      max-width: 600px;
+      margin: 3rem auto;
+      text-align: center;
+      padding: 2rem;
+      border: 1px solid currentColor;
+      border-radius: 12px;
+    }
+
+    .alt-cta {
+      max-width: 600px;
+      margin: 3rem auto 1rem;
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    .alt-cta h2 { margin-bottom: 0.5rem; }
+    .alt-cta p { margin-bottom: 1rem; opacity: 0.8; }
+
+    .trust-foot { text-align: center; opacity: 0.7; font-size: 0.9rem; }
+
+    button[disabled] { opacity: 0.6; cursor: not-allowed; }
+  </style>
+
+  <script is:inline>
+    (function () {
+      const form = document.getElementById('intakeForm');
+      const thankYou = document.getElementById('thankYou');
+      const errEl = document.getElementById('formError');
+      const btn = document.getElementById('submitBtn');
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errEl.hidden = true;
+        errEl.textContent = '';
+        const origLabel = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Invio in corso…';
+
+        const fd = new FormData(form);
+        const payload = Object.fromEntries(fd.entries());
+
+        try {
+          const res = await fetch('/api/lead/intake', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.ok) {
+            throw new Error(data.error || 'Errore invio. Riprova o scrivi a info@pianeta.studio.');
+          }
+          form.hidden = true;
+          thankYou.hidden = false;
+          thankYou.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } catch (err) {
+          errEl.textContent = err.message || 'Errore invio. Riprova.';
+          errEl.hidden = false;
+          btn.disabled = false;
+          btn.textContent = origLabel;
+        }
+      });
+    })();
+  </script>
+
+</BaseLayout>
