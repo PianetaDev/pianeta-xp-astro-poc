@@ -61,6 +61,7 @@ const jsonLd = {
     nextItem={nextItem}
     byline={{ authors: data.authors, date: data.date ? formatDate(data.date) : undefined, meta: data.issue ? [`#${data.issue}`] : undefined }}
     metaInline={metaInline}
+    twoCol={(item.body?.length ?? 0) > 2400}
     jsonLd={jsonLd}
   >
     <Content />

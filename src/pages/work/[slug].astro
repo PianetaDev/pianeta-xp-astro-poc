@@ -62,6 +62,7 @@ const related = bulletinRefs.map((slug) => ({ type: 'bulletin', slug }));
     related={related}
     nextItem={nextItem}
     metaInline={metaInline}
+    twoCol={(item.body?.length ?? 0) > 2400}
     jsonLd={jsonLd}
   >
     <Content />

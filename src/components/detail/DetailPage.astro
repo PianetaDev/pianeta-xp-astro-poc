@@ -20,6 +20,7 @@ interface Props {
   nextItem?: NextItem;
   byline?: BylineProp;
   metaInline?: MetaItem[];
+  twoCol?: boolean;
   jsonLd?: any;
 }
 const {
@@ -37,6 +38,7 @@ const {
   nextItem,
   byline,
   metaInline = [],
+  twoCol = false,
   jsonLd,
 } = Astro.props;
 
@@ -111,7 +113,7 @@ const renderCta = (c: CtaProp, cls: string) => {
   )}
 
   <section class="detail-body">
-    <div class="detail-prose prose-eclag">
+    <div class:list={['detail-prose prose-eclag', twoCol && 'is-two-col']}>
       <slot />
     </div>
   </section>

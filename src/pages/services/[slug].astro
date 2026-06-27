@@ -98,6 +98,7 @@ const jsonLd = {
     relatedTitle="Case study"
     nextItem={nextItem}
     metaInline={metaInline}
+    twoCol={(item.body?.length ?? 0) > 2400}
     jsonLd={jsonLd}
   >
     <Content />
