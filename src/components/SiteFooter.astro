@@ -3,7 +3,13 @@ const year = new Date().getFullYear();
 ---
 <footer class="site-main site-footer">
   <div class="site-footer-inner">
-    <img src="/brand/logo-horizontal-color.svg" alt="Pianeta.Studio" width="282" height="80" class="site-footer-logo" loading="lazy" decoding="async" />
+    <div class="site-footer-brand">
+      <img src="/brand/logo-horizontal-color.svg" alt="Pianeta.Studio" width="282" height="80" class="site-footer-logo" loading="lazy" decoding="async" />
+      <span class="badge-benefit" aria-label="Società Benefit dal 2023">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .5-4.5 4 1.5 6.5L12 16l-6 3 1.5-6.5-4.5-4 6-.5z"/></svg>
+        Società Benefit
+      </span>
+    </div>
     <div class="site-footer-meta">
       <p>© {year} Pianeta.Studio S.r.l. SB · Sustainable Creativity dal 2016 · P.IVA 06037730873</p>
       <p class="site-footer-links">
@@ -26,7 +32,10 @@ const year = new Date().getFullYear();
   }
   .site-footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
   @media (min-width: 700px) { .site-footer-inner { flex-direction: row; justify-content: space-between; align-items: center; } }
+  .site-footer-brand { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
   .site-footer-logo { width: 160px; height: auto; display: block; }
+  .badge-benefit { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: rgba(255,107,51,0.10); color: var(--cta-primary); border: 1px solid rgba(255,107,51,0.25); border-radius: 999px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .badge-benefit svg { fill: var(--cta-primary); }
   .site-footer-meta { font-size: 12px; color: rgba(14,17,22,0.6); display: flex; flex-direction: column; gap: 6px; }
   @media (min-width: 700px) { .site-footer-meta { text-align: right; } }
   .site-footer-links { display: flex; gap: 16px; flex-wrap: wrap; margin: 0; }
