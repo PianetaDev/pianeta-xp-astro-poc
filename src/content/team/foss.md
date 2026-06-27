@@ -1,6 +1,7 @@
 ---
 name: "Francesca Fossati"
 title: "Francesca Fossati"
+kind: "core"
 role: "Senior Designer · UI/UX Lead"
 since: "2020-01-01"
 employment: "dipendente"

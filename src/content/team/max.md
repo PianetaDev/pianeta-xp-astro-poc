@@ -1,5 +1,6 @@
 ---
 title: "Massimiliano Mauro"
+kind: "core"
 description: "Founder e Strategic Director di Pianeta.Studio. Design sostenibile, AI Safety, sistemi alimentari."
 ogImage: "/team/max.jpg"
 date: 2026-06-22

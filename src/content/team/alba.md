@@ -1,6 +1,7 @@
 ---
 name: "Alba"
 title: "Alba"
+kind: "ai"
 role: "AI di gruppo · Pre-vendita & narrazione"
 since: "2025-09-01"
 employment: "agente AI"

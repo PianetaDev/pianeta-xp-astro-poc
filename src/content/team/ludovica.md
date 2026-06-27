@@ -1,6 +1,7 @@
 ---
 name: "Ludovica Ranzini"
 title: "Ludovica Ranzini"
+kind: "core"
 role: "Designer · Custom Illustration, Data Visualization, UX/UI"
 since: "2025-09-01"
 employment: "collaboratore"

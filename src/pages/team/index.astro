@@ -3,12 +3,18 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import IndexCard from '../../components/detail/IndexCard.astro';
 import { getCollection } from 'astro:content';
 
-const all = await getCollection('team');
-const items = all
-  .filter((i: any) => i.data.draft !== true)
-  .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999));
+const all = (await getCollection('team')).filter((i: any) => i.data.draft !== true);
+
+const byKind = (k: string) =>
+  all
+    .filter((i: any) => (i.data.kind || 'core') === k)
+    .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999));
+
+const core = byKind('core');
+const satellite = byKind('satellite');
+const ai = byKind('ai');
 ---
-<BaseLayout title="Team — Pianeta.Studio" description="Le persone dietro Pianeta.Studio.">
+<BaseLayout title="Team — Pianeta.Studio" description="Le persone dietro Pianeta.Studio: core team, rete Satellite, agenti AI.">
   <div class="index-page">
     <header class="index-head">
       <p class="index-eyebrow">Pianeta.Studio</p>
@@ -16,21 +22,78 @@ const items = all
       <p class="index-deck">Persone che progettano, programmano, ricercano. Studio nomade, sedi a Milano · Ardea · Sicilia.</p>
     </header>
 
-    {items.length === 0 ? (
+    {core.length > 0 && (
+      <section class="team-section">
+        <header class="team-section-head">
+          <h2 class="team-section-title">Core</h2>
+          <p class="team-section-intro">Il team interno dello studio. Operations, design, tecnologia.</p>
+        </header>
+        <div class="index-grid">
+          {core.map((it: any) => (
+            <IndexCard
+              href={`/team/${it.id}`}
+              title={it.data.name || it.data.title || it.id}
+              deck={it.data.role}
+              kicker={it.data.location}
+              image={it.data.photo || it.data.cover}
+              portrait={true}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {satellite.length > 0 && (
+      <section class="team-section">
+        <header class="team-section-head">
+          <h2 class="team-section-title">Pianeta.Satellite</h2>
+          <p class="team-section-intro">La community di freelance che orbita intorno al core team — designer, illustratori, sviluppatori che hanno scelto di lavorare con noi su progetti specifici. Contatto: <a href="mailto:satellite@pianeta.studio" class="meta-link">satellite@pianeta.studio</a></p>
+        </header>
+        <div class="index-grid">
+          {satellite.map((it: any) => (
+            <IndexCard
+              href={`/team/${it.id}`}
+              title={it.data.name || it.data.title || it.id}
+              deck={it.data.role}
+              kicker={it.data.discipline || it.data.location}
+              image={it.data.photo || it.data.cover}
+              portrait={true}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {ai.length > 0 && (
+      <section class="team-section">
+        <header class="team-section-head">
+          <h2 class="team-section-title">AI di gruppo</h2>
+          <p class="team-section-intro">Sistemi AI che operano dentro Pianeta.Studio con disclosure esplicita. Niente "human disguised as AI", niente "AI disguised as human".</p>
+        </header>
+        <div class="index-grid">
+          {ai.map((it: any) => (
+            <IndexCard
+              href={`/team/${it.id}`}
+              title={it.data.name || it.data.title || it.id}
+              deck={it.data.role}
+              kicker={it.data.location}
+              image={it.data.photo || it.data.cover}
+              portrait={true}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {all.length === 0 && (
       <div class="index-empty">Nessun profilo pubblicato.</div>
-    ) : (
-      <div class="index-grid">
-        {items.map((it: any) => (
-          <IndexCard
-            href={`/team/${it.id}`}
-            title={it.data.name || it.data.title || it.id}
-            deck={it.data.role}
-            kicker={it.data.location}
-            image={it.data.photo || it.data.cover}
-            portrait={true}
-          />
-        ))}
-      </div>
     )}
   </div>
+
+  <style>
+    .team-section { margin-top: 64px; }
+    .team-section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
+    .team-section-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-weight: 900; letter-spacing: -0.02em; margin: 0 0 10px; }
+    .team-section-intro { font-size: 14px; color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
+  </style>
 </BaseLayout>

@@ -38,7 +38,10 @@ const services = defineCollection({
 
 const team = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/team' }),
-  schema: baseSchema,
+  schema: baseSchema.extend({
+    kind: z.enum(['core', 'satellite', 'ai']).optional(),
+    discipline: z.string().optional(),
+  }),
 });
 
 const lab = defineCollection({
