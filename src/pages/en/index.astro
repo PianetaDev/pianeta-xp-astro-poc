@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../lib/i18n/strings';
+---
+<BaseLayout title="Pianeta.Studio — Sustainable Creativity" description="Pianeta.Studio — Design & Technology for a Human to Planet world.">
+  <div class="index-page">
+    <div class="detail-fallback-banner" role="status" style="max-width:1100px;margin:16px auto 0;padding:10px 16px;background:rgba(255,107,51,0.10);border:1px solid rgba(255,107,51,0.25);border-radius:8px;font-size:13px;line-height:1.4;">
+      {t('en', 'fallback_banner')}
+    </div>
+    <header class="index-head">
+      <p class="index-eyebrow">Pianeta.Studio</p>
+      <h1 class="index-title">Sustainable Creativity</h1>
+      <p class="index-deck">Design & Technology — Human to Planet. We turn briefs into opportunities through co-design, AI validation and UX validation.</p>
+      <p style="margin-top: 32px;">
+        <a href="/en/work" class="cta-btn cta-primary">Explore our work</a>
+        <a href="/en/services" class="cta-btn cta-secondary" style="margin-left: 12px;">{t('en', 'cta_come_lavoriamo')}</a>
+      </p>
+    </header>
+  </div>
+</BaseLayout>

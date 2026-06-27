@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import IndexCard from '../../../components/detail/IndexCard.astro';
+import { getCollection } from 'astro:content';
+import { SERVICE_CATEGORIES } from '../../../lib/services-categories';
+import { t } from '../../../lib/i18n/strings';
+
+const all = (await getCollection('services')).filter((i: any) => !i.data.draft);
+
+const byCategory = (key: string) =>
+  all
+    .filter((i: any) => i.data.category === key)
+    .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999));
+---
+<BaseLayout title="Services — Pianeta.Studio" description="Four practice categories: Strategic Design Consultancy · Visualization & Storytelling · Products & Systems · Data & AI.">
+  <div class="index-page" style="max-width:1180px;">
+    <div class="detail-fallback-banner" role="status" style="max-width:1100px;margin:16px auto 0;padding:10px 16px;background:rgba(255,107,51,0.10);border:1px solid rgba(255,107,51,0.25);border-radius:8px;font-size:13px;line-height:1.4;">
+      {t('en', 'fallback_banner')}
+    </div>
+    <header class="index-head">
+      <p class="index-eyebrow">Sustainable Creativity · Design & Technology</p>
+      <h1 class="index-title">Services</h1>
+      <p class="index-deck">Four practice areas that talk to each other. Co-design + AI validation + open standards. No lock-in.</p>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">{t('en', 'cta_lavoriamo')}</button>
+        <a href="/processo" class="cta-btn cta-ghost">{t('en', 'cta_come_lavoriamo')} →</a>
+      </div>
+      <script is:inline>
+        document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open'))));
+      </script>
+    </header>
+
+    {SERVICE_CATEGORIES.map((cat) => {
+      const items = byCategory(cat.key);
+      if (!items.length) return null;
+      return (
+        <section id={cat.key} class="services-cat" style="margin-top:64px;">
+          <h2 style="font-size:clamp(1.4rem,2.2vw,1.85rem);font-weight:900;letter-spacing:-0.02em;margin:0 0 24px;text-align:center;">{cat.title}</h2>
+          <div class="index-grid">
+            {items.map((it: any) => (
+              <IndexCard href={`/en/services/${it.id}`} title={it.data.title || it.id} deck={it.data.description} kicker={it.data.icon || cat.title} image={it.data.cover || it.data.ogImage} />
+            ))}
+          </div>
+        </section>
+      );
+    })}
+  </div>
+</BaseLayout>

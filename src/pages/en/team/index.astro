@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import IndexCard from '../../../components/detail/IndexCard.astro';
+import { getCollection } from 'astro:content';
+import { t } from '../../../lib/i18n/strings';
+
+const all = (await getCollection('team')).filter((i: any) => i.data.draft !== true);
+
+const byKind = (k: string) =>
+  all
+    .filter((i: any) => (i.data.kind || 'core') === k)
+    .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999));
+
+const core = byKind('core');
+const satellite = byKind('satellite');
+const ai = byKind('ai');
+---
+<BaseLayout title="Team — Pianeta.Studio" description="The people behind Pianeta.Studio: core team, Satellite network, AI agents.">
+  <div class="index-page">
+    <div class="detail-fallback-banner" role="status" style="max-width:1100px;margin:16px auto 0;padding:10px 16px;background:rgba(255,107,51,0.10);border:1px solid rgba(255,107,51,0.25);border-radius:8px;font-size:13px;line-height:1.4;">
+      {t('en', 'fallback_banner')}
+    </div>
+    <header class="index-head">
+      <p class="index-eyebrow">Pianeta.Studio</p>
+      <h1 class="index-title">Team</h1>
+      <p class="index-deck">People who design, code, research. A nomadic studio with bases in Milan · Ardea · Sicily.</p>
+    </header>
+
+    {core.length > 0 && (
+      <section class="team-section">
+        <header class="team-section-head">
+          <h2 class="team-section-title">Core</h2>
+          <p class="team-section-intro">The studio's in-house team. Operations, design, technology.</p>
+        </header>
+        <div class="index-grid">
+          {core.map((it: any) => (
+            <IndexCard href={`/en/team/${it.id}`} title={it.data.name || it.data.title || it.id} deck={it.data.role} kicker={it.data.location} image={it.data.photo || it.data.cover} portrait={true} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {satellite.length > 0 && (
+      <section class="team-section">
+        <header class="team-section-head">
+          <h2 class="team-section-title">Pianeta.Satellite</h2>
+          <p class="team-section-intro">The freelance community that orbits the core team. Contact: <a href="mailto:satellite@pianeta.studio" class="meta-link">satellite@pianeta.studio</a></p>
+        </header>
+        <div class="index-grid">
+          {satellite.map((it: any) => (
+            <IndexCard href={`/en/team/${it.id}`} title={it.data.name || it.data.title || it.id} deck={it.data.role} kicker={it.data.discipline || it.data.location} image={it.data.photo || it.data.cover} portrait={true} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {ai.length > 0 && (
+      <section class="team-section">
+        <header class="team-section-head">
+          <h2 class="team-section-title">Group AI</h2>
+          <p class="team-section-intro">AI systems operating inside Pianeta.Studio with explicit disclosure.</p>
+        </header>
+        <div class="index-grid">
+          {ai.map((it: any) => (
+            <IndexCard href={`/en/team/${it.id}`} title={it.data.name || it.data.title || it.id} deck={it.data.role} kicker={it.data.location} image={it.data.photo || it.data.cover} portrait={true} />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {all.length === 0 && (<div class="index-empty">No profiles published.</div>)}
+  </div>
+
+  <style>
+    .team-section { margin-top: 64px; }
+    .team-section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
+    .team-section-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-weight: 900; letter-spacing: -0.02em; margin: 0 0 10px; }
+    .team-section-intro { font-size: 14px; color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
+  </style>
+</BaseLayout>

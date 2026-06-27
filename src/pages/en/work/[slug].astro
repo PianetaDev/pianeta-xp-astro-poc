@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DetailPage from '../../../components/detail/DetailPage.astro';
+import { getCollection, render } from 'astro:content';
+import { pickNextItem, toNextProp } from '../../../lib/next-item';
+import { t } from '../../../lib/i18n/strings';
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const items = await getCollection('work');
+  return items.map((item) => ({ params: { slug: item.id }, props: { item, allItems: items } }));
+}
+
+const { item, allItems } = Astro.props as any;
+const nextItem = toNextProp(pickNextItem(allItems, item.id), 'work');
+if (nextItem) nextItem.type = 'en/work';
+const { Content } = await render(item);
+const data: any = item.data;
+const title = data.title || item.id;
+const cover = data.cover || data.ogImage;
+const live = data.links?.live;
+const bulletinRefs: string[] = data.links?.bulletin || [];
+
+const metaInline = [
+  data.client && { label: 'Client', value: data.client },
+  data.sector && { label: 'Sector', value: data.sector },
+  data.year && { label: 'Year', value: String(data.year) },
+  data.category && { label: 'Category', value: data.category },
+  data.team?.length && { label: 'Team', value: data.team.join(', ') },
+  live && { label: 'Live', value: new URL(live).hostname, href: live, external: true },
+].filter(Boolean);
+
+const url = new URL(`/en/work/${item.id}`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: title,
+  description: data.description,
+  url,
+  image: data.ogImage || cover,
+  dateCreated: data.date ? new Date(data.date).toISOString() : undefined,
+  dateModified: data.updated ? new Date(data.updated).toISOString() : undefined,
+  creator: { '@type': 'Organization', name: 'Pianeta.Studio', url: 'https://xp.pianeta.studio' },
+  ...(data.client && { sourceOrganization: { '@type': 'Organization', name: data.client } }),
+  ...(live && { sameAs: live }),
+  keywords: (data.tags || []).join(', ') || undefined,
+};
+const eyebrowParts = [{ label: 'Work', href: '/en/work' }];
+if (data.category) eyebrowParts.push({ label: data.category });
+if (data.year) eyebrowParts.push({ label: String(data.year) });
+
+const related = bulletinRefs.map((slug) => ({ type: 'en/bulletin', slug }));
+---
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="work" ogSlug={item.id}>
+  <DetailPage
+    eyebrowParts={eyebrowParts}
+    title={title}
+    deck={data.description}
+    cover={cover}
+    primaryCta={{ label: t('en', 'cta_lavoriamo'), action: 'open-hire-us' }}
+    secondaryCta={live ? { label: 'Visit site ↗', href: live, external: true } : undefined}
+    backHref="/en/work"
+    backLabel="All work"
+    related={related}
+    nextItem={nextItem}
+    metaInline={metaInline}
+    twoCol={(item.body?.length ?? 0) > 2400}
+    jsonLd={jsonLd}
+    fallbackBanner={t('en', 'fallback_banner')}
+  >
+    <Content />
+  </DetailPage>
+</BaseLayout>

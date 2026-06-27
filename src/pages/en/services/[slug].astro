@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DetailPage from '../../../components/detail/DetailPage.astro';
+import { getCollection, render } from 'astro:content';
+import { pickNextItem, toNextProp } from '../../../lib/next-item';
+import { getCategoryByKey, getPhaseTag } from '../../../lib/services-categories';
+import { t } from '../../../lib/i18n/strings';
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const items = await getCollection('services');
+  return items.map((item) => ({ params: { slug: item.id }, props: { item, allItems: items } }));
+}
+
+const { item, allItems } = Astro.props as any;
+const { Content } = await render(item);
+const data: any = item.data;
+const title = data.title || item.id;
+const cover = data.cover || data.ogImage;
+const caseStudies: string[] = data.caseStudies || [];
+
+const category = data.category ? getCategoryByKey(data.category) : null;
+const phaseTag = getPhaseTag(data.processPhase);
+
+const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Services', href: '/en/services' }];
+if (category) eyebrowParts.push({ label: category.title, href: `/en/services#${category.key}` });
+
+const siblings = allItems
+  .filter((s: any) => s.data.category === data.category && s.id !== item.id && !s.data.draft)
+  .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999))
+  .slice(0, 3);
+
+const relatedFromCaseStudies = caseStudies.map((slug: string) => ({ type: 'en/work', slug }));
+
+const nextItem = toNextProp(pickNextItem(allItems, item.id), 'services');
+if (nextItem) nextItem.type = 'en/services';
+
+const metaInline = [
+  category && { label: 'Category', value: category.title, href: `/en/services#${category.key}` },
+  phaseTag && { label: 'Process phase', value: phaseTag, href: '/processo' },
+  data.team?.length && { label: 'Team', value: data.team.join(', ') },
+].filter(Boolean);
+
+const isNeuromarketing = item.id === 'neuromarketing-lab';
+const CAL_URL = 'https://cal.com/maxmauro/30min';
+
+const url = new URL(`/en/services/${item.id}`, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': url,
+  name: title,
+  description: data.description,
+  url,
+  image: data.ogImage || cover,
+  serviceType: category?.title || title,
+  category: category?.title || 'Design & Technology',
+  provider: { '@type': 'Organization', name: 'Pianeta.Studio', url: 'https://xp.pianeta.studio' },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Europe' },
+};
+---
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="services" ogSlug={item.id}>
+  <DetailPage
+    eyebrowParts={eyebrowParts}
+    title={title}
+    deck={data.description}
+    cover={cover}
+    primaryCta={isNeuromarketing
+      ? { label: 'Talk to Alba', action: 'open-alba' }
+      : { label: t('en', 'cta_lavoriamo'), action: 'open-hire-us' }}
+    secondaryCta={isNeuromarketing
+      ? { label: 'Book a call', href: CAL_URL, external: true }
+      : { label: t('en', 'cta_come_lavoriamo'), href: '/processo' }}
+    backHref="/en/services"
+    backLabel="All services"
+    related={relatedFromCaseStudies}
+    relatedTitle="Case studies"
+    nextItem={nextItem}
+    metaInline={metaInline}
+    twoCol={(item.body?.length ?? 0) > 2400}
+    jsonLd={jsonLd}
+    fallbackBanner={t('en', 'fallback_banner')}
+  >
+    <Content />
+
+    {(data.inputClient?.length || data.deliverables?.length) && (
+      <div class="service-blocks">
+        {data.inputClient?.length > 0 && (
+          <section class="service-block">
+            <h3 class="service-block-title">Client input</h3>
+            <ul class="service-block-list">
+              {data.inputClient.map((d: string) => <li>{d}</li>)}
+            </ul>
+          </section>
+        )}
+        {data.deliverables?.length > 0 && (
+          <section class="service-block is-highlight">
+            <h3 class="service-block-title">Pianeta deliverables</h3>
+            <ul class="service-block-list">
+              {data.deliverables.map((d: string) => <li>{d}</li>)}
+            </ul>
+          </section>
+        )}
+      </div>
+    )}
+
+    {siblings.length > 0 && (
+      <section class="service-siblings">
+        <h3 class="service-siblings-title">Other services in {category?.title || 'this category'}</h3>
+        <ul class="service-siblings-list">
+          {siblings.map((s: any) => (
+            <li>
+              <a href={`/en/services/${s.id}`} class="service-sibling-card">
+                <span class="service-sibling-icon">{s.data.icon || '•'}</span>
+                <div>
+                  <span class="service-sibling-title">{s.data.title}</span>
+                  {s.data.description && <span class="service-sibling-deck">{s.data.description}</span>}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </DetailPage>
+</BaseLayout>
