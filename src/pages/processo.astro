@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const steps = [
   {
     num: '01',
+    anchor: 'discover',
     title: 'Discovery',
     time: '1-2 settimane',
     body: 'Capiamo il vostro problema, non solo il vostro brief. Interviste con il team, audit del materiale esistente (sito, brand, dati), identificazione dei vincoli reali — tempo, budget, persone, vincoli legali, vincoli ESG. Output: una mappa condivisa del problema e una proposta di scope.',
@@ -11,6 +12,7 @@ const steps = [
   },
   {
     num: '02',
+    anchor: 'ideate',
     title: 'Co-design',
     time: '2-4 settimane',
     body: 'Disegniamo insieme. Workshop, prototipi navigabili, validazione AI dove serve (Swarm o Neural Prediction). Decisioni di design tracciate in un decision log che resta vostro. Niente "big reveal": il design cresce sotto i vostri occhi.',
@@ -18,6 +20,7 @@ const steps = [
   },
   {
     num: '03',
+    anchor: 'refine',
     title: 'Build',
     time: '4-12 settimane',
     body: 'Costruzione. Codice consegnato, standard aperti, repo del cliente. Stack Terra (Payload CMS + Nuxt) per il web, oppure il vostro stack se ne avete uno. Performance budget e carbon budget come vincoli tecnici verificabili in CI. Niente lock-in.',
@@ -25,6 +28,7 @@ const steps = [
   },
   {
     num: '04',
+    anchor: 'support',
     title: 'Validate & launch',
     time: '1-2 settimane',
     body: 'Validation finale. UX validation con utenti reali, AI validation sui concept critici, accessibility audit. Launch graduale o big bang in base al rischio. Handover ai team interni con sessioni di formazione e documentazione.',
@@ -32,6 +36,7 @@ const steps = [
   },
   {
     num: '05',
+    anchor: 'measure',
     title: 'Measure & evolve',
     time: 'rolling',
     body: 'Niente è "finito" davvero. Misurazione di performance, CO₂, conversioni; review trimestrali; backlog di evoluzioni prioritizzato insieme. Modello: rolling 3-6 mesi o forfait per fase, sempre con scope esplicito. Quando ne uscite, ne uscite con tutto in mano.',
@@ -74,7 +79,7 @@ const jsonLd = {
 
     <ol class="process-steps">
       {steps.map((s) => (
-        <li class="process-step">
+        <li class="process-step" id={s.anchor}>
           <div class="process-num">{s.num}</div>
           <div class="process-body">
             <header class="process-step-head">
