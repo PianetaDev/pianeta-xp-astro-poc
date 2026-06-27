@@ -24,7 +24,16 @@ const bulletin = defineCollection({
 
 const services = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/services' }),
-  schema: baseSchema,
+  schema: baseSchema.extend({
+    category: z.enum(['strategic-design-consultancy', 'visualization-storytelling', 'products-systems', 'data-ai']).optional(),
+    processPhase: z.union([z.number().int().min(1).max(4), z.string()]).optional(),
+    icon: z.string().optional(),
+    inputClient: z.array(z.string()).optional(),
+    deliverables: z.array(z.string()).optional(),
+    relatedServices: z.array(z.string()).optional(),
+    caseStudies: z.array(z.string()).optional(),
+    order: z.number().optional(),
+  }),
 });
 
 const team = defineCollection({
