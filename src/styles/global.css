@@ -93,6 +93,31 @@
   background: #1a1d23 !important;
   color: #f5f4ee !important;
 }
+
+/* Fix testi che si perdevano in dark — bg light hard-coded + text light/dark hard-coded */
+:root[data-theme="dark"],
+:root[data-theme="auto"][data-sun="night"] {
+  /* Process step (light card) */
+  .process-step { background: #1a1d23 !important; color: #f5f4ee !important; }
+  /* Services L1 question color */
+  .services-sub-question { color: #f5f4ee !important; }
+  /* Admin campaign link */
+  .campaign-link { color: #f5f4ee !important; }
+  /* Detail meta value (era nero hard) */
+  .detail-meta-value:not(a) { color: #f5f4ee !important; }
+  /* SiteRail wordmark testo era nero hard-coded */
+  .site-rail p[style*="color:#0e1116"], .site-rail-brand p, .site-rail-brand a { color: #f5f4ee !important; }
+  /* SiteRail flyout */
+  .rail-flyout { background: #1a1d23 !important; color: #f5f4ee !important; }
+  .rail-flyout a, .rail-flyout p { color: #f5f4ee !important; }
+  /* Index card sibling/related (white hard-coded inside service-block, service-sibling) */
+  .service-block, .service-sibling-card { background: #1a1d23 !important; }
+  .service-block-list li, .service-sibling-title, .service-sibling-deck { color: #f5f4ee !important; }
+  /* Bento wordmark tile testo se ancora nero hard-coded */
+  .bento-wordmark-text { color: #f5f4ee !important; }
+  /* Process bar chip (services) */
+  .process-chip { background: #1a1d23 !important; color: #f5f4ee !important; }
+}
 :root[data-theme="dark"] .bento-wordmark-logo,
 :root[data-theme="auto"][data-sun="night"] .bento-wordmark-logo {
   filter: invert(1) hue-rotate(180deg);
