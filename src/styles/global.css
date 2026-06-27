@@ -132,12 +132,17 @@
   body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 }
 
-.prose-eclag h2 { font-size: 1.75rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1rem; letter-spacing: -0.02em; }
-.prose-eclag h3 { font-size: 1.25rem; font-weight: 700; margin-top: 2rem; margin-bottom: 0.75rem; }
-.prose-eclag p { margin-bottom: 1rem; line-height: 1.7; }
+/* Baseline grid: line-height 1.7 = unità base. Tutti i margini in multipli. */
+.prose-eclag { line-height: 1.7; }
+.prose-eclag h2 { font-size: 1.75rem; font-weight: 800; margin: 1.7em 0 0.85em; line-height: 1.2; letter-spacing: -0.02em; }
+.prose-eclag h3 { font-size: 1.25rem; font-weight: 700; margin: 1.7em 0 0.85em; line-height: 1.3; }
+.prose-eclag p { margin: 0 0 1.7em; line-height: 1.7; }
+.prose-eclag ul, .prose-eclag ol { margin: 0 0 1.7em; padding-left: 1.25rem; }
+.prose-eclag ul { list-style: disc; }
+.prose-eclag ul li, .prose-eclag ol li { margin-bottom: 0.425em; line-height: 1.7; }
+.prose-eclag blockquote { margin: 1.7em 0; line-height: 1.7; }
 .prose-eclag a { text-decoration: underline; text-underline-offset: 3px; }
 .prose-eclag strong { font-weight: 700; }
-.prose-eclag ul { margin: 1rem 0; padding-left: 1.25rem; list-style: disc; }
 
 /* CTA buttons — pill shape, arancio primario, blu secondario */
 .cta-btn {
