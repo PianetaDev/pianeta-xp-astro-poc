@@ -17,6 +17,7 @@ const team = (await getCollection('team')).filter(live);
 const teamCount = team.length;
 
 const w0 = featuredWork[0];
+const w1 = featuredWork[1];
 const b0 = bulletin[0];
 const b1 = bulletin[1];
 const b2 = bulletin[2];
@@ -136,7 +137,20 @@ const ldJson = {
         </a>
       )}
 
-      {/* 7. Team — light */}
+      {/* 7. Work #2 — image cover (auto pesca w1 dalla collection) */}
+      {w1 && (
+        <a href={`/work/${w1.id}`} class="bento-tile t-medium" style={`background-image:url('${(w1.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
+          <div class="bento-grad" />
+          <div class="bento-content">
+            <p class="bento-kicker">{'Work · ' + (w1.data.year || '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{w1.data.title}</h2>
+            <p class="bento-sub">{w1.data.client || w1.data.description}</p>
+          </div>
+        </a>
+      )}
+
+      {/* 8. Team — light */}
       <a href="/team" class="bento-tile t-medium t-cream">
         <div class="bento-content">
           <p class="bento-kicker">Persone</p>
