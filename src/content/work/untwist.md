@@ -16,6 +16,7 @@ services: ["creativita-e-neuromarketing"]
 team: ["max", "sara", "ludovica", "foss"]
 links:
   live: "https://untwist.bc3research.org"
+  relatedWork: ["bc3-rebranding"]
 locale: it
 draft: false
 type: work
