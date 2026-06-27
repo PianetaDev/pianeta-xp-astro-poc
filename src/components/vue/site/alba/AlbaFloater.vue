@@ -11,20 +11,32 @@ const popupVisible = ref(false)
 
 function onClick() {
   session.trackEvent('floater_clicked', { url: typeof window !== 'undefined' ? window.location.pathname : '/' })
+  // GTM dataLayer: alba_chat_open
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({ event: 'alba_chat_open', trigger: 'floater', page: window.location.pathname })
+  }
   openPanel()
 }
 
-const onExternalOpen = () => openPanel()
+const onExternalOpenWithTracking = () => {
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({ event: 'alba_chat_open', trigger: 'cta', page: window.location.pathname })
+  }
+  openPanel()
+}
+
 const onPopupShown = () => { popupVisible.value = true }
 const onPopupClosed = () => { popupVisible.value = false }
 
 onMounted(() => {
-  window.addEventListener('alba:open', onExternalOpen)
+  window.addEventListener('alba:open', onExternalOpenWithTracking)
   window.addEventListener('alba:popup-shown', onPopupShown)
   window.addEventListener('alba:popup-closed', onPopupClosed)
 })
 onBeforeUnmount(() => {
-  window.removeEventListener('alba:open', onExternalOpen)
+  window.removeEventListener('alba:open', onExternalOpenWithTracking)
   window.removeEventListener('alba:popup-shown', onPopupShown)
   window.removeEventListener('alba:popup-closed', onPopupClosed)
 })

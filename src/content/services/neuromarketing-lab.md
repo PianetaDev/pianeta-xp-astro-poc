@@ -86,4 +86,4 @@ No. Lavoriamo in italiano e inglese, su progetti europei e internazionali. ECLAG
 
 Se hai un prossimo progetto con componente video o audio significativa, capiamo insieme se ha senso applicare il metodo.
 
-**Parla con Alba → [info@pianeta.studio](mailto:info@pianeta.studio)**
+Usa il pulsante **"Parla con Alba"** in alto — o prenota direttamente una call esplorativa con Max.

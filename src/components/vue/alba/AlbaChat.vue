@@ -169,6 +169,16 @@ async function send(directText?: string) {
             await nextTick(); scrollBottom()
           } else if (chunk.type === 'tool_use') {
             messages.value[asstIdx].toolHint = `Sto consultando ${chunk.name}…`
+          } else if (chunk.type === 'tool_result') {
+            // GTM dataLayer: traccia conversioni chiave di Alba
+            if (typeof window !== 'undefined') {
+              window.dataLayer = window.dataLayer || []
+              if (chunk.name === 'book_call') {
+                window.dataLayer.push({ event: 'book_call_click', page: window.location.pathname })
+              } else if (chunk.name === 'route_to_human') {
+                window.dataLayer.push({ event: 'route_to_human', page: window.location.pathname })
+              }
+            }
           } else if (chunk.type === 'error') {
             messages.value[asstIdx].content += `\n⚠️ ${chunk.message}`
           } else if (chunk.type === 'done') {
