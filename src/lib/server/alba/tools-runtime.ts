@@ -86,7 +86,7 @@ async function bookCall(
       start: parsedStart.toISOString(),
       end: endDate.toISOString(),
       timeZone: 'Europe/Rome',
-      attendees: [args.user_email, process.env.ALBA_CALENDAR_OWNER_EMAIL || 'info@pianeta.studio'],
+      attendees: [args.user_email, process.env.ALBA_CALENDAR_OWNER_EMAIL || 'max@pianeta.studio'],
       addMeet: true,
     });
   }
@@ -123,12 +123,13 @@ async function bookCall(
       `Per esportare la conversazione completa: GET /api/alba/export-my-data?uid=${ctx.uid}`,
     ].join('\n');
     try {
+      const ownerEmail = process.env.ALBA_CALENDAR_OWNER_EMAIL || 'max@pianeta.studio';
       const res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { 'authorization': `Bearer ${resendKey}`, 'content-type': 'application/json' },
         body: JSON.stringify({
           from: 'Alba — Pianeta.Studio <alba@pianeta.studio>',
-          to: ['info@pianeta.studio'],
+          to: [ownerEmail],
           cc: [args.user_email],
           reply_to: args.user_email,
           subject: `Nuovo contatto da Alba — ${args.user_name ?? args.user_email}`,
@@ -194,7 +195,7 @@ async function sendBriefEmail(args: { user_email: string; user_name?: string; br
       },
       body: JSON.stringify({
         from: 'Alba — Pianeta.Studio <alba@pianeta.studio>',
-        to: [args.user_email, 'info@pianeta.studio'],
+        to: [args.user_email, process.env.ALBA_CALENDAR_OWNER_EMAIL || 'max@pianeta.studio'],
         subject: `Brief — ${args.user_name ?? args.user_email}`,
         text: args.brief,
       }),
