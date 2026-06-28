@@ -73,6 +73,28 @@ async function refreshAccessToken(ownerEmail: string): Promise<{ access_token: s
   return { access_token: tok.access_token, expires_at: expAt };
 }
 
+export interface BusyInterval { start: string; end: string }
+export interface FreeBusyResult { ok: boolean; busy?: BusyInterval[]; error?: string }
+
+const FREEBUSY_API = 'https://www.googleapis.com/calendar/v3/freeBusy';
+
+export async function getFreeBusy(timeMinIso: string, timeMaxIso: string, timeZone = 'Europe/Rome'): Promise<FreeBusyResult> {
+  const owner = process.env.ALBA_CALENDAR_OWNER_EMAIL;
+  if (!owner) return { ok: false, error: 'ALBA_CALENDAR_OWNER_EMAIL env missing' };
+  const tokenRes = await refreshAccessToken(owner);
+  if ('error' in tokenRes) return { ok: false, error: tokenRes.error };
+
+  const res = await fetch(FREEBUSY_API, {
+    method: 'POST',
+    headers: { 'authorization': `Bearer ${tokenRes.access_token}`, 'content-type': 'application/json' },
+    body: JSON.stringify({ timeMin: timeMinIso, timeMax: timeMaxIso, timeZone, items: [{ id: 'primary' }] }),
+  });
+  if (!res.ok) return { ok: false, error: `freebusy failed: ${res.status} ${(await res.text()).slice(0, 200)}` };
+  const data = await res.json() as any;
+  const busy = (data.calendars?.primary?.busy || []) as BusyInterval[];
+  return { ok: true, busy };
+}
+
 export async function createGoogleCalendarEvent(args: CreateEventArgs): Promise<CalendarEventResult> {
   const owner = process.env.ALBA_CALENDAR_OWNER_EMAIL;
   if (!owner) return { ok: false, error: 'ALBA_CALENDAR_OWNER_EMAIL env missing' };

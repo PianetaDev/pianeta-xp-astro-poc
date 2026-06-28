@@ -3,6 +3,15 @@ import { ref, watch, nextTick, onMounted, computed } from 'vue'
 import { useAlbaSession } from '~/composables/useAlbaSession'
 import type { AlbaChatChunk } from '~/lib/alba/session-types'
 import MarkdownIt from 'markdown-it'
+import AlbaSlotPicker from './AlbaSlotPicker.vue'
+
+interface SlotPickerData {
+  slots: Array<{ start_iso: string; end_iso: string; day_key: string; label: string }>
+  duration_min: number
+  from_iso: string
+  next_from_iso: string | null
+  used?: boolean
+}
 
 // Renderer markdown safe: linkify auto, no html raw, target _blank per link esterni
 const md = new MarkdownIt({ html: false, linkify: true, breaks: true })
@@ -22,7 +31,7 @@ function renderMd(text: string): string {
   return md.render(text || '')
 }
 
-interface Msg { role: 'user' | 'assistant'; content: string; handoff?: boolean; toolHint?: string }
+interface Msg { role: 'user' | 'assistant'; content: string; handoff?: boolean; toolHint?: string; slotPicker?: SlotPickerData }
 
 const props = defineProps<{
   open: boolean
@@ -177,6 +186,21 @@ async function send(directText?: string) {
                 window.dataLayer.push({ event: 'book_call_click', page: window.location.pathname })
               } else if (chunk.name === 'route_to_human') {
                 window.dataLayer.push({ event: 'route_to_human', page: window.location.pathname })
+              } else if (chunk.name === 'suggest_slots') {
+                window.dataLayer.push({ event: 'alba_slots_shown', page: window.location.pathname })
+              }
+            }
+            // Slot picker: attacca i dati al messaggio assistant corrente
+            if (chunk.name === 'suggest_slots') {
+              const output = (chunk as any).output as { ok?: boolean; data?: any } | undefined
+              if (output?.ok && output.data) {
+                const d = output.data
+                messages.value[asstIdx].slotPicker = {
+                  slots: d.slots || [],
+                  duration_min: d.duration_min,
+                  from_iso: d.from_iso,
+                  next_from_iso: d.next_from_iso ?? null,
+                }
               }
             }
           } else if (chunk.type === 'error') {
@@ -199,6 +223,23 @@ function handleKey(e: KeyboardEvent) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send() }
 }
 
+function pickSlot(msg: Msg, slot: { start_iso: string; end_iso: string; label: string }) {
+  if (msg.slotPicker) msg.slotPicker.used = true
+  // Messaggio user esplicito che porta l'ISO: Alba lo passerà a book_call come preferred_slot
+  send(`Ho scelto lo slot: ${slot.label} — preferred_slot=${slot.start_iso}`)
+}
+
+function navigateSlots(msg: Msg, direction: 'back' | 'forward') {
+  if (!msg.slotPicker) return
+  if (msg.slotPicker) msg.slotPicker.used = true
+  if (direction === 'forward' && msg.slotPicker.next_from_iso) {
+    send(`Mostrami altri slot a partire da ${msg.slotPicker.next_from_iso}`)
+  } else if (direction === 'back') {
+    // Indietro = ripartiamo da +24h (l'inizio della finestra valida)
+    send('Torna agli slot più vicini disponibili')
+  }
+}
+
 function close() { emit('close') }
 </script>
 
@@ -209,6 +250,16 @@ function close() { emit('close') }
         <div v-for="(m, i) in messages" :key="i" :class="['alba-msg', m.role]">
           <div class="alba-bubble alba-bubble-md" v-html="renderMd(m.content)"></div>
           <p v-if="m.toolHint" class="italic text-sm text-black/50">{{ m.toolHint }}</p>
+          <AlbaSlotPicker
+            v-if="m.slotPicker"
+            :slots="m.slotPicker.slots"
+            :duration_min="m.slotPicker.duration_min"
+            :from_iso="m.slotPicker.from_iso"
+            :next_from_iso="m.slotPicker.next_from_iso"
+            :disabled="m.slotPicker.used || sending"
+            @pick="(s) => pickSlot(m, s)"
+            @navigate="(d) => navigateSlots(m, d)"
+          />
           <div v-if="m.handoff" class="alba-handoff-tag">→ Max viene avvisato</div>
         </div>
         <div v-if="props.suggested && props.suggested.length && messages.length === 1" class="flex flex-wrap gap-2 p-3">
