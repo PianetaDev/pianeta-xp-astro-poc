@@ -23,7 +23,6 @@ export const POST: APIRoute = async ({ request }) => {
     cancel_url: `${SITE_URL}/hire-us?canceled=1`,
     automatic_tax: { enabled: true },
     tax_id_collection: { enabled: true },
-    customer_creation: 'always',
     billing_address_collection: 'required',
     locale: 'it',
     metadata: {
