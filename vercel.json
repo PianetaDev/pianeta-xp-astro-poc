@@ -12,6 +12,10 @@
     {
       "path": "/api/cron/alba-retention",
       "schedule": "0 4 1 * *"
+    },
+    {
+      "path": "/api/cron/alba-reengagement",
+      "schedule": "0 10 * * *"
     }
   ]
 }
