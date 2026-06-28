@@ -21,7 +21,7 @@ export const GET: APIRoute = async ({ url, redirect }) => {
     client_id: clientId,
     redirect_uri: redirectUri,
     response_type: 'code',
-    scope: 'https://www.googleapis.com/auth/calendar.events openid email',
+    scope: 'https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.readonly openid email',
     access_type: 'offline',           // produce refresh_token
     prompt: 'consent',                // forza il consenso ogni volta → refresh_token sempre
     state: expected,                  // riusa il NARRATOR_SECRET come state (verifica nel callback)
