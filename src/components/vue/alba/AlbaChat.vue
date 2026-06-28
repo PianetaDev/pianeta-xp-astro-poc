@@ -13,6 +13,13 @@ interface SlotPickerData {
   used?: boolean
 }
 
+interface PageSuggestion {
+  url: string
+  label: string
+  reason?: string | null
+  used?: boolean
+}
+
 // Renderer markdown safe: linkify auto, no html raw, target _blank per link esterni
 const md = new MarkdownIt({ html: false, linkify: true, breaks: true })
 const defaultRender = md.renderer.rules.link_open || function (tokens, idx, options, env, self) {
@@ -31,7 +38,7 @@ function renderMd(text: string): string {
   return md.render(text || '')
 }
 
-interface Msg { role: 'user' | 'assistant'; content: string; handoff?: boolean; toolHint?: string; slotPicker?: SlotPickerData }
+interface Msg { role: 'user' | 'assistant'; content: string; handoff?: boolean; toolHint?: string; slotPicker?: SlotPickerData; pageSuggestion?: PageSuggestion }
 
 const props = defineProps<{
   open: boolean
@@ -203,6 +210,16 @@ async function send(directText?: string) {
                 }
               }
             }
+            // Page suggestion: attacca dati per render bottone "Aprire X →"
+            if (chunk.name === 'suggest_page') {
+              const output = (chunk as any).output as { ok?: boolean; data?: any } | undefined
+              if (output?.ok && output.data) {
+                const d = output.data
+                messages.value[asstIdx].pageSuggestion = {
+                  url: d.url, label: d.label, reason: d.reason ?? null,
+                }
+              }
+            }
           } else if (chunk.type === 'error') {
             messages.value[asstIdx].content += `\n⚠️ ${chunk.message}`
           } else if (chunk.type === 'done') {
@@ -229,6 +246,19 @@ function pickSlot(msg: Msg, slot: { start_iso: string; end_iso: string; label: s
   send(`Ho scelto lo slot: ${slot.label} — preferred_slot=${slot.start_iso}`)
 }
 
+function openSuggestedPage(msg: Msg) {
+  if (!msg.pageSuggestion) return
+  const ps = msg.pageSuggestion
+  msg.pageSuggestion.used = true
+  if (typeof window !== 'undefined') {
+    window.dataLayer = window.dataLayer || []
+    window.dataLayer.push({ event: 'alba_page_open_confirmed', url: ps.url, label: ps.label, page: window.location.pathname })
+  }
+  const isExternal = /^https?:\/\//i.test(ps.url)
+  if (isExternal) window.open(ps.url, '_blank', 'noopener')
+  else window.location.href = ps.url
+}
+
 function navigateSlots(msg: Msg, direction: 'back' | 'forward') {
   if (!msg.slotPicker) return
   if (msg.slotPicker) msg.slotPicker.used = true
@@ -242,6 +272,38 @@ function navigateSlots(msg: Msg, direction: 'back' | 'forward') {
 
 function close() { emit('close') }
 </script>
+
+<style scoped>
+.alba-page-suggest {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 2px;
+  padding: 10px 16px;
+  background: #fff;
+  color: var(--cta-primary, #FF6B33);
+  border: 1px solid rgba(255,107,51,0.32);
+  border-radius: 10px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background 150ms, transform 150ms, border-color 150ms;
+}
+.alba-page-suggest:hover:not(:disabled) {
+  background: var(--cta-primary, #FF6B33);
+  color: #fff;
+  border-color: var(--cta-primary, #FF6B33);
+  transform: translateY(-1px);
+}
+.alba-page-suggest:disabled { opacity: 0.5; cursor: not-allowed; }
+.alba-page-suggest-arrow { font-weight: 400; opacity: 0.85; }
+
+@media (prefers-reduced-motion: reduce) {
+  .alba-page-suggest:hover:not(:disabled) { transform: none; }
+}
+</style>
 
 <template>
   <template v-if="embedded">
@@ -260,6 +322,16 @@ function close() { emit('close') }
             @pick="(s) => pickSlot(m, s)"
             @navigate="(d) => navigateSlots(m, d)"
           />
+          <button
+            v-if="m.pageSuggestion"
+            type="button"
+            class="alba-page-suggest"
+            :disabled="m.pageSuggestion.used"
+            @click="openSuggestedPage(m)"
+          >
+            <span class="alba-page-suggest-label">{{ m.pageSuggestion.label }}</span>
+            <span class="alba-page-suggest-arrow">→</span>
+          </button>
           <div v-if="m.handoff" class="alba-handoff-tag">→ Max viene avvisato</div>
         </div>
         <div v-if="props.suggested && props.suggested.length && messages.length === 1" class="flex flex-wrap gap-2 p-3">

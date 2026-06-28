@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "tools": [
     {
       "name": "search_kb",
@@ -81,6 +81,44 @@
           "brief": { "type": "string", "description": "Markdown — 200-400 parole" }
         },
         "required": ["user_email", "brief"]
+      }
+    },
+    {
+      "name": "newsletter_signup",
+      "description": "Iscrivi l'utente all'audience Bulletin di Pianeta.Studio (Resend). Usalo come lead magnet leggero quando l'utente non è pronto a fissare una call ma è curioso. Idempotente: se già iscritto, ritorna ok senza errore. Chiedi consenso esplicito prima.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "user_email": { "type": "string", "format": "email" },
+          "user_name": { "type": "string" }
+        },
+        "required": ["user_email"]
+      }
+    },
+    {
+      "name": "send_recap_email",
+      "description": "Manda all'utente (NON a Max) un riassunto della conversazione in markdown, così può rileggerla o tornarci dopo. Usalo a fine chat lunga su esplicita richiesta o offerta dell'utente. Reply-to è Max, quindi se l'utente risponde alla mail arriva a Max.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "user_email": { "type": "string", "format": "email" },
+          "user_name": { "type": "string" },
+          "recap_md": { "type": "string", "description": "Markdown — riassunto strutturato: cosa hai chiesto, cosa ti ho mostrato, prossimi passi se ne abbiamo discussi. 150-400 parole." }
+        },
+        "required": ["user_email", "recap_md"]
+      }
+    },
+    {
+      "name": "suggest_page",
+      "description": "Proponi all'utente di aprire una pagina del sito (path relativo /xxx) o un URL esterno (https://...). NON naviga automaticamente: il client renderà un bottone con la label che hai dato, l'utente clicca esplicitamente per aprire. Usalo per: condividere /team-as-a-service quando il prospect è qualificato; aprire un case study; aprire pianeta.green/{userUrl} per misura CO2 live. Mai per redirect involontari.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "url": { "type": "string", "description": "Path relativo (/team-as-a-service, /work/eclag) o URL esterno https://..." },
+          "label": { "type": "string", "description": "Testo del bottone (max 50 char), es. 'Apri Team as a Service' o 'Misura CO2 del tuo sito'" },
+          "reason": { "type": "string", "description": "Perché proponi questa pagina (interno, opzionale)" }
+        },
+        "required": ["url", "label"]
       }
     }
   ]
