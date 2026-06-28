@@ -42,7 +42,6 @@ const metaInline = [
 ].filter(Boolean);
 
 const isNeuromarketing = item.id === 'neuromarketing-lab';
-const CAL_URL = 'https://cal.com/maxmauro/30min';
 
 const url = new URL(`/en/services/${item.id}`, Astro.site).toString();
 const jsonLd = {
@@ -68,9 +67,7 @@ const jsonLd = {
     primaryCta={isNeuromarketing
       ? { label: 'Talk to Alba', action: 'open-alba' }
       : { label: t('en', 'cta_lavoriamo'), action: 'open-hire-us' }}
-    secondaryCta={isNeuromarketing
-      ? { label: 'Book a call', href: CAL_URL, external: true }
-      : { label: t('en', 'cta_come_lavoriamo'), href: '/processo' }}
+    secondaryCta={{ label: t('en', 'cta_come_lavoriamo'), href: '/processo' }}
     backHref="/en/services"
     backLabel="All services"
     related={relatedFromCaseStudies}

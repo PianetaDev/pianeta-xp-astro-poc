@@ -49,15 +49,6 @@ async function searchKb(args: { query: string; sections?: string[]; top_k?: numb
 }
 
 // ---------- book_call ----------
-function buildCalUrl(slot?: string, topic?: string): string {
-  const base = process.env.CAL_COM_URL || 'https://cal.com/maxmauro/30min';
-  const params = new URLSearchParams();
-  if (topic) params.set('name', topic.slice(0, 80));
-  if (slot) params.set('notes', `Slot proposto: ${slot}`);
-  const qs = params.toString();
-  return qs ? `${base}?${qs}` : base;
-}
-
 async function bookCall(
   args: { user_email: string; user_name?: string; topic: string; preferred_slot?: string; preferred_window?: string },
   ctx: { uid: string; session_id: string }
@@ -100,8 +91,6 @@ async function bookCall(
     });
   }
 
-  const url = buildCalUrl(args.preferred_slot || args.preferred_window, args.topic);
-
   // 1) Salva email + nome sull'user
   try {
     await sb.from('alba_users').update({
@@ -115,19 +104,19 @@ async function bookCall(
   let emailSent = false;
   let emailError: string | null = null;
   if (resendKey) {
-    const slotLine = args.preferred_slot
-      ? `**Slot suggerito dall'utente**: ${args.preferred_slot} *(non garantito — Max sceglie da Cal.com)*`
+    const slotLine = gcalResult?.ok
+      ? `**Evento Google Calendar creato** per ${parsedStart!.toLocaleString('it-IT', { dateStyle: 'full', timeStyle: 'short' })}${gcalResult.meet_url ? ` · Meet: ${gcalResult.meet_url}` : ''}`
+      : args.preferred_slot
+      ? `**Slot suggerito dall'utente**: ${args.preferred_slot} *(Google Calendar non disponibile, da risistemare manualmente)*`
       : args.preferred_window
-      ? `**Finestra preferita**: ${args.preferred_window}`
-      : `**Slot**: nessuno proposto — l'utente sceglierà da Cal.com`;
+      ? `**Finestra preferita**: ${args.preferred_window} *(Alba non ha potuto fissare automaticamente)*`
+      : `**Slot**: nessuno proposto`;
     const brief = [
       `Contatto da Alba (AI di gruppo · sessione ${ctx.session_id.slice(0, 8)}).`,
       '',
       `**Da**: ${args.user_name ? args.user_name + ' — ' : ''}${args.user_email}`,
       `**Topic**: ${args.topic}`,
       slotLine,
-      '',
-      `**Link Cal.com agenda**: ${url}`,
       '',
       `Per esportare la conversazione completa: GET /api/alba/export-my-data?uid=${ctx.uid}`,
     ].join('\n');
@@ -156,7 +145,7 @@ async function bookCall(
   try {
     await sb.from('alba_events').insert([
       { uid: ctx.uid, session_id: ctx.session_id, event: 'email_captured', payload: { email: args.user_email, source: 'book_call' } },
-      { uid: ctx.uid, session_id: ctx.session_id, event: 'call_booked', payload: { topic: args.topic, slot: args.preferred_slot ?? null, window: args.preferred_window ?? null, url, email_sent: emailSent, gcal_event_id: gcalResult?.event_id ?? null, gcal_ok: gcalResult?.ok ?? null } },
+      { uid: ctx.uid, session_id: ctx.session_id, event: 'call_booked', payload: { topic: args.topic, slot: args.preferred_slot ?? null, window: args.preferred_window ?? null, email_sent: emailSent, gcal_event_id: gcalResult?.event_id ?? null, gcal_ok: gcalResult?.ok ?? null } },
     ]);
   } catch { /* fire-and-forget */ }
 
@@ -168,16 +157,14 @@ async function bookCall(
     if (gcalResult.html_link) summaryParts.push(`Evento: ${gcalResult.html_link}`);
     summaryParts.push(`Invito mandato automaticamente a ${args.user_email} e a Max`);
   } else {
-    if (gcalResult && !gcalResult.ok) summaryParts.push(`(Google Calendar non disponibile: ${gcalResult.error}. Fallback a link Cal.com.)`);
+    if (gcalResult && !gcalResult.ok) summaryParts.push(`Google Calendar non disponibile (${gcalResult.error}). Max ti scriverà appena può per fissare.`);
     summaryParts.push(emailSent ? `Email brief mandata a Max e a ${args.user_email}` : `Email NON inviata`);
-    summaryParts.push(`Agenda Max: ${url}`);
     if (args.preferred_slot) summaryParts.push(`Suggerimento utente "${args.preferred_slot}" passato a Max`);
   }
 
   return {
     ok: true,
     data: {
-      cal_url: url,
       slot: args.preferred_slot ?? null,
       email_sent: emailSent,
       user_email: args.user_email,
