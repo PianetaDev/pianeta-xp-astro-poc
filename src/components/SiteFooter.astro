@@ -50,35 +50,7 @@ const enHref = localizePath(Astro.url.pathname, 'en');
         <a href="https://www.linkedin.com/company/pianeta-studio/" target="_blank" rel="noopener">LinkedIn</a>
       </p>
       <p class="site-footer-copy">© {year} Pianeta.Studio S.r.l. SB — All rights reserved</p>
-      <div class="locale-switcher" data-locale-set role="group" aria-label="Language">
-        <a href={itHref} class={locale === 'it' ? 'is-active' : ''} aria-current={locale === 'it' ? 'true' : 'false'} hreflang="it">IT</a>
-        <a href={enHref} class={locale === 'en' ? 'is-active' : ''} aria-current={locale === 'en' ? 'true' : 'false'} hreflang="en">EN</a>
-      </div>
-      <div class="theme-switcher" role="group" aria-label="Tema visivo">
-        <button type="button" data-theme-set="light" aria-label="Tema chiaro">☀</button>
-        <button type="button" data-theme-set="auto" aria-label="Tema automatico (segue il tramonto sui server Pianeta)">◐</button>
-        <button type="button" data-theme-set="dark" aria-label="Tema scuro">☾</button>
-      </div>
-      <script is:inline>
-        (() => {
-          const root = document.documentElement;
-          const sync = () => {
-            const cur = root.getAttribute('data-theme') || 'auto';
-            document.querySelectorAll('[data-theme-set]').forEach((b) => {
-              b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-set') === cur));
-            });
-          };
-          document.querySelectorAll('[data-theme-set]').forEach((b) => {
-            b.addEventListener('click', () => {
-              const v = b.getAttribute('data-theme-set');
-              root.setAttribute('data-theme', v);
-              try { localStorage.setItem('pianeta-theme', v); } catch (e) {}
-              sync();
-            });
-          });
-          sync();
-        })();
-      </script>
+      <!-- Locale + theme switcher → ora sul SiteRail (più visibili, sempre a portata) -->
     </div>
   </div>
 </footer>

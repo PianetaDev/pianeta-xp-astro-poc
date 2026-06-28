@@ -7,7 +7,8 @@ interface Props {
 }
 const { current = '' } = Astro.props;
 const locale = detectLocale(Astro.url.pathname);
-const prefix = locale === 'en' ? '/en' : '';
+const itHref = localizePath(Astro.url.pathname, 'it');
+const enHref = localizePath(Astro.url.pathname, 'en');
 
 const nav = [
   { href: localizePath('/',         locale), label: t(locale, 'nav_hub'),      icon: 'lucide:home',              section: null      },
@@ -18,31 +19,23 @@ const nav = [
   { href: localizePath('/lab',      locale), label: t(locale, 'nav_lab'),      icon: 'lucide:flask-conical',     section: 'lab'     },
   { href: localizePath('/careers',  locale), label: t(locale, 'nav_careers'),  icon: 'lucide:briefcase-business',section: 'careers' },
 ];
-
-const railStyle = 'position:fixed;left:0;top:0;bottom:0;width:88px;background:#ffffff;color:#0e1116;border-right:1px solid rgba(0,0,0,0.08);display:flex;flex-direction:column;z-index:100;';
-const brandStyle = 'display:block;padding:18px 10px 22px;color:#0e1116;text-decoration:none;';
-const wordmarkStyle = 'font-weight:900;font-size:11px;line-height:1.1;letter-spacing:1px;text-align:center;margin:0;';
-const navStyle = 'flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 6px;overflow-y:auto;';
-const linkBase = 'display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:8px;color:rgba(14,17,22,0.78);text-decoration:none;font-size:9px;text-transform:uppercase;letter-spacing:0.8px;font-weight:500;';
-const linkActive = 'background:#0e1116;color:#fff;';
+const home = locale === 'en' ? '/en' : '/';
 ---
-<aside style={railStyle} aria-label="Main navigation" class="site-rail">
-  <a href={locale === 'en' ? '/en' : '/'} style={brandStyle} aria-label="Pianeta.Studio — home">
-    <img src="/brand/logo-mark-orange.svg" alt="" width="36" height="24" style="display:block;margin:0 auto 8px;width:36px;height:auto;" />
-    <p style="font-weight:900;font-size:9px;line-height:1.1;letter-spacing:0.5px;text-align:center;margin:0;color:#0e1116;">PIANETA<br>STUDIO</p>
+<aside class="site-rail" aria-label="Main navigation">
+  <a href={home} class="site-rail-brand" aria-label="Pianeta.Studio — home">
+    <img src="/brand/logo-mark-orange.svg" alt="" width="36" height="24" />
+    <p class="site-rail-wordmark">PIANETA<br />STUDIO</p>
   </a>
 
-  <nav style={navStyle}>
+  <nav class="site-rail-nav">
     {nav.map((l) => {
-      const home = locale === 'en' ? '/en' : '/';
       const isActive = l.href === home ? current === home : current.startsWith(l.href);
       return (
         <a
           href={l.href}
           aria-label={l.label}
           data-rail-section={l.section}
-          class="site-rail-link"
-          style={linkBase + (isActive ? linkActive : '')}
+          class:list={['site-rail-link', isActive && 'is-active']}
         >
           <Icon name={l.icon} width="16" height="16" />
           <span>{l.label}</span>
@@ -51,9 +44,20 @@ const linkActive = 'background:#0e1116;color:#fff;';
     })}
   </nav>
 
-  <div style="padding:0 14px 20px;font-size:10px;color:rgba(14,17,22,0.5);">
-    <a href="/privacy" style="display:block;color:rgba(14,17,22,0.5);text-decoration:none;margin-top:6px;">Privacy</a>
-    <a href="/cookie" style="display:block;color:rgba(14,17,22,0.5);text-decoration:none;margin-top:6px;">Cookie</a>
+  <div class="site-rail-foot">
+    <div class="rail-locale" role="group" aria-label="Language">
+      <a href={itHref} class={locale === 'it' ? 'is-active' : ''} aria-current={locale === 'it' ? 'true' : 'false'} hreflang="it">IT</a>
+      <a href={enHref} class={locale === 'en' ? 'is-active' : ''} aria-current={locale === 'en' ? 'true' : 'false'} hreflang="en">EN</a>
+    </div>
+    <div class="rail-theme" role="group" aria-label="Theme">
+      <button type="button" data-theme-set="light" aria-label="Light theme">☀</button>
+      <button type="button" data-theme-set="auto" aria-label="Auto theme (follows sunset)">◐</button>
+      <button type="button" data-theme-set="dark" aria-label="Dark theme">☾</button>
+    </div>
+    <div class="rail-mini">
+      <a href={localizePath('/privacy', locale)}>Privacy</a>
+      <a href={localizePath('/cookie', locale)}>Cookie</a>
+    </div>
   </div>
 </aside>
 
@@ -75,18 +79,115 @@ const linkActive = 'background:#0e1116;color:#fff;';
       rail.addEventListener('mouseleave', () => fire('rail-flyout:schedule-close'));
     }
 
-    // Hover highlight (no CSS dep)
-    document.querySelectorAll('.site-rail-link').forEach((el) => {
-      const orig = el.getAttribute('style') || '';
-      el.addEventListener('mouseenter', () => {
-        if (orig.includes('#0e1116;color:#fff')) return;
-        el.setAttribute('style', orig + 'background:rgba(0,0,0,0.05);color:#0e1116;');
+    const root = document.documentElement;
+    const syncTheme = () => {
+      const cur = root.getAttribute('data-theme') || 'auto';
+      document.querySelectorAll('[data-theme-set]').forEach((b) => {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-set') === cur));
       });
-      el.addEventListener('mouseleave', () => el.setAttribute('style', orig));
+    };
+    document.querySelectorAll('.rail-theme [data-theme-set]').forEach((b) => {
+      b.addEventListener('click', () => {
+        const v = b.getAttribute('data-theme-set');
+        root.setAttribute('data-theme', v);
+        try { localStorage.setItem('pianeta-theme', v); } catch (e) {}
+        syncTheme();
+      });
     });
+    syncTheme();
   })();
 </script>
 
 <style is:global>
   main.site-main { margin-left: 88px; }
+
+  .site-rail {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 88px;
+    background: var(--pianeta-bg-card);
+    color: var(--pianeta-text);
+    border-right: 1px solid var(--pianeta-border);
+    display: flex; flex-direction: column;
+    z-index: 100;
+  }
+  .site-rail-brand {
+    display: block; padding: 18px 10px 22px;
+    color: var(--pianeta-text); text-decoration: none;
+  }
+  .site-rail-brand img { display: block; margin: 0 auto 8px; width: 36px; height: auto; }
+  .site-rail-wordmark {
+    font-weight: 900; font-size: 9px; line-height: 1.1; letter-spacing: 0.5px;
+    text-align: center; margin: 0; color: var(--pianeta-text);
+  }
+
+  .site-rail-nav {
+    flex: 1;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 6px; padding: 0 6px; overflow-y: auto;
+  }
+  .site-rail-link {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 8px 4px; border-radius: 8px;
+    color: var(--pianeta-muted-strong); text-decoration: none;
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 500;
+    transition: background 120ms, color 120ms;
+  }
+  .site-rail-link:hover { background: var(--pianeta-border); color: var(--pianeta-text); }
+  .site-rail-link.is-active { background: var(--pianeta-text); color: var(--pianeta-bg-card); }
+
+  .site-rail-foot {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: 12px 6px 16px;
+    border-top: 1px solid var(--pianeta-border);
+  }
+
+  /* Locale switcher — pill IT|EN, alta visibilità anche in dark */
+  .rail-locale {
+    display: inline-flex; padding: 3px;
+    background: var(--pianeta-bg);
+    border: 1px solid var(--pianeta-border-strong);
+    border-radius: 999px;
+  }
+  .rail-locale a {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 28px; height: 22px; padding: 0 8px;
+    border-radius: 999px;
+    font-size: 10px; font-weight: 800; letter-spacing: 0.5px;
+    color: var(--pianeta-muted-strong); text-decoration: none;
+    transition: background 120ms, color 120ms;
+  }
+  .rail-locale a:hover { color: var(--pianeta-text); }
+  .rail-locale a.is-active {
+    background: var(--cta-primary);
+    color: var(--cta-primary-ink);
+  }
+
+  /* Theme switcher — 3 icone, alta visibilità anche in dark */
+  .rail-theme {
+    display: inline-flex; padding: 3px;
+    background: var(--pianeta-bg);
+    border: 1px solid var(--pianeta-border-strong);
+    border-radius: 999px;
+  }
+  .rail-theme button {
+    width: 22px; height: 22px; padding: 0; border: 0;
+    background: transparent;
+    color: var(--pianeta-muted-strong);
+    font-size: 12px; line-height: 1;
+    border-radius: 999px; cursor: pointer;
+    transition: background 120ms, color 120ms;
+  }
+  .rail-theme button:hover { color: var(--pianeta-text); background: var(--pianeta-border); }
+  .rail-theme button[aria-pressed="true"] {
+    background: var(--cta-primary);
+    color: var(--cta-primary-ink);
+  }
+
+  .rail-mini {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.6px;
+  }
+  .rail-mini a {
+    color: var(--pianeta-muted); text-decoration: none;
+  }
+  .rail-mini a:hover { color: var(--pianeta-text); }
 </style>
