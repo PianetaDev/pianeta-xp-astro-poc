@@ -6,6 +6,12 @@ const itHref = localizePath(Astro.url.pathname, 'it');
 const enHref = localizePath(Astro.url.pathname, 'en');
 ---
 <footer class="site-main site-footer">
+
+  <div class="footer-contact-bar">
+    <p class="footer-contact-bar-text">Preferisci parlare con una persona? Scrivici a <a href="mailto:info@pianeta.studio">info@pianeta.studio</a> o prenota una call.</p>
+    <a href="https://cal.com/maxmauro" target="_blank" rel="noopener" class="footer-contact-bar-btn">Prenota una call</a>
+  </div>
+
   <div class="site-footer-inner">
     <div class="site-footer-brand">
       <img src="/brand/logo-horizontal-color.svg" alt="Pianeta.Studio" width="282" height="80" class="site-footer-logo" loading="lazy" decoding="async" />
@@ -56,10 +62,60 @@ const enHref = localizePath(Astro.url.pathname, 'en');
 </footer>
 
 <style is:global>
+  .footer-contact-bar {
+    margin-left: 88px;
+    margin-top: 80px;
+    padding: 20px 32px;
+    background: var(--pianeta-bg-card);
+    border-top: 1px solid var(--pianeta-border);
+    border-bottom: 1px solid var(--pianeta-border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    transition: padding-right 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .footer-contact-bar-text {
+    font-size: 13px;
+    margin: 0;
+    flex: 1;
+    min-width: 200px;
+    color: var(--pianeta-text);
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+  .footer-contact-bar-text a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .footer-contact-bar-text a:hover { color: var(--cta-primary); }
+  .footer-contact-bar-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 20px;
+    border-radius: 999px;
+    background: var(--cta-primary);
+    color: var(--cta-primary-ink, #fff);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 150ms, transform 150ms;
+    flex-shrink: 0;
+  }
+  .footer-contact-bar-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  @media (min-width: 1024px) {
+    body.alba-open .footer-contact-bar { padding-right: 480px; }
+  }
+  @media (min-width: 1280px) {
+    body.alba-open .footer-contact-bar { padding-right: 560px; }
+  }
+
   .site-footer {
     margin-left: 88px;
     border-top: 1px solid var(--pianeta-border);
-    margin-top: 80px;
     padding: 40px 32px 64px;
     transition: padding-right 280ms cubic-bezier(0.16, 1, 0.3, 1);
   }

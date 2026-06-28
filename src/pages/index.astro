@@ -67,6 +67,47 @@ const ldJson = {
   </Fragment>
 
   <div class="home-page">
+
+    {/* === I NOSTRI PACCHETTI === */}
+    <section class="pacchetti-section" aria-label="I nostri pacchetti">
+      <p class="pacchetti-eyebrow">I nostri pacchetti</p>
+      <div class="pacchetti-grid">
+
+        {/* Sito Green */}
+        <div class="pacchetto-card pacchetto-green">
+          <div class="pacchetto-inner">
+            <p class="pacchetto-kicker">Sito Green</p>
+            <p class="pacchetto-price">da 2.000€ <span class="pacchetto-iva">+ IVA</span></p>
+            <p class="pacchetto-desc">Un sito sostenibile e veloce, costruito sul nostro design system e a basso impatto: la CO₂ della pagina la misuriamo con GreenMeter. Pacchetto Pianeta.Green.</p>
+          </div>
+          <button type="button" class="pacchetto-cta" data-action="open-alba">Parla con Alba</button>
+        </div>
+
+        {/* Pianeta Sprint */}
+        <div class="pacchetto-card pacchetto-sprint">
+          <div class="pacchetto-inner">
+            <p class="pacchetto-kicker">Pianeta Sprint</p>
+            <p class="pacchetto-price">4 giorni · 3.500€ <span class="pacchetto-iva">+ IVA</span></p>
+            <p class="pacchetto-desc">Da un'idea confusa a una direzione validata e pronta da produrre. 4 giorni: immersione → direzione → validazione col nostro swarm AI e neuromarketing → consegna.</p>
+            <a href="/come-funziona-lo-sprint" class="pacchetto-meta-link">Come funziona lo Sprint →</a>
+          </div>
+          <button type="button" class="pacchetto-cta" data-action="open-alba">Parla con Alba</button>
+        </div>
+
+        {/* Team as a Service */}
+        <div class="pacchetto-card pacchetto-taas">
+          <div class="pacchetto-inner">
+            <p class="pacchetto-kicker">Team as a Service</p>
+            <p class="pacchetto-price">4.000€<span class="pacchetto-iva">/mese + IVA</span></p>
+            <p class="pacchetto-desc">Un team dedicato (design, web, copy) con meeting settimanale e consegne ogni giovedì. Per chi ha bisogno continuativo.</p>
+            <a href="/team-as-a-service" class="pacchetto-meta-link">Scopri il pacchetto →</a>
+          </div>
+          <button type="button" class="pacchetto-cta" data-action="open-alba">Parla con Alba</button>
+        </div>
+
+      </div>
+    </section>
+
     <div class="bento-grid">
 
       {/* 1. Featured ECLAG video — tall portrait (col-1 row-span-3) */}
@@ -92,6 +133,7 @@ const ldJson = {
             Società Benefit · dal 2023
           </span>
           <p class="bento-sub">Sustainable Creativity dal 2016 · Design &amp; Technology · Pianeta-centric design iscritto in statuto</p>
+          <p class="sc-clarification">Sustainable Creativity non vuol dire solo no-profit: lavoriamo con brand etici, food, energy, farmaceutica responsabile e PMI green.</p>
         </div>
       </a>
 
@@ -255,6 +297,117 @@ const ldJson = {
       margin: 0 auto;
     }
     @media (min-width: 768px) { .home-page { padding: 32px; } }
+
+    /* ── Pacchetti section ── */
+    .pacchetti-section {
+      margin-bottom: 24px;
+    }
+    .pacchetti-eyebrow {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      opacity: 0.5;
+      margin: 0 0 14px;
+    }
+    .pacchetti-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    @media (min-width: 700px) {
+      .pacchetti-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    }
+    .pacchetto-card {
+      border-radius: 20px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 200px;
+    }
+    .pacchetto-inner { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .pacchetto-kicker {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      opacity: 0.7;
+      margin: 0;
+    }
+    .pacchetto-price {
+      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0;
+    }
+    .pacchetto-iva {
+      font-size: 0.75em;
+      font-weight: 500;
+      opacity: 0.6;
+    }
+    .pacchetto-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      opacity: 0.75;
+      margin: 4px 0 0;
+    }
+    .pacchetto-meta-link {
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      opacity: 0.6;
+      margin-top: 4px;
+    }
+    .pacchetto-meta-link:hover { opacity: 1; text-decoration: underline; }
+    .pacchetto-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 0;
+      transition: opacity 150ms, transform 150ms;
+      align-self: flex-start;
+    }
+    .pacchetto-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* Colori varianti */
+    .pacchetto-green  { background: #e8f5e9; color: #1b5e20; }
+    .pacchetto-green .pacchetto-cta { background: #2e7d32; color: #fff; }
+    .pacchetto-green .pacchetto-meta-link { color: #2e7d32; }
+    .pacchetto-sprint { background: #FF6B33; color: #fff; }
+    .pacchetto-sprint .pacchetto-cta { background: #fff; color: #FF6B33; }
+    .pacchetto-sprint .pacchetto-meta-link { color: rgba(255,255,255,0.85); }
+    .pacchetto-taas   { background: #0e1116; color: #fff; }
+    .pacchetto-taas .pacchetto-cta { background: #FF6B33; color: #fff; }
+    .pacchetto-taas .pacchetto-meta-link { color: rgba(255,255,255,0.65); }
+
+    /* Dark mode overrides for green card */
+    :root[data-theme="dark"] .pacchetto-green,
+    :root[data-theme="auto"][data-sun="night"] .pacchetto-green {
+      background: rgba(46,125,50,0.18);
+      color: #a5d6a7;
+    }
+    :root[data-theme="dark"] .pacchetto-green .pacchetto-cta,
+    :root[data-theme="auto"][data-sun="night"] .pacchetto-green .pacchetto-cta {
+      background: #388e3c;
+      color: #fff;
+    }
+
+    /* Sustainable Creativity clarification */
+    .sc-clarification {
+      font-size: 11px;
+      line-height: 1.5;
+      opacity: 0.55;
+      margin: 4px 0 0;
+      font-style: italic;
+    }
 
     .bento-grid {
       display: grid;
