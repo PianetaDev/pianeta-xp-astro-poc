@@ -425,6 +425,152 @@ async function suggestSlots(args: { duration_min?: number; from_iso?: string }):
   };
 }
 
+// ---------- newsletter_signup ----------
+// Iscrive l'utente alla audience Bulletin di Resend (Pianeta.Studio).
+// Lead magnet leggero: quando l'utente non è pronto a bookare ma è curioso.
+async function newsletterSignup(
+  args: { user_email: string; user_name?: string },
+  ctx: { uid: string; session_id: string }
+): Promise<AlbaToolResult> {
+  if (!args.user_email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(args.user_email)) {
+    return { ok: false, error: 'user_email mancante o non valida' };
+  }
+  const apiKey = process.env.RESEND_API_KEY;
+  const audienceId = process.env.RESEND_AUDIENCE_ID;
+  if (!apiKey || !audienceId) return { ok: false, error: 'RESEND_API_KEY/AUDIENCE_ID mancanti' };
+
+  try {
+    const res = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+      method: 'POST',
+      headers: { 'authorization': `Bearer ${apiKey}`, 'content-type': 'application/json' },
+      body: JSON.stringify({
+        email: args.user_email,
+        first_name: args.user_name ?? undefined,
+        unsubscribed: false,
+      }),
+    });
+    // Resend ritorna 201 OR 422 se già iscritto — entrambi OK per noi
+    const alreadySubscribed = res.status === 422;
+    if (!res.ok && !alreadySubscribed) {
+      return { ok: false, error: `resend ${res.status}: ${(await res.text()).slice(0, 200)}` };
+    }
+
+    const sb = albaSupabase();
+    try {
+      await sb.from('alba_users').update({ email: args.user_email, first_name: args.user_name ?? null }).eq('uid', ctx.uid);
+      await sb.from('alba_events').insert({
+        uid: ctx.uid,
+        session_id: ctx.session_id,
+        event: 'newsletter_signup',
+        payload: { email: args.user_email, already_subscribed: alreadySubscribed },
+      });
+    } catch { /* fire-and-forget */ }
+
+    return {
+      ok: true,
+      data: { already_subscribed: alreadySubscribed },
+      human_summary: alreadySubscribed
+        ? `${args.user_email} era già iscritto al Bulletin — nessuna duplicazione`
+        : `${args.user_email} iscritto al Bulletin Pianeta.Studio`,
+    };
+  } catch (e: any) {
+    return { ok: false, error: `fetch failed: ${e?.message}` };
+  }
+}
+
+// ---------- send_recap_email ----------
+// Manda un riassunto della conversazione SOLO all'utente (Max NON in copia — è cosa diversa da send_brief_email).
+// Usalo a fine chat lunga quando l'utente vuole rileggere o tornare in seguito.
+async function sendRecapEmail(
+  args: { user_email: string; user_name?: string; recap_md: string },
+  ctx: { uid: string; session_id: string }
+): Promise<AlbaToolResult> {
+  if (!args.user_email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(args.user_email)) {
+    return { ok: false, error: 'user_email non valida' };
+  }
+  if (!args.recap_md || args.recap_md.length < 50) {
+    return { ok: false, error: 'recap_md troppo breve (min 50 caratteri)' };
+  }
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return { ok: false, error: 'RESEND_API_KEY missing' };
+
+  const greeting = args.user_name ? `Ciao ${args.user_name},` : 'Ciao,';
+  const body = [
+    greeting,
+    '',
+    'come promesso, ti mando il riassunto della nostra conversazione su pianeta.studio:',
+    '',
+    args.recap_md,
+    '',
+    '---',
+    'Se vuoi riprenderla, scrivimi rispondendo a questa mail oppure torna su https://xp.pianeta.studio (chat in basso a destra).',
+    '',
+    '— Alba, AI di Pianeta.Studio',
+    '*Per esportare i tuoi dati completi: /api/alba/export-my-data?uid=' + ctx.uid + '*',
+  ].join('\n');
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'authorization': `Bearer ${apiKey}`, 'content-type': 'application/json' },
+      body: JSON.stringify({
+        from: 'Alba — Pianeta.Studio <alba@pianeta.studio>',
+        to: [args.user_email],
+        reply_to: process.env.ALBA_CALENDAR_OWNER_EMAIL || 'max@pianeta.studio',
+        subject: `Il riassunto della tua conversazione con Alba`,
+        text: body,
+      }),
+    });
+    if (!res.ok) return { ok: false, error: `resend ${res.status}: ${(await res.text()).slice(0, 200)}` };
+  } catch (e: any) {
+    return { ok: false, error: `fetch failed: ${e?.message}` };
+  }
+
+  try {
+    const sb = albaSupabase();
+    await sb.from('alba_users').update({ email: args.user_email, first_name: args.user_name ?? null }).eq('uid', ctx.uid);
+    await sb.from('alba_events').insert({
+      uid: ctx.uid, session_id: ctx.session_id, event: 'recap_email_sent',
+      payload: { email: args.user_email, len: args.recap_md.length },
+    });
+  } catch { /* fire-and-forget */ }
+
+  return { ok: true, human_summary: `Recap mandato a ${args.user_email}` };
+}
+
+// ---------- suggest_page ----------
+// Proponi all'utente di aprire una pagina del sito (o un URL esterno tipo pianeta.green/<userUrl>).
+// NON naviga automaticamente: il client renderizza un bottone "Aprire X →" che l'utente clicca.
+async function suggestPage(
+  args: { url: string; label: string; reason?: string },
+  ctx: { uid: string; session_id: string }
+): Promise<AlbaToolResult> {
+  if (!args.url || typeof args.url !== 'string') return { ok: false, error: 'url richiesta' };
+  if (!args.label || typeof args.label !== 'string') return { ok: false, error: 'label richiesta (testo del bottone)' };
+
+  // Sanity: accetta /relative-path o https?:// esterni. Niente javascript: o data:
+  if (!/^(\/|https?:\/\/)/i.test(args.url)) {
+    return { ok: false, error: `url non sicura: ${args.url}. Usa /path-relative o https://...` };
+  }
+  if (/^javascript:|^data:/i.test(args.url)) {
+    return { ok: false, error: 'url proibita' };
+  }
+
+  try {
+    const sb = albaSupabase();
+    await sb.from('alba_events').insert({
+      uid: ctx.uid, session_id: ctx.session_id, event: 'page_suggested',
+      payload: { url: args.url, label: args.label, reason: args.reason ?? null },
+    });
+  } catch { /* fire-and-forget */ }
+
+  return {
+    ok: true,
+    data: { url: args.url, label: args.label, reason: args.reason ?? null },
+    human_summary: `Bottone proposto: ${args.label} → ${args.url}`,
+  };
+}
+
 // ---------- dispatcher ----------
 export async function executeAlbaTool(name: string, args: any, ctx: { uid: string; session_id: string }): Promise<AlbaToolResult> {
   switch (name) {
@@ -434,6 +580,9 @@ export async function executeAlbaTool(name: string, args: any, ctx: { uid: strin
     case 'send_brief_email': return sendBriefEmail(args, ctx);
     case 'route_to_human': return routeToHuman(args, ctx);
     case 'start_project_tour': return startProjectTour(args);
+    case 'newsletter_signup': return newsletterSignup(args, ctx);
+    case 'send_recap_email': return sendRecapEmail(args, ctx);
+    case 'suggest_page': return suggestPage(args, ctx);
     default: return { ok: false, error: `unknown tool '${name}'` };
   }
 }
