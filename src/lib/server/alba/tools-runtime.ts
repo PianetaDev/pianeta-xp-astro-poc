@@ -4,7 +4,7 @@
 
 import { albaSupabase } from './supabase';
 import { getKb } from './assets';
-import { createGoogleCalendarEvent } from './google-calendar';
+import { createGoogleCalendarEvent, getFreeBusy } from './google-calendar';
 import * as chrono from 'chrono-node';
 
 export interface AlbaToolResult {
@@ -69,11 +69,20 @@ async function bookCall(
 
   const sb = albaSupabase();
 
-  // Parse preferred_slot (es. "lunedì alle 15", "30 giugno 14:30") via chrono-node IT
+  // Parse preferred_slot.
+  // Priority: (1) ISO datetime esplicito (proviene dal slot picker) → new Date direttamente
+  //           (2) testo libero in italiano → chrono-node IT
   let parsedStart: Date | null = null;
   if (args.preferred_slot) {
-    const results = chrono.it.parse(args.preferred_slot, new Date(), { forwardDate: true });
-    if (results.length > 0 && results[0].start) parsedStart = results[0].start.date();
+    const isoMatch = args.preferred_slot.match(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?(?:Z|[+-]\d{2}:?\d{2})/);
+    if (isoMatch) {
+      const d = new Date(isoMatch[0]);
+      if (!isNaN(d.getTime())) parsedStart = d;
+    }
+    if (!parsedStart) {
+      const results = chrono.it.parse(args.preferred_slot, new Date(), { forwardDate: true });
+      if (results.length > 0 && results[0].start) parsedStart = results[0].start.date();
+    }
   }
 
   // Se abbiamo un orario parsabile, prova a creare l'evento direttamente su Google Calendar
@@ -332,10 +341,108 @@ async function startProjectTour(args: { work_slug: string }): Promise<AlbaToolRe
   };
 }
 
+// ---------- suggest_slots ----------
+// Propone slot liberi sull'agenda di Max (FreeBusy).
+// Regole: Lun-Ven, 10:00-13:00 + 14:30-18:00 Europe/Rome, slot di `duration_min`,
+// no slot entro 24h da adesso, max 6 slot per page (2 al giorno per 3 giorni).
+// `from_iso` permette paginazione: la UI passa l'inizio del prossimo intervallo per andare avanti nel tempo.
+
+const BUSINESS_HOURS = [
+  { startH: 10, startM: 0, endH: 13, endM: 0 },
+  { startH: 14, startM: 30, endH: 18, endM: 0 },
+];
+const SLOTS_PER_PAGE = 6;
+const SLOTS_PER_DAY_MAX = 2;
+const SEARCH_DAYS_AHEAD = 21;
+
+function overlapsBusy(slotStart: Date, slotEnd: Date, busy: { start: string; end: string }[]): boolean {
+  const s = slotStart.getTime(), e = slotEnd.getTime();
+  return busy.some(b => {
+    const bs = new Date(b.start).getTime(), be = new Date(b.end).getTime();
+    return s < be && e > bs;
+  });
+}
+
+function* iterateCandidateSlots(from: Date, durationMin: number) {
+  // Cammina giorno per giorno, salta weekend, genera slot di `durationMin` ogni 30 min dentro le business hours.
+  const cursor = new Date(from);
+  cursor.setSeconds(0, 0);
+  const stop = new Date(from.getTime() + SEARCH_DAYS_AHEAD * 86400_000);
+  while (cursor < stop) {
+    const dow = cursor.getDay(); // 0=Sun, 6=Sat
+    if (dow !== 0 && dow !== 6) {
+      for (const win of BUSINESS_HOURS) {
+        const winStart = new Date(cursor); winStart.setHours(win.startH, win.startM, 0, 0);
+        const winEnd = new Date(cursor); winEnd.setHours(win.endH, win.endM, 0, 0);
+        let t = new Date(winStart);
+        while (t.getTime() + durationMin * 60_000 <= winEnd.getTime()) {
+          if (t.getTime() >= from.getTime()) {
+            yield { start: new Date(t), end: new Date(t.getTime() + durationMin * 60_000) };
+          }
+          t = new Date(t.getTime() + 30 * 60_000);
+        }
+      }
+    }
+    cursor.setDate(cursor.getDate() + 1);
+    cursor.setHours(0, 0, 0, 0);
+  }
+}
+
+async function suggestSlots(args: { duration_min?: number; from_iso?: string }): Promise<AlbaToolResult> {
+  const duration = Math.min(Math.max(args.duration_min ?? 30, 15), 120);
+  const earliestAllowed = new Date(Date.now() + 24 * 3600_000); // no slot entro 24h da adesso
+  const requestedFrom = args.from_iso ? new Date(args.from_iso) : earliestAllowed;
+  const from = requestedFrom.getTime() < earliestAllowed.getTime() ? earliestAllowed : requestedFrom;
+
+  const to = new Date(from.getTime() + SEARCH_DAYS_AHEAD * 86400_000);
+  const fb = await getFreeBusy(from.toISOString(), to.toISOString());
+  if (!fb.ok) return { ok: false, error: `freebusy failed: ${fb.error}` };
+
+  const busy = fb.busy || [];
+  const slots: { start_iso: string; end_iso: string; day_key: string; label: string }[] = [];
+  const perDay = new Map<string, number>();
+
+  const fmt = new Intl.DateTimeFormat('it-IT', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Rome' });
+  const dayKeyFmt = new Intl.DateTimeFormat('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Europe/Rome' });
+
+  for (const cand of iterateCandidateSlots(from, duration)) {
+    if (overlapsBusy(cand.start, cand.end, busy)) continue;
+    const dayKey = dayKeyFmt.format(cand.start);
+    if ((perDay.get(dayKey) ?? 0) >= SLOTS_PER_DAY_MAX) continue;
+    perDay.set(dayKey, (perDay.get(dayKey) ?? 0) + 1);
+    slots.push({
+      start_iso: cand.start.toISOString(),
+      end_iso: cand.end.toISOString(),
+      day_key: dayKey,
+      label: fmt.format(cand.start),
+    });
+    if (slots.length >= SLOTS_PER_PAGE) break;
+  }
+
+  const nextFromIso = slots.length > 0
+    ? new Date(new Date(slots[slots.length - 1].start_iso).getTime() + 86400_000).toISOString()
+    : null;
+
+  return {
+    ok: true,
+    data: {
+      slots,
+      duration_min: duration,
+      from_iso: from.toISOString(),
+      next_from_iso: nextFromIso,
+      timezone: 'Europe/Rome',
+    },
+    human_summary: slots.length === 0
+      ? 'Nessuno slot libero nei prossimi 21 giorni. Lascia un orario che ti va e ci organizziamo.'
+      : `Trovati ${slots.length} slot. Falli vedere all'utente con il selettore: scelga lui.`,
+  };
+}
+
 // ---------- dispatcher ----------
 export async function executeAlbaTool(name: string, args: any, ctx: { uid: string; session_id: string }): Promise<AlbaToolResult> {
   switch (name) {
     case 'search_kb': return searchKb(args);
+    case 'suggest_slots': return suggestSlots(args);
     case 'book_call': return bookCall(args, ctx);
     case 'send_brief_email': return sendBriefEmail(args, ctx);
     case 'route_to_human': return routeToHuman(args, ctx);

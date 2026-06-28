@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "tools": [
     {
       "name": "search_kb",
@@ -34,8 +34,19 @@
       }
     },
     {
+      "name": "suggest_slots",
+      "description": "Propone all'utente slot liberi sull'agenda di Max (Lun-Ven, 10-13 + 14:30-18, fuso Roma) usando FreeBusy. Restituisce fino a 6 slot in 3 giorni futuri. La UI client renderà automaticamente un selettore con bottoni di navigazione (◀ indietro / ▶ avanti). USA QUESTO TOOL come primo step quando l'utente vuole fissare una call e non ha già proposto un orario specifico. Non commentare gli slot in chat: il selettore visivo basta — di' solo 'Ti propongo questi orari' e basta.",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "duration_min": { "type": "integer", "default": 30, "minimum": 15, "maximum": 120, "description": "Durata call in minuti" },
+          "from_iso": { "type": "string", "description": "ISO datetime da cui iniziare a cercare (per paginazione ▶ avanti). Vuoto = da +24h." }
+        }
+      }
+    },
+    {
       "name": "book_call",
-      "description": "Fissa una call con Max. Fa 3 cose: salva email utente, manda email-brief a Max con la conversazione e l'eventuale slot suggerito, ritorna URL Cal.com con disponibilità real-time. NON promette slot: lo slot suggerito va come informazione a Max, ma l'utente sceglie sull'agenda Cal.com. Richiede user_email — chiedila al primo turno utile.",
+      "description": "Fissa la call con Max creando l'evento direttamente su Google Calendar (con Meet + invito automatico). Da chiamare DOPO che l'utente ha scelto uno slot dal selettore di suggest_slots oppure ha esplicitamente proposto un orario in testo libero. Richiede user_email — chiedila prima se non l'hai. Se Google Calendar fallisce, manda email-brief a Max come fallback.",
       "input_schema": {
         "type": "object",
         "properties": {
