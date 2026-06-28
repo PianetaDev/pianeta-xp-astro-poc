@@ -12,45 +12,79 @@ const baseSchema = z.object({
   tags: z.array(z.string()).optional(),
 }).passthrough();
 
+const servicesSchemaExt = baseSchema.extend({
+  category: z.enum(['strategic-design-consultancy', 'visualization-storytelling', 'products-systems', 'data-ai']).optional(),
+  processPhase: z.union([z.number().int().min(1).max(4), z.string()]).optional(),
+  icon: z.string().optional(),
+  inputClient: z.array(z.string()).optional(),
+  deliverables: z.array(z.string()).optional(),
+  relatedServices: z.array(z.string()).optional(),
+  caseStudies: z.array(z.string()).optional(),
+  order: z.number().optional(),
+});
+
+const teamSchemaExt = baseSchema.extend({
+  kind: z.enum(['core', 'satellite', 'ai']).optional(),
+  discipline: z.string().optional(),
+});
+
 const work = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/work' }),
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/work' }),
   schema: baseSchema,
 });
 
 const bulletin = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/bulletin' }),
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/bulletin' }),
   schema: baseSchema,
 });
 
 const services = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/services' }),
-  schema: baseSchema.extend({
-    category: z.enum(['strategic-design-consultancy', 'visualization-storytelling', 'products-systems', 'data-ai']).optional(),
-    processPhase: z.union([z.number().int().min(1).max(4), z.string()]).optional(),
-    icon: z.string().optional(),
-    inputClient: z.array(z.string()).optional(),
-    deliverables: z.array(z.string()).optional(),
-    relatedServices: z.array(z.string()).optional(),
-    caseStudies: z.array(z.string()).optional(),
-    order: z.number().optional(),
-  }),
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/services' }),
+  schema: servicesSchemaExt,
 });
 
 const team = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/team' }),
-  schema: baseSchema.extend({
-    kind: z.enum(['core', 'satellite', 'ai']).optional(),
-    discipline: z.string().optional(),
-  }),
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/team' }),
+  schema: teamSchemaExt,
 });
 
 const lab = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/lab' }),
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/lab' }),
   schema: baseSchema,
 });
 
 const careers = defineCollection({
-  loader: glob({ pattern: '*.md', base: './src/content/careers' }),
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/careers' }),
+  schema: baseSchema,
+});
+
+const workEn = defineCollection({
+  loader: glob({ pattern: '*.en.md', base: './src/content/work' }),
+  schema: baseSchema,
+});
+
+const bulletinEn = defineCollection({
+  loader: glob({ pattern: '*.en.md', base: './src/content/bulletin' }),
+  schema: baseSchema,
+});
+
+const servicesEn = defineCollection({
+  loader: glob({ pattern: '*.en.md', base: './src/content/services' }),
+  schema: servicesSchemaExt,
+});
+
+const teamEn = defineCollection({
+  loader: glob({ pattern: '*.en.md', base: './src/content/team' }),
+  schema: teamSchemaExt,
+});
+
+const labEn = defineCollection({
+  loader: glob({ pattern: '*.en.md', base: './src/content/lab' }),
+  schema: baseSchema,
+});
+
+const careersEn = defineCollection({
+  loader: glob({ pattern: '*.en.md', base: './src/content/careers' }),
   schema: baseSchema,
 });
 
@@ -75,4 +109,18 @@ const campaigns = defineCollection({
   }),
 });
 
-export const collections = { work, bulletin, services, team, lab, careers, campaigns };
+export const collections = {
+  work,
+  bulletin,
+  services,
+  team,
+  lab,
+  careers,
+  campaigns,
+  workEn,
+  bulletinEn,
+  servicesEn,
+  teamEn,
+  labEn,
+  careersEn,
+};

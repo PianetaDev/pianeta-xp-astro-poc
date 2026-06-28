@@ -7,7 +7,7 @@ import { t } from '../../../lib/i18n/strings';
 
 export const prerender = true;
 export async function getStaticPaths() {
-  const items = await getCollection('work');
+  const items = await getCollection('workEn');
   return items.map((item) => ({ params: { slug: item.id }, props: { item, allItems: items } }));
 }
 
@@ -66,7 +66,6 @@ const related = bulletinRefs.map((slug) => ({ type: 'en/bulletin', slug }));
     metaInline={metaInline}
     twoCol={(item.body?.length ?? 0) > 2400}
     jsonLd={jsonLd}
-    fallbackBanner={t('en', 'fallback_banner')}
   >
     <Content />
   </DetailPage>
