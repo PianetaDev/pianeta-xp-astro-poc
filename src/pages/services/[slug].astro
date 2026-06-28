@@ -41,9 +41,8 @@ const metaInline = [
   data.team?.length && { label: 'Team', value: data.team.join(', ') },
 ].filter(Boolean);
 
-// Neuromarketing-lab: landing page ottimizzata per conversione via Alba + Cal.com
+// Neuromarketing-lab: landing page ottimizzata per conversione via Alba (gestisce la prenotazione end-to-end)
 const isNeuromarketing = item.id === 'neuromarketing-lab';
-const CAL_URL = 'https://cal.com/maxmauro/30min';
 
 const url = new URL(`/services/${item.id}`, Astro.site).toString();
 const jsonLd = {
@@ -80,9 +79,7 @@ const jsonLd = {
     primaryCta={isNeuromarketing
       ? { label: 'Parla con Alba', action: 'open-alba' }
       : { label: 'Lavoriamo insieme', action: 'open-hire-us' }}
-    secondaryCta={isNeuromarketing
-      ? { label: 'Prenota una call', href: CAL_URL, external: true }
-      : { label: 'Come lavoriamo', href: '/processo' }}
+    secondaryCta={{ label: 'Come lavoriamo', href: '/processo' }}
     backHref="/services"
     backLabel="Tutti i servizi"
     related={relatedFromCaseStudies}
@@ -102,7 +99,6 @@ const jsonLd = {
           <p class="neuro-alba-cta-desc">Parlane con Alba: capiamo in 5 minuti se e come la validazione neuro può fare la differenza per il tuo caso.</p>
           <div class="neuro-alba-cta-actions">
             <button type="button" class="cta-btn cta-primary" data-action="open-alba">Parla con Alba</button>
-            <a href={CAL_URL} target="_blank" rel="noopener" class="cta-btn cta-secondary">Prenota una call diretta →</a>
           </div>
         </div>
       </div>
