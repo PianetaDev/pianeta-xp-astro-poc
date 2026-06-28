@@ -233,16 +233,75 @@ async function routeToHuman(args: { reason: string; summary: string; user_contac
     });
   } catch { /* fire-and-forget */ }
 
-  // Slack notif optional
+  // Slack notif optional — Block Kit
   const slackWebhook = process.env.SLACK_ALBA_WEBHOOK;
   if (slackWebhook) {
     try {
+      const urgency = args.urgency ?? 'normal';
+      const urgencyEmoji = urgency === 'high' ? '🔴' : urgency === 'low' ? '⚪' : '🟡';
+      const contact = args.user_contact ?? null;
+      const contactLabel = contact || 'da raccogliere';
+      const sessionShort = ctx.session_id.slice(0, 8);
+      const timestamp = new Date().toLocaleString('it-IT', { timeZone: 'Europe/Rome', dateStyle: 'short', timeStyle: 'short' });
+
+      const fallbackPrefix = urgency === 'high' ? '<!here> ' : '';
+      const fallbackText = `${fallbackPrefix}🤝 Nuovo lead da Alba (${urgency}) — ${args.reason ?? ''}`;
+
+      // Detect email in contact
+      const emailMatch = contact ? contact.match(/[^\s@]+@[^\s@]+\.[^\s@]+/) : null;
+      const emailAddress = emailMatch ? emailMatch[0] : null;
+
+      const actionElements: unknown[] = [];
+      if (emailAddress) {
+        actionElements.push({
+          type: 'button',
+          text: { type: 'plain_text', text: 'Rispondi', emoji: true },
+          url: `mailto:${emailAddress}`,
+          action_id: 'reply_lead',
+        });
+      }
+      actionElements.push({
+        type: 'button',
+        text: { type: 'plain_text', text: 'Apri dashboard lead', emoji: true },
+        url: 'https://xp.pianeta.studio/admin/alba/leads',
+        action_id: 'open_leads_dashboard',
+        style: 'primary',
+      });
+
+      const blocks: unknown[] = [
+        {
+          type: 'header',
+          text: { type: 'plain_text', text: `${urgencyEmoji} Nuovo lead da Alba`, emoji: true },
+        },
+        {
+          type: 'section',
+          fields: [
+            { type: 'mrkdwn', text: `*Urgenza*\n${urgencyEmoji} ${urgency}` },
+            { type: 'mrkdwn', text: `*Motivo*\n${args.reason ?? '–'}` },
+            { type: 'mrkdwn', text: `*Contatto*\n${contactLabel}` },
+          ],
+        },
+        {
+          type: 'section',
+          text: { type: 'mrkdwn', text: `*Riassunto*\n${args.summary ?? '–'}` },
+        },
+        { type: 'divider' },
+        {
+          type: 'actions',
+          elements: actionElements,
+        },
+        {
+          type: 'context',
+          elements: [
+            { type: 'mrkdwn', text: `Sessione ${sessionShort} · ${timestamp}` },
+          ],
+        },
+      ];
+
       await fetch(slackWebhook, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          text: `🤝 Alba handoff (${args.urgency ?? 'normal'})\n*Reason*: ${args.reason}\n*Summary*: ${args.summary}\n*Contact*: ${args.user_contact ?? 'n/d'}`,
-        }),
+        body: JSON.stringify({ text: fallbackText, blocks }),
       });
     } catch { /* ignore */ }
   }
