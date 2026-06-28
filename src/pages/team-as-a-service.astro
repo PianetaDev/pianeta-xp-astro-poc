@@ -1,0 +1,318 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Team as a Service — Pianeta.Studio"
+  description="Un team Pianeta dedicato — direzione, design e sviluppo — al tuo fianco ogni settimana. 4.000 €/mese + IVA."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <article class="detail-page">
+
+    <header class="detail-head taas-hero">
+      <p class="detail-eyebrow">Pianeta.Studio · Offerta riservata</p>
+      <h1 class="detail-title">Team as a Service</h1>
+      <p class="detail-deck">Un team Pianeta dedicato — direzione creativa, design e sviluppo — al tuo fianco ogni settimana. Risultati ogni giovedì.</p>
+      <div class="taas-price-badge">
+        <span class="price-amount">4.000 €</span><span class="price-period">/mese + IVA</span>
+      </div>
+      <div class="taas-ctas">
+        <button id="btnActivate" class="cta-btn cta-primary" type="button">
+          Attiva il tuo team
+        </button>
+        <button id="btnTalk" class="cta-btn cta-ghost" type="button">
+          Parla prima con noi
+        </button>
+      </div>
+    </header>
+
+    <div class="detail-body">
+
+      <section class="taas-section">
+        <h2 class="taas-section-title">Cosa include</h2>
+        <ul class="taas-list">
+          <li>
+            <span class="taas-list-icon">&#9632;</span>
+            <div>
+              <strong>~48 ore/mese di capacità</strong>
+              <p>Un team senior sempre disponibile: direction, UX/UI design, sviluppo front-end e back-end, contenuti, brand.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-list-icon">&#9632;</span>
+            <div>
+              <strong>Design system Hederae</strong>
+              <p>Accesso al nostro design system proprietario: componenti pronti, token, documentazione — costruisci più veloce senza partire da zero.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-list-icon">&#9632;</span>
+            <div>
+              <strong>Agenti AI che accelerano le consegne</strong>
+              <p>I nostri agenti interni supportano ricerca, copywriting, QA e automazioni — più output nella stessa finestra temporale.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-list-icon">&#9632;</span>
+            <div>
+              <strong>Ritmo prevedibile</strong>
+              <p>Meeting settimanale di allineamento + consegne ogni giovedì. Sai sempre dove siamo e cosa arriva.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="taas-section taas-how">
+        <h2 class="taas-section-title">Come funziona</h2>
+        <ol class="taas-steps">
+          <li>
+            <span class="taas-step-num">01</span>
+            <div>
+              <strong>Attivi online</strong>
+              <p>Pagamento sicuro via Stripe. Nessun contratto da firmare prima — prima iniziamo, prima consegniamo.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-step-num">02</span>
+            <div>
+              <strong>Kickoff entro 48h</strong>
+              <p>Il tuo referente Pianeta ti contatta, raccogliamo il backlog e stabiliamo le priorità del primo sprint.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-step-num">03</span>
+            <div>
+              <strong>Consegne ogni giovedì</strong>
+              <p>Ogni settimana ricevi avanzamento tangibile. Allineamento breve il lunedì, consegne il giovedì.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-step-num">04</span>
+            <div>
+              <strong>Rinnovo mensile, disdici quando vuoi</strong>
+              <p>Nessun lock-in annuale. Se il valore non c'è, esci. Il codice e i file restano tuoi.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="taas-section taas-right-for">
+        <h2 class="taas-section-title">Per chi è</h2>
+        <p>Team as a Service è pensato per startup, scale-up e aziende che hanno bisogno di un team design+dev di livello senior, senza assumere. Lavora per te chi ha già costruito prodotti, brand e siti per realtà come le vostre.</p>
+        <p>Non è adatto se cerchi un fornitore a progetto una-tantum — in quel caso <a class="taas-inline-link" href="/lavoriamo-insieme">parliamo del tuo progetto</a>.</p>
+      </section>
+
+      <section class="taas-cta-bottom">
+        <h2>Pronto a iniziare?</h2>
+        <p>48 ore di capacità dedicata, ogni mese. Attivazione immediata via Stripe.</p>
+        <div class="taas-ctas">
+          <button id="btnActivate2" class="cta-btn cta-primary" type="button">
+            Attiva il tuo team — 4.000 €/mese
+          </button>
+          <button id="btnTalk2" class="cta-btn cta-ghost" type="button">
+            Parla prima con noi
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="detail-foot taas-foot">
+      <p>Offerta riservata · condivisa personalmente da Alba · non indicizzata sui motori di ricerca</p>
+    </footer>
+
+  </article>
+
+  <style>
+    .taas-hero {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .taas-price-badge {
+      margin: 1.5rem 0 1.75rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      justify-content: center;
+    }
+    .price-amount {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .price-period {
+      font-size: 1.1rem;
+      opacity: 0.65;
+    }
+
+    .taas-ctas {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .taas-section {
+      max-width: 720px;
+      margin: 3rem auto;
+    }
+    .taas-section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .taas-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .taas-list li {
+      display: grid;
+      grid-template-columns: 1.25rem 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+    .taas-list-icon {
+      font-size: 0.5rem;
+      margin-top: 0.45rem;
+      opacity: 0.5;
+    }
+    .taas-list li strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .taas-list li p {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .taas-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .taas-steps li {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+    .taas-step-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      opacity: 0.4;
+      padding-top: 0.2rem;
+    }
+    .taas-steps li strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .taas-steps li p {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .taas-right-for p {
+      opacity: 0.8;
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+    .taas-inline-link {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .taas-cta-bottom {
+      max-width: 680px;
+      margin: 4rem auto 2rem;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(128,128,128,0.25);
+      border-radius: 16px;
+    }
+    .taas-cta-bottom h2 {
+      margin-bottom: 0.5rem;
+    }
+    .taas-cta-bottom p {
+      margin-bottom: 1.5rem;
+      opacity: 0.75;
+    }
+
+    .taas-foot {
+      text-align: center;
+      opacity: 0.5;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .taas-ctas { flex-direction: column; align-items: stretch; }
+      .taas-ctas .cta-btn { text-align: center; }
+    }
+  </style>
+
+  <script is:inline>
+    (function () {
+      async function activateTeam() {
+        const btn1 = document.getElementById('btnActivate');
+        const btn2 = document.getElementById('btnActivate2');
+        const active = document.activeElement;
+        const target = (active === btn2) ? btn2 : btn1;
+
+        const origLabel = target.textContent;
+        target.disabled = true;
+        target.textContent = 'Avvio checkout…';
+        if (btn1) btn1.disabled = true;
+        if (btn2) btn2.disabled = true;
+
+        try {
+          const res = await fetch('/api/hire-us/start-subscription', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ formula: 'team-as-a-service' }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.url) {
+            throw new Error(data.error || 'Errore avvio checkout. Riprova o scrivi a info@pianeta.studio.');
+          }
+          window.location = data.url;
+        } catch (err) {
+          alert(err.message || 'Errore. Riprova o scrivici a info@pianeta.studio.');
+          if (btn1) { btn1.disabled = false; btn1.textContent = origLabel; }
+          if (btn2) { btn2.disabled = false; btn2.textContent = 'Attiva il tuo team — 4.000 €/mese'; }
+        }
+      }
+
+      function openTalk() {
+        try {
+          window.dispatchEvent(new CustomEvent('hire-us:open'));
+        } catch (e) {
+          window.location.href = 'mailto:info@pianeta.studio';
+        }
+      }
+
+      document.getElementById('btnActivate')?.addEventListener('click', activateTeam);
+      document.getElementById('btnActivate2')?.addEventListener('click', activateTeam);
+      document.getElementById('btnTalk')?.addEventListener('click', openTalk);
+      document.getElementById('btnTalk2')?.addEventListener('click', openTalk);
+    })();
+  </script>
+
+</BaseLayout>
