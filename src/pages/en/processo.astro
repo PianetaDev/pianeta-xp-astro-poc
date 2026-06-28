@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const steps = [
+  {
+    num: '01',
+    anchor: 'discover',
+    title: 'Discovery',
+    time: '1-2 weeks',
+    body: 'We understand your problem, not just your brief. Interviews with the team, audit of existing material (site, brand, data), identification of the real constraints — time, budget, people, legal constraints, ESG constraints. Output: a shared map of the problem and a scope proposal.',
+    deliver: ['Problem map', 'Stakeholder map', 'Constraints and dependencies', 'Scope proposal with options'],
+  },
+  {
+    num: '02',
+    anchor: 'ideate',
+    title: 'Co-design',
+    time: '2-4 weeks',
+    body: 'We design together. Workshops, navigable prototypes, AI validation where needed (Swarm or Neural Prediction). Design decisions tracked in a decision log that stays yours. No "big reveal": the design grows in front of your eyes.',
+    deliver: ['Co-design workshops', 'Navigable prototypes', 'Shared decision log', 'AI validation of concepts (if in scope)'],
+  },
+  {
+    num: '03',
+    anchor: 'refine',
+    title: 'Build',
+    time: '4-12 weeks',
+    body: 'Construction. Code delivered, open standards, client repo. Stack Terra (Payload CMS + Nuxt) for the web, or your stack if you have one. Performance budget and carbon budget as verifiable technical constraints in CI. No lock-in.',
+    deliver: ['Client repo (no lock-in)', 'CMS with localized backoffice', 'CI-verifiable performance budget', 'Carbon budget tracked with GreenMeter'],
+  },
+  {
+    num: '04',
+    anchor: 'support',
+    title: 'Validate & launch',
+    time: '1-2 weeks',
+    body: 'Final validation. UX validation with real users, AI validation on critical concepts, accessibility audit. Gradual launch or big bang depending on risk. Handover to internal teams with training sessions and documentation.',
+    deliver: ['UX validation', 'Accessibility audit', 'Handover + training', 'Operational documentation'],
+  },
+  {
+    num: '05',
+    anchor: 'measure',
+    title: 'Measure & evolve',
+    time: 'rolling',
+    body: 'Nothing is ever truly "finished". Performance, CO₂ and conversion measurement; quarterly reviews; an evolution backlog prioritized together. Model: rolling 3-6 months or per-phase flat fee, always with explicit scope. When you leave, you leave with everything in hand.',
+    deliver: ['Shared KPI dashboard', 'Quarterly reviews', 'Prioritized backlog', 'Carbon footprint measurement'],
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'How we work — the Pianeta.Studio process',
+  description: '5 phases: Discovery · Co-design · Build · Validate & launch · Measure & evolve',
+  totalTime: 'P12W',
+  step: steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.title,
+    text: s.body,
+    timeRequired: s.time,
+  })),
+};
+---
+<BaseLayout title="How we work — the process · Pianeta.Studio" description="The 5 phases of the Pianeta.Studio process: Discovery, Co-design, Build, Validate & launch, Measure & evolve. Open standards, code delivered, verifiable carbon budget.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="index-page" style="max-width:1080px;">
+    <header class="index-head">
+      <p class="index-eyebrow">How we work</p>
+      <h1 class="index-title">The process</h1>
+      <p class="index-deck">Five phases designed to reduce uncertainty — and to reduce it together. Co-design + AI validation + open standards. No big reveal, no lock-in.</p>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;">
+        <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">Let's work together</button>
+      </div>
+      <script is:inline>
+        document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open'))));
+      </script>
+    </header>
+
+    <ol class="process-steps">
+      {steps.map((s) => (
+        <li class="process-step" id={s.anchor}>
+          <div class="process-num">{s.num}</div>
+          <div class="process-body">
+            <header class="process-step-head">
+              <h2 class="process-title">{s.title}</h2>
+              <span class="process-time">{s.time}</span>
+            </header>
+            <p class="process-text">{s.body}</p>
+            <ul class="process-deliver">
+              {s.deliver.map((d) => <li>{d}</li>)}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <footer class="detail-foot" style="border-top:1px solid var(--pianeta-border); padding-top:48px; margin-top:96px;">
+      <a href="/en/services" class="cta-btn cta-ghost">See the services →</a>
+    </footer>
+  </div>
+
+  <style>
+    .process-steps { list-style: none; padding: 0; margin: 64px 0 0; display: flex; flex-direction: column; gap: 24px; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 32px;
+      background: #fff;
+      border: 1px solid var(--pianeta-border);
+      border-radius: 20px;
+      transition: border-color 200ms, transform 200ms;
+    }
+    .process-step:hover { border-color: var(--cta-primary); }
+    @media (min-width: 800px) {
+      .process-step { grid-template-columns: 140px 1fr; gap: 40px; align-items: start; padding: 40px; }
+    }
+    .process-num {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: var(--cta-primary);
+    }
+    .process-step-head { display: flex; flex-wrap: wrap; gap: 14px; align-items: baseline; margin-bottom: 12px; }
+    .process-title { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 900; letter-spacing: -0.02em; margin: 0; }
+    .process-time { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); padding: 4px 10px; background: rgba(14,17,22,0.05); border-radius: 999px; }
+    .process-text { font-size: 1.0625rem; line-height: 1.7; color: rgba(14,17,22,0.85); margin: 0 0 16px; }
+    .process-deliver { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+    @media (min-width: 600px) { .process-deliver { grid-template-columns: 1fr 1fr; gap: 8px 24px; } }
+    .process-deliver li { font-size: 14px; color: rgba(14,17,22,0.75); padding-left: 18px; position: relative; }
+    .process-deliver li::before { content: '→'; position: absolute; left: 0; color: var(--cta-primary); font-weight: 700; }
+  </style>
+</BaseLayout>

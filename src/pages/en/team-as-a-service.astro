@@ -1,0 +1,318 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Team as a Service — Pianeta.Studio"
+  description="A dedicated Pianeta team — direction, design and development — by your side every week. €4,000/month + VAT."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <article class="detail-page">
+
+    <header class="detail-head taas-hero">
+      <p class="detail-eyebrow">Pianeta.Studio · Private offer</p>
+      <h1 class="detail-title">Team as a Service</h1>
+      <p class="detail-deck">A dedicated Pianeta team — creative direction, design and development — by your side every week. Deliveries every Thursday.</p>
+      <div class="taas-price-badge">
+        <span class="price-amount">€4,000</span><span class="price-period">/month + VAT</span>
+      </div>
+      <div class="taas-ctas">
+        <button id="btnActivate" class="cta-btn cta-primary" type="button">
+          Activate your team
+        </button>
+        <button id="btnTalk" class="cta-btn cta-ghost" type="button">
+          Talk to us first
+        </button>
+      </div>
+    </header>
+
+    <div class="detail-body">
+
+      <section class="taas-section">
+        <h2 class="taas-section-title">What's included</h2>
+        <ul class="taas-list">
+          <li>
+            <span class="taas-list-icon">&#9632;</span>
+            <div>
+              <strong>~48 hours/month of capacity</strong>
+              <p>A senior team always available: direction, UX/UI design, front-end and back-end development, content, brand.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-list-icon">&#9632;</span>
+            <div>
+              <strong>Hederae design system</strong>
+              <p>Access to our proprietary design system: ready components, tokens, documentation — build faster without starting from scratch.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-list-icon">&#9632;</span>
+            <div>
+              <strong>AI agents that speed up delivery</strong>
+              <p>Our internal agents support research, copywriting, QA and automation — more output in the same time window.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-list-icon">&#9632;</span>
+            <div>
+              <strong>Predictable cadence</strong>
+              <p>Weekly alignment meeting + deliveries every Thursday. You always know where we are and what's coming.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="taas-section taas-how">
+        <h2 class="taas-section-title">How it works</h2>
+        <ol class="taas-steps">
+          <li>
+            <span class="taas-step-num">01</span>
+            <div>
+              <strong>Activate online</strong>
+              <p>Secure payment via Stripe. No contract to sign upfront — the sooner we start, the sooner we deliver.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-step-num">02</span>
+            <div>
+              <strong>Kickoff within 48h</strong>
+              <p>Your Pianeta point of contact reaches out, we collect the backlog and set priorities for the first sprint.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-step-num">03</span>
+            <div>
+              <strong>Deliveries every Thursday</strong>
+              <p>Every week you receive tangible progress. Short alignment on Monday, deliveries on Thursday.</p>
+            </div>
+          </li>
+          <li>
+            <span class="taas-step-num">04</span>
+            <div>
+              <strong>Monthly renewal, cancel anytime</strong>
+              <p>No annual lock-in. If the value isn't there, you leave. Code and files stay yours.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="taas-section taas-right-for">
+        <h2 class="taas-section-title">Who it's for</h2>
+        <p>Team as a Service is built for startups, scale-ups and companies that need a senior design+dev team without hiring. You'll be working with people who have already built products, brands and sites for organizations like yours.</p>
+        <p>It's not the right fit if you're looking for a one-off project vendor — in that case <a class="taas-inline-link" href="/en/lavoriamo-insieme">let's talk about your project</a>.</p>
+      </section>
+
+      <section class="taas-cta-bottom">
+        <h2>Ready to start?</h2>
+        <p>48 hours of dedicated capacity, every month. Instant activation via Stripe.</p>
+        <div class="taas-ctas">
+          <button id="btnActivate2" class="cta-btn cta-primary" type="button">
+            Activate your team — €4,000/month
+          </button>
+          <button id="btnTalk2" class="cta-btn cta-ghost" type="button">
+            Talk to us first
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="detail-foot taas-foot">
+      <p>Private offer · shared personally by Alba · not indexed by search engines</p>
+    </footer>
+
+  </article>
+
+  <style>
+    .taas-hero {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .taas-price-badge {
+      margin: 1.5rem 0 1.75rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      justify-content: center;
+    }
+    .price-amount {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .price-period {
+      font-size: 1.1rem;
+      opacity: 0.65;
+    }
+
+    .taas-ctas {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .taas-section {
+      max-width: 720px;
+      margin: 3rem auto;
+    }
+    .taas-section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .taas-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .taas-list li {
+      display: grid;
+      grid-template-columns: 1.25rem 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+    .taas-list-icon {
+      font-size: 0.5rem;
+      margin-top: 0.45rem;
+      opacity: 0.5;
+    }
+    .taas-list li strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .taas-list li p {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .taas-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .taas-steps li {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+    .taas-step-num {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      opacity: 0.4;
+      padding-top: 0.2rem;
+    }
+    .taas-steps li strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .taas-steps li p {
+      margin: 0;
+      opacity: 0.75;
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+
+    .taas-right-for p {
+      opacity: 0.8;
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+    .taas-inline-link {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .taas-cta-bottom {
+      max-width: 680px;
+      margin: 4rem auto 2rem;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(128,128,128,0.25);
+      border-radius: 16px;
+    }
+    .taas-cta-bottom h2 {
+      margin-bottom: 0.5rem;
+    }
+    .taas-cta-bottom p {
+      margin-bottom: 1.5rem;
+      opacity: 0.75;
+    }
+
+    .taas-foot {
+      text-align: center;
+      opacity: 0.5;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .taas-ctas { flex-direction: column; align-items: stretch; }
+      .taas-ctas .cta-btn { text-align: center; }
+    }
+  </style>
+
+  <script is:inline>
+    (function () {
+      async function activateTeam() {
+        const btn1 = document.getElementById('btnActivate');
+        const btn2 = document.getElementById('btnActivate2');
+        const active = document.activeElement;
+        const target = (active === btn2) ? btn2 : btn1;
+
+        const origLabel = target.textContent;
+        target.disabled = true;
+        target.textContent = 'Starting checkout…';
+        if (btn1) btn1.disabled = true;
+        if (btn2) btn2.disabled = true;
+
+        try {
+          const res = await fetch('/api/hire-us/start-subscription', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ formula: 'team-as-a-service' }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || !data.url) {
+            throw new Error(data.error || 'Checkout error. Try again or email info@pianeta.studio.');
+          }
+          window.location = data.url;
+        } catch (err) {
+          alert(err.message || 'Error. Try again or email info@pianeta.studio.');
+          if (btn1) { btn1.disabled = false; btn1.textContent = origLabel; }
+          if (btn2) { btn2.disabled = false; btn2.textContent = 'Activate your team — €4,000/month'; }
+        }
+      }
+
+      function openTalk() {
+        try {
+          window.dispatchEvent(new CustomEvent('hire-us:open'));
+        } catch (e) {
+          window.location.href = 'mailto:info@pianeta.studio';
+        }
+      }
+
+      document.getElementById('btnActivate')?.addEventListener('click', activateTeam);
+      document.getElementById('btnActivate2')?.addEventListener('click', activateTeam);
+      document.getElementById('btnTalk')?.addEventListener('click', openTalk);
+      document.getElementById('btnTalk2')?.addEventListener('click', openTalk);
+    })();
+  </script>
+
+</BaseLayout>

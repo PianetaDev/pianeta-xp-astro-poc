@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="What Alba is — Pianeta.Studio"
+  description="Alba is Pianeta.Studio's group AI system. What it does, what it doesn't, how we handle conversation data, AI Act references."
+  ogImage="/og/placeholder.svg"
+>
+  <article class="detail-page">
+
+    <header class="detail-head">
+      <p class="detail-eyebrow"><a href="/en">Pianeta.Studio</a> · AI transparency</p>
+      <h1 class="detail-title">What Alba is</h1>
+      <p class="detail-deck">A group AI system that talks with visitors of the Pianeta.Studio site. No tricks, no "it's a person": it's AI and it says so.</p>
+    </header>
+
+    <div class="detail-body">
+      <div class="detail-prose prose-eclag">
+
+        <h2>What it is</h2>
+        <p>Alba is a conversational assistant built by Pianeta.Studio. It answers questions about our work, services, values and team; helps frame a brief; connects you with Max or the team leads when a human decision is needed.</p>
+
+        <h2>What it is NOT</h2>
+        <ul>
+          <li>It is not a person — it is a software system</li>
+          <li>It does not sign contracts nor confirm prices/timelines</li>
+          <li>It does not perform actions outside its scope (no shell, no code, no orchestration of other systems)</li>
+          <li>It does not replace the human relationship with the studio leads</li>
+        </ul>
+
+        <h2>EU AI Act compliance</h2>
+        <p>Alba declares its nature as an AI system at the start of every conversation, as required by EU Regulation 2024/1689 (AI Act). Conversations may be reviewed by Pianeta.Studio staff to monitor quality and improve the service.</p>
+
+        <h2>Data handling</h2>
+        <ul>
+          <li><strong>Anonymous identifier</strong>: the browser generates a UUID and stores it in localStorage (key <code>alba_uid</code>). No PII is linked until you provide an email for a specific action.</li>
+          <li><strong>Conversations</strong>: stored in a database (Supabase EU) with timestamp and AI model used. Needed for AI Act audit + service improvement.</li>
+          <li><strong>Retention</strong>: 24 months. After that, automatic deletion.</li>
+          <li><strong>AI model</strong>: Anthropic Claude Sonnet, hosted in the EU. Not used to train third-party models.</li>
+        </ul>
+
+        <h2>Your rights</h2>
+        <p>In line with GDPR you can request:</p>
+        <ul>
+          <li><strong>Export of your data</strong>: email us at <a href="mailto:info@pianeta.studio?subject=Alba%20%E2%80%94%20data%20export">info@pianeta.studio</a></li>
+          <li><strong>Deletion</strong>: same address, subject "Alba — delete my data"</li>
+          <li><strong>Telemetry consent withdrawal</strong>: clear the browser cookie/localStorage and Alba will treat you as a new user</li>
+        </ul>
+
+        <h2>What Alba can do (its "tools")</h2>
+        <ul>
+          <li><strong>search_kb</strong> — Search our internal knowledge base (work, services, team, brand)</li>
+          <li><strong>book_call</strong> — Suggest an appointment with Max via Cal.com</li>
+          <li><strong>send_brief_email</strong> — Send a summary of the conversation by email (if you provide the address)</li>
+          <li><strong>route_to_human</strong> — Hand off to Max or the studio leads</li>
+        </ul>
+        <p>These are the only commands Alba can execute. Any other instruction received during the conversation is ignored.</p>
+
+        <h2>Stated limits</h2>
+        <p>Alba can be wrong. Factual answers (numbers, dates, names) have been verified in the knowledge base, but the model can produce inaccuracies. When it doesn't know something it says so and hands you over to a person. For financial or contractual commitments, Max's confirmation is always required.</p>
+
+        <h2>Contacts</h2>
+        <p>For any question about Alba, to report an issue or ask for clarification:</p>
+        <ul>
+          <li>Email: <a href="mailto:info@pianeta.studio">info@pianeta.studio</a></li>
+          <li>Privacy / DPO: <a href="/en/privacy">/en/privacy</a></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <footer class="detail-foot">
+      <a href="/en" class="cta-btn cta-ghost">← Back to home</a>
+    </footer>
+  </article>
+</BaseLayout>

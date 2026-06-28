@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const cosaFacciamo = [
+  {
+    title: 'We map the right grant',
+    body: 'We look at your situation (SME/startup/large company), the type of project, the region, and find the grants that actually cover the work you want to do.',
+  },
+  {
+    title: 'We build a fundable project',
+    body: 'The design + dev you need, written in the language of the grant, with KPIs and milestones that can be reported without surprises at close-out.',
+  },
+  {
+    title: 'We support you through reporting',
+    body: 'AB Innovation handles the bureaucratic paperwork, we deliver outputs aligned with requirements. One supply chain, two competencies.',
+  },
+];
+
+const aree = [
+  {
+    emoji: '🌋',
+    nome: 'Sicily',
+    bandi: ['SME digitalization vouchers', 'Regional green & sustainability grants', 'Innovative startup support'],
+  },
+  {
+    emoji: '🏔️',
+    nome: 'Lombardy',
+    bandi: ['Marchi+ (internationalization)', 'SIMEST', 'Regional digital innovation grants'],
+  },
+  {
+    emoji: '🏛️',
+    nome: 'Lazio',
+    bandi: ['SME digitalization vouchers', 'Culture & publishing grants', 'Innovative startup support'],
+  },
+];
+
+const step = [
+  { num: '01', title: 'Free audit (30 min)', body: 'Of your project + goal. We figure out together whether the grant route makes sense.' },
+  { num: '02', title: 'Grant mapping', body: 'Available in your region + budget and timeline estimate.' },
+  { num: '03', title: 'Quote', body: 'Project + cost + expected grant coverage, all in plain sight.' },
+  { num: '04', title: 'Application + delivery', body: 'AB prepares the paperwork, we step in on design+dev once it is approved.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Grants & funding',
+  serviceType: 'Grants & funding',
+  provider: {
+    '@type': 'Organization',
+    name: 'Pianeta.Studio',
+    url: 'https://pianeta.studio',
+  },
+  areaServed: ['Sicily', 'Lombardy', 'Lazio'],
+  description: 'Italian grants oversight for design + dev projects. In partnership with AB Innovation Consulting in Sicily, Lombardy, Lazio.',
+};
+---
+<BaseLayout title="Grants & funding · Pianeta.Studio" description="We monitor the Italian grants that can fund the design and development of your next project. Partnership with AB Innovation Consulting in Sicily, Lombardy, Lazio.">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <div class="detail-page index-page" style="max-width:1080px;">
+    <header class="index-head">
+      <p class="index-eyebrow">Services</p>
+      <h1 class="index-title">Grants & funding</h1>
+      <p class="index-deck">Have a project and looking for ways to fund it? Together with AB Innovation Consulting we monitor the grants that can cover the design and development of your next project in Sicily, Lombardy, Lazio.</p>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">Let's work together</button>
+        <a href="/en/processo" class="cta-btn cta-ghost">See how we work</a>
+      </div>
+      <script is:inline>
+        document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open'))));
+      </script>
+    </header>
+
+    <section class="bandi-section">
+      <h2 class="bandi-section-title">What we do</h2>
+      <div class="bandi-grid bandi-grid-3">
+        {cosaFacciamo.map((c) => (
+          <article class="bandi-card">
+            <h3 class="bandi-card-title">{c.title}</h3>
+            <p class="bandi-card-body">{c.body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="bandi-section">
+      <h2 class="bandi-section-title">Areas we cover</h2>
+      <div class="bandi-grid bandi-grid-3">
+        {aree.map((a) => (
+          <article class="bandi-area-box">
+            <div class="bandi-area-emoji" aria-hidden="true">{a.emoji}</div>
+            <h3 class="bandi-area-name">{a.nome}</h3>
+            <ul class="bandi-area-list">
+              {a.bandi.map((b) => <li>{b}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="bandi-section">
+      <h2 class="bandi-section-title">How to start</h2>
+      <ol class="bandi-steps">
+        {step.map((s) => (
+          <li class="bandi-step">
+            <div class="bandi-step-num">{s.num}</div>
+            <div class="bandi-step-content">
+              <h3 class="bandi-step-title">{s.title}</h3>
+              <p class="bandi-step-body">{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <footer class="detail-foot" style="border-top:1px solid var(--pianeta-border); padding-top:48px; margin-top:96px;">
+      <div class="bandi-partner-box">
+        <strong>Official partner: AB Innovation Consulting</strong>
+        <span>Active agreement for Sicily · Lombardy · Lazio since 14 May 2026</span>
+      </div>
+    </footer>
+  </div>
+
+  <style>
+    .bandi-section { margin-top: 96px; }
+    .bandi-section-title {
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 32px;
+    }
+    .bandi-grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .bandi-grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 960px) {
+      .bandi-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+    .bandi-card {
+      padding: 28px;
+      background: #fff;
+      border: 1px solid var(--pianeta-border);
+      border-radius: 20px;
+      transition: border-color 200ms;
+    }
+    .bandi-card:hover { border-color: var(--cta-primary); }
+    .bandi-card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin: 0 0 12px;
+    }
+    .bandi-card-body {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: rgba(14,17,22,0.78);
+      margin: 0;
+    }
+    .bandi-area-box {
+      padding: 28px;
+      background: var(--pianeta-cream, #f6efe4);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 20px;
+      transition: border-color 200ms, transform 200ms;
+    }
+    .bandi-area-box:hover { border-color: var(--cta-primary); transform: translateY(-2px); }
+    .bandi-area-emoji {
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .bandi-area-name {
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px;
+    }
+    .bandi-area-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .bandi-area-list li {
+      font-size: 0.9rem;
+      color: rgba(14,17,22,0.78);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .bandi-area-list li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: var(--cta-primary);
+      font-weight: 700;
+    }
+    .bandi-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .bandi-step {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid var(--pianeta-border);
+      border-radius: 16px;
+      transition: border-color 200ms;
+    }
+    .bandi-step:hover { border-color: var(--cta-primary); }
+    @media (min-width: 640px) {
+      .bandi-step { grid-template-columns: 80px 1fr; gap: 24px; align-items: start; padding: 28px 32px; }
+    }
+    .bandi-step-num {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--cta-primary);
+    }
+    .bandi-step-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+    }
+    .bandi-step-body {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(14,17,22,0.78);
+      margin: 0;
+    }
+    .bandi-partner-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 20px 24px;
+      background: var(--pianeta-cream, #f6efe4);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .bandi-partner-box strong { font-weight: 800; }
+    .bandi-partner-box span { color: rgba(14,17,22,0.7); }
+  </style>
+</BaseLayout>
