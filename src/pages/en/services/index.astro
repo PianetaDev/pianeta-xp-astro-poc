@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 import { SERVICE_CATEGORIES } from '../../../lib/services-categories';
 import { t } from '../../../lib/i18n/strings';
 
-const all = (await getCollection('services')).filter((i: any) => !i.data.draft);
+const all = (await getCollection('servicesEn')).filter((i: any) => !i.data.draft);
 
 const byCategory = (key: string) =>
   all
@@ -14,9 +14,6 @@ const byCategory = (key: string) =>
 ---
 <BaseLayout title="Services — Pianeta.Studio" description="Four practice categories: Strategic Design Consultancy · Visualization & Storytelling · Products & Systems · Data & AI.">
   <div class="index-page" style="max-width:1180px;">
-    <div class="detail-fallback-banner" role="status" style="max-width:1100px;margin:16px auto 0;padding:10px 16px;background:rgba(255,107,51,0.10);border:1px solid rgba(255,107,51,0.25);border-radius:8px;font-size:13px;line-height:1.4;">
-      {t('en', 'fallback_banner')}
-    </div>
     <header class="index-head">
       <p class="index-eyebrow">Sustainable Creativity · Design & Technology</p>
       <h1 class="index-title">Services</h1>
