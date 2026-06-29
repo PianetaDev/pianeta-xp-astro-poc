@@ -78,6 +78,18 @@ const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.s
   </head>
   <body class="site-body antialiased" style="background:var(--pianeta-bg); color:var(--pianeta-text); transition:background 280ms ease, color 280ms ease;">
     {chrome && <SiteRail current={Astro.url.pathname} />}
+    {chrome && <a href="/hire" class="hub-hire-cta">Lavoriamo insieme</a>}
+    <style is:global>
+      .hub-hire-cta {
+        position: fixed; top: 16px; right: 16px; z-index: 40;
+        background: var(--cta-primary, #FF6B33); color: var(--cta-primary-ink, #fff);
+        font-weight: 600; font-size: 14px; padding: 9px 18px; border-radius: 999px;
+        text-decoration: none; box-shadow: 0 6px 20px rgba(255,107,51,.30);
+        transition: transform 150ms ease;
+      }
+      .hub-hire-cta:hover { transform: translateY(-1px); }
+      @media (max-width: 640px) { .hub-hire-cta { top: 10px; right: 10px; padding: 7px 14px; font-size: 13px; } }
+    </style>
 
     <main class={chrome ? 'site-main' : ''}>
       <slot />
