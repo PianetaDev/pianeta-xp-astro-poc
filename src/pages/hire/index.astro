@@ -170,8 +170,8 @@ const METHOD = [
       --txt: var(--pianeta-text); --mut: var(--pianeta-muted); --acc: var(--cta-primary);
       --orange: var(--cta-primary); --green: #1f7a3a;
     }
-    /* su /hire la CTA flottante "Lavoriamo insieme" del BaseLayout è ridondante */
-    :global(.hub-hire-cta) { display: none !important; }
+    /* su /hire le CTA flottanti hire (CTA hub + launcher drawer) sono ridondanti */
+    :global(.hub-hire-cta), :global(.hire-us-launcher) { display: none !important; }
 
     .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
     .wrap-narrow { max-width: 720px; }
