@@ -12,22 +12,12 @@ const isQuote = !offer.stripe;
 const recurNote = offer.stripe?.mode === 'subscription' ? 'al mese · disdici quando vuoi' : isQuote ? 'preventivo gratuito' : 'una tantum';
 const QUOTE_HREF = `/lavoriamo-insieme?offer=${offer.slug}`;
 
-// Metodo — vive qui dentro lo Sprint (insight swarm: gli scettici convertono solo se vedono processo e consegna).
-const sprintDays = [
-  { n: 1, title: 'Immersione', body: 'Obiettivi, audience, audit di quello che hai già. Mezza giornata con te, il resto lo lavoriamo noi.' },
-  { n: 2, title: 'Direzione', body: 'Concept e messaggi chiave. Una o più direzioni creative, non una sola scommessa.' },
-  { n: 3, title: 'Validazione', body: 'Il nostro swarm AI + neuromarketing stress-testa le direzioni con un panel sintetico. Vediamo cosa convince e cosa genera resistenza — prima di produrre.' },
-  { n: 4, title: 'Consegna', body: 'Direzione finale validata + asset chiave + roadmap, in un meeting di consegna.' },
-];
-const sprintFaqs = [
-  { q: 'Tecnologie proprietarie o tool rivenduti?', a: 'Il motore di validazione (swarm + neuromarketing) è nostro, sviluppato internamente. Non rivendiamo un tool di terzi: è il metodo con cui lavoriamo.' },
-  { q: 'Cosa consegnate, di preciso?', a: 'Una direzione creativa/di messaggio validata e pronta da produrre, il razionale della validazione, gli asset chiave decisi nello Sprint e una roadmap dei passi successivi.' },
-  { q: 'Per chi è lo Sprint?', a: 'Per chi sta per investire su una campagna, un sito o un rebrand e vuole partire sul piede giusto — non sprecare mesi e budget su una direzione sbagliata.' },
-  { q: 'E dopo lo Sprint?', a: 'Puoi produrre con noi (o con chi vuoi: la direzione è tua) oppure passare al Team as a Service per un rapporto continuativo.' },
-];
-const isSprint = offer.slug === 'pianeta-sprint';
+// Metodo + FAQ vengono dai dati condivisi (offers.ts) — stessa fonte dell'overlay.
+const sprintDays = offer.method ?? [];
+const sprintFaqs = offer.faqs ?? [];
+const hasMethod = sprintDays.length > 0;
 ---
-<BaseLayout title={`${offer.name} — ${BRAND}`} description={offer.tagline}>
+<BaseLayout title={`${offer.name} — ${BRAND}`} description={offer.tagline} hideNewsletter>
   <div class="hire-page">
   <main class="wrap">
     <p style="margin:24px 0 18px"><a href="/hire" style="color:var(--mut);text-decoration:none;font-size:13px">← Tutte le offerte</a></p>
@@ -44,7 +34,7 @@ const isSprint = offer.slug === 'pianeta-sprint';
           {offer.deliverables.map((d) => <li><span style={`color:${accent}`}>✓</span> {d}</li>)}
         </ul>
 
-        {isSprint && (
+        {hasMethod && (
           <div class="sprint-method">
             <h2 class="offer-h2">Come funziona, giorno per giorno</h2>
             <ol class="sprint-days">

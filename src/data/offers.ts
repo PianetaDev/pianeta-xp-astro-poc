@@ -5,6 +5,8 @@
 const SITE = '';
 
 export interface Related { title: string; href: string; kind: 'case' | 'article' }
+export interface MethodDay { n: number; title: string; body: string }
+export interface Faq { q: string; a: string }
 
 export interface Offer {
   slug: string;
@@ -21,6 +23,8 @@ export interface Offer {
   stripe?: { mode: 'payment' | 'subscription'; amount: number; recurring?: 'month'; label: string };
   quote?: { label: string };
   related: Related[];
+  method?: MethodDay[];   // es. i 4 giorni dello Sprint
+  faqs?: Faq[];
 }
 
 export const OFFERS: Offer[] = [
@@ -69,6 +73,18 @@ export const OFFERS: Offer[] = [
       { title: 'ECLAG — Choose to See Them', href: `${SITE}/work/eclag`, kind: 'case' },
       { title: 'Validare una campagna prima di produrla', href: `${SITE}/bulletin/validare-una-campagna-prima-di-produrla`, kind: 'article' },
       { title: 'Lab Neuromarketing', href: `${SITE}/bulletin/lab-neuromarketing`, kind: 'article' },
+    ],
+    method: [
+      { n: 1, title: 'Immersione', body: 'Obiettivi, audience, audit di quello che hai già. Mezza giornata con te, il resto lo lavoriamo noi.' },
+      { n: 2, title: 'Direzione', body: 'Concept e messaggi chiave. Una o più direzioni creative, non una sola scommessa.' },
+      { n: 3, title: 'Validazione', body: 'Il nostro swarm AI + neuromarketing stress-testa le direzioni con un panel sintetico. Vediamo cosa convince e cosa genera resistenza — prima di produrre.' },
+      { n: 4, title: 'Consegna', body: 'Direzione finale validata + asset chiave + roadmap, in un meeting di consegna.' },
+    ],
+    faqs: [
+      { q: 'Tecnologie proprietarie o tool rivenduti?', a: 'Il motore di validazione (swarm + neuromarketing) è nostro, sviluppato internamente. Non rivendiamo un tool di terzi: è il metodo con cui lavoriamo.' },
+      { q: 'Cosa consegnate, di preciso?', a: 'Una direzione creativa/di messaggio validata e pronta da produrre, il razionale della validazione, gli asset chiave decisi nello Sprint e una roadmap dei passi successivi.' },
+      { q: 'Per chi è lo Sprint?', a: 'Per chi sta per investire su una campagna, un sito o un rebrand e vuole partire sul piede giusto — non sprecare mesi e budget su una direzione sbagliata.' },
+      { q: 'E dopo lo Sprint?', a: 'Puoi produrre con noi (o con chi vuoi: la direzione è tua) oppure passare al Team as a Service per un rapporto continuativo.' },
     ],
   },
   {

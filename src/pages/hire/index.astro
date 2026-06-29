@@ -23,7 +23,7 @@ const METHOD = [
   { n: '04', t: 'Consegna, senza lock-in', d: 'Codice e contenuti consegnati, standard aperti. Quello che costruiamo è tuo.' },
 ];
 ---
-<BaseLayout title={`Lavoriamo insieme — ${BRAND}`} description="Una direzione creativa validata, prima di spendere il budget. Design, web e validazione con AI.">
+<BaseLayout title={`Lavoriamo insieme — ${BRAND}`} description="Una direzione creativa validata, prima di spendere il budget. Design, web e validazione con AI." hideNewsletter>
   <div class="hire-page">
   <!-- HERO -->
   <section class="hero">
@@ -39,7 +39,7 @@ const METHOD = [
     <h2 class="sec-h2">Tre modi per lavorare con noi</h2>
     <div class="offers">
       {OFFERS.map((o) => (
-        <a href={`/hire/${o.slug}`} class="offer-card" style={`border-top:3px solid ${accents[o.accent]}`}>
+        <a href={`/hire/${o.slug}`} class="offer-card offer-open" data-offer={o.slug} style={`border-top:3px solid ${accents[o.accent]}`}>
           <div class="offer-price">{o.price}</div>
           <h3 class="offer-name">{o.emoji} {o.name}</h3>
           <p class="offer-forwho">{o.forWho}</p>
@@ -286,51 +286,117 @@ const METHOD = [
     :global(.work-ov-live) { display: inline-block; margin: 32px 14px 0 0; background: var(--cta-primary); color: #fff; font-weight: 600; padding: 12px 22px; border-radius: 999px; text-decoration: none; }
     :global(.work-ov-full) { display: inline-block; margin-top: 32px; color: var(--pianeta-muted); font-weight: 600; text-decoration: none; font-size: 14px; }
     :global(.work-ov-full:hover) { color: var(--pianeta-text); }
+    /* overlay offerta */
+    :global(.ov-price) { font-size: 22px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 24px; }
+    :global(.ov-h2) { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted); margin: 32px 0 14px; }
+    :global(.ov-list) { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0; font-size: 16px; }
+    :global(.ov-list li) { display: flex; gap: 10px; }
+    :global(.ov-days) { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0; }
+    :global(.ov-days li) { display: flex; gap: 16px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 14px; padding: 16px 18px; }
+    :global(.ov-day-n) { font-size: 22px; font-weight: 800; min-width: 40px; }
+    :global(.ov-days strong) { display: block; margin-bottom: 4px; }
+    :global(.ov-days p) { color: var(--pianeta-muted); font-size: 14px; line-height: 1.5; margin: 0; }
+    :global(.ov-faqs) { display: grid; gap: 16px; }
+    :global(.ov-faqs strong) { display: block; margin-bottom: 4px; }
+    :global(.ov-faqs p) { color: var(--pianeta-muted); font-size: 14px; line-height: 1.5; margin: 0; }
+    :global(.ov-rels) { display: grid; gap: 10px; }
+    :global(.ov-rel) { display: flex; flex-direction: column; gap: 3px; padding: 14px 16px; border: 1px solid var(--pianeta-border); border-radius: 12px; text-decoration: none; transition: border-color 150ms; cursor: pointer; }
+    :global(.ov-rel:hover) { border-color: var(--pianeta-border-strong); }
+    :global(.ov-rel-k) { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: var(--cta-primary); }
+    :global(.ov-rel-t) { font-size: 15px; font-weight: 600; color: var(--pianeta-text); }
+    :global(.ov-cta) { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin-top: 36px; }
+    :global(.ov-buy) { display: inline-block; color: #fff; border: 0; font-weight: 700; font-size: 15px; padding: 13px 26px; border-radius: 999px; cursor: pointer; text-decoration: none; }
+    :global(.ov-buy:disabled) { opacity: .6; cursor: default; }
   </style>
 
   <script is:inline>
     (() => {
+      const ACC = { green: '#1f7a3a', orange: '#FF6B33', dark: '#5a4fcf', blue: '#1f5b8f' };
       const init = () => {
         const ov = document.getElementById('work-ov');
         if (!ov || ov.dataset.bound) return;
         ov.dataset.bound = '1';
         const body = document.getElementById('work-ov-body');
-        const md = (s) => s
+        const panel = ov.querySelector('.work-ov-panel');
+        const esc = (x) => String(x ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const md = (s) => String(s || '')
           .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
           .replace(/^#{1,3} (.*)$/gm, '<h2>$1</h2>')
           .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
           .replace(/\*(.+?)\*/g, '<em>$1</em>')
           .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
           .split(/\n{2,}/).map((b) => b.match(/^<h2>/) ? b : '<p>' + b.replace(/\n/g, '<br>') + '</p>').join('');
-        const open = async (slug) => {
-          body.innerHTML = '<p style="padding:60px 0;text-align:center;color:var(--pianeta-muted)">Carico…</p>';
-          ov.hidden = false; document.body.style.overflow = 'hidden';
-          try {
-            const r = await fetch('/api/work/' + slug + '.json'); const d = await r.json();
-            const esc = (x) => String(x || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            const eyebrow = [d.client, d.category].filter(Boolean).map(esc).join(' · ');
-            const services = Array.isArray(d.services) ? d.services : (d.services ? [d.services] : []);
-            const meta = [
-              d.year ? { k: 'Anno', v: esc(d.year) } : null,
-              d.sector ? { k: 'Settore', v: esc(d.sector) } : null,
-              services.length ? { k: 'Servizi', v: services.map(esc).join(', ') } : null,
-            ].filter(Boolean);
-            body.innerHTML =
-              (d.cover ? '<div class="work-ov-cover" style="background-image:url(\'' + String(d.cover).replace(/'/g, "%27") + '\')"></div>' : '') +
-              (eyebrow ? '<p class="work-ov-eyebrow">' + eyebrow + '</p>' : '') +
-              '<h1>' + esc(d.name) + '</h1>' +
-              (d.description ? '<p class="work-ov-deck">' + esc(d.description) + '</p>' : '') +
-              (meta.length ? '<ul class="work-ov-meta">' + meta.map((m) => '<li><span class="k">' + m.k + '</span><span class="v">' + m.v + '</span></li>').join('') + '</ul>' : '') +
-              '<div class="work-ov-content">' + md(d.body || '') + '</div>' +
-              (d.live_url ? '<a class="work-ov-live" href="' + esc(d.live_url) + '" target="_blank" rel="noopener">Vedi il progetto live →</a>' : '') +
-              '<a class="work-ov-full" href="/work/' + encodeURIComponent(slug) + '">Apri la scheda completa →</a>';
-          } catch (e) { body.innerHTML = '<p>Contenuto non disponibile.</p>'; }
+        const slugOf = (href, seg) => { const p = String(href).split('/' + seg + '/')[1]; return p ? p.split(/[?#]/)[0] : ''; };
+        const loading = () => { body.innerHTML = '<p style="padding:60px 0;text-align:center;color:var(--pianeta-muted)">Carico…</p>'; ov.hidden = false; document.body.style.overflow = 'hidden'; if (panel) panel.scrollTop = 0; };
+        const fail = () => { body.innerHTML = '<p style="padding:40px 0">Contenuto non disponibile.</p>'; };
+
+        // --- Articolo (work o bulletin) ---
+        const renderArticle = (d, fullHref, fullLabel) => {
+          const eyebrow = [d.client, d.category].filter(Boolean).map(esc).join(' · ');
+          const services = Array.isArray(d.services) ? d.services : (d.services ? [d.services] : []);
+          const meta = [
+            d.year ? { k: 'Anno', v: esc(d.year) } : null,
+            d.sector ? { k: 'Settore', v: esc(d.sector) } : null,
+            services.length ? { k: 'Servizi', v: services.map(esc).join(', ') } : null,
+          ].filter(Boolean);
+          body.innerHTML =
+            (d.cover ? '<div class="work-ov-cover" style="background-image:url(\'' + String(d.cover).replace(/'/g, '%27') + '\')"></div>' : '') +
+            (eyebrow ? '<p class="work-ov-eyebrow">' + eyebrow + '</p>' : '') +
+            '<h1>' + esc(d.name || d.title) + '</h1>' +
+            (d.description ? '<p class="work-ov-deck">' + esc(d.description) + '</p>' : '') +
+            (meta.length ? '<ul class="work-ov-meta">' + meta.map((m) => '<li><span class="k">' + m.k + '</span><span class="v">' + m.v + '</span></li>').join('') + '</ul>' : '') +
+            '<div class="work-ov-content">' + md(d.body || '') + '</div>' +
+            (d.live_url ? '<a class="work-ov-live" href="' + esc(d.live_url) + '" target="_blank" rel="noopener">Vedi il progetto live →</a>' : '') +
+            '<a class="work-ov-full" href="' + fullHref + '">' + fullLabel + '</a>';
         };
+        const openWork = async (s) => { loading(); try { renderArticle(await (await fetch('/api/work/' + s + '.json')).json(), '/work/' + encodeURIComponent(s), 'Apri la scheda completa →'); } catch (e) { fail(); } };
+        const openBulletin = async (s) => { loading(); try { renderArticle(await (await fetch('/api/bulletin/' + s + '.json')).json(), '/bulletin/' + encodeURIComponent(s), 'Leggi l’articolo completo →'); } catch (e) { fail(); } };
+
+        // --- Offerta ---
+        const relLink = (r) => {
+          const isCase = r.kind === 'case';
+          const s = slugOf(r.href, isCase ? 'work' : 'bulletin');
+          return '<a class="ov-rel ' + (isCase ? 'work-open' : 'bulletin-open') + '" ' + (isCase ? 'data-work' : 'data-bulletin') + '="' + esc(s) + '" href="' + esc(r.href) + '">'
+            + '<span class="ov-rel-k">' + (isCase ? 'Case study' : 'Articolo') + '</span><span class="ov-rel-t">' + esc(r.title) + ' →</span></a>';
+        };
+        const openOffer = async (s) => {
+          loading();
+          try {
+            const o = await (await fetch('/api/hire/offer/' + s + '.json')).json();
+            const acc = ACC[o.accent] || '#FF6B33';
+            const cta = o.stripe
+              ? '<button class="ov-buy" data-offer="' + esc(o.slug) + '" style="background:' + acc + '">' + esc(o.stripe.label) + '</button>'
+              : '<a class="ov-buy" href="/lavoriamo-insieme?offer=' + esc(o.slug) + '" style="background:' + acc + '">' + esc(o.quote ? o.quote.label : 'Richiedi un preventivo') + '</a>';
+            body.innerHTML =
+              '<p class="work-ov-eyebrow" style="color:' + acc + '">' + esc(o.emoji) + ' Offerta</p>' +
+              '<h1>' + esc(o.name) + '</h1>' +
+              '<p class="work-ov-deck">' + esc(o.forWho) + '</p>' +
+              '<div class="ov-price">' + esc(o.price) + '</div>' +
+              '<div class="work-ov-content"><p>' + esc(o.detail) + '</p></div>' +
+              '<h2 class="ov-h2">Cosa ottieni</h2><ul class="ov-list">' + (o.deliverables || []).map((d) => '<li><span style="color:' + acc + '">✓</span> ' + esc(d) + '</li>').join('') + '</ul>' +
+              (o.method && o.method.length ? '<h2 class="ov-h2">Come funziona, giorno per giorno</h2><ol class="ov-days">' + o.method.map((d) => '<li><span class="ov-day-n" style="color:' + acc + '">G' + d.n + '</span><div><strong>' + esc(d.title) + '</strong><p>' + esc(d.body) + '</p></div></li>').join('') + '</ol>' : '') +
+              (o.faqs && o.faqs.length ? '<h2 class="ov-h2">Domande frequenti</h2><div class="ov-faqs">' + o.faqs.map((f) => '<div><strong>' + esc(f.q) + '</strong><p>' + esc(f.a) + '</p></div>').join('') + '</div>' : '') +
+              (o.related && o.related.length ? '<h2 class="ov-h2">Casi e approfondimenti</h2><div class="ov-rels">' + o.related.map(relLink).join('') + '</div>' : '') +
+              '<div class="ov-cta">' + cta + '<a class="work-ov-full" href="/hire/' + esc(o.slug) + '">Pagina offerta completa →</a></div>';
+          } catch (e) { fail(); }
+        };
+
+        const checkout = async (s, btn) => {
+          if (btn) { btn.disabled = true; btn._t = btn.textContent; btn.textContent = 'Attendere…'; }
+          try { const d = await (await fetch('/api/hire/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offer: s }) })).json(); if (d.url) { location.href = d.url; return; } } catch (e) { /* noop */ }
+          if (btn) { btn.disabled = false; btn.textContent = btn._t; }
+          alert('Errore checkout, riprova.');
+        };
+
         const close = () => { ov.hidden = true; document.body.style.overflow = ''; };
         document.addEventListener('click', (e) => {
-          const a = e.target.closest && e.target.closest('.work-open');
-          if (a) { e.preventDefault(); open(a.dataset.work); return; }
-          if (e.target.closest && e.target.closest('[data-close]')) close();
+          const c = (sel) => e.target.closest && e.target.closest(sel);
+          let el;
+          if ((el = c('.ov-buy')) && el.tagName === 'BUTTON') { e.preventDefault(); checkout(el.dataset.offer, el); return; }
+          if ((el = c('.work-open'))) { e.preventDefault(); openWork(el.dataset.work); return; }
+          if ((el = c('.bulletin-open'))) { e.preventDefault(); openBulletin(el.dataset.bulletin); return; }
+          if ((el = c('.offer-open'))) { e.preventDefault(); openOffer(el.dataset.offer); return; }
+          if (c('[data-close]')) { close(); return; }
         });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !ov.hidden) close(); });
       };

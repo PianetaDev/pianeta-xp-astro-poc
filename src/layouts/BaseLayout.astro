@@ -23,9 +23,10 @@ interface Props {
   ogSlug?: string;
   chrome?: boolean;
   minimal?: boolean;
+  hideNewsletter?: boolean;   // su superfici di conversione (es. /hire) niente popup proattivi
 }
 
-const { title, description = '', ogImage = '/og/work-eclag.png', ogType, ogSlug, chrome = true, minimal = false } = Astro.props;
+const { title, description = '', ogImage = '/og/work-eclag.png', ogType, ogSlug, chrome = true, minimal = false, hideNewsletter = false } = Astro.props;
 const ogImageResolved = ogType && ogSlug
   ? new URL(`/api/og/${ogType}/${ogSlug}.png`, Astro.site).toString()
   : ogImage;
@@ -102,11 +103,11 @@ const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.s
         <CookieConsent client:only="vue" />
         <MobileMenu client:only="vue" />
         <SiteRailFlyout client:only="vue" />
-        <NewsletterPopup client:only="vue" />
+        {!hideNewsletter && <NewsletterPopup client:only="vue" />}
         <HireUsLauncher client:only="vue" />
         <HireUsDrawer client:only="vue" />
         <AlbaFloater client:only="vue" />
-        <AlbaProactivePopup client:only="vue" />
+        {!hideNewsletter && <AlbaProactivePopup client:only="vue" />}
         <SiteArtifactPane client:only="vue" />
         <SidePane client:only="vue" />
       </>
