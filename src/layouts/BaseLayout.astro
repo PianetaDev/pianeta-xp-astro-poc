@@ -35,7 +35,7 @@ const dataSun = isNightInItaly() ? 'night' : 'day';
 const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/') ? 'en' : 'it';
 ---
 <!doctype html>
-<html lang={locale} data-theme="auto" data-sun={dataSun}>
+<html lang={locale} data-theme="light" data-sun={dataSun}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -57,8 +57,12 @@ const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.s
       (() => {
         try {
           const saved = localStorage.getItem('pianeta-theme');
-          if (saved === 'light' || saved === 'dark' || saved === 'auto') {
+          // 'auto' deprecato → ricade su light
+          if (saved === 'light' || saved === 'dark') {
             document.documentElement.setAttribute('data-theme', saved);
+          } else if (saved === 'auto') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            try { localStorage.setItem('pianeta-theme', 'light'); } catch (e) {}
           }
         } catch (e) {}
       })();
