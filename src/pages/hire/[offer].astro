@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { offerBySlug } from '../../data/offers';
+
+const BRAND = 'Pianeta.Studio';
+const BOOKING = '/lavoriamo-insieme';
+const offer = offerBySlug(Astro.params.offer ?? '');
+if (!offer) return Astro.redirect('/hire');
+const accents: Record<string, string> = { green: 'var(--green)', orange: 'var(--orange)', dark: 'var(--acc)' };
+const accent = accents[offer.accent];
+const recurNote = offer.stripe.mode === 'subscription' ? 'al mese · disdici quando vuoi' : 'una tantum';
+
+// Metodo — vive qui dentro lo Sprint (insight swarm: gli scettici convertono solo se vedono processo e consegna).
+const sprintDays = [
+  { n: 1, title: 'Immersione', body: 'Obiettivi, audience, audit di quello che hai già. Mezza giornata con te, il resto lo lavoriamo noi.' },
+  { n: 2, title: 'Direzione', body: 'Concept e messaggi chiave. Una o più direzioni creative, non una sola scommessa.' },
+  { n: 3, title: 'Validazione', body: 'Il nostro swarm AI + neuromarketing stress-testa le direzioni con un panel sintetico. Vediamo cosa convince e cosa genera resistenza — prima di produrre.' },
+  { n: 4, title: 'Consegna', body: 'Direzione finale validata + asset chiave + roadmap, in un meeting di consegna.' },
+];
+const sprintFaqs = [
+  { q: 'Tecnologie proprietarie o tool rivenduti?', a: 'Il motore di validazione (swarm + neuromarketing) è nostro, sviluppato internamente. Non rivendiamo un tool di terzi: è il metodo con cui lavoriamo.' },
+  { q: 'Cosa consegnate, di preciso?', a: 'Una direzione creativa/di messaggio validata e pronta da produrre, il razionale della validazione, gli asset chiave decisi nello Sprint e una roadmap dei passi successivi.' },
+  { q: 'Per chi è lo Sprint?', a: 'Per chi sta per investire su una campagna, un sito o un rebrand e vuole partire sul piede giusto — non sprecare mesi e budget su una direzione sbagliata.' },
+  { q: 'E dopo lo Sprint?', a: 'Puoi produrre con noi (o con chi vuoi: la direzione è tua) oppure passare al Team as a Service per un rapporto continuativo.' },
+];
+const isSprint = offer.slug === 'pianeta-sprint';
+---
+<BaseLayout title={`${offer.name} — ${BRAND}`} description={offer.tagline}>
+  <div class="hire-page">
+  <main class="wrap">
+    <p style="margin:24px 0 18px"><a href="/hire" style="color:var(--mut);text-decoration:none;font-size:13px">← Tutte le offerte</a></p>
+
+    <div class="offer-grid">
+      <article class="offer-article">
+        <p class="offer-kicker" style={`color:${accent}`}>{offer.emoji} Offerta</p>
+        <h1 class="offer-title">{offer.name}</h1>
+        <p class="offer-forwho">{offer.forWho}</p>
+        <p class="offer-detail">{offer.detail}</p>
+
+        <h2 class="offer-h2">Cosa ottieni</h2>
+        <ul class="offer-list">
+          {offer.deliverables.map((d) => <li><span style={`color:${accent}`}>✓</span> {d}</li>)}
+        </ul>
+
+        {isSprint && (
+          <div class="sprint-method">
+            <h2 class="offer-h2">Come funziona, giorno per giorno</h2>
+            <ol class="sprint-days">
+              {sprintDays.map((d) => (
+                <li>
+                  <div class="sprint-day-n" style={`color:${accent}`}>G{d.n}</div>
+                  <div>
+                    <div class="sprint-day-t">{d.title}</div>
+                    <div class="sprint-day-b">{d.body}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <h2 class="offer-h2" style="margin-top:32px">Domande frequenti</h2>
+            <div class="sprint-faqs">
+              {sprintFaqs.map((f) => (
+                <div>
+                  <div class="sprint-faq-q">{f.q}</div>
+                  <div class="sprint-faq-a">{f.a}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {offer.related.length > 0 && (
+          <div class="offer-related">
+            <h2 class="offer-h2">Casi e approfondimenti</h2>
+            <div class="offer-related-list">
+              {offer.related.map((r) => (
+                <a href={r.href} class="offer-related-card">
+                  <span class="offer-related-kind" style={`color:${accent}`}>{r.kind === 'case' ? 'Case study' : 'Articolo'}</span>
+                  <span class="offer-related-title">{r.title} →</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="offer-clients">
+          <span class="offer-clients-label">Hanno scelto Pianeta</span>
+          <a href="/work" class="offer-clients-names">Armani · Prada · La Repubblica · Wired · Plenitude · BC3 · ChildFund · WeWorld · ECLAG · ARIES →</a>
+        </div>
+      </article>
+
+      <aside class="offer-buy">
+        <div class="offer-price">{offer.price.replace(' + IVA','')}</div>
+        <div class="offer-price-note">{recurNote} · + IVA</div>
+        <button id="buy" data-offer={offer.slug} class="offer-buy-btn" style={`background:${accent}`}>{offer.stripe.label}</button>
+        <a href={BOOKING} class="offer-call-btn">Preferisci parlarne? Prenota una call</a>
+        <p class="offer-reassure">Pagamento sicuro con <strong>Stripe</strong>. IVA e P.IVA gestite al checkout.</p>
+      </aside>
+    </div>
+  </main>
+  </div>
+
+  <style>
+    .hire-page {
+      --card: var(--pianeta-bg-card); --line: var(--pianeta-border);
+      --txt: var(--pianeta-text); --mut: var(--pianeta-muted); --acc: var(--cta-primary);
+      --orange: var(--cta-primary); --green: #1f7a3a;
+    }
+    :global(.hub-hire-cta) { display: none !important; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px 72px; }
+
+    .offer-grid { display: grid; grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
+    @media (min-width: 860px) { .offer-grid { grid-template-columns: minmax(0,1fr) 320px; gap: 56px; align-items: start; } }
+    .offer-article { max-width: 680px; }
+    .offer-kicker { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin: 0 0 10px; }
+    .offer-title { font-size: clamp(32px, 5vw, 44px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 14px; }
+    .offer-forwho { color: var(--mut); font-size: 16px; margin: 0 0 28px; }
+    .offer-detail { font-size: 18px; line-height: 1.7; margin: 0 0 36px; }
+    .offer-h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin: 0 0 14px; }
+    .offer-list { list-style: none; display: grid; gap: 12px; font-size: 16px; padding: 0; }
+    .offer-list li { display: flex; gap: 10px; }
+
+    .sprint-method { margin-top: 38px; }
+    .sprint-days { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0 0 4px; }
+    .sprint-days li { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+    .sprint-day-n { font-size: 22px; font-weight: 800; min-width: 40px; }
+    .sprint-day-t { font-weight: 600; margin-bottom: 4px; }
+    .sprint-day-b { color: var(--mut); font-size: 14px; line-height: 1.5; }
+    .sprint-faqs { display: grid; gap: 16px; }
+    .sprint-faq-q { font-weight: 600; margin-bottom: 4px; }
+    .sprint-faq-a { color: var(--mut); font-size: 14px; line-height: 1.5; }
+
+    .offer-related { margin-top: 38px; }
+    .offer-related .offer-h2 { margin-bottom: 12px; }
+    .offer-related-list { display: grid; gap: 10px; }
+    .offer-related-card { display: flex; flex-direction: column; gap: 3px; padding: 14px 16px;
+      border: 1px solid var(--line); border-radius: 12px; text-decoration: none; transition: border-color 150ms; }
+    .offer-related-card:hover { border-color: var(--pianeta-border-strong); }
+    .offer-related-kind { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+    .offer-related-title { font-size: 15px; font-weight: 600; }
+    .offer-clients { margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--line); }
+    .offer-clients-label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin-bottom: 8px; }
+    .offer-clients-names { font-size: 14px; font-weight: 600; line-height: 1.6; color: var(--txt); text-decoration: none; }
+    .offer-clients-names:hover { color: var(--acc); }
+
+    .offer-buy { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px; }
+    @media (min-width: 860px) { .offer-buy { position: sticky; top: 86px; } }
+    .offer-price { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+    .offer-price-note { color: var(--mut); font-size: 13px; margin-top: -6px; }
+    .offer-buy-btn { color: #fff; border: 0; font-weight: 700; padding: 14px; border-radius: 11px; cursor: pointer; font-size: 15px; margin-top: 6px; }
+    .offer-buy-btn:disabled { opacity: .6; cursor: default; }
+    .offer-call-btn { text-align: center; padding: 12px; border: 1px solid var(--line); border-radius: 11px; text-decoration: none; font-weight: 600; font-size: 14px; }
+    .offer-call-btn:hover { border-color: var(--pianeta-border-strong); }
+    .offer-reassure { color: var(--mut); font-size: 12px; line-height: 1.5; margin-top: 4px; }
+  </style>
+
+  <script is:inline>
+    (() => {
+      const bind = () => {
+        const btn = document.getElementById('buy');
+        if (!btn || btn.dataset.bound) return;
+        btn.dataset.bound = '1';
+        btn.addEventListener('click', async (e) => {
+          const b = e.currentTarget;
+          b.disabled = true; const orig = b.textContent; b.textContent = 'Attendere…';
+          try {
+            const r = await fetch('/api/hire/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offer: b.dataset.offer }) });
+            const d = await r.json();
+            if (d.url) { window.location.href = d.url; } else { b.disabled = false; b.textContent = orig; alert(d.error || 'Errore checkout'); }
+          } catch { b.disabled = false; b.textContent = orig; }
+        });
+      };
+      bind();
+      document.addEventListener('astro:page-load', bind);
+    })();
+  </script>
+</BaseLayout>
