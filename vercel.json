@@ -17,5 +17,15 @@
       "path": "/api/cron/alba-reengagement",
       "schedule": "0 10 * * *"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/hire",
+      "destination": "https://pianeta-engine.vercel.app/hire"
+    },
+    {
+      "source": "/hire/:path*",
+      "destination": "https://pianeta-engine.vercel.app/hire/:path*"
+    }
   ]
 }
