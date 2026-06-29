@@ -9,6 +9,13 @@ const route = useRoute()
 
 watch(() => route.fullPath, () => { if (artifact.value) close() })
 
+// Split su schermi larghi: restringe la main quando l'artifact è aperto (≥1280px)
+watch(artifact, (a) => {
+  if (typeof document !== 'undefined') document.body.classList.toggle('artifact-open', !!a)
+})
+// Mutua esclusività con gli altri pannelli
+function closeOnOtherPane() { if (artifact.value) close() }
+
 function onKey(e: KeyboardEvent) {
   if (!artifact.value) return
   if (e.key === 'Escape') close()
@@ -17,8 +24,17 @@ function onKey(e: KeyboardEvent) {
     if (e.key === 'ArrowLeft') prev()
   }
 }
-onMounted(() => window.addEventListener('keydown', onKey))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
+onMounted(() => {
+  window.addEventListener('keydown', onKey)
+  window.addEventListener('sidepane:open', closeOnOtherPane)
+  window.addEventListener('alba:open', closeOnOtherPane)
+})
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', onKey)
+  window.removeEventListener('sidepane:open', closeOnOtherPane)
+  window.removeEventListener('alba:open', closeOnOtherPane)
+  if (typeof document !== 'undefined') document.body.classList.remove('artifact-open')
+})
 
 const currentGalleryItem = computed(() => {
   if (!artifact.value || artifact.value.kind !== 'gallery' || !artifact.value.items?.length) return null
@@ -122,5 +138,16 @@ const kindIcon: Record<string, string> = {
 <style scoped>
 @media (prefers-reduced-motion: reduce) {
   .artifact-pane { transition: none !important; }
+}
+</style>
+
+<style>
+/* Split: su schermi larghi (≥1280px) la main si restringe invece di essere coperta */
+@media (min-width: 1280px) {
+  main.site-main { transition: padding-right 280ms cubic-bezier(0.16, 1, 0.3, 1); }
+  body.artifact-open main.site-main { padding-right: 820px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  main.site-main { transition: none !important; }
 }
 </style>

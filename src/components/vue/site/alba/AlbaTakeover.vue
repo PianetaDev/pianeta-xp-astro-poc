@@ -23,9 +23,17 @@ watch(() => route.fullPath, () => { if (open.value) closePanel() })
 
 const onSuggested = (prompt: string) => { initialPrompt.value = prompt }
 const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape' && open.value) closePanel() }
-onMounted(() => window.addEventListener('keydown', onKey))
+// Mutua esclusività: se si apre il side-pane generico, chiudi Alba
+const onSidePaneOpen = () => { if (open.value) closePanel() }
+onMounted(() => {
+  window.addEventListener('keydown', onKey)
+  window.addEventListener('sidepane:open', onSidePaneOpen)
+})
 onBeforeUnmount(() => {
-  if (typeof window !== 'undefined') window.removeEventListener('keydown', onKey)
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('keydown', onKey)
+    window.removeEventListener('sidepane:open', onSidePaneOpen)
+  }
 })
 
 // Mobile bottom-sheet: drag-to-close

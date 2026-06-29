@@ -24,12 +24,16 @@ function onExternalOpen(e: Event) {
   if (kind) open(kind)
 }
 function onKey(e: KeyboardEvent) { if (e.key === 'Escape' && pane.value) close() }
+// Mutua esclusività: se si apre Alba, chiudi il side-pane
+function onAlbaOpen() { if (pane.value) close() }
 onMounted(() => {
   window.addEventListener('sidepane:open', onExternalOpen)
+  window.addEventListener('alba:open', onAlbaOpen)
   window.addEventListener('keydown', onKey)
 })
 onBeforeUnmount(() => {
   window.removeEventListener('sidepane:open', onExternalOpen)
+  window.removeEventListener('alba:open', onAlbaOpen)
   window.removeEventListener('keydown', onKey)
   if (typeof document !== 'undefined') document.body.classList.remove('sidepane-open')
 })
