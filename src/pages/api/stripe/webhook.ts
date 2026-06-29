@@ -31,6 +31,8 @@ export const POST: APIRoute = async ({ request }) => {
         const session = evt.data.object as Stripe.Checkout.Session;
         if (session.metadata?.source === 'hire-us-alba' && session.mode === 'subscription') {
           await handleNewHireUsSubscription(stripe, session);
+        } else if (session.metadata?.source === 'hire') {
+          await handleHireOrder(session);
         }
         break;
       }
@@ -81,6 +83,37 @@ async function handleNewHireUsSubscription(stripe: Stripe, session: Stripe.Check
     subject: `🎉 Nuova subscription Hire Us — ${customer.email}`,
     html: renderSubscriptionEmail({ session, sub, customer, portalUrl: portal.url }),
   });
+}
+
+// Ordine /hire (Sito Green · Sprint · TaaS) → registra il "won" in engine_leads.
+// Source of truth del "ha pagato" per la superficie hire (prima viveva nell'engine).
+async function handleHireOrder(session: Stripe.Checkout.Session) {
+  const sb = supabaseService();
+  await sb.from('engine_leads').insert({
+    tenant: 'pianeta',
+    channel: 'direct',
+    landing: 'hire',
+    offer_slug: session.metadata?.offer ?? null,
+    email: session.customer_details?.email ?? null,
+    name: session.customer_details?.name ?? null,
+    status: 'won',
+    message: 'Acquisto completato via Stripe',
+    meta: {
+      amount_total: session.amount_total,
+      currency: session.currency,
+      mode: session.mode,
+      session: session.id,
+      payment_status: session.payment_status,
+    },
+  });
+
+  const resend = new Resend(env('RESEND_API_KEY'));
+  await resend.emails.send({
+    from: 'Pianeta noreply <noreply@pianeta.studio>',
+    to: 'info@pianeta.studio',
+    subject: `🎉 Nuovo ordine /hire — ${session.metadata?.offer ?? 'offerta'} · ${session.customer_details?.email ?? ''}`,
+    html: `<p>Acquisto completato.</p><p>Offerta: <strong>${session.metadata?.offer ?? '—'}</strong><br>Cliente: ${session.customer_details?.email ?? '—'}<br>Importo: ${((session.amount_total ?? 0) / 100).toFixed(2)} ${(session.currency ?? 'eur').toUpperCase()} (${session.mode})</p>`,
+  }).catch((e) => console.error('[hire-order] email error:', e));
 }
 
 async function handleSubscriptionLifecycle(sub: Stripe.Subscription, eventType: string) {

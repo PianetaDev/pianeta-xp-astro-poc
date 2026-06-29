@@ -13,6 +13,9 @@ Tagliare lungo la cucitura **presentazione vs backend**, non hire-vs-sito:
 
 Futuro: Pianeta.Green / Aria / siti client avranno **ciascuno la propria vetrina offerte nel proprio stile e AI**, tutti che parlano alla stessa macchina dietro.
 
+### North-star — Piattaforma / Superfici (insight Max 29/6)
+Non sono "due moduli nello stesso ambiente": è **una piattaforma** in cui convergono **contenuto + AI (Alba) + acquisizione + commerce**, sopra **un solo dato** (Supabase). I siti sono **superfici** (presentazione) che ci si appoggiano — sottili e diversissime per stile e AI. Oggi la piattaforma vive sparsa (gran parte nel repo sito, la macchina nell'engine); l'evoluzione è renderla un **confine esplicito** (servizio/package) con superfici-skin. Pattern di interazione preferiti sulle superfici: **API + overlay + interattivo**, non navigazioni a pagina (es. l'overlay approfondimento `/api/work`). Confine esplicito = prossimo brainstorming dedicato (non ora, YAGNI).
+
 ## Scoperta chiave — il sito ha GIÀ la commerce
 Non si porta l'intero backend dell'engine: il sito ha già la sua commerce hire-us, che l'engine aveva in parte **duplicato**. Da **riusare** invece di re-importare:
 - `src/lib/server/stripe.ts` — client Stripe (env `STRIPE_SECRET_KEY`).
