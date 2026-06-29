@@ -60,4 +60,4 @@ Per la rete freelance Pianeta.Satellite: [satellite@pianeta.studio](mailto:satel
 
 ---
 
-*Sustainable Creativity dal 2016. Studio nomade. Co-autori dei vostri progetti. Human to Planet.*
+*Sustainable Creativity. Studio nomade. Co-autori dei vostri progetti. Human to Planet.*
