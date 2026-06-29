@@ -43,3 +43,28 @@ export const ABOUT = {
   body: 'Pianeta.Studio è uno studio di Sustainable Creativity — design & technology al servizio di idee che generano cambiamento positivo per le persone e per il pianeta. Società Benefit: il Pianeta-centric design è scritto nel nostro statuto. Lavoriamo in co-design, validiamo con AI prima di produrre, e consegniamo codice e standard aperti — niente lock-in.',
   href: `${SITE}/bulletin/chi-siamo`,
 };
+
+const ABOUT_EN = {
+  title: 'About us',
+  body: 'Pianeta.Studio is a Sustainable Creativity studio — design & technology in service of ideas that create positive change for people and the planet. A Benefit Corporation: Planet-centric design is written into our charter. We work in co-design, validate with AI before producing, and hand over code and open standards — no lock-in.',
+  href: `/en/bulletin/chi-siamo`,
+};
+
+const TESTIMONIALS_EN: Testimonial[] = [
+  {
+    quote: 'Clear direction from day one, zero wasted loops: they validated the idea before spending. Exactly the studio we were looking for — flexible like a boutique, solid like a studio.',
+    name: 'Cornertable', org: 'cornertable.agency', url: 'https://cornertable.agency', initials: 'CT', draft: true,
+  },
+];
+
+// Helper bilingue: works/team/clients condivisi (nomi), about+testimonials localizzati, href con prefisso /en.
+export function getShowcase(locale: 'it' | 'en' = 'it') {
+  const pfx = locale === 'en' ? '/en' : '';
+  return {
+    works: WORKS.map((w) => ({ ...w, href: `${pfx}${w.href}` })),
+    team: TEAM,
+    clients: CLIENTS,
+    about: locale === 'en' ? ABOUT_EN : ABOUT,
+    testimonials: locale === 'en' ? TESTIMONIALS_EN : TESTIMONIALS,
+  };
+}

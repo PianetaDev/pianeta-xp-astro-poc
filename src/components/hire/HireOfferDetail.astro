@@ -1,0 +1,179 @@
+---
+import { type Offer } from '../../data/offers';
+import { HIRE_STRINGS, type Locale } from './strings';
+
+interface Props { offer: Offer; locale?: Locale; }
+const { offer, locale = 'it' } = Astro.props;
+const S = HIRE_STRINGS[locale];
+
+const accents: Record<string, string> = { green: '#1f7a3a', orange: '#FF6B33', dark: '#5a4fcf', blue: '#1f5b8f' };
+const accent = accents[offer.accent];
+const isQuote = !offer.stripe;
+const recurNote = offer.stripe?.mode === 'subscription' ? S.recurMonth : isQuote ? S.quoteNote : S.recurOnce;
+const hirePrefix = locale === 'en' ? '/en/hire' : '/hire';
+const QUOTE_HREF = `${S.booking}?offer=${offer.slug}`;
+const dayPrefix = locale === 'en' ? 'D' : 'G';
+const priceMain = offer.price.replace(/\s*\+\s*(IVA|VAT)\s*$/, '');
+const clientsStrip = 'Armani · Prada · La Repubblica · Wired · Plenitude · BC3 · ChildFund · WeWorld · ECLAG · ARIES →';
+
+const sprintDays = offer.method ?? [];
+const sprintFaqs = offer.faqs ?? [];
+const hasMethod = sprintDays.length > 0;
+---
+<div class="hire-page">
+  <main class="wrap">
+    <p style="margin:24px 0 18px"><a href={hirePrefix} style="color:var(--mut);text-decoration:none;font-size:13px">{S.allOffers}</a></p>
+
+    <div class="offer-grid">
+      <article class="offer-article">
+        <p class="offer-kicker" style={`color:${accent}`}>{offer.emoji} {S.offerKicker}</p>
+        <h1 class="offer-title">{offer.name}</h1>
+        <p class="offer-forwho">{offer.forWho}</p>
+        <p class="offer-detail">{offer.detail}</p>
+
+        <h2 class="offer-h2">{S.cosaOttieni}</h2>
+        <ul class="offer-list">
+          {offer.deliverables.map((d) => <li><span style={`color:${accent}`}>✓</span> {d}</li>)}
+        </ul>
+
+        {hasMethod && (
+          <div class="sprint-method">
+            <h2 class="offer-h2">{S.comeFunziona}</h2>
+            <ol class="sprint-days">
+              {sprintDays.map((d) => (
+                <li>
+                  <div class="sprint-day-n" style={`color:${accent}`}>{dayPrefix}{d.n}</div>
+                  <div>
+                    <div class="sprint-day-t">{d.title}</div>
+                    <div class="sprint-day-b">{d.body}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <h2 class="offer-h2" style="margin-top:32px">{S.faqTitle}</h2>
+            <div class="sprint-faqs">
+              {sprintFaqs.map((f) => (
+                <div>
+                  <div class="sprint-faq-q">{f.q}</div>
+                  <div class="sprint-faq-a">{f.a}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {offer.related.length > 0 && (
+          <div class="offer-related">
+            <h2 class="offer-h2">{S.casiTitle}</h2>
+            <div class="offer-related-list">
+              {offer.related.map((r) => (
+                <a href={r.href} class="offer-related-card">
+                  <span class="offer-related-kind" style={`color:${accent}`}>{r.kind === 'case' ? S.caseLabel : S.articleLabel}</span>
+                  <span class="offer-related-title">{r.title} →</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="offer-clients">
+          <span class="offer-clients-label">{S.clientsLabel}</span>
+          <a href={S.workAll} class="offer-clients-names">{clientsStrip}</a>
+        </div>
+      </article>
+
+      <aside class="offer-buy">
+        <div class="offer-price">{priceMain}</div>
+        <div class="offer-price-note">{isQuote ? recurNote : `${recurNote} · ${S.vatSuffix}`}</div>
+        {isQuote ? (
+          <>
+            <a href={QUOTE_HREF} class="offer-buy-btn" style={`background:${accent}`}>{offer.quote?.label}</a>
+            <a href={S.booking} class="offer-call-btn">{S.quoteCallAlt}</a>
+            <p class="offer-reassure">{S.quoteReassure}</p>
+          </>
+        ) : (
+          <>
+            <button id="buy" data-offer={offer.slug} data-locale={locale} class="offer-buy-btn" style={`background:${accent}`}>{offer.stripe?.label}</button>
+            <a href={S.booking} class="offer-call-btn">{S.callAlt}</a>
+            <p class="offer-reassure" set:html={S.payReassure} />
+          </>
+        )}
+      </aside>
+    </div>
+  </main>
+</div>
+
+<style>
+  .hire-page {
+    --card: var(--pianeta-bg-card); --line: var(--pianeta-border);
+    --txt: var(--pianeta-text); --mut: var(--pianeta-muted); --acc: var(--cta-primary);
+    --orange: var(--cta-primary); --green: #1f7a3a;
+  }
+  :global(.hub-hire-cta), :global(.hire-us-launcher) { display: none !important; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px 72px; }
+
+  .offer-grid { display: grid; grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
+  @media (min-width: 860px) { .offer-grid { grid-template-columns: minmax(0,1fr) 320px; gap: 56px; align-items: start; } }
+  .offer-article { max-width: 680px; }
+  .offer-kicker { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin: 0 0 10px; }
+  .offer-title { font-size: clamp(32px, 5vw, 44px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 14px; }
+  .offer-forwho { color: var(--mut); font-size: 16px; margin: 0 0 28px; }
+  .offer-detail { font-size: 18px; line-height: 1.7; margin: 0 0 36px; }
+  .offer-h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin: 0 0 14px; }
+  .offer-list { list-style: none; display: grid; gap: 12px; font-size: 16px; padding: 0; }
+  .offer-list li { display: flex; gap: 10px; }
+
+  .sprint-method { margin-top: 38px; }
+  .sprint-days { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0 0 4px; }
+  .sprint-days li { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .sprint-day-n { font-size: 22px; font-weight: 800; min-width: 40px; }
+  .sprint-day-t { font-weight: 600; margin-bottom: 4px; }
+  .sprint-day-b { color: var(--mut); font-size: 14px; line-height: 1.5; }
+  .sprint-faqs { display: grid; gap: 16px; }
+  .sprint-faq-q { font-weight: 600; margin-bottom: 4px; }
+  .sprint-faq-a { color: var(--mut); font-size: 14px; line-height: 1.5; }
+
+  .offer-related { margin-top: 38px; }
+  .offer-related .offer-h2 { margin-bottom: 12px; }
+  .offer-related-list { display: grid; gap: 10px; }
+  .offer-related-card { display: flex; flex-direction: column; gap: 3px; padding: 14px 16px;
+    border: 1px solid var(--line); border-radius: 12px; text-decoration: none; transition: border-color 150ms; }
+  .offer-related-card:hover { border-color: var(--pianeta-border-strong); }
+  .offer-related-kind { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+  .offer-related-title { font-size: 15px; font-weight: 600; }
+  .offer-clients { margin-top: 34px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .offer-clients-label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin-bottom: 8px; }
+  .offer-clients-names { font-size: 14px; font-weight: 600; line-height: 1.6; color: var(--txt); text-decoration: none; }
+  .offer-clients-names:hover { color: var(--acc); }
+
+  .offer-buy { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 26px 24px; display: flex; flex-direction: column; gap: 12px; }
+  @media (min-width: 860px) { .offer-buy { position: sticky; top: 86px; } }
+  .offer-price { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+  .offer-price-note { color: var(--mut); font-size: 13px; margin-top: -6px; }
+  .offer-buy-btn { display: block; text-align: center; text-decoration: none; color: #fff; border: 0; font-weight: 700; padding: 14px; border-radius: 11px; cursor: pointer; font-size: 15px; margin-top: 6px; }
+  .offer-buy-btn:disabled { opacity: .6; cursor: default; }
+  .offer-call-btn { text-align: center; padding: 12px; border: 1px solid var(--line); border-radius: 11px; text-decoration: none; font-weight: 600; font-size: 14px; }
+  .offer-call-btn:hover { border-color: var(--pianeta-border-strong); }
+  .offer-reassure { color: var(--mut); font-size: 12px; line-height: 1.5; margin-top: 4px; }
+</style>
+
+<script is:inline>
+  (() => {
+    const bind = () => {
+      const btn = document.getElementById('buy');
+      if (!btn || btn.dataset.bound) return;
+      btn.dataset.bound = '1';
+      btn.addEventListener('click', async (e) => {
+        const b = e.currentTarget;
+        b.disabled = true; const orig = b.textContent; b.textContent = '…';
+        try {
+          const r = await fetch('/api/hire/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offer: b.dataset.offer, locale: b.dataset.locale }) });
+          const d = await r.json();
+          if (d.url) { window.location.href = d.url; } else { b.disabled = false; b.textContent = orig; alert(d.error || 'Error'); }
+        } catch { b.disabled = false; b.textContent = orig; }
+      });
+    };
+    bind();
+    document.addEventListener('astro:page-load', bind);
+  })();
+</script>

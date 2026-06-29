@@ -10,7 +10,9 @@ export const POST: APIRoute = async ({ request, url }) => {
   let body: any = {};
   try { body = await request.json(); } catch { /* empty */ }
   const slug = body.offer ?? url.searchParams.get('offer');
-  const offer = slug ? offerBySlug(slug) : undefined;
+  const locale = (body.locale ?? url.searchParams.get('locale')) === 'en' ? 'en' : 'it';
+  const base = locale === 'en' ? '/en/hire' : '/hire';
+  const offer = slug ? offerBySlug(slug, locale) : undefined;
   if (!offer) return json({ error: 'offerta sconosciuta' }, 400);
   if (!offer.stripe) return json({ error: 'offerta a preventivo, nessun checkout' }, 400);
 
@@ -33,8 +35,8 @@ export const POST: APIRoute = async ({ request, url }) => {
       automatic_tax: { enabled: true },
       tax_id_collection: { enabled: true },
       billing_address_collection: 'required',
-      success_url: `${url.origin}/hire/grazie?offer=${offer.slug}`,
-      cancel_url: `${url.origin}/hire/${offer.slug}`,
+      success_url: `${url.origin}${base}/grazie?offer=${offer.slug}`,
+      cancel_url: `${url.origin}${base}/${offer.slug}`,
       metadata: { source: 'hire', offer: offer.slug },
     });
     return json({ ok: true, url: session.url });

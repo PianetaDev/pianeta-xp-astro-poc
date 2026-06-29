@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HireOfferDetail from '../../../components/hire/HireOfferDetail.astro';
+import { offerBySlug } from '../../../data/offers';
+const offer = offerBySlug(Astro.params.offer ?? '', 'en');
+if (!offer) return Astro.redirect('/en/hire');
+---
+<BaseLayout title={`${offer.name} — Pianeta.Studio`} description={offer.tagline} hideNewsletter>
+  <HireOfferDetail offer={offer} locale="en" />
+</BaseLayout>

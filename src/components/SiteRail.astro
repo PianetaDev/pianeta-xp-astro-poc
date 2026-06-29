@@ -18,7 +18,7 @@ const nav = [
   { href: localizePath('/team',     locale), label: t(locale, 'nav_team'),     icon: 'lucide:users',             section: 'team'    },
   { href: localizePath('/lab',      locale), label: t(locale, 'nav_lab'),      icon: 'lucide:flask-conical',     section: 'lab'     },
   { href: localizePath('/careers',  locale), label: t(locale, 'nav_careers'),  icon: 'lucide:briefcase-business',section: 'careers' },
-  { href: '/hire',                            label: locale === 'en' ? 'Hire' : 'Lavoriamo', icon: 'lucide:handshake',  section: null      },
+  { href: localizePath('/hire', locale),      label: locale === 'en' ? 'Hire' : 'Lavoriamo', icon: 'lucide:handshake',  section: null      },
 ];
 const home = locale === 'en' ? '/en' : '/';
 ---
