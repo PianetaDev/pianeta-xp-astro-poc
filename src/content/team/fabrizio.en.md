@@ -30,7 +30,6 @@ Fabrizio Ciampini is **CTO of Pianeta.Studio** on a dedicated **R&D** contract. 
 
 ## Projects in production
 
-- EPOS
 - Susdef
 - Apotheke
 
