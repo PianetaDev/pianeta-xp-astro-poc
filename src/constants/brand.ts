@@ -2,7 +2,7 @@
 export const BRAND = {
   name: 'Pianeta.Studio',
   legalName: 'PIANETA.STUDIO S.R.L. SOCIETÀ BENEFIT',
-  tagline: 'Sustainable Creativity dal 2016',
+  tagline: 'Sustainable Creativity',
 } as const
 
 export const SITE_URL = 'https://xp.pianeta.studio'
