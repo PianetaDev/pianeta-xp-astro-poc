@@ -12,6 +12,7 @@ export const POST: APIRoute = async ({ request, url }) => {
   const slug = body.offer ?? url.searchParams.get('offer');
   const offer = slug ? offerBySlug(slug) : undefined;
   if (!offer) return json({ error: 'offerta sconosciuta' }, 400);
+  if (!offer.stripe) return json({ error: 'offerta a preventivo, nessun checkout' }, 400);
 
   let stripe;
   try { stripe = getStripe(); } catch { return json({ error: 'stripe non configurato' }, 503); }

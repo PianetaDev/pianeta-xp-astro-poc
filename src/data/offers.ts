@@ -15,9 +15,11 @@ export interface Offer {
   detail: string;
   deliverables: string[];
   bullets: string[];
-  accent: 'green' | 'orange' | 'dark';
+  accent: 'green' | 'orange' | 'dark' | 'blue';
   emoji: string;
-  stripe: { mode: 'payment' | 'subscription'; amount: number; recurring?: 'month'; label: string };
+  // offerte self-serve hanno `stripe`; quelle a preventivo hanno `quote` (CTA → form, no checkout).
+  stripe?: { mode: 'payment' | 'subscription'; amount: number; recurring?: 'month'; label: string };
+  quote?: { label: string };
   related: Related[];
 }
 
@@ -90,6 +92,29 @@ export const OFFERS: Offer[] = [
     related: [
       { title: 'BC3 — Annual Reports', href: `${SITE}/work/bc3-annual-reports`, kind: 'case' },
       { title: 'ChildFund World Index', href: `${SITE}/work/childfund-world-index`, kind: 'case' },
+    ],
+  },
+  {
+    slug: 'progetto',
+    name: 'Progetto su misura',
+    price: 'su quotazione',
+    forWho: 'Per chi ha un progetto definito — sito, brand, campagna o prodotto digitale — e vuole un preventivo su misura.',
+    tagline: 'Un progetto completo, quotato sulle tue esigenze.',
+    detail:
+      'Quando il progetto è più grande di un’offerta a pacchetto — un sito articolato, un rebrand completo, una piattaforma — lo costruiamo su misura. Partiamo da una call per capire scope e obiettivi, poi ti mandiamo un preventivo dettagliato con tempi e fasi. Stesso metodo: co-design, validazione AI, consegna senza lock-in.',
+    deliverables: [
+      'Call di scoping e analisi obiettivi',
+      'Preventivo dettagliato con fasi e tempi',
+      'Team Pianeta dedicato al progetto',
+      'Consegna di codice e asset — nessun lock-in',
+    ],
+    bullets: ['Scope su misura', 'Preventivo dettagliato', 'Team dedicato'],
+    accent: 'blue',
+    emoji: '✦',
+    quote: { label: 'Richiedi un preventivo' },
+    related: [
+      { title: 'BC3 — Rebranding', href: `${SITE}/work/bc3-rebranding`, kind: 'case' },
+      { title: 'ECLAG — Choose to See Them', href: `${SITE}/work/eclag`, kind: 'case' },
     ],
   },
 ];

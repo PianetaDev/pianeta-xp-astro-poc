@@ -6,9 +6,11 @@ const BRAND = 'Pianeta.Studio';
 const BOOKING = '/lavoriamo-insieme';
 const offer = offerBySlug(Astro.params.offer ?? '');
 if (!offer) return Astro.redirect('/hire');
-const accents: Record<string, string> = { green: 'var(--green)', orange: 'var(--orange)', dark: 'var(--acc)' };
+const accents: Record<string, string> = { green: '#1f7a3a', orange: '#FF6B33', dark: '#5a4fcf', blue: '#1f5b8f' };
 const accent = accents[offer.accent];
-const recurNote = offer.stripe.mode === 'subscription' ? 'al mese · disdici quando vuoi' : 'una tantum';
+const isQuote = !offer.stripe;
+const recurNote = offer.stripe?.mode === 'subscription' ? 'al mese · disdici quando vuoi' : isQuote ? 'preventivo gratuito' : 'una tantum';
+const QUOTE_HREF = `/lavoriamo-insieme?offer=${offer.slug}`;
 
 // Metodo — vive qui dentro lo Sprint (insight swarm: gli scettici convertono solo se vedono processo e consegna).
 const sprintDays = [
@@ -90,10 +92,20 @@ const isSprint = offer.slug === 'pianeta-sprint';
 
       <aside class="offer-buy">
         <div class="offer-price">{offer.price.replace(' + IVA','')}</div>
-        <div class="offer-price-note">{recurNote} · + IVA</div>
-        <button id="buy" data-offer={offer.slug} class="offer-buy-btn" style={`background:${accent}`}>{offer.stripe.label}</button>
-        <a href={BOOKING} class="offer-call-btn">Preferisci parlarne? Prenota una call</a>
-        <p class="offer-reassure">Pagamento sicuro con <strong>Stripe</strong>. IVA e P.IVA gestite al checkout.</p>
+        <div class="offer-price-note">{isQuote ? recurNote : `${recurNote} · + IVA`}</div>
+        {isQuote ? (
+          <>
+            <a href={QUOTE_HREF} class="offer-buy-btn" style={`background:${accent}`}>{offer.quote?.label}</a>
+            <a href={BOOKING} class="offer-call-btn">Preferisci una call diretta?</a>
+            <p class="offer-reassure">Ti rispondiamo entro 2 giorni lavorativi con scope e preventivo.</p>
+          </>
+        ) : (
+          <>
+            <button id="buy" data-offer={offer.slug} class="offer-buy-btn" style={`background:${accent}`}>{offer.stripe?.label}</button>
+            <a href={BOOKING} class="offer-call-btn">Preferisci parlarne? Prenota una call</a>
+            <p class="offer-reassure">Pagamento sicuro con <strong>Stripe</strong>. IVA e P.IVA gestite al checkout.</p>
+          </>
+        )}
       </aside>
     </div>
   </main>
@@ -146,7 +158,7 @@ const isSprint = offer.slug === 'pianeta-sprint';
     @media (min-width: 860px) { .offer-buy { position: sticky; top: 86px; } }
     .offer-price { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
     .offer-price-note { color: var(--mut); font-size: 13px; margin-top: -6px; }
-    .offer-buy-btn { color: #fff; border: 0; font-weight: 700; padding: 14px; border-radius: 11px; cursor: pointer; font-size: 15px; margin-top: 6px; }
+    .offer-buy-btn { display: block; text-align: center; text-decoration: none; color: #fff; border: 0; font-weight: 700; padding: 14px; border-radius: 11px; cursor: pointer; font-size: 15px; margin-top: 6px; }
     .offer-buy-btn:disabled { opacity: .6; cursor: default; }
     .offer-call-btn { text-align: center; padding: 12px; border: 1px solid var(--line); border-radius: 11px; text-decoration: none; font-weight: 600; font-size: 14px; }
     .offer-call-btn:hover { border-color: var(--pianeta-border-strong); }

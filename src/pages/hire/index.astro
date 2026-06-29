@@ -6,7 +6,8 @@ import { WORKS, TEAM, ABOUT, CLIENTS, TESTIMONIALS } from '../../data/showcase';
 
 const BRAND = 'Pianeta.Studio';
 const BOOKING = '/lavoriamo-insieme';
-const accents: Record<string, string> = { green: 'var(--green)', orange: 'var(--orange)', dark: 'var(--acc)' };
+// accent fissi: leggibili con testo bianco su entrambi i temi (il bottone buy usa l'accent come bg)
+const accents: Record<string, string> = { green: '#1f7a3a', orange: '#FF6B33', dark: '#5a4fcf', blue: '#1f5b8f' };
 
 // posizioni del cerchio team
 const R = 43;
@@ -169,14 +170,19 @@ const METHOD = [
       --card: var(--pianeta-bg-card); --line: var(--pianeta-border);
       --txt: var(--pianeta-text); --mut: var(--pianeta-muted); --acc: var(--cta-primary);
       --orange: var(--cta-primary); --green: #1f7a3a;
+      --soft: #f3f2ea;   /* fascia sezioni "soft" — chiaro */
+      --band: #14171c;   /* banda Alba — scura su entrambi i temi */
     }
+    /* dark: la fascia soft diventa scura (prima era #fafaf7 fisso → blocchi bianchi + testo illeggibile) */
+    :global(:root[data-theme="dark"]) .hire-page,
+    :global(:root[data-theme="auto"][data-sun="night"]) .hire-page { --soft: #15181e; }
     /* su /hire le CTA flottanti hire (CTA hub + launcher drawer) sono ridondanti */
     :global(.hub-hire-cta), :global(.hire-us-launcher) { display: none !important; }
 
     .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
     .wrap-narrow { max-width: 720px; }
     .sec { padding: 64px 0; }
-    .sec-soft { background: var(--pianeta-bg-soft, #fafaf7); }
+    .sec-soft { background: var(--soft); }
     .sec-h2 { font-size: clamp(22px, 3vw, 28px); letter-spacing: -0.01em; margin: 0; }
     .sec-h2.center { text-align: center; }
     .sec-head { display: flex; align-items: baseline; justify-content: space-between; }
@@ -189,7 +195,8 @@ const METHOD = [
     .hero-cta { display: inline-block; background: var(--cta-primary); color: #fff; font-weight: 600; padding: 13px 24px; border-radius: 999px; text-decoration: none; }
 
     .offers { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
-    @media (min-width: 760px) { .offers { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 620px) { .offers { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .offers { grid-template-columns: repeat(4, 1fr); } }
     .offer-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px; transition: transform 150ms; }
     .offer-card:hover { transform: translateY(-3px); }
     .offer-price { font-size: 13px; color: var(--mut); }
@@ -219,18 +226,18 @@ const METHOD = [
 
     .testi { text-align: center; max-width: 660px; margin: 0 auto; }
     .testi-draft { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--mut);
-      background: var(--pianeta-bg-soft, #fafaf7); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; margin-bottom: 18px; }
+      background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; margin-bottom: 18px; }
     .testi-quote { font-size: clamp(20px, 3vw, 26px); line-height: 1.45; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 20px; }
     .testi-by { display: inline-flex; align-items: center; gap: 12px; font-size: 15px; }
     .testi-by a { color: var(--acc); text-decoration: none; }
     .testi-avatar { width: 44px; height: 44px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 14px; color: #0e1116; background: linear-gradient(135deg, #fbcfe8, #fed7aa, #fef3c7); }
+      font-weight: 800; font-size: 14px; color: var(--pianeta-accent); background: var(--card); border: 1px solid var(--pianeta-border-strong); }
 
     .circle-wrap { display: flex; justify-content: center; margin: 32px 0; }
     .circle { position: relative; width: 440px; max-width: 92vw; aspect-ratio: 1; }
     .bubble { position: absolute; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 999px;
-      display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; color: #0e1116;
-      background: linear-gradient(135deg, #fbcfe8, #fed7aa, #fef3c7); box-shadow: 0 4px 14px rgba(14,17,22,.10); }
+      display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; color: var(--pianeta-accent);
+      background: var(--card); border: 1px solid var(--pianeta-border-strong); box-shadow: 0 4px 14px rgba(14,17,22,.12); }
     .circle-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 62%; text-align: center;
       display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .cc-top, .cc-bot { font-size: 13px; color: var(--mut); margin: 0; }
@@ -241,7 +248,7 @@ const METHOD = [
     .why p { color: var(--mut); line-height: 1.6; margin: 0 0 12px; }
     .why strong { color: var(--txt); }
 
-    .alba-band { background: #0e1116; color: #fff; padding: 28px 0; }
+    .alba-band { background: var(--band); color: #f5f4ee; padding: 28px 0; }
     .alba-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .alba-inner > div { max-width: 640px; font-size: 15px; line-height: 1.5; }
     .alba-cta { background: var(--cta-primary); color: #fff; font-weight: 600; padding: 11px 20px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
