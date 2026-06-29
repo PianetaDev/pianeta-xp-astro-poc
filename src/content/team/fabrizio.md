@@ -30,7 +30,6 @@ Fabrizio Ciampini è **CTO di Pianeta.Studio** con un contratto **R&D** dedicato
 
 ## Progetti in produzione
 
-- EPOS
 - Susdef
 - Apotheke
 

@@ -1,6 +1,6 @@
 ---
 title: "Stack Terra — CMS proprietario per sostenibilità digitale"
-description: "Il CMS con cui costruiamo i siti dei nostri clienti: Payload CMS + Nuxt 3 + MeiliSearch, hosting carbon-neutral, calcolatore CO₂ integrato. Live su EPOS, Susdef, Apotheke."
+description: "Il CMS con cui costruiamo i siti dei nostri clienti: Payload CMS + Nuxt 3 + MeiliSearch, hosting carbon-neutral, calcolatore CO₂ integrato. Live su Susdef, Apotheke."
 kind: "Prodotto R&D"
 year: 2026
 status: "In commessa"
@@ -34,7 +34,6 @@ Stack Terra è il **CMS proprietario** che Pianeta usa per costruire i siti dei 
 
 ## In produzione su
 
-- EPOS
 - Susdef
 - Apotheke
 
