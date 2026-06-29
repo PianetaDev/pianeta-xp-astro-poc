@@ -1,17 +1,223 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 import { t } from '../../lib/i18n/strings';
+
+// EN home — bento gemella della IT. Contenuti dalle stesse collection (IT),
+// UI in inglese, banner "translation in progress". Link localizzati /en/*.
+const byDateDesc = (a: any, b: any) => {
+  const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return db - da;
+};
+const liveOnly = (e: any) => e.data.draft !== true;
+
+const featuredWork = (await getCollection('work')).filter(liveOnly).sort(byDateDesc);
+const bulletin = (await getCollection('bulletin')).filter(liveOnly).sort(byDateDesc);
+const services = (await getCollection('services')).filter(liveOnly).sort(byDateDesc);
+const team = (await getCollection('team')).filter(liveOnly);
+const teamCount = team.length;
+
+const w0 = featuredWork[0];
+const otherWork = featuredWork.slice(1);
+const b0 = bulletin[0];
+const b1 = bulletin[1];
+const b2 = bulletin[2];
+const s0 = services[0];
+
+const title = 'Pianeta.Studio — Sustainable Creativity';
+const description = 'Design & technology studio. Work, articles, experiments.';
 ---
-<BaseLayout title="Pianeta.Studio — Sustainable Creativity" description="Pianeta.Studio — Design & Technology for a Human to Planet world.">
-  <div class="index-page">
-    <header class="index-head">
-      <p class="index-eyebrow">Pianeta.Studio</p>
-      <h1 class="index-title">Sustainable Creativity</h1>
-      <p class="index-deck">Design & Technology — Human to Planet. We turn briefs into opportunities through co-design, AI validation and UX validation.</p>
-      <p style="margin-top: 32px;">
-        <a href="/en/work" class="cta-btn cta-primary">Explore our work</a>
-        <a href="/en/services" class="cta-btn cta-secondary" style="margin-left: 12px;">{t('en', 'cta_come_lavoriamo')}</a>
-      </p>
-    </header>
+<BaseLayout title={title} description={description} ogImage="/og/home.png">
+  <div class="home-page">
+    <p class="i18n-banner">{t('en', 'fallback_banner')}</p>
+    <div class="bento-grid">
+
+      <a href={w0 ? `/en/work/${w0.id}` : '/en/work'} class="bento-tile t-tall t-dark">
+        <video poster="/choosetoseethem/cover-v3.png" autoplay muted loop playsinline class="bento-video">
+          <source src="https://pub-4c166b51c33040fd98b8f75c2963296e.r2.dev/choosetoseethem/video-restore-web.mp4" type="video/mp4" />
+        </video>
+        <div class="bento-grad" />
+        <div class="bento-content">
+          <p class="bento-kicker">Featured · ECLAG</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title-xl">{w0?.data.title || 'Choose to See Them'}</h2>
+          <p class="bento-sub">{(w0?.data.client || 'ECLAG') + ' · ' + (w0?.data.year || 2026)}</p>
+        </div>
+      </a>
+
+      <a href="/en/bulletin/chi-siamo" class="bento-tile t-square t-cream bento-wordmark">
+        <div class="bento-wordmark-stack">
+          <img src="/brand/logo-horizontal-color.svg" alt="Pianeta.Studio" class="bento-wordmark-logo" width="282" height="80" loading="lazy" decoding="async" />
+          <span class="badge-benefit">Benefit Corporation · since 2023</span>
+          <p class="bento-sub">Sustainable Creativity · Design &amp; Technology · Planet-centric design in our bylaws</p>
+        </div>
+      </a>
+
+      {b0 && (
+        <a href={`/en/bulletin/${b0.id}`} class="bento-tile t-medium" style="background:#E9FF1F;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Bulletin' + (b0.data.issue ? ' · #' + b0.data.issue : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b0.data.title}</h2>
+            {b0.data.description && <p class="bento-sub">{b0.data.description}</p>}
+          </div>
+        </a>
+      )}
+
+      <button type="button" class="bento-tile t-medium t-orange" data-action="open-alba">
+        <div class="bento-content">
+          <p class="bento-kicker">Studio</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">Talk to Alba</h2>
+          <p class="bento-sub">Pianeta.Studio's group AI · helps you frame a brief, book a call, explore our work.</p>
+        </div>
+      </button>
+
+      {b1 && (
+        <a href={`/en/bulletin/${b1.id}`} class="bento-tile t-medium t-blue">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Bulletin' + (b1.data.issue ? ' · #' + b1.data.issue : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b1.data.title}</h2>
+            {b1.data.description && <p class="bento-sub">{b1.data.description}</p>}
+          </div>
+        </a>
+      )}
+
+      {s0 && (
+        <a href={`/en/services/${s0.id}`} class="bento-tile t-tall" style="background:#f7f1d9;">
+          <div class="bento-content">
+            <p class="bento-kicker">Service</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-lg">{s0.data.title}</h2>
+            <p class="bento-sub">{s0.data.description}</p>
+          </div>
+        </a>
+      )}
+
+      {otherWork.map((w: any, i: number) => (
+        <a href={`/en/work/${w.id}`} class={`bento-tile ${i === 0 ? 't-tall' : 't-medium'}`} style={`background-image:url('${(w.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
+          <div class="bento-grad" />
+          <div class="bento-content">
+            <p class="bento-kicker">{'Work · ' + (w.data.year || '')}</p>
+            <div class="bento-spacer" />
+            <h2 class={i === 0 ? 'bento-title-xl' : 'bento-title'}>{w.data.title}</h2>
+            <p class="bento-sub">{w.data.client || w.data.description}</p>
+          </div>
+        </a>
+      ))}
+
+      <a href="/en/team" class="bento-tile t-medium t-cream">
+        <div class="bento-content">
+          <p class="bento-kicker">People</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">{teamCount > 0 ? `${teamCount} voices inside Pianeta` : '5 voices inside Pianeta'}</h2>
+          <p class="bento-sub">Meet the team →</p>
+        </div>
+      </a>
+
+      {b2 && (
+        <a href={`/en/bulletin/${b2.id}`} class="bento-tile t-medium" style="background:#1f7a3a; color:#fff;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Bulletin' + (b2.data.issue ? ' · #' + b2.data.issue : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b2.data.title}</h2>
+            {b2.data.description && <p class="bento-sub">{b2.data.description}</p>}
+          </div>
+        </a>
+      )}
+
+      <a href="/en/work" class="bento-tile t-tall t-cream bento-clientwall">
+        <div class="bento-content">
+          <p class="bento-kicker">They chose to work with us</p>
+          <div class="bento-spacer" />
+          <ul class="clientwall-list" aria-label="Clients and partners">
+            <li>Armani</li><li>Prada</li><li>La Repubblica</li><li>Wired</li><li>Plenitude</li>
+            <li>BC3</li><li>ChildFund</li><li>WeWorld</li><li>ECLAG</li><li>Sant'Egidio</li>
+            <li>ARIES</li><li>ArtPay</li><li>Morsy</li><li>Latte Creative</li>
+            <li>Susdef</li><li>Apotheke</li>
+          </ul>
+          <p class="bento-sub" style="margin-top:16px;">See the work →</p>
+        </div>
+      </a>
+
+      <a href="/en/lab" class="bento-tile t-medium t-dark">
+        <div class="bento-content">
+          <p class="bento-kicker">Lab</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">R&D in progress</h2>
+          <p class="bento-sub">Atlas — our proprietary ESG framework, live at atlas.pianeta.green →</p>
+        </div>
+      </a>
+
+      <a href="/en/careers" class="bento-tile t-medium" style="background:#FFE7C2;">
+        <div class="bento-content">
+          <p class="bento-kicker">Careers</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">We're hiring an AI Manager</h2>
+          <p class="bento-sub">See the role →</p>
+        </div>
+      </a>
+
+      <a href="/en/bulletin/iscrivimi" data-action="open-bulletin" class="bento-tile t-medium t-cream">
+        <div class="bento-content">
+          <p class="bento-kicker">Bulletin</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">Subscribe</h2>
+          <p class="bento-sub">1-2 a month. Selectable topics.</p>
+        </div>
+      </a>
+
+      <script is:inline>
+        document.addEventListener('click', (e) => {
+          const el = e.target.closest && e.target.closest('[data-action="open-bulletin"]');
+          if (el) { e.preventDefault(); window.dispatchEvent(new CustomEvent('sidepane:open', { detail: 'bulletin' })); }
+          const al = e.target.closest && e.target.closest('[data-action="open-alba"]');
+          if (al) { window.dispatchEvent(new CustomEvent('alba:open')); }
+        });
+      </script>
+
+    </div>
   </div>
+
+  <style>
+    .home-page { padding: 16px; max-width: 1500px; margin: 0 auto; }
+    @media (min-width: 768px) { .home-page { padding: 32px; } }
+    .i18n-banner { font-size: 12px; opacity: 0.7; margin: 0 0 16px; padding: 8px 14px;
+      background: var(--pianeta-bg-card, #f3f3ef); border-radius: 10px; display: inline-block; }
+
+    .bento-grid { display: grid; gap: 16px; grid-template-columns: 1fr; grid-auto-rows: 220px; grid-auto-flow: dense; }
+    @media (min-width: 700px) { .bento-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; grid-auto-rows: 200px; } }
+    @media (min-width: 1100px) { .bento-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; grid-auto-rows: 220px; } }
+
+    .bento-tile { position: relative; overflow: hidden; border-radius: 20px; text-decoration: none; color: inherit;
+      display: block; border: 0; background: #fafaf7; cursor: pointer; text-align: left; font: inherit; transition: transform 250ms ease; }
+    .bento-tile:hover { transform: translateY(-2px); }
+    .t-tall { grid-row: span 2; } .t-medium { grid-row: span 1; } .t-square { grid-row: span 1; }
+    @media (min-width: 1100px) { .t-tall { grid-row: span 3; } }
+    .t-dark { background: #0e1116; color: #fff; } .t-cream { background: #fafaf7; color: #0e1116; }
+    .t-blue { background: #1f5b8f; color: #fff; } .t-orange { background: #FF6B33; color: #fff; }
+
+    .bento-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 20px 22px; }
+    .bento-spacer { flex: 1; }
+    .bento-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin: 0; font-weight: 500; }
+    .bento-title { font-size: clamp(1.05rem, 2vw, 1.45rem); font-weight: 900; letter-spacing: -0.01em; line-height: 1.15; margin: 0; }
+    .bento-title-lg { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+    .bento-title-xl { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; margin: 0; }
+    .bento-sub { font-size: 13px; opacity: 0.75; margin: 6px 0 0; line-height: 1.4; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+    .bento-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .bento-grad { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65), transparent 60%); z-index: 1; }
+
+    .bento-wordmark { display: flex; align-items: center; padding: 22px; }
+    .bento-wordmark-stack { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .bento-wordmark-logo { width: 100%; max-width: 200px; height: auto; display: block; }
+    .badge-benefit { background: rgba(255,107,51,0.10); color: #FF6B33; border: 1px solid rgba(255,107,51,0.25);
+      border-radius: 999px; padding: 6px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; width: fit-content; }
+
+    .bento-clientwall .clientwall-list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; }
+    .bento-clientwall .clientwall-list li { font-weight: 800; font-size: clamp(0.95rem, 1.6vw, 1.25rem); letter-spacing: -0.01em; color: #0e1116; line-height: 1.15; white-space: nowrap; }
+    .bento-clientwall .clientwall-list li + li::before { content: '·'; margin-right: 16px; color: rgba(14,17,22,0.3); font-weight: 400; }
+  </style>
 </BaseLayout>

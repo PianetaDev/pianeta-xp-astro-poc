@@ -13,6 +13,7 @@ import HireUsDrawer from '../components/vue/site/hire-us/HireUsDrawer.vue';
 import AlbaFloater from '../components/vue/site/alba/AlbaFloater.vue';
 import AlbaProactivePopup from '../components/vue/site/alba/AlbaProactivePopup.vue';
 import SiteArtifactPane from '../components/vue/site/SiteArtifactPane.vue';
+import SidePane from '../components/vue/site/SidePane.vue';
 
 interface Props {
   title: string;
@@ -95,6 +96,7 @@ const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.s
         <AlbaFloater client:only="vue" />
         <AlbaProactivePopup client:only="vue" />
         <SiteArtifactPane client:only="vue" />
+        <SidePane client:only="vue" />
       </>
     )}
 

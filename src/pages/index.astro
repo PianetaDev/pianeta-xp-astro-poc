@@ -228,8 +228,8 @@ const ldJson = {
         </div>
       </a>
 
-      {/* 11. Bulletin CTA — pale */}
-      <a href="/bulletin/iscrivimi" class="bento-tile t-medium t-cream">
+      {/* 11. Bulletin CTA — pale · apre il side-pane (fallback: naviga a /bulletin/iscrivimi) */}
+      <a href="/bulletin/iscrivimi" data-action="open-bulletin" class="bento-tile t-medium t-cream">
         <div class="bento-content">
           <p class="bento-kicker">Bulletin</p>
           <div class="bento-spacer" />
@@ -237,6 +237,15 @@ const ldJson = {
           <p class="bento-sub">1-2 al mese. Topic selezionabili.</p>
         </div>
       </a>
+      <script is:inline>
+        // Delegato su document → sopravvive alle view transition di Astro
+        document.addEventListener('click', (e) => {
+          const el = e.target.closest && e.target.closest('[data-action="open-bulletin"]');
+          if (!el) return;
+          e.preventDefault();
+          window.dispatchEvent(new CustomEvent('sidepane:open', { detail: 'bulletin' }));
+        });
+      </script>
 
       <script is:inline>
         document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => {
