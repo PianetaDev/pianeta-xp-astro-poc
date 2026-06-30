@@ -37,12 +37,12 @@ const OFFERS_IT: Offer[] = [
     forWho: 'Per brand e PMI green che vogliono una presenza online seria e a basso impatto.',
     tagline: 'Un sito sostenibile e veloce, sul nostro design system, con la CO₂ misurata.',
     detail:
-      'Costruiamo il tuo sito su misura — sostenibile, veloce, sul nostro design system Hederae. Misuriamo la CO₂ di ogni pagina con GreenMeter e la teniamo bassa per design. Standard aperti e codice consegnato: il sito è tuo, niente lock-in.',
+      'Costruiamo il tuo sito su misura — sostenibile, veloce, sul nostro design system Hederae. Misuriamo la CO₂ di ogni pagina con GreenMeter e la teniamo bassa per design. Veloce e mobile-first, con performance e impatto verificabili. Contenuti e dominio restano tuoi.',
     deliverables: [
       'Sito responsive sul design system Hederae',
       'Report CO₂ per pagina (GreenMeter)',
       'Performance e carbon budget verificabili',
-      'Codice e contenuti consegnati — nessun lock-in',
+      'Contenuti e dominio sempre tuoi',
     ],
     bullets: ['Design system Hederae', 'CO₂ misurata (GreenMeter)', 'Veloce e mobile-first'],
     accent: 'green',
@@ -126,12 +126,12 @@ const OFFERS_IT: Offer[] = [
     forWho: 'Per chi ha un progetto definito — sito, brand, campagna o prodotto digitale — e vuole un preventivo su misura.',
     tagline: 'Un progetto completo, quotato sulle tue esigenze.',
     detail:
-      'Quando il progetto è più grande di un’offerta a pacchetto — un sito articolato, un rebrand completo, una piattaforma — lo costruiamo su misura. Partiamo da una call per capire scope e obiettivi, poi ti mandiamo un preventivo dettagliato con tempi e fasi. Stesso metodo: co-design, validazione AI, consegna senza lock-in.',
+      'Quando il progetto è più grande di un’offerta a pacchetto — un sito articolato, un rebrand completo, una piattaforma — lo costruiamo su misura. Partiamo da una call per capire scope e obiettivi, poi ti mandiamo un preventivo dettagliato con tempi e fasi. Stesso metodo: co-design, validazione con neuroscienza, AI e dati, consegna e supporto.',
     deliverables: [
       'Call di scoping e analisi obiettivi',
       'Preventivo dettagliato con fasi e tempi',
       'Team Pianeta dedicato al progetto',
-      'Consegna di codice e asset — nessun lock-in',
+      'Consegna degli asset e dei contenuti',
     ],
     bullets: ['Scope su misura', 'Preventivo dettagliato', 'Team dedicato'],
     accent: 'blue',
@@ -153,12 +153,12 @@ const OFFERS_EN: Offer[] = [
     forWho: 'For green brands and SMEs that want a serious, low-impact online presence.',
     tagline: 'A sustainable, fast website on our design system, with measured CO₂.',
     detail:
-      'We build your site bespoke — sustainable, fast, on our Hederae design system. We measure each page’s CO₂ with GreenMeter and keep it low by design. Open standards and delivered code: the site is yours, no lock-in.',
+      'We build your site bespoke — sustainable, fast, on our Hederae design system. We measure each page’s CO₂ with GreenMeter and keep it low by design. Fast and mobile-first, with verifiable performance and impact. Your content and domain stay yours.',
     deliverables: [
       'Responsive site on the Hederae design system',
       'Per-page CO₂ report (GreenMeter)',
       'Verifiable performance and carbon budget',
-      'Code and content handed over — no lock-in',
+      'Your content and domain, always yours',
     ],
     bullets: ['Hederae design system', 'Measured CO₂ (GreenMeter)', 'Fast, mobile-first'],
     accent: 'green',
@@ -242,12 +242,12 @@ const OFFERS_EN: Offer[] = [
     forWho: 'For those with a defined project — site, brand, campaign or digital product — who want a tailored quote.',
     tagline: 'A complete project, quoted on your needs.',
     detail:
-      'When the project is bigger than a packaged offer — a complex site, a full rebrand, a platform — we build it bespoke. We start with a call to understand scope and goals, then send you a detailed quote with timing and phases. Same method: co-design, AI validation, delivery with no lock-in.',
+      'When the project is bigger than a packaged offer — a complex site, a full rebrand, a platform — we build it bespoke. We start with a call to understand scope and goals, then send you a detailed quote with timing and phases. Same method: co-design, validation with neuroscience, AI and data, delivery and support.',
     deliverables: [
       'Scoping call and goal analysis',
       'Detailed quote with phases and timing',
       'A dedicated Pianeta team on the project',
-      'Code and assets handed over — no lock-in',
+      'Assets and content handed over',
     ],
     bullets: ['Bespoke scope', 'Detailed quote', 'Dedicated team'],
     accent: 'blue',

@@ -59,13 +59,13 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export const ABOUT = {
   title: 'Chi siamo',
-  body: 'Pianeta.Studio è uno studio di Sustainable Creativity — design & technology al servizio di idee che generano cambiamento positivo per le persone e per il pianeta. Società Benefit: il Pianeta-centric design è scritto nel nostro statuto. Lavoriamo in co-design, validiamo con AI prima di produrre, e consegniamo codice e standard aperti — niente lock-in.',
+  body: 'Pianeta.Studio è uno studio di Sustainable Creativity — design & technology al servizio di idee che generano cambiamento positivo per le persone e per il pianeta. Società Benefit: il Pianeta-centric design è scritto nel nostro statuto. Lavoriamo in co-design, validiamo con neuroscienza, AI e dati prima di produrre, e misuriamo l’impatto di ciò che costruiamo.',
   href: `${SITE}/bulletin/chi-siamo`,
 };
 
 const ABOUT_EN = {
   title: 'About us',
-  body: 'Pianeta.Studio is a Sustainable Creativity studio — design & technology in service of ideas that create positive change for people and the planet. A Benefit Corporation: Planet-centric design is written into our charter. We work in co-design, validate with AI before producing, and hand over code and open standards — no lock-in.',
+  body: 'Pianeta.Studio is a Sustainable Creativity studio — design & technology in service of ideas that create positive change for people and the planet. A Benefit Corporation: Planet-centric design is written into our charter. We work in co-design, validate with neuroscience, AI and data before producing, and measure the impact of what we build.',
   href: `/en/bulletin/chi-siamo`,
 };
 
