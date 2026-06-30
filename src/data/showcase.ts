@@ -25,8 +25,23 @@ export const TEAM: Member[] = [
 
 // Clienti (dalla home del sito).
 export const CLIENTS: string[] = [
-  'Armani', 'Prada', 'La Repubblica', 'Wired', 'Plenitude', 'BC3', 'ChildFund',
-  'WeWorld', 'ECLAG', "Sant'Egidio", 'ARIES', 'ArtPay', 'Morsy', 'Latte Creative', 'Susdef', 'Apotheke',
+  'Armani', 'Prada', 'La Repubblica', 'Wired', 'Plenitude', 'BC3', 'ChildFund', 'Lucy sulla Cultura',
+  'WeWorld', 'ECLAG', "Sant'Egidio", 'ARIES', 'ArtPay', 'Morsy', 'Latte Creative', 'Susdef', 'Foodreboot', 'Apotheke',
+];
+
+// Gare/bandi vinti con fondazioni ed enti mission-driven (citabili liberamente).
+export interface FoundationWin { name: string; what: string }
+export const FOUNDATIONS: FoundationWin[] = [
+  { name: 'Susdef', what: 'Fondazione per lo Sviluppo Sostenibile' },
+  { name: 'ECLAG', what: 'Missing Children — diritti dei minori' },
+  { name: 'Lucy sulla Cultura', what: 'Cultura ed editoria' },
+  { name: 'Foodreboot', what: 'Food & sostenibilità' },
+];
+const FOUNDATIONS_EN: FoundationWin[] = [
+  { name: 'Susdef', what: 'Foundation for Sustainable Development' },
+  { name: 'ECLAG', what: 'Missing Children — children’s rights' },
+  { name: 'Lucy sulla Cultura', what: 'Culture & publishing' },
+  { name: 'Foodreboot', what: 'Food & sustainability' },
 ];
 
 // Testimonials. Cornertable = cliente reale (Max chiede citazione + foto). Per ora bozza.
@@ -66,5 +81,6 @@ export function getShowcase(locale: 'it' | 'en' = 'it') {
     clients: CLIENTS,
     about: locale === 'en' ? ABOUT_EN : ABOUT,
     testimonials: locale === 'en' ? TESTIMONIALS_EN : TESTIMONIALS,
+    foundations: locale === 'en' ? FOUNDATIONS_EN : FOUNDATIONS,
   };
 }

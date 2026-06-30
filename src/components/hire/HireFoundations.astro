@@ -1,0 +1,98 @@
+---
+// Verticale Fondazioni/Enti — gare e bandi. Condivisa IT/EN. La pagina fornisce BaseLayout.
+import { getShowcase } from '../../data/showcase';
+import { FOUND_STRINGS, type Locale } from './strings';
+
+interface Props { locale?: Locale; }
+const { locale = 'it' } = Astro.props;
+const S = FOUND_STRINGS[locale];
+const { foundations } = getShowcase(locale);
+---
+<div class="hire-page">
+  <main class="wrap">
+    <p class="f-back"><a href={S.backHref}>{S.back}</a></p>
+    <p class="f-eyebrow">{S.eyebrow}</p>
+    <h1 class="f-h1">{S.h1}</h1>
+    <p class="f-deck">{S.deck}</p>
+
+    <h2 class="f-h2">{S.winsTitle}</h2>
+    <div class="f-wins">
+      {foundations.map((w) => (
+        <div class="f-win"><strong>{w.name}</strong><span>{w.what}</span></div>
+      ))}
+    </div>
+
+    <div class="f-send">
+      <div>
+        <h2 class="f-send-t">{S.sendTitle}</h2>
+        <p class="f-send-d">{S.sendText}</p>
+      </div>
+      <a href={S.sendHref} class="f-send-btn">{S.sendCta}</a>
+    </div>
+
+    <h2 class="f-h2">{S.stepsTitle}</h2>
+    <ol class="f-steps">
+      {S.steps.map((st) => (
+        <li><span class="f-step-n">{st.n}</span><div><strong>{st.t}</strong><p>{st.d}</p></div></li>
+      ))}
+    </ol>
+
+    <div class="f-bandi">
+      <div>
+        <h2 class="f-bandi-t">{S.bandiTitle}</h2>
+        <p class="f-bandi-d">{S.bandiText}</p>
+      </div>
+      <a href={S.bandiHref} class="f-bandi-link">{S.bandiCta}</a>
+    </div>
+
+    <h2 class="f-h2">{S.casesTitle}</h2>
+    <div class="f-cases">
+      {S.cases.map((c) => <a href={c.href} class="f-case">{c.title} →</a>)}
+    </div>
+  </main>
+</div>
+
+<style>
+  .hire-page {
+    --card: var(--pianeta-bg-card); --line: var(--pianeta-border);
+    --txt: var(--pianeta-text); --mut: var(--pianeta-muted); --acc: var(--cta-primary);
+  }
+  :global(.hub-hire-cta), :global(.hire-us-launcher) { display: none !important; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .f-back { margin: 24px 0 22px; }
+  .f-back a { color: var(--mut); text-decoration: none; font-size: 13px; }
+  .f-back a:hover { color: var(--txt); }
+  .f-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--acc); font-weight: 700; margin: 0 0 14px; }
+  .f-h1 { font-size: clamp(32px, 5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 18px; }
+  .f-deck { font-size: 19px; line-height: 1.6; color: var(--mut); margin: 0 0 44px; max-width: 680px; }
+  .f-h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin: 44px 0 16px; }
+
+  .f-wins { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 620px) { .f-wins { grid-template-columns: 1fr 1fr; } }
+  .f-win { display: flex; flex-direction: column; gap: 3px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .f-win strong { font-size: 16px; }
+  .f-win span { color: var(--mut); font-size: 13px; }
+
+  .f-send, .f-bandi { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;
+    border-radius: 18px; padding: 26px 30px; margin-top: 30px; }
+  .f-send { background: var(--pianeta-text); color: var(--pianeta-bg); }
+  .f-send-t { font-size: clamp(20px, 3vw, 26px); margin: 0 0 6px; color: var(--pianeta-bg); }
+  .f-send-d { margin: 0; font-size: 15px; line-height: 1.5; opacity: .8; max-width: 520px; }
+  .f-send-btn { background: var(--cta-primary); color: #fff; font-weight: 700; padding: 13px 24px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+  .f-bandi { background: var(--card); border: 1px solid var(--line); }
+  .f-bandi-t { font-size: 18px; margin: 0 0 6px; }
+  .f-bandi-d { margin: 0; color: var(--mut); font-size: 15px; line-height: 1.5; max-width: 560px; }
+  .f-bandi-link { color: var(--cta-primary); font-weight: 700; font-size: 15px; white-space: nowrap; text-decoration: none; }
+
+  .f-steps { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0; }
+  .f-steps li { display: flex; gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .f-step-n { font-size: 13px; font-weight: 800; color: var(--cta-primary); min-width: 28px; }
+  .f-steps strong { display: block; margin-bottom: 5px; font-size: 16px; }
+  .f-steps p { margin: 0; color: var(--mut); font-size: 14px; line-height: 1.5; }
+
+  .f-cases { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 620px) { .f-cases { grid-template-columns: 1fr 1fr; } }
+  .f-case { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: var(--txt); font-weight: 600; font-size: 15px; transition: border-color 150ms; }
+  .f-case:hover { border-color: var(--pianeta-border-strong); color: var(--acc); }
+</style>

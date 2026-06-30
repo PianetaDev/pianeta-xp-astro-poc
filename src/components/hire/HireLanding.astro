@@ -8,7 +8,7 @@ interface Props { locale?: Locale; }
 const { locale = 'it' } = Astro.props;
 const S = HIRE_STRINGS[locale];
 const OFFERS = getOffers(locale);
-const { works: WORKS, team: TEAM, clients: CLIENTS, about: ABOUT, testimonials: TESTIMONIALS } = getShowcase(locale);
+const { works: WORKS, team: TEAM, clients: CLIENTS, about: ABOUT, testimonials: TESTIMONIALS, foundations: FOUNDATIONS } = getShowcase(locale);
 
 const accents: Record<string, string> = { green: '#1f7a3a', orange: '#FF6B33', dark: '#5a4fcf', blue: '#1f5b8f' };
 const R = 43;
@@ -42,6 +42,12 @@ const cfg = {
     </div>
   </section>
 
+  <!-- BANDA PROVA — gare vinte con fondazioni/enti -->
+  <section class="proof-band"><div class="wrap proof-inner">
+    <span class="proof-label">{S.proofBand}</span>
+    <span class="proof-names">{FOUNDATIONS.map((f) => f.name).join(' · ')}</span>
+  </div></section>
+
   <!-- OFFERTE -->
   <section id="offerte" class="sec"><div class="wrap">
     <h2 class="sec-h2">{S.offersTitle}</h2>
@@ -74,6 +80,17 @@ const cfg = {
       ))}
     </div>
   </section>
+
+  <!-- VERTICALE FONDAZIONI / ENTI -->
+  <section class="sec"><div class="wrap">
+    <a href={S.fondHref} class="fond-cta">
+      <div>
+        <h2 class="fond-cta-title">{S.fondTitle}</h2>
+        <p class="fond-cta-text">{S.fondText}</p>
+      </div>
+      <span class="fond-cta-link">{S.fondCta}</span>
+    </a>
+  </div></section>
 
   <!-- CLIENTI -->
   <section class="sec"><div class="wrap">
@@ -206,6 +223,18 @@ const cfg = {
   .hero-h1 em { font-style: normal; color: var(--cta-primary); }
   .hero-sub { font-size: 18px; color: var(--mut); max-width: 620px; margin: 0 0 28px; line-height: 1.5; }
   .hero-cta { display: inline-block; background: var(--cta-primary); color: #fff; font-weight: 600; padding: 13px 24px; border-radius: 999px; text-decoration: none; }
+
+  .proof-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--soft); }
+  .proof-inner { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 14px 0; }
+  .proof-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--mut); font-weight: 600; }
+  .proof-names { font-size: 14px; font-weight: 700; color: var(--txt); }
+
+  .fond-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px 32px; text-decoration: none; color: inherit; transition: border-color 150ms; }
+  .fond-cta:hover { border-color: var(--pianeta-border-strong); }
+  .fond-cta-title { font-size: clamp(20px, 3vw, 26px); margin: 0 0 6px; }
+  .fond-cta-text { color: var(--mut); font-size: 15px; line-height: 1.5; margin: 0; max-width: 640px; }
+  .fond-cta-link { color: var(--cta-primary); font-weight: 700; font-size: 15px; white-space: nowrap; }
 
   .offers { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 28px; }
   @media (min-width: 620px) { .offers { grid-template-columns: repeat(2, 1fr); } }

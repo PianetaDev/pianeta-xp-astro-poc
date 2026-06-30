@@ -22,6 +22,8 @@ export interface HireStrings {
   allOffers: string; clientsLabel: string; vatSuffix: string;
   recurMonth: string; recurOnce: string; quoteNote: string;
   payReassure: string; callAlt: string; quoteCallAlt: string; quoteReassure: string;
+  // banda prova + aggancio verticale fondazioni
+  proofBand: string; fondTitle: string; fondText: string; fondCta: string; fondHref: string;
 }
 
 export const HIRE_STRINGS: Record<Locale, HireStrings> = {
@@ -67,6 +69,10 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     payReassure: 'Pagamento sicuro con <strong>Stripe</strong>. IVA e P.IVA gestite al checkout.',
     callAlt: 'Preferisci parlarne? Prenota una call', quoteCallAlt: 'Preferisci una call diretta?',
     quoteReassure: 'Ti rispondiamo entro 2 giorni lavorativi con scope e preventivo.',
+    proofBand: 'Scelti — e vinti in gara — da fondazioni ed enti',
+    fondTitle: 'Fondazioni, ONG, enti, ricerca?',
+    fondText: 'Partecipiamo e vinciamo gare e bandi con istituzioni mission-driven. Se hai una gara o un bando, ti aiutiamo a vincerlo.',
+    fondCta: 'Il percorso per fondazioni ed enti →', fondHref: '/hire/fondazioni',
   },
   en: {
     metaTitle: 'Work with us — Pianeta.Studio',
@@ -110,5 +116,78 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     payReassure: 'Secure payment with <strong>Stripe</strong>. VAT and VAT-ID handled at checkout.',
     callAlt: 'Prefer to talk first? Book a call', quoteCallAlt: 'Prefer a direct call?',
     quoteReassure: 'We reply within 2 business days with scope and quote.',
+    proofBand: 'Chosen — and won in tender — by foundations and institutions',
+    fondTitle: 'Foundations, NGOs, institutions, research?',
+    fondText: 'We take part in — and win — public tenders and grants with mission-driven institutions. Got a tender or a grant? We help you win it.',
+    fondCta: 'The track for foundations & institutions →', fondHref: '/en/hire/fondazioni',
+  },
+};
+
+// --- Pagina verticale Fondazioni ---
+export interface FoundStrings {
+  metaTitle: string; metaDesc: string;
+  eyebrow: string; h1: string; deck: string;
+  winsTitle: string; stepsTitle: string; steps: { n: string; t: string; d: string }[];
+  sendTitle: string; sendText: string; sendCta: string; sendHref: string;
+  bandiTitle: string; bandiText: string; bandiCta: string; bandiHref: string;
+  casesTitle: string; cases: { title: string; href: string }[];
+  back: string; backHref: string;
+}
+export const FOUND_STRINGS: Record<Locale, FoundStrings> = {
+  it: {
+    metaTitle: 'Fondazioni & enti — Gare e bandi · Pianeta.Studio',
+    metaDesc: 'Partecipiamo e vinciamo gare e bandi con fondazioni ed enti mission-driven. Inviaci la tua gara: ti aiutiamo a vincerla.',
+    eyebrow: 'Fondazioni · Enti · Ricerca · ONG',
+    h1: 'Gare e bandi: vi aiutiamo a vincere.',
+    deck: 'Partecipiamo — e vinciamo — gare e bandi con fondazioni ed enti mission-driven. Portateci la vostra gara: la trasformiamo in un progetto che vince e si rendiconta senza sorprese.',
+    winsTitle: 'Gare e progetti vinti',
+    stepsTitle: 'Come lavoriamo con voi',
+    steps: [
+      { n: '01', t: 'Inviateci la gara o il bando', d: 'Leggiamo requisiti, criteri di valutazione e vincoli. Capiamo dove si vince e dove si perde punti.' },
+      { n: '02', t: 'Progettiamo la proposta che vince', d: 'Design e sviluppo scritti nel linguaggio del bando, con KPI e milestone rendicontabili. Validati con il nostro swarm AI prima di consegnare.' },
+      { n: '03', t: 'Eseguiamo e rendicontiamo', d: 'Consegniamo i deliverable allineati ai requisiti. Con AB Innovation gestiamo la pratica burocratica: una sola filiera, due competenze.' },
+    ],
+    sendTitle: 'Hai già una gara?',
+    sendText: 'Inviacela: la leggiamo e ti diciamo come la imposteremmo per vincerla. Nessun impegno.',
+    sendCta: 'Inviaci la tua gara', sendHref: '/lavoriamo-insieme?offer=gara',
+    bandiTitle: 'Non hai ancora un bando?',
+    bandiText: 'Ti aiutiamo a vincere il bando nazionale o regionale per l’innovazione della tua organizzazione — dalla mappatura alla rendicontazione.',
+    bandiCta: 'Scopri bandi & finanza agevolata →', bandiHref: '/bandi',
+    casesTitle: 'Casi con istituzioni',
+    cases: [
+      { title: 'ECLAG — Choose to See Them', href: '/work/eclag' },
+      { title: 'BC3 — Basque Centre for Climate Change', href: '/work/bc3-rebranding' },
+      { title: 'ARIES — AI per ambiente e sostenibilità', href: '/work/aries-towards-smarter-sustainable-world' },
+      { title: 'ChildFund World Index', href: '/work/childfund-world-index' },
+    ],
+    back: '← Lavoriamo insieme', backHref: '/hire',
+  },
+  en: {
+    metaTitle: 'Foundations & institutions — Tenders & grants · Pianeta.Studio',
+    metaDesc: 'We take part in and win tenders and grants with mission-driven foundations and institutions. Send us your tender: we help you win it.',
+    eyebrow: 'Foundations · Institutions · Research · NGOs',
+    h1: 'Tenders and grants: we help you win.',
+    deck: 'We take part in — and win — tenders and grants with mission-driven foundations and institutions. Bring us your tender: we turn it into a project that wins and reports cleanly.',
+    winsTitle: 'Tenders & projects won',
+    stepsTitle: 'How we work with you',
+    steps: [
+      { n: '01', t: 'Send us the tender or grant', d: 'We read requirements, scoring criteria and constraints. We see where points are won and lost.' },
+      { n: '02', t: 'We design the winning proposal', d: 'Design and development written in the tender’s language, with reportable KPIs and milestones. Validated with our AI swarm before delivery.' },
+      { n: '03', t: 'We deliver and report', d: 'We deliver outputs aligned to requirements. With AB Innovation we handle the paperwork: one chain, two competencies.' },
+    ],
+    sendTitle: 'Already have a tender?',
+    sendText: 'Send it over: we read it and tell you how we’d set it up to win. No commitment.',
+    sendCta: 'Send us your tender', sendHref: '/en/lavoriamo-insieme?offer=gara',
+    bandiTitle: 'No grant yet?',
+    bandiText: 'We help you win the national or regional innovation grant for your organization — from mapping to reporting.',
+    bandiCta: 'Grants & subsidized finance →', bandiHref: '/en/bandi',
+    casesTitle: 'Cases with institutions',
+    cases: [
+      { title: 'ECLAG — Choose to See Them', href: '/en/work/eclag' },
+      { title: 'BC3 — Basque Centre for Climate Change', href: '/en/work/bc3-rebranding' },
+      { title: 'ARIES — AI for environment & sustainability', href: '/en/work/aries-towards-smarter-sustainable-world' },
+      { title: 'ChildFund World Index', href: '/en/work/childfund-world-index' },
+    ],
+    back: '← Work with us', backHref: '/en/hire',
   },
 };

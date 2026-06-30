@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HireFoundations from '../../components/hire/HireFoundations.astro';
+import { FOUND_STRINGS } from '../../components/hire/strings';
+const S = FOUND_STRINGS.it;
+---
+<BaseLayout title={S.metaTitle} description={S.metaDesc} hideNewsletter>
+  <HireFoundations locale="it" />
+</BaseLayout>
