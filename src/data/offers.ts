@@ -7,6 +7,11 @@ const SITE = '';
 export interface Related { title: string; href: string; kind: 'case' | 'article' }
 export interface MethodDay { n: number; title: string; body: string }
 export interface Faq { q: string; a: string }
+export interface BeforeAfterRow { k: string; before: string; after: string; better: 'lower' | 'higher' }
+export interface BeforeAfter {
+  title: string; intro: string; beforeLabel: string; afterLabel: string;
+  rows: BeforeAfterRow[]; note: string; exampleHref?: string; exampleLabel?: string;
+}
 
 export interface Offer {
   slug: string;
@@ -28,6 +33,8 @@ export interface Offer {
   faqs?: Faq[];
   stats?: { k: string; v: string }[];   // prova di performance/green (numeri reali misurati)
   statsNote?: string;
+  valueNote?: string;                    // micro-copy sotto il prezzo: perché vale (giustifica il costo)
+  beforeAfter?: BeforeAfter;             // esempio prima/dopo con numeri reali misurati
   variantB?: { forWho?: string };        // A/B: contenuto alternativo servito con ?v=b
 }
 
@@ -61,6 +68,19 @@ const OFFERS_IT: Offer[] = [
       { k: 'CO₂ / visita', v: '~0,1–0,2 g' },
     ],
     statsNote: 'Numeri reali, misurati su siti nostri e dei clienti (es. cornertable.agency, pianeta.studio). Media web: ~2,3 MB e ~0,36 g CO₂. CO₂ stimata con metodo Green Web Foundation (Sustainable Web Design), via GreenMeter.',
+    valueNote: 'Un sito che non rifai tra un anno: veloce, a basso impatto, su standard verificabili. La media web pesa ~2,3 MB e va rifatta spesso.',
+    beforeAfter: {
+      title: 'Prima / dopo — sul nostro stesso sito',
+      intro: 'Non è teoria: l’abbiamo applicato a pianeta.studio. Stesso sito, prima e dopo l’ottimizzazione.',
+      beforeLabel: 'Prima', afterLabel: 'Dopo',
+      rows: [
+        { k: 'Lighthouse', before: '74/100', after: '94/100', better: 'higher' },
+        { k: 'Peso pagina', before: '4,4 MB', after: '0,67 MB', better: 'lower' },
+        { k: 'Video hero', before: '8,5 MB', after: '1,7 MB', better: 'lower' },
+      ],
+      note: 'Misure reali (Lighthouse + GreenMeter, metodo Green Web Foundation).',
+      exampleHref: 'https://cornertable.agency', exampleLabel: 'Esempio cliente live: cornertable.agency — 95/100, 1,4 MB →',
+    },
     method: [
       { n: 1, title: 'Brief & contenuti', body: 'Obiettivi, struttura, contenuti. Capiamo cosa ti serve davvero — e cosa togliere: meno peso, meno CO₂.' },
       { n: 2, title: 'Design sul DS Hederae', body: 'Disegniamo sul nostro design system: coerente, accessibile, veloce per costruzione. Niente template generici.' },
@@ -94,6 +114,7 @@ const OFFERS_IT: Offer[] = [
     accent: 'orange',
     emoji: '⚡',
     stripe: { mode: 'payment', amount: 350000, label: 'Prenota lo Sprint — 3.500€ + IVA' },
+    valueNote: 'Non paghi 4 giorni: eviti di bruciare il budget di produzione su una direzione sbagliata. Costa meno scoprirlo ora.',
     related: [
       { title: 'ECLAG — Choose to See Them', href: `${SITE}/work/eclag`, kind: 'case' },
       { title: 'Validare una campagna prima di produrla', href: `${SITE}/bulletin/validare-una-campagna-prima-di-produrla`, kind: 'article' },
@@ -131,6 +152,7 @@ const OFFERS_IT: Offer[] = [
     accent: 'dark',
     emoji: '🤝',
     stripe: { mode: 'subscription', amount: 400000, recurring: 'month', label: 'Attiva — 4.000€/mese + IVA' },
+    valueNote: 'Meno di un junior in busta paga — senza costi di assunzione, ferie o gestione. Disdici quando vuoi: è mensile.',
     related: [
       { title: 'BC3 — Annual Reports', href: `${SITE}/work/bc3-annual-reports`, kind: 'case' },
       { title: 'ChildFund World Index', href: `${SITE}/work/childfund-world-index`, kind: 'case' },
@@ -216,6 +238,19 @@ const OFFERS_EN: Offer[] = [
       { k: 'CO₂ / visit', v: '~0.1–0.2 g' },
     ],
     statsNote: 'Real numbers, measured on our own and client sites (e.g. cornertable.agency, pianeta.studio). Web average: ~2.3 MB and ~0.36 g CO₂. CO₂ estimated with the Green Web Foundation method (Sustainable Web Design), via GreenMeter.',
+    valueNote: 'A site you won’t rebuild in a year: fast, low-impact, on verifiable standards. The web average weighs ~2.3 MB and gets rebuilt often.',
+    beforeAfter: {
+      title: 'Before / after — on our own site',
+      intro: 'Not theory: we applied it to pianeta.studio. Same site, before and after optimization.',
+      beforeLabel: 'Before', afterLabel: 'After',
+      rows: [
+        { k: 'Lighthouse', before: '74/100', after: '94/100', better: 'higher' },
+        { k: 'Page weight', before: '4.4 MB', after: '0.67 MB', better: 'lower' },
+        { k: 'Hero video', before: '8.5 MB', after: '1.7 MB', better: 'lower' },
+      ],
+      note: 'Real measurements (Lighthouse + GreenMeter, Green Web Foundation method).',
+      exampleHref: 'https://cornertable.agency', exampleLabel: 'Live client example: cornertable.agency — 95/100, 1.4 MB →',
+    },
     method: [
       { n: 1, title: 'Brief & content', body: 'Goals, structure, content. We figure out what you actually need — and what to cut: less weight, less CO₂.' },
       { n: 2, title: 'Design on Hederae DS', body: 'We design on our design system: consistent, accessible, fast by construction. No generic templates.' },
@@ -249,6 +284,7 @@ const OFFERS_EN: Offer[] = [
     accent: 'orange',
     emoji: '⚡',
     stripe: { mode: 'payment', amount: 350000, label: 'Book the Sprint — €3,500 + VAT' },
+    valueNote: 'You’re not paying for 4 days: you’re avoiding burning the production budget on the wrong direction. Cheaper to find out now.',
     related: [
       { title: 'ECLAG — Choose to See Them', href: `${SITE_EN}/work/eclag`, kind: 'case' },
       { title: 'Validate a campaign before producing it', href: `${SITE_EN}/bulletin/validare-una-campagna-prima-di-produrla`, kind: 'article' },
@@ -286,6 +322,7 @@ const OFFERS_EN: Offer[] = [
     accent: 'dark',
     emoji: '🤝',
     stripe: { mode: 'subscription', amount: 400000, recurring: 'month', label: 'Activate — €4,000/month + VAT' },
+    valueNote: 'Less than a junior on payroll — without hiring costs, holidays or management. Cancel anytime: it’s monthly.',
     related: [
       { title: 'BC3 — Annual Reports', href: `${SITE_EN}/work/bc3-annual-reports`, kind: 'case' },
       { title: 'ChildFund World Index', href: `${SITE_EN}/work/childfund-world-index`, kind: 'case' },
