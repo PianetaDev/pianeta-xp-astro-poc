@@ -25,6 +25,7 @@ export interface HireStrings {
   // banda prova + aggancio verticale fondazioni
   proofBand: string; fondTitle: string; fondText: string; fondCta: string; fondHref: string;
   riskLine: string;
+  afterTitle: string; after: string[];
 }
 
 export const HIRE_STRINGS: Record<Locale, HireStrings> = {
@@ -75,6 +76,12 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     fondText: 'Partecipiamo e vinciamo gare e bandi con istituzioni mission-driven. Se hai una gara o un bando, ti aiutiamo a vincerlo.',
     fondCta: 'Il percorso per fondazioni ed enti →', fondHref: '/hire/fondazioni',
     riskLine: 'Codice e contenuti tuoi · nessun lock-in · checkout sicuro con Stripe · nessun impegno per parlare con Alba',
+    afterTitle: 'Cosa succede dopo l’acquisto',
+    after: [
+      'Ricevi subito la conferma via mail.',
+      'Ti scriviamo entro 1 giorno lavorativo per il kickoff.',
+      'Partiamo insieme — codice e contenuti restano tuoi.',
+    ],
   },
   en: {
     metaTitle: 'Work with us — Pianeta.Studio',
@@ -123,6 +130,12 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     fondText: 'We take part in — and win — public tenders and grants with mission-driven institutions. Got a tender or a grant? We help you win it.',
     fondCta: 'The track for foundations & institutions →', fondHref: '/en/hire/fondazioni',
     riskLine: 'Your code and content · no lock-in · secure Stripe checkout · no commitment to talk to Alba',
+    afterTitle: 'What happens after you buy',
+    after: [
+      'You get an instant email confirmation.',
+      'We reach out within 1 business day to kick off.',
+      'We start together — your code and content stay yours.',
+    ],
   },
 };
 

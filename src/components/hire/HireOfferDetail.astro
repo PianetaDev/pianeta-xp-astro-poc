@@ -108,6 +108,10 @@ const hasMethod = sprintDays.length > 0;
             <button id="buy" data-offer={offer.slug} data-locale={locale} class="offer-buy-btn" style={`background:${accent}`}>{offer.stripe?.label}</button>
             <a href={S.booking} class="offer-call-btn">{S.callAlt}</a>
             <p class="offer-reassure" set:html={S.payReassure} />
+            <div class="offer-after">
+              <p class="offer-after-t">{S.afterTitle}</p>
+              <ol class="offer-after-list">{S.after.map((x) => <li>{x}</li>)}</ol>
+            </div>
           </>
         )}
       </aside>
@@ -175,6 +179,10 @@ const hasMethod = sprintDays.length > 0;
   .offer-call-btn { text-align: center; padding: 12px; border: 1px solid var(--line); border-radius: 11px; text-decoration: none; font-weight: 600; font-size: 14px; }
   .offer-call-btn:hover { border-color: var(--pianeta-border-strong); }
   .offer-reassure { color: var(--mut); font-size: 12px; line-height: 1.5; margin-top: 4px; }
+  .offer-after { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .offer-after-t { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--mut); margin: 0 0 8px; }
+  .offer-after-list { margin: 0; padding-left: 18px; display: grid; gap: 5px; }
+  .offer-after-list li { font-size: 13px; line-height: 1.45; }
 </style>
 
 <script is:inline>
