@@ -44,7 +44,11 @@ const FOUNDATIONS_EN: FoundationWin[] = [
   { name: 'Foodreboot', what: 'Food & sustainability' },
 ];
 
-// Testimonials. Cornertable = cliente reale (Max chiede citazione + foto). Per ora bozza.
+// Testimonials. Fonti reali da contattare per citazione+foto+consenso (NON inventare quote a loro nome):
+//   - Steve Wilson · Cornertable (cornertable.agency) — agenzia, ottimo per buyer T1
+//   - Roberta Gigante · Apotheke (apotheke.it)
+//   - Barbara Costantini · sito portfolio
+// Finché non arrivano le frasi reali, la testimonial resta draft:true (placeholder, non attribuita a una persona reale).
 export interface Testimonial { quote: string; name: string; org: string; url?: string; initials: string; draft?: boolean }
 export const TESTIMONIALS: Testimonial[] = [
   {

@@ -71,9 +71,8 @@ const ldJson = {
 
       {/* 1. Featured ECLAG video — tall portrait (col-1 row-span-3) */}
       <a href={w0 ? `/work/${w0.id}` : '/work/eclag'} class="bento-tile t-tall t-dark">
-        <video poster="/choosetoseethem/cover-v3.png" autoplay muted loop playsinline class="bento-video">
-          <source src="https://pub-4c166b51c33040fd98b8f75c2963296e.r2.dev/choosetoseethem/video-restore-web.mp4" type="video/mp4" />
-        </video>
+        <video poster="/choosetoseethem/cover-v3.webp" muted loop playsinline preload="none" class="bento-video"
+               data-lazy-video data-src="https://pub-4c166b51c33040fd98b8f75c2963296e.r2.dev/choosetoseethem/video-restore-web.mp4"></video>
         <div class="bento-grad" />
         <div class="bento-content">
           <p class="bento-kicker">Featured · ECLAG</p>
@@ -278,6 +277,27 @@ const ldJson = {
           } catch (err) { if (msg) msg.textContent = 'Qualcosa è andato storto, riprova.'; }
           btn.disabled = false; btn.textContent = o;
         });
+      </script>
+
+      <script is:inline>
+        // Video pesante (ECLAG ~3.8MB): poster istantaneo, video caricato in idle dopo il load.
+        // Non blocca LCP/peso iniziale; parte un attimo dopo.
+        (() => {
+          const load = () => {
+            document.querySelectorAll('video[data-lazy-video]').forEach((v) => {
+              if (v.dataset.loaded || !v.dataset.src) return;
+              v.dataset.loaded = '1';
+              const s = document.createElement('source');
+              s.src = v.dataset.src; s.type = 'video/mp4';
+              v.appendChild(s); v.load();
+              const p = v.play(); if (p && p.catch) p.catch(() => {});
+            });
+          };
+          const defer = () => (window.requestIdleCallback ? requestIdleCallback(load, { timeout: 2500 }) : setTimeout(load, 1200));
+          if (document.readyState === 'complete') defer();
+          else window.addEventListener('load', defer, { once: true });
+          document.addEventListener('astro:page-load', () => { if (document.readyState === 'complete') defer(); });
+        })();
       </script>
 
     </div>
