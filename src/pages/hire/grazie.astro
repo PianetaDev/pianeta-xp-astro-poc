@@ -15,6 +15,12 @@ const offer = offerBySlug(Astro.url.searchParams.get('offer') ?? '');
   </main>
   </div>
   <script is:inline>
-    (() => { const o = new URLSearchParams(location.search).get('offer') || ''; (window.dataLayer = window.dataLayer || []).push({ event: 'hire_purchase', offer: o }); })();
+    (() => {
+      const ck = (n) => (document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)') || [])[2] || '';
+      const o = new URLSearchParams(location.search).get('offer') || '';
+      (window.dataLayer = window.dataLayer || []).push({ event: 'hire_purchase', offer: o });
+      const body = JSON.stringify({ event: 'hire_purchase', offer: o, gclid: decodeURIComponent(ck('gclid') || ''), page: location.pathname });
+      try { if (navigator.sendBeacon) navigator.sendBeacon('/api/track', new Blob([body], { type: 'application/json' })); else fetch('/api/track', { method: 'POST', headers: { 'content-type': 'application/json' }, body, keepalive: true }); } catch (e) { /* noop */ }
+    })();
   </script>
 </BaseLayout>
