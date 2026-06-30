@@ -24,6 +24,7 @@ export interface HireStrings {
   payReassure: string; callAlt: string; quoteCallAlt: string; quoteReassure: string;
   // banda prova + aggancio verticale fondazioni
   proofBand: string; fondTitle: string; fondText: string; fondCta: string; fondHref: string;
+  riskLine: string;
 }
 
 export const HIRE_STRINGS: Record<Locale, HireStrings> = {
@@ -31,17 +32,17 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     metaTitle: 'Lavoriamo insieme — Pianeta.Studio',
     metaDesc: 'Una direzione creativa validata, prima di spendere il budget. Design, web e validazione con AI.',
     heroPre: 'Una direzione creativa ', heroEm: 'validata', heroPost: ' — prima di spendere il budget.',
-    heroSub: 'Design, web e validazione con AI per brand e organizzazioni che vogliono fare la cosa giusta, e farla funzionare. Scegli da dove iniziare.',
+    heroSub: 'Neuroscienza, AI e dati — con l’umano sempre nel loop — per validare la direzione di brand e organizzazioni che vogliono fare la cosa giusta, e farla funzionare. Scegli da dove iniziare.',
     heroCta: 'Scegli come iniziare ↓',
     offersTitle: 'Quattro modi per lavorare con noi', offerMore: 'Scopri di più →',
     worksTitle: 'I nostri lavori', worksAll: 'Vedi tutti →',
     clientsTitle: 'Hanno scelto Pianeta', clientsNote: 'Loghi in arrivo — per ora i nomi.',
     recentTitle: 'Lavori recenti',
     methodTitle: 'Come lavoriamo',
-    methodLead: 'Metodologie di design thinking, validate con l’AI. Un metodo che riduce il rischio prima di spendere.',
+    methodLead: 'Design thinking + validazione con neuroscienza, AI e dati — l’umano sempre nel loop. Un metodo che riduce il rischio prima di spendere.',
     method: [
       { n: '01', t: 'Design thinking & co-design', d: 'Partiamo dal problema, insieme a te. Niente brief calati dall’alto: co-progettiamo la direzione.' },
-      { n: '02', t: 'AI validation', d: 'Validiamo le idee con il nostro swarm AI + neuromarketing — prima di spendere il budget di produzione.' },
+      { n: '02', t: 'Validazione: neuroscienza, AI e dati', d: 'Neuroscienza, AI e dati validano le direzioni — con l’umano che decide — prima di spendere il budget di produzione.' },
       { n: '03', t: 'Design & build', d: 'Dalla direzione validata al prodotto: design system, web, contenuti. Carbon e performance budget come vincoli verificabili.' },
       { n: '04', t: 'Consegna, senza lock-in', d: 'Codice e contenuti consegnati, standard aperti. Quello che costruiamo è tuo.' },
     ],
@@ -73,22 +74,23 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     fondTitle: 'Fondazioni, ONG, enti, ricerca?',
     fondText: 'Partecipiamo e vinciamo gare e bandi con istituzioni mission-driven. Se hai una gara o un bando, ti aiutiamo a vincerlo.',
     fondCta: 'Il percorso per fondazioni ed enti →', fondHref: '/hire/fondazioni',
+    riskLine: 'Codice e contenuti tuoi · nessun lock-in · checkout sicuro con Stripe · nessun impegno per parlare con Alba',
   },
   en: {
     metaTitle: 'Work with us — Pianeta.Studio',
     metaDesc: 'A validated creative direction, before you spend the budget. Design, web and AI validation.',
     heroPre: 'A creative direction, ', heroEm: 'validated', heroPost: ' — before you spend the budget.',
-    heroSub: 'Design, web and AI validation for brands and organizations that want to do the right thing, and make it work. Choose where to start.',
+    heroSub: 'Neuroscience, AI and data — always with a human in the loop — to validate the direction of brands and organizations that want to do the right thing, and make it work. Choose where to start.',
     heroCta: 'Choose where to start ↓',
     offersTitle: 'Four ways to work with us', offerMore: 'Learn more →',
     worksTitle: 'Our work', worksAll: 'See all →',
     clientsTitle: 'They chose Pianeta', clientsNote: 'Logos coming soon — names for now.',
     recentTitle: 'Recent work',
     methodTitle: 'How we work',
-    methodLead: 'Design thinking methods, validated with AI. A method that cuts risk before you spend.',
+    methodLead: 'Design thinking + validation with neuroscience, AI and data — always with a human in the loop. A method that cuts risk before you spend.',
     method: [
       { n: '01', t: 'Design thinking & co-design', d: 'We start from the problem, together with you. No top-down briefs: we co-design the direction.' },
-      { n: '02', t: 'AI validation', d: 'We validate ideas with our AI swarm + neuromarketing — before spending the production budget.' },
+      { n: '02', t: 'Validation: neuroscience, AI & data', d: 'Neuroscience, AI and data validate the directions — with a human making the call — before spending the production budget.' },
       { n: '03', t: 'Design & build', d: 'From validated direction to product: design system, web, content. Carbon and performance budgets as verifiable constraints.' },
       { n: '04', t: 'Delivery, no lock-in', d: 'Code and content handed over, open standards. What we build is yours.' },
     ],
@@ -120,6 +122,7 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     fondTitle: 'Foundations, NGOs, institutions, research?',
     fondText: 'We take part in — and win — public tenders and grants with mission-driven institutions. Got a tender or a grant? We help you win it.',
     fondCta: 'The track for foundations & institutions →', fondHref: '/en/hire/fondazioni',
+    riskLine: 'Your code and content · no lock-in · secure Stripe checkout · no commitment to talk to Alba',
   },
 };
 
@@ -144,7 +147,7 @@ export const FOUND_STRINGS: Record<Locale, FoundStrings> = {
     stepsTitle: 'Come lavoriamo con voi',
     steps: [
       { n: '01', t: 'Inviateci la gara o il bando', d: 'Leggiamo requisiti, criteri di valutazione e vincoli. Capiamo dove si vince e dove si perde punti.' },
-      { n: '02', t: 'Progettiamo la proposta che vince', d: 'Design e sviluppo scritti nel linguaggio del bando, con KPI e milestone rendicontabili. Validati con il nostro swarm AI prima di consegnare.' },
+      { n: '02', t: 'Progettiamo la proposta che vince', d: 'Design e sviluppo scritti nel linguaggio del bando, con KPI e milestone rendicontabili. Validati con neuroscienza, AI e dati — l’umano nel loop — prima di consegnare.' },
       { n: '03', t: 'Eseguiamo e rendicontiamo', d: 'Consegniamo i deliverable allineati ai requisiti. Con AB Innovation gestiamo la pratica burocratica: una sola filiera, due competenze.' },
     ],
     sendTitle: 'Hai già una gara?',
@@ -172,7 +175,7 @@ export const FOUND_STRINGS: Record<Locale, FoundStrings> = {
     stepsTitle: 'How we work with you',
     steps: [
       { n: '01', t: 'Send us the tender or grant', d: 'We read requirements, scoring criteria and constraints. We see where points are won and lost.' },
-      { n: '02', t: 'We design the winning proposal', d: 'Design and development written in the tender’s language, with reportable KPIs and milestones. Validated with our AI swarm before delivery.' },
+      { n: '02', t: 'We design the winning proposal', d: 'Design and development written in the tender’s language, with reportable KPIs and milestones. Validated with neuroscience, AI and data — human in the loop — before delivery.' },
       { n: '03', t: 'We deliver and report', d: 'We deliver outputs aligned to requirements. With AB Innovation we handle the paperwork: one chain, two competencies.' },
     ],
     sendTitle: 'Already have a tender?',

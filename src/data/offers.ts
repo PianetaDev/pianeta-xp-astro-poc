@@ -58,14 +58,14 @@ const OFFERS_IT: Offer[] = [
     forWho: 'Per chi sta per investire su una campagna, un sito o un rebrand e non vuole sbagliare il primo passo.',
     tagline: 'Da un’idea confusa a una direzione validata, in 4 giorni.',
     detail:
-      'Quattro giorni per trasformare un’idea confusa in una direzione validata e pronta da produrre. Lavoriamo in co-design, validiamo con il nostro swarm AI + neuromarketing, e consegniamo una direzione che regge — prima che tu spenda il budget di produzione.',
+      'Quattro giorni per trasformare un’idea confusa in una direzione validata e pronta da produrre. Lavoriamo in co-design, validiamo con neuroscienza, AI e dati — con l’umano sempre nel loop — e consegniamo una direzione che regge, prima che tu spenda il budget di produzione.',
     deliverables: [
       'Direzione creativa / di messaggio validata',
-      'Il razionale della validazione (swarm AI)',
+      'Il razionale della validazione (neuroscienza, AI e dati)',
       'Gli asset chiave decisi nello sprint',
       'Una roadmap dei passi successivi',
     ],
-    bullets: ['4 giorni time-boxed', 'Validazione con swarm AI', 'Deliverable + roadmap'],
+    bullets: ['4 giorni time-boxed', 'Neuroscienza, AI e dati', 'Deliverable + roadmap'],
     accent: 'orange',
     emoji: '⚡',
     stripe: { mode: 'payment', amount: 350000, label: 'Prenota lo Sprint — 3.500€ + IVA' },
@@ -77,11 +77,11 @@ const OFFERS_IT: Offer[] = [
     method: [
       { n: 1, title: 'Immersione', body: 'Obiettivi, audience, audit di quello che hai già. Mezza giornata con te, il resto lo lavoriamo noi.' },
       { n: 2, title: 'Direzione', body: 'Concept e messaggi chiave. Una o più direzioni creative, non una sola scommessa.' },
-      { n: 3, title: 'Validazione', body: 'Il nostro swarm AI + neuromarketing stress-testa le direzioni con un panel sintetico. Vediamo cosa convince e cosa genera resistenza — prima di produrre.' },
+      { n: 3, title: 'Validazione', body: 'Neuroscienza, AI e dati stress-testano le direzioni con un panel sintetico — con l’umano che decide. Vediamo cosa convince e cosa genera resistenza, prima di produrre.' },
       { n: 4, title: 'Consegna', body: 'Direzione finale validata + asset chiave + roadmap, in un meeting di consegna.' },
     ],
     faqs: [
-      { q: 'Tecnologie proprietarie o tool rivenduti?', a: 'Il motore di validazione (swarm + neuromarketing) è nostro, sviluppato internamente. Non rivendiamo un tool di terzi: è il metodo con cui lavoriamo.' },
+      { q: 'Tecnologie proprietarie o tool rivenduti?', a: 'Il motore di validazione (neuroscienza, AI e dati) è nostro, sviluppato internamente, con l’umano sempre nel loop. Non rivendiamo un tool di terzi: è il metodo con cui lavoriamo.' },
       { q: 'Cosa consegnate, di preciso?', a: 'Una direzione creativa/di messaggio validata e pronta da produrre, il razionale della validazione, gli asset chiave decisi nello Sprint e una roadmap dei passi successivi.' },
       { q: 'Per chi è lo Sprint?', a: 'Per chi sta per investire su una campagna, un sito o un rebrand e vuole partire sul piede giusto — non sprecare mesi e budget su una direzione sbagliata.' },
       { q: 'E dopo lo Sprint?', a: 'Puoi produrre con noi (o con chi vuoi: la direzione è tua) oppure passare al Team as a Service per un rapporto continuativo.' },
@@ -167,14 +167,14 @@ const OFFERS_EN: Offer[] = [
     forWho: 'For anyone about to invest in a campaign, a site or a rebrand who can’t afford a wrong first step.',
     tagline: 'From a fuzzy idea to a validated direction, in 4 days.',
     detail:
-      'Four days to turn a fuzzy idea into a validated direction, ready to produce. We work in co-design, validate with our AI swarm + neuromarketing, and deliver a direction that holds — before you spend the production budget.',
+      'Four days to turn a fuzzy idea into a validated direction, ready to produce. We work in co-design, validate with neuroscience, AI and data — always with a human in the loop — and deliver a direction that holds, before you spend the production budget.',
     deliverables: [
       'A validated creative / messaging direction',
-      'The validation rationale (AI swarm)',
+      'The validation rationale (neuroscience, AI & data)',
       'The key assets decided in the sprint',
       'A roadmap of next steps',
     ],
-    bullets: ['4 time-boxed days', 'AI-swarm validation', 'Deliverables + roadmap'],
+    bullets: ['4 time-boxed days', 'Neuroscience, AI & data', 'Deliverables + roadmap'],
     accent: 'orange',
     emoji: '⚡',
     stripe: { mode: 'payment', amount: 350000, label: 'Book the Sprint — €3,500 + VAT' },
@@ -186,11 +186,11 @@ const OFFERS_EN: Offer[] = [
     method: [
       { n: 1, title: 'Immersion', body: 'Goals, audience, an audit of what you already have. Half a day with you, the rest we work on our own.' },
       { n: 2, title: 'Direction', body: 'Concept and key messages. One or more creative directions — not a single bet.' },
-      { n: 3, title: 'Validation', body: 'Our AI swarm + neuromarketing stress-tests the directions with a synthetic panel. We see what convinces and what triggers resistance — before producing.' },
+      { n: 3, title: 'Validation', body: 'Neuroscience, AI and data stress-test the directions with a synthetic panel — with a human making the call. We see what convinces and what triggers resistance, before producing.' },
       { n: 4, title: 'Delivery', body: 'Final validated direction + key assets + roadmap, in a handover meeting.' },
     ],
     faqs: [
-      { q: 'Proprietary tech or resold tools?', a: 'The validation engine (swarm + neuromarketing) is ours, built in-house. We don’t resell a third-party tool: it’s the method we work with.' },
+      { q: 'Proprietary tech or resold tools?', a: 'The validation engine (neuroscience, AI and data) is ours, built in-house, with a human always in the loop. We don’t resell a third-party tool: it’s the method we work with.' },
       { q: 'What exactly do you deliver?', a: 'A validated creative/messaging direction ready to produce, the validation rationale, the key assets decided in the Sprint and a roadmap of next steps.' },
       { q: 'Who is the Sprint for?', a: 'For anyone about to invest in a campaign, a site or a rebrand who wants to start on the right foot — not waste months and budget on the wrong direction.' },
       { q: 'And after the Sprint?', a: 'You can produce with us (or with whoever you like: the direction is yours) or move to Team as a Service for an ongoing relationship.' },
