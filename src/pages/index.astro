@@ -228,15 +228,21 @@ const ldJson = {
         </div>
       </a>
 
-      {/* 11. Bulletin CTA — pale · apre il side-pane (fallback: naviga a /bulletin/iscrivimi) */}
-      <a href="/bulletin/iscrivimi" data-action="open-bulletin" class="bento-tile t-medium t-cream">
+      {/* 11. Bulletin CTA — campo email inline (la "buca" già disponibile) */}
+      <div class="bento-tile t-medium t-cream">
         <div class="bento-content">
           <p class="bento-kicker">Bulletin</p>
           <div class="bento-spacer" />
           <h2 class="bento-title">Iscriviti</h2>
-          <p class="bento-sub">1-2 al mese. Topic selezionabili.</p>
+          <p class="bento-sub">1-2 al mese. Niente spam.</p>
+          <form data-bulletin-form style="display:flex;gap:8px;margin-top:14px">
+            <input type="email" required placeholder="la-tua-email@…" aria-label="Email"
+              style="flex:1;min-width:0;background:transparent;border:1px solid rgba(14,17,22,.25);border-radius:8px;padding:9px 11px;font-size:13px;color:inherit;font-family:inherit" />
+            <button type="submit" style="background:#0e1116;color:#fff;border:0;border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap">Iscriviti</button>
+          </form>
+          <p data-bulletin-msg style="font-size:12px;margin-top:8px;min-height:1em;color:rgba(14,17,22,.6)"></p>
         </div>
-      </a>
+      </div>
       <script is:inline>
         // Delegato su document → sopravvive alle view transition di Astro
         document.addEventListener('click', (e) => {
@@ -251,6 +257,27 @@ const ldJson = {
         document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => {
           b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open')))
         })
+      </script>
+
+      <script is:inline>
+        // Iscrizione bulletin inline (delegato → sopravvive alle view transition)
+        document.addEventListener('submit', async (e) => {
+          const f = e.target.closest && e.target.closest('[data-bulletin-form]');
+          if (!f) return;
+          e.preventDefault();
+          const input = f.querySelector('input[type=email]');
+          const msg = f.parentElement.querySelector('[data-bulletin-msg]');
+          const email = (input.value || '').trim();
+          if (!email) return;
+          const btn = f.querySelector('button');
+          btn.disabled = true; const o = btn.textContent; btn.textContent = '…';
+          try {
+            const r = await fetch('/api/newsletter/subscribe', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ email }) });
+            if (msg) msg.textContent = r.ok ? 'Controlla la mail per confermare.' : 'Qualcosa è andato storto, riprova.';
+            if (r.ok) input.value = '';
+          } catch (err) { if (msg) msg.textContent = 'Qualcosa è andato storto, riprova.'; }
+          btn.disabled = false; btn.textContent = o;
+        });
       </script>
 
     </div>

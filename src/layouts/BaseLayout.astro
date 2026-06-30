@@ -54,14 +54,20 @@ const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.s
     <meta name="twitter:card" content="summary_large_image" />
     <ClientRouter />
     <script is:inline>
-      // Theme: legge localStorage prima del paint per evitare flash
+      // Theme: legge localStorage prima del paint per evitare flash.
+      // Riapplica anche su astro:after-swap, altrimenti ogni navigazione ClientRouter
+      // resetta data-theme al default SSR ("auto") → flip nero→bianco di giorno.
       (() => {
-        try {
-          const saved = localStorage.getItem('pianeta-theme');
-          if (saved === 'light' || saved === 'dark' || saved === 'auto') {
-            document.documentElement.setAttribute('data-theme', saved);
-          }
-        } catch (e) {}
+        const apply = () => {
+          try {
+            const saved = localStorage.getItem('pianeta-theme');
+            if (saved === 'light' || saved === 'dark' || saved === 'auto') {
+              document.documentElement.setAttribute('data-theme', saved);
+            }
+          } catch (e) {}
+        };
+        apply();
+        document.addEventListener('astro:after-swap', apply);
       })();
     </script>
 
