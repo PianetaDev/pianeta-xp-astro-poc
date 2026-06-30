@@ -1,14 +1,14 @@
 // Contenuti curati per la superficie hire (selezione, non duplica il sito). Href/cover relativi.
 const SITE = '';
 
-export interface Work { title: string; client: string; cover: string; href: string }
+export interface Work { title: string; client: string; cover: string; href: string; web?: boolean }
 export const WORKS: Work[] = [
   { title: 'Choose to See Them', client: 'ECLAG', cover: `${SITE}/og/work-eclag.png`, href: `${SITE}/work/eclag` },
   { title: 'BC3 — Rebranding', client: 'Basque Centre for Climate Change', cover: `${SITE}/og/work-bc3-cover.png`, href: `${SITE}/work/bc3-rebranding` },
   { title: 'ARIES', client: 'AI for Environment & Sustainability', cover: `${SITE}/og/work-aries-cover.png`, href: `${SITE}/work/aries-towards-smarter-sustainable-world` },
-  { title: 'ChildFund World Index', client: 'ChildFund · WeWorld', cover: `${SITE}/og/work-childfund-cover.png`, href: `${SITE}/work/childfund-world-index` },
+  { title: 'ChildFund World Index', client: 'ChildFund · WeWorld', cover: `${SITE}/og/work-childfund-cover.png`, href: `${SITE}/work/childfund-world-index`, web: true },
   { title: 'UNTWIST', client: 'BC3 — Water-Energy-Food Nexus', cover: `${SITE}/og/work-untwist.png`, href: `${SITE}/work/untwist` },
-  { title: 'BC3 Annual Reports', client: 'Basque Centre for Climate Change', cover: `${SITE}/og/work-bc3-reports-cover.png`, href: `${SITE}/work/bc3-annual-reports` },
+  { title: 'BC3 Annual Reports', client: 'Basque Centre for Climate Change', cover: `${SITE}/og/work-bc3-reports-cover.png`, href: `${SITE}/work/bc3-annual-reports`, web: true },
 ];
 
 // Team — avatar veri non disponibili → bolle-iniziali finché Max non carica le foto.

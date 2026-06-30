@@ -7,7 +7,11 @@ interface Props { offer: Offer; locale?: Locale; }
 const { offer, locale = 'it' } = Astro.props;
 const S = HIRE_STRINGS[locale];
 const { works: WORKS, foundations: FOUNDATIONS } = getShowcase(locale);
-const worksTitle = locale === 'en' ? 'Selected work' : 'Lavori selezionati';
+const isWebOffer = offer.slug === 'sito-green';
+const shownWorks = isWebOffer ? WORKS.filter((w) => w.web) : WORKS;
+const worksTitle = isWebOffer
+  ? (locale === 'en' ? 'Sites we’ve built' : 'Siti che abbiamo costruito')
+  : (locale === 'en' ? 'Selected work' : 'Lavori selezionati');
 
 const accents: Record<string, string> = { green: '#1f7a3a', orange: '#FF6B33', dark: '#5a4fcf', blue: '#1f5b8f' };
 const accent = accents[offer.accent];
@@ -53,29 +57,6 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
               ))}
             </div>
             {offer.statsNote && <p class="offer-stats-note">{offer.statsNote}</p>}
-          </div>
-        )}
-
-        {offer.beforeAfter && (
-          <div class="offer-ba">
-            <h2 class="offer-h2">{offer.beforeAfter.title}</h2>
-            <p class="offer-ba-intro">{offer.beforeAfter.intro}</p>
-            <div class="offer-ba-grid">
-              <div class="offer-ba-hdr offer-ba-k"></div>
-              <div class="offer-ba-hdr offer-ba-before">{offer.beforeAfter.beforeLabel}</div>
-              <div class="offer-ba-hdr offer-ba-after">{offer.beforeAfter.afterLabel}</div>
-              {offer.beforeAfter.rows.map((r) => (
-                <>
-                  <div class="offer-ba-k">{r.k}</div>
-                  <div class="offer-ba-before"><s>{r.before}</s></div>
-                  <div class="offer-ba-after" style={`color:${accent}`}>{r.after} <span class="offer-ba-arrow">{r.better === 'higher' ? '↑' : '↓'}</span></div>
-                </>
-              ))}
-            </div>
-            <p class="offer-stats-note">{offer.beforeAfter.note}</p>
-            {offer.beforeAfter.exampleHref && (
-              <a href={offer.beforeAfter.exampleHref} target="_blank" rel="noopener" class="offer-ba-example" style={`color:${accent}`}>{offer.beforeAfter.exampleLabel}</a>
-            )}
           </div>
         )}
 
@@ -165,7 +146,7 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
         <a href={S.workAll} class="offer-works-all">{S.clientsLabel} →</a>
       </div>
       <div class="offer-works-scroll">
-        {WORKS.map((w) => (
+        {shownWorks.map((w) => (
           <a href={w.href} class="offer-work" target="_blank" rel="noopener">
             <span class="offer-work-cover" style={`background-image:url('${w.cover}')`}></span>
             <span class="offer-work-meta">
@@ -209,23 +190,6 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
 
   .sprint-method { margin-top: 38px; }
   .sprint-faqs-wrap { margin-top: 38px; }
-
-  /* Prima / dopo — esempio con numeri reali misurati */
-  .offer-ba { margin-top: 38px; }
-  .offer-ba-intro { font-size: 15px; color: var(--mut); margin: 0 0 16px; line-height: 1.5; }
-  .offer-ba-grid {
-    display: grid; grid-template-columns: 1fr auto auto; gap: 1px;
-    background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
-  }
-  .offer-ba-grid > div { background: var(--card); padding: 13px 16px; display: flex; align-items: center; }
-  .offer-ba-hdr { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--mut); font-weight: 700; }
-  .offer-ba-k { font-weight: 600; font-size: 15px; }
-  .offer-ba-before { color: var(--mut); justify-content: flex-end; min-width: 92px; }
-  .offer-ba-before s { text-decoration-color: var(--cta-primary); }
-  .offer-ba-after { font-weight: 800; justify-content: flex-end; min-width: 110px; }
-  .offer-ba-arrow { font-size: 13px; margin-left: 2px; }
-  .offer-ba-example { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; text-decoration: none; }
-  .offer-ba-example:hover { text-decoration: underline; }
 
   .offer-value-note {
     font-size: 13px; line-height: 1.5; color: var(--txt); margin: 12px 0 0;

@@ -7,11 +7,6 @@ const SITE = '';
 export interface Related { title: string; href: string; kind: 'case' | 'article' }
 export interface MethodDay { n: number; title: string; body: string }
 export interface Faq { q: string; a: string }
-export interface BeforeAfterRow { k: string; before: string; after: string; better: 'lower' | 'higher' }
-export interface BeforeAfter {
-  title: string; intro: string; beforeLabel: string; afterLabel: string;
-  rows: BeforeAfterRow[]; note: string; exampleHref?: string; exampleLabel?: string;
-}
 
 export interface Offer {
   slug: string;
@@ -34,7 +29,6 @@ export interface Offer {
   stats?: { k: string; v: string }[];   // prova di performance/green (numeri reali misurati)
   statsNote?: string;
   valueNote?: string;                    // micro-copy sotto il prezzo: perché vale (giustifica il costo)
-  beforeAfter?: BeforeAfter;             // esempio prima/dopo con numeri reali misurati
   variantB?: { forWho?: string };        // A/B: contenuto alternativo servito con ?v=b
 }
 
@@ -69,18 +63,6 @@ const OFFERS_IT: Offer[] = [
     ],
     statsNote: 'Numeri reali, misurati su siti nostri e dei clienti (es. cornertable.agency, pianeta.studio). Media web: ~2,3 MB e ~0,36 g CO₂. CO₂ stimata con metodo Green Web Foundation (Sustainable Web Design), via GreenMeter.',
     valueNote: 'Un sito che non rifai tra un anno: veloce, a basso impatto, su standard verificabili. La media web pesa ~2,3 MB e va rifatta spesso.',
-    beforeAfter: {
-      title: 'Prima / dopo — sul nostro stesso sito',
-      intro: 'Non è teoria: l’abbiamo applicato a pianeta.studio. Stesso sito, prima e dopo l’ottimizzazione.',
-      beforeLabel: 'Prima', afterLabel: 'Dopo',
-      rows: [
-        { k: 'Lighthouse', before: '74/100', after: '94/100', better: 'higher' },
-        { k: 'Peso pagina', before: '4,4 MB', after: '0,67 MB', better: 'lower' },
-        { k: 'Video hero', before: '8,5 MB', after: '1,7 MB', better: 'lower' },
-      ],
-      note: 'Misure reali (Lighthouse + GreenMeter, metodo Green Web Foundation).',
-      exampleHref: 'https://cornertable.agency', exampleLabel: 'Esempio cliente live: cornertable.agency — 95/100, 1,4 MB →',
-    },
     method: [
       { n: 1, title: 'Brief & contenuti', body: 'Obiettivi, struttura, contenuti. Capiamo cosa ti serve davvero — e cosa togliere: meno peso, meno CO₂.' },
       { n: 2, title: 'Design sul DS Hederae', body: 'Disegniamo sul nostro design system: coerente, accessibile, veloce per costruzione. Niente template generici.' },
@@ -239,18 +221,6 @@ const OFFERS_EN: Offer[] = [
     ],
     statsNote: 'Real numbers, measured on our own and client sites (e.g. cornertable.agency, pianeta.studio). Web average: ~2.3 MB and ~0.36 g CO₂. CO₂ estimated with the Green Web Foundation method (Sustainable Web Design), via GreenMeter.',
     valueNote: 'A site you won’t rebuild in a year: fast, low-impact, on verifiable standards. The web average weighs ~2.3 MB and gets rebuilt often.',
-    beforeAfter: {
-      title: 'Before / after — on our own site',
-      intro: 'Not theory: we applied it to pianeta.studio. Same site, before and after optimization.',
-      beforeLabel: 'Before', afterLabel: 'After',
-      rows: [
-        { k: 'Lighthouse', before: '74/100', after: '94/100', better: 'higher' },
-        { k: 'Page weight', before: '4.4 MB', after: '0.67 MB', better: 'lower' },
-        { k: 'Hero video', before: '8.5 MB', after: '1.7 MB', better: 'lower' },
-      ],
-      note: 'Real measurements (Lighthouse + GreenMeter, Green Web Foundation method).',
-      exampleHref: 'https://cornertable.agency', exampleLabel: 'Live client example: cornertable.agency — 95/100, 1.4 MB →',
-    },
     method: [
       { n: 1, title: 'Brief & content', body: 'Goals, structure, content. We figure out what you actually need — and what to cut: less weight, less CO₂.' },
       { n: 2, title: 'Design on Hederae DS', body: 'We design on our design system: consistent, accessible, fast by construction. No generic templates.' },
