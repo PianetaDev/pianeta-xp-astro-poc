@@ -1,10 +1,13 @@
 ---
 import { type Offer } from '../../data/offers';
+import { getShowcase } from '../../data/showcase';
 import { HIRE_STRINGS, type Locale } from './strings';
 
 interface Props { offer: Offer; locale?: Locale; }
 const { offer, locale = 'it' } = Astro.props;
 const S = HIRE_STRINGS[locale];
+const { works: WORKS, foundations: FOUNDATIONS } = getShowcase(locale);
+const worksTitle = locale === 'en' ? 'Selected work' : 'Lavori selezionati';
 
 const accents: Record<string, string> = { green: '#1f7a3a', orange: '#FF6B33', dark: '#5a4fcf', blue: '#1f5b8f' };
 const accent = accents[offer.accent];
@@ -120,6 +123,29 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
         )}
       </aside>
     </div>
+
+    <section class="offer-proof">
+      <div class="offer-proofband" aria-label={S.proofBand}>
+        <span class="offer-proofband-t">{S.proofBand}</span>
+        <span class="offer-proofband-names">{FOUNDATIONS.map((f) => f.name).join(' · ')}</span>
+      </div>
+
+      <div class="offer-works-head">
+        <h2 class="offer-works-title">{worksTitle}</h2>
+        <a href={S.workAll} class="offer-works-all">{S.clientsLabel} →</a>
+      </div>
+      <div class="offer-works-scroll">
+        {WORKS.map((w) => (
+          <a href={w.href} class="offer-work" target="_blank" rel="noopener">
+            <span class="offer-work-cover" style={`background-image:url('${w.cover}')`}></span>
+            <span class="offer-work-meta">
+              <span class="offer-work-client">{w.client}</span>
+              <span class="offer-work-name">{w.title}</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
   </main>
 </div>
 
@@ -187,6 +213,39 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
   .offer-after-t { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--mut); margin: 0 0 8px; }
   .offer-after-list { margin: 0; padding-left: 18px; display: grid; gap: 5px; }
   .offer-after-list li { font-size: 13px; line-height: 1.45; }
+
+  /* Banda prova + lavori — la pagina offerta si regge da sola, come la main */
+  .offer-proof { margin-top: 8px; padding-top: 40px; border-top: 1px solid var(--line); }
+  .offer-proofband {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px 20px; margin-bottom: 36px;
+  }
+  .offer-proofband-t { font-size: 13px; font-weight: 700; }
+  .offer-proofband-names { font-size: 13px; color: var(--mut); }
+
+  .offer-works-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+  .offer-works-title { font-size: clamp(20px, 3vw, 26px); letter-spacing: -0.01em; margin: 0; }
+  .offer-works-all { font-size: 13px; font-weight: 600; color: var(--acc); text-decoration: none; white-space: nowrap; }
+  .offer-works-all:hover { text-decoration: underline; }
+
+  .offer-works-scroll {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 260px; gap: 16px;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 -24px; padding: 4px 24px 16px;
+    scrollbar-width: thin;
+  }
+  .offer-work { scroll-snap-align: start; text-decoration: none; color: inherit; display: block; }
+  .offer-work-cover {
+    display: block; aspect-ratio: 16 / 10; border-radius: 14px;
+    border: 1px solid var(--line); background-size: cover; background-position: center;
+    transition: transform 180ms ease;
+  }
+  .offer-work:hover .offer-work-cover { transform: translateY(-3px); }
+  .offer-work-meta { display: block; padding: 12px 2px 0; }
+  .offer-work-client { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--mut); }
+  .offer-work-name { display: block; font-size: 15px; font-weight: 600; margin-top: 3px; }
+  @media (min-width: 860px) { .offer-works-scroll { margin: 0; padding: 4px 0 16px; } }
 </style>
 
 <script is:inline>
