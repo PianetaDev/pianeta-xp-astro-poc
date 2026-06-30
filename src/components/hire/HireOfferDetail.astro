@@ -36,6 +36,18 @@ const hasMethod = sprintDays.length > 0;
           {offer.deliverables.map((d) => <li><span style={`color:${accent}`}>✓</span> {d}</li>)}
         </ul>
 
+        {offer.stats && offer.stats.length > 0 && (
+          <div class="offer-stats">
+            <h2 class="offer-h2">{locale === 'en' ? 'Measured performance & impact' : 'Performance e impatto, misurati'}</h2>
+            <div class="offer-stats-grid">
+              {offer.stats.map((s) => (
+                <div class="offer-stat"><div class="offer-stat-v" style={`color:${accent}`}>{s.v}</div><div class="offer-stat-k">{s.k}</div></div>
+              ))}
+            </div>
+            {offer.statsNote && <p class="offer-stats-note">{offer.statsNote}</p>}
+          </div>
+        )}
+
         {hasMethod && (
           <div class="sprint-method">
             <h2 class="offer-h2">{S.comeFunziona}</h2>
@@ -122,6 +134,14 @@ const hasMethod = sprintDays.length > 0;
   .offer-h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin: 0 0 14px; }
   .offer-list { list-style: none; display: grid; gap: 12px; font-size: 16px; padding: 0; }
   .offer-list li { display: flex; gap: 10px; }
+
+  .offer-stats { margin-top: 38px; }
+  .offer-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (min-width: 560px) { .offer-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  .offer-stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 14px; text-align: center; }
+  .offer-stat-v { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+  .offer-stat-k { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--mut); margin-top: 4px; }
+  .offer-stats-note { font-size: 12px; color: var(--mut); line-height: 1.5; margin: 12px 0 0; }
 
   .sprint-method { margin-top: 38px; }
   .sprint-days { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0 0 4px; }

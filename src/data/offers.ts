@@ -25,6 +25,8 @@ export interface Offer {
   related: Related[];
   method?: MethodDay[];   // es. i 4 giorni dello Sprint
   faqs?: Faq[];
+  stats?: { k: string; v: string }[];   // prova di performance/green (numeri reali misurati)
+  statsNote?: string;
 }
 
 const OFFERS_IT: Offer[] = [
@@ -50,6 +52,13 @@ const OFFERS_IT: Offer[] = [
       { title: 'BC3 — Rebranding', href: `${SITE}/work/bc3-rebranding`, kind: 'case' },
       { title: 'ARIES — AI per ambiente e sostenibilità', href: `${SITE}/work/aries-towards-smarter-sustainable-world`, kind: 'case' },
     ],
+    stats: [
+      { k: 'Lighthouse', v: '94–95/100' },
+      { k: 'LCP', v: '~2,0s' },
+      { k: 'Peso pagina', v: '0,7–1,4 MB' },
+      { k: 'CO₂ / visita', v: '~0,1–0,2 g' },
+    ],
+    statsNote: 'Numeri reali, misurati su siti nostri e dei clienti (es. cornertable.agency, pianeta.studio). Media web: ~2,3 MB e ~0,36 g CO₂. CO₂ stimata con metodo Green Web Foundation (Sustainable Web Design), via GreenMeter.',
   },
   {
     slug: 'pianeta-sprint',
@@ -159,6 +168,13 @@ const OFFERS_EN: Offer[] = [
       { title: 'BC3 — Rebranding', href: `${SITE_EN}/work/bc3-rebranding`, kind: 'case' },
       { title: 'ARIES — AI for environment & sustainability', href: `${SITE_EN}/work/aries-towards-smarter-sustainable-world`, kind: 'case' },
     ],
+    stats: [
+      { k: 'Lighthouse', v: '94–95/100' },
+      { k: 'LCP', v: '~2.0s' },
+      { k: 'Page weight', v: '0.7–1.4 MB' },
+      { k: 'CO₂ / visit', v: '~0.1–0.2 g' },
+    ],
+    statsNote: 'Real numbers, measured on our own and client sites (e.g. cornertable.agency, pianeta.studio). Web average: ~2.3 MB and ~0.36 g CO₂. CO₂ estimated with the Green Web Foundation method (Sustainable Web Design), via GreenMeter.',
   },
   {
     slug: 'pianeta-sprint',
