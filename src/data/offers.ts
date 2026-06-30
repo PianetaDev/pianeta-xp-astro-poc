@@ -27,6 +27,7 @@ export interface Offer {
   faqs?: Faq[];
   stats?: { k: string; v: string }[];   // prova di performance/green (numeri reali misurati)
   statsNote?: string;
+  variantB?: { forWho?: string };        // A/B: contenuto alternativo servito con ?v=b
 }
 
 const OFFERS_IT: Offer[] = [
@@ -59,6 +60,7 @@ const OFFERS_IT: Offer[] = [
       { k: 'CO₂ / visita', v: '~0,1–0,2 g' },
     ],
     statsNote: 'Numeri reali, misurati su siti nostri e dei clienti (es. cornertable.agency, pianeta.studio). Media web: ~2,3 MB e ~0,36 g CO₂. CO₂ stimata con metodo Green Web Foundation (Sustainable Web Design), via GreenMeter.',
+    variantB: { forWho: 'Per chi vuole il sito più leggero e a basso impatto del proprio settore: CO₂ misurata, performance verificabili, zero peso inutile.' },
   },
   {
     slug: 'pianeta-sprint',
@@ -175,6 +177,7 @@ const OFFERS_EN: Offer[] = [
       { k: 'CO₂ / visit', v: '~0.1–0.2 g' },
     ],
     statsNote: 'Real numbers, measured on our own and client sites (e.g. cornertable.agency, pianeta.studio). Web average: ~2.3 MB and ~0.36 g CO₂. CO₂ estimated with the Green Web Foundation method (Sustainable Web Design), via GreenMeter.',
+    variantB: { forWho: 'For those who want the lightest, lowest-impact site in their field: measured CO₂, verifiable performance, zero wasted weight.' },
   },
   {
     slug: 'pianeta-sprint',

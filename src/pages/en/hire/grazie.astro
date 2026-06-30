@@ -14,4 +14,7 @@ const offer = offerBySlug(Astro.url.searchParams.get('offer') ?? '', 'en');
     <p style="margin-top:28px"><a href="/en/hire" style="color:var(--acc)">← Back to offers</a></p>
   </main>
   </div>
+  <script is:inline>
+    (() => { const o = new URLSearchParams(location.search).get('offer') || ''; (window.dataLayer = window.dataLayer || []).push({ event: 'hire_purchase', offer: o }); })();
+  </script>
 </BaseLayout>

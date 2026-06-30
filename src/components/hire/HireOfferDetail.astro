@@ -19,8 +19,12 @@ const clientsStrip = 'Armani · Prada · La Repubblica · Wired · Plenitude · 
 const sprintDays = offer.method ?? [];
 const sprintFaqs = offer.faqs ?? [];
 const hasMethod = sprintDays.length > 0;
+
+// A/B: ?v=b serve la variante (es. dagli annunci). Default = a. Canonical (BaseLayout) già punta alla base → niente problemi SEO.
+const variant = Astro.url.searchParams.get('v') === 'b' ? 'b' : 'a';
+const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forWho : offer.forWho;
 ---
-<div class="hire-page">
+<div class="hire-page" data-offer={offer.slug} data-variant={variant}>
   <main class="wrap">
     <p style="margin:24px 0 18px"><a href={hirePrefix} style="color:var(--mut);text-decoration:none;font-size:13px">{S.allOffers}</a></p>
 
@@ -28,7 +32,7 @@ const hasMethod = sprintDays.length > 0;
       <article class="offer-article">
         <p class="offer-kicker" style={`color:${accent}`}>{offer.emoji} {S.offerKicker}</p>
         <h1 class="offer-title">{offer.name}</h1>
-        <p class="offer-forwho">{offer.forWho}</p>
+        <p class="offer-forwho">{forWho}</p>
         <p class="offer-detail">{offer.detail}</p>
 
         <h2 class="offer-h2">{S.cosaOttieni}</h2>
@@ -99,13 +103,13 @@ const hasMethod = sprintDays.length > 0;
         <div class="offer-price-note">{isQuote ? recurNote : `${recurNote} · ${S.vatSuffix}`}</div>
         {isQuote ? (
           <>
-            <a href={QUOTE_HREF} class="offer-buy-btn" style={`background:${accent}`}>{offer.quote?.label}</a>
+            <a href={QUOTE_HREF} class="offer-buy-btn quote-cta" style={`background:${accent}`}>{offer.quote?.label}</a>
             <a href={S.booking} class="offer-call-btn">{S.quoteCallAlt}</a>
             <p class="offer-reassure">{S.quoteReassure}</p>
           </>
         ) : (
           <>
-            <button id="buy" data-offer={offer.slug} data-locale={locale} class="offer-buy-btn" style={`background:${accent}`}>{offer.stripe?.label}</button>
+            <button id="buy" data-offer={offer.slug} data-locale={locale} data-variant={variant} class="offer-buy-btn" style={`background:${accent}`}>{offer.stripe?.label}</button>
             <a href={S.booking} class="offer-call-btn">{S.callAlt}</a>
             <p class="offer-reassure" set:html={S.payReassure} />
             <div class="offer-after">
@@ -187,15 +191,25 @@ const hasMethod = sprintDays.length > 0;
 
 <script is:inline>
   (() => {
+    const dl = (o) => { (window.dataLayer = window.dataLayer || []).push(o); };
     const bind = () => {
+      const root = document.querySelector('.hire-page[data-offer]');
+      if (!root || root.dataset.bound) return;
+      root.dataset.bound = '1';
+      const offer = root.dataset.offer, variant = root.dataset.variant || 'a';
+      // conversione 1: vista offerta (con variante A/B)
+      dl({ event: 'hire_offer_view', offer: offer, variant: variant });
+      // conversione 2: intento preventivo (offerte a quote)
+      const q = root.querySelector('.quote-cta');
+      if (q) q.addEventListener('click', () => dl({ event: 'hire_lead_intent', offer: offer, variant: variant }));
+      // conversione 3: checkout (offerte self-serve)
       const btn = document.getElementById('buy');
-      if (!btn || btn.dataset.bound) return;
-      btn.dataset.bound = '1';
-      btn.addEventListener('click', async (e) => {
+      if (btn) btn.addEventListener('click', async (e) => {
         const b = e.currentTarget;
+        dl({ event: 'hire_begin_checkout', offer: b.dataset.offer, variant: variant });
         b.disabled = true; const orig = b.textContent; b.textContent = '…';
         try {
-          const r = await fetch('/api/hire/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offer: b.dataset.offer, locale: b.dataset.locale }) });
+          const r = await fetch('/api/hire/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offer: b.dataset.offer, locale: b.dataset.locale, variant: variant }) });
           const d = await r.json();
           if (d.url) { window.location.href = d.url; } else { b.disabled = false; b.textContent = orig; alert(d.error || 'Error'); }
         } catch { b.disabled = false; b.textContent = orig; }
