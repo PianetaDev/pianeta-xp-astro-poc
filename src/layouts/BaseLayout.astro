@@ -19,7 +19,7 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
-  ogType?: 'work' | 'bulletin' | 'services' | 'lab' | 'team' | 'careers';
+  ogType?: 'work' | 'bulletin' | 'services' | 'lab' | 'team' | 'careers' | 'hire';
   ogSlug?: string;
   chrome?: boolean;
   minimal?: boolean;
@@ -27,13 +27,13 @@ interface Props {
 }
 
 const { title, description = '', ogImage = '/og/work-eclag.png', ogType, ogSlug, chrome = true, minimal = false, hideNewsletter = false } = Astro.props;
+const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/') ? 'en' : 'it';
 const ogImageResolved = ogType && ogSlug
-  ? new URL(`/api/og/${ogType}/${ogSlug}.png`, Astro.site).toString()
-  : ogImage;
+  ? new URL(`/api/og/${ogType}/${ogSlug}.png${ogType === 'hire' && locale === 'en' ? '?l=en' : ''}`, Astro.site).toString()
+  : new URL(ogImage, Astro.site).toString();
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const showIslands = chrome && !minimal;
 const dataSun = isNightInItaly() ? 'night' : 'day';
-const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/') ? 'en' : 'it';
 ---
 <!doctype html>
 <html lang={locale} data-theme="auto" data-sun={dataSun}>

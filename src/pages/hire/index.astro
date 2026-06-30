@@ -4,6 +4,6 @@ import HireLanding from '../../components/hire/HireLanding.astro';
 import { HIRE_STRINGS } from '../../components/hire/strings';
 const S = HIRE_STRINGS.it;
 ---
-<BaseLayout title={S.metaTitle} description={S.metaDesc} hideNewsletter>
+<BaseLayout title={S.metaTitle} description={S.metaDesc} ogType="hire" ogSlug="index" hideNewsletter>
   <HireLanding locale="it" />
 </BaseLayout>

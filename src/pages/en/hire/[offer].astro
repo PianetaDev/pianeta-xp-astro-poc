@@ -5,6 +5,6 @@ import { offerBySlug } from '../../../data/offers';
 const offer = offerBySlug(Astro.params.offer ?? '', 'en');
 if (!offer) return Astro.redirect('/en/hire');
 ---
-<BaseLayout title={`${offer.name} — Pianeta.Studio`} description={offer.tagline} hideNewsletter>
+<BaseLayout title={`${offer.name} — Pianeta.Studio`} description={offer.tagline} ogType="hire" ogSlug={offer.slug} hideNewsletter>
   <HireOfferDetail offer={offer} locale="en" />
 </BaseLayout>
