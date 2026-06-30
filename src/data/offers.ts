@@ -23,7 +23,8 @@ export interface Offer {
   stripe?: { mode: 'payment' | 'subscription'; amount: number; recurring?: 'month'; label: string };
   quote?: { label: string };
   related: Related[];
-  method?: MethodDay[];   // es. i 4 giorni dello Sprint
+  method?: MethodDay[];   // es. i 4 giorni dello Sprint, o le fasi di un progetto
+  methodKind?: 'days' | 'steps';   // 'days' → prefisso G/D (Sprint); 'steps' → solo numero (default)
   faqs?: Faq[];
   stats?: { k: string; v: string }[];   // prova di performance/green (numeri reali misurati)
   statsNote?: string;
@@ -60,6 +61,19 @@ const OFFERS_IT: Offer[] = [
       { k: 'CO₂ / visita', v: '~0,1–0,2 g' },
     ],
     statsNote: 'Numeri reali, misurati su siti nostri e dei clienti (es. cornertable.agency, pianeta.studio). Media web: ~2,3 MB e ~0,36 g CO₂. CO₂ stimata con metodo Green Web Foundation (Sustainable Web Design), via GreenMeter.',
+    method: [
+      { n: 1, title: 'Brief & contenuti', body: 'Obiettivi, struttura, contenuti. Capiamo cosa ti serve davvero — e cosa togliere: meno peso, meno CO₂.' },
+      { n: 2, title: 'Design sul DS Hederae', body: 'Disegniamo sul nostro design system: coerente, accessibile, veloce per costruzione. Niente template generici.' },
+      { n: 3, title: 'Build & carbon budget', body: 'Sviluppiamo mobile-first tenendo un budget di CO₂ per pagina. Ogni asset pesato: zero peso inutile.' },
+      { n: 4, title: 'Misura & go-live', body: 'Misuriamo performance (Lighthouse) e CO₂ (GreenMeter), pubblichiamo. Contenuti e dominio restano tuoi.' },
+    ],
+    faqs: [
+      { q: 'Perché si parte da 2.000€?', a: 'È il punto di partenza per un sito su misura sul nostro design system, veloce e a basso impatto. Per progetti più articolati (molte pagine, e-commerce, piattaforme) si passa al preventivo — vedi Progetto su misura.' },
+      { q: 'Quanto tempo serve?', a: 'In genere poche settimane: dipende dai contenuti e dal numero di pagine. Te lo diciamo con precisione dopo il brief.' },
+      { q: 'I contenuti chi li scrive?', a: 'Possiamo partire dai tuoi o produrli insieme (copy a preventivo o dentro il Team as a Service). In ogni caso i contenuti restano tuoi.' },
+      { q: 'Cosa vuol dire “CO₂ misurata”?', a: 'Misuriamo i grammi di CO₂ per visita con GreenMeter, metodo Green Web Foundation (Sustainable Web Design). Non è una stima a caso: è un numero verificabile, pagina per pagina.' },
+      { q: 'Il dominio resta mio?', a: 'Sì. Contenuti e dominio sono e restano tuoi — nessun vincolo.' },
+    ],
     variantB: { forWho: 'Per chi vuole il sito più leggero e a basso impatto del proprio settore: CO₂ misurata, performance verificabili, zero peso inutile.' },
   },
   {
@@ -85,6 +99,7 @@ const OFFERS_IT: Offer[] = [
       { title: 'Validare una campagna prima di produrla', href: `${SITE}/bulletin/validare-una-campagna-prima-di-produrla`, kind: 'article' },
       { title: 'Lab Neuromarketing', href: `${SITE}/bulletin/lab-neuromarketing`, kind: 'article' },
     ],
+    methodKind: 'days',
     method: [
       { n: 1, title: 'Immersione', body: 'Obiettivi, audience, audit di quello che hai già. Mezza giornata con te, il resto lo lavoriamo noi.' },
       { n: 2, title: 'Direzione', body: 'Concept e messaggi chiave. Una o più direzioni creative, non una sola scommessa.' },
@@ -120,6 +135,18 @@ const OFFERS_IT: Offer[] = [
       { title: 'BC3 — Annual Reports', href: `${SITE}/work/bc3-annual-reports`, kind: 'case' },
       { title: 'ChildFund World Index', href: `${SITE}/work/childfund-world-index`, kind: 'case' },
     ],
+    method: [
+      { n: 1, title: 'Onboarding', body: 'Allineiamo obiettivi, accessi e priorità. Conosci il team dedicato che lavora con te.' },
+      { n: 2, title: 'Ritmo settimanale', body: 'Un meeting a settimana per decidere insieme le priorità del periodo.' },
+      { n: 3, title: 'Consegne il giovedì', body: 'Ogni giovedì ricevi gli avanzamenti. Ritmo prevedibile, niente sorprese.' },
+      { n: 4, title: 'Revisione mensile', body: 'A fine mese rivediamo cosa è stato fatto e ripianifichiamo il successivo.' },
+    ],
+    faqs: [
+      { q: 'Come si contano le ~48h al mese?', a: 'È la capacità mensile del team dedicato. La allochiamo sulle priorità che decidiamo insieme ogni settimana — design, web, copy.' },
+      { q: 'Posso mettere in pausa o disdire?', a: 'Sì, è un abbonamento mensile: nessun vincolo lungo. La maggior parte dei clienti resta perché il ritmo continuo rende.' },
+      { q: 'Cosa include “team”?', a: 'Design, web e copy di Pianeta, coordinati da noi. Per esigenze specifiche attiviamo la rete Satellite di freelance.' },
+      { q: 'E se ho un picco di lavoro?', a: 'Lo gestiamo nelle priorità della settimana; se eccede la capacità mensile lo quotiamo a parte, in trasparenza.' },
+    ],
   },
   {
     slug: 'progetto',
@@ -142,6 +169,18 @@ const OFFERS_IT: Offer[] = [
     related: [
       { title: 'BC3 — Rebranding', href: `${SITE}/work/bc3-rebranding`, kind: 'case' },
       { title: 'ECLAG — Choose to See Them', href: `${SITE}/work/eclag`, kind: 'case' },
+    ],
+    method: [
+      { n: 1, title: 'Call di scoping', body: 'Capiamo insieme scope, obiettivi e vincoli. Senza impegno.' },
+      { n: 2, title: 'Preventivo', body: 'Ti mandiamo un preventivo dettagliato con fasi, tempi e costi. In genere pochi giorni dopo la call.' },
+      { n: 3, title: 'Co-design & validazione', body: 'Costruiamo col nostro metodo: co-design e validazione con neuroscienza, AI e dati — l’umano sempre nel loop.' },
+      { n: 4, title: 'Consegna & supporto', body: 'Consegniamo asset e contenuti, con il supporto necessario per partire. Tutto resta tuo.' },
+    ],
+    faqs: [
+      { q: 'Quanto costa un progetto?', a: 'Dipende dallo scope. Dopo la call di scoping ti mandiamo un preventivo dettagliato, senza impegno.' },
+      { q: 'Che tipo di progetti fate?', a: 'Siti articolati, rebrand completi, campagne, piattaforme e prodotti digitali. Se è più grande di un pacchetto, è un Progetto su misura.' },
+      { q: 'Quanto ci vuole per il preventivo?', a: 'In genere pochi giorni dopo la call di scoping.' },
+      { q: 'Conviene partire con uno Sprint?', a: 'Spesso sì: validare la direzione in 4 giorni (Pianeta Sprint) prima di un progetto grande riduce il rischio e il budget sprecato.' },
     ],
   },
 ];
@@ -177,6 +216,19 @@ const OFFERS_EN: Offer[] = [
       { k: 'CO₂ / visit', v: '~0.1–0.2 g' },
     ],
     statsNote: 'Real numbers, measured on our own and client sites (e.g. cornertable.agency, pianeta.studio). Web average: ~2.3 MB and ~0.36 g CO₂. CO₂ estimated with the Green Web Foundation method (Sustainable Web Design), via GreenMeter.',
+    method: [
+      { n: 1, title: 'Brief & content', body: 'Goals, structure, content. We figure out what you actually need — and what to cut: less weight, less CO₂.' },
+      { n: 2, title: 'Design on Hederae DS', body: 'We design on our design system: consistent, accessible, fast by construction. No generic templates.' },
+      { n: 3, title: 'Build & carbon budget', body: 'We develop mobile-first against a per-page CO₂ budget. Every asset weighed: zero wasted weight.' },
+      { n: 4, title: 'Measure & go-live', body: 'We measure performance (Lighthouse) and CO₂ (GreenMeter), then publish. Your content and domain stay yours.' },
+    ],
+    faqs: [
+      { q: 'Why does it start at €2,000?', a: 'It’s the starting point for a bespoke site on our design system — fast and low-impact. For larger projects (many pages, e-commerce, platforms) we move to a quote — see Bespoke project.' },
+      { q: 'How long does it take?', a: 'Usually a few weeks: it depends on content and number of pages. We give you a precise timeline after the brief.' },
+      { q: 'Who writes the content?', a: 'We can start from yours or produce it together (copy on quote or inside Team as a Service). Either way, the content stays yours.' },
+      { q: 'What does “measured CO₂” mean?', a: 'We measure grams of CO₂ per visit with GreenMeter, using the Green Web Foundation method (Sustainable Web Design). Not a rough guess: a verifiable number, page by page.' },
+      { q: 'Does the domain stay mine?', a: 'Yes. Your content and domain are and remain yours — no constraints.' },
+    ],
     variantB: { forWho: 'For those who want the lightest, lowest-impact site in their field: measured CO₂, verifiable performance, zero wasted weight.' },
   },
   {
@@ -202,6 +254,7 @@ const OFFERS_EN: Offer[] = [
       { title: 'Validate a campaign before producing it', href: `${SITE_EN}/bulletin/validare-una-campagna-prima-di-produrla`, kind: 'article' },
       { title: 'Neuromarketing Lab', href: `${SITE_EN}/bulletin/lab-neuromarketing`, kind: 'article' },
     ],
+    methodKind: 'days',
     method: [
       { n: 1, title: 'Immersion', body: 'Goals, audience, an audit of what you already have. Half a day with you, the rest we work on our own.' },
       { n: 2, title: 'Direction', body: 'Concept and key messages. One or more creative directions — not a single bet.' },
@@ -237,6 +290,18 @@ const OFFERS_EN: Offer[] = [
       { title: 'BC3 — Annual Reports', href: `${SITE_EN}/work/bc3-annual-reports`, kind: 'case' },
       { title: 'ChildFund World Index', href: `${SITE_EN}/work/childfund-world-index`, kind: 'case' },
     ],
+    method: [
+      { n: 1, title: 'Onboarding', body: 'We align on goals, access and priorities. You meet the dedicated team that works with you.' },
+      { n: 2, title: 'Weekly rhythm', body: 'One meeting a week to decide the period’s priorities together.' },
+      { n: 3, title: 'Thursday deliveries', body: 'Every Thursday you get the progress. Predictable rhythm, no surprises.' },
+      { n: 4, title: 'Monthly review', body: 'At month end we review what got done and replan the next one.' },
+    ],
+    faqs: [
+      { q: 'How are the ~48h/month counted?', a: 'It’s the dedicated team’s monthly capacity. We allocate it to the priorities we decide together each week — design, web, copy.' },
+      { q: 'Can I pause or cancel?', a: 'Yes, it’s a monthly subscription: no long commitment. Most clients stay because the steady rhythm pays off.' },
+      { q: 'What does “team” include?', a: 'Pianeta’s design, web and copy, coordinated by us. For specific needs we activate our Satellite freelance network.' },
+      { q: 'What if I have a workload spike?', a: 'We handle it within the week’s priorities; if it exceeds the monthly capacity we quote it separately, transparently.' },
+    ],
   },
   {
     slug: 'progetto',
@@ -259,6 +324,18 @@ const OFFERS_EN: Offer[] = [
     related: [
       { title: 'BC3 — Rebranding', href: `${SITE_EN}/work/bc3-rebranding`, kind: 'case' },
       { title: 'ECLAG — Choose to See Them', href: `${SITE_EN}/work/eclag`, kind: 'case' },
+    ],
+    method: [
+      { n: 1, title: 'Scoping call', body: 'We figure out scope, goals and constraints together. No commitment.' },
+      { n: 2, title: 'Quote', body: 'We send you a detailed quote with phases, timing and costs. Usually a few days after the call.' },
+      { n: 3, title: 'Co-design & validation', body: 'We build with our method: co-design and validation with neuroscience, AI and data — a human always in the loop.' },
+      { n: 4, title: 'Delivery & support', body: 'We hand over assets and content, with the support you need to launch. Everything stays yours.' },
+    ],
+    faqs: [
+      { q: 'How much does a project cost?', a: 'It depends on scope. After the scoping call we send you a detailed quote, no commitment.' },
+      { q: 'What kind of projects do you do?', a: 'Complex sites, full rebrands, campaigns, platforms and digital products. If it’s bigger than a package, it’s a Bespoke project.' },
+      { q: 'How long for the quote?', a: 'Usually a few days after the scoping call.' },
+      { q: 'Should I start with a Sprint?', a: 'Often yes: validating the direction in 4 days (Pianeta Sprint) before a big project cuts risk and wasted budget.' },
     ],
   },
 ];

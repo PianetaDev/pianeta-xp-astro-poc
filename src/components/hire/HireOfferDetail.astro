@@ -22,6 +22,7 @@ const clientsStrip = 'Armani · Prada · La Repubblica · Wired · Plenitude · 
 const sprintDays = offer.method ?? [];
 const sprintFaqs = offer.faqs ?? [];
 const hasMethod = sprintDays.length > 0;
+const isDays = offer.methodKind === 'days';
 
 // A/B: ?v=b serve la variante (es. dagli annunci). Default = a. Canonical (BaseLayout) già punta alla base → niente problemi SEO.
 const variant = Astro.url.searchParams.get('v') === 'b' ? 'b' : 'a';
@@ -61,7 +62,7 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
             <ol class="sprint-days">
               {sprintDays.map((d) => (
                 <li>
-                  <div class="sprint-day-n" style={`color:${accent}`}>{dayPrefix}{d.n}</div>
+                  <div class="sprint-day-n" style={`color:${accent}`}>{isDays ? dayPrefix : ''}{d.n}</div>
                   <div>
                     <div class="sprint-day-t">{d.title}</div>
                     <div class="sprint-day-b">{d.body}</div>
@@ -69,7 +70,12 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
                 </li>
               ))}
             </ol>
-            <h2 class="offer-h2" style="margin-top:32px">{S.faqTitle}</h2>
+          </div>
+        )}
+
+        {sprintFaqs.length > 0 && (
+          <div class="sprint-faqs-wrap">
+            <h2 class="offer-h2">{S.faqTitle}</h2>
             <div class="sprint-faqs">
               {sprintFaqs.map((f) => (
                 <div>
@@ -178,6 +184,7 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
   .offer-stats-note { font-size: 12px; color: var(--mut); line-height: 1.5; margin: 12px 0 0; }
 
   .sprint-method { margin-top: 38px; }
+  .sprint-faqs-wrap { margin-top: 38px; }
   .sprint-days { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0 0 4px; }
   .sprint-days li { display: flex; gap: 16px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
   .sprint-day-n { font-size: 22px; font-weight: 800; min-width: 40px; }
