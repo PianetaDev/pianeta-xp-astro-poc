@@ -11,6 +11,8 @@ export const POST: APIRoute = async ({ request, url }) => {
   try { body = await request.json(); } catch { /* empty */ }
   const slug = body.offer ?? url.searchParams.get('offer');
   const locale = (body.locale ?? url.searchParams.get('locale')) === 'en' ? 'en' : 'it';
+  const gaClientId = typeof body.gaClientId === 'string' ? body.gaClientId.slice(0, 64) : '';
+  const gclid = typeof body.gclid === 'string' ? body.gclid.slice(0, 200) : '';
   const base = locale === 'en' ? '/en/hire' : '/hire';
   const offer = slug ? offerBySlug(slug, locale) : undefined;
   if (!offer) return json({ error: 'offerta sconosciuta' }, 400);
@@ -37,7 +39,7 @@ export const POST: APIRoute = async ({ request, url }) => {
       billing_address_collection: 'required',
       success_url: `${url.origin}${base}/grazie?offer=${offer.slug}&sid={CHECKOUT_SESSION_ID}`,
       cancel_url: `${url.origin}${base}/${offer.slug}`,
-      metadata: { source: 'hire', offer: offer.slug },
+      metadata: { source: 'hire', offer: offer.slug, ga_client_id: gaClientId, gclid, amount: String(offer.stripe.amount) },
     });
     return json({ ok: true, url: session.url });
   } catch (e: any) {

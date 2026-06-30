@@ -325,12 +325,14 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
 <script is:inline>
   (() => {
     const ck = (n) => (document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)') || [])[2] || '';
+    // client_id GA4 dal cookie _ga (GA1.1.<id>.<ts> → "<id>.<ts>") per attribuire la conversione lato server
+    const gaCid = () => { const p = (ck('_ga') || '').split('.'); return p.length >= 4 ? p[p.length - 2] + '.' + p[p.length - 1] : ''; };
     // cattura gclid (auto-tagging Google Ads) → cookie 90gg, per attribuire la conversione alla campagna
     const g = new URLSearchParams(location.search).get('gclid');
     if (g) document.cookie = 'gclid=' + encodeURIComponent(g) + ';max-age=7776000;path=/';
     const send = (event, offer, variant) => {
       (window.dataLayer = window.dataLayer || []).push({ event, offer, variant });
-      const body = JSON.stringify({ event, offer, variant, gclid: decodeURIComponent(ck('gclid') || ''), page: location.pathname });
+      const body = JSON.stringify({ event, offer, variant, gclid: decodeURIComponent(ck('gclid') || ''), gaClientId: gaCid(), page: location.pathname });
       try {
         if (navigator.sendBeacon) navigator.sendBeacon('/api/track', new Blob([body], { type: 'application/json' }));
         else fetch('/api/track', { method: 'POST', headers: { 'content-type': 'application/json' }, body, keepalive: true });
@@ -350,7 +352,7 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
         send('hire_begin_checkout', b.dataset.offer, variant);
         b.disabled = true; const orig = b.textContent; b.textContent = '…';
         try {
-          const r = await fetch('/api/hire/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offer: b.dataset.offer, locale: b.dataset.locale, variant: variant }) });
+          const r = await fetch('/api/hire/checkout', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ offer: b.dataset.offer, locale: b.dataset.locale, variant: variant, gaClientId: gaCid(), gclid: decodeURIComponent(ck('gclid') || '') }) });
           const d = await r.json();
           if (d.url) { window.location.href = d.url; } else { b.disabled = false; b.textContent = orig; alert(d.error || 'Error'); }
         } catch { b.disabled = false; b.textContent = orig; }

@@ -4,6 +4,7 @@ import { Resend } from 'resend';
 import { getStripe } from '@/lib/server/stripe';
 import { supabaseService } from '@/lib/server/supabase';
 import { renderSubscriptionEmail } from '@/lib/server/hire-us-email';
+import { ga4Send } from '@/lib/server/ga4';
 import { env, SITE_URL } from '@/lib/server/env';
 
 export const prerender = false;
@@ -106,6 +107,21 @@ async function handleHireOrder(session: Stripe.Checkout.Session) {
       payment_status: session.payment_status,
     },
   });
+
+  // Conversione lato server → GA4 (affidabile: scatta a pagamento confermato, non dal browser).
+  const gaClientId = session.metadata?.ga_client_id;
+  if (gaClientId) {
+    const offerSlug = session.metadata?.offer ?? 'offerta';
+    await ga4Send(gaClientId, [{
+      name: 'purchase',
+      params: {
+        transaction_id: session.id,
+        currency: (session.currency ?? 'eur').toUpperCase(),
+        value: (session.amount_total ?? 0) / 100,
+        items: [{ item_id: offerSlug, item_name: offerSlug, quantity: 1 }],
+      },
+    }]);
+  }
 
   const resend = new Resend(env('RESEND_API_KEY'));
   await resend.emails.send({
