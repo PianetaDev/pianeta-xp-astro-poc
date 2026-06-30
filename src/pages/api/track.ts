@@ -9,7 +9,7 @@ export const POST: APIRoute = async ({ request }) => {
   let b: any = {};
   try { b = await request.json(); } catch { /* empty */ }
   const event = String(b.event || '').slice(0, 60);
-  if (!event) return new Response('ok', { status: 204 });
+  if (!event) return new Response(null, { status: 204 });
   try {
     await supabaseService().from('engine_conversions').insert({
       event,
@@ -20,5 +20,5 @@ export const POST: APIRoute = async ({ request }) => {
       meta: b.meta && typeof b.meta === 'object' ? b.meta : {},
     });
   } catch (e) { /* tabella mancante o supabase off → non bloccare */ }
-  return new Response('ok', { status: 204 });
+  return new Response(null, { status: 204 });
 };
