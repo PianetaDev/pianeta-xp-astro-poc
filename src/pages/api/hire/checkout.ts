@@ -35,7 +35,7 @@ export const POST: APIRoute = async ({ request, url }) => {
       automatic_tax: { enabled: true },
       tax_id_collection: { enabled: true },
       billing_address_collection: 'required',
-      success_url: `${url.origin}${base}/grazie?offer=${offer.slug}`,
+      success_url: `${url.origin}${base}/grazie?offer=${offer.slug}&sid={CHECKOUT_SESSION_ID}`,
       cancel_url: `${url.origin}${base}/${offer.slug}`,
       metadata: { source: 'hire', offer: offer.slug },
     });
