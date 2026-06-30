@@ -71,12 +71,13 @@ const dataSun = isNightInItaly() ? 'night' : 'day';
       })();
     </script>
 
-    <!-- Google tag (gtag.js) — account Google Ads AW-16699800788 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16699800788"></script>
+    <!-- Google tag (gtag.js) — GA4 G-T6BP1GCG7P + Google Ads AW-16699800788 (stesso loader) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T6BP1GCG7P"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
       gtag('js', new Date());
+      gtag('config', 'G-T6BP1GCG7P');
       gtag('config', 'AW-16699800788');
     </script>
     <!-- Fine Google tag -->
