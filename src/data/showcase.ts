@@ -1,6 +1,16 @@
 // Contenuti curati per la superficie hire (selezione, non duplica il sito). Href/cover relativi.
 const SITE = '';
 
+// Siti live che abbiamo costruito — prova per l'offerta Sito Green (card → sito live, no overlay).
+export interface BuiltSite { name: string; url: string; cover: string; note: string }
+export const BUILT_SITES: BuiltSite[] = [
+  { name: 'Cornertable', url: 'https://cornertable.agency', cover: `${SITE}/og/built-cornertable.webp`, note: 'Comunicazione & PR' },
+  { name: 'Apothéke Alimentare', url: 'https://www.apothekealimentare.it/coming-soon', cover: `${SITE}/og/built-apotheke.webp`, note: 'Boutique pantry · Puglia' },
+  { name: 'ARIES', url: 'https://aries.integratedmodelling.org', cover: `${SITE}/og/built-aries-platform.webp`, note: 'AI for Environment & Sustainability' },
+  { name: 'Disrules', url: 'https://www.disrules.com', cover: `${SITE}/og/built-disrules.webp`, note: 'Video & media production' },
+  { name: 'Sant’Egidio', url: 'https://www.santegidio.org', cover: `${SITE}/og/built-santegidio.webp`, note: 'Comunità di Sant’Egidio' },
+];
+
 export interface Work { title: string; client: string; cover: string; href: string; web?: boolean }
 export const WORKS: Work[] = [
   { title: 'Choose to See Them', client: 'ECLAG', cover: `${SITE}/og/work-eclag.png`, href: `${SITE}/work/eclag` },

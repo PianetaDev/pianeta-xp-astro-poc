@@ -1,6 +1,6 @@
 ---
 import { type Offer } from '../../data/offers';
-import { getShowcase } from '../../data/showcase';
+import { getShowcase, BUILT_SITES } from '../../data/showcase';
 import { HIRE_STRINGS, type Locale } from './strings';
 
 interface Props { offer: Offer; locale?: Locale; }
@@ -8,7 +8,11 @@ const { offer, locale = 'it' } = Astro.props;
 const S = HIRE_STRINGS[locale];
 const { works: WORKS, foundations: FOUNDATIONS } = getShowcase(locale);
 const workPrefix = locale === 'en' ? '/en/work' : '/work';
-const worksTitle = locale === 'en' ? 'Selected work' : 'Lavori selezionati';
+// offerta web (Sito Green) → mostra i siti live costruiti; le altre → portfolio con overlay
+const isWebOffer = offer.slug === 'sito-green';
+const worksTitle = isWebOffer
+  ? (locale === 'en' ? 'Sites we’ve built' : 'Siti che abbiamo costruito')
+  : (locale === 'en' ? 'Selected work' : 'Lavori selezionati');
 // stesso overlay ricco della landing /hire: card .work-open → pannello dx con prev/next
 const cfg = {
   locale, workPrefix,
@@ -146,16 +150,27 @@ const forWho = (variant === 'b' && offer.variantB?.forWho) ? offer.variantB.forW
 
       <div class="offer-works-head">
         <h2 class="offer-works-title">{worksTitle}</h2>
-        <a href={S.workAll} class="offer-works-all">{S.worksAll} →</a>
+        {!isWebOffer && <a href={S.workAll} class="offer-works-all">{S.worksAll} →</a>}
       </div>
-      <div class="works-scroll">
-        {WORKS.map((w) => (
-          <a href={w.href} class="work-card work-open" data-work={w.href.split('/work/')[1]}>
-            <div class="work-cover" style={`background-image:url('${w.cover}')`}></div>
-            <div class="work-meta"><strong>{w.title}</strong><span>{w.client}</span></div>
-          </a>
-        ))}
-      </div>
+      {isWebOffer ? (
+        <div class="works-scroll">
+          {BUILT_SITES.map((s) => (
+            <a href={s.url} target="_blank" rel="noopener" class="work-card">
+              <div class="work-cover" style={`background-image:url('${s.cover}')`}></div>
+              <div class="work-meta"><strong>{s.name} ↗</strong><span>{s.note}</span></div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="works-scroll">
+          {WORKS.map((w) => (
+            <a href={w.href} class="work-card work-open" data-work={w.href.split('/work/')[1]}>
+              <div class="work-cover" style={`background-image:url('${w.cover}')`}></div>
+              <div class="work-meta"><strong>{w.title}</strong><span>{w.client}</span></div>
+            </a>
+          ))}
+        </div>
+      )}
     </section>
   </main>
 
