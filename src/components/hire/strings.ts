@@ -76,8 +76,8 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     fondTitle: 'Fondazioni, ONG, enti, ricerca?',
     fondText: 'Partecipiamo e vinciamo gare e bandi con istituzioni mission-driven. Se hai una gara o un bando, ti aiutiamo a vincerlo.',
     fondCta: 'Il percorso per fondazioni ed enti →', fondHref: '/hire/fondazioni',
-    platTitle: 'Cerchiamo aziende da innovare',
-    platText: 'Selezioniamo processi B2B e B2C da trasformare in piattaforme: dati integrati e AI automation. Casi: Luxottica, Morsy, ArtPay.',
+    platTitle: 'Dal processo alla piattaforma',
+    platText: 'Cerchiamo aziende da innovare: selezioniamo processi B2B e B2C da trasformare in piattaforme, dati integrati e AI automation. Casi: Luxottica, Morsy, ArtPay.',
     platCta: 'Candida il tuo processo →', platHref: '/hire/piattaforme',
     riskLine: 'Performance e CO₂ misurate · contenuti e dominio tuoi · checkout sicuro con Stripe · nessun impegno per parlare con Alba',
     afterTitle: 'Cosa succede dopo l’acquisto',
@@ -133,8 +133,8 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     fondTitle: 'Foundations, NGOs, institutions, research?',
     fondText: 'We take part in — and win — public tenders and grants with mission-driven institutions. Got a tender or a grant? We help you win it.',
     fondCta: 'The track for foundations & institutions →', fondHref: '/en/hire/fondazioni',
-    platTitle: 'Looking for companies to innovate',
-    platText: 'We select B2B and B2C processes to turn into platforms: integrated data and AI automation. Cases: Luxottica, Morsy, ArtPay.',
+    platTitle: 'From process to platform',
+    platText: 'Looking for companies to innovate: we select B2B and B2C processes to turn into platforms, integrated data and AI automation. Cases: Luxottica, Morsy, ArtPay.',
     platCta: 'Apply with your process →', platHref: '/en/hire/piattaforme',
     riskLine: 'Measured performance & CO₂ · your content and domain · secure Stripe checkout · no commitment to talk to Alba',
     afterTitle: 'What happens after you buy',
@@ -227,11 +227,11 @@ export interface PlatStrings {
 }
 export const PLAT_STRINGS: Record<Locale, PlatStrings> = {
   it: {
-    metaTitle: 'Cerchiamo aziende da innovare — Piattaforme e AI automation · Pianeta.Studio',
-    metaDesc: 'Selezioniamo processi B2B e B2C da trasformare in piattaforme: dati integrati e AI automation. Candida il tuo processo.',
+    metaTitle: 'Dal processo alla piattaforma: dati integrati e AI automation — Pianeta.Studio',
+    metaDesc: 'Cerchiamo aziende da innovare: selezioniamo processi B2B e B2C da trasformare in piattaforme. Candida il tuo processo.',
     eyebrow: 'Piattaforme informative e AI automation',
-    h1: 'Cerchiamo aziende da innovare: dal processo alla piattaforma',
-    deck: 'Selezioniamo un numero limitato di processi B2B e B2C da trasformare in piattaforme: dati integrati e AI automation che elimina il lavoro ripetitivo. Se il tuo processo oggi vive tra fogli, email e passaggi manuali, è un buon candidato.',
+    h1: 'Dal processo alla piattaforma: dati integrati e AI automation',
+    deck: 'Cerchiamo aziende da innovare. Selezioniamo un numero limitato di processi B2B e B2C da trasformare in piattaforme: dati integrati e AI automation che elimina il lavoro ripetitivo. Se il tuo processo oggi vive tra fogli, email e passaggi manuali, è un buon candidato.',
     methodTitle: 'Il metodo',
     method: [
       { n: '01', t: 'Ricerca', d: 'Capiamo il processo reale: attori, obiettivi, punti di attrito.' },
@@ -252,11 +252,11 @@ export const PLAT_STRINGS: Record<Locale, PlatStrings> = {
     back: '← Tutte le offerte', backHref: '/hire',
   },
   en: {
-    metaTitle: 'Looking for companies to innovate — Platforms & AI automation · Pianeta.Studio',
-    metaDesc: 'We select B2B and B2C processes to turn into platforms: integrated data and AI automation. Apply with your process.',
+    metaTitle: 'From process to platform: integrated data and AI automation — Pianeta.Studio',
+    metaDesc: 'Looking for companies to innovate: we select B2B and B2C processes to turn into platforms. Apply with your process.',
     eyebrow: 'Information platforms & AI automation',
-    h1: 'Looking for companies to innovate: from process to platform',
-    deck: 'We select a limited number of B2B and B2C processes to turn into platforms: integrated data and AI automation that removes repetitive work. If your process lives across spreadsheets, emails and manual steps, it’s a good candidate.',
+    h1: 'From process to platform: integrated data and AI automation',
+    deck: 'Looking for companies to innovate. We select a limited number of B2B and B2C processes to turn into platforms: integrated data and AI automation that removes repetitive work. If your process lives across spreadsheets, emails and manual steps, it’s a good candidate.',
     methodTitle: 'The method',
     method: [
       { n: '01', t: 'Research', d: 'We understand the real process: actors, goals, friction points.' },

@@ -24,8 +24,8 @@ const HIRE_PAGES: Record<string, { it: { eyebrow: string; title: string; deck: s
     en: { eyebrow: 'THE METHOD', title: 'Identify, validate, measure, iterate', deck: 'The funnel we sell, applied to ourselves first.' },
   },
   piattaforme: {
-    it: { eyebrow: 'PIATTAFORME E AI AUTOMATION', title: 'Cerchiamo aziende da innovare', deck: 'Selezioniamo processi B2B e B2C da trasformare in piattaforme. Luxottica · Morsy · ArtPay. Candida il tuo processo.' },
-    en: { eyebrow: 'PLATFORMS & AI AUTOMATION', title: 'Looking for companies to innovate', deck: 'We select B2B and B2C processes to turn into platforms. Luxottica · Morsy · ArtPay. Apply with your process.' },
+    it: { eyebrow: 'PIATTAFORME E AI AUTOMATION', title: 'Dal processo alla piattaforma', deck: 'Cerchiamo aziende da innovare. Luxottica · Morsy · ArtPay. Candida il tuo processo.' },
+    en: { eyebrow: 'PLATFORMS & AI AUTOMATION', title: 'From process to platform', deck: 'Looking for companies to innovate. Luxottica · Morsy · ArtPay. Apply with your process.' },
   },
 };
 
