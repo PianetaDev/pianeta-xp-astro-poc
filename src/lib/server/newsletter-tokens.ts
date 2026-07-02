@@ -27,8 +27,9 @@ export function verifyManageToken(email: string, token: string): boolean {
   } catch { return false; }
 }
 
-export function manageUrl(siteUrl: string, email: string): string {
-  return `${siteUrl}/bulletin/preferenze?email=${encodeURIComponent(email)}&t=${manageToken(email)}`;
+export function manageUrl(siteUrl: string, email: string, locale: 'it' | 'en' = 'it'): string {
+  const prefix = locale === 'en' ? '/en' : '';
+  return `${siteUrl}${prefix}/bulletin/preferenze?email=${encodeURIComponent(email)}&t=${manageToken(email)}`;
 }
 
 export function unsubscribeUrl(siteUrl: string, email: string): string {

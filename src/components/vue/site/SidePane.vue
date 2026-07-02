@@ -45,10 +45,11 @@ async function submitBulletin() {
   if (!email.value || status.value === 'loading') return
   status.value = 'loading'
   try {
+    const locale = route.fullPath === '/en' || route.fullPath.startsWith('/en/') ? 'en' : 'it'
     const res = await fetch('/api/newsletter/subscribe', {
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ email: email.value }),
+      body: new URLSearchParams({ email: email.value, locale }),
     })
     status.value = res.ok ? 'done' : 'error'
   } catch {

@@ -40,10 +40,11 @@ export const POST: APIRoute = async ({ request }) => {
   const email = body.email.toLowerCase().trim();
 
   const { data: current } = await sb.from('newsletter_subscribers')
-    .select('topics').eq('email', email).maybeSingle();
+    .select('topics, locale').eq('email', email).maybeSingle();
   if (!current) return json({ error: 'subscriber not found' }, 404);
 
   const merged = { ...(current.topics || {}), ...(body.topics || {}) };
+  const locale: 'it' | 'en' = current.locale === 'en' ? 'en' : 'it';
 
   const { error } = await sb.from('newsletter_subscribers')
     .update({ topics: merged }).eq('email', email);
@@ -51,7 +52,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     const resend = new Resend(env('RESEND_API_KEY'));
-    const tpl = renderPrefsUpdatedEmail(email, manageUrl(SITE_URL, email), unsubscribeUrl(SITE_URL, email));
+    const tpl = renderPrefsUpdatedEmail(email, manageUrl(SITE_URL, email, locale), unsubscribeUrl(SITE_URL, email));
     await resend.emails.send({
       from: 'Pianeta.Studio <bulletin@pianeta.studio>',
       to: email,

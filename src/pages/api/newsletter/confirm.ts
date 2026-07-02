@@ -15,12 +15,15 @@ export const GET: APIRoute = async ({ url }) => {
   const resend = new Resend(env('RESEND_API_KEY'));
 
   const { data: sub, error } = await sb.from('newsletter_subscribers')
-    .select('id, email, confirmed_at')
+    .select('id, email, confirmed_at, locale')
     .eq('confirm_token', token).maybeSingle();
   if (error || !sub) return new Response('token not found', { status: 404 });
 
+  const locale: 'it' | 'en' = sub.locale === 'en' ? 'en' : 'it';
+  const prefix = locale === 'en' ? '/en' : '';
+
   if (sub.confirmed_at) {
-    return Response.redirect(`${SITE_URL}/bulletin/confermato?already=1&email=${encodeURIComponent(sub.email)}`, 302);
+    return Response.redirect(`${SITE_URL}${prefix}/bulletin/confermato?already=1&email=${encodeURIComponent(sub.email)}`, 302);
   }
 
   let audienceId: string | undefined;
@@ -39,7 +42,7 @@ export const GET: APIRoute = async ({ url }) => {
   }).eq('id', sub.id);
 
   try {
-    const tpl = renderWelcomeEmail(sub.email, manageUrl(SITE_URL, sub.email), unsubscribeUrl(SITE_URL, sub.email));
+    const tpl = renderWelcomeEmail(sub.email, manageUrl(SITE_URL, sub.email, locale), unsubscribeUrl(SITE_URL, sub.email));
     await resend.emails.send({
       from: 'Pianeta.Studio <bulletin@pianeta.studio>',
       to: sub.email,
@@ -49,5 +52,5 @@ export const GET: APIRoute = async ({ url }) => {
     });
   } catch (e) { console.error('Welcome email error', e); }
 
-  return Response.redirect(`${SITE_URL}/bulletin/confermato?email=${encodeURIComponent(sub.email)}`, 302);
+  return Response.redirect(`${SITE_URL}${prefix}/bulletin/confermato?email=${encodeURIComponent(sub.email)}`, 302);
 };

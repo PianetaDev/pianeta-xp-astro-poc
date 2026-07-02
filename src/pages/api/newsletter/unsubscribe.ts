@@ -16,6 +16,11 @@ export const GET: APIRoute = async ({ url }) => {
   const sb = supabaseService();
   const e = email.toLowerCase().trim();
 
+  const { data: sub } = await sb.from('newsletter_subscribers')
+    .select('locale').eq('email', e).maybeSingle();
+  const locale: 'it' | 'en' = sub?.locale === 'en' ? 'en' : 'it';
+  const prefix = locale === 'en' ? '/en' : '';
+
   await sb.from('newsletter_subscribers')
     .update({ unsubscribed_at: new Date().toISOString() })
     .eq('email', e);
@@ -40,5 +45,5 @@ export const GET: APIRoute = async ({ url }) => {
     });
   } catch (err) { console.error('Goodbye email error', err); }
 
-  return Response.redirect(`${SITE_URL}/bulletin/disiscritto?email=${encodeURIComponent(e)}`, 302);
+  return Response.redirect(`${SITE_URL}${prefix}/bulletin/disiscritto?email=${encodeURIComponent(e)}`, 302);
 };
