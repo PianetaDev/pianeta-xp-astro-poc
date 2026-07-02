@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const email = Astro.url.searchParams.get('email') || '';
+const already = Astro.url.searchParams.get('already') === '1';
+---
+<BaseLayout title={already ? 'Already subscribed · Pianeta Bulletin' : 'Subscription confirmed · Pianeta Bulletin'} description="Subscription active.">
+  <div class="px-6 lg:px-10 py-16 md:py-24 max-w-[640px] mx-auto text-center">
+    <p class="text-5xl mb-6">🌱</p>
+    <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">
+      {already ? 'Subscription already active' : 'Subscription confirmed'}
+    </h1>
+    <p class="mt-6 text-lg text-black/70">
+      {already ? (
+        <span>{email && <strong class="text-black">{email}</strong>} is already subscribed. All good.</span>
+      ) : (
+        <span>From today you'll receive Pianeta.Studio's Bulletin{email && ` at `}{email && <strong class="text-black">{email}</strong>}.</span>
+      )}
+    </p>
+    <p class="mt-4 text-sm text-black/55">We sent you a welcome email with the link to your preferences.</p>
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a href="/en/bulletin" class="inline-block bg-black text-white px-5 py-3 rounded-full text-sm font-medium hover:bg-black/85">Read the articles →</a>
+      <a href="/en" class="inline-block border border-black/15 px-5 py-3 rounded-full text-sm font-medium hover:border-black">Go to homepage</a>
+    </div>
+  </div>
+</BaseLayout>

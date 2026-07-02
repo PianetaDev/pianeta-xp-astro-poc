@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import NewsletterPreferences from '../../../components/vue/site/newsletter/NewsletterPreferences.vue';
+---
+<BaseLayout title="Subscription preferences · Pianeta Bulletin" description="Manage your subscription preferences.">
+  <NewsletterPreferences client:load locale="en" />
+</BaseLayout>

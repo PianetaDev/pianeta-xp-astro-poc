@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Subscribe to the Bulletin — Pianeta.Studio">
+  <section class="px-6 lg:px-12 pt-16 pb-16 max-w-[720px]">
+    <h1 class="text-4xl font-black mb-4">Subscribe to the Bulletin</h1>
+    <p class="text-black/70 mb-8">One email a month on sustainable creativity, design and technology.</p>
+    <form action="/api/newsletter/subscribe" method="post" class="flex flex-col gap-4 max-w-md">
+      <input type="email" name="email" required placeholder="you@email.com" class="border border-black/20 rounded-md px-4 py-3 bg-white"/>
+      <button type="submit" class="bg-ink text-bg px-6 py-3 rounded-md font-semibold">Subscribe</button>
+    </form>
+    <p class="text-xs text-black/50 mt-4">By subscribing you accept our <a class="underline" href="/en/privacy">privacy policy</a>.</p>
+  </section>
+</BaseLayout>
