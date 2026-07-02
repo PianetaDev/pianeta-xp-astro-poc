@@ -207,3 +207,66 @@ export const FOUND_STRINGS: Record<Locale, FoundStrings> = {
     back: '← Work with us', backHref: '/en/hire',
   },
 };
+
+// --- Pagina verticale Piattaforme ---
+export interface PlatStrings {
+  metaTitle: string; metaDesc: string;
+  eyebrow: string; h1: string; deck: string;
+  methodTitle: string; method: { n: string; t: string; d: string }[];
+  casesTitle: string; cases: { name: string; what: string }[];
+  dogfood: string;
+  ctaTitle: string; ctaText: string; ctaCta: string; ctaHref: string;
+  back: string; backHref: string;
+}
+export const PLAT_STRINGS: Record<Locale, PlatStrings> = {
+  it: {
+    metaTitle: 'Piattaforme e AI automation — Pianeta.Studio',
+    metaDesc: 'Dal processo alla piattaforma: ricerca, mappatura dati, task analysis e AI automation. Casi Luxottica, Morsy, ArtPay.',
+    eyebrow: 'Piattaforme informative e flussi di dati',
+    h1: 'Dal processo alla piattaforma: dati integrati e AI automation',
+    deck: 'Prendiamo un processo B2B o B2C, ne mappiamo i dati e i compiti, e costruiamo flussi integrati con AI che automatizza il lavoro ripetitivo. Siamo sempre stati bravi a prendere processi e trasformarli in flussi di dati integrati.',
+    methodTitle: 'Il metodo',
+    method: [
+      { n: '01', t: 'Ricerca', d: 'Capiamo il processo reale: attori, obiettivi, punti di attrito.' },
+      { n: '02', t: 'Mappatura dati', d: 'Individuiamo quali dati esistono, dove vivono e come si connettono.' },
+      { n: '03', t: 'Task analysis', d: 'Analizziamo i compiti chiave, i colli di bottiglia e cosa si può automatizzare.' },
+      { n: '04', t: 'Flussi e AI automation', d: 'Costruiamo la piattaforma: flussi integrati e automazioni AI.' },
+    ],
+    casesTitle: 'Casi',
+    cases: [
+      { name: 'Luxottica', what: 'User Journey per l’e-learning' },
+      { name: 'Morsy', what: 'Esperienze d’acquisto su misura' },
+      { name: 'ArtPay', what: 'Flussi di pagamento integrati' },
+    ],
+    dogfood: 'Lo facciamo su noi stessi: la macchina di acquisizione /hire e Segnale, la nostra piattaforma di delivery.',
+    ctaTitle: 'Hai un processo da trasformare?',
+    ctaText: 'Ci racconti come funziona oggi, ti diciamo cosa si può integrare e automatizzare. Nessun impegno.',
+    ctaCta: 'Raccontaci il tuo processo', ctaHref: '/lavoriamo-insieme?offer=progetto',
+    back: '← Tutte le offerte', backHref: '/hire',
+  },
+  en: {
+    metaTitle: 'Platforms & AI automation — Pianeta.Studio',
+    metaDesc: 'From process to platform: research, data mapping, task analysis and AI automation. Cases: Luxottica, Morsy, ArtPay.',
+    eyebrow: 'Information platforms & data flows',
+    h1: 'From process to platform: integrated data and AI automation',
+    deck: 'We take a B2B or B2C process, map its data and tasks, and build integrated flows with AI that automates the repetitive work. Turning processes into integrated data flows is what we have always been good at.',
+    methodTitle: 'The method',
+    method: [
+      { n: '01', t: 'Research', d: 'We understand the real process: actors, goals, friction points.' },
+      { n: '02', t: 'Data mapping', d: 'We identify which data exists, where it lives and how it connects.' },
+      { n: '03', t: 'Task analysis', d: 'We analyse the key tasks, the bottlenecks and what can be automated.' },
+      { n: '04', t: 'Flows & AI automation', d: 'We build the platform: integrated flows and AI automations.' },
+    ],
+    casesTitle: 'Cases',
+    cases: [
+      { name: 'Luxottica', what: 'User journey for e-learning' },
+      { name: 'Morsy', what: 'Tailored shopping experiences' },
+      { name: 'ArtPay', what: 'Integrated payment flows' },
+    ],
+    dogfood: 'We do it on ourselves: the /hire acquisition machine and Segnale, our delivery platform.',
+    ctaTitle: 'Got a process to transform?',
+    ctaText: 'Tell us how it works today — we’ll tell you what can be integrated and automated. No commitment.',
+    ctaCta: 'Tell us about your process', ctaHref: '/en/lavoriamo-insieme?offer=progetto',
+    back: '← All offers', backHref: '/en/hire',
+  },
+};

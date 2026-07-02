@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HirePlatforms from '../../../components/hire/HirePlatforms.astro';
+import { PLAT_STRINGS } from '../../../components/hire/strings';
+const S = PLAT_STRINGS.en;
+---
+<BaseLayout title={S.metaTitle} description={S.metaDesc} ogType="hire" ogSlug="piattaforme" hideNewsletter>
+  <HirePlatforms locale="en" />
+</BaseLayout>

@@ -23,6 +23,10 @@ const HIRE_PAGES: Record<string, { it: { eyebrow: string; title: string; deck: s
     it: { eyebrow: 'IL METODO', title: 'Identifica, valida, misura, modifica', deck: 'Il funnel che vendiamo, applicato prima su noi stessi.' },
     en: { eyebrow: 'THE METHOD', title: 'Identify, validate, measure, iterate', deck: 'The funnel we sell, applied to ourselves first.' },
   },
+  piattaforme: {
+    it: { eyebrow: 'PIATTAFORME E FLUSSI DI DATI', title: 'Dal processo alla piattaforma: dati integrati e AI automation', deck: 'Ricerca, mappatura dati, task analysis, automazioni AI. Luxottica · Morsy · ArtPay.' },
+    en: { eyebrow: 'PLATFORMS & DATA FLOWS', title: 'From process to platform: integrated data and AI automation', deck: 'Research, data mapping, task analysis, AI automations. Luxottica · Morsy · ArtPay.' },
+  },
 };
 
 const ORANGE = '#FF6B33';
