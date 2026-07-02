@@ -185,35 +185,6 @@ a.detail-meta-value { color: var(--cta-primary); text-decoration: none; }
 a.detail-meta-value:hover { text-decoration: underline; }
 .detail-prose { font-size: 1.0625rem; line-height: 1.7; max-width: 65ch; }
 .detail-prose :first-child { margin-top: 0; }
-/* Double-column body on desktop — alla Deux Huit Huit */
-/* Two-col ONLY when explicitly opted-in via .is-two-col (body abbastanza lungo) */
-@media (min-width: 900px) {
-  .detail-prose.is-two-col {
-    max-width: 720px;
-    column-count: 2;
-    column-gap: 40px;
-    column-fill: balance;
-    orphans: 3;
-    widows: 3;
-  }
-  .detail-prose.is-two-col h2,
-  .detail-prose.is-two-col h3,
-  .detail-prose.is-two-col blockquote,
-  .detail-prose.is-two-col hr,
-  .detail-prose.is-two-col figure,
-  .detail-prose.is-two-col img,
-  .detail-prose.is-two-col ul,
-  .detail-prose.is-two-col ol {
-    column-span: all;
-    break-after: avoid;
-    break-before: avoid;
-  }
-  .detail-prose.is-two-col > :first-child,
-  .detail-prose.is-two-col p:first-child,
-  .detail-prose.is-two-col h2 + p,
-  .detail-prose.is-two-col h3 + p { margin-top: 0; padding-top: 0; }
-  .detail-prose.is-two-col p { margin-top: 0; margin-bottom: 1.05rem; }
-}
 .detail-related { max-width: 1080px; margin: 96px auto 48px; padding-top: 48px; border-top: 1px solid var(--pianeta-border); }
 .detail-related-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 20px; }
 .detail-related-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
