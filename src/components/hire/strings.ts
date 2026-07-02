@@ -22,8 +22,9 @@ export interface HireStrings {
   allOffers: string; clientsLabel: string; vatSuffix: string;
   recurMonth: string; recurOnce: string; quoteNote: string;
   payReassure: string; callAlt: string; quoteCallAlt: string; quoteReassure: string;
-  // banda prova + aggancio verticale fondazioni
+  // banda prova + agganci verticali (fondazioni, piattaforme)
   proofBand: string; fondTitle: string; fondText: string; fondCta: string; fondHref: string;
+  platTitle: string; platText: string; platCta: string; platHref: string;
   riskLine: string;
   afterTitle: string; after: string[];
 }
@@ -75,6 +76,9 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     fondTitle: 'Fondazioni, ONG, enti, ricerca?',
     fondText: 'Partecipiamo e vinciamo gare e bandi con istituzioni mission-driven. Se hai una gara o un bando, ti aiutiamo a vincerlo.',
     fondCta: 'Il percorso per fondazioni ed enti →', fondHref: '/hire/fondazioni',
+    platTitle: 'Hai un processo da trasformare?',
+    platText: 'Dal processo alla piattaforma: mappiamo dati e compiti, costruiamo flussi integrati e AI automation. Casi: Luxottica, Morsy, ArtPay.',
+    platCta: 'Piattaforme e AI automation →', platHref: '/hire/piattaforme',
     riskLine: 'Performance e CO₂ misurate · contenuti e dominio tuoi · checkout sicuro con Stripe · nessun impegno per parlare con Alba',
     afterTitle: 'Cosa succede dopo l’acquisto',
     after: [
@@ -129,6 +133,9 @@ export const HIRE_STRINGS: Record<Locale, HireStrings> = {
     fondTitle: 'Foundations, NGOs, institutions, research?',
     fondText: 'We take part in — and win — public tenders and grants with mission-driven institutions. Got a tender or a grant? We help you win it.',
     fondCta: 'The track for foundations & institutions →', fondHref: '/en/hire/fondazioni',
+    platTitle: 'Got a process to transform?',
+    platText: 'From process to platform: we map data and tasks, build integrated flows and AI automation. Cases: Luxottica, Morsy, ArtPay.',
+    platCta: 'Platforms & AI automation →', platHref: '/en/hire/piattaforme',
     riskLine: 'Measured performance & CO₂ · your content and domain · secure Stripe checkout · no commitment to talk to Alba',
     afterTitle: 'What happens after you buy',
     after: [
