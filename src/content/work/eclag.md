@@ -5,7 +5,7 @@ client: "ECLAG — European Coalition for the Rights and Well-being of Children 
 category: "Campaign"
 year: 2026
 date: 2026-05-24
-updated: 2026-06-24
+updated: 2026-07-06
 sector: "Diritti dei minori · Advocacy europea"
 cover: "/og/work-eclag.png"
 ogImage: "/og/work-eclag.png"
@@ -41,19 +41,27 @@ tour:
         - "Live su choosetoseethem.childsafetyineurope.com"
 ---
 
-**TLDR.** Una campagna video europea in tre atti — *Erase · Highlight · Restore* — sui diritti dei minori online, validata con il nostro stack di analisi neurale predittiva prima della produzione. **3 video · 18 analisi neuro · 3 settimane** di lavoro. Live su [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com).
+**TLDR.** Una campagna video europea in tre atti — *Ignore · Highlight · Restore* — sui diritti dei minori online, validata con il nostro stack di analisi neurale predittiva prima della produzione. **3 video · 18 analisi neuro · 3 settimane** di lavoro. Live su [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com).
 
 ## La sfida
 
-ECLAG (European Coalition for the Rights and Well-being of Children Online) ci ha chiesto una campagna video europea sui diritti dei minori online. Il tema è platform-touchy — le piattaforme bloccano la sponsorizzazione di contenuti politicamente sensibili — ed è emotivamente costoso da sbagliare: un tono che scivola nel pietismo o nella drammatizzazione gratuita affossa l'autorevolezza dell'organizzazione.
+ECLAG (European Coalition for the Rights and Well-being of Children Online) rappresenta oltre 80 organizzazioni europee che chiedono all'Unione Europea di adottare urgentemente una legislazione contro l'abuso sessuale online dei minori. Il tema è tra i più difficili da raccontare in comunicazione: emotivamente costoso da sbagliare — un tono che scivola nel pietismo o nella drammatizzazione affossa l'autorevolezza del messaggio — e tecnicamente sensibile — le piattaforme bloccano la sponsorizzazione di contenuti politicamente esposti.
 
-Servivano video che fossero al tempo stesso forti emotivamente, sostenibili tecnicamente sulle piattaforme, e validati prima della produzione per non sprecare risorse su direzioni sbagliate.
+Servivano video forti emotivamente, sostenibili tecnicamente sulle piattaforme, e validati prima della produzione per non sprecare risorse su direzioni sbagliate.
+
+## La tesi
+
+Prima ancora della produzione, abbiamo definito una tesi: per scuotere serve disagio, non rassicurazione. Una campagna confortevole è facile da consumare e altrettanto facile da dimenticare. Volevamo che lo spettatore sentisse fastidio — e che quel fastidio diventasse innesco per agire.
+
+## La ricerca visiva
+
+Da qui è partita la ricerca visiva. Abbiamo costruito una moodboard di riferimenti, con un metodo che chiamiamo *Hot or Not*, attraverso cui è emersa la direzione visiva della campagna: un linguaggio sottrattivo, costruito sull'assenza — silhouette al posto di volti, cancellazione al posto di dimostrazione, silenzio al posto di dramma. Ma anche una grammatica pensata non solo per cancellare ciò che scegliamo di non vedere, ma anche per portare alla luce e restituire quanto ignorato.
 
 ## Cosa abbiamo fatto
 
-Una campagna video in tre atti — *Erase · Highlight · Restore* — che traduce la dinamica della crisi in tre scene consecutive: cancellazione, emersione, restituzione. Ogni video è stato validato prima della produzione con il nostro stack proprietario di analisi neurale predittiva, iterando colonna sonora, montaggio e mix sulla base di feedback strutturati.
+Il risultato è una campagna in tre atti — *Ignore · Highlight · Restore* — che traduce la dinamica della crisi in tre movimenti: cancellazione, emersione, restituzione. Chiede allo spettatore di guardare dove normalmente distoglie lo sguardo.
 
-Il ciclo iterativo è durato tre settimane, con diciotto analisi consolidate. Da queste abbiamo distillato sette principi operativi che ora applichiamo come default a qualsiasi progetto con componente audio-visiva emotiva.
+Ogni video è stato validato prima della produzione con il nostro stack proprietario di analisi neurale predittiva, iterando colonna sonora, montaggio e mix sulla base di feedback strutturati. Il ciclo iterativo è durato tre settimane, con diciotto analisi consolidate. Da queste abbiamo distillato sette principi operativi che ora applichiamo come default a qualsiasi progetto con componente audio-visiva emotiva.
 
 ## Tre numeri grandi
 
@@ -61,9 +69,9 @@ Il ciclo iterativo è durato tre settimane, con diciotto analisi consolidate. Da
 
 ## Outcome
 
-La campagna è live su [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com) e gira su LinkedIn, Instagram e X. Il video *Restore* è in Featured sulla homepage di Pianeta.Studio.
+La campagna è live e attiva su LinkedIn, Instagram e X, e ha una landing page dedicata su [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com). *Restore* — il capitolo di chiusura — è in Featured sulla homepage di Pianeta.Studio.
 
-Il metodo applicato a ECLAG è oggi parte del nostro processo creativo standard, senza extra-fee, su qualsiasi progetto con componente video o audio significativa.
+Ma l'outcome più rilevante è metodologico: il processo applicato a ECLAG è oggi parte del nostro creativo standard, senza extra-fee, su ogni progetto con componente video o audio significativa.
 
 ## Vuoi capire come abbiamo lavorato?
 

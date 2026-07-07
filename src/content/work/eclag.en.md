@@ -5,7 +5,7 @@ client: "ECLAG — European Coalition for the Rights and Well-being of Children 
 category: "Campaign"
 year: 2026
 date: 2026-05-24
-updated: 2026-06-24
+updated: 2026-07-06
 sector: "Children's rights · European advocacy"
 cover: "/og/work-eclag.png"
 ogImage: "/og/work-eclag.png"
@@ -41,19 +41,27 @@ tour:
         - "Live at choosetoseethem.childsafetyineurope.com"
 ---
 
-**TLDR.** A three-act European video campaign — *Erase · Highlight · Restore* — on children's rights online, validated with our predictive neural-analysis stack before production. **3 videos · 18 neuro analyses · 3 weeks** of work. Live at [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com).
+**TLDR.** A three-act European video campaign — *Ignore · Highlight · Restore* — on children's rights online, validated with our predictive neural-analysis stack before production. **3 videos · 18 neuro analyses · 3 weeks** of work. Live at [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com).
 
 ## The challenge
 
-ECLAG (European Coalition for the Rights and Well-being of Children Online) asked us for a European video campaign on children's rights online. The subject is platform-touchy — platforms block sponsorship of politically sensitive content — and it is emotionally costly to get wrong: a tone that slides into pity or gratuitous drama undermines the organization's authority.
+ECLAG (European Coalition for the Rights and Well-being of Children Online) represents over 80 European organizations calling on the European Union to urgently adopt legislation against the online sexual abuse of children. The subject is among the hardest to communicate: emotionally costly to get wrong — a tone that slides into pity or drama undermines the message's credibility — and technically sensitive — platforms block sponsorship of politically exposed content.
 
 We needed videos that were emotionally strong, technically sustainable on the platforms, and validated before production so we wouldn't burn resources on the wrong directions.
 
+## The thesis
+
+Before production even started, we set a thesis: to shake people, you need discomfort, not reassurance. A comfortable campaign is easy to consume and just as easy to forget. We wanted the viewer to feel friction — and for that friction to become a trigger to act.
+
+## The visual research
+
+From there, the visual research began. We built a reference moodboard using a method we call *Hot or Not*, through which the campaign's visual direction emerged: a subtractive language built on absence — silhouettes instead of faces, erasure instead of demonstration, silence instead of drama. But also a grammar designed not only to erase what we choose not to see, but also to bring to light and restore what is ignored.
+
 ## What we did
 
-A three-act video campaign — *Erase · Highlight · Restore* — translating the dynamic of the crisis into three consecutive scenes: erasure, emergence, restoration. Each video was validated before production with our proprietary predictive neural-analysis stack, iterating on score, editing, and mix on the basis of structured feedback.
+The result is a three-act campaign — *Ignore · Highlight · Restore* — translating the dynamic of the crisis into three movements: erasure, emergence, restoration. It asks the viewer to look where they would normally look away.
 
-The iterative cycle ran for three weeks, with eighteen consolidated analyses. From these we distilled seven operating principles we now apply by default on any project with an emotional audio-visual component.
+Each video was validated before production with our proprietary predictive neural-analysis stack, iterating on score, editing, and mix on the basis of structured feedback. The iterative cycle ran for three weeks, with eighteen consolidated analyses. From these we distilled seven operating principles we now apply by default on any project with an emotional audio-visual component.
 
 ## Three big numbers
 
@@ -61,9 +69,9 @@ The iterative cycle ran for three weeks, with eighteen consolidated analyses. Fr
 
 ## Outcome
 
-The campaign is live at [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com) and runs on LinkedIn, Instagram, and X. The *Restore* video is Featured on the Pianeta.Studio homepage.
+The campaign is live and active on LinkedIn, Instagram, and X, with a dedicated landing page at [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com). *Restore* — the closing chapter — is Featured on the Pianeta.Studio homepage.
 
-The method we applied on ECLAG is now part of our standard creative process, with no extra fee, on any project with a significant video or audio component.
+But the most relevant outcome is methodological: the process applied to ECLAG is now part of our standard creative approach, with no extra fee, on every project with a significant video or audio component.
 
 ## Want to understand how we worked?
 
