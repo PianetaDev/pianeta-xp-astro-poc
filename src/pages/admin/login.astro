@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { checkAdminPassword, setAdminCookie, adminGateDisabled } from '../../lib/server/admin-session';
+
+export const prerender = false;
+
+const redirectTo = Astro.url.searchParams.get('redirect') || '/admin/leads';
+// Solo path interni — evita open-redirect.
+const safeRedirect = redirectTo.startsWith('/') && !redirectTo.startsWith('//') ? redirectTo : '/admin/leads';
+
+if (adminGateDisabled()) {
+  return Astro.redirect(safeRedirect);
+}
+
+let error: string | null = null;
+
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const password = String(form.get('password') || '');
+  if (checkAdminPassword(password)) {
+    setAdminCookie(Astro.cookies);
+    return Astro.redirect(safeRedirect);
+  }
+  error = 'Password errata.';
+}
+---
+
+<BaseLayout title="Admin · Login" description="Accesso area interna" minimal={true} chrome={false}>
+  <main class="admin-login">
+    <form class="admin-login-card" method="POST">
+      <p class="admin-login-eyebrow">Admin · Pianeta.Studio</p>
+      <h1 class="admin-login-title">Accesso interno</h1>
+      <p class="admin-login-deck">Inserisci la password condivisa per continuare.</p>
+
+      <label class="admin-login-label" for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        autofocus
+        required
+        class="admin-login-input"
+        placeholder="••••••••"
+      />
+
+      {error && <p class="admin-login-error">{error}</p>}
+
+      <button type="submit" class="cta-btn cta-primary admin-login-submit">Entra</button>
+    </form>
+  </main>
+
+  <style>
+    .admin-login {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+    .admin-login-card {
+      width: 100%;
+      max-width: 380px;
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-login-eyebrow {
+      margin: 0 0 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pianeta-muted);
+      font-weight: 600;
+    }
+    .admin-login-title {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--pianeta-text);
+    }
+    .admin-login-deck {
+      margin: 0 0 24px;
+      font-size: 13px;
+      color: var(--pianeta-muted);
+    }
+    .admin-login-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--pianeta-muted-strong);
+      margin-bottom: 6px;
+    }
+    .admin-login-input {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--pianeta-border-strong);
+      background: var(--pianeta-bg);
+      color: var(--pianeta-text);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .admin-login-input:focus {
+      outline: none;
+      border-color: var(--cta-primary);
+    }
+    .admin-login-error {
+      margin: 4px 0 12px;
+      font-size: 13px;
+      color: #cc3333;
+    }
+    .admin-login-submit {
+      margin-top: 16px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 11px 20px;
+      border-radius: 999px;
+    }
+  </style>
+</BaseLayout>
