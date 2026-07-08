@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LeadsBoard from '../../../components/vue/admin/LeadsBoard.vue';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+import { supabaseService } from '../../../lib/server/supabase';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+interface LeadRow {
+  id: string;
+  source: 'green_machine' | 'alba' | 'manual';
+  company: string | null;
+  contact_name: string | null;
+  contact_role: string | null;
+  email: string | null;
+  url: string | null;
+  sector: string | null;
+  rating: string | null;
+  co2_per_visit: string | null;
+  status: 'draft' | 'sent' | 'replied' | 'call' | 'won' | 'discarded';
+  notes: string | null;
+  week_label: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+let leads: LeadRow[] = [];
+let fetchError: string | null = null;
+
+try {
+  const sb = supabaseService();
+  const { data, error } = await sb
+    .from('leads')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) fetchError = error.message;
+  else leads = (data ?? []) as LeadRow[];
+} catch (err: any) {
+  fetchError = err?.message ?? 'Errore sconosciuto';
+}
+---
+
+<BaseLayout title="Admin · Leads" description="Gestione prospect commerciali" minimal={true} chrome={false}>
+  <main class="leads-admin">
+    <header class="leads-admin-head">
+      <p class="leads-admin-eyebrow">Admin · Interno</p>
+      <h1 class="leads-admin-title">Leads</h1>
+      <p class="leads-admin-deck">
+        Prospect commerciali generati da GreenMachine e dagli altri canali. Cambia lo status man mano che avanzano.
+      </p>
+      <a href="/api/admin/logout" class="leads-admin-logout">Esci</a>
+    </header>
+
+    {fetchError && (
+      <div class="leads-admin-error">
+        <strong>Errore nel caricare i lead:</strong> {fetchError}
+      </div>
+    )}
+
+    {!fetchError && <LeadsBoard client:load initialLeads={leads} />}
+  </main>
+
+  <style>
+    .leads-admin {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .leads-admin-head {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .leads-admin-eyebrow {
+      margin: 0 0 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pianeta-muted);
+      font-weight: 600;
+    }
+    .leads-admin-title {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--pianeta-text);
+    }
+    .leads-admin-deck {
+      margin: 0;
+      max-width: 640px;
+      font-size: 14px;
+      color: var(--pianeta-muted);
+    }
+    .leads-admin-logout {
+      position: absolute;
+      top: 4px;
+      right: 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--pianeta-muted-strong);
+      text-decoration: none;
+      border: 1px solid var(--pianeta-border);
+      padding: 7px 14px;
+      border-radius: 999px;
+    }
+    .leads-admin-logout:hover {
+      border-color: var(--cta-primary);
+      color: var(--cta-primary);
+    }
+    .leads-admin-error {
+      padding: 16px 20px;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: #856404;
+    }
+    @media (max-width: 640px) {
+      .leads-admin-logout { position: static; display: inline-block; margin-top: 14px; }
+    }
+  </style>
+</BaseLayout>
