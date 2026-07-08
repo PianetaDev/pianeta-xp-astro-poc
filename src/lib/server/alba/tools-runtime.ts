@@ -5,6 +5,7 @@
 import { albaSupabase } from './supabase';
 import { getKb } from './assets';
 import { createGoogleCalendarEvent, getFreeBusy } from './google-calendar';
+import { syncAlbaLead } from './leads-sync';
 import * as chrono from 'chrono-node';
 
 export interface AlbaToolResult {
@@ -98,6 +99,17 @@ async function bookCall(
       first_name: args.user_name ?? null,
     }).eq('uid', ctx.uid);
   } catch { /* fire-and-forget */ }
+
+  // 1b) Sync additivo verso leads (CRM commerciale) — non deve mai rompere il flusso chat.
+  try {
+    await syncAlbaLead(sb, {
+      email: args.user_email,
+      name: args.user_name ?? null,
+      status: gcalResult?.ok ? 'call' : 'draft',
+    });
+  } catch (e) {
+    console.error('[alba-leads-sync] book_call sync failed:', e);
+  }
 
   // 2) Manda email-brief a Max (e CC all'utente) via Resend
   const resendKey = process.env.RESEND_API_KEY;
@@ -213,6 +225,11 @@ async function sendBriefEmail(args: { user_email: string; user_name?: string; br
       event: 'email_captured',
       payload: { email: args.user_email, source: 'send_brief_email' },
     });
+    try {
+      await syncAlbaLead(sb, { email: args.user_email, name: args.user_name ?? null, status: 'draft' });
+    } catch (e) {
+      console.error('[alba-leads-sync] send_brief_email sync failed:', e);
+    }
   } catch { /* fire-and-forget */ }
   return { ok: true, human_summary: `Brief mandato a ${args.user_email}` };
 }
@@ -464,6 +481,11 @@ async function newsletterSignup(
         event: 'newsletter_signup',
         payload: { email: args.user_email, already_subscribed: alreadySubscribed },
       });
+      try {
+        await syncAlbaLead(sb, { email: args.user_email, name: args.user_name ?? null, status: 'draft' });
+      } catch (e) {
+        console.error('[alba-leads-sync] newsletter_signup sync failed:', e);
+      }
     } catch { /* fire-and-forget */ }
 
     return {
@@ -533,6 +555,11 @@ async function sendRecapEmail(
       uid: ctx.uid, session_id: ctx.session_id, event: 'recap_email_sent',
       payload: { email: args.user_email, len: args.recap_md.length },
     });
+    try {
+      await syncAlbaLead(sb, { email: args.user_email, name: args.user_name ?? null, status: 'draft' });
+    } catch (e) {
+      console.error('[alba-leads-sync] send_recap_email sync failed:', e);
+    }
   } catch { /* fire-and-forget */ }
 
   return { ok: true, human_summary: `Recap mandato a ${args.user_email}` };
