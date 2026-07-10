@@ -5,15 +5,15 @@ const email = Astro.url.searchParams.get('email') || '';
 <BaseLayout title="Disiscritto · Bulletin Pianeta" description="Iscrizione rimossa.">
   <div class="px-6 lg:px-10 py-16 md:py-24 max-w-[640px] mx-auto text-center">
     <p class="text-5xl mb-6">🌱</p>
-    <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">Confermato</h1>
-    <p class="mt-6 text-lg text-black/70">
+    <h1 class="page-title">Confermato</h1>
+    <p class="mt-6 lead">
       {email ? (
         <span><strong class="text-black">{email}</strong> è stato rimosso dalla lista.</span>
       ) : (
         <span>L'iscrizione è stata rimossa.</span>
       )}
     </p>
-    <p class="mt-4 text-sm text-black/55">Non riceverai più nostre email. Grazie per averci letto fin qui.</p>
+    <p class="mt-4 fine-print">Non riceverai più nostre email. Grazie per averci letto fin qui.</p>
     <div class="mt-10 flex flex-wrap justify-center gap-3">
       <a href="/" class="inline-block bg-black text-white px-5 py-3 rounded-full text-sm font-medium hover:bg-black/85">Vai alla home</a>
       <a href="/bulletin/iscrivimi" class="inline-block border border-black/15 px-5 py-3 rounded-full text-sm font-medium hover:border-black">Riscriviti</a>
