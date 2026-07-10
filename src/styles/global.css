@@ -164,7 +164,8 @@
 /* Detail page layout — DHH style — used by work/bulletin/services/team/lab/careers [slug] */
 .detail-page { max-width: 1280px; margin: 0 auto; padding: 64px 32px 96px; }
 .detail-head { text-align: center; max-width: 880px; margin: 0 auto 56px; }
-.detail-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 28px; }
+.eyebrow, .detail-eyebrow, .index-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); }
+.detail-eyebrow { margin: 0 0 28px; }
 .detail-eyebrow a { color: inherit; text-decoration: none; }
 .detail-eyebrow a:hover { color: #0e1116; }
 .detail-title { font-size: clamp(2.25rem, 5vw, 4.25rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 24px; }
@@ -220,7 +221,7 @@ a.detail-meta-value:hover { text-decoration: underline; }
 /* Index pages — section cards grid */
 .index-page { max-width: 1280px; margin: 0 auto; padding: 56px 32px 96px; }
 .index-head { max-width: 880px; margin: 0 auto 48px; text-align: center; }
-.index-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 16px; }
+.index-eyebrow { margin: 0 0 16px; }
 .index-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 20px; }
 .index-deck { font-size: 1.125rem; color: rgba(14,17,22,0.65); line-height: 1.5; margin: 0 auto; max-width: 640px; }
 .index-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
@@ -237,6 +238,11 @@ a.detail-meta-value:hover { text-decoration: underline; }
 .index-card-title { font-weight: 800; font-size: 1.0625rem; line-height: 1.25; letter-spacing: -0.01em; margin: 0; }
 .index-card-deck { font-size: 0.875rem; color: rgba(14,17,22,0.65); line-height: 1.45; margin: 0; }
 .index-empty { text-align: center; padding: 48px 20px; color: rgba(14,17,22,0.55); border: 1px dashed var(--pianeta-border-strong); border-radius: 16px; }
+
+/* Pagine di utilità — privacy/cookie/contact/bulletin flow */
+.page-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; }
+.lead { font-size: 1.0625rem; color: var(--pianeta-muted-strong); line-height: 1.5; }
+.fine-print { font-size: 0.8125rem; color: var(--pianeta-muted); line-height: 1.4; }
 
 /* Print CSS — detail pages stampabili come PDF */
 @media print {

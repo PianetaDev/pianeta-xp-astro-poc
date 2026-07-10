@@ -5,15 +5,15 @@ const email = Astro.url.searchParams.get('email') || '';
 <BaseLayout title="Unsubscribed · Pianeta Bulletin" description="Subscription removed.">
   <div class="px-6 lg:px-10 py-16 md:py-24 max-w-[640px] mx-auto text-center">
     <p class="text-5xl mb-6">🌱</p>
-    <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">Confirmed</h1>
-    <p class="mt-6 text-lg text-black/70">
+    <h1 class="page-title">Confirmed</h1>
+    <p class="mt-6 lead">
       {email ? (
         <span><strong class="text-black">{email}</strong> has been removed from the list.</span>
       ) : (
         <span>The subscription has been removed.</span>
       )}
     </p>
-    <p class="mt-4 text-sm text-black/55">You won't receive any more emails from us. Thanks for reading this far.</p>
+    <p class="mt-4 fine-print">You won't receive any more emails from us. Thanks for reading this far.</p>
     <div class="mt-10 flex flex-wrap justify-center gap-3">
       <a href="/en" class="inline-block bg-black text-white px-5 py-3 rounded-full text-sm font-medium hover:bg-black/85">Go to homepage</a>
       <a href="/en/bulletin/iscrivimi" class="inline-block border border-black/15 px-5 py-3 rounded-full text-sm font-medium hover:border-black">Subscribe again</a>

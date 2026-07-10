@@ -6,17 +6,17 @@ const already = Astro.url.searchParams.get('already') === '1';
 <BaseLayout title={already ? 'Già iscritto · Bulletin Pianeta' : 'Iscrizione confermata · Bulletin Pianeta'} description="Iscrizione attiva.">
   <div class="px-6 lg:px-10 py-16 md:py-24 max-w-[640px] mx-auto text-center">
     <p class="text-5xl mb-6">🌱</p>
-    <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">
+    <h1 class="page-title">
       {already ? 'Iscrizione già attiva' : 'Iscrizione confermata'}
     </h1>
-    <p class="mt-6 text-lg text-black/70">
+    <p class="mt-6 lead">
       {already ? (
         <span>{email && <strong class="text-black">{email}</strong>} risulta già iscritto. Tutto a posto.</span>
       ) : (
         <span>Da oggi riceverai il Bulletin di Pianeta.Studio{email && ` a `}{email && <strong class="text-black">{email}</strong>}.</span>
       )}
     </p>
-    <p class="mt-4 text-sm text-black/55">Ti abbiamo mandato un'email di benvenuto col link al centro preferenze.</p>
+    <p class="mt-4 fine-print">Ti abbiamo mandato un'email di benvenuto col link al centro preferenze.</p>
     <div class="mt-10 flex flex-wrap justify-center gap-3">
       <a href="/bulletin" class="inline-block bg-black text-white px-5 py-3 rounded-full text-sm font-medium hover:bg-black/85">Leggi gli articoli →</a>
       <a href="/" class="inline-block border border-black/15 px-5 py-3 rounded-full text-sm font-medium hover:border-black">Vai alla home</a>
