@@ -43,6 +43,24 @@
   --s-8: 2rem;
   --s-12: 3rem;
   --s-16: 4rem;
+
+  /* Typography system — estratto da /hire (scala solida, un solo sistema) */
+  --ty-hero: clamp(2rem, 5.5vw, 3.25rem);      /* 32→52 — h1 hero (detail + index) */
+  --ty-hero-lh: 1.05;
+  --ty-hero-tracking: -0.02em;
+  --ty-sub: 1.125rem;                          /* 18 — hero deck fisso */
+  --ty-sub-lh: 1.5;
+  --ty-eyebrow: 0.6875rem;                     /* 11 */
+  --ty-eyebrow-tracking: 1.5px;
+  --ty-h2-sec: clamp(1.375rem, 3vw, 1.75rem);  /* 22→28 — h2 in-page */
+  --ty-h2-sec-tracking: -0.01em;
+  --ty-h2-prose: clamp(1.25rem, 2.5vw, 1.5rem);/* 20→24 — h2 dentro articoli */
+  --ty-h3-prose: 1.1875rem;                    /* 19 */
+  --ty-body: 1.0625rem;                        /* 17 — copy longform */
+  --ty-body-lh: 1.75;
+  --ty-meta: 0.8125rem;                        /* 13 — meta inline / bullets */
+  --ty-quote: clamp(1.25rem, 3vw, 1.625rem);   /* 20→26 */
+  --ty-quote-lh: 1.45;
 }
 
 /* Dark theme tokens — applied when [data-theme="dark"] OR [data-theme="auto"][data-sun="night"] */
@@ -133,10 +151,10 @@
 }
 
 /* Baseline grid: line-height 1.7 = unità base. Tutti i margini in multipli. */
-.prose-eclag { line-height: 1.7; }
-.prose-eclag h2 { font-size: 1.75rem; font-weight: 800; margin: 1.7em 0 0.85em; line-height: 1.2; letter-spacing: -0.02em; }
-.prose-eclag h3 { font-size: 1.25rem; font-weight: 700; margin: 1.7em 0 0.85em; line-height: 1.3; }
-.prose-eclag p { margin: 0 0 1.7em; line-height: 1.7; }
+.prose-eclag { line-height: var(--ty-body-lh); font-size: var(--ty-body); }
+.prose-eclag h2 { font-size: var(--ty-h2-prose); font-weight: 800; margin: 1.75em 0 0.5em; line-height: 1.2; letter-spacing: var(--ty-h2-sec-tracking); }
+.prose-eclag h3 { font-size: var(--ty-h3-prose); font-weight: 700; margin: 1.75em 0 0.5em; line-height: 1.3; letter-spacing: -0.01em; }
+.prose-eclag p { margin: 0 0 1.75em; line-height: var(--ty-body-lh); }
 .prose-eclag ul, .prose-eclag ol { margin: 0 0 1.7em; padding-left: 1.25rem; }
 .prose-eclag ul { list-style: disc; }
 .prose-eclag ul li, .prose-eclag ol li { margin-bottom: 0.425em; line-height: 1.7; }
@@ -164,26 +182,26 @@
 /* Detail page layout — DHH style — used by work/bulletin/services/team/lab/careers [slug] */
 .detail-page { max-width: 1280px; margin: 0 auto; padding: 64px 32px 96px; }
 .detail-head { text-align: center; max-width: 880px; margin: 0 auto 56px; }
-.detail-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 28px; }
+.detail-eyebrow { font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: var(--ty-eyebrow-tracking); color: var(--pianeta-muted); margin: 0 0 28px; font-weight: 600; }
 .detail-eyebrow a { color: inherit; text-decoration: none; }
-.detail-eyebrow a:hover { color: #0e1116; }
-.detail-title { font-size: clamp(2.25rem, 5vw, 4.25rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 24px; }
-.detail-deck { font-size: clamp(1.05rem, 1.8vw, 1.35rem); color: rgba(14,17,22,0.65); line-height: 1.5; margin: 0 auto 36px; max-width: 720px; }
+.detail-eyebrow a:hover { color: var(--pianeta-text); }
+.detail-title { font-size: var(--ty-hero); font-weight: 900; letter-spacing: var(--ty-hero-tracking); line-height: var(--ty-hero-lh); margin: 0 0 18px; }
+.detail-deck { font-size: var(--ty-sub); color: var(--pianeta-muted-strong); line-height: var(--ty-sub-lh); margin: 0 auto 36px; max-width: 640px; }
 .detail-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .detail-hero { border-radius: 20px; overflow: hidden; background: rgba(14,17,22,0.04); aspect-ratio: 16/9; margin: 0 auto 56px; max-width: 880px; }
 .detail-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .detail-hero.is-portrait { aspect-ratio: 3/4; max-width: 480px; }
-.detail-byline { max-width: 880px; margin: -32px auto 56px; text-align: center; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: rgba(14,17,22,0.55); font-weight: 500; }
+.detail-byline { max-width: 880px; margin: -32px auto 56px; text-align: center; font-size: var(--ty-meta); letter-spacing: 1px; text-transform: uppercase; color: var(--pianeta-muted); font-weight: 500; }
 .detail-body { display: block; max-width: 720px; margin: 0 auto; }
 
 /* Meta inline — pills sotto la cover */
 .detail-meta-inline { list-style: none; padding: 0; margin: 0 auto 56px; max-width: 880px; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; align-items: baseline; }
-.detail-meta-inline li { display: inline-flex; gap: 8px; align-items: baseline; font-size: 13px; line-height: 1.4; }
+.detail-meta-inline li { display: inline-flex; gap: 8px; align-items: baseline; font-size: var(--ty-meta); line-height: 1.4; }
 .detail-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); font-weight: 500; }
 .detail-meta-value { color: #0e1116; font-weight: 500; }
 a.detail-meta-value { color: var(--cta-primary); text-decoration: none; }
 a.detail-meta-value:hover { text-decoration: underline; }
-.detail-prose { font-size: 1.0625rem; line-height: 1.7; max-width: 65ch; }
+.detail-prose { font-size: var(--ty-body); line-height: var(--ty-body-lh); max-width: 65ch; }
 .detail-prose :first-child { margin-top: 0; }
 .detail-related { max-width: 1080px; margin: 96px auto 48px; padding-top: 48px; border-top: 1px solid var(--pianeta-border); }
 .detail-related-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 20px; }
@@ -220,9 +238,9 @@ a.detail-meta-value:hover { text-decoration: underline; }
 /* Index pages — section cards grid */
 .index-page { max-width: 1280px; margin: 0 auto; padding: 56px 32px 96px; }
 .index-head { max-width: 880px; margin: 0 auto 48px; text-align: center; }
-.index-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: rgba(14,17,22,0.55); margin: 0 0 16px; }
-.index-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 20px; }
-.index-deck { font-size: 1.125rem; color: rgba(14,17,22,0.65); line-height: 1.5; margin: 0 auto; max-width: 640px; }
+.index-eyebrow { font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: var(--ty-eyebrow-tracking); color: var(--pianeta-muted); margin: 0 0 16px; font-weight: 600; }
+.index-title { font-size: var(--ty-hero); font-weight: 900; letter-spacing: var(--ty-hero-tracking); line-height: var(--ty-hero-lh); margin: 0 0 18px; }
+.index-deck { font-size: var(--ty-sub); color: var(--pianeta-muted-strong); line-height: var(--ty-sub-lh); margin: 0 auto; max-width: 620px; }
 .index-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
 @media (min-width: 700px) { .index-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1100px) { .index-grid { grid-template-columns: 1fr 1fr 1fr; } }
@@ -236,7 +254,7 @@ a.detail-meta-value:hover { text-decoration: underline; }
 .index-card-kicker { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); }
 .index-card-title { font-weight: 800; font-size: 1.0625rem; line-height: 1.25; letter-spacing: -0.01em; margin: 0; }
 .index-card-deck { font-size: 0.875rem; color: rgba(14,17,22,0.65); line-height: 1.45; margin: 0; }
-.index-empty { text-align: center; padding: 48px 20px; color: rgba(14,17,22,0.55); border: 1px dashed var(--pianeta-border-strong); border-radius: 16px; }
+.index-empty { text-align: center; padding: 48px 20px; color: var(--pianeta-muted); border: 1px dashed var(--pianeta-border-strong); border-radius: 16px; }
 
 /* Print CSS — detail pages stampabili come PDF */
 @media print {
