@@ -146,12 +146,12 @@ const home = locale === 'en' ? '/en' : '/';
     display: inline-flex; padding: 3px;
     background: var(--pianeta-bg);
     border: 1px solid var(--pianeta-border-strong);
-    border-radius: 999px;
+    border-radius: var(--r-pill);
   }
   .rail-locale a {
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 28px; height: 22px; padding: 0 8px;
-    border-radius: 999px;
+    border-radius: var(--r-pill);
     font-size: 10px; font-weight: 800; letter-spacing: 0.5px;
     color: var(--pianeta-muted-strong); text-decoration: none;
     transition: background 120ms, color 120ms;
@@ -167,14 +167,14 @@ const home = locale === 'en' ? '/en' : '/';
     display: inline-flex; padding: 3px;
     background: var(--pianeta-bg);
     border: 1px solid var(--pianeta-border-strong);
-    border-radius: 999px;
+    border-radius: var(--r-pill);
   }
   .rail-theme button {
     width: 22px; height: 22px; padding: 0; border: 0;
     background: transparent;
     color: var(--pianeta-muted-strong);
     font-size: 12px; line-height: 1;
-    border-radius: 999px; cursor: pointer;
+    border-radius: var(--r-pill); cursor: pointer;
     transition: background 120ms, color 120ms;
   }
   .rail-theme button:hover { color: var(--pianeta-text); background: var(--pianeta-border); }

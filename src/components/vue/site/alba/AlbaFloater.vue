@@ -71,7 +71,7 @@ onBeforeUnmount(() => {
   color: #ffffff;
   padding: 10px 18px 10px 12px;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   box-shadow: 0 10px 30px rgba(14,17,22,0.25);
   cursor: pointer;
   font: inherit;
@@ -84,14 +84,14 @@ onBeforeUnmount(() => {
 .alba-launcher-avatar {
   flex-shrink: 0;
   width: 26px; height: 26px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: linear-gradient(135deg, #fbcfe8, #fed7aa, #fef3c7);
   color: #0e1116;
   display: inline-flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800;
+  font-size: var(--ty-eyebrow); font-weight: 800;
 }
 .alba-launcher-label {
-  font-size: 14px;
+  font-size: var(--ty-meta);
   font-weight: 500;
   white-space: nowrap;
 }

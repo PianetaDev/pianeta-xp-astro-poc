@@ -96,20 +96,20 @@ const canGoForward = computed(() => !!props.next_from_iso)
   padding: 14px 16px;
   background: rgba(255,107,51,0.06);
   border: 1px solid rgba(255,107,51,0.18);
-  border-radius: 12px;
+  border-radius: var(--radius-chip);
 }
 .slot-picker-empty {
-  font-size: 13px; color: rgba(14,17,22,0.6);
+  font-size: var(--ty-meta); color: rgba(14,17,22,0.6);
   padding: 10px 0;
 }
 .slot-day { margin-bottom: 12px; }
 .slot-day:last-of-type { margin-bottom: 0; }
 .slot-day-label {
-  font-size: 11px;
+  font-size: var(--ty-eyebrow);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 700;
-  color: rgba(14,17,22,0.55);
+  color: var(--pianeta-muted);
   margin: 0 0 8px;
 }
 .slot-day-times {
@@ -117,7 +117,7 @@ const canGoForward = computed(() => !!props.next_from_iso)
 }
 .slot-btn {
   padding: 8px 14px;
-  font-size: 14px;
+  font-size: var(--ty-meta);
   font-weight: 600;
   background: #fff;
   color: var(--cta-primary, #FF6B33);
@@ -143,7 +143,7 @@ const canGoForward = computed(() => !!props.next_from_iso)
 .slot-nav-btn {
   background: transparent;
   border: 0;
-  color: rgba(14,17,22,0.65);
+  color: var(--pianeta-muted-strong);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -157,7 +157,7 @@ const canGoForward = computed(() => !!props.next_from_iso)
 }
 .slot-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 .slot-nav-meta {
-  font-size: 11px; color: rgba(14,17,22,0.45);
+  font-size: var(--ty-eyebrow); color: rgba(14,17,22,0.45);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
