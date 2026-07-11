@@ -1,0 +1,648 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Ordered list of color tokens grouped by category — le fonti sono global.css + DESIGN_TOKENS.md
+const colorGroups: Array<{ label: string; tokens: Array<{ name: string; use: string }> }> = [
+  {
+    label: 'Brand / neutral',
+    tokens: [
+      { name: '--pianeta-text',           use: 'Body text' },
+      { name: '--pianeta-bg',             use: 'Background pagina' },
+      { name: '--pianeta-bg-card',        use: 'Surface card' },
+      { name: '--pianeta-border',         use: 'Border card default' },
+      { name: '--pianeta-border-strong',  use: 'Border card hover' },
+      { name: '--pianeta-muted',          use: 'Testo secondario' },
+      { name: '--pianeta-muted-strong',   use: 'Testo secondario forte' },
+      { name: '--pianeta-accent',         use: 'Link / accento blu' },
+      { name: '--pianeta-highlight',      use: 'Highlight giallo' },
+    ],
+  },
+  {
+    label: 'CTA',
+    tokens: [
+      { name: '--cta-primary',            use: 'CTA primary bg (arancio)' },
+      { name: '--cta-primary-hover',      use: 'CTA primary hover' },
+      { name: '--cta-primary-ink',        use: 'CTA primary testo' },
+      { name: '--cta-secondary',          use: 'CTA secondary bg (blu)' },
+      { name: '--cta-secondary-hover',    use: 'CTA secondary hover' },
+      { name: '--cta-secondary-ink',      use: 'CTA secondary testo' },
+    ],
+  },
+  {
+    label: 'Sistema /hire',
+    tokens: [
+      { name: '--soft',    use: 'Sezione soft (band chiara)' },
+      { name: '--band',    use: 'Band scura' },
+      { name: '--green',   use: 'Accento green (Pianeta.Green)' },
+    ],
+  },
+];
+
+const typoSamples: Array<{ token: string; tag: string; text: string; note: string }> = [
+  { token: '--ty-hero',      tag: 'h1', text: 'Sustainable Creativity dal 2016', note: 'H1 hero (index + detail + landing)' },
+  { token: '--ty-h2-sec',    tag: 'h2', text: 'Cosa facciamo, in concreto',       note: 'H2 di sezione in-page' },
+  { token: '--ty-h2-prose',  tag: 'h2', text: 'Un pezzo di articolo',              note: 'H2 dentro articoli' },
+  { token: '--ty-h3-prose',  tag: 'h3', text: 'Un sotto-titolo',                   note: 'H3 prose' },
+  { token: '--ty-sub',       tag: 'p',  text: 'Studio di design e tecnologia. Progetti Pianeta-centric, standard aperti, codice consegnato.', note: 'Deck / hero sub' },
+  { token: '--ty-body',      tag: 'p',  text: 'Progettiamo prodotti digitali con vincoli tecnici verificabili: carbon budget, performance budget, accessibilità. Ogni riga di codice consegnata resta di chi la commissiona — niente lock-in, standard aperti, documentazione inclusa.', note: 'Copy longform' },
+  { token: '--ty-eyebrow',   tag: 'p',  text: 'STYLEGUIDE · PIANETA',              note: 'Eyebrow uppercase' },
+  { token: '--ty-meta',      tag: 'p',  text: '13px meta inline · usata nelle liste, chip, byline',  note: 'Meta inline / bullets' },
+  { token: '--ty-quote',     tag: 'blockquote', text: '“Non causare danno, non prendere alcunché dai sistemi naturali, non sprecare nulla.”', note: 'Blockquote / citazione' },
+];
+
+const spatialTokens: Array<{ name: string; label: string }> = [
+  { name: '--radius-card',    label: '18px · card standard' },
+  { name: '--radius-card-sm', label: '14px · card small' },
+  { name: '--radius-chip',    label: '12px · chip' },
+  { name: '--radius-pill',    label: '999px · pill / CTA' },
+];
+
+const utilityClasses: Array<{ cls: string; desc: string }> = [
+  { cls: '.pi-wrap',        desc: 'Container 1040px · padding-x 24' },
+  { cls: '.pi-wrap-narrow', desc: 'Container 720px · padding-x 24' },
+  { cls: '.pi-sec',         desc: 'Sezione con padding-y 64' },
+  { cls: '.pi-sec-soft',    desc: 'Sezione + bg --soft' },
+  { cls: '.pi-card',        desc: 'Surface card (radius 18, pad 22)' },
+  { cls: '.pi-card--sm',    desc: 'Card small (radius 14, pad 18)' },
+  { cls: '.pi-h1',          desc: 'Alias tipografico hero H1' },
+  { cls: '.pi-h2',          desc: 'Alias tipografico H2 sezione' },
+  { cls: '.pi-hero-sub',    desc: 'Deck sotto hero' },
+  { cls: '.pi-eyebrow',     desc: 'Eyebrow uppercase' },
+  { cls: '.pi-meta-label',  desc: 'Label meta 10px uppercase' },
+  { cls: '.pi-meta-value',  desc: 'Valore meta 13px' },
+];
+
+const sections: Array<{ id: string; label: string }> = [
+  { id: 'colors',    label: 'Colors' },
+  { id: 'typo',      label: 'Typography' },
+  { id: 'radii',     label: 'Radii · Padding · Wrap' },
+  { id: 'buttons',   label: 'Buttons / CTA' },
+  { id: 'cards',     label: 'Cards' },
+  { id: 'overlays',  label: 'Overlays & Chrome' },
+  { id: 'utility',   label: 'Utility classes' },
+  { id: 'dark',      label: 'Dark mode' },
+];
+---
+
+<BaseLayout
+  title="Styleguide — Pianeta.Studio"
+  description="Sistema di design di Pianeta.Studio: token, tipografia, componenti. Fonte: /hire."
+  chrome={true}
+  hideNewsletter={true}
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex,nofollow" />
+  </Fragment>
+
+  <div class="sg-root">
+    <!-- Hero -->
+    <header class="sg-hero pi-wrap">
+      <p class="pi-eyebrow">Styleguide · Interno</p>
+      <h1 class="pi-h1">Styleguide</h1>
+      <p class="pi-hero-sub">Sistema di design di Pianeta.Studio — token, tipografia, componenti. Fonte: <code>/hire</code>. Usato dal team per review, allineamento e onboarding.</p>
+
+      <div class="sg-toolbar">
+        <div class="sg-theme">
+          <span class="pi-meta-label">Tema locale</span>
+          <div class="sg-theme-btns" role="group" aria-label="Cambia tema">
+            <button type="button" data-theme-set="light" class="sg-theme-btn">Light</button>
+            <button type="button" data-theme-set="auto"  class="sg-theme-btn">Auto</button>
+            <button type="button" data-theme-set="dark"  class="sg-theme-btn">Dark</button>
+          </div>
+        </div>
+        <p class="sg-hint pi-meta-value">Click su qualsiasi valore <code>#hex</code> per copiarlo negli appunti.</p>
+      </div>
+    </header>
+
+    <div class="sg-layout pi-wrap">
+      <!-- Contenuto -->
+      <div class="sg-main">
+        <!-- 2. COLORS -->
+        <section id="colors" class="sg-section">
+          <h2 class="pi-h2">1. Colors</h2>
+          <p class="sg-lead">Ogni swatch mostra il valore risolto della variabile CSS. Il valore si aggiorna cambiando tema.</p>
+          {colorGroups.map((g) => (
+            <div class="sg-color-group">
+              <h3 class="sg-h3">{g.label}</h3>
+              <div class="sg-swatch-grid">
+                {g.tokens.map((t) => (
+                  <div class="sg-swatch" data-token={t.name}>
+                    <div class="sg-swatch-chip" style={`background: var(${t.name});`}></div>
+                    <div class="sg-swatch-meta">
+                      <code class="sg-swatch-name">{t.name}</code>
+                      <button type="button" class="sg-copy" data-copy-var={t.name} title="Copia valore risolto">
+                        <span class="sg-swatch-value" data-var-value={t.name}>—</span>
+                      </button>
+                      <span class="sg-swatch-use pi-meta-label">{t.use}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </section>
+
+        <!-- 3. TYPOGRAPHY -->
+        <section id="typo" class="sg-section">
+          <h2 class="pi-h2">2. Typography</h2>
+          <p class="sg-lead">Scala unica, allineata a <code>/hire</code>. A destra: valore risolto (font-size · line-height · letter-spacing).</p>
+
+          <div class="sg-typo-list">
+            {typoSamples.map((s) => (
+              <div class="sg-typo-row">
+                <div class="sg-typo-sample">
+                  {s.tag === 'h1' && <h1 style={`font-size: var(${s.token}); line-height: var(--ty-hero-lh); letter-spacing: var(--ty-hero-tracking); font-weight: 900; margin: 0;`}>{s.text}</h1>}
+                  {s.tag === 'h2' && s.token === '--ty-h2-sec' && <h2 style={`font-size: var(${s.token}); line-height: 1.15; letter-spacing: var(--ty-h2-sec-tracking); font-weight: 800; margin: 0;`}>{s.text}</h2>}
+                  {s.tag === 'h2' && s.token === '--ty-h2-prose' && <h2 style={`font-size: var(${s.token}); line-height: 1.2; letter-spacing: -0.01em; font-weight: 800; margin: 0;`}>{s.text}</h2>}
+                  {s.tag === 'h3' && <h3 style={`font-size: var(${s.token}); line-height: 1.3; letter-spacing: -0.01em; font-weight: 700; margin: 0;`}>{s.text}</h3>}
+                  {s.tag === 'p' && s.token === '--ty-sub' && <p style={`font-size: var(${s.token}); line-height: var(--ty-sub-lh); color: var(--pianeta-muted-strong); margin: 0;`}>{s.text}</p>}
+                  {s.tag === 'p' && s.token === '--ty-body' && <p style={`font-size: var(${s.token}); line-height: var(--ty-body-lh); margin: 0;`}>{s.text}</p>}
+                  {s.tag === 'p' && s.token === '--ty-eyebrow' && <p style={`font-size: var(${s.token}); text-transform: uppercase; letter-spacing: var(--ty-eyebrow-tracking); color: var(--pianeta-muted); font-weight: 600; margin: 0;`}>{s.text}</p>}
+                  {s.tag === 'p' && s.token === '--ty-meta' && <p style={`font-size: var(${s.token}); color: var(--pianeta-muted-strong); margin: 0;`}>{s.text}</p>}
+                  {s.tag === 'blockquote' && <blockquote style={`font-size: var(${s.token}); line-height: var(--ty-quote-lh); margin: 0; padding-left: 16px; border-left: 3px solid var(--cta-primary);`}>{s.text}</blockquote>}
+                </div>
+                <div class="sg-typo-label">
+                  <code class="sg-swatch-name">{s.token}</code>
+                  <span class="pi-meta-label">{s.note}</span>
+                  <span class="sg-typo-value" data-typo-value={s.token}>—</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- 4. RADII / PADDING / WRAPS -->
+        <section id="radii" class="sg-section">
+          <h2 class="pi-h2">3. Radii · Padding · Wrap</h2>
+
+          <h3 class="sg-h3">Radii</h3>
+          <div class="sg-radii-grid">
+            {spatialTokens.map((r) => (
+              <div class="sg-radii-item">
+                <div class="sg-radii-chip" style={`border-radius: var(${r.name});`}></div>
+                <code class="sg-swatch-name">{r.name}</code>
+                <span class="pi-meta-label">{r.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <h3 class="sg-h3">Padding card</h3>
+          <div class="sg-pad-demo">
+            <div class="sg-pad-outer">
+              <div class="sg-pad-inner">
+                <span class="pi-meta-label">Contenuto card</span>
+                <p class="sg-pad-text">Padding <code>--pad-card</code> · 22px su tutti i lati. Radius <code>--radius-card</code> · 18px. Questa è la surface standard usata su tutte le pagine post-refactor.</p>
+              </div>
+            </div>
+            <p class="pi-meta-label">Small: <code>--pad-card-sm</code> 18px · Large: <code>--pad-card-lg</code> 28px 32px</p>
+          </div>
+
+          <h3 class="sg-h3">Wrap</h3>
+          <div class="sg-wrap-demo">
+            <div class="sg-wrap-box"><span class="pi-meta-label">--wrap-max · 1040px</span></div>
+            <div class="sg-wrap-box sg-wrap-narrow-box"><span class="pi-meta-label">--wrap-narrow-max · 720px</span></div>
+          </div>
+
+          <h3 class="sg-h3">Section padding</h3>
+          <div class="sg-sec-demo">
+            <div class="sg-sec-band">
+              <span class="pi-meta-label">--sec-pad-y · 64px</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. BUTTONS -->
+        <section id="buttons" class="sg-section">
+          <h2 class="pi-h2">4. Buttons / CTA</h2>
+          <p class="sg-lead">Sistema <code>.cta-btn</code> con 3 varianti + due varianti legacy da <code>/hire</code>. La CTA fissa <code>.hub-hire-cta</code> è mostrata statica qui.</p>
+
+          <div class="sg-btn-grid">
+            <div class="sg-btn-cell">
+              <div class="sg-btn-preview"><a href="#" class="cta-btn cta-primary">Lavoriamo insieme</a></div>
+              <code class="sg-swatch-name">.cta-btn .cta-primary</code>
+              <pre class="sg-code"><code>{'<a class="cta-btn cta-primary">Lavoriamo insieme</a>'}</code></pre>
+            </div>
+
+            <div class="sg-btn-cell">
+              <div class="sg-btn-preview"><a href="#" class="cta-btn cta-secondary">Scopri</a></div>
+              <code class="sg-swatch-name">.cta-btn .cta-secondary</code>
+              <pre class="sg-code"><code>{'<a class="cta-btn cta-secondary">Scopri</a>'}</code></pre>
+            </div>
+
+            <div class="sg-btn-cell">
+              <div class="sg-btn-preview"><a href="#" class="cta-btn cta-ghost">Vedi tutto</a></div>
+              <code class="sg-swatch-name">.cta-btn .cta-ghost</code>
+              <pre class="sg-code"><code>{'<a class="cta-btn cta-ghost">Vedi tutto</a>'}</code></pre>
+            </div>
+
+            <div class="sg-btn-cell">
+              <div class="sg-btn-preview"><a href="#" class="hero-cta">Vedi le offerte</a></div>
+              <code class="sg-swatch-name">.hero-cta <em>(HireLanding · variante compatta 13/24)</em></code>
+              <pre class="sg-code"><code>{'<a class="hero-cta">Vedi le offerte</a>'}</code></pre>
+            </div>
+
+            <div class="sg-btn-cell">
+              <div class="sg-btn-preview" style="min-height: 96px; background: var(--soft); border-radius: 12px; padding: 20px; position: relative;">
+                <span class="hub-hire-cta-static">Lavoriamo insieme</span>
+                <span class="pi-meta-label" style="position:absolute; bottom: 8px; left: 12px;">Overlay: position fixed top-right, z-40</span>
+              </div>
+              <code class="sg-swatch-name">.hub-hire-cta <em>(fixed overlay · BaseLayout)</em></code>
+              <pre class="sg-code"><code>{'<a href="/hire" class="hub-hire-cta">Lavoriamo insieme</a>'}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. CARDS -->
+        <section id="cards" class="sg-section">
+          <h2 class="pi-h2">5. Cards</h2>
+          <p class="sg-lead">Surface e varianti — dal sistema unico.</p>
+
+          <div class="sg-cards-grid">
+            <div class="sg-card-cell">
+              <div class="pi-card">
+                <p class="pi-eyebrow">Card standard</p>
+                <h3 style="font-size: var(--ty-h3-prose); margin: 8px 0;">Titolo esempio</h3>
+                <p style="font-size: var(--ty-meta); color: var(--pianeta-muted-strong); margin: 0;">Radius 18 · pad 22 · bg card · border default.</p>
+              </div>
+              <code class="sg-swatch-name">.pi-card</code>
+              <pre class="sg-code"><code>{'<div class="pi-card">...</div>'}</code></pre>
+            </div>
+
+            <div class="sg-card-cell">
+              <div class="pi-card pi-card--sm">
+                <p class="pi-eyebrow">Card small</p>
+                <h3 style="font-size: var(--ty-h3-prose); margin: 8px 0;">Titolo esempio</h3>
+                <p style="font-size: var(--ty-meta); color: var(--pianeta-muted-strong); margin: 0;">Radius 14 · pad 18.</p>
+              </div>
+              <code class="sg-swatch-name">.pi-card.pi-card--sm</code>
+              <pre class="sg-code"><code>{'<div class="pi-card pi-card--sm">...</div>'}</code></pre>
+            </div>
+
+            <div class="sg-card-cell">
+              <div class="sg-method-card">
+                <span class="sg-method-n">01</span>
+                <strong>Discovery</strong>
+                <p>Il metodo di <code>/hire</code>: chip arancio in cima, titolo bold, descrizione muted.</p>
+              </div>
+              <code class="sg-swatch-name">.method-card (HireLanding)</code>
+              <pre class="sg-code"><code>{'<div class="method-card"><span class="method-n">01</span>...</div>'}</code></pre>
+            </div>
+
+            <div class="sg-card-cell">
+              <div class="sg-offer-card" style="border-top: 3px solid var(--cta-primary);">
+                <div class="sg-offer-price">Da progetto</div>
+                <h3 class="sg-offer-name">✳️ Foundation</h3>
+                <p class="sg-offer-forwho">Per team che partono da zero.</p>
+                <ul class="sg-offer-bullets"><li>✓ Design system</li><li>✓ Landing</li><li>✓ Delivery</li></ul>
+                <span class="sg-offer-link" style="color: var(--cta-primary);">Scopri →</span>
+              </div>
+              <code class="sg-swatch-name">.offer-card (HireLanding)</code>
+              <pre class="sg-code"><code>{'<a class="offer-card" style="border-top:3px solid …">...</a>'}</code></pre>
+            </div>
+
+            <div class="sg-card-cell">
+              <div class="pi-card" style="border-left: 3px solid var(--cta-primary);">
+                <blockquote style="font-size: var(--ty-quote); line-height: var(--ty-quote-lh); margin: 0;">
+                  “Standard aperti. Codice consegnato.”
+                </blockquote>
+                <p style="font-size: var(--ty-meta); color: var(--pianeta-muted); margin: 12px 0 0;">— Manifesto Pianeta</p>
+              </div>
+              <code class="sg-swatch-name">Quote card (composita)</code>
+              <pre class="sg-code"><code>{'<div class="pi-card"><blockquote>…</blockquote></div>'}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. OVERLAYS -->
+        <section id="overlays" class="sg-section">
+          <h2 class="pi-h2">6. Overlays & Chrome</h2>
+          <p class="sg-lead">Elementi di chrome del sito — descrizione + snippet. Nessuna demo interattiva qui (per non rompere lo stato della styleguide).</p>
+
+          <div class="sg-overlay-list">
+            <article class="pi-card">
+              <h3 class="sg-h3">SiteRail</h3>
+              <p class="sg-lead">Rail laterale sinistro (60px), trasparente. Contiene logo Pianeta, eyebrow contestuale, theme switcher (Light/Auto/Dark), locale switcher IT/EN. Persiste su tutte le pagine con <code>chrome=true</code>.</p>
+              <pre class="sg-code"><code>{'<SiteRail current={Astro.url.pathname} />'}</code></pre>
+            </article>
+
+            <article class="pi-card">
+              <h3 class="sg-h3">Detail overlay (.work-ov-panel)</h3>
+              <p class="sg-lead">Pannello laterale che scorre da destra su click da index pages (work, bulletin, services). Contiene detail-head + detail-hero + detail-body. Chiude con ESC o click fuori.</p>
+              <pre class="sg-code"><code>{'<div class="work-ov-panel">…</div>'}</code></pre>
+            </article>
+
+            <article class="pi-card">
+              <h3 class="sg-h3">Team overlay (.team-ov-panel)</h3>
+              <p class="sg-lead">Variante del detail overlay per pagine team — con foto profilo, ruolo, bio breve, link a progetti.</p>
+              <pre class="sg-code"><code>{'<div class="team-ov-panel">…</div>'}</code></pre>
+            </article>
+
+            <article class="pi-card">
+              <h3 class="sg-h3">NewsletterPopup</h3>
+              <p class="sg-lead">Popup proattivo con iscrizione alla Bulletin (audience Resend). Nascosto qui via <code>hideNewsletter=true</code>. Anche AlbaProactivePopup segue lo stesso flag.</p>
+              <pre class="sg-code"><code>{'<BaseLayout hideNewsletter={true}>'}</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <!-- 8. UTILITY CLASSES -->
+        <section id="utility" class="sg-section">
+          <h2 class="pi-h2">7. Utility classes</h2>
+          <p class="sg-lead">Prefisso <code>.pi-*</code> — sistema unico condiviso da tutte le pagine.</p>
+          <div class="sg-util-grid">
+            {utilityClasses.map((u) => (
+              <div class="sg-util-row">
+                <code class="sg-swatch-name">{u.cls}</code>
+                <span class="pi-meta-value">{u.desc}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <!-- 9. DARK MODE -->
+        <section id="dark" class="sg-section">
+          <h2 class="pi-h2">8. Dark mode</h2>
+          <p class="sg-lead">Attivata via <code>data-theme="dark"</code> (o <code>data-theme="auto"</code> + <code>data-sun="night"</code>). Testa qui col toggle in cima alla pagina.</p>
+
+          <div class="sg-dark-table">
+              <div class="sg-dark-row sg-dark-head">
+                <span>Cosa cambia</span>
+                <span>Come lo garantisci</span>
+              </div>
+              <div class="sg-dark-row">
+                <span>Background surface</span>
+                <span><code>--pianeta-bg-card</code> passa da <code>#ffffff</code> → <code>#1a1d23</code>. Usa <code>.pi-card</code> o <code>var(--pianeta-bg-card)</code>, mai <code>#fff</code> hard-coded.</span>
+              </div>
+              <div class="sg-dark-row">
+                <span>Text</span>
+                <span><code>--pianeta-text</code> passa da <code>#0e1116</code> → <code>#f5f4ee</code>. Non usare mai il valore hex diretto.</span>
+              </div>
+              <div class="sg-dark-row">
+                <span>Muted</span>
+                <span><code>--pianeta-muted</code> passa a <code>rgba(245,244,238,0.58)</code>. Le rgba <code>(14,17,22,.xx)</code> vanno tokenizzate.</span>
+              </div>
+              <div class="sg-dark-row">
+                <span>Border</span>
+                <span><code>--pianeta-border</code> flippa colore base (bianco su nero). Le border card lo usano già.</span>
+              </div>
+              <div class="sg-dark-row">
+                <span>CTA secondary</span>
+                <span><code>--cta-secondary</code> <code>#1f5b8f</code> → <code>#4a8fc4</code> (contrast preservato su bg scuro).</span>
+              </div>
+              <div class="sg-dark-row">
+                <span>--soft</span>
+                <span><code>#f3f2ea</code> → <code>#15181e</code>. Le sezioni <code>.pi-sec-soft</code> restano distinte dal background principale.</span>
+              </div>
+              <div class="sg-dark-row">
+                <span>--band</span>
+                <span>Resta <code>#14171c</code> in entrambi i temi (design intenzionale).</span>
+              </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ANCHOR NAV -->
+      <aside class="sg-aside">
+        <p class="pi-eyebrow" style="margin-bottom: 12px;">Indice</p>
+        <nav class="sg-anchors" aria-label="Indice sezioni">
+          {sections.map((s, i) => (
+            <a href={`#${s.id}`} data-anchor={s.id} class="sg-anchor">
+              <span class="sg-anchor-num">{String(i + 1).padStart(2, '0')}</span>
+              <span>{s.label}</span>
+            </a>
+          ))}
+        </nav>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Nascondi la CTA fissa "Lavoriamo insieme" solo su questa pagina */
+  :global(.hub-hire-cta) { display: none !important; }
+
+  .sg-root { padding-top: 40px; padding-bottom: 96px; }
+
+  .sg-hero { text-align: left; padding-top: 32px; padding-bottom: 32px; }
+  .sg-hero .pi-hero-sub { margin-top: 14px; max-width: 640px; }
+  .sg-hero code { background: var(--soft); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+
+  .sg-toolbar { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin-top: 28px; padding: 16px 20px; background: var(--soft); border-radius: 14px; border: 1px solid var(--pianeta-border); }
+  .sg-theme { display: flex; align-items: center; gap: 12px; }
+  .sg-theme-btns { display: inline-flex; gap: 4px; padding: 4px; background: var(--pianeta-bg-card); border-radius: 999px; border: 1px solid var(--pianeta-border); }
+  .sg-theme-btn { border: 0; background: transparent; padding: 6px 14px; border-radius: 999px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--pianeta-muted-strong); }
+  .sg-theme-btn[data-active="true"] { background: var(--cta-primary); color: var(--cta-primary-ink); }
+  .sg-hint { margin: 0; }
+
+  .sg-layout { display: grid; grid-template-columns: 1fr; gap: 48px; margin-top: 32px; }
+  @media (min-width: 960px) {
+    .sg-layout { grid-template-columns: minmax(0, 1fr) 220px; align-items: start; gap: 64px; }
+  }
+
+  .sg-aside { order: -1; }
+  @media (min-width: 960px) {
+    .sg-aside { order: 1; position: sticky; top: 24px; }
+  }
+
+  .sg-anchors { display: flex; flex-direction: column; gap: 4px; }
+  .sg-anchor { display: flex; align-items: baseline; gap: 10px; padding: 8px 10px; border-radius: 8px; text-decoration: none; color: var(--pianeta-muted-strong); font-size: 14px; transition: background 150ms, color 150ms; }
+  .sg-anchor:hover { background: var(--soft); color: var(--pianeta-text); }
+  .sg-anchor[data-current="true"] { background: var(--soft); color: var(--pianeta-text); font-weight: 600; }
+  .sg-anchor-num { font-size: 11px; color: var(--pianeta-muted); font-variant-numeric: tabular-nums; }
+
+  .sg-section { padding: 48px 0; border-top: 1px solid var(--pianeta-border); scroll-margin-top: 24px; }
+  .sg-section:first-of-type { border-top: 0; padding-top: 0; }
+  .sg-section h2 { margin-bottom: 8px; }
+  .sg-lead { color: var(--pianeta-muted-strong); font-size: var(--ty-meta); line-height: 1.6; margin: 8px 0 28px; max-width: 640px; }
+  .sg-lead code { background: var(--soft); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+  .sg-h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; color: var(--pianeta-muted-strong); margin: 32px 0 16px; }
+
+  /* Colors */
+  .sg-color-group { margin-bottom: 20px; }
+  .sg-swatch-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (min-width: 640px) { .sg-swatch-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1000px) { .sg-swatch-grid { grid-template-columns: repeat(4, 1fr); } }
+  .sg-swatch { border: 1px solid var(--pianeta-border); border-radius: 14px; overflow: hidden; background: var(--pianeta-bg-card); display: flex; flex-direction: column; }
+  .sg-swatch-chip { height: 96px; border-bottom: 1px solid var(--pianeta-border); }
+  .sg-swatch-meta { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 4px; }
+  .sg-swatch-name { font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pianeta-text); }
+  .sg-swatch-name em { font-style: normal; color: var(--pianeta-muted); font-size: 11px; }
+  .sg-copy { border: 0; background: transparent; padding: 0; text-align: left; cursor: pointer; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pianeta-muted-strong); font-size: 12px; }
+  .sg-copy:hover { color: var(--cta-primary); }
+  .sg-copy[data-copied="true"] { color: var(--green); }
+  .sg-swatch-value { display: inline-block; }
+  .sg-swatch-use { margin-top: 2px; }
+
+  /* Typography */
+  .sg-typo-list { display: flex; flex-direction: column; gap: 24px; }
+  .sg-typo-row { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 20px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 14px; }
+  @media (min-width: 800px) {
+    .sg-typo-row { grid-template-columns: minmax(0, 1fr) 220px; align-items: start; gap: 24px; }
+  }
+  .sg-typo-sample { min-width: 0; }
+  .sg-typo-label { display: flex; flex-direction: column; gap: 4px; padding-top: 4px; border-top: 1px solid var(--pianeta-border); padding-top: 12px; }
+  @media (min-width: 800px) { .sg-typo-label { border-top: 0; padding-top: 0; border-left: 1px solid var(--pianeta-border); padding-left: 20px; } }
+  .sg-typo-value { font-size: 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--pianeta-muted); line-height: 1.5; }
+
+  /* Radii / padding / wrap */
+  .sg-radii-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (min-width: 700px) { .sg-radii-grid { grid-template-columns: repeat(4, 1fr); } }
+  .sg-radii-item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 14px; text-align: center; }
+  .sg-radii-chip { width: 72px; height: 72px; background: var(--cta-primary); }
+
+  .sg-pad-demo { display: flex; flex-direction: column; gap: 12px; }
+  .sg-pad-outer { background: repeating-linear-gradient(45deg, rgba(255,107,51,.10) 0 4px, transparent 4px 12px); border-radius: var(--radius-card); padding: var(--pad-card); border: 1px dashed var(--cta-primary); }
+  .sg-pad-inner { background: var(--pianeta-bg-card); border-radius: 10px; padding: 16px; }
+  .sg-pad-text { font-size: var(--ty-meta); color: var(--pianeta-muted-strong); line-height: 1.5; margin: 6px 0 0; }
+  .sg-pad-text code, .sg-lead code { background: var(--soft); padding: 1px 5px; border-radius: 4px; }
+
+  .sg-wrap-demo { display: flex; flex-direction: column; gap: 12px; }
+  .sg-wrap-box { max-width: var(--wrap-max); background: var(--soft); border: 1px dashed var(--pianeta-border-strong); border-radius: 12px; padding: 20px; text-align: center; }
+  .sg-wrap-narrow-box { max-width: var(--wrap-narrow-max); }
+
+  .sg-sec-demo { background: repeating-linear-gradient(0deg, rgba(255,107,51,.06) 0 4px, transparent 4px 12px); border-radius: 12px; padding: var(--sec-pad-y) 0; text-align: center; }
+  .sg-sec-band { background: var(--pianeta-bg-card); padding: 20px; border-radius: 10px; margin: 0 20px; border: 1px solid var(--pianeta-border); }
+
+  /* Buttons */
+  .sg-btn-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 700px) { .sg-btn-grid { grid-template-columns: 1fr 1fr; } }
+  .sg-btn-cell { display: flex; flex-direction: column; gap: 10px; padding: 20px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 14px; }
+  .sg-btn-preview { display: flex; align-items: center; justify-content: center; min-height: 80px; background: var(--soft); border-radius: 10px; padding: 20px; }
+
+  /* hub-hire-cta static preview (mirror di BaseLayout) */
+  .hub-hire-cta-static {
+    display: inline-block;
+    background: var(--cta-primary); color: var(--cta-primary-ink, #fff);
+    font-weight: 600; font-size: 14px; padding: 9px 18px; border-radius: 999px;
+    text-decoration: none; box-shadow: 0 6px 20px rgba(255,107,51,.30);
+  }
+
+  /* Hero CTA (mirror da HireLanding, autonomo per il preview) */
+  .sg-btn-cell .hero-cta { display: inline-block; background: var(--cta-primary); color: #fff; font-weight: 600; padding: 13px 24px; border-radius: 999px; text-decoration: none; font-size: 14px; }
+
+  .sg-code { background: var(--band); color: #f5f4ee; padding: 12px 14px; border-radius: 10px; font-size: 12px; overflow-x: auto; margin: 0; line-height: 1.5; }
+  .sg-code code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  /* Cards */
+  .sg-cards-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+  @media (min-width: 700px) { .sg-cards-grid { grid-template-columns: 1fr 1fr; } }
+  .sg-card-cell { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Method card (mirror da HireLanding) */
+  .sg-method-card { background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 14px; padding: 18px; }
+  .sg-method-n { font-size: 12px; font-weight: 800; color: var(--cta-primary); }
+  .sg-method-card strong { display: block; margin: 6px 0; font-size: 15px; }
+  .sg-method-card p { color: var(--pianeta-muted-strong); font-size: 13px; line-height: 1.5; margin: 0; }
+  .sg-method-card code { background: var(--soft); padding: 1px 4px; border-radius: 3px; font-size: 12px; }
+
+  /* Offer card (mirror da HireLanding) */
+  .sg-offer-card { background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px; }
+  .sg-offer-price { font-size: 13px; color: var(--pianeta-muted); }
+  .sg-offer-name { font-size: 19px; margin: 0; }
+  .sg-offer-forwho { font-size: 13px; color: var(--pianeta-muted); }
+  .sg-offer-bullets { list-style: none; display: grid; gap: 5px; font-size: 13px; padding: 0; margin: 0; }
+  .sg-offer-link { font-weight: 600; font-size: 14px; }
+
+  /* Overlays */
+  .sg-overlay-list { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (min-width: 700px) { .sg-overlay-list { grid-template-columns: 1fr 1fr; } }
+  .sg-overlay-list h3 { margin: 0 0 8px; font-size: 15px; }
+  .sg-overlay-list .pi-card { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Utility list */
+  .sg-util-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  @media (min-width: 700px) { .sg-util-grid { grid-template-columns: 1fr 1fr; } }
+  .sg-util-row { display: grid; grid-template-columns: 160px 1fr; gap: 12px; align-items: baseline; padding: 10px 14px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 10px; }
+
+  /* Dark table */
+  .sg-dark-table { border: 1px solid var(--pianeta-border); border-radius: 14px; overflow: hidden; }
+  .sg-dark-row { display: grid; grid-template-columns: 200px 1fr; gap: 20px; padding: 14px 20px; border-bottom: 1px solid var(--pianeta-border); font-size: 13px; line-height: 1.6; }
+  .sg-dark-row:last-child { border-bottom: 0; }
+  .sg-dark-head { background: var(--soft); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  .sg-dark-row code { background: var(--soft); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+</style>
+
+<script is:inline>
+  (() => {
+    const init = () => {
+      const root = document.documentElement;
+
+      // 1) Risolvi valori CSS var per swatch + typo labels
+      const resolve = (name) => {
+        const raw = getComputedStyle(root).getPropertyValue(name).trim();
+        return raw || '—';
+      };
+
+      const renderValues = () => {
+        document.querySelectorAll('[data-var-value]').forEach((el) => {
+          const name = el.getAttribute('data-var-value');
+          el.textContent = resolve(name);
+        });
+        document.querySelectorAll('[data-typo-value]').forEach((el) => {
+          const name = el.getAttribute('data-typo-value');
+          const size = resolve(name);
+          // Ricava line-height / tracking correlati quando esistono
+          let extra = '';
+          if (name === '--ty-hero') extra = ' · lh ' + resolve('--ty-hero-lh') + ' · tracking ' + resolve('--ty-hero-tracking');
+          if (name === '--ty-sub') extra = ' · lh ' + resolve('--ty-sub-lh');
+          if (name === '--ty-body') extra = ' · lh ' + resolve('--ty-body-lh');
+          if (name === '--ty-h2-sec') extra = ' · tracking ' + resolve('--ty-h2-sec-tracking');
+          if (name === '--ty-eyebrow') extra = ' · tracking ' + resolve('--ty-eyebrow-tracking');
+          if (name === '--ty-quote') extra = ' · lh ' + resolve('--ty-quote-lh');
+          el.textContent = size + extra;
+        });
+      };
+      renderValues();
+
+      // 2) Copy-to-clipboard sui valori risolti
+      document.querySelectorAll('[data-copy-var]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const name = btn.getAttribute('data-copy-var');
+          const val = resolve(name);
+          try {
+            await navigator.clipboard.writeText(val);
+            btn.setAttribute('data-copied', 'true');
+            setTimeout(() => btn.removeAttribute('data-copied'), 1200);
+          } catch (e) {}
+        });
+      });
+
+      // 3) Theme switcher locale (usa lo stesso pattern globale — chiave pianeta-theme)
+      const KEY = 'pianeta-theme';
+      const setTheme = (v) => {
+        try { localStorage.setItem(KEY, v); } catch (e) {}
+        root.setAttribute('data-theme', v);
+        document.querySelectorAll('[data-theme-set]').forEach((b) => {
+          b.setAttribute('data-active', b.getAttribute('data-theme-set') === v ? 'true' : 'false');
+        });
+        // Re-render dei valori risolti (i colori risolvono da hex al nuovo tema)
+        setTimeout(renderValues, 40);
+      };
+      document.querySelectorAll('[data-theme-set]').forEach((btn) => {
+        btn.addEventListener('click', () => setTheme(btn.getAttribute('data-theme-set')));
+      });
+      // Sync iniziale
+      const current = (() => { try { return localStorage.getItem(KEY) || root.getAttribute('data-theme') || 'auto'; } catch (e) { return 'auto'; } })();
+      document.querySelectorAll('[data-theme-set]').forEach((b) => {
+        b.setAttribute('data-active', b.getAttribute('data-theme-set') === current ? 'true' : 'false');
+      });
+
+      // 4) Anchor attivo su scroll
+      const anchors = Array.from(document.querySelectorAll('[data-anchor]'));
+      const targets = anchors.map((a) => document.getElementById(a.getAttribute('data-anchor'))).filter(Boolean);
+      if ('IntersectionObserver' in window && targets.length) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const id = e.target.id;
+              anchors.forEach((a) => a.setAttribute('data-current', a.getAttribute('data-anchor') === id ? 'true' : 'false'));
+            }
+          });
+        }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+        targets.forEach((t) => io.observe(t));
+      }
+    };
+
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>
