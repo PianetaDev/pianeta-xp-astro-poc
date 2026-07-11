@@ -167,7 +167,7 @@ const onTouchEnd = () => {
   width: 48px;
   height: 5px;
   background: rgba(14,17,22,0.25);
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   margin: 8px auto 0;
   flex-shrink: 0;
   cursor: grab;
@@ -188,19 +188,19 @@ const onTouchEnd = () => {
 }
 .alba-head-id { display: flex; align-items: center; gap: 10px; }
 .alba-avatar {
-  width: 36px; height: 36px; border-radius: 999px;
+  width: 36px; height: 36px; border-radius: var(--r-pill);
   background: linear-gradient(135deg, #fbcfe8, #fed7aa, #fef3c7);
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 14px; color: #0e1116;
+  font-weight: 800; font-size: var(--ty-meta); color: #0e1116;
 }
-.alba-name { font-size: 14px; font-weight: 700; margin: 0; line-height: 1.1; }
-.alba-sub { font-size: 11px; color: rgba(14,17,22,0.55); margin: 2px 0 0; line-height: 1.1; }
+.alba-name { font-size: var(--ty-meta); font-weight: 700; margin: 0; line-height: 1.1; }
+.alba-sub { font-size: var(--ty-eyebrow); color: var(--pianeta-muted); margin: 2px 0 0; line-height: 1.1; }
 .alba-close, .alba-close-sm {
   background: transparent; border: 0;
   width: 36px; height: 36px;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   display: flex; align-items: center; justify-content: center;
-  color: rgba(14,17,22,0.7);
+  color: var(--pianeta-muted-strong);
   cursor: pointer;
   transition: background 150ms;
 }
@@ -228,10 +228,10 @@ const onTouchEnd = () => {
 }
 .alba-artifact-title {
   display: flex; align-items: center; gap: 8px;
-  font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+  font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
   color: rgba(14,17,22,0.6);
 }
-.alba-artifact-body { flex: 1; overflow-y: auto; padding: 18px; font-size: 14px; }
+.alba-artifact-body { flex: 1; overflow-y: auto; padding: 18px; font-size: var(--ty-meta); }
 .alba-artifact-body pre { font-size: 12px; white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, monospace; }
 
 /* Enter/leave: slide from right desktop, slide from bottom mobile */

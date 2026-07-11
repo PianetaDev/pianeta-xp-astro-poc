@@ -285,7 +285,7 @@ function close() { emit('close') }
   border: 1px solid rgba(255,107,51,0.32);
   border-radius: 10px;
   font: inherit;
-  font-size: 14px;
+  font-size: var(--ty-meta);
   font-weight: 700;
   cursor: pointer;
   text-align: left;
@@ -469,7 +469,7 @@ function close() { emit('close') }
 .alba-name { font-weight: 700; font-size: 16px; line-height: 1.1; color: #0f172a; }
 .alba-sub { font-size: 12px; color: #64748b; margin-top: 2px; }
 .alba-close {
-  border: 0; background: transparent; font-size: 28px; line-height: 1; color: #64748b;
+  border: 0; background: transparent; font-size: var(--ty-h2-sec); line-height: 1; color: #64748b;
   cursor: pointer; padding: 4px 8px; border-radius: 6px;
 }
 .alba-close:hover { background: #f1f5f9; color: #0f172a; }
@@ -485,8 +485,8 @@ function close() { emit('close') }
 .alba-msg.assistant { align-self: flex-start; align-items: flex-start; }
 .alba-bubble {
   padding: 12px 14px;
-  border-radius: 14px;
-  font-size: 14px; line-height: 1.55;
+  border-radius: var(--radius-card-sm);
+  font-size: var(--ty-meta); line-height: 1.55;
   word-wrap: break-word;
 }
 .alba-msg.user .alba-bubble {
@@ -499,7 +499,7 @@ function close() { emit('close') }
   border-bottom-left-radius: 4px;
 }
 .alba-handoff-tag {
-  font-size: 11px; color: #FF6B33; font-weight: 600;
+  font-size: var(--ty-eyebrow); color: #FF6B33; font-weight: 600;
   margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em;
 }
 
@@ -526,7 +526,7 @@ function close() { emit('close') }
   flex: 1; resize: none;
   border: 1px solid #cbd5e1; border-radius: 8px;
   padding: 10px 12px;
-  font-family: inherit; font-size: 14px; line-height: 1.4;
+  font-family: inherit; font-size: var(--ty-meta); line-height: 1.4;
   color: #1e293b; background: #ffffff;
   outline: none;
 }
@@ -535,7 +535,7 @@ function close() { emit('close') }
 .alba-send {
   border: 0; background: #046BD2; color: #ffffff;
   padding: 0 18px; border-radius: 8px;
-  font-weight: 600; font-size: 14px; cursor: pointer;
+  font-weight: 600; font-size: var(--ty-meta); cursor: pointer;
   transition: background 0.15s;
 }
 .alba-send:hover:not(:disabled) { background: #035aab; }
@@ -546,11 +546,11 @@ function close() { emit('close') }
   padding: 8px 14px;
   background: #F0F5FA;
   border-top: 1px solid #e2e8f0;
-  font-size: 11px; color: #64748b;
+  font-size: var(--ty-eyebrow); color: #64748b;
 }
 .alba-close-link {
   border: 0; background: transparent; color: #046BD2;
-  cursor: pointer; font-size: 11px; text-decoration: underline;
+  cursor: pointer; font-size: var(--ty-eyebrow); text-decoration: underline;
 }
 
 .alba-fade-enter-active, .alba-fade-leave-active { transition: opacity 0.2s ease; }
@@ -564,8 +564,8 @@ function close() { emit('close') }
   padding: 8px 14px;
   background: rgba(255,255,255,0.65);
   border: 1px solid rgba(14,17,22,0.10);
-  border-radius: 999px;
-  font-size: 13px;
+  border-radius: var(--r-pill);
+  font-size: var(--ty-meta);
   font-weight: 500;
   color: #0e1116;
   cursor: pointer;

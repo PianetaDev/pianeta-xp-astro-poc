@@ -59,7 +59,7 @@ const renderCta = (c: CtaProp, cls: string) => {
 ---
 {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 {fallbackBanner && (
-  <div class="detail-fallback-banner" role="status" style="max-width:1100px;margin:16px auto 0;padding:10px 16px;background:rgba(255,107,51,0.10);border:1px solid rgba(255,107,51,0.25);border-radius:8px;color:var(--pianeta-text);font-size:13px;line-height:1.4;">
+  <div class="detail-fallback-banner" role="status" style="max-width:1100px;margin:16px auto 0;padding:10px 16px;background:rgba(255,107,51,0.10);border:1px solid rgba(255,107,51,0.25);border-radius:8px;color:var(--pianeta-text);font-size: var(--ty-meta);line-height:1.4;">
     {fallbackBanner}
   </div>
 )}

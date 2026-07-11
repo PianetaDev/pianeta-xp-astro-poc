@@ -219,7 +219,7 @@ onBeforeUnmount(() => {
   position: absolute; top: 8px; right: 10px;
   width: 26px; height: 26px;
   background: transparent; border: 0;
-  font-size: 18px; line-height: 1; color: rgba(14,17,22,0.5);
+  font-size: var(--ty-sub); line-height: 1; color: rgba(14,17,22,0.5);
   cursor: pointer; border-radius: 50%;
   z-index: 2;
 }
@@ -230,14 +230,14 @@ onBeforeUnmount(() => {
 }
 .alba-popup-avatar {
   flex-shrink: 0;
-  width: 36px; height: 36px; border-radius: 999px;
+  width: 36px; height: 36px; border-radius: var(--r-pill);
   background: linear-gradient(135deg, #fbcfe8, #fed7aa, #fef3c7);
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 14px; color: #0e1116;
+  font-weight: 800; font-size: var(--ty-meta); color: #0e1116;
 }
 .alba-popup-text { flex: 1; min-width: 0; }
-.alba-popup-title { font-size: 14px; font-weight: 700; margin: 0; line-height: 1.25; }
-.alba-popup-sub { font-size: 12px; color: rgba(14,17,22,0.55); margin: 4px 0 10px; line-height: 1.35; }
+.alba-popup-title { font-size: var(--ty-meta); font-weight: 700; margin: 0; line-height: 1.25; }
+.alba-popup-sub { font-size: 12px; color: var(--pianeta-muted); margin: 4px 0 10px; line-height: 1.35; }
 
 /* Carosello prompt: scroll verticale + maschera sfumata sopra/sotto */
 .alba-popup-prompts {
@@ -266,7 +266,7 @@ onBeforeUnmount(() => {
   transform: translateY(-1px);
 }
 .alba-popup-prompt {
-  font-size: 14px;
+  font-size: var(--ty-meta);
   font-weight: 700;
   line-height: 1.3;
   color: var(--cta-primary, #FF6B33);
@@ -284,7 +284,7 @@ onBeforeUnmount(() => {
   padding: 0;
   background: transparent;
   border: 0;
-  color: rgba(14,17,22,0.55);
+  color: var(--pianeta-muted);
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
