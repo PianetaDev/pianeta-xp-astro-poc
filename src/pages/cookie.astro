@@ -1,9 +1,83 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const updated = '11 luglio 2026';
 ---
-<BaseLayout title="Cookie — Pianeta.Studio" chrome={false}>
-  <article class="px-6 lg:px-12 pt-16 pb-16 max-w-[720px]">
-    <h1 class="text-4xl font-black mb-6">Cookie</h1>
-    <div class="prose-eclag"><p>Cookie policy. Usiamo cookie tecnici e, previo consenso, di analisi.</p></div>
+<BaseLayout title="Cookie — Pianeta.Studio" description="Cookie policy: quali cookie usiamo, per quali finalità e come revocare il consenso." chrome={true}>
+  <article class="detail-page">
+    <header class="detail-head">
+      <p class="detail-eyebrow">Legale</p>
+      <h1 class="detail-title">Cookie Policy</h1>
+      <p class="detail-deck">Quali cookie e tecnologie simili usiamo su pianeta.studio, per quali finalità e come gestire il consenso.</p>
+      <p style="font-size:0.85rem;opacity:0.7;margin-top:8px">Ultimo aggiornamento: {updated}</p>
+    </header>
+
+    <div class="detail-body prose-eclag">
+      <h2>Titolare</h2>
+      <p>PIANETA.STUDIO S.R.L. S.B., Via IV Novembre 18, 95037 San Giovanni La Punta (CT) — C.F./P.IVA 06037730873. Contatti: <a href="mailto:info@pianeta.studio">info@pianeta.studio</a>. Informativa privacy estesa: <a href="/privacy">/privacy</a>.</p>
+
+      <h2>Cosa sono i cookie</h2>
+      <p>I cookie sono piccoli file di testo salvati sul tuo dispositivo dai siti che visiti. Usiamo cookie e tecnologie simili (localStorage, pixel) per far funzionare il sito, misurarne l'uso in modo anonimo e — solo previo consenso esplicito — per attività di marketing.</p>
+
+      <h2>Categorie di cookie usati</h2>
+
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--pianeta-border);text-align:left;">
+              <th style="padding:10px 8px;">Categoria</th>
+              <th style="padding:10px 8px;">Fornitore</th>
+              <th style="padding:10px 8px;">Finalità</th>
+              <th style="padding:10px 8px;">Durata</th>
+              <th style="padding:10px 8px;">Consenso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--pianeta-border);">
+              <td style="padding:10px 8px;"><strong>Tecnici</strong></td>
+              <td style="padding:10px 8px;">Pianeta.Studio</td>
+              <td style="padding:10px 8px;">Sessione, preferenza tema (localStorage <code>pianeta-theme</code>), memorizzazione consenso cookie.</td>
+              <td style="padding:10px 8px;">Sessione / 12 mesi</td>
+              <td style="padding:10px 8px;">Non richiesto</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pianeta-border);">
+              <td style="padding:10px 8px;"><strong>Analitici</strong></td>
+              <td style="padding:10px 8px;">Google Analytics 4 (<code>G-T6BP1GCG7P</code>)</td>
+              <td style="padding:10px 8px;">Misurazione anonima traffico, sorgenti, contenuti più visti.</td>
+              <td style="padding:10px 8px;">14 mesi</td>
+              <td style="padding:10px 8px;">Richiesto</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pianeta-border);">
+              <td style="padding:10px 8px;"><strong>Marketing</strong></td>
+              <td style="padding:10px 8px;">Google Ads (<code>AW-16699800788</code>)</td>
+              <td style="padding:10px 8px;">Tracciamento conversioni campagne pubblicitarie.</td>
+              <td style="padding:10px 8px;">90 giorni</td>
+              <td style="padding:10px 8px;">Richiesto</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--pianeta-border);">
+              <td style="padding:10px 8px;"><strong>Marketing</strong></td>
+              <td style="padding:10px 8px;">LinkedIn Insight Tag</td>
+              <td style="padding:10px 8px;">Attribuzione traffico da LinkedIn, retargeting.</td>
+              <td style="padding:10px 8px;">Fino a 6 mesi</td>
+              <td style="padding:10px 8px;">Richiesto</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Gestione e revoca del consenso</h2>
+      <p>Puoi cambiare le tue scelte in qualsiasi momento dal pannello Cookie del sito: <button type="button" data-action="open-cookie-consent" style="background:none;border:0;color:var(--cta-primary);cursor:pointer;text-decoration:underline;padding:0;font:inherit;">apri il pannello preferenze cookie</button>. In alternativa puoi disabilitare i cookie dalle impostazioni del browser (Chrome, Safari, Firefox, Edge supportano gestione granulare per dominio).</p>
+
+      <h2>Cookie di terze parti</h2>
+      <p>Google Analytics, Google Ads e LinkedIn Insight sono servizi di terze parti con proprie informative privacy. I dati raccolti possono essere trasferiti verso gli USA sulla base delle Clausole Contrattuali Standard e del EU-US Data Privacy Framework.</p>
+
+      <h2>Aggiornamenti</h2>
+      <p>Questa cookie policy può essere aggiornata. La versione corrente è sempre disponibile a questo URL con data in testa alla pagina.</p>
+    </div>
   </article>
+
+  <script is:inline>
+    document.querySelectorAll('[data-action="open-cookie-consent"]').forEach((b) => {
+      b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('cookie-consent:open')));
+    });
+  </script>
 </BaseLayout>

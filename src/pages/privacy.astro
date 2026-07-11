@@ -1,9 +1,57 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const updated = '11 luglio 2026';
 ---
-<BaseLayout title="Privacy — Pianeta.Studio" chrome={false}>
-  <article class="px-6 lg:px-12 pt-16 pb-16 max-w-[720px]">
-    <h1 class="text-4xl font-black mb-6">Privacy</h1>
-    <div class="prose-eclag"><p>Informativa privacy ai sensi del GDPR. Per richieste: <a class='underline' href='mailto:info@pianeta.studio'>info@pianeta.studio</a>.</p></div>
+<BaseLayout title="Privacy — Pianeta.Studio" description="Informativa privacy ai sensi del Regolamento (UE) 2016/679 (GDPR)." chrome={true}>
+  <article class="detail-page">
+    <header class="detail-head">
+      <p class="detail-eyebrow">Legale</p>
+      <h1 class="detail-title">Informativa Privacy</h1>
+      <p class="detail-deck">Ai sensi degli artt. 13-14 del Regolamento (UE) 2016/679 — GDPR.</p>
+      <p style="font-size:0.85rem;opacity:0.7;margin-top:8px">Ultimo aggiornamento: {updated}</p>
+    </header>
+
+    <div class="detail-body prose-eclag">
+      <h2>1. Titolare del trattamento</h2>
+      <p>
+        <strong>PIANETA.STUDIO S.R.L. S.B.</strong> unipersonale (Società Benefit) —
+        Via IV Novembre 18, 95037 San Giovanni La Punta (CT) — C.F./P.IVA 06037730873 — REA CT-459996.<br/>
+        PEC: <a href="mailto:pianeta.studiosrlsb@legalmail.it">pianeta.studiosrlsb@legalmail.it</a> —
+        email: <a href="mailto:info@pianeta.studio">info@pianeta.studio</a>.
+      </p>
+
+      <h2>2. Dati trattati e finalità</h2>
+      <ul>
+        <li><strong>Contatto tramite form / email</strong> (nome, email, azienda, messaggio) — riscontro alle richieste. Base giuridica: art. 6(1)(b) esecuzione di misure precontrattuali; conservazione 24 mesi dall'ultimo contatto.</li>
+        <li><strong>Richieste commerciali via /hire</strong> (dati intake + eventuale conversazione con l'assistente Alba) — qualificazione del lead, preventivo, contrattualizzazione. Base giuridica: art. 6(1)(b); conservazione 24 mesi o durata del rapporto contrattuale.</li>
+        <li><strong>Iscrizione newsletter (Bulletin, annunci)</strong> — invio contenuti editoriali e comunicazioni istituzionali. Base giuridica: art. 6(1)(a) consenso; conservazione fino a revoca del consenso.</li>
+        <li><strong>Cookie tecnici e analitici</strong> — funzionamento del sito e misurazione anonima del traffico. Base giuridica: art. 6(1)(f) legittimo interesse per i tecnici; art. 6(1)(a) consenso per analitici e marketing. Dettagli in <a href="/cookie">Cookie Policy</a>.</li>
+        <li><strong>Adempimenti contabili e fiscali</strong> (fatturazione, contratti) — obblighi di legge. Base giuridica: art. 6(1)(c); conservazione 10 anni.</li>
+      </ul>
+
+      <h2>3. Destinatari e responsabili esterni</h2>
+      <p>I dati sono trattati con strumenti di terze parti, nominati Responsabili del trattamento ex art. 28 GDPR:</p>
+      <ul>
+        <li><strong>Vercel Inc.</strong> — hosting del sito (USA)</li>
+        <li><strong>Supabase Inc.</strong> — database applicativo (UE/USA)</li>
+        <li><strong>Resend</strong> — invio email transazionali e newsletter (USA)</li>
+        <li><strong>Stripe Payments Europe</strong> — pagamenti /hire (Irlanda / USA)</li>
+        <li><strong>Google LLC</strong> — Google Analytics 4, Google Ads (USA)</li>
+        <li><strong>Anthropic PBC</strong> — modello linguistico che alimenta l'assistente Alba (USA)</li>
+        <li><strong>Etastudio</strong> — commercialista/fiscale (Italia)</li>
+      </ul>
+
+      <h2>4. Trasferimenti extra-UE</h2>
+      <p>I trasferimenti verso fornitori USA (Vercel, Stripe, Resend, Google, Anthropic) avvengono sulla base di Clausole Contrattuali Standard (CCS) approvate dalla Commissione Europea (Decisione 2021/914) e, ove applicabile, dell'adesione al <em>EU-US Data Privacy Framework</em>.</p>
+
+      <h2>5. Diritti dell'interessato</h2>
+      <p>Ai sensi degli artt. 15-22 GDPR puoi esercitare in ogni momento i diritti di accesso, rettifica, cancellazione, limitazione, portabilità, opposizione e revoca del consenso scrivendo a <a href="mailto:info@pianeta.studio">info@pianeta.studio</a>. Hai inoltre diritto di proporre reclamo all'Autorità Garante per la Protezione dei Dati Personali (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">garanteprivacy.it</a>).</p>
+
+      <h2>6. Modalità di trattamento e sicurezza</h2>
+      <p>Il trattamento avviene con strumenti elettronici, protetti da cifratura in transito (TLS), controllo degli accessi e backup regolari. Non sono effettuati processi decisionali automatizzati che producano effetti giuridici sull'interessato ex art. 22 GDPR.</p>
+
+      <h2>7. Aggiornamenti</h2>
+      <p>Questa informativa può essere aggiornata per adeguarla a modifiche normative o operative. La versione corrente è sempre pubblicata a questo URL. Data ultimo aggiornamento in testa alla pagina.</p>
+    </div>
   </article>
 </BaseLayout>
