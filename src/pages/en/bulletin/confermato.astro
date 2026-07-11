@@ -5,8 +5,7 @@ const already = Astro.url.searchParams.get('already') === '1';
 ---
 <BaseLayout title={already ? 'Already subscribed · Pianeta Bulletin' : 'Subscription confirmed · Pianeta Bulletin'} description="Subscription active.">
   <div class="px-6 lg:px-10 py-16 md:py-24 max-w-[640px] mx-auto text-center">
-    <p class="text-5xl mb-6">🌱</p>
-    <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">
       {already ? 'Subscription already active' : 'Subscription confirmed'}
     </h1>
     <p class="mt-6 text-lg text-black/70">

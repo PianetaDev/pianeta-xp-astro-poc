@@ -18,7 +18,7 @@ const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
 const cover = data.cover || data.ogImage;
-const live = data.links?.live;
+const live = data.live || data.links?.live;
 const bulletinRefs: string[] = data.links?.bulletin || [];
 
 const metaInline = [

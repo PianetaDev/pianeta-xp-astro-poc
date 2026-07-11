@@ -72,13 +72,19 @@ const cfg = {
       <a href={S.workAll} class="sec-all">{S.worksAll}</a>
     </div>
   </div>
-    <div class="works-scroll">
-      {WORKS.map((w) => (
-        <a href={w.href} class="work-card work-open" data-work={w.href.split('/work/')[1]}>
-          <div class="work-cover" style={`background-image:url('${w.cover}')`}></div>
-          <div class="work-meta"><strong>{w.title}</strong><span>{w.client}</span></div>
-        </a>
-      ))}
+    <div class="works-scroll-wrap">
+      <div class="works-scroll" data-works-scroll>
+        {WORKS.map((w) => (
+          <a href={w.href} class="work-card work-open" data-work={w.href.split('/work/')[1]}>
+            <div class="work-cover" style={`background-image:url('${w.cover}')`}></div>
+            <div class="work-meta"><strong>{w.title}</strong><span>{w.client}</span></div>
+          </a>
+        ))}
+      </div>
+      <div class="works-nav" aria-hidden="false">
+        <button type="button" class="works-nav-btn" data-works-prev aria-label="Precedente">‹</button>
+        <button type="button" class="works-nav-btn" data-works-next aria-label="Successivo">›</button>
+      </div>
     </div>
   </section>
 
@@ -248,9 +254,31 @@ const cfg = {
   .offer-link { font-weight: 600; font-size: 14px; }
   .risk-line { text-align: center; color: var(--mut); font-size: 13px; margin: 22px 0 0; }
 
-  .works-scroll { display: flex; gap: 16px; overflow-x: auto; padding: 24px 24px 8px; scroll-snap-type: x mandatory; }
-  .works-scroll::-webkit-scrollbar { height: 6px; }
+  .works-scroll-wrap { position: relative; }
+  /* Bleed: il carosello arriva fino ai bordi del viewport, senza overflow-hidden clip da genitori */
+  .works-scroll {
+    display: flex; gap: 16px;
+    overflow-x: auto; overflow-y: hidden;
+    padding: 24px max(24px, calc((100vw - 1040px) / 2)) 12px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .works-scroll::-webkit-scrollbar { height: 8px; }
+  .works-scroll::-webkit-scrollbar-thumb { background: rgba(14,17,22,.18); border-radius: 999px; }
   .work-card { flex: 0 0 300px; scroll-snap-align: start; text-decoration: none; color: inherit; }
+  /* Controlli prev/next: assicurano UX consistente su desktop (trackpad senza scrollbar visibile) e tastiera */
+  .works-nav { display: flex; gap: 10px; justify-content: flex-end; max-width: 1040px; margin: 8px auto 0; padding: 0 24px; }
+  .works-nav-btn {
+    width: 40px; height: 40px; border-radius: 999px;
+    background: var(--card); border: 1px solid var(--line);
+    color: var(--txt); font-size: 22px; line-height: 1; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: border-color 150ms, background 150ms;
+  }
+  .works-nav-btn:hover { border-color: var(--pianeta-border-strong); }
+  .works-nav-btn:focus-visible { outline: 2px solid var(--cta-primary); outline-offset: 2px; }
+  .works-nav-btn[disabled] { opacity: .35; cursor: not-allowed; }
   .work-cover { aspect-ratio: 16/10; border-radius: 14px; background-size: cover; background-position: center; border: 1px solid var(--line); }
   .work-meta { padding: 10px 2px; display: flex; flex-direction: column; }
   .work-meta strong { font-size: 15px; }
@@ -405,5 +433,29 @@ const cfg = {
     };
     init();
     document.addEventListener('astro:page-load', init);
+
+    // Carosello /hire: prev/next buttons (fallback per trackpad senza scrollbar visibile + tastiera)
+    const initWorksNav = () => {
+      const scroller = document.querySelector('[data-works-scroll]');
+      if (!scroller || scroller.dataset.navBound) return;
+      scroller.dataset.navBound = '1';
+      const prev = document.querySelector('[data-works-prev]');
+      const next = document.querySelector('[data-works-next]');
+      const STEP = 316; // 300 card + 16 gap
+      const update = () => {
+        const max = scroller.scrollWidth - scroller.clientWidth - 2;
+        if (prev) prev.toggleAttribute('disabled', scroller.scrollLeft <= 2);
+        if (next) next.toggleAttribute('disabled', scroller.scrollLeft >= max);
+        const nav = document.querySelector('.works-nav');
+        if (nav) nav.style.display = (scroller.scrollWidth <= scroller.clientWidth + 4) ? 'none' : '';
+      };
+      prev && prev.addEventListener('click', () => scroller.scrollBy({ left: -STEP, behavior: 'smooth' }));
+      next && next.addEventListener('click', () => scroller.scrollBy({ left: STEP, behavior: 'smooth' }));
+      scroller.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    };
+    initWorksNav();
+    document.addEventListener('astro:page-load', initWorksNav);
   })();
 </script>
