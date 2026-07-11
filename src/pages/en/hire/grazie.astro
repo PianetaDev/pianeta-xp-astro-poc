@@ -6,7 +6,6 @@ const offer = offerBySlug(Astro.url.searchParams.get('offer') ?? '', 'en');
 <BaseLayout title="Thank you — Pianeta.Studio" hideNewsletter>
   <div class="hire-page" style="--mut:var(--pianeta-muted);--acc:var(--cta-primary)">
   <main class="wrap" style="max-width:620px;margin:0 auto;text-align:center;padding:80px 24px 72px">
-    <div style="font-size:40px">✅</div>
     <h1 style="font-size:30px;margin:12px 0">Thank you!</h1>
     <p style="color:var(--mut);font-size:17px;line-height:1.6">
       {offer ? `Purchase started for ${offer.name}.` : 'Purchase received.'} We’ll be in touch shortly to get going — check your inbox.

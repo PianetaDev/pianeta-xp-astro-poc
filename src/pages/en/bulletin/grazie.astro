@@ -4,8 +4,7 @@ const email = Astro.url.searchParams.get('email') || '';
 ---
 <BaseLayout title="Thanks · Pianeta Bulletin" description="Check your inbox to confirm the subscription.">
   <div class="px-6 lg:px-10 py-16 md:py-24 max-w-[640px] mx-auto text-center">
-    <p class="text-5xl mb-6">📬</p>
-    <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">Check your inbox</h1>
+        <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">Check your inbox</h1>
     <p class="mt-6 text-lg text-black/70">
       We sent you an email{email && ` at `}{email && <strong class="text-black">{email}</strong>} with the link to confirm your subscription.
     </p>
