@@ -1,9 +1,57 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const updated = 'July 11, 2026';
 ---
-<BaseLayout title="Privacy — Pianeta.Studio" chrome={false}>
-  <article class="px-6 lg:px-12 pt-16 pb-16 max-w-[720px]">
-    <h1 class="text-4xl font-black mb-6">Privacy</h1>
-    <div class="prose-eclag"><p>Privacy notice pursuant to GDPR. For requests: <a class='underline' href='mailto:info@pianeta.studio'>info@pianeta.studio</a>.</p></div>
+<BaseLayout title="Privacy — Pianeta.Studio" description="Privacy notice pursuant to Regulation (EU) 2016/679 (GDPR)." chrome={true}>
+  <article class="detail-page">
+    <header class="detail-head">
+      <p class="detail-eyebrow">Legal</p>
+      <h1 class="detail-title">Privacy Notice</h1>
+      <p class="detail-deck">Pursuant to Articles 13-14 of Regulation (EU) 2016/679 — GDPR.</p>
+      <p style="font-size:0.85rem;opacity:0.7;margin-top:8px">Last updated: {updated}</p>
+    </header>
+
+    <div class="detail-body prose-eclag">
+      <h2>1. Data controller</h2>
+      <p>
+        <strong>PIANETA.STUDIO S.R.L. S.B.</strong> (single-shareholder Benefit Corporation) —
+        Via IV Novembre 18, 95037 San Giovanni La Punta (CT), Italy — VAT/Tax ID 06037730873 — REA CT-459996.<br/>
+        PEC: <a href="mailto:pianeta.studiosrlsb@legalmail.it">pianeta.studiosrlsb@legalmail.it</a> —
+        email: <a href="mailto:info@pianeta.studio">info@pianeta.studio</a>.
+      </p>
+
+      <h2>2. Data collected and purposes</h2>
+      <ul>
+        <li><strong>Contact via form / email</strong> (name, email, company, message) — replying to requests. Legal basis: Art. 6(1)(b) pre-contractual measures; retention 24 months from last contact.</li>
+        <li><strong>Commercial requests via /hire</strong> (intake fields plus any conversation with the Alba assistant) — lead qualification, proposal, contracting. Legal basis: Art. 6(1)(b); retention 24 months or duration of the contract.</li>
+        <li><strong>Newsletter signup (Bulletin, announcements)</strong> — sending editorial content and studio updates. Legal basis: Art. 6(1)(a) consent; retention until consent is withdrawn.</li>
+        <li><strong>Technical and analytics cookies</strong> — site operation and anonymous traffic measurement. Legal basis: Art. 6(1)(f) legitimate interest for technical cookies; Art. 6(1)(a) consent for analytics and marketing. Details in <a href="/en/cookie">Cookie Policy</a>.</li>
+        <li><strong>Accounting and tax obligations</strong> (invoicing, contracts) — statutory duties. Legal basis: Art. 6(1)(c); retention 10 years.</li>
+      </ul>
+
+      <h2>3. Recipients and processors</h2>
+      <p>Data is processed with third-party tools appointed as Processors under Art. 28 GDPR:</p>
+      <ul>
+        <li><strong>Vercel Inc.</strong> — website hosting (USA)</li>
+        <li><strong>Supabase Inc.</strong> — application database (EU/USA)</li>
+        <li><strong>Resend</strong> — transactional and newsletter email (USA)</li>
+        <li><strong>Stripe Payments Europe</strong> — /hire payments (Ireland / USA)</li>
+        <li><strong>Google LLC</strong> — Google Analytics 4, Google Ads (USA)</li>
+        <li><strong>Anthropic PBC</strong> — LLM powering the Alba assistant (USA)</li>
+        <li><strong>Etastudio</strong> — tax/accounting advisor (Italy)</li>
+      </ul>
+
+      <h2>4. International transfers</h2>
+      <p>Transfers to US providers (Vercel, Stripe, Resend, Google, Anthropic) rely on Standard Contractual Clauses approved by the European Commission (Decision 2021/914) and, where applicable, participation in the <em>EU-US Data Privacy Framework</em>.</p>
+
+      <h2>5. Data subject rights</h2>
+      <p>Under Articles 15-22 GDPR you may exercise access, rectification, erasure, restriction, portability, objection and consent-withdrawal rights at any time by writing to <a href="mailto:info@pianeta.studio">info@pianeta.studio</a>. You may also lodge a complaint with the Italian Data Protection Authority (<a href="https://www.garanteprivacy.it" target="_blank" rel="noopener">garanteprivacy.it</a>).</p>
+
+      <h2>6. Processing and security</h2>
+      <p>Processing is carried out electronically with TLS in-transit encryption, access controls and regular backups. No automated decision-making producing legal effects on the data subject under Art. 22 GDPR is performed.</p>
+
+      <h2>7. Updates</h2>
+      <p>This notice may be updated to reflect regulatory or operational changes. The current version is always published at this URL. Last-updated date shown at the top of this page.</p>
+    </div>
   </article>
 </BaseLayout>

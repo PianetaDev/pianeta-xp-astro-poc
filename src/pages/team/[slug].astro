@@ -43,6 +43,9 @@ const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Team', href:
 if (data.role) eyebrowParts.push({ label: data.role });
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="team" ogSlug={item.id}>
+  <Fragment slot="head">
+    <link rel="alternate" href={`/team#${item.id}`} />
+  </Fragment>
   <DetailPage
     eyebrowParts={eyebrowParts}
     title={title}

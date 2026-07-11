@@ -1,8 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import IndexCard from '../../../components/detail/IndexCard.astro';
+import TeamOverlay from '../../../components/team/TeamOverlay.astro';
 import { getCollection } from 'astro:content';
-import { t } from '../../../lib/i18n/strings';
 
 const all = (await getCollection('teamEn')).filter((i: any) => i.data.draft !== true);
 
@@ -14,6 +13,12 @@ const byKind = (k: string) =>
 const core = byKind('core');
 const satellite = byKind('satellite');
 const ai = byKind('ai');
+
+const sections = [
+  { key: 'core', title: 'Core', intro: "The studio's in-house team. Operations, design, technology.", items: core, contact: '' },
+  { key: 'satellite', title: 'Pianeta.Satellite', intro: 'The freelance community that orbits the core team.', items: satellite, contact: 'satellite@pianeta.studio' },
+  { key: 'ai', title: 'Group AI', intro: 'AI systems operating inside Pianeta.Studio with explicit disclosure.', items: ai, contact: '' },
+];
 ---
 <BaseLayout title="Team — Pianeta.Studio" description="The people behind Pianeta.Studio: core team, Satellite network, AI agents.">
   <div class="index-page">
@@ -21,55 +26,96 @@ const ai = byKind('ai');
       <p class="index-deck">People who design, code, research. A nomadic studio with bases in Milan · Ardea · Sicily.</p>
     </header>
 
-    {core.length > 0 && (
+    {sections.map((sec) => sec.items.length > 0 && (
       <section class="team-section">
         <header class="team-section-head">
-          <h2 class="team-section-title">Core</h2>
-          <p class="team-section-intro">The studio's in-house team. Operations, design, technology.</p>
+          <h2 class="team-section-title">{sec.title}</h2>
+          <p class="team-section-intro">
+            {sec.intro}
+            {sec.contact && <> Contact: <a href={`mailto:${sec.contact}`} class="meta-link">{sec.contact}</a></>}
+          </p>
         </header>
-        <div class="index-grid">
-          {core.map((it: any) => (
-            <IndexCard href={`/en/team/${it.id}`} title={it.data.name || it.data.title || it.id} deck={it.data.role} kicker={it.data.location} image={it.data.photo || it.data.cover} portrait={true} />
-          ))}
+        <div class="team-grid">
+          {sec.items.map((it: any) => {
+            const name = it.data.name || it.data.title || it.id;
+            const photo = it.data.photo || it.data.cover;
+            const initials = String(name).split(/\s+/).map((s: string) => s[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
+            return (
+              <a
+                href={`/en/team/${it.id}`}
+                class="team-card team-open"
+                data-team-slug={it.id}
+                aria-label={name}
+              >
+                <div class="team-card-photo" style={photo ? `background-image:url('${photo}')` : ''}>
+                  {!photo && <span class="team-card-initials">{initials}</span>}
+                </div>
+                <div class="team-card-meta">
+                  <strong class="team-card-name">{name}</strong>
+                  {it.data.role && <span class="team-card-role">{it.data.role}</span>}
+                </div>
+              </a>
+            );
+          })}
         </div>
       </section>
-    )}
-
-    {satellite.length > 0 && (
-      <section class="team-section">
-        <header class="team-section-head">
-          <h2 class="team-section-title">Pianeta.Satellite</h2>
-          <p class="team-section-intro">The freelance community that orbits the core team. Contact: <a href="mailto:satellite@pianeta.studio" class="meta-link">satellite@pianeta.studio</a></p>
-        </header>
-        <div class="index-grid">
-          {satellite.map((it: any) => (
-            <IndexCard href={`/en/team/${it.id}`} title={it.data.name || it.data.title || it.id} deck={it.data.role} kicker={it.data.discipline || it.data.location} image={it.data.photo || it.data.cover} portrait={true} />
-          ))}
-        </div>
-      </section>
-    )}
-
-    {ai.length > 0 && (
-      <section class="team-section">
-        <header class="team-section-head">
-          <h2 class="team-section-title">Group AI</h2>
-          <p class="team-section-intro">AI systems operating inside Pianeta.Studio with explicit disclosure.</p>
-        </header>
-        <div class="index-grid">
-          {ai.map((it: any) => (
-            <IndexCard href={`/en/team/${it.id}`} title={it.data.name || it.data.title || it.id} deck={it.data.role} kicker={it.data.location} image={it.data.photo || it.data.cover} portrait={true} />
-          ))}
-        </div>
-      </section>
-    )}
+    ))}
 
     {all.length === 0 && (<div class="index-empty">No profiles published.</div>)}
   </div>
+
+  <TeamOverlay locale="en" />
 
   <style>
     .team-section { margin-top: 64px; }
     .team-section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
     .team-section-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-weight: 900; letter-spacing: -0.02em; margin: 0 0 10px; }
     .team-section-intro { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (min-width: 640px)  { .team-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; } }
+    @media (min-width: 900px)  { .team-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+    @media (min-width: 1200px) { .team-grid { grid-template-columns: repeat(5, 1fr); gap: 16px; } }
+
+    .team-card {
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+      border-radius: 14px; overflow: hidden;
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+    .team-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--pianeta-border-strong);
+      box-shadow: 0 10px 24px rgba(14,17,22,.08);
+    }
+    .team-card-photo {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background-size: cover; background-position: center top;
+      background-color: var(--pianeta-bg);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .team-card-initials {
+      font-size: 28px; font-weight: 900; letter-spacing: -0.02em;
+      color: var(--pianeta-muted);
+    }
+    .team-card-meta {
+      padding: 10px 12px 12px;
+      display: flex; flex-direction: column; gap: 2px;
+      min-height: 52px;
+    }
+    .team-card-name {
+      font-size: 14px; font-weight: 700; line-height: 1.2;
+      color: var(--pianeta-text);
+    }
+    .team-card-role {
+      font-size: 12px; color: var(--pianeta-muted); line-height: 1.35;
+    }
   </style>
 </BaseLayout>
