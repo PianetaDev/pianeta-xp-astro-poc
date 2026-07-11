@@ -433,5 +433,29 @@ const cfg = {
     };
     init();
     document.addEventListener('astro:page-load', init);
+
+    // Carosello /hire: prev/next buttons (fallback per trackpad senza scrollbar visibile + tastiera)
+    const initWorksNav = () => {
+      const scroller = document.querySelector('[data-works-scroll]');
+      if (!scroller || scroller.dataset.navBound) return;
+      scroller.dataset.navBound = '1';
+      const prev = document.querySelector('[data-works-prev]');
+      const next = document.querySelector('[data-works-next]');
+      const STEP = 316; // 300 card + 16 gap
+      const update = () => {
+        const max = scroller.scrollWidth - scroller.clientWidth - 2;
+        if (prev) prev.toggleAttribute('disabled', scroller.scrollLeft <= 2);
+        if (next) next.toggleAttribute('disabled', scroller.scrollLeft >= max);
+        const nav = document.querySelector('.works-nav');
+        if (nav) nav.style.display = (scroller.scrollWidth <= scroller.clientWidth + 4) ? 'none' : '';
+      };
+      prev && prev.addEventListener('click', () => scroller.scrollBy({ left: -STEP, behavior: 'smooth' }));
+      next && next.addEventListener('click', () => scroller.scrollBy({ left: STEP, behavior: 'smooth' }));
+      scroller.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    };
+    initWorksNav();
+    document.addEventListener('astro:page-load', initWorksNav);
   })();
 </script>

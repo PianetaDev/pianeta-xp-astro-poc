@@ -1,0 +1,216 @@
+---
+// Overlay laterale destro per profili team.
+// Il click su `.team-open` intercetta la navigazione e fetcha /api/team/<slug>.json?locale=<x>.
+// Riusa lo stesso pattern estetico di .work-ov (vedi HireLanding.astro) ma senza prev/next.
+interface Props { locale?: 'it' | 'en'; }
+const { locale = 'it' } = Astro.props;
+const S = locale === 'en'
+  ? { loading: 'Loading…', fail: 'Profile unavailable.', full: 'Open full profile →', email: 'Email', role: 'Role', location: 'Where', since: 'Since', expertise: 'Expertise', close: 'Close' }
+  : { loading: 'Carico…', fail: 'Profilo non disponibile.', full: 'Apri il profilo completo →', email: 'Email', role: 'Ruolo', location: 'Dove', since: 'Dal', expertise: 'Competenze', close: 'Chiudi' };
+const cfg = { locale, teamPrefix: locale === 'en' ? '/en/team' : '/team', S };
+---
+<div id="team-ov" class="team-ov" hidden>
+  <div class="team-ov-backdrop" data-close></div>
+  <aside class="team-ov-panel" role="dialog" aria-label="Team profile">
+    <div class="team-ov-nav">
+      <span class="team-ov-count" id="team-ov-count"></span>
+      <button class="team-ov-x" data-close aria-label={S.close}>✕</button>
+    </div>
+    <div id="team-ov-body" class="team-ov-body"></div>
+  </aside>
+</div>
+
+<script type="application/json" id="team-ov-cfg" set:html={JSON.stringify(cfg)}></script>
+
+<style>
+  .team-ov { position: fixed; inset: 0; z-index: 60; }
+  .team-ov[hidden] { display: none; }
+  .team-ov-backdrop { position: absolute; inset: 0; background: rgba(14,17,22,.18); }
+  .team-ov-panel {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 100%; max-width: 560px;
+    background: var(--pianeta-bg);
+    box-shadow: -24px 0 70px rgba(14,17,22,.16);
+    overflow-y: auto; border-left: 1px solid var(--pianeta-border);
+  }
+  .team-ov-nav {
+    position: sticky; top: 0; z-index: 3;
+    display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+    padding: 12px clamp(16px, 3vw, 24px);
+    background: var(--pianeta-bg); border-bottom: 1px solid var(--pianeta-border);
+  }
+  .team-ov-x {
+    background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border);
+    width: 38px; height: 38px; border-radius: 999px; cursor: pointer;
+    line-height: 1; color: var(--pianeta-text);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .team-ov-x:hover { border-color: var(--pianeta-border-strong); }
+  .team-ov-count { font-size: 12px; color: var(--pianeta-muted); margin-right: auto; }
+  .team-ov-body { padding: 24px clamp(24px, 4vw, 44px) 72px; }
+
+  :global(.team-ov-photo) {
+    width: 100%; aspect-ratio: 1; border-radius: 16px;
+    background-size: cover; background-position: center;
+    background-color: var(--pianeta-bg-card);
+    margin-bottom: 24px; border: 1px solid var(--pianeta-border);
+  }
+  :global(.team-ov-eyebrow) {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+    color: var(--pianeta-muted); margin: 0 0 12px;
+  }
+  :global(.team-ov-body h1) {
+    font-size: clamp(26px, 3.4vw, 36px); font-weight: 900; letter-spacing: -.02em;
+    line-height: 1.05; margin: 0 0 8px;
+  }
+  :global(.team-ov-role) { font-size: 16px; color: var(--pianeta-muted); margin: 0 0 20px; }
+  :global(.team-ov-deck) {
+    font-size: 16px; color: var(--pianeta-text); line-height: 1.55; margin: 0 0 24px;
+  }
+  :global(.team-ov-meta) {
+    list-style: none; display: flex; flex-wrap: wrap; gap: 10px 24px;
+    padding: 16px 0; margin: 0 0 24px;
+    border-top: 1px solid var(--pianeta-border); border-bottom: 1px solid var(--pianeta-border);
+  }
+  :global(.team-ov-meta li) { display: flex; flex-direction: column; gap: 2px; }
+  :global(.team-ov-meta .k) {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted);
+  }
+  :global(.team-ov-meta .v) { font-size: 14px; font-weight: 600; }
+  :global(.team-ov-meta a) { color: var(--pianeta-text); text-decoration: none; }
+  :global(.team-ov-meta a:hover) { color: var(--cta-primary); }
+  :global(.team-ov-skills) { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 24px; padding: 0; list-style: none; }
+  :global(.team-ov-skills li) {
+    font-size: 12px; padding: 5px 10px; border-radius: 999px;
+    background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); color: var(--pianeta-muted);
+  }
+  :global(.team-ov-links) { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 0; }
+  :global(.team-ov-links a) {
+    font-size: 13px; padding: 8px 14px; border-radius: 999px;
+    background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border);
+    color: var(--pianeta-text); text-decoration: none; font-weight: 600;
+  }
+  :global(.team-ov-links a:hover) { border-color: var(--pianeta-border-strong); }
+  :global(.team-ov-content) { font-size: 16px; line-height: 1.7; max-width: 62ch; }
+  :global(.team-ov-content h2), :global(.team-ov-content h3) {
+    font-size: 19px; font-weight: 800; letter-spacing: -.01em; margin: 28px 0 10px;
+  }
+  :global(.team-ov-content p) { margin: 0 0 14px; }
+  :global(.team-ov-content a) { color: var(--cta-primary); }
+  :global(.team-ov-full) {
+    display: inline-block; margin-top: 28px;
+    color: var(--pianeta-muted); font-weight: 600; text-decoration: none; font-size: 14px;
+  }
+  :global(.team-ov-full:hover) { color: var(--pianeta-text); }
+</style>
+
+<script is:inline>
+  (() => {
+    const init = () => {
+      const ov = document.getElementById('team-ov');
+      if (!ov || ov.dataset.bound) return;
+      ov.dataset.bound = '1';
+      const cfgEl = document.getElementById('team-ov-cfg');
+      const C = cfgEl ? JSON.parse(cfgEl.textContent) : { locale: 'it', teamPrefix: '/team', S: {} };
+      const T = C.S || {};
+      const body = document.getElementById('team-ov-body');
+      const panel = ov.querySelector('.team-ov-panel');
+
+      const esc = (x) => String(x ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      const md = (s) => String(s || '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/^#{1,3} (.*)$/gm, '<h2>$1</h2>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .split(/\n{2,}/).map((b) => b.match(/^<h2>/) ? b : '<p>' + b.replace(/\n/g, '<br>') + '</p>').join('');
+
+      const loading = () => {
+        body.innerHTML = '<p style="padding:60px 0;text-align:center;color:var(--pianeta-muted)">' + (T.loading || 'Loading…') + '</p>';
+        ov.hidden = false; document.body.style.overflow = 'hidden';
+        if (panel) panel.scrollTop = 0;
+      };
+      const fail = () => { body.innerHTML = '<p style="padding:40px 0">' + (T.fail || 'Unavailable.') + '</p>'; };
+
+      const renderLinks = (links) => {
+        if (!links || typeof links !== 'object') return '';
+        const items = Object.entries(links)
+          .filter(([, v]) => v && typeof v === 'string')
+          .map(([k, v]) => '<a href="' + esc(v) + '" target="_blank" rel="noopener">' + esc(k) + ' →</a>');
+        return items.length ? '<div class="team-ov-links">' + items.join('') + '</div>' : '';
+      };
+
+      const renderPerson = (d, slug) => {
+        const photo = d.photo || d.cover;
+        const meta = [
+          d.role ? { k: T.role || 'Role', v: esc(d.role) } : null,
+          d.location ? { k: T.location || 'Where', v: esc(d.location) } : null,
+          d.since ? { k: T.since || 'Since', v: esc(String(new Date(d.since).getFullYear())) } : null,
+          d.email ? { k: T.email || 'Email', v: '<a href="mailto:' + esc(d.email) + '">' + esc(d.email) + '</a>' } : null,
+        ].filter(Boolean);
+        const skills = Array.isArray(d.skills) ? d.skills : (Array.isArray(d.expertise) ? d.expertise : []);
+        const eyebrow = [d.kind ? String(d.kind).toUpperCase() : null, d.discipline].filter(Boolean).map(esc).join(' · ');
+
+        body.innerHTML =
+          (photo ? '<div class="team-ov-photo" style="background-image:url(\'' + String(photo).replace(/'/g, '%27') + '\')"></div>' : '') +
+          (eyebrow ? '<p class="team-ov-eyebrow">' + eyebrow + '</p>' : '') +
+          '<h1>' + esc(d.name || d.title) + '</h1>' +
+          (d.role ? '<p class="team-ov-role">' + esc(d.role) + '</p>' : '') +
+          (d.description ? '<p class="team-ov-deck">' + esc(d.description) + '</p>' : '') +
+          (meta.length ? '<ul class="team-ov-meta">' + meta.map((m) => '<li><span class="k">' + m.k + '</span><span class="v">' + m.v + '</span></li>').join('') + '</ul>' : '') +
+          (skills.length ? '<ul class="team-ov-skills">' + skills.map((s) => '<li>' + esc(s) + '</li>').join('') + '</ul>' : '') +
+          '<div class="team-ov-content">' + md(d.body || '') + '</div>' +
+          renderLinks(d.links) +
+          '<br><a class="team-ov-full" href="' + C.teamPrefix + '/' + encodeURIComponent(slug) + '">' + (T.full || 'Open full profile →') + '</a>';
+      };
+
+      const openMember = async (slug) => {
+        loading();
+        try {
+          const r = await fetch('/api/team/' + encodeURIComponent(slug) + '.json?locale=' + C.locale);
+          if (!r.ok) throw new Error('http ' + r.status);
+          const d = await r.json();
+          if (d && d.error) throw new Error(d.error);
+          renderPerson(d, slug);
+          if (history && history.replaceState) history.replaceState(null, '', '#' + slug);
+        } catch (e) { fail(); }
+      };
+
+      const close = () => {
+        ov.hidden = true; document.body.style.overflow = '';
+        if (location.hash && history && history.replaceState) {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+      };
+
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+        const el = t.closest('.team-open');
+        if (el) {
+          e.preventDefault();
+          const slug = el.dataset.teamSlug || (el.getAttribute('href') || '').split('/').pop();
+          if (slug) openMember(slug);
+          return;
+        }
+        if (t.closest('[data-close]')) { close(); return; }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (ov.hidden) return;
+        if (e.key === 'Escape') close();
+      });
+
+      // Deep-link support: /team#slug apre l'overlay al load
+      const openFromHash = () => {
+        const h = (location.hash || '').replace(/^#/, '');
+        if (h && /^[a-z0-9-]+$/i.test(h)) openMember(h);
+      };
+      openFromHash();
+      window.addEventListener('hashchange', openFromHash);
+    };
+    init();
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>
