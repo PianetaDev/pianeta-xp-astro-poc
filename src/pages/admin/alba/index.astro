@@ -177,7 +177,7 @@ const uniq = (arr: any[], k: string) => new Set(arr.map((x: any) => x[k])).size;
                     <tr style="border-top:1px solid var(--pianeta-border, #e5e7eb);">
                       <td style="padding:10px 16px; white-space:nowrap;">{new Date(h.ts).toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' })}</td>
                       <td style="padding:10px 16px;">{h.payload?.reason ?? '—'}</td>
-                      <td style="padding:10px 16px; color:rgba(14,17,22,0.7);">{summary.slice(0, 80)}{summary.length > 80 ? '…' : ''}</td>
+                      <td style="padding:10px 16px; color:var(--pianeta-muted-strong);">{summary.slice(0, 80)}{summary.length > 80 ? '…' : ''}</td>
                       <td style="padding:10px 16px;">{h.payload?.contact ?? '—'}</td>
                       <td style={`padding:10px 16px; font-weight:600; ${h.payload?.urgency === 'high' ? 'color:#cc0000;' : 'color:rgba(14,17,22,0.5);'}`}>{h.payload?.urgency ?? 'normal'}</td>
                     </tr>

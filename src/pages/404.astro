@@ -61,12 +61,12 @@ const recentBulletin = (await getCollection('bulletin')).filter(live).sort(byDat
   <style>
     .error404-page { max-width: 880px; margin: 0 auto; padding: 80px 32px 96px; }
     .error404-head { text-align: center; max-width: 640px; margin: 0 auto 64px; }
-    .error404-kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--cta-primary); font-weight: 700; margin: 0 0 16px; }
+    .error404-kicker { font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px; color: var(--cta-primary); font-weight: 700; margin: 0 0 16px; }
     .error404-title { font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 16px; }
     .error404-deck { font-size: 1.05rem; color: var(--pianeta-muted); margin: 0 0 28px; }
     .error404-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .error404-section { margin-top: 48px; }
-    .error404-sec-title { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--pianeta-muted); font-weight: 700; margin: 0 0 16px; }
+    .error404-sec-title { font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px; color: var(--pianeta-muted); font-weight: 700; margin: 0 0 16px; }
     .error404-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
     .error404-list a { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 12px; text-decoration: none; color: inherit; transition: border-color 150ms; }
     .error404-list a:hover { border-color: var(--cta-primary); }

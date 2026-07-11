@@ -135,7 +135,7 @@ const fmtNum = (n: number) => n.toLocaleString('it-IT');
         <h2 style="margin:0 0 16px; font-size:14px; text-transform:uppercase; letter-spacing:1.5px; color:rgba(14,17,22,0.5);">Tetto giornaliero</h2>
         <div style={`padding:24px; background:${capBg}; border:1px solid ${capColor}33; border-radius:12px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;`}>
           <div style="flex:1; min-width:200px;">
-            <p style="margin:0 0 8px; font-size:13px; font-weight:600; color:rgba(14,17,22,0.7);">Oggi ({new Date().toLocaleDateString('it-IT', { dateStyle: 'medium' })})</p>
+            <p style="margin:0 0 8px; font-size:13px; font-weight:600; color:var(--pianeta-muted-strong);">Oggi ({new Date().toLocaleDateString('it-IT', { dateStyle: 'medium' })})</p>
             <div style="display:flex; align-items:baseline; gap:8px;">
               <span style={`font-size:42px; font-weight:900; line-height:1; color:${capColor};`}>{fmtEur(todayCost, 4)}</span>
               <span style="font-size:16px; color:rgba(14,17,22,0.5);">/ {fmtEur(CAP_EUR, 0)} cap</span>
@@ -251,13 +251,13 @@ const fmtNum = (n: number) => n.toLocaleString('it-IT');
                 {topSessions.map((s, i) => (
                   <tr style="border-top:1px solid #e5e7eb;">
                     <td style="padding:10px 16px; color:rgba(14,17,22,0.4); font-weight:600;">{i + 1}</td>
-                    <td style="padding:10px 16px; white-space:nowrap; color:rgba(14,17,22,0.7);">
+                    <td style="padding:10px 16px; white-space:nowrap; color:var(--pianeta-muted-strong);">
                       {new Date(s.started_at).toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' })}
                     </td>
                     <td style="padding:10px 16px; font-family:ui-monospace,'Cascadia Code',monospace; font-size:12px; color:rgba(14,17,22,0.5);">
                       {s.uid.slice(0, 8)}
                     </td>
-                    <td style="padding:10px 16px; color:rgba(14,17,22,0.7);">{s.page_origin ?? '/'}</td>
+                    <td style="padding:10px 16px; color:var(--pianeta-muted-strong);">{s.page_origin ?? '/'}</td>
                     <td style="text-align:right; padding:10px 16px;">{s.msg_count}</td>
                     <td style="text-align:right; padding:10px 16px; font-variant-numeric:tabular-nums;">{fmtNum(Number(s.tokens_in ?? 0))}</td>
                     <td style="text-align:right; padding:10px 16px; font-variant-numeric:tabular-nums;">{fmtNum(Number(s.tokens_out ?? 0))}</td>
