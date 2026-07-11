@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .alba-launcher {
   position: fixed;
-  bottom: 16px;
+  bottom: 72px; /* sopra il widget Segnala che sta a bottom-right */
   right: 16px;
   z-index: 30;
   display: inline-flex;
