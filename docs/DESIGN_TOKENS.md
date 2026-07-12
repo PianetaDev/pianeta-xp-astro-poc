@@ -187,3 +187,34 @@ Override principali sono in `global.css`:
 
 NON toccare `src/components/hire/*` né `src/pages/hire/*` — la source of truth
 resta canonica.
+
+---
+
+## Isole stilistiche
+
+Alcune aree del sito vivono con palette autonoma perché il loro contesto
+(conversazionale, admin) beneficia di un linguaggio visivo diverso da
+quello editoriale del resto del sito. Non sono da allineare ai token
+`--pianeta-*`.
+
+### `src/styles/widgets.css`
+
+Documenta la palette dei widget conversazionali e admin:
+
+- **Alba** (AlbaChat, AlbaFloater, AlbaProactivePopup, AlbaTakeover,
+  AlbaConversation, AlbaSlotPicker) — palette calda/pastello con
+  gradient blu → pesca (`#046BD2` → `#FF6B33`).
+- **SidePane** (`site/SidePane.vue`) — palette neutra grigia
+  (`#ffffff`, `#F9FAFB`, `#e2e8f0`, `#94a3b8`, `#1e293b`).
+- **Admin / LeadsBoard** — accento blu (`#046BD2`).
+
+Variabili scoped: `.alba-scope`, `.side-pane-scope`, `.leads-board-scope`
+(`--w-bg`, `--w-fg`, `--w-muted`, `--w-accent`, `--w-border`, warm
+gradient endpoints).
+
+I widget attualmente hardcodano i colori inline: `widgets.css` serve
+come **documentazione della palette** e base per un futuro refactor
+incrementale, non come contratto già applicato.
+
+Dark mode: non implementata per l'isola. Se necessario, gestirla con
+override sotto `[data-theme="dark"] .alba-scope` ecc.
