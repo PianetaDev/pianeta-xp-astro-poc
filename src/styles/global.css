@@ -200,22 +200,22 @@
 .cta-ghost:hover { background: rgba(14,17,22,0.04); }
 
 /* Detail page layout — DHH style — used by work/bulletin/services/team/lab/careers [slug] */
-.detail-page { max-width: 1280px; margin: 0 auto; padding: 64px 32px 96px; }
-.detail-head { text-align: center; max-width: 880px; margin: 0 auto 56px; }
+.detail-page { max-width: var(--wrap-max); margin: 0 auto; padding: 80px 24px 96px; }
+.detail-head { text-align: left; max-width: 880px; margin: 0 0 56px; }
 .detail-eyebrow { font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: var(--ty-eyebrow-tracking); color: var(--pianeta-muted); margin: 0 0 28px; }
 .detail-eyebrow a { color: inherit; text-decoration: none; }
 .detail-eyebrow a:hover { color: var(--pianeta-text); }
 .detail-title { font-size: var(--ty-hero); letter-spacing: var(--ty-hero-tracking); line-height: var(--ty-hero-lh); margin: 0 0 18px; }
-.detail-deck { font-size: var(--ty-sub); color: var(--pianeta-muted-strong); line-height: var(--ty-sub-lh); margin: 0 auto 36px; max-width: 640px; }
-.detail-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.detail-hero { border-radius: 20px; overflow: hidden; background: rgba(14,17,22,0.04); aspect-ratio: 16/9; margin: 0 auto 56px; max-width: 880px; }
+.detail-deck { font-size: var(--ty-sub); color: var(--pianeta-muted-strong); line-height: var(--ty-sub-lh); margin: 0 0 28px; max-width: 620px; }
+.detail-cta-row { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; }
+.detail-hero { border-radius: var(--radius-card); overflow: hidden; background: rgba(14,17,22,0.04); aspect-ratio: 16/9; margin: 0 0 56px; max-width: 880px; }
 .detail-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .detail-hero.is-portrait { aspect-ratio: 3/4; max-width: 480px; }
-.detail-byline { max-width: 880px; margin: -32px auto 56px; text-align: center; font-size: var(--ty-meta); letter-spacing: 1px; text-transform: uppercase; color: var(--pianeta-muted); font-weight: 500; }
+.detail-byline { max-width: 880px; margin: -32px 0 56px; text-align: left; font-size: var(--ty-meta); letter-spacing: 1px; text-transform: uppercase; color: var(--pianeta-muted); font-weight: 500; }
 .detail-body { display: block; max-width: 720px; margin: 0 auto; }
 
 /* Meta inline — pills sotto la cover */
-.detail-meta-inline { list-style: none; padding: 0; margin: 0 auto 56px; max-width: 880px; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; align-items: baseline; }
+.detail-meta-inline { list-style: none; padding: 0; margin: 0 0 56px; max-width: 880px; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: flex-start; align-items: baseline; }
 .detail-meta-inline li { display: inline-flex; gap: 8px; align-items: baseline; font-size: var(--ty-meta); line-height: 1.4; }
 .detail-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); font-weight: 500; }
 .detail-meta-value { color: #0e1116; font-weight: 500; }
@@ -256,11 +256,11 @@ a.detail-meta-value:hover { text-decoration: underline; }
 .share-btn:hover { border-color: var(--cta-primary); background: rgba(255,107,51,0.06); }
 
 /* Index pages — section cards grid */
-.index-page { max-width: 1280px; margin: 0 auto; padding: 56px 32px 96px; }
-.index-head { max-width: 880px; margin: 0 auto 48px; text-align: center; }
+.index-page { max-width: var(--wrap-max); margin: 0 auto; padding: 80px 24px 96px; }
+.index-head { max-width: 880px; margin: 0 0 48px; text-align: left; }
 .index-eyebrow { font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: var(--ty-eyebrow-tracking); color: var(--pianeta-muted); margin: 0 0 16px; }
 .index-title { font-size: var(--ty-hero); letter-spacing: var(--ty-hero-tracking); line-height: var(--ty-hero-lh); margin: 0 0 18px; }
-.index-deck { font-size: var(--ty-sub); color: var(--pianeta-muted-strong); line-height: var(--ty-sub-lh); margin: 0 auto; max-width: 620px; }
+.index-deck { font-size: var(--ty-sub); color: var(--pianeta-muted-strong); line-height: var(--ty-sub-lh); margin: 0; max-width: 620px; }
 .index-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
 @media (min-width: 700px) { .index-grid { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 1100px) { .index-grid { grid-template-columns: 1fr 1fr 1fr; } }
