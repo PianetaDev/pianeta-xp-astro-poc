@@ -90,7 +90,7 @@ if (authed) {
 
 const capPct = Math.min(Math.round((todayCost / CAP_EUR) * 100), 100);
 const capStatus = capPct >= 100 ? 'over' : capPct >= 80 ? 'warn' : 'ok';
-const capColor = capStatus === 'over' ? '#cc0000' : capStatus === 'warn' ? '#e07000' : '#1a8a3a';
+const capColor = capStatus === 'over' ? 'var(--pianeta-error)' : capStatus === 'warn' ? '#e07000' : '#1a8a3a';
 const capBg = capStatus === 'over' ? '#ffeaea' : capStatus === 'warn' ? '#fff5e6' : '#e6f4ec';
 
 const fmtEur = (n: number, digits = 4) => `€${n.toFixed(digits)}`;
@@ -203,7 +203,7 @@ const fmtNum = (n: number) => n.toLocaleString('it-IT');
                   const pct = Math.min(Math.round((Number(d.total_eur) / CAP_EUR) * 100), 100);
                   const isOver = pct >= 100;
                   const isHigh = pct >= 80;
-                  const barColor = isOver ? '#cc0000' : isHigh ? '#e07000' : '#FF6B33';
+                  const barColor = isOver ? 'var(--pianeta-error)' : isHigh ? '#e07000' : '#FF6B33';
                   return (
                     <tr style="border-top:1px solid #e5e7eb;">
                       <td style="padding:10px 16px; font-variant-numeric:tabular-nums;">{d.date}</td>
@@ -213,7 +213,7 @@ const fmtNum = (n: number) => n.toLocaleString('it-IT');
                           <div style={`width:${pct}%; height:100%; background:${barColor};`} />
                         </div>
                       </td>
-                      <td style={`padding:10px 16px; font-weight:600; color:${isOver ? '#cc0000' : isHigh ? '#e07000' : '#1a8a3a'};`}>
+                      <td style={`padding:10px 16px; font-weight:600; color:${isOver ? 'var(--pianeta-error)' : isHigh ? '#e07000' : '#1a8a3a'};`}>
                         {pct}% {isOver ? '🔴' : isHigh ? '🟡' : ''}
                       </td>
                     </tr>

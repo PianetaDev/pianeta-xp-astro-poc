@@ -26,6 +26,8 @@
   --pianeta-muted-strong: rgba(14, 17, 22, 0.70);
   --pianeta-accent: #1f5b8f;
   --pianeta-highlight: #E9FF1F;
+  --pianeta-cream: #f6efe4;
+  --pianeta-error: #cc0000;
   /* CTA — arancio primario, blu secondario */
   --cta-primary: #FF6B33;
   --cta-primary-hover: #ff8458;
@@ -96,6 +98,8 @@
   --cta-secondary: #4a8fc4;
   --cta-secondary-hover: #6aa5d4;
   --soft: #15181e;
+  --pianeta-cream: #1a1d23;
+  --pianeta-error: #ff6b6b;
 }
 :root[data-theme="dark"] body,
 :root[data-theme="auto"][data-sun="night"] body {
@@ -339,3 +343,6 @@ a.detail-meta-value:hover { text-decoration: underline; }
 }
 @keyframes vt-fade-out { to { opacity: 0; } }
 @keyframes vt-fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Widget isola — palette autonoma per Alba/SidePane/Admin (vedi widgets.css) */
+@import "./widgets.css";

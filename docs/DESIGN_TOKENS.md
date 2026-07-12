@@ -26,6 +26,8 @@ Tutti i token sono in `src/styles/global.css` (`:root` + `:root[data-theme="dark
 | `--band` (dark band) | `#14171c` | `#14171c` |
 | `--green` (accent) | `#1f7a3a` | `#1f7a3a` |
 | `--pianeta-highlight` | `#E9FF1F` | `#E9FF1F` |
+| `--pianeta-cream` | `#f6efe4` | `#1a1d23` |
+| `--pianeta-error` | `#cc0000` | `#ff6b6b` |
 
 **Regole di sostituzione (hardcoded → token):**
 - `rgba(14,17,22,.55)` → `var(--pianeta-muted)`
