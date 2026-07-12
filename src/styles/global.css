@@ -180,7 +180,8 @@
 .prose-eclag ul li, .prose-eclag ol li { margin-bottom: 0.425em; line-height: 1.7; }
 .prose-eclag blockquote { margin: 1.7em 0; line-height: 1.7; }
 .prose-eclag a { text-decoration: underline; text-underline-offset: 3px; }
-.prose-eclag strong { font-weight: 600; }
+.prose-eclag strong { font-weight: 600; color: var(--cta-primary); }
+.prose-eclag em { font-style: normal; color: var(--cta-primary); }
 
 /* CTA buttons — pill shape, arancio primario, blu secondario */
 .cta-btn {
@@ -206,6 +207,7 @@
 .detail-eyebrow a { color: inherit; text-decoration: none; }
 .detail-eyebrow a:hover { color: var(--pianeta-text); }
 .detail-title { font-size: var(--ty-hero); letter-spacing: var(--ty-hero-tracking); line-height: var(--ty-hero-lh); margin: 0 0 18px; }
+.detail-title em, .detail-title strong { font-style: normal; font-weight: inherit; color: var(--cta-primary); }
 .detail-deck { font-size: var(--ty-sub); color: var(--pianeta-muted-strong); line-height: var(--ty-sub-lh); margin: 0 0 28px; max-width: 620px; }
 .detail-cta-row { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; }
 .detail-hero { border-radius: var(--radius-card); overflow: hidden; background: rgba(14,17,22,0.04); aspect-ratio: 16/9; margin: 0 0 56px; max-width: 880px; }
@@ -260,6 +262,7 @@ a.detail-meta-value:hover { text-decoration: underline; }
 .index-head { max-width: 880px; margin: 0 0 48px; text-align: left; }
 .index-eyebrow { font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: var(--ty-eyebrow-tracking); color: var(--pianeta-muted); margin: 0 0 16px; }
 .index-title { font-size: var(--ty-hero); letter-spacing: var(--ty-hero-tracking); line-height: var(--ty-hero-lh); margin: 0 0 18px; }
+.index-title em, .index-title strong { font-style: normal; font-weight: inherit; color: var(--cta-primary); }
 .index-deck { font-size: var(--ty-sub); color: var(--pianeta-muted-strong); line-height: var(--ty-sub-lh); margin: 0; max-width: 620px; }
 .index-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
 @media (min-width: 700px) { .index-grid { grid-template-columns: 1fr 1fr; } }
