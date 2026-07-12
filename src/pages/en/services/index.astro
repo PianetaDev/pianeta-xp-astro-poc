@@ -32,7 +32,7 @@ const byCategory = (key: string) =>
       if (!items.length) return null;
       return (
         <section id={cat.key} class="services-cat" style="margin-top:64px;">
-          <h2 style="font-size:clamp(1.4rem,2.2vw,1.85rem);font-weight:900;letter-spacing:-0.02em;margin:0 0 24px;text-align:center;">{cat.title}</h2>
+          <h2 style="font-size:clamp(1.4rem,2.2vw,1.85rem);letter-spacing:-0.02em;margin:0 0 24px;text-align:center;">{cat.title}</h2>
           <div class="index-grid">
             {items.map((it: any) => (
               <IndexCard href={`/en/services/${it.id}`} title={it.data.title || it.id} deck={it.data.description} kicker={it.data.icon || cat.title} image={it.data.cover || it.data.ogImage} />

@@ -118,18 +118,17 @@ const jsonLd = {
     }
     .process-num {
       font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900;
       letter-spacing: -0.04em;
       line-height: 0.9;
       color: var(--cta-primary);
     }
     .process-step-head { display: flex; flex-wrap: wrap; gap: 14px; align-items: baseline; margin-bottom: 12px; }
-    .process-title { font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 900; letter-spacing: -0.02em; margin: 0; }
+    .process-title { font-size: clamp(1.4rem, 2.5vw, 1.85rem); letter-spacing: -0.02em; margin: 0; }
     .process-time { font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted); padding: 4px 10px; background: var(--pianeta-border); border-radius: var(--r-pill); }
     .process-text { font-size: var(--ty-body); line-height: 1.7; color: var(--pianeta-muted-strong); margin: 0 0 16px; }
     .process-deliver { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
     @media (min-width: 600px) { .process-deliver { grid-template-columns: 1fr 1fr; gap: 8px 24px; } }
     .process-deliver li { font-size: var(--ty-meta); color: var(--pianeta-muted-strong); padding-left: 18px; position: relative; }
-    .process-deliver li::before { content: '→'; position: absolute; left: 0; color: var(--cta-primary); font-weight: 700; }
+    .process-deliver li::before { content: '→'; position: absolute; left: 0; color: var(--cta-primary); font-weight: 600; }
   </style>
 </BaseLayout>
