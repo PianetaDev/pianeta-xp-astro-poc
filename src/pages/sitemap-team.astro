@@ -1,0 +1,488 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// -------- Sezione 1 — Pagine statiche (auto-scan filesystem al build) --------
+// import.meta.glob risolto al build da Vite: lista i .astro sotto /src/pages
+const pageModules = import.meta.glob('/src/pages/**/*.astro');
+const allPagePaths = Object.keys(pageModules).sort();
+
+// filtro: no api, no admin, no dinamiche [slug]/[offer], no 404 (non è "pagina" navigabile)
+const isStatic = (p: string) =>
+  !p.includes('/pages/api/') &&
+  !p.includes('/pages/admin/') &&
+  !p.includes('[') &&
+  !p.endsWith('/404.astro');
+
+const staticPaths = allPagePaths.filter(isStatic);
+
+// route dal path filesystem: /src/pages/foo/bar.astro -> /foo/bar (index -> /foo)
+const pathToRoute = (p: string): string => {
+  let r = p.replace('/src/pages', '').replace(/\.astro$/, '');
+  r = r.replace(/\/index$/, '');
+  return r === '' ? '/' : r;
+};
+
+// distingui IT vs EN: EN è tutto ciò che sta sotto /src/pages/en/
+const itPaths = staticPaths.filter((p) => !p.startsWith('/src/pages/en/'));
+const enPaths = new Set(staticPaths.filter((p) => p.startsWith('/src/pages/en/')));
+
+type Row = { route: string; it: boolean; en: boolean; internal: boolean };
+
+// pagine considerate "interne" (noindex — non fanno parte del sitemap pubblico)
+const INTERNAL_ROUTES = new Set(['/styleguide', '/sitemap-team']);
+
+const staticRows: Row[] = itPaths.map((itPath) => {
+  const route = pathToRoute(itPath);
+  const enTwinPath = itPath.replace('/src/pages/', '/src/pages/en/');
+  return {
+    route,
+    it: true,
+    en: enPaths.has(enTwinPath),
+    internal: INTERNAL_ROUTES.has(route),
+  };
+});
+
+// segnala EN "orfane" (senza gemello IT)
+const enTwinExpected = new Set(itPaths.map((p) => p.replace('/src/pages/', '/src/pages/en/')));
+const orphanEn: Row[] = [...enPaths]
+  .filter((p) => !enTwinExpected.has(p))
+  .map((p) => ({
+    route: pathToRoute(p),
+    it: false,
+    en: true,
+    internal: false,
+  }));
+
+const allStaticRows = [...staticRows, ...orphanEn].sort((a, b) => a.route.localeCompare(b.route));
+
+// -------- Sezione 2 — Collezioni dinamiche --------
+type CollectionRow = {
+  key: string;
+  label: string;
+  indexIt: string;
+  indexEn: string | null;
+  detailIt: string;
+  detailEn: string | null;
+  itCount: number;
+  enCount: number;
+  coverage: number;
+};
+
+async function coll(
+  key: string,
+  label: string,
+  itName: string,
+  enName: string | null,
+): Promise<CollectionRow> {
+  const it = await getCollection(itName as any);
+  const en = enName ? await getCollection(enName as any) : [];
+  const itCount = it.length;
+  const enCount = en.length;
+  return {
+    key,
+    label,
+    indexIt: `/${key}`,
+    indexEn: enName ? `/en/${key}` : null,
+    detailIt: `/${key}/[slug]`,
+    detailEn: enName ? `/en/${key}/[slug]` : null,
+    itCount,
+    enCount,
+    coverage: itCount === 0 ? 0 : Math.round((enCount / itCount) * 100),
+  };
+}
+
+const collectionRows: CollectionRow[] = [
+  await coll('work', 'Work / case study', 'work', 'workEn'),
+  await coll('bulletin', 'Bulletin (newsletter archivio)', 'bulletin', 'bulletinEn'),
+  await coll('services', 'Services', 'services', 'servicesEn'),
+  await coll('team', 'Team', 'team', 'teamEn'),
+  await coll('lab', 'Lab (R&D)', 'lab', 'labEn'),
+  await coll('careers', 'Careers', 'careers', 'careersEn'),
+];
+
+// /hire non è una collezione: statica multi-pagina
+const hireRoutes = [
+  { it: '/hire', en: '/en/hire', name: 'Index' },
+  { it: '/hire/[offer]', en: '/en/hire/[offer]', name: 'Offer dettaglio (dinamica)' },
+  { it: '/hire/fondazioni', en: '/en/hire/fondazioni', name: 'Fondazioni' },
+  { it: '/hire/piattaforme', en: '/en/hire/piattaforme', name: 'Piattaforme' },
+  { it: '/hire/metodo', en: '/en/hire/metodo', name: 'Metodo' },
+  { it: '/hire/grazie', en: '/en/hire/grazie', name: 'Grazie' },
+];
+
+// -------- Sezione 3 — Markdown detail --------
+type MdRow = { collection: string; slug: string; title: string; hasEn: boolean };
+
+async function mdRows(itName: string, enName: string | null): Promise<MdRow[]> {
+  const it = await getCollection(itName as any);
+  const en = enName ? await getCollection(enName as any) : [];
+  const enSlugs = new Set(en.map((e: any) => e.id.replace(/\.en$/, '')));
+  return it.map((e: any) => ({
+    collection: itName,
+    slug: e.id,
+    title: e.data?.title || e.id,
+    hasEn: enSlugs.has(e.id),
+  }));
+}
+
+const allMd: MdRow[] = [
+  ...(await mdRows('work', 'workEn')),
+  ...(await mdRows('bulletin', 'bulletinEn')),
+  ...(await mdRows('services', 'servicesEn')),
+  ...(await mdRows('team', 'teamEn')),
+  ...(await mdRows('lab', 'labEn')),
+  ...(await mdRows('careers', 'careersEn')),
+].sort((a, b) =>
+  a.collection === b.collection ? a.slug.localeCompare(b.slug) : a.collection.localeCompare(b.collection),
+);
+
+// -------- Sezione 4 — Gap noti (curati a mano) --------
+// Rilevati manualmente durante audit UX/design: non ricavabili via filesystem scan
+const knownGaps: Array<{ area: string; issue: string; why: string }> = [
+  {
+    area: '/en/404',
+    issue: '404 in inglese assente',
+    why: 'Astro serve /404.astro (IT) come fallback per rotte EN inesistenti — accettabile ma non ottimale',
+  },
+  {
+    area: 'Home /',
+    issue: 'Bento tile giallo (t-yellow) con testo bianco',
+    why: 'Contrast fail WCAG AA — non ricavabile via grep, richiede audit visivo',
+  },
+  {
+    area: 'Alba popup/launcher',
+    issue: 'Gradiente pastello hex hardcoded',
+    why: 'Non risponde a data-theme, non è ricavabile da import.meta.glob — segnalato a mano',
+  },
+  {
+    area: 'Team /team/[slug]',
+    issue: 'Detail page esiste come fallback SEO',
+    why: 'La main UX è overlay in /team — la detail page è solo per crawler e link diretti',
+  },
+];
+
+const now = new Date().toISOString();
+
+const total = allStaticRows.length;
+const bothCount = allStaticRows.filter((r) => r.it && r.en).length;
+const itOnly = allStaticRows.filter((r) => r.it && !r.en && !r.internal).length;
+const enOnly = allStaticRows.filter((r) => !r.it && r.en).length;
+---
+
+<BaseLayout
+  title="Sitemap Team — Pianeta.Studio"
+  description="Mappa interna delle pagine e stato copertura IT/EN. Uso interno."
+  chrome={true}
+  hideNewsletter={true}
+>
+  <meta slot="head" name="robots" content="noindex,nofollow" />
+
+  <section class="pi-sec">
+    <div class="pi-wrap">
+      <p class="eyebrow">INTERNO · TEAM PIANETA</p>
+      <h1 class="hero">Sitemap team</h1>
+      <p class="sub">
+        Mappa auto-generata al build del sito xp.pianeta.studio. Fonte: filesystem scan di
+        <code>src/pages</code> e delle collezioni <code>src/content</code>. Non è indicizzata
+        (<code>noindex</code>) e non compare in nav.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-n">{total}</div>
+          <div class="stat-l">Pagine statiche</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">{bothCount}</div>
+          <div class="stat-l">IT + EN</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">{itOnly}</div>
+          <div class="stat-l">Solo IT (EN mancante)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">{enOnly}</div>
+          <div class="stat-l">Solo EN (orfane)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sezione 1 — Pagine statiche -->
+  <section class="pi-sec">
+    <div class="pi-wrap">
+      <h2 class="h2">1. Pagine statiche</h2>
+      <p class="muted">
+        Ogni riga è un <code>.astro</code> sotto <code>src/pages</code> (esclusi <code>api/</code>,
+        <code>admin/</code>, dinamiche <code>[slug]</code>/<code>[offer]</code>, e <code>404</code>).
+      </p>
+
+      <div class="pi-card">
+        <table class="tbl">
+          <thead>
+            <tr><th>Route</th><th class="c">IT</th><th class="c">EN</th><th>Note</th></tr>
+          </thead>
+          <tbody>
+            {allStaticRows.map((r) => (
+              <tr>
+                <td><code>{r.route}</code></td>
+                <td class="c">{r.it ? <span class="ok">✓</span> : <span class="ko">×</span>}</td>
+                <td class="c">{r.en ? <span class="ok">✓</span> : <span class="ko">×</span>}</td>
+                <td class="meta">{r.internal ? 'interno (noindex)' : ''}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sezione 2 — Sezioni dinamiche -->
+  <section class="pi-sec">
+    <div class="pi-wrap">
+      <h2 class="h2">2. Sezioni dinamiche (collezioni)</h2>
+      <p class="muted">Index + detail template per ogni collezione. Coverage EN = <code>enCount / itCount</code>.</p>
+
+      <div class="grid">
+        {collectionRows.map((c) => (
+          <div class="pi-card">
+            <h3 class="h3">{c.label}</h3>
+            <dl class="dl">
+              <dt>Index IT</dt><dd><code>{c.indexIt}</code></dd>
+              <dt>Index EN</dt><dd>{c.indexEn ? <code>{c.indexEn}</code> : <span class="ko">—</span>}</dd>
+              <dt>Detail IT</dt><dd><code>{c.detailIt}</code></dd>
+              <dt>Detail EN</dt><dd>{c.detailEn ? <code>{c.detailEn}</code> : <span class="ko">—</span>}</dd>
+              <dt>Contenuti IT</dt><dd>{c.itCount}</dd>
+              <dt>Contenuti EN</dt><dd>{c.enCount}</dd>
+              <dt>Coverage EN</dt>
+              <dd>
+                <div class="bar">
+                  <div class="bar-fill" style={`width:${c.coverage}%`}></div>
+                </div>
+                <span class="meta">{c.coverage}%</span>
+              </dd>
+            </dl>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="h3" style="margin-top:32px">Hire (multi-pagina, non collezione)</h3>
+      <div class="pi-card">
+        <table class="tbl">
+          <thead>
+            <tr><th>Route IT</th><th>Route EN</th><th>Nome</th></tr>
+          </thead>
+          <tbody>
+            {hireRoutes.map((h) => (
+              <tr>
+                <td><code>{h.it}</code></td>
+                <td><code>{h.en}</code></td>
+                <td class="meta">{h.name}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sezione 3 — Markdown detail -->
+  <section class="pi-sec">
+    <div class="pi-wrap">
+      <h2 class="h2">3. Contenuti markdown</h2>
+      <p class="muted">
+        Un file per riga da <code>src/content/*/*.md</code>. Il flag EN verifica l'esistenza del sidecar
+        <code>&lt;slug&gt;.en.md</code>.
+      </p>
+
+      <div class="pi-card">
+        <table class="tbl">
+          <thead>
+            <tr><th>Collezione</th><th>Slug</th><th>Titolo</th><th class="c">EN</th></tr>
+          </thead>
+          <tbody>
+            {allMd.map((r) => (
+              <tr>
+                <td class="meta">{r.collection}</td>
+                <td><code>{r.slug}</code></td>
+                <td>{r.title}</td>
+                <td class="c">{r.hasEn ? <span class="ok">✓</span> : <span class="ko">×</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sezione 4 — Gap noti -->
+  <section class="pi-sec">
+    <div class="pi-wrap">
+      <h2 class="h2">4. Gap noti</h2>
+      <p class="muted">
+        Issue rilevate a mano durante audit UX/design: non derivabili da uno scan filesystem —
+        elenco curato, da aggiornare quando si risolvono.
+      </p>
+
+      <div class="pi-card">
+        <table class="tbl">
+          <thead>
+            <tr><th>Area</th><th>Issue</th><th>Perché non è auto-rilevato</th></tr>
+          </thead>
+          <tbody>
+            {knownGaps.map((g) => (
+              <tr>
+                <td><code>{g.area}</code></td>
+                <td>{g.issue}</td>
+                <td class="meta">{g.why}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sezione 5 — Meta -->
+  <section class="pi-sec">
+    <div class="pi-wrap">
+      <div class="pi-card meta-card">
+        <p class="meta">
+          <strong>Ultimo aggiornamento:</strong> {now}<br />
+          <strong>Fonte dei dati:</strong> build-time filesystem scan (<code>import.meta.glob</code> +
+          <code>getCollection</code>). Ogni deploy re-esegue lo scan e riflette lo stato reale del repo.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow {
+    font: var(--ty-eyebrow);
+    color: var(--pianeta-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .hero {
+    font: var(--ty-hero);
+    color: var(--pianeta-text);
+    margin: 0 0 12px;
+  }
+  .sub {
+    font: var(--ty-sub);
+    color: var(--pianeta-muted-strong);
+    max-width: 68ch;
+    margin: 0 0 32px;
+  }
+  .h2 {
+    font: var(--ty-h2-sec);
+    color: var(--pianeta-text);
+    margin: 0 0 8px;
+  }
+  .h3 {
+    font: var(--ty-h3-prose);
+    color: var(--pianeta-text);
+    margin: 0 0 12px;
+  }
+  .muted {
+    font: var(--ty-body);
+    color: var(--pianeta-muted-strong);
+    margin: 0 0 20px;
+    max-width: 68ch;
+  }
+  code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.92em;
+    color: var(--pianeta-text);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin: 24px 0 0;
+  }
+  .stat {
+    background: var(--pianeta-bg-card);
+    border: 1px solid var(--pianeta-border);
+    border-radius: var(--radius-card-sm);
+    padding: 16px 18px;
+  }
+  .stat-n {
+    font: var(--ty-h2-sec);
+    color: var(--pianeta-text);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-l {
+    font: var(--ty-meta);
+    color: var(--pianeta-muted);
+  }
+
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font: var(--ty-body);
+  }
+  .tbl th, .tbl td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--pianeta-border);
+    vertical-align: top;
+  }
+  .tbl th {
+    font: var(--ty-meta);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--pianeta-muted);
+    background: transparent;
+  }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl .c { text-align: center; width: 60px; }
+  .tbl .meta { font: var(--ty-meta); color: var(--pianeta-muted); }
+
+  .ok { color: var(--cta-primary); font-weight: 600; }
+  .ko { color: var(--pianeta-muted); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .dl {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 6px 12px;
+    margin: 0;
+    font: var(--ty-body);
+  }
+  .dl dt {
+    font: var(--ty-meta);
+    color: var(--pianeta-muted);
+  }
+  .dl dd { margin: 0; }
+
+  .bar {
+    display: inline-block;
+    width: 100px;
+    height: 6px;
+    background: var(--pianeta-border);
+    border-radius: 4px;
+    overflow: hidden;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--cta-primary);
+    border-radius: 4px;
+  }
+
+  .meta-card {
+    background: var(--soft);
+  }
+</style>
