@@ -1,0 +1,43 @@
+/* ============================================================
+   WIDGETS.CSS — Isola stilistica per widget conversazionali
+   ============================================================
+
+   Questi stili appartengono all'isola dei widget conversazionali
+   (Alba, SidePane, Admin/LeadsBoard). Vivono con palette autonoma
+   perché il contesto conversazionale beneficia di UI più
+   calda/pastello (Alba) o più neutra/blu (SidePane, LeadsBoard),
+   distinta dal linguaggio editoriale del resto del sito.
+
+   → NON sono da allineare ai token globali (--pianeta-*).
+   → Se serve dark mode qui, gestirlo con override dedicati sotto
+     un selettore [data-theme="dark"] .alba-scope, ecc.
+   → I widget attualmente hardcodano i colori inline nei loro
+     <style scoped>: queste variabili sono documentazione della
+     palette usata e base per un futuro refactor incrementale.
+
+   Componenti nell'isola:
+   - Alba: AlbaChat, AlbaFloater, AlbaProactivePopup, AlbaTakeover,
+           AlbaConversation, AlbaSlotPicker
+   - SidePane (site/SidePane.vue)
+   - Admin: LeadsBoard
+
+   ============================================================ */
+
+.alba-scope,
+.side-pane-scope,
+.leads-board-scope {
+  /* Neutrals — bianco/grigi (SidePane + fondo card Alba) */
+  --w-bg: #ffffff;
+  --w-bg-soft: #F9FAFB;
+  --w-fg: #1e293b;
+  --w-muted: #94a3b8;
+  --w-border: #e2e8f0;
+
+  /* Accento primario — blu (CTA, focus, LeadsBoard header) */
+  --w-accent: #046BD2;
+  --w-accent-fg: #ffffff;
+
+  /* Alba warm gradient — pesca/rosa/giallo (proactive popup, takeover hero) */
+  --w-alba-warm-start: #046BD2;
+  --w-alba-warm-end: #FF6B33;
+}

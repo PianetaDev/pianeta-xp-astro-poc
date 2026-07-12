@@ -131,7 +131,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .field { display: flex; flex-direction: column; gap: 0.35rem; }
     .field-full { grid-column: 1 / -1; }
     .lbl { font-size: 0.85rem; font-weight: 600; opacity: 0.85; }
-    .lbl em { color: #c00; font-style: normal; }
+    .lbl em { color: var(--pianeta-error); font-style: normal; }
 
     .field input,
     .field select,
@@ -161,7 +161,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       gap: 0.75rem;
       margin-top: 1.5rem;
     }
-    .form-error { color: #c00; font-size: 0.9rem; margin: 0; }
+    .form-error { color: var(--pianeta-error); font-size: 0.9rem; margin: 0; }
 
     .thank-you {
       max-width: 600px;
