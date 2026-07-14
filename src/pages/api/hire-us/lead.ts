@@ -33,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   await resend.emails.send({
     from: 'Pianeta noreply <noreply@pianeta.studio>',
-    to: 'info@pianeta.studio',
+    to: 'max@pianeta.studio',
     subject: `✍ Nuovo lead Hire Us — ${body!.name || body!.email}`,
     html: renderLeadEmail(body),
   });

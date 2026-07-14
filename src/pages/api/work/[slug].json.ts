@@ -43,10 +43,10 @@ export const GET: APIRoute = async ({ params, site }) => {
       name: 'Pianeta.Studio',
       url: base,
       taxID: 'IT06037730873',
-      email: 'info@pianeta.studio',
+      email: 'max@pianeta.studio',
     },
     contact_actions: [
-      { type: 'email', target: 'mailto:info@pianeta.studio?subject=Case%20study%20' + encodeURIComponent(data.title || item.id) },
+      { type: 'email', target: 'mailto:max@pianeta.studio?subject=Case%20study%20' + encodeURIComponent(data.title || item.id) },
       { type: 'chat', target: `${base}/?alba=open&topic=${encodeURIComponent(item.id)}` },
     ],
   };

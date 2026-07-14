@@ -44,7 +44,7 @@ export const GET: APIRoute = async ({ site }) => {
       related_work: it.data.relatedWork ?? [],
     })),
     contact: {
-      sales: 'info@pianeta.studio',
+      sales: 'max@pianeta.studio',
       pre_sales_ai: 'alba@pianeta.studio',
       docs: `${base}/llms.txt`,
     },

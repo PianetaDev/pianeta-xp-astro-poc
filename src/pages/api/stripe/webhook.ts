@@ -80,7 +80,7 @@ async function handleNewHireUsSubscription(stripe: Stripe, session: Stripe.Check
   const resend = new Resend(env('RESEND_API_KEY'));
   await resend.emails.send({
     from: 'Pianeta noreply <noreply@pianeta.studio>',
-    to: 'info@pianeta.studio',
+    to: 'max@pianeta.studio',
     subject: `🎉 Nuova subscription Hire Us — ${customer.email}`,
     html: renderSubscriptionEmail({ session, sub, customer, portalUrl: portal.url }),
   });
@@ -126,7 +126,7 @@ async function handleHireOrder(session: Stripe.Checkout.Session) {
   const resend = new Resend(env('RESEND_API_KEY'));
   await resend.emails.send({
     from: 'Pianeta noreply <noreply@pianeta.studio>',
-    to: 'info@pianeta.studio',
+    to: 'max@pianeta.studio',
     subject: `🎉 Nuovo ordine /hire — ${session.metadata?.offer ?? 'offerta'} · ${session.customer_details?.email ?? ''}`,
     html: `<p>Acquisto completato.</p><p>Offerta: <strong>${session.metadata?.offer ?? '—'}</strong><br>Cliente: ${session.customer_details?.email ?? '—'}<br>Importo: ${((session.amount_total ?? 0) / 100).toFixed(2)} ${(session.currency ?? 'eur').toUpperCase()} (${session.mode})</p>`,
   }).catch((e) => console.error('[hire-order] email error:', e));
@@ -149,7 +149,7 @@ async function handleInvoiceFailure(inv: Stripe.Invoice) {
   const resend = new Resend(env('RESEND_API_KEY'));
   await resend.emails.send({
     from: 'Pianeta noreply <noreply@pianeta.studio>',
-    to: 'info@pianeta.studio',
+    to: 'max@pianeta.studio',
     subject: `⚠️ Pagamento subscription fallito — ${inv.customer_email}`,
     html: `<p>Pagamento fallito per subscription ${(inv as any).subscription}. Customer: ${inv.customer_email}. Importo: ${(inv.amount_due / 100).toFixed(2)} ${inv.currency.toUpperCase()}.</p><p>Stripe sta riprovando automaticamente. Contatta il cliente se persiste.</p>`,
   });

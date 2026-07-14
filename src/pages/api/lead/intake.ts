@@ -65,7 +65,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     await resend.emails.send({
       from: 'Pianeta noreply <noreply@pianeta.studio>',
-      to: 'info@pianeta.studio',
+      to: 'max@pianeta.studio',
       reply_to: email,
       subject: `[Lead] ${projectType || 'Generic'} — ${nome}${azienda ? ' — ' + azienda : ''}`,
       html: renderIntakeEmail({ nome, email, azienda, projectType, budget, timeline, descrizione }),

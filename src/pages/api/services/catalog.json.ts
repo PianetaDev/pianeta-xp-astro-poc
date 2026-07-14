@@ -35,11 +35,11 @@ export const GET: APIRoute = async ({ site }) => {
       detail_url: `${base}/api/services/${it.id}.json`,
       category: it.data.category || 'Design & Technology',
       deliverables: it.data.deliverables ?? [],
-      pricing_note: it.data.pricing?.label || 'Personalizzato — contatta info@pianeta.studio',
+      pricing_note: it.data.pricing?.label || 'Personalizzato — contatta max@pianeta.studio',
       case_studies: (it.data.caseStudies ?? []).map((s: string) => `${base}/work/${s}`),
     })),
     contact: {
-      sales: 'info@pianeta.studio',
+      sales: 'max@pianeta.studio',
       pre_sales_ai: 'alba@pianeta.studio',
       docs: `${base}/llms.txt`,
     },

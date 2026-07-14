@@ -38,7 +38,7 @@ export const GET: APIRoute = async () => new Response(
   JSON.stringify({
     info: 'GDPR forget-me endpoint',
     usage: 'DELETE or POST with ?uid=<uuid> or ?email=<email>',
-    contact: 'info@pianeta.studio',
+    contact: 'max@pianeta.studio',
   }),
   { status: 200, headers: { 'content-type': 'application/json' } }
 );

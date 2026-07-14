@@ -321,7 +321,7 @@ async function routeToHuman(args: { reason: string; summary: string; user_contac
 
   return {
     ok: true,
-    human_summary: 'Ho avvisato Max — ti risponderà a breve. Nel frattempo, puoi anche scriverci a info@pianeta.studio.',
+    human_summary: 'Ho avvisato Max — ti risponderà a breve. Nel frattempo, puoi anche scriverci a max@pianeta.studio.',
   };
 }
 

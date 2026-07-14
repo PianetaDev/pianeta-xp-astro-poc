@@ -95,6 +95,6 @@ Campagne video o audio con componente emotiva significativa: advocacy, ONG, sani
 
 ## Per un progetto simile
 
-**Parla con Alba → [info@pianeta.studio](mailto:info@pianeta.studio)**
+**Parla con Alba → [max@pianeta.studio](mailto:max@pianeta.studio)**
 
 Vedi anche: [Service · Creatività e neuromarketing](/services/neuromarketing-lab)

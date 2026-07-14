@@ -17,11 +17,11 @@ Step-by-step per autorizzare Alba a creare eventi direttamente sul Google Calend
 - Menu sinistro → APIs & Services → OAuth consent screen
 - User type: **Internal** se hai Google Workspace su pianeta.studio (consigliato), altrimenti **External**
 - App name: `Alba — Pianeta.Studio`
-- User support email: info@pianeta.studio
-- Developer contact email: info@pianeta.studio
+- User support email: max@pianeta.studio
+- Developer contact email: max@pianeta.studio
 - Salva
 - Scopes (se External): aggiungi `https://www.googleapis.com/auth/calendar.events`
-- Test users (se External): aggiungi info@pianeta.studio
+- Test users (se External): aggiungi max@pianeta.studio
 
 ## 4) Crea OAuth Client ID
 
@@ -42,14 +42,14 @@ Vai sul project Vercel `pianeta-studio-hub` → Settings → Environment Variabl
 GOOGLE_CLIENT_ID            = <quello del passo 4>
 GOOGLE_CLIENT_SECRET        = <quello del passo 4>
 GOOGLE_OAUTH_REDIRECT_URI   = https://xp.pianeta.studio/api/oauth/google/callback
-ALBA_CALENDAR_OWNER_EMAIL   = info@pianeta.studio
+ALBA_CALENDAR_OWNER_EMAIL   = max@pianeta.studio
 ```
 
 Salva. Vercel ridepoya automaticamente.
 
 ## 6) Autorizza Alba (one-time)
 
-Apri il browser autenticato come `info@pianeta.studio` e vai a:
+Apri il browser autenticato come `max@pianeta.studio` e vai a:
 
 ```
 https://xp.pianeta.studio/api/oauth/google/start?key=<NARRATOR_SECRET>
@@ -58,7 +58,7 @@ https://xp.pianeta.studio/api/oauth/google/start?key=<NARRATOR_SECRET>
 Sostituisci `<NARRATOR_SECRET>` con il valore del secret Vercel `NARRATOR_SECRET` (lo conosci tu).
 
 - Ti reindirizza al consent screen Google
-- Login con `info@pianeta.studio` se richiesto
+- Login con `max@pianeta.studio` se richiesto
 - Accetta i permessi (read/write Calendar events)
 - Vieni reindirizzato a `/api/oauth/google/callback` → vedi la pagina di conferma "✅ Alba ora può creare eventi"
 
@@ -70,7 +70,7 @@ Apri Alba sul sito in incognito, scrivi:
 
 > "Posso prendere appuntamento giovedì 3 luglio alle 11?"
 
-Dovresti ricevere (e info@pianeta.studio anche) un invito Google Calendar con Google Meet, mandato automaticamente.
+Dovresti ricevere (e max@pianeta.studio anche) un invito Google Calendar con Google Meet, mandato automaticamente.
 
 Se l'orario non è parsabile o Google Calendar fallisce, fallback: brief email a Max via Resend + link Cal.com generico.
 

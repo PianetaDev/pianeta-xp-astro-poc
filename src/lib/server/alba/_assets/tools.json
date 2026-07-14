@@ -72,7 +72,7 @@
     },
     {
       "name": "send_brief_email",
-      "description": "Manda un brief riassuntivo a info@pianeta.studio + all'utente.",
+      "description": "Manda un brief riassuntivo a max@pianeta.studio + all'utente.",
       "input_schema": {
         "type": "object",
         "properties": {

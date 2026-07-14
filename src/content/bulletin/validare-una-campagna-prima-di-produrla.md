@@ -129,7 +129,7 @@ Sì. Funziona su singoli spot, contenuti formativi, asset fundraising, brand vid
 
 Se hai un prossimo progetto con componente video o audio significativa, capiamo insieme se ha senso applicare il metodo.
 
-**[info@pianeta.studio](mailto:info@pianeta.studio)**
+**[max@pianeta.studio](mailto:max@pianeta.studio)**
 
 ---
 
