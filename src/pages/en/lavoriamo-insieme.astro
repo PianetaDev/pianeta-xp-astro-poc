@@ -214,7 +214,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           });
           const data = await res.json().catch(() => ({}));
           if (!res.ok || !data.ok) {
-            throw new Error(data.error || 'Sending error. Try again or email info@pianeta.studio.');
+            throw new Error(data.error || 'Sending error. Try again or email max@pianeta.studio.');
           }
           form.hidden = true;
           thankYou.hidden = false;

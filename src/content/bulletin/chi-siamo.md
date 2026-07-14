@@ -55,7 +55,7 @@ E tre linee di prodotti proprietari che alimentiamo dalle commesse:
 
 ## Scriveteci
 
-Per parlare di un progetto: [info@pianeta.studio](mailto:info@pianeta.studio).
+Per parlare di un progetto: [max@pianeta.studio](mailto:max@pianeta.studio).
 Per la rete freelance Pianeta.Satellite: [satellite@pianeta.studio](mailto:satellite@pianeta.studio).
 
 ---

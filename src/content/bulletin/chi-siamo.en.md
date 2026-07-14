@@ -55,7 +55,7 @@ And three proprietary product lines we fund through client work:
 
 ## Get in touch
 
-To talk about a project: [info@pianeta.studio](mailto:info@pianeta.studio).
+To talk about a project: [max@pianeta.studio](mailto:max@pianeta.studio).
 For the Pianeta.Satellite freelance network: [satellite@pianeta.studio](mailto:satellite@pianeta.studio).
 
 ---

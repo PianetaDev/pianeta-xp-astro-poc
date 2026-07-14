@@ -46,7 +46,7 @@ export async function checkAndIncrementRateLimit(args: {
   const date = today();
   const uidCount = await incrementAndGet(`uid:${args.uid}`, date);
   if (uidCount > LIMITS.perUidPerDay) {
-    return { ok: false, reason: 'Hai raggiunto il limite giornaliero. Riprova domani o scrivici a info@pianeta.studio.' };
+    return { ok: false, reason: 'Hai raggiunto il limite giornaliero. Riprova domani o scrivici a max@pianeta.studio.' };
   }
   const ipCount = await incrementAndGet(`ip:${args.ip}`, date);
   if (ipCount > LIMITS.perIpPerDay) {
@@ -54,7 +54,7 @@ export async function checkAndIncrementRateLimit(args: {
   }
   const globalCount = await incrementAndGet('global', date);
   if (globalCount > LIMITS.globalPerDay) {
-    return { ok: false, reason: 'Alba è in pausa per oggi (alto traffico). Scrivici a info@pianeta.studio.' };
+    return { ok: false, reason: 'Alba è in pausa per oggi (alto traffico). Scrivici a max@pianeta.studio.' };
   }
   return { ok: true };
 }

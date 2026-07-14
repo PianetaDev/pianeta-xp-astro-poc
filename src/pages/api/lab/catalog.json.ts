@@ -44,7 +44,7 @@ export const GET: APIRoute = async ({ site }) => {
       external_link: it.data.links?.external || undefined,
     })),
     contact: {
-      sales: 'info@pianeta.studio',
+      sales: 'max@pianeta.studio',
       lab: 'lab@pianeta.studio',
       docs: `${base}/llms.txt`,
     },

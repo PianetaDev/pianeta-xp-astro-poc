@@ -6,7 +6,7 @@
 //   GOOGLE_CLIENT_ID
 //   GOOGLE_CLIENT_SECRET
 //   GOOGLE_OAUTH_REDIRECT_URI   (es. https://xp.pianeta.studio/api/oauth/google/callback)
-//   ALBA_CALENDAR_OWNER_EMAIL   (es. info@pianeta.studio — chi possiede l'agenda)
+//   ALBA_CALENDAR_OWNER_EMAIL   (es. max@pianeta.studio — chi possiede l'agenda)
 
 import { albaSupabase } from './supabase';
 

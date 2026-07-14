@@ -129,7 +129,7 @@ Yes. It works on single spots, educational content, fundraising assets, brand vi
 
 If you have an upcoming project with a significant video or audio component, let's figure out together whether it makes sense to apply the method.
 
-**[info@pianeta.studio](mailto:info@pianeta.studio)**
+**[max@pianeta.studio](mailto:max@pianeta.studio)**
 
 ---
 

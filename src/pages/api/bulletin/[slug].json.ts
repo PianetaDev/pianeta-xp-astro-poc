@@ -41,7 +41,7 @@ export const GET: APIRoute = async ({ params, site }) => {
       name: 'Pianeta.Studio',
       url: base,
       taxID: 'IT06037730873',
-      email: 'info@pianeta.studio',
+      email: 'max@pianeta.studio',
     },
   };
 

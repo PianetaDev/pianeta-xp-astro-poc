@@ -8,7 +8,7 @@ export const BRAND = {
 export const SITE_URL = 'https://xp.pianeta.studio'
 
 export const EMAILS = {
-  info: 'info@pianeta.studio',
+  info: 'max@pianeta.studio',
   bulletin: 'bulletin@pianeta.studio',
   people: 'people@pianeta.studio',
   noreply: 'noreply@pianeta.studio',

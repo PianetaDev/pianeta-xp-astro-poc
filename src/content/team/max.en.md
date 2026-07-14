@@ -13,7 +13,7 @@ role: "Founder & Strategic Director"
 since: "2023-09-14"
 employment: "founder"
 location: "Catania · Milan · Rome"
-email: "info@pianeta.studio"
+email: "max@pianeta.studio"
 photo: "/og/placeholder.svg"
 order: 1
 expertise: ["strategy", "ai-governance", "sustainability", "design"]

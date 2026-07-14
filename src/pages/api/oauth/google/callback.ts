@@ -45,7 +45,7 @@ export const GET: APIRoute = async ({ url }) => {
   }
 
   // Estrai email owner da id_token (decodifica JWT senza verifica firma — qui ci fidiamo perché è Google che ha appena risposto)
-  let ownerEmail = process.env.ALBA_CALENDAR_OWNER_EMAIL || 'info@pianeta.studio';
+  let ownerEmail = process.env.ALBA_CALENDAR_OWNER_EMAIL || 'max@pianeta.studio';
   if (tok.id_token) {
     try {
       const payload = JSON.parse(Buffer.from(tok.id_token.split('.')[1], 'base64').toString('utf8'));

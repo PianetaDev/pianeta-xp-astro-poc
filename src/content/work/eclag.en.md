@@ -95,6 +95,6 @@ Video or audio campaigns with a significant emotional component: advocacy, NGOs,
 
 ## For a similar project
 
-**Talk to Alba → [info@pianeta.studio](mailto:info@pianeta.studio)**
+**Talk to Alba → [max@pianeta.studio](mailto:max@pianeta.studio)**
 
 See also: [Service · Creativity and neuromarketing](/services/neuromarketing-lab)
