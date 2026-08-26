@@ -58,33 +58,35 @@ const careers = defineCollection({
   schema: baseSchema,
 });
 
+const enGenerateId = ({ entry }: { entry: string }) => entry.replace(/\.en\.md$/, '');
+
 const workEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/work' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/work', generateId: enGenerateId }),
   schema: baseSchema,
 });
 
 const bulletinEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/bulletin' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/bulletin', generateId: enGenerateId }),
   schema: baseSchema,
 });
 
 const servicesEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/services' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/services', generateId: enGenerateId }),
   schema: servicesSchemaExt,
 });
 
 const teamEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/team' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/team', generateId: enGenerateId }),
   schema: teamSchemaExt,
 });
 
 const labEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/lab' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/lab', generateId: enGenerateId }),
   schema: baseSchema,
 });
 
 const careersEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/careers' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/careers', generateId: enGenerateId }),
   schema: baseSchema,
 });
 

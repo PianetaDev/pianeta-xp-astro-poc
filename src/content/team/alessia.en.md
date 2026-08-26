@@ -27,7 +27,7 @@ The ability to hold informational rigor and readability together: in her project
 
 ## Recent projects with Pianeta
 
-- **[ARIES — Towards a smarter & more sustainable world](/work/aries-towards-smarter-sustainable-world)** (2022) · infographic system for the AI + Open Science vision
+- **[ARIES — Towards a smarter & more sustainable world](/en/work/aries-towards-smarter-sustainable-world)** (2022) · infographic system for the AI + Open Science vision
 
 ## How to reach her
 

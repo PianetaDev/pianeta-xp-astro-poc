@@ -20,7 +20,7 @@ const byCategory = (key: string) =>
       <p class="index-deck">Four practice areas that talk to each other. Co-design + AI validation + open standards. No lock-in.</p>
       <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">{t('en', 'cta_lavoriamo')}</button>
-        <a href="/processo" class="cta-btn cta-ghost">{t('en', 'cta_come_lavoriamo')} →</a>
+        <a href="/en/processo" class="cta-btn cta-ghost">{t('en', 'cta_come_lavoriamo')} →</a>
       </div>
       <script is:inline>
         document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open'))));
