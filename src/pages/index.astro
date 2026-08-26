@@ -115,6 +115,16 @@ const ldJson = {
           <p class="bento-sub">L'AI di gruppo di Pianeta.Studio · ti aiuta a inquadrare brief, fissare call, capire i nostri lavori.</p>
         </div>
       </button>
+
+      {/* 4b. Calendly CTA diretta — dark */}
+      <a href="https://calendly.com/pianetastudio/30min" target="_blank" rel="noopener noreferrer" class="bento-tile t-medium t-dark">
+        <div class="bento-content">
+          <p class="bento-kicker">30 min · Gratuita</p>
+          <div class="bento-spacer" />
+          <h2 class="bento-title">Prenota una call</h2>
+          <p class="bento-sub">Parliamo del tuo progetto con Max, direttamente →</p>
+        </div>
+      </a>
       <script is:inline>
         document.querySelectorAll('[data-action="open-alba"]').forEach((b) => {
           b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('alba:open')));

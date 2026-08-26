@@ -46,6 +46,10 @@ const home = locale === 'en' ? '/en' : '/';
   </nav>
 
   <div class="site-rail-foot">
+    <a href="https://calendly.com/pianetastudio/30min" target="_blank" rel="noopener noreferrer" class="rail-book-call" aria-label="Prenota una call con Pianeta.Studio">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span>Book call</span>
+    </a>
     <div class="rail-locale" role="group" aria-label="Language">
       <a href={itHref} class={locale === 'it' ? 'is-active' : ''} aria-current={locale === 'it' ? 'true' : 'false'} hreflang="it">IT</a>
       <a href={enHref} class={locale === 'en' ? 'is-active' : ''} aria-current={locale === 'en' ? 'true' : 'false'} hreflang="en">EN</a>
@@ -191,4 +195,18 @@ const home = locale === 'en' ? '/en' : '/';
     color: var(--pianeta-muted); text-decoration: none;
   }
   .rail-mini a:hover { color: var(--pianeta-text); }
+
+  .rail-book-call {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    width: 100%;
+    padding: 8px 6px;
+    border-radius: 8px;
+    background: var(--cta-primary);
+    color: var(--cta-primary-ink);
+    text-decoration: none;
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600;
+    transition: opacity 150ms;
+    text-align: center;
+  }
+  .rail-book-call:hover { opacity: 0.85; }
 </style>
