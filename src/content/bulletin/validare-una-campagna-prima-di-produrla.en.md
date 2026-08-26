@@ -121,8 +121,8 @@ Yes. It works on single spots, educational content, fundraising assets, brand vi
 
 ## See also
 
-→ [Choose to See Them — the ECLAG case](/work/eclag)
-→ [Service · Creativity and neuromarketing](/services/neuromarketing-lab)
+→ [Choose to See Them — the ECLAG case](/en/work/eclag)
+→ [Service · Creativity and neuromarketing](/en/services/neuromarketing-lab)
 → The live campaign at [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com)
 
 ## Talk to Alba

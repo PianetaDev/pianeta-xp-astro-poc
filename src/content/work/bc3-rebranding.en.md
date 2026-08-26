@@ -51,7 +51,7 @@ Build a visual system that tells a story of **positive change, impact, responsib
 The identity had to be:
 
 - **Recognizable** in academic publications as much as on social media
-- **Adaptable** across more than 30 project sub-brands (including the later [UNTWIST](/work/untwist))
+- **Adaptable** across more than 30 project sub-brands (including the later [UNTWIST](/en/work/untwist))
 - **Sustainable** — including physically, in printed materials
 - **Multilingual** (English · Spanish · Catalan · Basque)
 
@@ -91,4 +91,4 @@ The identity had to be:
 
 Full gallery with every deliverable: **[BC3 Rebranding on Behance ↗](https://www.behance.net/gallery/211724877/BC3-Rebranding)**
 
-The 2025 project **[UNTWIST — Untangling the Water-Energy-Food Nexus](/work/untwist)** is a direct descendant of this visual system: same family of typographic and color choices, same sub-brand logic.
+The 2025 project **[UNTWIST — Untangling the Water-Energy-Food Nexus](/en/work/untwist)** is a direct descendant of this visual system: same family of typographic and color choices, same sub-brand logic.

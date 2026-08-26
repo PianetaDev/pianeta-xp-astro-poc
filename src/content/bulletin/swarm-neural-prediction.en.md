@@ -15,7 +15,7 @@ relatedWork: ["eclag"]
 category: "Root"
 ---
 
-**TL;DR.** Two families of artificial intelligence exist for validating a video creative before producing it: audience simulation (multi-agent panels) and brain-response prediction (AI models trained on fMRI data). The academic literature treats them as separate traditions. We use them in parallel, during production — not after. This piece explains the scientific root of the method, not a case. For the case, see the [bulletin on the ECLAG campaign](/bulletin/validare-una-campagna-prima-di-produrla).
+**TL;DR.** Two families of artificial intelligence exist for validating a video creative before producing it: audience simulation (multi-agent panels) and brain-response prediction (AI models trained on fMRI data). The academic literature treats them as separate traditions. We use them in parallel, during production — not after. This piece explains the scientific root of the method, not a case. For the case, see the [bulletin on the ECLAG campaign](/en/bulletin/validare-una-campagna-prima-di-produrla).
 
 ## Two distinct families of AI tools
 
@@ -100,13 +100,13 @@ It's the response of an *average subject in attentive viewing*. It works well fo
 Speed and integration. Traditional tools take a single snapshot at the finish line. Here the test runs during production, in parallel with the editor, and guides decisions as they're being made.
 
 **Where can I see an applied case?**
-The [bulletin on the ECLAG campaign](/bulletin/validare-una-campagna-prima-di-produrla) covers the first case we've documented publicly: three videos on children's online rights, validated with this method, produced in three weeks with eighteen iterations.
+The [bulletin on the ECLAG campaign](/en/bulletin/validare-una-campagna-prima-di-produrla) covers the first case we've documented publicly: three videos on children's online rights, validated with this method, produced in three weeks with eighteen iterations.
 
 ## Cases and links
 
-→ [Choose to See Them — ECLAG](/work/eclag): the applied case study.
-→ [Validating a video campaign before producing it](/bulletin/validare-una-campagna-prima-di-produrla): the operational story, the seven lessons, what we'll apply to the next projects.
-→ [Creativity and neuromarketing](/services/neuromarketing-lab): the service.
+→ [Choose to See Them — ECLAG](/en/work/eclag): the applied case study.
+→ [Validating a video campaign before producing it](/en/bulletin/validare-una-campagna-prima-di-produrla): the operational story, the seven lessons, what we'll apply to the next projects.
+→ [Creativity and neuromarketing](/en/services/neuromarketing-lab): the service.
 
 ## References
 
