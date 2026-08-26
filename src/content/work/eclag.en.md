@@ -77,7 +77,7 @@ But the most relevant outcome is methodological: the process applied to ECLAG is
 
 The methodological detail — what the neural-analysis stack measures, how you iterate, the seven operating lessons — lives in the Bulletin:
 
-→ [Validating a video campaign before producing it — the ECLAG case](/bulletin/validare-una-campagna-prima-di-produrla)
+→ [Validating a video campaign before producing it — the ECLAG case](/en/bulletin/validare-una-campagna-prima-di-produrla)
 
 ## FAQ
 
@@ -97,4 +97,4 @@ Video or audio campaigns with a significant emotional component: advocacy, NGOs,
 
 **Talk to Alba → [max@pianeta.studio](mailto:max@pianeta.studio)**
 
-See also: [Service · Creativity and neuromarketing](/services/neuromarketing-lab)
+See also: [Service · Creativity and neuromarketing](/en/services/neuromarketing-lab)

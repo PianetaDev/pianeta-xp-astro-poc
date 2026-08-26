@@ -77,11 +77,11 @@ Three guiding principles:
 - **Creative Direction** — Pianeta.Studio
 - **Client Manager** — Massimiliano Mauro
 - **Senior Designer** — Francesca Fossati
-- **Developer** — [Andrea Maccone](/team/andrea) (Satellite network)
+- **Developer** — [Andrea Maccone](/en/team/andrea) (Satellite network)
 - **Agency partner** — Latte Creative
 
 ## Dig deeper
 
 Official project page: **[childfund-alliance-world-index-amplifying-voices-for-inclusion ↗](https://pianeta.studio/childfund-alliance-world-index-amplifying-voices-for-inclusion/)**
 
-This work is a defining case of **data storytelling** in our practice: the same family of choices appears in **[ARIES Towards a smarter & more sustainable world](/work/aries-towards-smarter-sustainable-world)** (AI + Open Science infographic system) and **[UNTWIST — Untangling the Water-Energy-Food Nexus](/work/untwist)** (Nexus editorial system).
+This work is a defining case of **data storytelling** in our practice: the same family of choices appears in **[ARIES Towards a smarter & more sustainable world](/en/work/aries-towards-smarter-sustainable-world)** (AI + Open Science infographic system) and **[UNTWIST — Untangling the Water-Energy-Food Nexus](/en/work/untwist)** (Nexus editorial system).
