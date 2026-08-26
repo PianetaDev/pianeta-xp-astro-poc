@@ -73,7 +73,7 @@ Design the **2022 and 2023** annual reports so they:
 
 ## Credits
 
-Project produced under **Pianeta.Studio creative direction** with the internal team + Satellite collaborations. For the full story of the relationship with BC3 see also **[BC3 — Rebranding](/work/bc3-rebranding)** (2024) — the definitive visual system that unified the center's entire communication.
+Project produced under **Pianeta.Studio creative direction** with the internal team + Satellite collaborations. For the full story of the relationship with BC3 see also **[BC3 — Rebranding](/en/work/bc3-rebranding)** (2024) — the definitive visual system that unified the center's entire communication.
 
 ## Dig deeper
 
@@ -81,6 +81,6 @@ Official project page: **[bc3-annual-reports-crafting-stories-of-climate-action 
 
 The "data storytelling for scientific research" family of work:
 
-- **[ChildFund Alliance World Index](/work/childfund-world-index)** — 2025 · interactive longform with the voice of children
-- **[UNTWIST — Untangling the Water-Energy-Food Nexus](/work/untwist)** — 2025 · illustrated book + educational system
-- **[ARIES — Towards a smarter & more sustainable world](/work/aries-towards-smarter-sustainable-world)** — 2022 · infographic series on AI + Open Science
+- **[ChildFund Alliance World Index](/en/work/childfund-world-index)** — 2025 · interactive longform with the voice of children
+- **[UNTWIST — Untangling the Water-Energy-Food Nexus](/en/work/untwist)** — 2025 · illustrated book + educational system
+- **[ARIES — Towards a smarter & more sustainable world](/en/work/aries-towards-smarter-sustainable-world)** — 2022 · infographic series on AI + Open Science

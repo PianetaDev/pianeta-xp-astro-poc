@@ -58,33 +58,36 @@ const careers = defineCollection({
   schema: baseSchema,
 });
 
+// Strip ".en" suffix: eclag.en.md → id "eclag" (not "eclag.en" → "eclagen")
+const enId = ({ entry }: { entry: string }) => entry.replace(/\.en\.md$/, '');
+
 const workEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/work' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/work', generateId: enId }),
   schema: baseSchema,
 });
 
 const bulletinEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/bulletin' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/bulletin', generateId: enId }),
   schema: baseSchema,
 });
 
 const servicesEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/services' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/services', generateId: enId }),
   schema: servicesSchemaExt,
 });
 
 const teamEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/team' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/team', generateId: enId }),
   schema: teamSchemaExt,
 });
 
 const labEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/lab' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/lab', generateId: enId }),
   schema: baseSchema,
 });
 
 const careersEn = defineCollection({
-  loader: glob({ pattern: '*.en.md', base: './src/content/careers' }),
+  loader: glob({ pattern: '*.en.md', base: './src/content/careers', generateId: enId }),
   schema: baseSchema,
 });
 
