@@ -116,15 +116,15 @@ const ldJson = {
         </div>
       </button>
 
-      {/* 4b. Calendly CTA diretta — dark */}
-      <a href="https://calendly.com/pianetastudio/30min" target="_blank" rel="noopener noreferrer" class="bento-tile t-medium t-dark">
+      {/* 4b. Prenota una call — apre Alba, che verifica il calendario di Max e fissa lei stessa la call (niente Calendly) */}
+      <button type="button" class="bento-tile t-medium t-dark" data-action="open-alba">
         <div class="bento-content">
           <p class="bento-kicker">30 min · Gratuita</p>
           <div class="bento-spacer" />
           <h2 class="bento-title">Prenota una call</h2>
-          <p class="bento-sub">Parliamo del tuo progetto con Max, direttamente →</p>
+          <p class="bento-sub">Alba controlla l'agenda di Max e fissa la call, direttamente in chat →</p>
         </div>
-      </a>
+      </button>
       <script is:inline>
         document.querySelectorAll('[data-action="open-alba"]').forEach((b) => {
           b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('alba:open')));
