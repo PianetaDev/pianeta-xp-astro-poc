@@ -4,8 +4,8 @@ description: "Two interactive maps for the Alliance Bioversity International - C
 kind: "Data viz"
 year: 2026
 status: "Live"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/future-seeds.png"
+ogImage: "/og/future-seeds.png"
 date: 2026-08-27
 locale: en
 draft: false
