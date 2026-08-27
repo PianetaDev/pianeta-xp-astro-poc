@@ -133,18 +133,15 @@ Il reframe: la validazione neurale non è persuasione manipolativa — è assicu
 2. **Pagina servizio neuromarketing-lab** (`/services/neuromarketing-lab`) — Completa. Copy chiaro su cosa è e cosa non è.
 3. **Pagina servizio AI validation swarm** (`/services/ai-validation-swarm`) — Incompleta (scheletro). Priorità bassa perché neuromarketing-lab è il punto di arrivo principale.
 
-### Bulletin già referenziato (esistenza da verificare)
+### Bulletin esistente e live
 
-- **"Validare una campagna video prima di produrla"** (`/bulletin/validare-una-campagna-prima-di-produrla`) — Citato in ECLAG e nel servizio, ma non trovato nella directory `src/content/bulletin/`. Verificare se esiste come draft o se è da produrre.
+4. **Bulletin: "Validare una campagna video prima di produrla"** (`/bulletin/validare-una-campagna-prima-di-produrla`) — Esiste e funziona (`src/content/bulletin/validare-una-campagna-prima-di-produrla.md` + versione `.en.md`). Linkato da ECLAG e dalla pagina servizio. Funziona bene per Persona 1 e Persona 2.
 
 ### Contenuti che dovrebbero esistere — priorità ordinata
 
-**Priorità 1 — Alta, blocca le persona attive**
+**Priorità 1 — Media, amplia la copertura**
 
-- **Bulletin: "Validare una campagna video prima di produrla — il caso ECLAG"**
-  Target: Persona 1 e Persona 2. Già referenziato ovunque — se non esiste, è un link rotto nei contenuti pubblicati. Va prodotto subito se mancante.
-
-**Priorità 2 — Media, amplia la copertura**
+**Priorità 2 — Media-bassa, dipende da risposte Max (domande 2–4)**
 
 - **Bulletin: "Come difendere le scelte creative al board con dati invece di opinioni"**
   Target primario: Persona 2. Angolo: il problema non è trovare una buona agenzia, è portare a casa l'approvazione. La validazione neurale diventa un argomento, non solo uno strumento.
@@ -194,7 +191,7 @@ La Persona 2 (Andrea, ONG con board difficile) è quella più vicina alla zona d
 
 ## 6. Domande aperte per Max
 
-1. **Il Bulletin "Validare una campagna video prima di produrla"** è già scritto e pubblicato, o è solo referenziato in attesa? Se è un link rotto, va messo in priorità 1 assoluta per MUSE.
+~~1. Il Bulletin "Validare una campagna prima di produrla" esiste?~~ **Chiuso** — confermato esistente e live (2026-08-27).
 
 2. **La validazione senza produzione** (Persona 2 scenario: un'altra agenzia fa il video, noi facciamo solo la validazione) è un'offerta che si vuole esplicitare? Ha implicazioni su come si presenta il servizio.
 
