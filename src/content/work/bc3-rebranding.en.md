@@ -51,7 +51,7 @@ Build a visual system that tells a story of **positive change, impact, responsib
 The identity had to be:
 
 - **Recognizable** in academic publications as much as on social media
-- **Adaptable** across more than 30 project sub-brands (including the later [UNTWIST](/work/untwist))
+- **Adaptable** across more than 30 project sub-brands (including the later [UNTWIST](/en/work/untwist))
 - **Sustainable** — including physically, in printed materials
 - **Multilingual** (English · Spanish · Catalan · Basque)
 

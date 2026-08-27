@@ -1,10 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { t } from '../../lib/i18n/strings';
 
-// EN home — bento gemella della IT. Contenuti dalle stesse collection (IT),
-// UI in inglese, banner "translation in progress". Link localizzati /en/*.
 const byDateDesc = (a: any, b: any) => {
   const da = a.data.date ? new Date(a.data.date).getTime() : 0;
   const db = b.data.date ? new Date(b.data.date).getTime() : 0;
@@ -12,10 +9,10 @@ const byDateDesc = (a: any, b: any) => {
 };
 const liveOnly = (e: any) => e.data.draft !== true;
 
-const featuredWork = (await getCollection('work')).filter(liveOnly).sort(byDateDesc);
-const bulletin = (await getCollection('bulletin')).filter(liveOnly).sort(byDateDesc);
-const services = (await getCollection('services')).filter(liveOnly).sort(byDateDesc);
-const team = (await getCollection('team')).filter(liveOnly);
+const featuredWork = (await getCollection('workEn')).filter(liveOnly).sort(byDateDesc);
+const bulletin = (await getCollection('bulletinEn')).filter(liveOnly).sort(byDateDesc);
+const services = (await getCollection('servicesEn')).filter(liveOnly).sort(byDateDesc);
+const team = (await getCollection('teamEn')).filter(liveOnly);
 const teamCount = team.length;
 
 const w0 = featuredWork[0];
@@ -30,7 +27,6 @@ const description = 'Design & technology studio. Work, articles, experiments.';
 ---
 <BaseLayout title={title} description={description} ogImage="/og/home.png">
   <div class="home-page">
-    <p class="i18n-banner">{t('en', 'fallback_banner')}</p>
     <div class="bento-grid">
 
       <a href={w0 ? `/en/work/${w0.id}` : '/en/work'} class="bento-tile t-tall t-dark">
@@ -184,8 +180,6 @@ const description = 'Design & technology studio. Work, articles, experiments.';
   <style>
     .home-page { padding: 16px; max-width: 1500px; margin: 0 auto; }
     @media (min-width: 768px) { .home-page { padding: 32px; } }
-    .i18n-banner { font-size: 12px; opacity: 0.7; margin: 0 0 16px; padding: 8px 14px;
-      background: var(--pianeta-bg-card, #f3f3ef); border-radius: 10px; display: inline-block; }
 
     .bento-grid { display: grid; gap: 16px; grid-template-columns: 1fr; grid-auto-rows: 220px; grid-auto-flow: dense; }
     @media (min-width: 700px) { .bento-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; grid-auto-rows: 200px; } }
