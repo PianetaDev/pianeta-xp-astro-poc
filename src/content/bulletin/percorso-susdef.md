@@ -27,7 +27,7 @@ Il capitolato non prescriveva tecnologia. La risposta di default per un cliente 
 
 Avevamo un motivo solido.
 
-L'archivio di Susdef contiene **3.381 articoli e 2.019 documenti scaricabili**, costruiti in più di vent'anni di produzione editoriale. Con WordPress, a quella scala, il problema non è oggi: è tra tre anni, quando la base di plugin è invecchiata, quando le performance degradano sotto carico, quando la migrazione verso qualcosa di più solido costerebbe il doppio di quello che sarebbe costato costruire bene adesso.
+L'archivio di Susdef conta **oltre 33.000 contenuti**, costruiti in più di vent'anni di produzione editoriale. Con WordPress, a quella scala, il problema non è oggi: è tra tre anni, quando la base di plugin è invecchiata, quando le performance degradano sotto carico, quando la migrazione verso qualcosa di più solido costerebbe il doppio di quello che sarebbe costato costruire bene adesso.
 
 Abbiamo proposto **Nuxt 3 + Payload CMS + MeiliSearch**. Payload CMS è open source come framework — codice pubblico, community attiva, nessun vendor da cui dipendere per le licenze. Il codice applicativo che abbiamo costruito per Susdef è però proprietà di Susdef: lo possono portare da un altro fornitore domani, se lo decidono. Nessun lock-in verso di noi.
 
@@ -78,7 +78,6 @@ Non pubblichiamo tariffe. La risposta onesta è che un progetto con migrazione d
 
 ## Vedi anche
 
-→ [Service · CMS e architettura documentale](/services/cms-documentale)
 → Case study Susdef completo — in arrivo con il lancio del sito
 
 ## Parlane con noi
