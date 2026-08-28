@@ -159,7 +159,7 @@ Non abbiamo un caso reale che la fondi. Prima di produrre contenuto specifico pe
 **Struttura**: intro narrativa per A (dolore, scelta, risultato) + sezione tecnica per B (stack, >33.000 record, WCAG 2.1 AA, timeline 12 settimane)
 **Prerequisiti bloccanti** (non procedere senza):
 - [x] URL pubblico del sito Susdef — **https://susdef.pianeta.green** (confermato da Max, 2026-08-28)
-- [ ] Autorizzazione del cliente a pubblicare numeri tecnici (>33.000 record, dettagli stack)
+- [x] Autorizzazione del cliente a pubblicare numeri tecnici (>33.000 record, dettagli stack) — **confermato da Max (2026-08-28)**
 - [ ] Screenshot del sito finito — disponibili su https://susdef.pianeta.green (Max ha confermato che si possono prendere da lì per la futura pubblicazione)
 - [ ] Nome con cui il cliente vuole essere citato: "Fondazione per lo Sviluppo Sostenibile" o "Susdef"?
 
@@ -194,8 +194,8 @@ Non abbiamo un caso reale che la fondi. Prima di produrre contenuto specifico pe
 Prima di passare queste priorità a MUSE come issue, serve conferma su:
 
 1. ~~**Nome del prodotto**: esiste già? È necessario per Lab e landing. Non può richiamare EPOS.~~ **Risolto (2026-08-28)**: il prodotto si chiama **Terra**, già pubblico su https://pianeta.green. L'offerta documentale AI è il profilo "Hub Editoriale" di Terra. Nessun nuovo naming necessario.
-2. **Autorizzazione Susdef**: i numeri tecnici (>33.000 record, dettagli stack, timeline) sono già trattabili come pubblici, o serve conferma scritta dal cliente?
+2. ~~**Autorizzazione Susdef**: i numeri tecnici (>33.000 record, dettagli stack, timeline) sono già trattabili come pubblici, o serve conferma scritta dal cliente?~~ **Risolto (2026-08-28)**: autorizzati da Max — numeri tecnici, stack e timeline trattabili come pubblici nel case study.
 3. ~~**URL Susdef**: qual è il dominio pubblico del sito?~~ **Risolto (2026-08-28)**: https://susdef.pianeta.green — Max ha confermato che si possono prendere screenshot da qui per la futura pubblicazione.
 4. **Screenshot/video**: la fonte primaria per gli screenshot è ora https://susdef.pianeta.green. I materiali in `25P19_Epos/6_Screen video pages/` — usabili per contesto interno, ma verificare che non mostrino branding ghost prima di qualsiasi uso pubblico.
 5. **Persona D (NGO)**: ci sono conversazioni o progetti reali con NGO che hanno valutato questo prodotto, o è un segmento da escludere finché non si materializza?
-6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study?
+6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study? — **In raccolta (Max, 2026-08-28)**: le chiede appena possibile. Il case study può partire senza quote e aggiungerle in seguito.
