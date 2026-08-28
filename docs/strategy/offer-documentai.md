@@ -12,6 +12,12 @@ prodotto-correlato: offer-stack-terra.md
 
 > **Nota di stato**: questo documento è uno stub — ho solo i fatti del Piano R&D, non materiale di brief approfondito come per Stack Terra. Non procedere con persona o contenuti finche' Max non risponde alle domande nella sezione 5.
 
+> **Tono e registro per MUSE — vincolo confermato da Max (2026-08-28)**
+>
+> Scrivere con il registro di uno **studio con R&D reale**: investimento misurabile, asset proprietari costruiti da commesse enterprise reali, logica di reinvestimento sistematico.
+>
+> **Non dichiarare mai la certificazione legale "Startup Innovativa" come già ottenuta.** La registrazione non è ancora conclusa. Se il tema emerge in un contenuto: "percorso verso la registrazione come Startup Innovativa" — oppure lasciare parlare i fatti (budget R&D investito, asset costruiti, contratti quadro) senza nominare lo status legale.
+
 ---
 
 ## 1. Definizione dell'offerta

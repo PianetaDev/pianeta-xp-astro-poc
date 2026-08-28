@@ -17,6 +17,12 @@ prodotto-correlato: offer-documentai.md
 >
 > Questo documento è interno — le persona derivate dal contesto EPOS sono usate per informare la strategia, non per produrre contenuto. Chi produce contenuto (MUSE) non deve mai usare EPOS come fonte citabile.
 
+> **Tono e registro per MUSE — vincolo confermato da Max (2026-08-28)**
+>
+> Scrivere con il registro di una **studio con R&D reale**: investimento misurabile, asset proprietari costruiti da commesse enterprise reali, logica di reinvestimento sistematico. Questo tono è corretto e verificabile nei fatti.
+>
+> **Non dichiarare mai la certificazione legale "Startup Innovativa" come già ottenuta.** La registrazione non è ancora conclusa (in attesa del commercialista). Se il tema emerge in un contenuto, usare: "percorso verso la registrazione come Startup Innovativa" — oppure lasciare parlare i fatti (budget R&D investito, asset costruiti, contratti quadro con collaboratori) senza nominare lo status legale. I fatti sono veri e verificabili indipendentemente dalla certificazione.
+
 ---
 
 ## 1. Definizione dell'offerta
