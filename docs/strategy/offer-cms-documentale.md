@@ -30,11 +30,17 @@ Stack verificato (da due progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSe
 - **Non è un servizio SaaS**. È una build custom, self-hosted, consegnata al cliente. Non c'è abbonamento mensile a Pianeta (salvo contratti di manutenzione separati).
 - **Non è "open source"**. Il framework sottostante (Payload CMS) è open source, ma il codice applicativo è proprietario del cliente — formulazione corretta: "codice consegnato in toto, nessun lock-in".
 
-### Contesto di prodotto
+### Contesto di prodotto e nome
 
-Nata da due progetti reali (due applicazioni della stessa architettura):
+**Il prodotto si chiama Terra** — già pubblico su https://pianeta.green (confermato da Max, 2026-08-28).
+
+Terra è il layer CMS dell'ecosistema Pianeta.Studio (basato su Payload CMS). L'offerta documentale AI è il profilo "Hub Editoriale" di Terra applicato a organizzazioni con grandi archivi documentali: aggiunge il layer MeiliSearch + AI (RAG, abstract generation) sopra la base Terra standard.
+
+**Implicazione per i contenuti**: non serve un nome di prodotto nuovo. La Lab/service page si posiziona come "Terra — Hub Editoriale per fondazioni e enti di ricerca" o simile. Il case study Susdef diventa la prova del profilo Hub Editoriale di Terra.
+
+Nato da due progetti reali (due applicazioni della stessa architettura):
 1. Consorzio scientifico europeo — **contesto interno, non nominabile mai** (vedi vincolo EPOS in cima)
-2. Fondazione per lo Sviluppo Sostenibile (Susdef) — **unico caso nominabile**, sito live dal 16 luglio 2026, >33.000 record migrati
+2. Fondazione per lo Sviluppo Sostenibile (Susdef) — **unico caso nominabile**, sito live dal 16 luglio 2026, >33.000 record migrati — URL: https://susdef.pianeta.green
 
 Il prodotto è esplicitamente pensato come asset riutilizzabile, non un one-off. La co-produzione avviene con Latte Creative (nominabile) come partner principale su entrambi i casi.
 
@@ -168,11 +174,11 @@ Non abbiamo un caso reale che la fondi. Prima di produrre contenuto specifico pe
 
 ---
 
-### [P2] Lab asset — piattaforma documentale come prodotto autonomo
-**Stato**: dipende da decisione su nome del prodotto
-**Persona primaria**: B (architettura, riusabilità) + posizionamento generale
-**Prerequisito critico**: il prodotto ha bisogno di un nome che non richiami EPOS. Senza nome non si può creare un Lab asset autonomo.
-**Gap da risolvere con Max**: esiste già un nome in mente? Se no, va deciso prima di procedere.
+### [P2] Pagina Terra Hub Editoriale — posizionamento per fondazioni/enti di ricerca
+**Stato**: nome risolto — il prodotto è Terra (https://pianeta.green), profilo Hub Editoriale
+**Persona primaria**: A + C (comm manager fondazione/consorzio)
+**Struttura**: Terra esiste già come pagina prodotto; serve un angolo specifico per il segmento "archivio documentale AI" — potrebbe essere una sezione dedicata su pianeta.green o una landing separata collegata.
+**Da decidere con Max**: la pagina documentale AI vive dentro pianeta.green (come sezione Hub Editoriale) o su pianeta.studio/lab come asset separato? Impatta sulla struttura del contenuto.
 
 ---
 
@@ -187,7 +193,7 @@ Non abbiamo un caso reale che la fondi. Prima di produrre contenuto specifico pe
 
 Prima di passare queste priorità a MUSE come issue, serve conferma su:
 
-1. **Nome del prodotto**: esiste già? È necessario per Lab e landing. Non può richiamare EPOS.
+1. ~~**Nome del prodotto**: esiste già? È necessario per Lab e landing. Non può richiamare EPOS.~~ **Risolto (2026-08-28)**: il prodotto si chiama **Terra**, già pubblico su https://pianeta.green. L'offerta documentale AI è il profilo "Hub Editoriale" di Terra. Nessun nuovo naming necessario.
 2. **Autorizzazione Susdef**: i numeri tecnici (>33.000 record, dettagli stack, timeline) sono già trattabili come pubblici, o serve conferma scritta dal cliente?
 3. ~~**URL Susdef**: qual è il dominio pubblico del sito?~~ **Risolto (2026-08-28)**: https://susdef.pianeta.green — Max ha confermato che si possono prendere screenshot da qui per la futura pubblicazione.
 4. **Screenshot/video**: la fonte primaria per gli screenshot è ora https://susdef.pianeta.green. I materiali in `25P19_Epos/6_Screen video pages/` — usabili per contesto interno, ma verificare che non mostrino branding ghost prima di qualsiasi uso pubblico.
