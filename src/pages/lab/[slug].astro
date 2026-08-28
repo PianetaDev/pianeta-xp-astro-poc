@@ -27,6 +27,22 @@ const metaInline = [
 const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Lab', href: '/lab' }];
 if (data.kind) eyebrowParts.push({ label: data.kind });
 if (data.year) eyebrowParts.push({ label: String(data.year) });
+
+// `links.client` marks a case study delivered to a real client: the client's
+// own live page becomes the primary CTA (proof of delivered work), and
+// `links.external` -- our own prototype/staging -- moves to secondary,
+// labeled to make clear it's the evolving version, not what the client uses.
+// Entries without `links.client` keep the default behavior: `links.external`
+// as primary, "Lavoriamo insieme" as secondary.
+const primaryCta = data.links?.client
+  ? { label: 'Vedi sul sito del cliente ↗', href: data.links.client, external: true }
+  : (data.links?.external
+      ? { label: 'Apri ' + (data.title || 'progetto') + ' ↗', href: data.links.external, external: true }
+      : undefined);
+
+const secondaryCta = data.links?.client && data.links?.external
+  ? { label: 'Prototipo in evoluzione ↗', href: data.links.external, external: true }
+  : { label: 'Lavoriamo insieme', action: 'open-hire-us' };
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="lab" ogSlug={item.id}>
   <DetailPage
@@ -34,8 +50,8 @@ if (data.year) eyebrowParts.push({ label: String(data.year) });
     title={title}
     deck={data.description}
     cover={cover}
-    primaryCta={data.links?.external ? { label: 'Apri ' + (data.title || 'progetto') + ' ↗', href: data.links.external, external: true } : undefined}
-    secondaryCta={{ label: 'Lavoriamo insieme', action: 'open-hire-us' }}
+    primaryCta={primaryCta}
+    secondaryCta={secondaryCta}
     backHref="/lab"
     backLabel="Tutti gli esperimenti"
     nextItem={nextItem}
