@@ -1,77 +1,26 @@
 ---
-status: sospeso — nessun cliente verificato (PIA-1303, 2026-08-28)
-compiled: 2026-08-28
-author: COMPASS (PIA-1303)
-fonti: Piano R&D `09_relazione_sostenibilita/03_Piano_RD_e_Startup_Innovativa.md` (citato da Max nel thread PIA-1303)
-prodotto-correlato: offer-stack-terra.md
+status: DEPRECATO — DocumentAI è un modulo di Terra, non un prodotto autonomo (PIA-1309, 2026-08-28)
+deprecato: 2026-08-28
+sostituito-da: offer-stack-terra.md#15-modulo-documentai--add-on-di-terra
+author: COMPASS
 ---
 
-> **Questo documento copre solo DocumentAI.** La piattaforma CMS + ricerca (Nuxt+Payload+MeiliSearch) è un prodotto separato — vedi [`offer-stack-terra.md`](./offer-stack-terra.md).
+# DocumentAI — documento deprecato
 
-# Strategia offerta — DocumentAI
-
-> **Nota di stato**: questo documento è uno stub — ho solo i fatti del Piano R&D, non materiale di brief approfondito come per Stack Terra. Non procedere con persona o contenuti finche' Max non risponde alle domande nella sezione 5.
-
-> **Tono e registro per MUSE — vincolo confermato da Max (2026-08-28)**
+> **Questo documento è stato deprecato con PIA-1309 (2026-08-28).**
 >
-> Scrivere con il registro di uno **studio con R&D reale**: investimento misurabile, asset proprietari costruiti da commesse enterprise reali, logica di reinvestimento sistematico.
+> La strategia di DocumentAI vive ora nella **sezione 1.5 di [`offer-stack-terra.md`](./offer-stack-terra.md)**.
 >
-> **Non dichiarare mai la certificazione legale "Startup Innovativa" come già ottenuta.** La registrazione non è ancora conclusa. Se il tema emerge in un contenuto: "percorso verso la registrazione come Startup Innovativa" — oppure lasciare parlare i fatti (budget R&D investito, asset costruiti, contratti quadro) senza nominare lo status legale.
+> Non aggiornare questo file. Tutte le modifiche vanno su `offer-stack-terra.md`.
 
 ---
 
-## 1. Definizione dell'offerta
+## Perché è stato deprecato
 
-### Cosa sappiamo (fatti verificati dal Piano R&D)
+La conclusione precedente ("nessun cliente verificato, documento sospeso") era sbagliata. **Susdef usa DocumentAI** — ingestione AI, abstract automatici, ricerca semantica sui documenti — in produzione su https://susdef.pianeta.green dal 16 luglio 2026.
 
-DocumentAI e' un **workflow/tool AI per documenti di ricerca** — un asset proprietario distinto da Stack Terra.
+La correzione strategica più importante: DocumentAI non deve essere posizionato come prodotto a sé stante. Max (PIA-1309): "dobbiamo venderlo tra i moduli di Terra". Di conseguenza la strategia DocumentAI è stata integrata in `offer-stack-terra.md` come sezione 1.5.
 
-**Stack tecnico**: WordPress Multisite + API enterprise (confermato da Piano R&D). Stack completamente diverso da Stack Terra (Nuxt+Payload+MeiliSearch) — non sono intercambiabili.
+## Nota sullo stack tecnico
 
-**Cliente verificato**: nessuno al momento. Il Piano R&D citava AGESCI ma Max ha confermato (2026-08-28) che **AGESCI non e' un cliente DocumentAI e non e' nominabile**. La strategia non puo' essere sviluppata senza almeno un caso reale verificato.
-
-**Relazione con Stack Terra**: i due prodotti sono "connessi e integrati" (Max, 2026-08-28) ma restano offerte distinte. DocumentAI puo' operare sopra un sito esistente senza richiedere migrazione su Stack Terra. Quando i due sono combinati si ottiene la piattaforma documentale AI completa.
-
-### Cos'e' (ipotesi da verificare)
-
-Un sistema che aggiunge capacita' AI su un corpus di documenti esistente — probabilmente: ingestione di documenti (PDF, Word, pubblicazioni), elaborazione AI (estrazione di concetti, abstract automatici, Q&A), accesso via API o interfaccia dedicata.
-
-> ⚠️ Non ho un brief dettagliato su DocumentAI come ho su Stack Terra. Le caratteristiche sopra sono inferite dal nome e dal contesto del Piano R&D. Non procedere con contenuti pubblici basati su queste ipotesi — chiedere prima il materiale verificato.
-
-### Cosa NON e' (da confermare)
-
-- **Non e' Stack Terra**: stack diverso (WordPress Multisite vs Nuxt+Payload), target potenzialmente diverso, casi diversi
-- **Non e' un CMS**: non e' pensato per gestire la pubblicazione di contenuti editoriali — e' un layer di elaborazione AI su documenti esistenti
-- **Non e' un sostituto di Stack Terra**: i due si completano
-
----
-
-## 2. Persona — DA SVILUPPARE
-
-> **Non ho abbastanza segnali verificati per costruire persona credibili per DocumentAI.** Il contesto AGESCI (organizzazione scout, non fondazione di ricerca) suggerisce un target diverso da Stack Terra. Prima di sviluppare questa sezione, Max deve rispondere alle domande nella sezione 5.
-
----
-
-## 3. Mappa canale x persona — DA SVILUPPARE
-
-Dipende dalla definizione di persona (sezione 2 da sviluppare).
-
----
-
-## 4. Contenuti prioritari — DA SVILUPPARE
-
-Dipende da: nominabilita' AGESCI, materiale verificato sull'offerta, persona.
-
----
-
-## 5. Gap aperti — non procedere senza risposta di Max
-
-1. ~~**AGESCI nominabile?**~~ **Risolto (2026-08-28)**: AGESCI non usa DocumentAI e non e' nominabile — voce del Piano R&D da considerare errata o riferita ad altro. **Non ci sono clienti verificati al momento.**
-
-2. **Qual e' il primo cliente verificato di DocumentAI?** Senza un caso reale non e' possibile costruire persona credibili ne' una strategia contenuti. Questo documento rimane sospeso finche' Max non identifica un caso reale.
-
-3. **WordPress Multisite e' la scelta tecnica definitiva o una dipendenza dal cliente?** Stack Terra usa Nuxt+Payload per una ragione precisa (performance, no plugin, live preview). DocumentAI usa WordPress Multisite — e' una scelta di prodotto o un adattamento alle esigenze specifiche di AGESCI?
-
-4. **Integrabilita' con Stack Terra**: come si integrano concretamente i due prodotti? Un cliente Terra puo' aggiungere DocumentAI? Un cliente DocumentAI migra poi su Terra?
-
-5. **Target reale di DocumentAI**: il target e' lo stesso di Stack Terra (fondazioni, enti di ricerca) o e' un segmento diverso? AGESCI e' un'organizzazione scout — suggerisce un target "grandi organizzazioni con archivio documentale interno", non necessariamente "enti di ricerca con pubblicazioni".
+Il Piano R&D citava "WordPress Multisite + API enterprise" per DocumentAI. Questo non corrisponde allo stack reale di Susdef (Nuxt+Payload+MeiliSearch). La descrizione WP Multisite nel Piano R&D è probabilmente riferita a un'implementazione precedente o a un'ipotesi generica — non vincolante. Il caso reale (Susdef, Nuxt+Payload+MeiliSearch+DocumentAI) prevale su qualsiasi descrizione tecnica del Piano R&D.

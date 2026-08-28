@@ -1,15 +1,13 @@
 ---
-status: draft — scissione da offer-cms-documentale.md (PIA-1303, 2026-08-28)
+status: aggiornato — DocumentAI integrato come modulo di Terra (PIA-1309, 2026-08-28)
 compiled: 2026-08-27
 revised: 2026-08-28
-author: COMPASS (PIA-1303)
+author: COMPASS (PIA-1303, PIA-1309)
 fonti: BRIEF.md CMS-Documentale, BRIEF.md Susdef (incollati da Max nel thread PIA-1303); Piano R&D `09_relazione_sostenibilita/03_Piano_RD_e_Startup_Innovativa.md`
-prodotto-correlato: offer-documentai.md
+nota-pia-1309: DocumentAI non è un prodotto autonomo — è un modulo add-on di Terra. offer-documentai.md è deprecato, la strategia DocumentAI vive nella sezione 1.5 di questo documento.
 ---
 
-# Strategia offerta — Stack Terra (CMS + ricerca documentale)
-
-> **Questo documento copre solo Stack Terra.** Il layer AI per documenti di ricerca (workflow AI, Q&A su corpus) è un prodotto separato con stack diverso — vedi [`offer-documentai.md`](./offer-documentai.md).
+# Strategia offerta — Stack Terra (CMS + ricerca documentale + modulo DocumentAI)
 
 > **⚠️ Vincolo ghost EPOS-ERIC — rispettare sempre**
 >
@@ -33,12 +31,12 @@ Una piattaforma CMS + ricerca documentale che trasforma un archivio statico (rep
 
 Stack verificato (da tre progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSearch**. Self-hosted su server europei, GDPR compliant, WCAG 2.1 AA. Il codice viene consegnato integralmente al cliente — nessun lock-in su Pianeta.Studio.
 
-**MeiliSearch** fornisce ricerca full-text veloce e ordinata per rilevanza — non è generative AI, è un motore di ricerca ad alte prestazioni. Per il layer AI generativo (abstract automatici, Q&A su corpus documentale), vedi il prodotto complementare [`offer-documentai.md`](./offer-documentai.md).
+**MeiliSearch** fornisce ricerca full-text veloce e ordinata per rilevanza — non è generative AI, è un motore di ricerca ad alte prestazioni. Il layer AI generativo (ingestione AI, abstract automatici, ricerca semantica) è disponibile come **modulo DocumentAI**, add-on di Terra — vedi sezione 1.5.
 
 ### Cosa NON è
 
 - **Non è un sito generico con un CMS**. Il differenziatore non è Payload da solo — è la combinazione di CMS strutturato (live preview, no plugin, TypeScript), ricerca full-text su scala (MeiliSearch), e infrastruttura consegnata al cliente. Chi ha bisogno solo di un sito vetrina è il target sbagliato.
-- **Non è generative AI / chatbot**. Stack Terra non genera abstract, non fa Q&A in linguaggio naturale sui documenti. Quella è una funzionalità del prodotto complementare DocumentAI — i due possono essere integrati ma sono offerte separate.
+- **Nel profilo base non include AI generativa**. Il core di Terra (Nuxt+Payload+MeiliSearch) non genera abstract né fa Q&A in linguaggio naturale. Queste funzionalità sono disponibili aggiungendo il modulo DocumentAI (vedi sezione 1.5) — è un add-on di Terra, non un prodotto separato con strategia di mercato autonoma.
 - **Non è un servizio SaaS**. È una build custom, self-hosted, consegnata al cliente. Non c'è abbonamento mensile a Pianeta (salvo contratti di manutenzione separati).
 - **Non è "open source"**. Il framework sottostante (Payload CMS) è open source, ma il codice applicativo è proprietario del cliente — formulazione corretta: "codice consegnato in toto, nessun lock-in".
 
@@ -52,11 +50,35 @@ Terra è il layer CMS dell'ecosistema Pianeta.Studio (basato su Payload CMS). Il
 
 **Clienti verificati del profilo Hub Editoriale di Stack Terra**:
 1. Consorzio scientifico europeo — **contesto interno, non nominabile mai** (vedi vincolo EPOS in cima); ha finanziato lo sviluppo iniziale dello stack
-2. Fondazione per lo Sviluppo Sostenibile (Susdef) — **unico caso nominabile pubblicamente**, sito live dal 16 luglio 2026, >33.000 record migrati — URL: https://susdef.pianeta.green
+2. Fondazione per lo Sviluppo Sostenibile (Susdef) — **unico caso nominabile pubblicamente**, sito live dal 16 luglio 2026, >33.000 record migrati — URL: https://susdef.pianeta.green. **Susdef usa Terra con il modulo DocumentAI**: ingestione AI, abstract automatici, ricerca semantica sui documenti — è il caso verificato che dimostra il pacchetto completo Terra + DocumentAI in produzione.
 
 **Nota (confermato da Max, 2026-08-28)**: Apotheke usa Terra ma in un profilo più semplice, non Hub Editoriale — non è un caso per questa offerta e non va usato come proof point qui.
 
 Il prodotto è esplicitamente pensato come asset riutilizzabile, non un one-off. La co-produzione avviene con Latte Creative (nominabile) come partner principale su EPOS e Susdef.
+
+---
+
+### 1.5 Modulo DocumentAI — add-on di Terra
+
+> **Correzione strategica (PIA-1309, 2026-08-28)**: DocumentAI non è un prodotto autonomo con target e strategia di mercato propri. Va venduto come modulo di Terra, non come offerta parallela. Il documento separato `offer-documentai.md` è deprecato.
+
+**Cos'è il modulo DocumentAI**
+
+Un add-on che si aggiunge al core di Terra per portare capacità AI generativa sull'archivio documentale:
+- **Ingestione AI**: elaborazione automatica di PDF, Word, pubblicazioni — estrazione strutturata di metadati e contenuto
+- **Abstract automatici**: sintesi generate per ogni documento senza intervento redazionale manuale
+- **Ricerca semantica**: ricerca per significato, non solo per parole chiave esatte — il corpus diventa interrogabile in linguaggio naturale
+
+**Caso verificato in produzione**: Susdef usa Terra + modulo DocumentAI. >33.000 record migrati, sito live dal 16 luglio 2026. Il Bulletin di percorso Susdef (PIA-1302) documenta questo caso.
+
+**Stack tecnico reale**: Nuxt+Payload+MeiliSearch (stesso core di Terra) + layer AI integrato. Il Piano R&D citava "WordPress Multisite" per DocumentAI — questa descrizione non corrisponde allo stack reale di Susdef ed è probabilmente riferita a un'implementazione precedente o generica non vincolante. Il caso reale (Nuxt+Payload+MeiliSearch) prevale.
+
+**Come si acquista**: come add-on nel pacchetto Terra — non ha prezzo, scheda o campagna propri indipendenti da Terra. Il modulo si menziona nel case study Susdef e nella landing Hub Editoriale come capacità opzionale del pacchetto.
+
+**Cosa NON è (confini del modulo)**:
+- Non è un prodotto standalone con target separato da Terra
+- Non è un chatbot generale — è specifico sull'archivio documentale del cliente
+- Non è un layer SaaS: resta self-hosted, GDPR, dati non escono dalla giurisdizione del cliente
 
 ---
 
@@ -140,7 +162,7 @@ Consorzio finanziato con fondi pubblici UE, 10-40 partner europei, produzione do
 | **Bulletin "il percorso Susdef"** | ✅ Primario — storia before/after in linguaggio non tecnico | ❌ Non è il suo canale | ✅ Secondario — se racconta scala e governance |
 | **Work/case study `/work/susdef`** | ✅ Primario — vede se stessa nella fondazione analoga | ✅ Cerca la sezione tecnica (stack, WCAG, volume) | ✅ Primario — cerca proof che funziona a scala |
 | **Pagina Terra Hub Editoriale** (pianeta.green) | ✅ La narrativa principale è per lei | ✅ Solo la sezione tecnica di prova | ✅ Solo se tocca multi-partner/GDPR |
-| **Scheda DocumentAI** (prodotto complementare) | ⬜ Solo se ha bisogno anche del layer AI generativo | ✅ Capisce l'architettura integrata | ⬜ Se il consorzio ha bisogno di Q&A sui deliverable |
+| **Sezione modulo DocumentAI** (dentro case study / landing Hub Editoriale) | ⬜ Solo se ha bisogno del layer AI generativo — Susdef è la prova | ✅ Capisce l'architettura del pacchetto completo | ⬜ Se il consorzio ha bisogno di Q&A sui deliverable |
 | **Scheda catalogo servizi** | ✅ Scoperta — entry point verso case/landing | ❌ | ✅ Entry point |
 
 **Logica della sequenza**: il Bulletin (già in lavorazione con MUSE, PIA-1302) genera awareness per Persona A. Il case study Susdef è la proof che converte Persona A e B. La landing vende a chi arriva già con intenzione. Il Lab serve a Persona B come approfondimento architetturale e a posizionare il prodotto come asset autonomo.
@@ -199,3 +221,4 @@ Prima di passare queste priorità a MUSE come issue, serve conferma su:
 5. ~~**Persona D (NGO)**: ci sono conversazioni o progetti reali con NGO che hanno valutato questo prodotto, o è un segmento da escludere finché non si materializza?~~ **Risolto (2026-08-28)**: segmento NGO **escluso** — nessun cliente NGO ha questo stack, non prioritario ora. Persona D rimossa dal documento.
 6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study? — **In raccolta (Max, 2026-08-28)**: le chiede appena possibile. Il case study può partire senza quote e aggiungerle in seguito.
 7. ~~**Apotheke nominabile?**~~ **Risolto (2026-08-28)**: Apotheke usa Terra ma in un profilo semplice, non Hub Editoriale — non rilevante per questa offerta.
+8. ~~**DocumentAI: prodotto separato o modulo?**~~ **Risolto (2026-08-28, PIA-1309)**: DocumentAI è un **modulo add-on di Terra**, non un prodotto con strategia di mercato autonoma. Susdef è il caso verificato. Il documento separato `offer-documentai.md` è deprecato — vedi sezione 1.5 di questo documento.
