@@ -9,7 +9,7 @@ prodotto-correlato: offer-documentai.md
 
 # Strategia offerta — Stack Terra (CMS + ricerca documentale)
 
-> **Questo documento copre solo Stack Terra.** Il layer AI per documenti di ricerca (workflow AI, Q&A su corpus) è un prodotto separato con stack diverso — vedi [`offer-documentai.md`](./offer-documentai.md).
+> **Questo documento copre Stack Terra** (CMS + ricerca documentale). Il layer AI per documenti (abstract automatici, Q&A su corpus) è il **modulo add-on DocumentAI** — non un prodotto separato, ma un'estensione che si vende insieme a Terra. Spec del modulo: [`offer-documentai.md`](./offer-documentai.md).
 
 > **⚠️ Vincolo ghost EPOS-ERIC — rispettare sempre**
 >
@@ -33,12 +33,12 @@ Una piattaforma CMS + ricerca documentale che trasforma un archivio statico (rep
 
 Stack verificato (da tre progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSearch**. Self-hosted su server europei, GDPR compliant, WCAG 2.1 AA. Il codice viene consegnato integralmente al cliente — nessun lock-in su Pianeta.Studio.
 
-**MeiliSearch** fornisce ricerca full-text veloce e ordinata per rilevanza — non è generative AI, è un motore di ricerca ad alte prestazioni. Per il layer AI generativo (abstract automatici, Q&A su corpus documentale), vedi il prodotto complementare [`offer-documentai.md`](./offer-documentai.md).
+**MeiliSearch** fornisce ricerca full-text veloce e ordinata per rilevanza — non è generative AI, è un motore di ricerca ad alte prestazioni. Per le capacità AI generative (abstract automatici, Q&A su corpus documentale), è disponibile il modulo add-on **DocumentAI** — vedi [`offer-documentai.md`](./offer-documentai.md) per la spec del modulo. DocumentAI non si vende separatamente da Terra.
 
 ### Cosa NON è
 
 - **Non è un sito generico con un CMS**. Il differenziatore non è Payload da solo — è la combinazione di CMS strutturato (live preview, no plugin, TypeScript), ricerca full-text su scala (MeiliSearch), e infrastruttura consegnata al cliente. Chi ha bisogno solo di un sito vetrina è il target sbagliato.
-- **Non è generative AI / chatbot**. Stack Terra non genera abstract, non fa Q&A in linguaggio naturale sui documenti. Quella è una funzionalità del prodotto complementare DocumentAI — i due possono essere integrati ma sono offerte separate.
+- **Non è generative AI / chatbot da solo**. Stack Terra (base) non genera abstract, non fa Q&A in linguaggio naturale sui documenti. Quella è la funzionalità del **modulo add-on DocumentAI** — si aggiunge a Terra su richiesta, ma Stack Terra funziona e ha valore anche senza DocumentAI.
 - **Non è un servizio SaaS**. È una build custom, self-hosted, consegnata al cliente. Non c'è abbonamento mensile a Pianeta (salvo contratti di manutenzione separati).
 - **Non è "open source"**. Il framework sottostante (Payload CMS) è open source, ma il codice applicativo è proprietario del cliente — formulazione corretta: "codice consegnato in toto, nessun lock-in".
 
@@ -140,10 +140,10 @@ Consorzio finanziato con fondi pubblici UE, 10-40 partner europei, produzione do
 | **Bulletin "il percorso Susdef"** | ✅ Primario — storia before/after in linguaggio non tecnico | ❌ Non è il suo canale | ✅ Secondario — se racconta scala e governance |
 | **Work/case study `/work/susdef`** | ✅ Primario — vede se stessa nella fondazione analoga | ✅ Cerca la sezione tecnica (stack, WCAG, volume) | ✅ Primario — cerca proof che funziona a scala |
 | **Pagina Terra Hub Editoriale** (pianeta.green) | ✅ La narrativa principale è per lei | ✅ Solo la sezione tecnica di prova | ✅ Solo se tocca multi-partner/GDPR |
-| **Scheda DocumentAI** (prodotto complementare) | ⬜ Solo se ha bisogno anche del layer AI generativo | ✅ Capisce l'architettura integrata | ⬜ Se il consorzio ha bisogno di Q&A sui deliverable |
+| **Sezione DocumentAI** (modulo add-on Terra) | ⬜ Solo se ha bisogno del layer AI generativo | ✅ Capisce l'architettura del modulo | ⬜ Se il consorzio ha bisogno di Q&A sui deliverable |
 | **Scheda catalogo servizi** | ✅ Scoperta — entry point verso case/landing | ❌ | ✅ Entry point |
 
-**Logica della sequenza**: il Bulletin (già in lavorazione con MUSE, PIA-1302) genera awareness per Persona A. Il case study Susdef è la proof che converte Persona A e B. La landing vende a chi arriva già con intenzione. Il Lab serve a Persona B come approfondimento architetturale e a posizionare il prodotto come asset autonomo.
+**Logica della sequenza**: il Bulletin (già in lavorazione con MUSE, PIA-1302) genera awareness per Persona A. Il case study Susdef è la proof che converte Persona A e B — include le capacità AI del modulo DocumentAI solo se verificate come live (vedi `offer-documentai.md`, gap 1). La landing vende a chi arriva già con intenzione. Il Lab serve a Persona B come approfondimento architetturale.
 
 ---
 
