@@ -1,11 +1,15 @@
 ---
-status: approved — gap chiusi, pronto per MUSE
+status: draft — scissione da offer-cms-documentale.md (PIA-1303, 2026-08-28)
 compiled: 2026-08-27
+revised: 2026-08-28
 author: COMPASS (PIA-1303)
-fonti: BRIEF.md CMS-Documentale, BRIEF.md Susdef (incollati da Max nel thread PIA-1303)
+fonti: BRIEF.md CMS-Documentale, BRIEF.md Susdef (incollati da Max nel thread PIA-1303); Piano R&D `09_relazione_sostenibilita/03_Piano_RD_e_Startup_Innovativa.md`
+prodotto-correlato: offer-documentai.md
 ---
 
-# Strategia offerta — CMS/piattaforma documentale AI
+# Strategia offerta — Stack Terra (CMS + ricerca documentale)
+
+> **Questo documento copre solo Stack Terra.** Il layer AI per documenti di ricerca (workflow AI, Q&A su corpus) è un prodotto separato con stack diverso — vedi [`offer-documentai.md`](./offer-documentai.md).
 
 > **⚠️ Vincolo ghost EPOS-ERIC — rispettare sempre**
 >
@@ -19,14 +23,16 @@ fonti: BRIEF.md CMS-Documentale, BRIEF.md Susdef (incollati da Max nel thread PI
 
 ### Cos'è
 
-Una piattaforma documentale AI che trasforma un archivio di documenti (report, pubblicazioni, paper scientifici, atti) in una superficie interrogabile in linguaggio naturale. Il team dell'organizzazione trova quello che cerca senza dover sapere dove è salvato o come si chiama il file. L'AI genera abstract, risponde a domande, superficie i documenti rilevanti.
+Una piattaforma CMS + ricerca documentale che trasforma un archivio statico (report, pubblicazioni, paper scientifici, atti) in una superficie interrogabile, navigabile e gestibile in autonomia dal team dell'organizzazione. Il sito è veloce, accessibile, e i documenti sono trovabili senza dover sapere esattamente dove sono salvati o come si chiama il file.
 
-Stack verificato (da due progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSearch + AI layer (RAG, abstract generation)**. Self-hosted su server europei, GDPR compliant, WCAG 2.1 AA. Il codice viene consegnato integralmente al cliente — nessun lock-in su Pianeta.Studio.
+Stack verificato (da tre progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSearch**. Self-hosted su server europei, GDPR compliant, WCAG 2.1 AA. Il codice viene consegnato integralmente al cliente — nessun lock-in su Pianeta.Studio.
+
+**MeiliSearch** fornisce ricerca full-text veloce e ordinata per rilevanza — non è generative AI, è un motore di ricerca ad alte prestazioni. Per il layer AI generativo (abstract automatici, Q&A su corpus documentale), vedi il prodotto complementare [`offer-documentai.md`](./offer-documentai.md).
 
 ### Cosa NON è
 
-- **Non è un sito generico con un CMS**. Il differenziatore non è Payload — è l'ingestione AI di migliaia di documenti e la ricerca semantica su di essi. Chi ha bisogno solo di un CMS editoriale è il target sbagliato.
-- **Non è un chatbot generico**. La piattaforma non risponde a domande su argomenti qualsiasi — risponde interrogando il corpus documentale dell'organizzazione. I dati restano chiusi nel sistema del cliente.
+- **Non è un sito generico con un CMS**. Il differenziatore non è Payload da solo — è la combinazione di CMS strutturato (live preview, no plugin, TypeScript), ricerca full-text su scala (MeiliSearch), e infrastruttura consegnata al cliente. Chi ha bisogno solo di un sito vetrina è il target sbagliato.
+- **Non è generative AI / chatbot**. Stack Terra non genera abstract, non fa Q&A in linguaggio naturale sui documenti. Quella è una funzionalità del prodotto complementare DocumentAI — i due possono essere integrati ma sono offerte separate.
 - **Non è un servizio SaaS**. È una build custom, self-hosted, consegnata al cliente. Non c'è abbonamento mensile a Pianeta (salvo contratti di manutenzione separati).
 - **Non è "open source"**. Il framework sottostante (Payload CMS) è open source, ma il codice applicativo è proprietario del cliente — formulazione corretta: "codice consegnato in toto, nessun lock-in".
 
@@ -34,21 +40,22 @@ Stack verificato (da due progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSe
 
 **Il prodotto si chiama Terra** — già pubblico su https://pianeta.green (confermato da Max, 2026-08-28).
 
-Terra è il layer CMS dell'ecosistema Pianeta.Studio (basato su Payload CMS). L'offerta documentale AI è il profilo "Hub Editoriale" di Terra applicato a organizzazioni con grandi archivi documentali: aggiunge il layer MeiliSearch + AI (RAG, abstract generation) sopra la base Terra standard.
+Terra è il layer CMS dell'ecosistema Pianeta.Studio (basato su Payload CMS). Il profilo "Hub Editoriale" di Terra — con MeiliSearch per la ricerca su grande scala — è il punto di ingresso per fondazioni, enti di ricerca e organizzazioni con archivi documentali importanti.
 
-**Implicazione per i contenuti**: non serve un nome di prodotto nuovo. La Lab/service page si posiziona come "Terra — Hub Editoriale per fondazioni e enti di ricerca" o simile. Il case study Susdef diventa la prova del profilo Hub Editoriale di Terra.
+**Implicazione per i contenuti**: il prodotto ha già una pagina pubblica su https://pianeta.green. La comunicazione per il segmento "fondazioni/enti di ricerca" è un approfondimento del profilo Hub Editoriale. Il case study Susdef è la prova principale di questo profilo.
 
-Nato da due progetti reali (due applicazioni della stessa architettura):
-1. Consorzio scientifico europeo — **contesto interno, non nominabile mai** (vedi vincolo EPOS in cima)
-2. Fondazione per lo Sviluppo Sostenibile (Susdef) — **unico caso nominabile**, sito live dal 16 luglio 2026, >33.000 record migrati — URL: https://susdef.pianeta.green
+**Clienti verificati dello Stack Terra** (Nuxt+Payload+MeiliSearch):
+1. Consorzio scientifico europeo — **contesto interno, non nominabile mai** (vedi vincolo EPOS in cima); finanziatore del sviluppo iniziale dello stack
+2. Fondazione per lo Sviluppo Sostenibile (Susdef) — **unico caso nominabile al momento**, sito live dal 16 luglio 2026, >33.000 record migrati — URL: https://susdef.pianeta.green
+3. Apotheke — **verificare nominabilità con Max prima di usare come caso pubblico**
 
-Il prodotto è esplicitamente pensato come asset riutilizzabile, non un one-off. La co-produzione avviene con Latte Creative (nominabile) come partner principale su entrambi i casi.
+Il prodotto è esplicitamente pensato come asset riutilizzabile, non un one-off. La co-produzione avviene con Latte Creative (nominabile) come partner principale su EPOS e Susdef.
 
 ---
 
 ## 2. Persona multiple
 
-> **Nota metodologica**: le persona A e B sono ancorate a persone reali dei progetti verificati (Delia Milioni e Davide Grossi su Susdef). La persona C è informata dal contesto EPOS (verificato internamente) ma anonimizzata — il tipo è reale, il cliente non è nominabile. Il segmento NGO/terzo settore è stato valutato e **escluso per ora** (2026-08-28, Max): nessun cliente NGO ha lo stack documentale AI, non è un segmento prioritario in questa fase.
+> **Nota metodologica**: le persona A e B sono ancorate a persone reali dei progetti verificati (Delia Milioni e Davide Grossi su Susdef). La persona C è informata dal contesto EPOS (verificato internamente) ma anonimizzata — il tipo è reale, il cliente non è nominabile. Il segmento NGO/terzo settore è stato valutato e **escluso per ora** (2026-08-28, Max): non è un segmento prioritario per Stack Terra in questa fase.
 
 ---
 
@@ -125,8 +132,8 @@ Consorzio finanziato con fondi pubblici UE, 10-40 partner europei, produzione do
 |---|---|---|---|
 | **Bulletin "il percorso Susdef"** | ✅ Primario — storia before/after in linguaggio non tecnico | ❌ Non è il suo canale | ✅ Secondario — se racconta scala e governance |
 | **Work/case study `/work/susdef`** | ✅ Primario — vede se stessa nella fondazione analoga | ✅ Cerca la sezione tecnica (stack, WCAG, volume) | ✅ Primario — cerca proof che funziona a scala |
-| **Landing `/servizi/cms-documentale`** | ✅ La narrativa principale è per lei | ✅ Solo la sezione tecnica di prova | ✅ Solo se la landing tocca multi-partner/GDPR |
-| **Lab asset (se nominato come prodotto)** | ❌ Non è il suo contesto | ✅ È il canale giusto per capire l'architettura | ❌ Non è il suo contesto |
+| **Pagina Terra Hub Editoriale** (pianeta.green) | ✅ La narrativa principale è per lei | ✅ Solo la sezione tecnica di prova | ✅ Solo se tocca multi-partner/GDPR |
+| **Scheda DocumentAI** (prodotto complementare) | ⬜ Solo se ha bisogno anche del layer AI generativo | ✅ Capisce l'architettura integrata | ⬜ Se il consorzio ha bisogno di Q&A sui deliverable |
 | **Scheda catalogo servizi** | ✅ Scoperta — entry point verso case/landing | ❌ | ✅ Entry point |
 
 **Logica della sequenza**: il Bulletin (già in lavorazione con MUSE, PIA-1302) genera awareness per Persona A. Il case study Susdef è la proof che converte Persona A e B. La landing vende a chi arriva già con intenzione. Il Lab serve a Persona B come approfondimento architetturale e a posizionare il prodotto come asset autonomo.
@@ -157,20 +164,13 @@ Consorzio finanziato con fondi pubblici UE, 10-40 partner europei, produzione do
 
 ---
 
-### [P1] Landing/service page — `/servizi/cms-documentale`
-**Stato**: non ancora esistente
-**Persona primaria**: A (narrativa principale) + B (sezione proof tecnica)
-**Struttura**: headline sul dolore (trovabilità, non tecnico) → come funziona in 3 passi → proof (case Susdef, numeri chiave) → sezione tecnica per IT → CTA verso call/case study
-**Prerequisiti**: case study Susdef pubblicato (è la proof principale) + nome del prodotto se diventa Lab asset
-**Nota strategica**: questa pagina non esiste ancora e non deve esistere prima che il case study sia pubblicato — senza proof è solo una promessa.
-
----
-
-### [P2] Pagina Terra Hub Editoriale — posizionamento per fondazioni/enti di ricerca
-**Stato**: nome risolto — il prodotto è Terra (https://pianeta.green), profilo Hub Editoriale
-**Persona primaria**: A + C (comm manager fondazione/consorzio)
-**Struttura**: Terra esiste già come pagina prodotto; serve un angolo specifico per il segmento "archivio documentale AI" — potrebbe essere una sezione dedicata su pianeta.green o una landing separata collegata.
-**Da decidere con Max**: la pagina documentale AI vive dentro pianeta.green (come sezione Hub Editoriale) o su pianeta.studio/lab come asset separato? Impatta sulla struttura del contenuto.
+### [P1] Approfondimento Terra Hub Editoriale — segmento fondazioni/enti di ricerca
+**Stato**: Terra esiste già su https://pianeta.green — serve contenuto specifico per il segmento archivi documentali
+**Persona primaria**: A + C
+**Struttura**: angolo "organizzazione con archivio documentale sottoutilizzato" → come Terra risolve la trovabilità → proof (case Susdef, numeri) → CTA
+**Da decidere con Max**: vive dentro pianeta.green come sezione Hub Editoriale, o su pianeta.studio come landing separata? Impatta sulla struttura.
+**Prerequisiti**: case study Susdef pubblicato (è la proof principale)
+**Nota strategica**: questa pagina non deve esistere prima che il case study sia pubblicato — senza proof è solo una promessa.
 
 ---
 
@@ -181,7 +181,7 @@ Consorzio finanziato con fondi pubblici UE, 10-40 partner europei, produzione do
 
 ---
 
-## 5. Gap aperti — non procedere senza risposta di Max
+## 5. Gap aperti
 
 Prima di passare queste priorità a MUSE come issue, serve conferma su:
 
@@ -191,3 +191,4 @@ Prima di passare queste priorità a MUSE come issue, serve conferma su:
 4. **Screenshot/video**: la fonte primaria per gli screenshot è ora https://susdef.pianeta.green. I materiali in `25P19_Epos/6_Screen video pages/` — usabili per contesto interno, ma verificare che non mostrino branding ghost prima di qualsiasi uso pubblico.
 5. ~~**Persona D (NGO)**: ci sono conversazioni o progetti reali con NGO che hanno valutato questo prodotto, o è un segmento da escludere finché non si materializza?~~ **Risolto (2026-08-28)**: segmento NGO **escluso** — nessun cliente NGO ha questo stack, non prioritario ora. Persona D rimossa dal documento.
 6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study? — **In raccolta (Max, 2026-08-28)**: le chiede appena possibile. Il case study può partire senza quote e aggiungerle in seguito.
+7. **Apotheke nominabile?** Apotheke è confermato come cliente Terra — verificare con Max se è nominabile pubblicamente come secondo case study.
