@@ -1,9 +1,9 @@
 # Strategia offerta — Video campaign / AI validation creativa
 
-**Versione:** 1.0
-**Data:** 2026-08-27
+**Versione:** 1.1
+**Data:** 2026-08-28
 **Autore:** COMPASS (PIA-1304)
-**Stato:** Draft — in attesa di review Max
+**Stato:** Aggiornato post-review Max (domande 1–4 chiuse)
 
 ---
 
@@ -24,18 +24,20 @@ Il caso ECLAG è il prototipo: 3 concept testati → 1 concept scelto → 18 ite
 - **Non è video production generica.** Chiunque fa video. Il differenziatore è la validazione integrata, non la qualità produttiva in sé.
 - **Non è focus group tradizionale.** Il panel sintetico è complementare ai focus group reali, non sostitutivo. Non si usano persone in carne e ossa.
 - **Non è consulenza strategica comunicativa.** Non definiamo obiettivi di campagna o piano media — presupponiamo che il brief esista.
-- **Non è un add-on opzionale.** La validazione è inclusa nel processo standard, senza voce separata in fattura. Non si vende "solo la validazione" né "solo il video senza validazione".
+- **Non è esclusivamente un pacchetto video+validazione.** La sola validazione (swarm + neural prediction su concept prodotti da un'altra agenzia) è un'offerta a sé stante — il cliente porta il video, noi portiamo il secondo parere quantitativo. Vedi Persona 2.
 - **Non è adatto a qualsiasi campagna.** Il valore emerge quando c'è una componente emotiva significativa e il costo di sbagliare tono è alto. Spot low-stakes e contenuti editoriali flat non ne beneficiano abbastanza.
 
 ### Il differenziatore concreto
 
 Il mercato offre due cose separate: agenzie creative che fanno campagne, e istituti di ricerca che fanno test. Pianeta.Studio fa entrambe in un ciclo integrato, a costi e tempi paragonabili a un progetto creativo standard. L'argomento non è "siamo migliori creativamente" — è "arriviamo al file finale con un secondo parere quantitativo, senza allungare i tempi e senza extra-fee".
 
+In alternativa: se hai già un'agenzia che produce il video, la sola validazione (swarm + neural prediction) è disponibile come servizio standalone. Il posizionamento cambia da "fate il video con noi" a "dateci il vostro video, ve lo restituiamo con un rapporto".
+
 ---
 
 ## 2. Persona multiple
 
-> **Nota metodologica:** Le tre persona qui sotto nascono dai casi reali disponibili (ECLAG, ChildFund/WeWorld) e dall'analisi del tipo di organizzazione che ha posta in gioco alta su campagne video con temi sensibili. Le persona 1 e 2 hanno riscontro diretto nei clienti reali; la persona 3 è inferita dalla logica dell'offerta e dalla tipologia di settore compatibile. Va validata con Max prima di usarla come base per contenuto dedicato.
+> **Nota metodologica:** Le tre persona nascono dall'analisi dei casi reali (ECLAG unico caso confermato per questa offerta) e dalla logica del segmento. Persona 1 e 2 hanno riscontro diretto in clienti reali; Persona 3 è confermata da Max come priorità commerciale attiva.
 
 ---
 
@@ -80,9 +82,10 @@ Non riesce a difendere le scelte creative con argomenti oggettivi. "Mi piace" vs
 "Siamo già a posto con la nostra agenzia. Non vogliamo aggiungere un partner esterno nel mezzo del processo."
 
 **Cosa la convince:**
-La possibilità di usare la validazione come "secondo parere" indipendente dal processo produttivo principale — non necessariamente Pianeta.Studio deve fare il video. La validazione può essere applicata a concept prodotti da un'altra agenzia. Questo cambia il posizionamento: non "sostituiamo la tua agenzia" ma "ti diamo i dati per difendere le tue scelte interne".
+La possibilità di usare la validazione come "secondo parere" indipendente dal processo produttivo principale — Pianeta.Studio non deve fare il video. La validazione standalone (swarm + neural prediction applicati a concept prodotti dalla sua agenzia) è un'offerta esplicita. Il posizionamento è: non "sostituiamo la tua agenzia" ma "ti diamo i dati per difendere le tue scelte interne al CDA".
 
-**Nota:** Questa persona apre una domanda operativa per Max — il servizio di sola validazione (senza produzione video da parte nostra) è un'offerta che si vuole esplicitare? Se sì, va chiarito nel listino. Se no, la persona 2 va servita solo quando la produzione è gestita da noi.
+**Dove la troviamo:**
+Network comunicazione no-profit (Forum Terzo Settore, CSVnet), LinkedIn (discussioni su fundraising e comunicazione d'impatto), relazioni dirette via referral da agenzie creative che già lavorano con ONG.
 
 ---
 
@@ -90,22 +93,27 @@ La possibilità di usare la validazione come "secondo parere" indipendente dal p
 
 **Nome fittizio:** Paolo
 **Ruolo:** Responsabile comunicazione / Science Communication Manager
-**Tipo di organizzazione:** Centro di ricerca (es. CMCC, Fondazione Cariplo, ENEA), ente pubblico con obbligo di comunicare al grande pubblico
-**Sede tipica:** Italia, spesso città universitarie o Roma.
+**Tipo di organizzazione:** Centro di ricerca (es. CMCC, ENEA, CNR, istituto universitario), fondazione erogante (es. Fondazione Cariplo, Fondazione Compagnia di San Paolo), ente pubblico con mandate comunicativo
+**Sede tipica:** Italia — Milano, Roma, città universitarie.
 
 **Contesto specifico:**
-Paolo deve comunicare scienza o policy a pubblici non specialisti — un compito che richiede semplificazione senza banalizzazione. Il rischio principale è fare comunicazione "corretta" ma noiosissima: il video lo guarda solo chi già ci crede. L'altro rischio è l'opposto: enfatizzare l'impatto emotivo e sembrare poco rigorosi.
+Paolo lavora in un contesto dove il contenuto è "garantito" (c'è la ricerca, ci sono i dati, ci sono i ricercatori) ma la comunicazione è storicamente sottovalutata. Il suo budget è limitato, deve rendicontare le spese a comitati scientifici che non capiscono la comunicazione, e deve produrre video che funzionino su canali pubblici e istituzionali con obiettivi spesso contraddittori: accessibili ma rigorosi, coinvolgenti ma non sensazionalistici.
+
+Il suo problema non è trovare chi fa il video — è che i video che produce non ottengono l'attenzione che meritano. L'engagement è basso. I ricercatori dicono "il pubblico non è interessato alla scienza" e hanno torto — il pubblico non è interessato a comunicazione piatta. Paolo lo sa ma non sa come argomentarlo a chi controlla il budget.
 
 **Dolore concreto:**
-Produce video istituzionali con standard di produzione adeguati ma con engagement basso. Sa che qualcosa non funziona nella componente emotiva ma non sa diagnosticarlo né argomentarlo ai colleghi ricercatori che "sanno i fatti" e svalutano il lato comunicativo.
+Produce materiali corretti ma non efficaci. Non riesce a diagnosticare il problema (è il tono? la struttura? la colonna sonora? il ritmo del montaggio?) e non ha strumenti per argomentare al comitato scientifico perché le scelte creative che propone siano migliori di quelle che i ricercatori vorrebbero. Il risultato: video mediocri che passano perché "non fa discutere", non perché funzionano.
 
 **Obiezione principale:**
-"Il neuromarketing suona come manipolazione. Noi siamo un'istituzione pubblica e non possiamo associarci a questo tipo di approccio."
+"Il neuromarketing suona come manipolazione. Noi siamo un'istituzione pubblica credibile — associarci a un approccio di questo tipo sarebbe un danno reputazionale."
 
-**Cosa la convince:**
-Il reframe: la validazione neurale non è persuasione manipolativa — è assicurarsi che lo stimolo venga processato, non ignorato. Un video che non attiva attenzione non convince nessuno, nemmeno con i fatti giusti. Il metodo misura la qualità intrinseca dello stimolo, non manipola il contenuto del messaggio.
+**Cosa lo convince:**
+Il reframe definitivo: la validazione neurale non misura come manipolare il messaggio — misura se lo stimolo viene processato o ignorato. Un video che non attiva l'attenzione corticale non viene ricordato, indipendentemente dalla qualità del contenuto scientifico. Il metodo misura la qualità intrinseca dello stimolo, non altera il messaggio. L'analogia utile: è come correggere le bozze — non cambia cosa dici, assicura che venga letto.
 
-**Stato:** Persona inferita, non da caso reale diretto. Da validare con Max prima di creare contenuto dedicato.
+Ulteriore leva: la validazione dà a Paolo un argomento strutturato da portare al comitato scientifico. Non "secondo me questa colonna sonora funziona meglio" ma "la risposta neurale media migliora del X% con questa versione". Stesso meccanismo che funziona per Andrea (Persona 2), applicato a un contesto istituzionale.
+
+**Dove lo troviamo:**
+Reti di comunicazione scientifica (Zadig, Psiquadro, Forum Comunicazione Scienza), eventi tipo Bright Night, Maker Faire Roma, ESOF. LinkedIn con query su "science communication" + "comunicazione scientifica". Relazioni con uffici comunicazione di ateneo e fondazioni di ricerca.
 
 ---
 
@@ -115,13 +123,12 @@ Il reframe: la validazione neurale non è persuasione manipolativa — è assicu
 |-----------|-------------------------------|----------------------------------|----------------------------------|
 | **Case study ECLAG** | ✅ Primario — caso diretto | ✅ Utile — mostra processo e velocità | ⚠️ Utile ma tema distante (advocacy vs scienza) |
 | **Bulletin metodologico** ("validare prima di produrre") | ✅ Primario — spiega il come | ✅ Utile — dà argomenti per il board | ⚠️ Utile ma serve reframe istituzionale |
-| **Pagina servizio (neuromarketing-lab)** | ✅ Arrivo naturale post-referral | ✅ Utile per confronto con il proprio processo | ✅ Primo punto di contatto spesso |
-| **Case study ChildFund/WeWorld** | ⚠️ Parziale — è data storytelling, non video validation | ✅ Rilevante — mostra altro cliente NGO | ✅ Rilevante — reporting istituzionale |
+| **Pagina servizio neuromarketing-lab** | ✅ Arrivo naturale post-referral | ✅ Utile per confronto con il proprio processo | ✅ Primo punto di contatto spesso |
 | **Bulletin demistificazione** ("neuromarketing non è manipolazione") | ⚠️ Non prioritario | ⚠️ Utile per obiezione board | ✅ Primario — sblocca l'obiezione principale |
-| **Bulletin "difendere le scelte creative al board"** | ⚠️ Non prioritario | ✅ Primario — questo è esattamente il suo problema | ❌ Non rilevante |
-| **Servizio a catalogo (AI validation standalone)** | ⚠️ Solo se validazione senza produzione è offerta | ✅ Potenzialmente primario | ⚠️ Solo se chiaro il reframe |
+| **Bulletin "difendere le scelte creative al board"** | ⚠️ Non prioritario | ✅ Primario — questo è esattamente il suo problema | ✅ Utile — stesso meccanismo, contesto diverso |
+| **Pagina servizio AI validation standalone** | ⚠️ Secondario | ✅ Primario — è esattamente il suo scenario | ⚠️ Utile dopo il reframe |
 
-**Nota su ChildFund:** Il case study è pubblicato e ha valore come track record, ma non è centrato sull'AI validation (è più editorial/data storytelling). Se vogliamo che funzioni come prova di capacità per questa offerta specifica, serve un Bulletin che faccia il collegamento esplicitamente — oppure una revisione del case study per aggiungere la prospettiva validation.
+**Nota su ChildFund/WeWorld:** Il progetto non ha mai usato lo stack AI validation — era data storytelling/editorial design puro. Non va citato come caso per questa offerta. Resta nel portfolio ma appartiene all'offerta data storytelling.
 
 ---
 
@@ -129,32 +136,27 @@ Il reframe: la validazione neurale non è persuasione manipolativa — è assicu
 
 ### Già esistenti (non richiedono issue MUSE)
 
-1. **Case study ECLAG** (`/work/eclag`) — Completo. Cita il metodo, i numeri, il link al Bulletin. Funziona bene per Persona 1.
+1. **Case study ECLAG** (`/work/eclag`) — Completo. Cita il metodo, i numeri, il link al Bulletin. Funziona per Persona 1; utile per Persona 2. Unico caso reale confermato per questa offerta.
 2. **Pagina servizio neuromarketing-lab** (`/services/neuromarketing-lab`) — Completa. Copy chiaro su cosa è e cosa non è.
-3. **Pagina servizio AI validation swarm** (`/services/ai-validation-swarm`) — Incompleta (scheletro). Priorità bassa perché neuromarketing-lab è il punto di arrivo principale.
-
-### Bulletin esistente e live
-
-4. **Bulletin: "Validare una campagna video prima di produrla"** (`/bulletin/validare-una-campagna-prima-di-produrla`) — Esiste e funziona (`src/content/bulletin/validare-una-campagna-prima-di-produrla.md` + versione `.en.md`). Linkato da ECLAG e dalla pagina servizio. Funziona bene per Persona 1 e Persona 2.
+3. **Bulletin: "Validare una campagna video prima di produrla"** (`/bulletin/validare-una-campagna-prima-di-produrla`) — Live. Funziona per Persona 1 e Persona 2.
+4. **Pagina servizio AI validation swarm** (`/services/ai-validation-swarm`) — Scheletro incompleto. Va completato ora che la validazione standalone è un'offerta esplicita.
 
 ### Contenuti che dovrebbero esistere — priorità ordinata
 
-**Priorità 1 — Media, amplia la copertura**
+**Priorità 1 — Alta**
 
-**Priorità 2 — Media-bassa, dipende da risposte Max (domande 2–4)**
+- **Pagina servizio AI validation standalone** (sezione o pagina dedicata in `ai-validation-swarm`)
+  Ora che la sola validazione è un'offerta esplicita, la pagina servizio deve avere copy che parla direttamente a chi ha già un'agenzia creativa e cerca solo il secondo parere. Target: Persona 2 primario, Persona 3 secondario. La pagina attuale è un scheletro — va scritta.
+
+**Priorità 2 — Media**
 
 - **Bulletin: "Come difendere le scelte creative al board con dati invece di opinioni"**
-  Target primario: Persona 2. Angolo: il problema non è trovare una buona agenzia, è portare a casa l'approvazione. La validazione neurale diventa un argomento, non solo uno strumento.
-  Note: richiede validazione di Max — è un Bulletin da scrivere con un angolo vendita sottile, senza sembrare una brochure.
+  Target primario: Persona 2 (e utile per Persona 3 con lo stesso meccanismo). Angolo: il problema non è trovare una buona agenzia, è portare a casa l'approvazione con argomenti oggettivi. La validazione neurale come strumento di governance interna, non solo di qualità creativa. Da scrivere con un angolo che non sembri una brochure.
 
-**Priorità 3 — Media-bassa, apre mercato nuovo ma non validato**
+**Priorità 3 — Media**
 
-- **Bulletin: "Il neuromarketing non è persuasione: perché un'istituzione di ricerca dovrebbe validare la sua comunicazione"**
-  Target primario: Persona 3.
-  Note: da produrre SOLO dopo validazione con Max della Persona 3 — se il segmento istituzione/ricerca non è una priorità commerciale attiva, rimandare.
-
-- **Case study WeWorld/ChildFund (focus validation)**
-  Un Bulletin o revisione del case study che faccia emergere esplicitamente la componente metodologica applicata (se c'era validazione — da verificare con Max: il progetto ChildFund usava lo stesso stack, o era solo editorial design?).
+- **Bulletin: "Il neuromarketing non è manipolazione: come validare la comunicazione scientifica"**
+  Target primario: Persona 3. Sblocca l'obiezione principale. Angolo: la validazione neurale misura la qualità intrinseca dello stimolo, non altera il messaggio — è correzione di bozze per il video, non persuasione. Max ha confermato Persona 3 come priorità commerciale attiva.
 
 ---
 
@@ -191,10 +193,47 @@ La Persona 2 (Andrea, ONG con board difficile) è quella più vicina alla zona d
 
 ## 6. Domande aperte per Max
 
+Tutte chiuse.
+
 ~~1. Il Bulletin "Validare una campagna prima di produrla" esiste?~~ **Chiuso** — confermato esistente e live (2026-08-27).
 
-2. **La validazione senza produzione** (Persona 2 scenario: un'altra agenzia fa il video, noi facciamo solo la validazione) è un'offerta che si vuole esplicitare? Ha implicazioni su come si presenta il servizio.
+~~2. La validazione senza produzione è un'offerta esplicita?~~ **Chiuso** — Sì. Offerta standalone confermata (2026-08-28). Aggiornata definizione offerta e mappa canale.
 
-3. **ChildFund/WeWorld**: il progetto usava lo stack di AI validation, o era solo editorial/data storytelling? Se sì, può diventare un secondo case study per questa offerta; se no, va lasciato all'offerta data storytelling.
+~~3. ChildFund/WeWorld usava lo stack AI validation?~~ **Chiuso** — No. Solo data storytelling/editorial. Rimosso da questa offerta (2026-08-28).
 
-4. **Persona 3 (istituzione/ricerca)**: è un segmento attivo commercialmente? Se no, i contenuti dedicati hanno bassa priorità.
+~~4. Persona 3 (istituzione/ricerca) è priorità commerciale attiva?~~ **Chiuso** — Sì, priorità attiva confermata da Max (2026-08-28). Persona sviluppata a parità con le altre due.
+
+---
+
+## 7. Proposta — Pagina match persona (per valutazione Max)
+
+> Non è un contenuto da costruire ora. È una proposta da valutare per il prossimo giro. Non ho avuto accesso al documento Drive `26A11_Pianeta.Studio Reworld/08_knowledge_base_twin/04_Strategia_Case_Study_KG.md` — se c'è lavoro precedente rilevante su questo, incollaLo qui e aggiorno la proposta di conseguenza.
+
+### Idea
+
+Una pagina (o sezione della home/servizi) dove chi legge si riconosce in una persona e viene portato direttamente al contenuto pertinente — case study + offerta + ingresso contact. Meccanismo di match, non lista statica di servizi.
+
+### Le persona che ci andrebbero
+
+La proposta funziona meglio come **pagina unica cross-offerta** piuttosto che una per offerta, perché le persona si sovrappongono parzialmente tra offerte diverse. Esempio: un responsabile comunicazione ONG può essere target sia dell'offerta video (se ha una campagna) sia del CMS documentale (se ha un archivio da organizzare). La pagina per offerta lo obbliga a scegliere prima ancora di capire; la pagina cross-offerta lo lascia partire dal proprio ruolo/problema.
+
+| Persona | Collegamento primario | Collegamento secondario |
+|---------|----------------------|-------------------------|
+| **Marta** — Coordinatrice advocacy coalizione europea | Case study ECLAG + Neuromarketing Lab | Bulletin "validare prima di produrre" |
+| **Andrea** — Responsabile comunicazione ONG con board difficile | AI Validation standalone + Bulletin "difendere le scelte al board" | Case study ECLAG |
+| **Paolo** — Responsabile comunicazione istituzione/ricerca | Bulletin "neuromarketing non è manipolazione" + Neuromarketing Lab | Case study ECLAG |
+| *(Persona CMS documentale da PIA-1303 — es. Susdef)* | CMS documentale + case study Susdef | — |
+
+### Logica di match
+
+Tre possibili implementazioni, in ordine di semplicità:
+
+1. **Quiz minimale (3 domande):** "Che tipo di organizzazione sei?" → "Qual è il tuo problema principale?" → "Hai già una campagna/video in produzione?" → risposta con persona + link diretti. Basso costo tecnico, chiaro.
+
+2. **Card persona cliccabili:** sezione visiva con 4–6 card, ciascuna con headline problema (non titolo ruolo). Click → dettaglio persona + case study + CTA. Più editoriale, richiede design.
+
+3. **Match via Alba:** l'utente descrive il suo problema in chat, Alba risponde con persona più vicina + contenuti pertinenti. Richiede configurazione knowledge graph in Alba — se il knowledge graph citato nel documento Drive è già strutturato per questo, l'implementazione potrebbe essere più vicina di quanto sembra.
+
+### Questione aperta prima della decisione
+
+La scelta tra pagina unica cross-offerta e una per offerta dipende da come è strutturato il knowledge graph. Se il KG è organizzato per offerta, la pagina per offerta è più semplice da collegare. Se è organizzato per persona/problema, la pagina cross-offerta è la scelta naturale. Max conosce la struttura del documento Drive — questa scelta dovrebbe partire da lì.
