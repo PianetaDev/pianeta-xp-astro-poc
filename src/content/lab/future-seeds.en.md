@@ -1,9 +1,9 @@
 ---
 title: "Future Seeds — where a genebank's seeds go and come from"
-description: "Two interactive maps for the Alliance Bioversity International - CIAT: the countries that contributed to and received genetic material from the Palmira, Colombia genebank. This link is the prototype's staging build."
+description: "Two interactive maps for the Alliance Bioversity International - CIAT: the countries that contributed to and received genetic material from the Palmira, Colombia genebank."
 kind: "Data viz"
 year: 2026
-status: "In development"
+status: "Live"
 cover: "/og/future-seeds.png"
 ogImage: "/og/future-seeds.png"
 date: 2026-08-27
@@ -12,6 +12,7 @@ draft: false
 type: lab
 tags: ["dataviz", "svg", "vue", "genebank", "ciat"]
 links:
+  client: "https://alliancebioversityciat.org/future-seeds"
   external: "https://future-seeds-staging.vercel.app"
 ---
 
@@ -22,11 +23,11 @@ Two interactive data visualizations built for **Future Seeds**, the Alliance Bio
 - **[Where our seeds come from](https://future-seeds-staging.vercel.app/come-from)** — the top countries that contributed to the genebank
 - **[Where our seeds went](https://future-seeds-staging.vercel.app/went)** — the countries that received genetic material free of charge
 
-Bilingual EN/ES, mobile-first (region picker with search on mobile, replacing the old dropdown), with line-draw and map-zoom animations.
+Bilingual EN/ES, mobile-first (region picker with search on mobile), with line-flow and map-zoom animations, plus a switcher between the two directions.
 
-## This link is staging, not production
+## Two links, two purposes
 
-The button above opens `future-seeds-staging.vercel.app` — a separate Vercel project that always tracks the latest build but is **not** wired into the iframes CIAT already has on their site. It's where we (and anyone on the team) can see and test new versions of the prototype before promoting them to production. The production URL — the one the client actually uses — is `future-seeds.vercel.app`, only updated once a change has been verified here.
+**"See on the client's site"** opens CIAT's real page ([alliancebioversityciat.org/future-seeds](https://alliancebioversityciat.org/future-seeds)) where the work is delivered and live. **"Evolving prototype"** opens our staging build instead (`future-seeds-staging.vercel.app`) — always tracking the latest version, where we test improvements before promoting them to the production URL (`future-seeds.vercel.app`) the client actually has embedded.
 
 ## The story
 

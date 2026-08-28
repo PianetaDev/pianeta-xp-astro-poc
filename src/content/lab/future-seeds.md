@@ -1,9 +1,9 @@
 ---
 title: "Future Seeds — dove vanno e da dove arrivano i semi di una banca genetica"
-description: "Due mappe interattive per l'Alliance Bioversity International - CIAT: i paesi che hanno contribuito e ricevuto materiale genetico dal genebank di Palmira, Colombia. Questo link è lo staging del prototipo."
+description: "Due mappe interattive per l'Alliance Bioversity International - CIAT: i paesi che hanno contribuito e ricevuto materiale genetico dal genebank di Palmira, Colombia."
 kind: "Data viz"
 year: 2026
-status: "In sviluppo"
+status: "Live"
 cover: "/og/future-seeds.png"
 ogImage: "/og/future-seeds.png"
 date: 2026-08-27
@@ -12,6 +12,7 @@ draft: false
 type: lab
 tags: ["dataviz", "svg", "vue", "genebank", "ciat"]
 links:
+  client: "https://alliancebioversityciat.org/future-seeds"
   external: "https://future-seeds-staging.vercel.app"
 ---
 
@@ -22,11 +23,11 @@ Due data visualization interattive costruite per **Future Seeds**, il genebank d
 - **[Where our seeds come from](https://future-seeds-staging.vercel.app/come-from)** — i principali paesi contributori del genebank
 - **[Where our seeds went](https://future-seeds-staging.vercel.app/went)** — i paesi che hanno ricevuto materiale genetico gratuitamente
 
-Bilingue EN/ES, mobile-first (su mobile: selezione per regione con ricerca, invece del vecchio dropdown), con animazioni sulle linee e sullo zoom della mappa.
+Bilingue EN/ES, mobile-first (su mobile: selezione per regione con ricerca), con animazioni sulle linee e sullo zoom della mappa, e uno switcher per passare dall'una all'altra direzione.
 
-## Questo link è lo staging, non la produzione
+## Due link, due scopi
 
-Il bottone qui sopra apre `future-seeds-staging.vercel.app` — un progetto Vercel separato, sempre allineato all'ultima versione ma **non** collegato agli iframe che CIAT ha già incorporato sul proprio sito. Serve a noi (e a chiunque in team) per vedere e testare le nuove versioni del prototipo prima di promuoverle in produzione. L'URL di produzione — quello che il cliente usa davvero — è `future-seeds.vercel.app`, aggiornato solo dopo verifica sullo staging.
+**"Vedi sul sito del cliente"** apre la pagina reale di CIAT ([alliancebioversityciat.org/future-seeds](https://alliancebioversityciat.org/future-seeds)) dove il lavoro è consegnato e live. **"Prototipo in evoluzione"** apre invece il nostro staging (`future-seeds-staging.vercel.app`) — sempre allineato all'ultima versione, dove testiamo i miglioramenti prima di promuoverli sull'URL di produzione (`future-seeds.vercel.app`) che il cliente ha effettivamente incorporato.
 
 ## La storia
 
