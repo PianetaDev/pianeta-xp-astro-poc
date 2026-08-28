@@ -1,5 +1,5 @@
 ---
-status: draft — in attesa di revisione Max
+status: approved — gap chiusi, pronto per MUSE
 compiled: 2026-08-27
 author: COMPASS (PIA-1303)
 fonti: BRIEF.md CMS-Documentale, BRIEF.md Susdef (incollati da Max nel thread PIA-1303)
@@ -48,7 +48,7 @@ Il prodotto è esplicitamente pensato come asset riutilizzabile, non un one-off.
 
 ## 2. Persona multiple
 
-> **Nota metodologica**: le persona A e B sono ancorate a persone reali dei progetti verificati (Delia Milioni e Davide Grossi su Susdef). La persona C è informata dal contesto EPOS (verificato internamente) ma anonimizzata — il tipo è reale, il cliente non è nominabile. La persona D è una **ipotesi non verificata**: non abbiamo un caso reale di NGO che ha acquistato o valutato questo prodotto. Non produrre contenuto specifico per Persona D senza prima validarla con Max.
+> **Nota metodologica**: le persona A e B sono ancorate a persone reali dei progetti verificati (Delia Milioni e Davide Grossi su Susdef). La persona C è informata dal contesto EPOS (verificato internamente) ma anonimizzata — il tipo è reale, il cliente non è nominabile. Il segmento NGO/terzo settore è stato valutato e **escluso per ora** (2026-08-28, Max): nessun cliente NGO ha lo stack documentale AI, non è un segmento prioritario in questa fase.
 
 ---
 
@@ -116,14 +116,6 @@ Consorzio finanziato con fondi pubblici UE, 10-40 partner europei, produzione do
 **Canale primario**: landing/service page con sezione governance dati + case study Susdef come proof
 
 ---
-
-### Persona D — NGO/terzo settore con archivio documentale — ⚠️ IPOTESI NON VERIFICATA
-
-Non abbiamo un caso reale che la fondi. Prima di produrre contenuto specifico per questo segmento, Max deve confermare:
-- Ci sono state conversazioni commerciali o progetti con NGO che hanno valutato questo prodotto?
-- Il dolore è analogo a Persona A (fondazione di ricerca) o ha differenziatori specifici (es. rendicontazione ai donatori, report di advocacy)?
-
-**Non produrre contenuto per Persona D fino a validazione.**
 
 ---
 
@@ -197,5 +189,5 @@ Prima di passare queste priorità a MUSE come issue, serve conferma su:
 2. ~~**Autorizzazione Susdef**: i numeri tecnici (>33.000 record, dettagli stack, timeline) sono già trattabili come pubblici, o serve conferma scritta dal cliente?~~ **Risolto (2026-08-28)**: autorizzati da Max — numeri tecnici, stack e timeline trattabili come pubblici nel case study.
 3. ~~**URL Susdef**: qual è il dominio pubblico del sito?~~ **Risolto (2026-08-28)**: https://susdef.pianeta.green — Max ha confermato che si possono prendere screenshot da qui per la futura pubblicazione.
 4. **Screenshot/video**: la fonte primaria per gli screenshot è ora https://susdef.pianeta.green. I materiali in `25P19_Epos/6_Screen video pages/` — usabili per contesto interno, ma verificare che non mostrino branding ghost prima di qualsiasi uso pubblico.
-5. **Persona D (NGO)**: ci sono conversazioni o progetti reali con NGO che hanno valutato questo prodotto, o è un segmento da escludere finché non si materializza?
+5. ~~**Persona D (NGO)**: ci sono conversazioni o progetti reali con NGO che hanno valutato questo prodotto, o è un segmento da escludere finché non si materializza?~~ **Risolto (2026-08-28)**: segmento NGO **escluso** — nessun cliente NGO ha questo stack, non prioritario ora. Persona D rimossa dal documento.
 6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study? — **In raccolta (Max, 2026-08-28)**: le chiede appena possibile. Il case study può partire senza quote e aggiungerle in seguito.
