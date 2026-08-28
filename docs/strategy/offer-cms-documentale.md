@@ -152,9 +152,9 @@ Non abbiamo un caso reale che la fondi. Prima di produrre contenuto specifico pe
 **Persona primaria**: A + B
 **Struttura**: intro narrativa per A (dolore, scelta, risultato) + sezione tecnica per B (stack, >33.000 record, WCAG 2.1 AA, timeline 12 settimane)
 **Prerequisiti bloccanti** (non procedere senza):
-- [ ] URL pubblico del sito Susdef
+- [x] URL pubblico del sito Susdef — **https://susdef.pianeta.green** (confermato da Max, 2026-08-28)
 - [ ] Autorizzazione del cliente a pubblicare numeri tecnici (>33.000 record, dettagli stack)
-- [ ] Screenshot/video del sito finito senza loghi EPOS visibili
+- [ ] Screenshot del sito finito — disponibili su https://susdef.pianeta.green (Max ha confermato che si possono prendere da lì per la futura pubblicazione)
 - [ ] Nome con cui il cliente vuole essere citato: "Fondazione per lo Sviluppo Sostenibile" o "Susdef"?
 
 ---
@@ -189,7 +189,7 @@ Prima di passare queste priorità a MUSE come issue, serve conferma su:
 
 1. **Nome del prodotto**: esiste già? È necessario per Lab e landing. Non può richiamare EPOS.
 2. **Autorizzazione Susdef**: i numeri tecnici (>33.000 record, dettagli stack, timeline) sono già trattabili come pubblici, o serve conferma scritta dal cliente?
-3. **URL Susdef**: qual è il dominio pubblico del sito?
-4. **Screenshot/video**: i materiali in `25P19_Epos/6_Screen video pages/` sono utilizzabili? Mostrano branding EPOS visibile?
+3. ~~**URL Susdef**: qual è il dominio pubblico del sito?~~ **Risolto (2026-08-28)**: https://susdef.pianeta.green — Max ha confermato che si possono prendere screenshot da qui per la futura pubblicazione.
+4. **Screenshot/video**: la fonte primaria per gli screenshot è ora https://susdef.pianeta.green. I materiali in `25P19_Epos/6_Screen video pages/` — usabili per contesto interno, ma verificare che non mostrino branding ghost prima di qualsiasi uso pubblico.
 5. **Persona D (NGO)**: ci sono conversazioni o progetti reali con NGO che hanno valutato questo prodotto, o è un segmento da escludere finché non si materializza?
 6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study?
