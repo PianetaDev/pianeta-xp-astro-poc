@@ -75,10 +75,22 @@ Un add-on che si aggiunge al core di Terra per portare capacità AI generativa s
 
 **Come si acquista**: come add-on nel pacchetto Terra — non ha prezzo, scheda o campagna propri indipendenti da Terra. Il modulo si menziona nel case study Susdef e nella landing Hub Editoriale come capacità opzionale del pacchetto.
 
+**Layer AI — API esterne o self-hosted?** (gap 2 — risposta parziale)
+
+Max (PIA-1313): "api esterne credo" — **probabile ma non ancora confermato**. Non passare questa informazione come certa in contenuti pubblici finché non è confermata.
+
+Implicazioni se confermato (API esterne):
+- I documenti del cliente vengono inviati a un provider AI esterno per elaborazione (ingestione, abstract, ricerca semantica) — escono quindi dalla giurisdizione/server europei gestiti da Pianeta/Fabrizio
+- **Questo contraddice il claim generico "dati non escono dalla giurisdizione"** — che rimane vero per il core Terra (Nuxt+Payload+MeiliSearch self-hosted) ma non si estende al modulo DocumentAI se usa API esterne
+- Per Persona B e Persona C (entrambi con obiezioni GDPR forti), è un dettaglio critico: devono sapere quale provider, dove sono i server, se i documenti vengono trattenuti/usati per training, e se esiste un DPA
+- La risposta convincente esiste (es. Anthropic/OpenAI hanno DPA GDPR, server europei, opt-out training) ma non va assunta — va confermata da Max/Fabrizio con il provider specifico
+
+**Azione bloccata**: non produrre contenuti che affermano GDPR compliance completa del modulo DocumentAI finché gap 2 non è chiuso con provider specifico + DPA confermato.
+
 **Cosa NON è (confini del modulo)**:
 - Non è un prodotto standalone con target separato da Terra
 - Non è un chatbot generale — è specifico sull'archivio documentale del cliente
-- Non è un layer SaaS: resta self-hosted, GDPR, dati non escono dalla giurisdizione del cliente
+- Non si afferma self-hosted al 100%: il core Terra (Nuxt+Payload+MeiliSearch) è self-hosted, ma il layer AI probabilmente usa API esterne — vedi nota sopra
 
 ---
 
@@ -121,10 +133,14 @@ Fondazione medio-piccola (staff 10-50), missione scientifica o ambientale, con 1
 
 **Cosa la convince**
 - Codice consegnato in toto al cliente: nessuna dipendenza da Pianeta per far girare il sistema
-- Server europei, GDPR, Matomo self-hosted (zero data fuori dalla giurisdizione)
+- Core Terra self-hosted su server europei, GDPR, Matomo self-hosted
 - WCAG 2.1 AA verificato a livello di componente — non un'affermazione, un fatto verificabile
 - Infrastruttura gestita da Fabrizio Ciampini (VPS con backup giornalieri, SSL/HSTS/CSP) — l'opzione "gestione infrastructure inclusa" esiste
 - Stack open source alla base (Payload, MeiliSearch, Nuxt) — nessun vendor lock-in a livello di tool
+
+> **⚠️ Nota interna — modulo DocumentAI (gap 2 aperto, PIA-1313)**
+>
+> Se il cliente valuta Terra + modulo DocumentAI, Persona B porrà la domanda: "Il layer AI manda i miei documenti fuori?". La risposta onesta oggi è: **probabile sì (API esterne) ma non confermato** (Max: "api esterne credo"). Finché gap 2 non è chiuso con provider + DPA specifici, non affermare in nessun contenuto pubblico o deck che DocumentAI è "zero data fuori". Il claim si applica al core Terra, non necessariamente al modulo AI.
 
 **Canale primario**: sezione tecnica del case study + scheda tecnica nella landing (non il Bulletin — non è il suo linguaggio)
 
