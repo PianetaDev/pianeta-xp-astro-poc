@@ -50,10 +50,11 @@ Terra è il layer CMS dell'ecosistema Pianeta.Studio (basato su Payload CMS). Il
 
 **Implicazione per i contenuti**: il prodotto ha già una pagina pubblica su https://pianeta.green. La comunicazione per il segmento "fondazioni/enti di ricerca" è un approfondimento del profilo Hub Editoriale. Il case study Susdef è la prova principale di questo profilo.
 
-**Clienti verificati dello Stack Terra** (Nuxt+Payload+MeiliSearch):
-1. Consorzio scientifico europeo — **contesto interno, non nominabile mai** (vedi vincolo EPOS in cima); finanziatore del sviluppo iniziale dello stack
-2. Fondazione per lo Sviluppo Sostenibile (Susdef) — **unico caso nominabile al momento**, sito live dal 16 luglio 2026, >33.000 record migrati — URL: https://susdef.pianeta.green
-3. Apotheke — **verificare nominabilità con Max prima di usare come caso pubblico**
+**Clienti verificati del profilo Hub Editoriale di Stack Terra**:
+1. Consorzio scientifico europeo — **contesto interno, non nominabile mai** (vedi vincolo EPOS in cima); ha finanziato lo sviluppo iniziale dello stack
+2. Fondazione per lo Sviluppo Sostenibile (Susdef) — **unico caso nominabile pubblicamente**, sito live dal 16 luglio 2026, >33.000 record migrati — URL: https://susdef.pianeta.green
+
+**Nota (confermato da Max, 2026-08-28)**: Apotheke usa Terra ma in un profilo più semplice, non Hub Editoriale — non è un caso per questa offerta e non va usato come proof point qui.
 
 Il prodotto è esplicitamente pensato come asset riutilizzabile, non un one-off. La co-produzione avviene con Latte Creative (nominabile) come partner principale su EPOS e Susdef.
 
@@ -197,4 +198,4 @@ Prima di passare queste priorità a MUSE come issue, serve conferma su:
 4. **Screenshot/video**: la fonte primaria per gli screenshot è ora https://susdef.pianeta.green. I materiali in `25P19_Epos/6_Screen video pages/` — usabili per contesto interno, ma verificare che non mostrino branding ghost prima di qualsiasi uso pubblico.
 5. ~~**Persona D (NGO)**: ci sono conversazioni o progetti reali con NGO che hanno valutato questo prodotto, o è un segmento da escludere finché non si materializza?~~ **Risolto (2026-08-28)**: segmento NGO **escluso** — nessun cliente NGO ha questo stack, non prioritario ora. Persona D rimossa dal documento.
 6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study? — **In raccolta (Max, 2026-08-28)**: le chiede appena possibile. Il case study può partire senza quote e aggiungerle in seguito.
-7. **Apotheke nominabile?** Apotheke è confermato come cliente Terra — verificare con Max se è nominabile pubblicamente come secondo case study.
+7. ~~**Apotheke nominabile?**~~ **Risolto (2026-08-28)**: Apotheke usa Terra ma in un profilo semplice, non Hub Editoriale — non rilevante per questa offerta.

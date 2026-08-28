@@ -1,5 +1,5 @@
 ---
-status: stub — in attesa di materiale verificato (PIA-1303, 2026-08-28)
+status: sospeso — nessun cliente verificato (PIA-1303, 2026-08-28)
 compiled: 2026-08-28
 author: COMPASS (PIA-1303)
 fonti: Piano R&D `09_relazione_sostenibilita/03_Piano_RD_e_Startup_Innovativa.md` (citato da Max nel thread PIA-1303)
@@ -28,7 +28,7 @@ DocumentAI e' un **workflow/tool AI per documenti di ricerca** — un asset prop
 
 **Stack tecnico**: WordPress Multisite + API enterprise (confermato da Piano R&D). Stack completamente diverso da Stack Terra (Nuxt+Payload+MeiliSearch) — non sono intercambiabili.
 
-**Cliente verificato**: AGESCI — commessa €38K. **Nominabilita' di AGESCI: da verificare con Max** (vedi sezione 5, punto 1).
+**Cliente verificato**: nessuno al momento. Il Piano R&D citava AGESCI ma Max ha confermato (2026-08-28) che **AGESCI non e' un cliente DocumentAI e non e' nominabile**. La strategia non puo' essere sviluppata senza almeno un caso reale verificato.
 
 **Relazione con Stack Terra**: i due prodotti sono "connessi e integrati" (Max, 2026-08-28) ma restano offerte distinte. DocumentAI puo' operare sopra un sito esistente senza richiedere migrazione su Stack Terra. Quando i due sono combinati si ottiene la piattaforma documentale AI completa.
 
@@ -66,9 +66,9 @@ Dipende da: nominabilita' AGESCI, materiale verificato sull'offerta, persona.
 
 ## 5. Gap aperti — non procedere senza risposta di Max
 
-1. **AGESCI nominabile?** E' il caso verificato di DocumentAI (commessa €38K da Piano R&D). Prima di costruire qualsiasi strategia pubblica serve sapere: Pianeta ha lavorato come partner diretto o ghost? Il progetto e' concluso e il cliente ha dato consenso alla pubblicazione? **Questa e' la domanda piu' urgente — senza risposta non posso sviluppare nessuna sezione.**
+1. ~~**AGESCI nominabile?**~~ **Risolto (2026-08-28)**: AGESCI non usa DocumentAI e non e' nominabile — voce del Piano R&D da considerare errata o riferita ad altro. **Non ci sono clienti verificati al momento.**
 
-2. **Cosa fa esattamente DocumentAI su AGESCI?** Qual e' il problema che risolve, qual e' l'output per il cliente? Il Piano R&D la chiama "workflow/tool AI per documenti di ricerca" — ma AGESCI non e' un istituto di ricerca. Serve una descrizione concreta del caso d'uso reale.
+2. **Qual e' il primo cliente verificato di DocumentAI?** Senza un caso reale non e' possibile costruire persona credibili ne' una strategia contenuti. Questo documento rimane sospeso finche' Max non identifica un caso reale.
 
 3. **WordPress Multisite e' la scelta tecnica definitiva o una dipendenza dal cliente?** Stack Terra usa Nuxt+Payload per una ragione precisa (performance, no plugin, live preview). DocumentAI usa WordPress Multisite — e' una scelta di prodotto o un adattamento alle esigenze specifiche di AGESCI?
 
