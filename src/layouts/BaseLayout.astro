@@ -23,9 +23,10 @@ interface Props {
   chrome?: boolean;
   minimal?: boolean;
   hideNewsletter?: boolean;   // su superfici di conversione (es. /hire) niente popup proattivo Alba
+  noindex?: boolean;   // contenuto draft: fuori sitemap + noindex, raggiungibile solo via link diretto
 }
 
-const { title, description = '', ogImage = '/og/work-eclag.png', ogType, ogSlug, chrome = true, minimal = false, hideNewsletter = false } = Astro.props;
+const { title, description = '', ogImage = '/og/work-eclag.png', ogType, ogSlug, chrome = true, minimal = false, hideNewsletter = false, noindex = false } = Astro.props;
 const locale: 'it' | 'en' = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/') ? 'en' : 'it';
 const ogImageResolved = ogType && ogSlug
   ? new URL(`/api/og/${ogType}/${ogSlug}.png${ogType === 'hire' && locale === 'en' ? '?l=en' : ''}`, Astro.site).toString()
@@ -42,6 +43,7 @@ const dataSun = isNightInItaly() ? 'night' : 'day';
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://rsms.me" crossorigin />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="https://rsms.me/inter/font-files/InterVariable.woff2?v=4.0" />

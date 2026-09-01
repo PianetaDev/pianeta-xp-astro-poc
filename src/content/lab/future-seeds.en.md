@@ -8,7 +8,7 @@ cover: "/og/future-seeds.png"
 ogImage: "/og/future-seeds.png"
 date: 2026-08-27
 locale: en
-draft: false
+draft: true
 type: lab
 tags: ["dataviz", "svg", "vue", "genebank", "ciat"]
 links:
