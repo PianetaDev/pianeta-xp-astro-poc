@@ -45,7 +45,7 @@ const secondaryCta = data.links?.client && data.links?.external
   ? { label: 'Evolving prototype ↗', href: data.links.external, external: true }
   : { label: t('en', 'cta_lavoriamo'), action: 'open-hire-us' };
 ---
-<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="lab" ogSlug={item.id}>
+<BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="lab" ogSlug={item.id} noindex={data.draft === true}>
   <DetailPage
     eyebrowParts={eyebrowParts}
     title={title}
