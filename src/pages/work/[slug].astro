@@ -3,11 +3,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import DetailPage from '../../components/detail/DetailPage.astro';
 import { getCollection, render } from 'astro:content';
 import { pickNextItem, toNextProp } from '../../lib/next-item';
+import { PREVIEW_ALIASES } from '../../../scripts/preview-aliases.mjs';
 
 export const prerender = true;
 export async function getStaticPaths() {
   const items = await getCollection('work');
-  return items.map((item) => ({ params: { slug: item.id }, props: { item, allItems: items } }));
+  const paths = items.map((item) => ({ params: { slug: item.id }, props: { item, allItems: items } }));
+  for (const item of items) {
+    const alias = item.data.draft && PREVIEW_ALIASES.work?.[item.id];
+    if (alias) paths.push({ params: { slug: alias }, props: { item, allItems: items } });
+  }
+  return paths;
 }
 
 const { item, allItems } = Astro.props as any;

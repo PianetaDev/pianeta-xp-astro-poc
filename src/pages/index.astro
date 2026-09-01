@@ -69,18 +69,30 @@ const ldJson = {
   <div class="home-page">
     <div class="bento-grid">
 
-      {/* 1. Featured ECLAG video — tall portrait (col-1 row-span-3) */}
-      <a href={w0 ? `/work/${w0.id}` : '/work/eclag'} class="bento-tile t-tall t-dark">
-        <video poster="/choosetoseethem/cover-v3.webp" muted loop playsinline preload="none" class="bento-video"
-               data-lazy-video data-src="/choosetoseethem/video-restore-web-720.mp4"></video>
-        <div class="bento-grad" />
-        <div class="bento-content">
-          <p class="bento-kicker">Featured · ECLAG</p>
-          <div class="bento-spacer" />
-          <h2 class="bento-title-xl">{w0?.data.title || 'Choose to See Them'}</h2>
-          <p class="bento-sub">{(w0?.data.client || 'ECLAG') + ' · ' + (w0?.data.year || 2026)}</p>
-        </div>
-      </a>
+      {/* 1. Featured work — tall portrait (col-1 row-span-3). Video ECLAG solo quando ECLAG è davvero il top item non-draft. */}
+      {w0?.id === 'eclag' ? (
+        <a href={`/work/${w0.id}`} class="bento-tile t-tall t-dark">
+          <video poster="/choosetoseethem/cover-v3.webp" muted loop playsinline preload="none" class="bento-video"
+                 data-lazy-video data-src="/choosetoseethem/video-restore-web-720.mp4"></video>
+          <div class="bento-grad" />
+          <div class="bento-content">
+            <p class="bento-kicker">Featured · ECLAG</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-xl">{w0.data.title}</h2>
+            <p class="bento-sub">{(w0.data.client || 'ECLAG') + ' · ' + (w0.data.year || 2026)}</p>
+          </div>
+        </a>
+      ) : w0 && (
+        <a href={`/work/${w0.id}`} class="bento-tile t-tall t-dark" style={`background-image:url('${(w0.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center;`}>
+          <div class="bento-grad" />
+          <div class="bento-content">
+            <p class="bento-kicker">Featured</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-xl">{w0.data.title}</h2>
+            <p class="bento-sub">{(w0.data.client || '') + (w0.data.client && w0.data.year ? ' · ' : '') + (w0.data.year || '')}</p>
+          </div>
+        </a>
+      )}
 
       {/* 2. Wordmark — square */}
       <div class="bento-tile t-square t-cream bento-wordmark">

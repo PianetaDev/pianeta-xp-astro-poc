@@ -29,18 +29,30 @@ const description = 'Design & technology studio. Work, articles, experiments.';
   <div class="home-page">
     <div class="bento-grid">
 
-      <a href={w0 ? `/en/work/${w0.id}` : '/en/work'} class="bento-tile t-tall t-dark">
-        <video poster="/choosetoseethem/cover-v3.png" autoplay muted loop playsinline class="bento-video">
-          <source src="https://pub-4c166b51c33040fd98b8f75c2963296e.r2.dev/choosetoseethem/video-restore-web.mp4" type="video/mp4" />
-        </video>
-        <div class="bento-grad" />
-        <div class="bento-content">
-          <p class="bento-kicker">Featured · ECLAG</p>
-          <div class="bento-spacer" />
-          <h2 class="bento-title-xl">{w0?.data.title || 'Choose to See Them'}</h2>
-          <p class="bento-sub">{(w0?.data.client || 'ECLAG') + ' · ' + (w0?.data.year || 2026)}</p>
-        </div>
-      </a>
+      {w0?.id === 'eclag' ? (
+        <a href={`/en/work/${w0.id}`} class="bento-tile t-tall t-dark">
+          <video poster="/choosetoseethem/cover-v3.png" autoplay muted loop playsinline class="bento-video">
+            <source src="https://pub-4c166b51c33040fd98b8f75c2963296e.r2.dev/choosetoseethem/video-restore-web.mp4" type="video/mp4" />
+          </video>
+          <div class="bento-grad" />
+          <div class="bento-content">
+            <p class="bento-kicker">Featured · ECLAG</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-xl">{w0.data.title}</h2>
+            <p class="bento-sub">{(w0.data.client || 'ECLAG') + ' · ' + (w0.data.year || 2026)}</p>
+          </div>
+        </a>
+      ) : w0 && (
+        <a href={`/en/work/${w0.id}`} class="bento-tile t-tall t-dark" style={`background-image:url('${(w0.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center;`}>
+          <div class="bento-grad" />
+          <div class="bento-content">
+            <p class="bento-kicker">Featured</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-xl">{w0.data.title}</h2>
+            <p class="bento-sub">{(w0.data.client || '') + (w0.data.client && w0.data.year ? ' · ' : '') + (w0.data.year || '')}</p>
+          </div>
+        </a>
+      )}
 
       <a href="/en/bulletin/chi-siamo" class="bento-tile t-square t-cream bento-wordmark">
         <div class="bento-wordmark-stack">
