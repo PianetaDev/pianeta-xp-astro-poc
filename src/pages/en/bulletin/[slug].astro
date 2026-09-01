@@ -25,7 +25,11 @@ const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Bulletin', h
 if (data.issue) eyebrowParts.push({ label: `#${data.issue}` });
 if (data.date) eyebrowParts.push({ label: formatDate(data.date) });
 
-const related = (data.relatedWork || []).map((slug: string) => ({ type: 'en/work', slug }));
+const workEnEntries = await getCollection('workEn');
+const related = (data.relatedWork || []).map((slug: string) => {
+  const enEntry = workEnEntries.find((e) => e.id === slug);
+  return { type: 'en/work', slug, label: enEntry?.data.title };
+});
 
 const bodyLen = item.body?.length ?? 0;
 const wordCount = Math.max(1, Math.round(bodyLen / 5.5));
