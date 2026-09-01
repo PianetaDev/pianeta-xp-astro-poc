@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PREVIEW_ALIASES } from './preview-aliases.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -29,6 +30,8 @@ export function getDraftPaths(contentRoot = join(__dirname, '..', 'src', 'conten
       const isEn = file.endsWith('.en.md');
       const slug = file.replace(/\.en\.md$/, '').replace(/\.md$/, '');
       paths.add(isEn ? `/en/${collection}/${slug}` : `/${collection}/${slug}`);
+      const alias = PREVIEW_ALIASES[collection]?.[slug];
+      if (alias) paths.add(isEn ? `/en/${collection}/${alias}` : `/${collection}/${alias}`);
     }
   }
   return paths;
