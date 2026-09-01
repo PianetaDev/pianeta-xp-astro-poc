@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import { pickRotatingHero } from '../../lib/hero-rotation';
 
 const byDateDesc = (a: any, b: any) => {
   const da = a.data.date ? new Date(a.data.date).getTime() : 0;
@@ -15,8 +16,8 @@ const services = (await getCollection('servicesEn')).filter(liveOnly).sort(byDat
 const team = (await getCollection('teamEn')).filter(liveOnly);
 const teamCount = team.length;
 
-const w0 = featuredWork[0];
-const otherWork = featuredWork.slice(1);
+const w0 = pickRotatingHero(featuredWork, Astro.cookies);
+const otherWork = featuredWork.filter((w) => w.id !== w0?.id);
 const b0 = bulletin[0];
 const b1 = bulletin[1];
 const b2 = bulletin[2];
