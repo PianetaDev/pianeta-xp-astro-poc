@@ -7,7 +7,6 @@ import SiteFooter from '../components/SiteFooter.astro';
 import CookieConsent from '../components/vue/site/consent/CookieConsent.vue';
 import MobileMenu from '../components/vue/site/MobileMenu.vue';
 import SiteRailFlyout from '../components/vue/site/SiteRailFlyout.vue';
-import NewsletterPopup from '../components/vue/site/newsletter/NewsletterPopup.vue';
 import HireUsLauncher from '../components/vue/site/HireUsLauncher.vue';
 import HireUsDrawer from '../components/vue/site/hire-us/HireUsDrawer.vue';
 import AlbaFloater from '../components/vue/site/alba/AlbaFloater.vue';
@@ -23,7 +22,7 @@ interface Props {
   ogSlug?: string;
   chrome?: boolean;
   minimal?: boolean;
-  hideNewsletter?: boolean;   // su superfici di conversione (es. /hire) niente popup proattivi
+  hideNewsletter?: boolean;   // su superfici di conversione (es. /hire) niente popup proattivo Alba
 }
 
 const { title, description = '', ogImage = '/og/work-eclag.png', ogType, ogSlug, chrome = true, minimal = false, hideNewsletter = false } = Astro.props;
@@ -113,7 +112,6 @@ const dataSun = isNightInItaly() ? 'night' : 'day';
         <CookieConsent client:only="vue" />
         <MobileMenu client:only="vue" />
         <SiteRailFlyout client:only="vue" />
-        {!hideNewsletter && <NewsletterPopup client:only="vue" />}
         <HireUsLauncher client:only="vue" />
         <HireUsDrawer client:only="vue" />
         <AlbaFloater client:only="vue" />
