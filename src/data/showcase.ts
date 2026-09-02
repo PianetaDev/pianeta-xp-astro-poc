@@ -43,13 +43,13 @@ export const CLIENTS: string[] = [
 export interface FoundationWin { name: string; what: string }
 export const FOUNDATIONS: FoundationWin[] = [
   { name: 'Susdef', what: 'Fondazione per lo Sviluppo Sostenibile' },
-  { name: 'ECLAG', what: 'Missing Children — diritti dei minori' },
+  { name: 'ECLAG', what: 'Diritti dei minori online · advocacy europea' },
   { name: 'Lucy sulla Cultura', what: 'Cultura ed editoria' },
   { name: 'Foodreboot', what: 'Food & sostenibilità' },
 ];
 const FOUNDATIONS_EN: FoundationWin[] = [
   { name: 'Susdef', what: 'Foundation for Sustainable Development' },
-  { name: 'ECLAG', what: 'Missing Children — children’s rights' },
+  { name: 'ECLAG', what: 'Children’s online rights · European advocacy' },
   { name: 'Lucy sulla Cultura', what: 'Culture & publishing' },
   { name: 'Foodreboot', what: 'Food & sustainability' },
 ];
