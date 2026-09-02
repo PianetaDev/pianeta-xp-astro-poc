@@ -1,6 +1,6 @@
 ---
 title: "Validare una campagna video prima di produrla"
-description: "Come abbiamo integrato simulazione multi-agente e stack di analisi neurale nel processo creativo standard. La storia di ECLAG Missing Children, in tre settimane e diciotto iterazioni."
+description: "Come abbiamo integrato simulazione multi-agente e stack di analisi neurale nel processo creativo standard. La storia di ECLAG, in tre settimane e diciotto iterazioni."
 date: 2026-06-24
 updated: 2026-06-24
 authors: ["max"]
@@ -25,7 +25,7 @@ Negli ultimi diciotto mesi questo equilibrio è cambiato. Sono emersi due strume
 
 Il primo è la simulazione multi-agente (in inglese: *swarm intelligence*): un panel di "spettatori sintetici" generato da modelli linguistici di frontiera, ognuno con un profilo demografico e psicografico definito, che valuta materiali creativi prima della produzione. È un sistema che abbiamo costruito noi e che oggi è parte della nostra cassetta degli attrezzi. Il secondo è il nostro stack di analisi neurale predittiva, che usa un foundation model di ricerca per predire come reagisce la corteccia cerebrale di un soggetto medio a stimoli video, audio e testo. Non è una scatola che dice "questa campagna vincerà": è uno strumento di crafting che permette di iterare con un feedback strutturato.
 
-Abbiamo applicato entrambi al progetto ECLAG Missing Children, una campagna video europea sui diritti dei minori online. Tre settimane di lavoro, diciotto analisi consolidate, tre video consegnati. Questa è la storia di come abbiamo fatto, cosa abbiamo imparato, e perché pensiamo che questa modalità di lavoro sarà presto la norma anche per progetti con budget ordinari.
+Abbiamo applicato entrambi al progetto ECLAG, una campagna video europea sui diritti dei minori online. Tre settimane di lavoro, diciotto analisi consolidate, tre video consegnati. Questa è la storia di come abbiamo fatto, cosa abbiamo imparato, e perché pensiamo che questa modalità di lavoro sarà presto la norma anche per progetti con budget ordinari.
 
 ## Cosa misura, davvero, lo stack di analisi neurale
 

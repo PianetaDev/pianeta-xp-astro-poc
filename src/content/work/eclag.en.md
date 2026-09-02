@@ -1,7 +1,7 @@
 ---
 title: "Choose to See Them — ECLAG"
 description: "A European video campaign on children's rights online, validated with our neural-analysis stack before production. 3 videos · 18 neuro analyses · 3 weeks."
-client: "ECLAG — European Coalition for the Rights and Well-being of Children Online"
+client: "ECLAG — European Child Sexual Abuse Legislation Advocacy Group"
 category: "Campaign"
 year: 2026
 date: 2026-05-24
@@ -45,7 +45,7 @@ tour:
 
 ## The challenge
 
-ECLAG (European Coalition for the Rights and Well-being of Children Online) represents over 80 European organizations calling on the European Union to urgently adopt legislation against the online sexual abuse of children. The subject is among the hardest to communicate: emotionally costly to get wrong — a tone that slides into pity or drama undermines the message's credibility — and technically sensitive — platforms block sponsorship of politically exposed content.
+ECLAG (European Child Sexual Abuse Legislation Advocacy Group) represents over 80 European organizations calling on the European Union to urgently adopt legislation against the online sexual abuse of children. The subject is among the hardest to communicate: emotionally costly to get wrong — a tone that slides into pity or drama undermines the message's credibility — and technically sensitive — platforms block sponsorship of politically exposed content.
 
 We needed videos that were emotionally strong, technically sustainable on the platforms, and validated before production so we wouldn't burn resources on the wrong directions.
 
