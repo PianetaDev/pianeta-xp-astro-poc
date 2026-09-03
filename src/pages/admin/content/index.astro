@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+type Status = 'live' | 'draft' | 'missing';
+
+interface Row {
+  id: string;
+  title: string;
+  statusIt: Status;
+  statusEn: Status;
+  date: Date | null;
+}
+
+interface Section {
+  name: string;
+  label: string;
+  rows: Row[];
+}
+
+const COLLECTIONS: Array<{ name: string; enName: string; label: string }> = [
+  { name: 'lab', enName: 'labEn', label: 'Lab' },
+  { name: 'work', enName: 'workEn', label: 'Work' },
+  { name: 'bulletin', enName: 'bulletinEn', label: 'Bulletin' },
+  { name: 'services', enName: 'servicesEn', label: 'Services' },
+  { name: 'team', enName: 'teamEn', label: 'Team' },
+  { name: 'careers', enName: 'careersEn', label: 'Careers' },
+];
+
+const REPO_BASE = 'https://github.com/PianetaDev/pianeta-xp-astro-poc/blob/main/src/content';
+
+function entryStatus(entry: { data: { draft?: boolean } } | undefined): Status {
+  if (!entry) return 'missing';
+  return entry.data.draft === true ? 'draft' : 'live';
+}
+
+function latestDate(a?: Date, b?: Date): Date | null {
+  if (a && b) return a.getTime() >= b.getTime() ? a : b;
+  return a || b || null;
+}
+
+const sections: Section[] = [];
+
+for (const { name, enName, label } of COLLECTIONS) {
+  const [itItems, enItems] = await Promise.all([
+    getCollection(name as any),
+    getCollection(enName as any),
+  ]);
+
+  const itById = new Map(itItems.map((e: any) => [e.id, e]));
+  const enById = new Map(enItems.map((e: any) => [e.id, e]));
+  const ids = new Set([...itById.keys(), ...enById.keys()]);
+
+  const rows: Row[] = Array.from(ids).map((id) => {
+    const itEntry: any = itById.get(id);
+    const enEntry: any = enById.get(id);
+    return {
+      id,
+      title: itEntry?.data.title || enEntry?.data.title || id,
+      statusIt: entryStatus(itEntry),
+      statusEn: entryStatus(enEntry),
+      date: latestDate(itEntry?.data.date, enEntry?.data.date),
+    };
+  }).sort((a, b) => a.title.localeCompare(b.title));
+
+  if (rows.length > 0) {
+    sections.push({ name, label, rows });
+  }
+}
+
+const allRows = sections.flatMap((s) => s.rows);
+const liveCount = allRows.filter((r) => r.statusIt === 'live' || r.statusEn === 'live').length;
+const draftCount = allRows.filter((r) => r.statusIt === 'draft' || r.statusEn === 'draft').length;
+const missingEnCount = allRows.filter((r) => r.statusEn === 'missing').length;
+
+const statusBadge = (s: Status) => ({ live: '🟢 Live', draft: '📝 Draft', missing: '⚪ —' }[s]);
+
+const fmtDate = (d: Date | null) => d ? d.toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
+---
+<BaseLayout title="Admin — Contenuti" description="Mappa contenuti pubblicati e non" chrome={true} minimal={false}>
+  <div class="index-page">
+    <header class="index-head">
+      <p class="index-eyebrow">Admin · Interno</p>
+      <h1 class="index-title">Contenuti</h1>
+      <p class="index-deck">Stato pubblicato/draft di tutti i contenuti editoriali, IT ed EN affiancati.</p>
+      <p class="content-summary">{liveCount} pubblicati · {draftCount} draft · {missingEnCount} senza EN</p>
+    </header>
+
+    {sections.map((section) => (
+      <section class="content-section">
+        <h2 class="content-section-title">{section.label}</h2>
+        <table class="content-table">
+          <thead>
+            <tr><th>Titolo</th><th>IT</th><th>EN</th><th>Data</th><th>Modifica IT</th><th>Modifica EN</th></tr>
+          </thead>
+          <tbody>
+            {section.rows.map((row) => (
+              <tr>
+                <td>{row.title}</td>
+                <td>{statusBadge(row.statusIt)}</td>
+                <td>{statusBadge(row.statusEn)}</td>
+                <td>{fmtDate(row.date)}</td>
+                <td>
+                  {row.statusIt !== 'missing'
+                    ? <a href={`${REPO_BASE}/${section.name}/${row.id}.md`} class="content-edit-link" target="_blank" rel="noopener">Modifica →</a>
+                    : '—'}
+                </td>
+                <td>
+                  {row.statusEn !== 'missing'
+                    ? <a href={`${REPO_BASE}/${section.name}/${row.id}.en.md`} class="content-edit-link" target="_blank" rel="noopener">Modifica →</a>
+                    : '—'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+    ))}
+  </div>
+
+  <style>
+    .content-summary {
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--pianeta-muted-strong);
+    }
+    .content-section {
+      max-width: 1100px;
+      margin: 0 auto 40px;
+    }
+    .content-section-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      color: var(--pianeta-muted-strong);
+      margin: 0 0 12px;
+    }
+    .content-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .content-table th, .content-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--pianeta-border); }
+    .content-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); font-weight: 600; }
+    .content-edit-link { color: #0e1116; text-decoration: none; font-weight: 600; }
+    .content-edit-link:hover { color: var(--cta-primary); }
+  </style>
+</BaseLayout>
