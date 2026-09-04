@@ -38,7 +38,7 @@ The 2026 visual identity was designed by the Brickbat collective: five animal mo
 
 Eight workshops ran in parallel for eleven days, constructing structures, installations and site-specific research in the forests and village of Santo Pietro.
 
-**Sicilian Satoyama** (w/ Yoshiharu Tsukamoto, Atelier Bow-Wow — Wolf Prize in Architecture 2022) — a vegetable garden within ancient stone walls, an octagonal gazebo of eight chestnut columns, a mulberry grove transformed into a cool resting place through pruning and dry-stone terracing. Addition and subtraction as recomposition of landscape.
+**Sicilian Satoyama** (w/ Yoshiharu Tsukamoto, Atelier Bow-Wow — Wolf Prize in Architecture 2022) — a vegetable garden within ancient stone walls, a gazebo of eight chestnut columns, a mulberry grove transformed into a cool resting place through pruning and dry-stone terracing. Addition and subtraction as recomposition of landscape.
 
 **Sound, Ceramics and Communities** (w/ Domenico Mangano and Marieke van Rooy, curated by Salvatore Lacagnina) — ceramic whistles made from clay, olive ash and Sicilian sand. The moment when a clear note brings shared joy to everyone. A work about people and their stories, not just clay.
 
@@ -50,7 +50,7 @@ Eight workshops ran in parallel for eleven days, constructing structures, instal
 
 **More-Than-Human Audio Worlds** (w/ Maja Avnat, Matters of Activity, Berlin) — audio pieces documenting the campus experience, accessible via QR code at the exact location in which each piece was recorded. An invitation to listen where you stand.
 
-**Skin Climate Action / Darmstadt School** (w/ Johanna Schmeisser) — a ruined room transformed with lime, water, linseed oil and lime-impregnated linen. Care as a design act: clearing, cleaning, repairing — knowledge transmitted through shared labour.
+**Skin Climate Action / Darmstadt School** (w/ Johanna Schmeisser) — a ruined room transformed with lime, water, linseed oil and impregnated linen. Care as a design act: clearing, cleaning, repairing — knowledge transmitted through shared labour.
 
 **Processo (Off Program)** (w/ Collettivo Stilles Örtchen) — born while waiting, on the threshold. A relational biopause.
 
@@ -60,7 +60,7 @@ On Saturday, August 1st, behind the former church of the Village of Santo Pietro
 
 It is the second Train Kiln built in Italy, and the first permanent infrastructure of Casa Bosco Colto.
 
-The kiln was designed under the guidance of Prof. Ted Neal (Ball State University, Indiana — one of the world's leading experts on wood-fired kilns) and Prof. Michał Puszczyński (Academy of Art and Design, Wrocław, Poland — member of the International Academy of Ceramics). Its construction reclaims a historical bond: for centuries, the Bosco di Santo Pietro fuelled the kilns of Caltagirone, making the city's ceramic tradition famous. The Train Kiln brings firing back into the forest.
+The kiln was designed under the guidance of Prof. Ted Neal (Ball State University, Indiana — one of the world's leading experts on wood-fired kilns) and Prof. Michał Puszczyński (Academy of Wrocław, Poland — member of the International Academy of Ceramics). Its construction reclaims a historical bond: for centuries, the Bosco di Santo Pietro fuelled the kilns of Caltagirone, making the city's ceramic tradition famous. The Train Kiln brings firing back into the forest.
 
 The kiln can reach temperatures up to 1,350 °C. Natural ash deposits on ceramic surfaces create textures and colour effects characteristic of wood firing — a chemical process that transforms what the eye sees as simple matter into something unexpected.
 
