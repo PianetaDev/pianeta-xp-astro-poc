@@ -1,6 +1,14 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
 import { getCollection } from 'astro:content';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
 
 const all = await getCollection('campaigns');
 const items = all.sort((a: any, b: any) => {
@@ -17,6 +25,7 @@ const fmt = (n?: number) => n != null ? n.toLocaleString('it-IT') : '—';
 const fmtEur = (n?: number) => n != null ? '€ ' + n.toLocaleString('it-IT', { maximumFractionDigits: 0 }) : '—';
 ---
 <BaseLayout title="Admin — Campagne" description="Pannello interno gestione campagne" chrome={true} minimal={false}>
+  <AdminNav current="campaigns" />
   <div class="index-page">
     <header class="index-head">
       <p class="index-eyebrow">Admin · Interno</p>
