@@ -1,8 +1,8 @@
 ---
-status: aggiornato — DocumentAI integrato come modulo di Terra (PIA-1309, 2026-08-28)
+status: aggiornato — gap A-D chiusi (PIA-1313, 2026-09-04); API esterne confermato; provider AI da nominare
 compiled: 2026-08-27
-revised: 2026-08-28
-author: COMPASS (PIA-1303, PIA-1309)
+revised: 2026-09-04
+author: COMPASS (PIA-1303, PIA-1309, PIA-1313)
 fonti: BRIEF.md CMS-Documentale, BRIEF.md Susdef (incollati da Max nel thread PIA-1303); Piano R&D `09_relazione_sostenibilita/03_Piano_RD_e_Startup_Innovativa.md`
 nota-pia-1309: DocumentAI non è un prodotto autonomo — è un modulo add-on di Terra. offer-documentai.md è deprecato, la strategia DocumentAI vive nella sezione 1.5 di questo documento.
 ---
@@ -75,22 +75,22 @@ Un add-on che si aggiunge al core di Terra per portare capacità AI generativa s
 
 **Come si acquista**: come add-on nel pacchetto Terra — non ha prezzo, scheda o campagna propri indipendenti da Terra. Il modulo si menziona nel case study Susdef e nella landing Hub Editoriale come capacità opzionale del pacchetto.
 
-**Layer AI — API esterne o self-hosted?** (gap 2 — risposta parziale)
+**Layer AI — API esterne o self-hosted?** (confermato, Max 2026-09-04)
 
-Max (PIA-1313): "api esterne credo" — **probabile ma non ancora confermato**. Non passare questa informazione come certa in contenuti pubblici finché non è confermata.
+Il modulo DocumentAI usa **API esterne** — confermato da Max il 2026-09-04 (precedente risposta "api esterne credo" ora è conferma ferma). Il provider specifico non è ancora nominato — se serve per il DPA/nota GDPR, va chiesto in un follow-up mirato.
 
-Implicazioni se confermato (API esterne):
-- I documenti del cliente vengono inviati a un provider AI esterno per elaborazione (ingestione, abstract, ricerca semantica) — escono quindi dalla giurisdizione/server europei gestiti da Pianeta/Fabrizio
-- **Questo contraddice il claim generico "dati non escono dalla giurisdizione"** — che rimane vero per il core Terra (Nuxt+Payload+MeiliSearch self-hosted) ma non si estende al modulo DocumentAI se usa API esterne
-- Per Persona B e Persona C (entrambi con obiezioni GDPR forti), è un dettaglio critico: devono sapere quale provider, dove sono i server, se i documenti vengono trattenuti/usati per training, e se esiste un DPA
-- La risposta convincente esiste (es. Anthropic/OpenAI hanno DPA GDPR, server europei, opt-out training) ma non va assunta — va confermata da Max/Fabrizio con il provider specifico
+Implicazioni operative (ora certe, non più ipotetiche):
+- I documenti del cliente vengono inviati a un provider AI esterno per elaborazione (ingestione, abstract, ricerca semantica) — escono dalla giurisdizione/server europei gestiti da Pianeta/Fabrizio
+- **Il claim "dati non escono dalla giurisdizione" si applica solo al core Terra** (Nuxt+Payload+MeiliSearch self-hosted), non al modulo DocumentAI
+- Per Persona B e Persona C (entrambi con obiezioni GDPR forti): devono sapere quale provider, dove sono i server, se i documenti vengono trattenuti/usati per training, e se esiste un DPA — questa risposta va data con il provider specifico in mano
+- La risposta convincente esiste (es. Anthropic/OpenAI hanno DPA GDPR, server europei, opt-out training) ma non va assunta — va confermata con il provider effettivo
 
-**Azione bloccata**: non produrre contenuti che affermano GDPR compliance completa del modulo DocumentAI finché gap 2 non è chiuso con provider specifico + DPA confermato.
+**Azione**: non affermare GDPR compliance completa del modulo DocumentAI in nessun contenuto pubblico finché il provider specifico + DPA non sono nominati. Il gap sul provider resta aperto — creare follow-up mirato quando Max ha il nome.
 
 **Cosa NON è (confini del modulo)**:
 - Non è un prodotto standalone con target separato da Terra
 - Non è un chatbot generale — è specifico sull'archivio documentale del cliente
-- Non si afferma self-hosted al 100%: il core Terra (Nuxt+Payload+MeiliSearch) è self-hosted, ma il layer AI probabilmente usa API esterne — vedi nota sopra
+- Non si afferma self-hosted al 100%: il core Terra (Nuxt+Payload+MeiliSearch) è self-hosted, il layer AI usa API esterne (confermato)
 
 ---
 
@@ -138,9 +138,9 @@ Fondazione medio-piccola (staff 10-50), missione scientifica o ambientale, con 1
 - Infrastruttura gestita da Fabrizio Ciampini (VPS con backup giornalieri, SSL/HSTS/CSP) — l'opzione "gestione infrastructure inclusa" esiste
 - Stack open source alla base (Payload, MeiliSearch, Nuxt) — nessun vendor lock-in a livello di tool
 
-> **⚠️ Nota interna — modulo DocumentAI (gap 2 aperto, PIA-1313)**
+> **⚠️ Nota interna — modulo DocumentAI (confermato 2026-09-04, provider da nominare)**
 >
-> Se il cliente valuta Terra + modulo DocumentAI, Persona B porrà la domanda: "Il layer AI manda i miei documenti fuori?". La risposta onesta oggi è: **probabile sì (API esterne) ma non confermato** (Max: "api esterne credo"). Finché gap 2 non è chiuso con provider + DPA specifici, non affermare in nessun contenuto pubblico o deck che DocumentAI è "zero data fuori". Il claim si applica al core Terra, non necessariamente al modulo AI.
+> Se il cliente valuta Terra + modulo DocumentAI, Persona B porrà la domanda: "Il layer AI manda i miei documenti fuori?". La risposta corretta è: **sì, usa API esterne** (confermato da Max, 2026-09-04). Il provider specifico non è ancora nominato — non affermare in contenuti pubblici o deck che DocumentAI è "zero data fuori". Il claim si applica al core Terra, non al modulo AI. Aggiornare questa nota quando il provider + DPA sono nominati.
 
 **Canale primario**: sezione tecnica del case study + scheda tecnica nella landing (non il Bulletin — non è il suo linguaggio)
 
@@ -234,6 +234,10 @@ Prima di passare queste priorità a MUSE come issue, serve conferma su:
 2. ~~**Autorizzazione Susdef**: i numeri tecnici (>33.000 record, dettagli stack, timeline) sono già trattabili come pubblici, o serve conferma scritta dal cliente?~~ **Risolto (2026-08-28)**: autorizzati da Max — numeri tecnici, stack e timeline trattabili come pubblici nel case study.
 3. ~~**URL Susdef**: qual è il dominio pubblico del sito?~~ **Risolto (2026-08-28)**: https://susdef.pianeta.green — Max ha confermato che si possono prendere screenshot da qui per la futura pubblicazione.
 4. **Screenshot/video**: la fonte primaria per gli screenshot è ora https://susdef.pianeta.green. I materiali in `25P19_Epos/6_Screen video pages/` — usabili per contesto interno, ma verificare che non mostrino branding ghost prima di qualsiasi uso pubblico.
+9. ~~**Capacità AI live su Susdef**: il modulo DocumentAI è live? Ingestione AI, abstract automatici, ricerca semantica sono in produzione su Susdef?~~ **Risolto (Max, 2026-09-04)**: tutto live e funzionante su susdef.pianeta.green — ingestione AI, abstract automatici, ricerca semantica tutti in produzione. Il case study può affermare il pacchetto completo Terra + DocumentAI.
+10. ~~**Pricing modulo DocumentAI**: ha un prezzo fisso? Quando si menziona, come si quota?~~ **Risolto (Max, 2026-09-04)**: **solo su preventivo, caso per caso** — nessun prezzo fisso. Non pubblicare cifre. La landing e il case study non devono citare cifre per il modulo.
+11. ~~**Menzione su pianeta.green**: il prodotto Terra è già descritto su pianeta.green? Esiste già una pagina pubblica che menziona il modulo DocumentAI o Hub Editoriale?~~ **Risolto (Max, 2026-09-04)**: Terra è su pianeta.green ma il profilo Hub Editoriale / modulo DocumentAI **non è ancora descritto** lì — nessun conflitto con contenuto già pubblicato. La pagina di approfondimento può essere creata senza rischio di duplicati.
+12. **Provider AI del modulo DocumentAI**: quale provider usa il layer AI (es. OpenAI, Anthropic, altro)? Necessario per la nota DPA/GDPR per Persona B e C. **Aperto** — Max ha confermato che usa API esterne ma non ha nominato il provider specifico. Creare follow-up mirato quando disponibile.
 5. ~~**Persona D (NGO)**: ci sono conversazioni o progetti reali con NGO che hanno valutato questo prodotto, o è un segmento da escludere finché non si materializza?~~ **Risolto (2026-08-28)**: segmento NGO **escluso** — nessun cliente NGO ha questo stack, non prioritario ora. Persona D rimossa dal documento.
 6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study? — **In raccolta (Max, 2026-08-28)**: le chiede appena possibile. Il case study può partire senza quote e aggiungerle in seguito.
 7. ~~**Apotheke nominabile?**~~ **Risolto (2026-08-28)**: Apotheke usa Terra ma in un profilo semplice, non Hub Editoriale — non rilevante per questa offerta.
