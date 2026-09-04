@@ -2,7 +2,7 @@
 title: "Come abbiamo vinto la gara Susdef: Nuxt, Payload, e 33.000 contenuti da interrogare"
 description: "Fondazione Sviluppo Sostenibile ha selezionato Pianeta.Studio in una gara aperta. Abbiamo scelto Nuxt 3 + Payload CMS invece di WordPress, migrato oltre 33.000 record da vent'anni di archivio editoriale, reso l'archivio interrogabile con AI. Consegna in 12 settimane. Il percorso, le scelte tecniche, le ragioni."
 date: 2026-08-27
-draft: false
+draft: true
 locale: it
 tags: ["cms", "archivio", "nuxt", "payload-cms", "sostenibilità", "metodo", "gara"]
 type: bulletin
