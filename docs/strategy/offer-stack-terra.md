@@ -78,7 +78,7 @@ Un add-on che si aggiunge al core di Terra per portare capacità AI generativa s
 **Cosa NON è (confini del modulo)**:
 - Non è un prodotto standalone con target separato da Terra
 - Non è un chatbot generale — è specifico sull'archivio documentale del cliente
-- Non è un layer SaaS: resta self-hosted, GDPR, dati non escono dalla giurisdizione del cliente
+- **Il core Terra (Nuxt+Payload+MeiliSearch) è self-hosted**: server europei, GDPR — dati non escono dalla giurisdizione del cliente. **Il layer AI generativo (modulo DocumentAI) usa API esterne** (provider non ancora nominato — confermato da Max, 2026-09-04): documenti o estratti passano da un provider terzo. Non usare la claim "zero data fuori dalla giurisdizione" per il modulo DocumentAI. Il provider specifico è da nominare se/quando serve per il DPA.
 
 ---
 
@@ -127,6 +127,8 @@ Fondazione medio-piccola (staff 10-50), missione scientifica o ambientale, con 1
 - Stack open source alla base (Payload, MeiliSearch, Nuxt) — nessun vendor lock-in a livello di tool
 
 **Canale primario**: sezione tecnica del case study + scheda tecnica nella landing (non il Bulletin — non è il suo linguaggio)
+
+> **Nota GDPR — layer AI (confermato, 2026-09-04)**: il modulo DocumentAI usa API esterne (provider da nominare per eventuale DPA). L'argomento "zero data fuori dalla giurisdizione" vale per il core Terra, **non** per le funzionalità AI del modulo DocumentAI — documenti o estratti passano da un provider terzo. Non usare la claim GDPR onnicomprensiva in contenuti rivolti a Persona B senza questa qualifica.
 
 ---
 
@@ -222,3 +224,29 @@ Prima di passare queste priorità a MUSE come issue, serve conferma su:
 6. **Quote**: Delia Milioni o Raimondo hanno espresso feedback specifico (email, call) usabile nel case study? — **In raccolta (Max, 2026-08-28)**: le chiede appena possibile. Il case study può partire senza quote e aggiungerle in seguito.
 7. ~~**Apotheke nominabile?**~~ **Risolto (2026-08-28)**: Apotheke usa Terra ma in un profilo semplice, non Hub Editoriale — non rilevante per questa offerta.
 8. ~~**DocumentAI: prodotto separato o modulo?**~~ **Risolto (2026-08-28, PIA-1309)**: DocumentAI è un **modulo add-on di Terra**, non un prodotto con strategia di mercato autonoma. Susdef è il caso verificato. Il documento separato `offer-documentai.md` è deprecato — vedi sezione 1.5 di questo documento.
+
+---
+
+### ~~Gap A — Layer AI del modulo DocumentAI: API esterne o self-hosted?~~ **Risolto (2026-09-04)**
+
+**API esterne: confermato** (Max, 2026-09-04 — conferma ferma, non più "credo"). Provider specifico non ancora nominato — da richiedere in follow-up mirato se necessario per DPA/contratto.
+
+**Implicazione GDPR per Persona B**: documenti o estratti passano da un provider terzo. La claim "zero data fuori dalla giurisdizione" vale per il core Terra, non per il modulo DocumentAI. Qualifica aggiornata in sezione 1.5 e nella nota Persona B.
+
+---
+
+### ~~Gap B — Capacità AI live su Susdef: quali funzionalità sono attive in produzione?~~ **Risolto (2026-09-04)**
+
+**Tutto live e funzionante** su https://susdef.pianeta.green (Max, 2026-09-04): ingestione AI, abstract automatici e ricerca semantica sono tutte attive in produzione, nessuna limitazione. Il case study e la sezione 1.5 possono affermare il pacchetto completo senza riserve.
+
+---
+
+### ~~Gap C — Pricing modulo DocumentAI: come si struttura il costo?~~ **Risolto (2026-09-04)**
+
+**Solo su preventivo**, caso per caso (Max, 2026-09-04). Nessun canone fisso pubblicato, nessuna tariffa a consumo standard. La landing e il case study non devono esporre un prezzo — CTA: "contattaci per un preventivo".
+
+---
+
+### ~~Gap D — Modulo DocumentAI: già menzionato su pianeta.green?~~ **Risolto (2026-09-04)**
+
+**Non ancora descritto su pianeta.green** (Max, 2026-09-04) — nessun rischio di messaggio contraddittorio. Un task per scriverlo è probabile in arrivo come issue separata.
