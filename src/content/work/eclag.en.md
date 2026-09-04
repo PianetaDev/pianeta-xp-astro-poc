@@ -18,7 +18,7 @@ links:
   live: "https://choosetoseethem.childsafetyineurope.com/"
   bulletin: ["validare-una-campagna-prima-di-produrla"]
 locale: en
-draft: true
+draft: false
 type: work
 tags: ["campaign", "neuromarketing", "advocacy", "ai-validation"]
 tour:
