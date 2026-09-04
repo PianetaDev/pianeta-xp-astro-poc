@@ -30,6 +30,8 @@ tags: ["data-storytelling", "adolescenza", "territorio", "partecipazione", "word
 
 Abbiamo raccolto dati quantitativi (chi frequenta un luogo, con quale frequenza, in quali orari) e testimonianze qualitative (citazioni dirette, in prima persona, non mediate). I risultati vengono restituiti come una **piattaforma editoriale scrollabile**, che alterna grafici, mappe e voci degli adolescenti.
 
+![La piattaforma editoriale di Geografia dello stare: un grafico affiancato a una citazione diretta di uno dei ragazzi coinvolti](/work/geografia-dello-stare/piattaforma-editoriale.png)
+
 ## Cosa emerge
 
 Le voci restituite non descrivono un luogo *sicuro* o *pericoloso*, ma raccontano una geografia soggettiva: alcuni spazi sono evitati per la percezione del gruppo che li abita, altri per l'orario, altri ancora — semplicemente — perché *"le persone sono quello che non mi fa sentire al sicuro"*.
