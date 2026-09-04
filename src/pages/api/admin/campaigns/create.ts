@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { requireAdminCookie } from '../../../../lib/server/admin-session';
 
 export const prerender = false;
 
@@ -14,16 +15,12 @@ export const prerender = false;
  * Fase 3 (TODO): se channel === 'google-ads' e payload completo →
  * crea bozza campagna via Google Ads API (vedi /api/ads/google/launch).
  *
- * Auth: header `x-admin-secret: $ADMIN_SECRET` (env).
+ * Auth: stesso cookie di sessione admin usato da /admin/campaigns/new
+ * (il fetch parte dal browser same-origin, già dietro login).
  */
-export const POST: APIRoute = async ({ request }) => {
-  const secret = process.env.ADMIN_SECRET || '';
-  if (!secret || request.headers.get('x-admin-secret') !== secret) {
-    // Per ora niente auth in dev — abilitare quando si imposta ADMIN_SECRET su Vercel
-    if (process.env.NODE_ENV === 'production' && secret) {
-      return new Response(JSON.stringify({ error: 'unauthorized' }), { status: 401 });
-    }
-  }
+export const POST: APIRoute = async ({ request, cookies }) => {
+  const auth = requireAdminCookie(cookies);
+  if (!auth.ok) return auth.response;
 
   const body = await request.json().catch(() => null);
   if (!body || typeof body !== 'object') {
