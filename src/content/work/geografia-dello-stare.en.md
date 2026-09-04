@@ -30,6 +30,8 @@ tags: ["data-storytelling", "adolescence", "territory", "participation", "wordpr
 
 We collected quantitative data (who visits a place, how often, at what times) and qualitative testimonies (direct, first-person quotes, unfiltered). Results come back as a **scrollable editorial platform** alternating charts, maps, and the voices of the adolescents themselves.
 
+![The Geografia dello stare editorial platform: a chart paired with a direct quote from one of the teenagers involved](/work/geografia-dello-stare/piattaforma-editoriale.png)
+
 ## What emerges
 
 The voices don't describe a place as *safe* or *unsafe* — they trace a subjective geography: some spaces are avoided for the group perceived to inhabit them, others for the time of day, others still — simply — because *"people are what makes me feel unsafe"*.
