@@ -1,87 +1,62 @@
 ---
-title: "Come abbiamo vinto la gara Susdef: Nuxt, Payload, e 33.000 contenuti da interrogare"
-description: "Fondazione Sviluppo Sostenibile ha selezionato Pianeta.Studio in una gara aperta. Abbiamo scelto Nuxt 3 + Payload CMS invece di WordPress, migrato oltre 33.000 record da vent'anni di archivio editoriale, reso l'archivio interrogabile con AI. Consegna in 12 settimane. Il percorso, le scelte tecniche, le ragioni."
+title: "Il percorso Susdef: dall'ascolto alla proposta che va oltre"
+description: "Fondazione Sviluppo Sostenibile aveva esigenze chiare e trent'anni di archivio documentale da far funzionare meglio. Siamo partiti da lì — non dalla nostra soluzione preferita. Il percorso, e cosa ha aperto."
 date: 2026-08-27
 draft: true
 locale: it
-tags: ["cms", "archivio", "nuxt", "payload-cms", "sostenibilità", "metodo", "gara"]
+tags: ["cms", "archivio", "nuxt", "payload-cms", "sostenibilità", "metodo"]
 type: bulletin
 authors: ["max"]
-readingTime: "7 min"
+readingTime: "6 min"
 category: "Metodo"
 ---
 
-**TLDR.** Fondazione Sviluppo Sostenibile ha selezionato Pianeta.Studio e Latte Creative in una gara aperta. Abbiamo proposto Nuxt 3 + Payload CMS invece di WordPress, migrato oltre 33.000 record da un archivio costruito in vent'anni, reso l'archivio interrogabile con AI. Consegna in 12 settimane, codice di proprietà del cliente. Questo è il percorso.
+**TLDR.** Fondazione Sviluppo Sostenibile aveva requisiti definiti e un archivio di trent'anni che non riusciva a valorizzare. Siamo partiti dalle loro esigenze — non dalla nostra risposta standard. Da quella conversazione è emerso uno stack diverso da quello atteso, una migrazione di oltre 33.000 contenuti, e proposte che non erano nel capitolato originale.
 
-## La selezione
+## Da dove siamo partiti
 
-La Fondazione Sviluppo Sostenibile — più nota come Susdef — coordina il Forum Nazionale per lo Sviluppo Sostenibile, produce report e documenti di policy, è uno degli attori di riferimento per la transizione ecologica italiana. Quando ha deciso di riprogettare il sito e l'archivio documentale, ha aperto una selezione competitiva.
+La Fondazione Sviluppo Sostenibile — Susdef — coordina il Forum Nazionale per lo Sviluppo Sostenibile, produce da trent'anni report, documenti di policy e materiali di ricerca che ministeri e centri di ricerca usano come riferimento. Quando ci hanno coinvolto nella selezione, avevano le idee abbastanza chiare: sito rinnovato, CMS gestibile in autonomia dal team interno senza dipendere dal fornitore per ogni modifica, accessibilità WCAG 2.1 AA (requisito contrattuale, non opzionale), hosting europeo GDPR-compliant.
 
-Abbiamo partecipato insieme a Latte Creative — co-produttori, non subfornitori anonimi — e abbiamo vinto.
+Quello che non avevano ancora risolto era l'archivio: **oltre 33.000 contenuti** costruiti in trent'anni di produzione editoriale — articoli, report, download, categorizzazioni stratificate nel tempo — difficili da trovare, difficili da connettere tra loro, difficili da tenere vivi.
 
-Non è la prima volta che entriamo in selezioni aperte in questo settore e le portiamo a casa. Fondazioni, NGO, enti di ricerca ci scelgono in competizione perché il modo in cui ci presentiamo alle gare corrisponde al modo in cui poi lavoriamo. È utile dirlo esplicitamente: in un settore dove chi gestisce il sito può creare dipendenza, bloccare migrazioni future, rendere la tecnologia un fardello invece di uno strumento, la coerenza tra proposta e metodo è la prima forma di riduzione del rischio.
+Siamo partiti da lì.
 
-## Perché Nuxt e Payload, non WordPress
+## Lo stack: non la risposta attesa, ma quella giusta
 
-Il capitolato non prescriveva tecnologia. La risposta di default per un cliente con contenuti editoriali è WordPress: è il default di settore, la prima risposta di qualsiasi agenzia che non ha un motivo solido per proporre altro.
+Il capitolato non prescriveva tecnologia. La risposta più semplice sarebbe stata WordPress: è il default del settore, riduce la frizione nella valutazione, funziona benissimo per archivi più piccoli.
 
-Avevamo un motivo solido.
+Ma guardando la scala dei dati di Susdef e la traiettoria che avevano davanti — un archivio che cresce, un team che vuole autonomia operativa, la necessità di non ritrovarsi tra tre anni con un sistema da rifare — WordPress avrebbe rimandato il problema, non risolto.
 
-L'archivio di Susdef conta **oltre 33.000 contenuti**, costruiti in più di vent'anni di produzione editoriale. Con WordPress, a quella scala, il problema non è oggi: è tra tre anni, quando la base di plugin è invecchiata, quando le performance degradano sotto carico, quando la migrazione verso qualcosa di più solido costerebbe il doppio di quello che sarebbe costato costruire bene adesso.
+Abbiamo proposto **Nuxt 3 + Payload CMS + MeiliSearch**. Non perché fosse la nostra scelta preferita in astratto: perché era la risposta ai loro vincoli concreti. Nessun vendor da cui dipendere per le licenze — Payload CMS è un framework open source con community attiva. Performance native su un dataset di questa dimensione. Codice applicativo che rimane proprietà di Susdef: possono portarlo da qualunque altro fornitore, senza che noi abbiamo leva. Nessun lock-in.
 
-Abbiamo proposto **Nuxt 3 + Payload CMS + MeiliSearch**. Payload CMS è open source come framework — codice pubblico, community attiva, nessun vendor da cui dipendere per le licenze. Il codice applicativo che abbiamo costruito per Susdef è però proprietà di Susdef: lo possono portare da un altro fornitore domani, se lo decidono. Nessun lock-in verso di noi.
+Susdef ha riconosciuto la differenza tra uno stack che regge e uno che rinvia. L'ha scelta.
 
-Nuxt 3 gestisce il frontend con performance native e tipizzazione forte. MeiliSearch gestisce la ricerca full-text sull'archivio con latenza sotto i 50ms anche su dataset di questa dimensione. WCAG 2.1 AA era un requisito del capitolato: lo abbiamo integrato nell'architettura dall'inizio, non retrofit.
+## Dall'archivio che si cerca all'archivio che risponde
 
-La proposta tecnica è stata parte della selezione. Susdef ha scelto questa strada perché capisce la differenza tra uno stack che regge e uno che rimanda il problema.
+Questo è il punto in cui il percorso è andato oltre il capitolato.
 
-## Vent'anni di archivio da migrare
+Un archivio di 33.000 contenuti che funziona sulla ricerca tradizionale — parole chiave, filtri per categoria, anno, autore — è già un valore. Ma non risolve il problema reale di chi cerca: spesso non conosce le parole esatte usate nel documento che gli serve. Sa la domanda, non il titolo.
 
-L'archivio è il cuore del progetto, non un'appendice. I documenti di Susdef — report annuali, posizioni di policy, materiali del Forum — sono usati come riferimento da ministeri, centri di ricerca, fondazioni. Renderli trovabili in modo efficace è la trasformazione centrale.
+Ascoltando le persone che usano l'archivio ogni giorno, era evidente: cercano risposte, non documenti. Abbiamo proposto di rendere l'archivio interrogabile — in grado di rispondere a domande in linguaggio naturale, non solo di filtrare per metadati. Una query come *"documenti sulla fiscalità delle rinnovabili prima del 2020"* restituisce risultati pertinenti anche quando i testi non contengono esattamente quelle parole.
 
-Il numero grezzo: **oltre 33.000 record migrati** all'handover del 16 luglio 2026.
+Questa proposta non era nel capitolato. Era emersa dall'ascolto.
 
-La migrazione di un archivio così non è un import da CSV. Ogni record porta metadati storici da pulire, relazioni tra contenuti da preservare, tag e categorizzazioni da normalizzare in uno schema coerente. La pipeline di migrazione è stata costruita come parte del progetto — non come attività postuma, non come approssimazione da rifinire in produzione.
+## Il risultato e cosa ha aperto
 
-La ricerca vettoriale integrata su MeiliSearch permette oggi di interrogare l'archivio per domande, non solo per parole chiave. Una query come "documenti sulla fiscalità delle rinnovabili prima del 2020" restituisce risultati pertinenti anche quando i testi non contengono esattamente quelle parole. È la differenza tra un archivio che si cerca e un archivio che si interroga.
+Dalla firma al go-live: **12 settimane**. Oltre 33.000 record migrati con metadati puliti, relazioni preservate, categorizzazioni normalizzate. Formazione al team interno inclusa. Handover documentato.
 
-## Dodici settimane
+Susdef ha ora un archivio che il loro team gestisce in autonomia, su uno stack senza scadenze di licenza, con il codice applicativo interamente di loro proprietà.
 
-Dalla firma al go-live: **12 settimane**. Handover documentato. Formazione al team interno inclusa.
+La parte più interessante, per noi, è quello che questo percorso ha aperto. Lavorare con un archivio di questa scala ha fatto emergere possibilità che non erano visibili all'inizio — e alcune si sono trasformate in proposte concrete per sviluppi successivi. Non erano nel contratto originale. Sono nate dall'ascolto di cosa serviva davvero, una volta che il sistema funzionava.
 
-Questo dettaglio non è un vanto di efficienza operativa. È rilevante per chi sta valutando un fornitore per un progetto con vincoli di calendario reali — spesso contrattuali, nel caso di fondazioni con finanziamenti co-progettati. Rispettare una scadenza dichiarata, con tutto quello che comporta su migrazione, test, accessibilità e formazione, è una prova di metodo, non di velocità.
-
-Lo stack scelto aiuta: niente black box, niente plugin critici di terze parti che si aggiornano in modo incontrollato, niente personalizzazioni che diventano debito tecnico al primo aggiornamento. L'hosting è europeo e GDPR-compliant per requisito, non per opzione.
-
-## Cosa resta a Susdef
-
-- **Il codice applicativo, per intero** — proprietà del cliente, consegnato con la documentazione tecnica dell'architettura. Possono portarlo da un altro fornitore senza che noi abbiamo leva.
-- **Un team interno formato**, in grado di gestire contenuti, aggiornare categorie e caricare documenti in autonomia senza dipendere da noi per ogni modifica.
-- **Uno stack che non invecchia per licenza** — Payload CMS e Nuxt sono framework open source con community attive. Non c'è un vendor che può cambiare i termini unilateralmente.
-- **WCAG 2.1 AA e hosting GDPR-compliant** come caratteristiche strutturali, non come certificazioni da rinnovare.
-
-Il sistema che abbiamo costruito non dipende da noi per funzionare. Dipende da noi se vogliono continuare a migliorarlo — ma quella è una scelta che Susdef può fare liberamente, con qualsiasi fornitore.
-
-## FAQ
-
-**Possiamo applicare lo stesso approccio a un archivio più piccolo?**
-Sì. La pipeline di migrazione e l'architettura Nuxt + Payload scalano verso il basso. I principi — ricerca semantica, codice consegnato, nessun lock-in — restano gli stessi. Il costo si riduce proporzionalmente alla complessità.
-
-**Lavorare con voi richiede di passare per Latte Creative?**
-No. Susdef è una co-produzione con Latte Creative, che ha curato la direction creativa e la relazione con il cliente sul piano del design. Lavoriamo anche direttamente con fondazioni e centri di ricerca su mandati propri.
-
-**Quanto tempo richiede la partecipazione a una selezione del genere?**
-La nostra parte — proposta tecnica, preventivo, eventuali incontri di chiarimento — è tipicamente una settimana. I tempi della selezione dipendono dal cliente.
-
-**Ci sono soglie di budget?**
-Non pubblichiamo tariffe. La risposta onesta è che un progetto con migrazione di archivio di questa complessità richiede un investimento che vale la pena discutere prima di scrivere il capitolato, non dopo. Scriveteci prima.
+Non sempre il lavoro più interessante è quello che si vede nel capitolato.
 
 ## Vedi anche
 
-→ Case study Susdef completo — in arrivo con il lancio del sito
+→ Case study Susdef — in arrivo
 
 ## Parlane con noi
 
-Se stai preparando una selezione per un progetto simile — sito editoriale, archivio documentale, CMS con requisiti di accessibilità e GDPR — scrivici prima di chiudere il capitolato.
+Se hai un archivio documentale che non riesce a valorizzare quello che contiene — per dimensione, complessità, o uno stack che è diventato un ostacolo — scrivici prima di scrivere il capitolato.
 
 **[max@pianeta.studio](mailto:max@pianeta.studio)**
