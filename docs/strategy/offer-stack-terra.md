@@ -78,7 +78,7 @@ Un add-on che si aggiunge al core di Terra per portare capacità AI generativa s
 **Cosa NON è (confini del modulo)**:
 - Non è un prodotto standalone con target separato da Terra
 - Non è un chatbot generale — è specifico sull'archivio documentale del cliente
-- **Il core Terra (Nuxt+Payload+MeiliSearch) è self-hosted**: server europei, GDPR — dati non escono dalla giurisdizione del cliente. **⚠️ Il layer AI generativo (modulo DocumentAI) è probabile che usi API esterne** (OpenAI, Anthropic o altro provider): Max ha risposto "api esterne credo" — risposta con incertezza esplicita, non una conferma ferma. Se usa API esterne, documenti o estratti passano da un provider terzo. Non usare la claim "zero data fuori dalla giurisdizione" per il modulo DocumentAI finché non è confermato. Vedi sezione 5, Gap A.
+- **Il core Terra (Nuxt+Payload+MeiliSearch) è self-hosted**: server europei, GDPR — dati non escono dalla giurisdizione del cliente. **Il layer AI generativo (modulo DocumentAI) usa API esterne** (provider non ancora nominato — confermato da Max, 2026-09-04): documenti o estratti passano da un provider terzo. Non usare la claim "zero data fuori dalla giurisdizione" per il modulo DocumentAI. Il provider specifico è da nominare se/quando serve per il DPA.
 
 ---
 
@@ -128,7 +128,7 @@ Fondazione medio-piccola (staff 10-50), missione scientifica o ambientale, con 1
 
 **Canale primario**: sezione tecnica del case study + scheda tecnica nella landing (non il Bulletin — non è il suo linguaggio)
 
-> **⚠️ Gap aperto per Persona B — layer AI**: se il modulo DocumentAI usa API esterne, l'argomento "zero data fuori dalla giurisdizione" non vale per le funzionalità AI. Non usare questa claim per il modulo DocumentAI finché non è confermato il provider e dove elabora i dati. (Vedi sezione 5, Gap A.)
+> **Nota GDPR — layer AI (confermato, 2026-09-04)**: il modulo DocumentAI usa API esterne (provider da nominare per eventuale DPA). L'argomento "zero data fuori dalla giurisdizione" vale per il core Terra, **non** per le funzionalità AI del modulo DocumentAI — documenti o estratti passano da un provider terzo. Non usare la claim GDPR onnicomprensiva in contenuti rivolti a Persona B senza questa qualifica.
 
 ---
 
@@ -227,42 +227,26 @@ Prima di passare queste priorità a MUSE come issue, serve conferma su:
 
 ---
 
-### Gap A — Layer AI del modulo DocumentAI: API esterne o self-hosted? *(probabile, non confermato)*
+### ~~Gap A — Layer AI del modulo DocumentAI: API esterne o self-hosted?~~ **Risolto (2026-09-04)**
 
-**Stato**: probabile API esterne — da confermare (PIA-1313, 2026-08-28)
+**API esterne: confermato** (Max, 2026-09-04 — conferma ferma, non più "credo"). Provider specifico non ancora nominato — da richiedere in follow-up mirato se necessario per DPA/contratto.
 
-Max ha risposto "api esterne credo" — risposta con incertezza esplicita, non una conferma ferma. Non aggiornare a "confermato: API esterne" finché non arriva una risposta netta.
-
-**Implicazione per Persona B**: se il layer AI usa API esterne (es. OpenAI, Anthropic o altro provider), i documenti o estratti di essi passano da un provider terzo — non è self-hosted end-to-end. Per chi valuta compliance GDPR, questo è un dettaglio decisivo e non equivalente a una soluzione completamente self-hosted. Non usare la claim "zero data fuori dalla giurisdizione" per il modulo DocumentAI in contenuti rivolti a Persona B finché non è confermato.
-
-**Azione richiesta**: Max conferma quale provider AI viene usato nel modulo DocumentAI, dove elabora i dati (server EU o US?), e se esiste un'alternativa self-hosted (es. modello locale, Ollama, etc.). Solo dopo si aggiorna la descrizione di Persona B e la sezione 1.5.
+**Implicazione GDPR per Persona B**: documenti o estratti passano da un provider terzo. La claim "zero data fuori dalla giurisdizione" vale per il core Terra, non per il modulo DocumentAI. Qualifica aggiornata in sezione 1.5 e nella nota Persona B.
 
 ---
 
-### Gap B — Capacità AI live su Susdef: quali funzionalità sono attive in produzione?
+### ~~Gap B — Capacità AI live su Susdef: quali funzionalità sono attive in produzione?~~ **Risolto (2026-09-04)**
 
-**Stato**: aperto — nessuna risposta ricevuta (PIA-1313, 2026-08-28)
-
-Il case study e la sezione 1.5 affermano che Susdef usa Terra con il modulo DocumentAI in produzione: ingestione AI, abstract automatici, ricerca semantica. Non è verificato se tutte e tre le capacità sono attive live, o solo alcune. Se una o più non sono ancora attive, l'affermazione va circoscritta ai fatti reali — MUSE non può scrivere claim su funzionalità non verificate in produzione.
-
-**Azione richiesta**: Max conferma quali funzionalità DocumentAI (ingestione AI / abstract automatici / ricerca semantica) sono effettivamente attive su https://susdef.pianeta.green in produzione.
+**Tutto live e funzionante** su https://susdef.pianeta.green (Max, 2026-09-04): ingestione AI, abstract automatici e ricerca semantica sono tutte attive in produzione, nessuna limitazione. Il case study e la sezione 1.5 possono affermare il pacchetto completo senza riserve.
 
 ---
 
-### Gap C — Pricing modulo DocumentAI: come si struttura il costo?
+### ~~Gap C — Pricing modulo DocumentAI: come si struttura il costo?~~ **Risolto (2026-09-04)**
 
-**Stato**: aperto — nessuna risposta ricevuta (PIA-1313, 2026-08-28)
-
-La sezione 1.5 dice che il modulo si acquista come add-on nel pacchetto Terra. Non è specificato come si prezza in pratica. Senza questa informazione non si può costruire una CTA concreta per il case study o la landing.
-
-**Azione richiesta**: add-on a forfait? Tariffa a consumo (es. per documento ingerito o per chiamata API)? Solo su preventivo? Max conferma.
+**Solo su preventivo**, caso per caso (Max, 2026-09-04). Nessun canone fisso pubblicato, nessuna tariffa a consumo standard. La landing e il case study non devono esporre un prezzo — CTA: "contattaci per un preventivo".
 
 ---
 
-### Gap D — Modulo DocumentAI: già menzionato su pianeta.green?
+### ~~Gap D — Modulo DocumentAI: già menzionato su pianeta.green?~~ **Risolto (2026-09-04)**
 
-**Stato**: aperto — nessuna risposta ricevuta (PIA-1313, 2026-08-28)
-
-Verificare se il modulo DocumentAI è già descritto su https://pianeta.green e come. Se sì, la comunicazione nel case study e nella landing deve essere coerente con quanto già pubblico — evitare contraddizioni o doppi messaggi.
-
-**Azione richiesta**: Max conferma se e come DocumentAI è già descritto su pianeta.green, con eventuale link alla sezione.
+**Non ancora descritto su pianeta.green** (Max, 2026-09-04) — nessun rischio di messaggio contraddittorio. Un task per scriverlo è probabile in arrivo come issue separata.
