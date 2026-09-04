@@ -12,6 +12,14 @@ export default defineConfig({
   site: 'https://xp.pianeta.studio',
   output: 'server',
   adapter: vercel(),
+  security: {
+    // Il controllo Origin automatico di Astro blocca ogni POST form-encoded
+    // come "cross-site" su questo deployment Vercel (bug di compatibilità
+    // adapter/proxy: url.origin calcolato da Astro non combacia mai con
+    // l'Origin header reale, anche per richieste realmente same-origin) —
+    // rompeva sia /admin/login che /api/newsletter/subscribe in produzione.
+    checkOrigin: false,
+  },
   integrations: [
     vue(),
     tailwind(),
