@@ -1,7 +1,16 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
 ---
 <BaseLayout title="Nuova campagna — Admin" description="Brief intake nuova campagna" minimal={false}>
+  <AdminNav current="campaigns" />
   <div class="index-page" style="max-width:720px;">
     <header class="index-head">
       <p class="index-eyebrow">Admin · Campagne</p>

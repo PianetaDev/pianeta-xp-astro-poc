@@ -1,0 +1,73 @@
+---
+interface Props {
+  current: 'leads' | 'campaigns' | 'content';
+}
+
+const { current } = Astro.props;
+
+const LINKS = [
+  { key: 'leads', href: '/admin/leads', label: 'Leads' },
+  { key: 'campaigns', href: '/admin/campaigns', label: 'Campagne' },
+  { key: 'content', href: '/admin/content', label: 'Contenuti' },
+] as const;
+---
+<nav class="admin-nav">
+  <div class="admin-nav-links">
+    {LINKS.map((link) => (
+      <a
+        href={link.href}
+        class="admin-nav-link"
+        aria-current={link.key === current ? 'page' : undefined}
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+  <a href="/api/admin/logout" class="admin-nav-logout">Esci</a>
+</nav>
+
+<style>
+  .admin-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 1240px;
+    margin: 0 auto 32px;
+    padding: 0 24px;
+    flex-wrap: wrap;
+  }
+  .admin-nav-links {
+    display: flex;
+    gap: 4px;
+  }
+  .admin-nav-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pianeta-muted-strong);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+  }
+  .admin-nav-link:hover {
+    color: var(--pianeta-text);
+    background: var(--pianeta-bg-card);
+  }
+  .admin-nav-link[aria-current='page'] {
+    color: #fff;
+    background: var(--cta-primary);
+  }
+  .admin-nav-logout {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pianeta-muted-strong);
+    text-decoration: none;
+    border: 1px solid var(--pianeta-border);
+    padding: 7px 14px;
+    border-radius: 999px;
+  }
+  .admin-nav-logout:hover {
+    border-color: var(--cta-primary);
+    color: var(--cta-primary);
+  }
+</style>

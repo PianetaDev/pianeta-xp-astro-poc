@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
 import LeadsBoard from '../../../components/vue/admin/LeadsBoard.vue';
 import { isAdminAuthed } from '../../../lib/server/admin-session';
 import { supabaseService } from '../../../lib/server/supabase';
@@ -45,6 +46,7 @@ try {
 ---
 
 <BaseLayout title="Admin · Leads" description="Gestione prospect commerciali" minimal={true} chrome={false}>
+  <AdminNav current="leads" />
   <main class="leads-admin">
     <header class="leads-admin-head">
       <p class="leads-admin-eyebrow">Admin · Interno</p>
@@ -52,7 +54,6 @@ try {
       <p class="leads-admin-deck">
         Prospect commerciali generati da GreenMachine e dagli altri canali. Cambia lo status man mano che avanzano.
       </p>
-      <a href="/api/admin/logout" class="leads-admin-logout">Esci</a>
     </header>
 
     {fetchError && (
@@ -94,22 +95,6 @@ try {
       font-size: 14px;
       color: var(--pianeta-muted);
     }
-    .leads-admin-logout {
-      position: absolute;
-      top: 4px;
-      right: 0;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--pianeta-muted-strong);
-      text-decoration: none;
-      border: 1px solid var(--pianeta-border);
-      padding: 7px 14px;
-      border-radius: 999px;
-    }
-    .leads-admin-logout:hover {
-      border-color: var(--cta-primary);
-      color: var(--cta-primary);
-    }
     .leads-admin-error {
       padding: 16px 20px;
       background: #fff3cd;
@@ -118,9 +103,6 @@ try {
       margin-bottom: 24px;
       font-size: 13px;
       color: #856404;
-    }
-    @media (max-width: 640px) {
-      .leads-admin-logout { position: static; display: inline-block; margin-top: 14px; }
     }
   </style>
 </BaseLayout>
