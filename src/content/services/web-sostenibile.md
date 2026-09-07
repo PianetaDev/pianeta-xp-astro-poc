@@ -36,4 +36,8 @@ Audit performance esistente + design system + build con budget verificabili in C
 
 ## Cosa ottiene il cliente
 
-Un sito che pesa meno, gira veloce, emette meno CO₂ a visita. Numeri tracciabili in dashboard, niente "ipse dixit".
+Un sito web medio produce 1,76g di CO₂ per visita. I nostri siti producono il 70% in meno — non per una singola ottimizzazione, ma per come è costruito il sistema.
+
+Ogni progetto ha un **performance budget e un carbon budget** definiti a monte, misurabili e rendicontabili esattamente come il budget economico. Non sono obiettivi aspirazionali: sono vincoli verificati ad ogni deploy, con CI integrata.
+
+Il codice e lo schema dati sono vostri. Un altro dev può subentrare con un HANDOFF.md chiaro. Nessun lock-in verso di noi — né tecnico né contrattuale.
