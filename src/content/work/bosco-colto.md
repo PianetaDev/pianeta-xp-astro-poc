@@ -48,6 +48,16 @@ Proprio come nel 2025, nel 2026 torniamo a Caltagirone per documentare l'evento.
 
 I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Portiamo il nostro **Starlink** per garantire connessione ai workshop e al team. Ci muoviamo con il **furgone ETPS BYD elettrico** e lo **scooter Askol XKP80** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
 
+## Il Train Kiln — una storia che abbiamo seguito con cura
+
+Una delle storie più significative di BC26 è il **Train Kiln** — il forno a legna per ceramica inaugurato il 1° agosto dietro l'ex chiesa del Borgo di Santo Pietro.
+
+Non è opera nostra: è stato costruito dagli artisti **Domenico Mangano e Marieke van Rooy**, con il contributo tecnico del Prof. **Ted Neal** (Ball State University, Indiana — tra i maggiori esperti mondiali di forni a legna) e del Prof. **Michał Puszczyński** (Accademia di Breslavia, membro dell'International Academy of Ceramics).
+
+È il **secondo Train Kiln costruito in Italia** e la **prima infrastruttura permanente di Casa Bosco Colto**. Il forno può raggiungere temperature fino a **1.350°C**, e la sua costruzione recupera un legame storico: per secoli il Bosco di Santo Pietro aveva alimentato i forni di Caltagirone, rendendo celebre la tradizione ceramica della città. Il Train Kiln riporta la cottura dentro il bosco.
+
+Documentare la sua costruzione, la sua inaugurazione, il suo significato — è parte del lavoro editoriale che il nostro team ha fatto durante il campus.
+
 ## Il team
 
 Siamo arrivati con conoscenze e persone per gestire un team autonomo.

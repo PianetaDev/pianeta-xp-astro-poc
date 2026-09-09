@@ -48,6 +48,16 @@ Just as in 2025, in 2026 we return to Caltagirone to document the event. Not jus
 
 The Boschi di Santo Pietro are in a remote area with limited connectivity. We bring our **Starlink** to ensure connection for the workshops and team. We move with an **ETPS BYD electric van** and an **Askol XKP80 scooter** — a way of being present on the ground with a footprint consistent with the project we support.
 
+## The Train Kiln — a story we followed with care
+
+One of the most significant stories of BC26 is the **Train Kiln** — the wood-fire kiln inaugurated on 1 August behind the old church of the Borgo di Santo Pietro.
+
+It is not our work: it was built by artists **Domenico Mangano and Marieke van Rooy**, with the technical guidance of Prof. **Ted Neal** (Ball State University, Indiana — among the world's leading experts in wood-fired kilns) and Prof. **Michał Puszczyński** (Academy of Art and Design in Wrocław, member of the International Academy of Ceramics).
+
+It is the **second Train Kiln built in Italy** and the **first permanent infrastructure of Casa Bosco Colto**. The kiln can reach temperatures of up to **1,350°C**, and its construction recovers a historical bond: for centuries the Bosco di Santo Pietro fed the kilns of Caltagirone, making the city's ceramic tradition renowned. The Train Kiln brings firing back into the forest.
+
+Documenting its construction, its inauguration, its meaning — that is part of the editorial work our team did during the campus.
+
 ## The team
 
 We arrived with knowledge and people to run an independent team.
