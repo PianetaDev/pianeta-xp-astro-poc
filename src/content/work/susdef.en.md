@@ -1,6 +1,6 @@
 ---
 title: "A new platform for Susdef"
-description: "We designed and built the new digital platform for Fondazione Sviluppo Sostenibile: editorial site, 33,000+ document archive, full-text search and a generative AI layer. 12 weeks. Live since 16 July 2026."
+description: "We designed the new platform for Fondazione Sviluppo Sostenibile: research, UX, and accessibility for an archive of 33,000+ documents. Live since 16 July 2026."
 client: "Fondazione Sviluppo Sostenibile (Susdef)"
 category: "Platform"
 year: 2026
@@ -14,94 +14,80 @@ links:
 locale: en
 draft: true
 type: work
-tags: ["cms", "archive", "nuxt", "payload-cms", "meilisearch", "accessibility", "sustainability", "foundations"]
+tags: ["ux", "accessibility", "archive", "foundations", "sustainability", "wcag"]
 tour:
   enabled: true
   chapters:
     - title: "The project"
       key_facts:
         - "Fondazione Sviluppo Sostenibile coordinates Italy's National Forum for Sustainable Development"
-        - "New editorial platform + twenty-year document archive"
+        - "New platform for a twenty-year archive of 33,000+ documents"
         - "Co-produced with Latte Creative"
-    - title: "Stack and migration"
+    - title: "Research and UX"
       key_facts:
-        - "Nuxt 3 + Payload CMS + MeiliSearch"
-        - "33,000+ records migrated"
-        - "WCAG 2.1 AA · EU servers · GDPR"
+        - "Users looking for answers, not just documents"
+        - "WCAG 2.1 AA as a design decision, integrated from the start"
+        - "Internal team training for post-launch autonomy"
     - title: "The result"
       key_facts:
         - "12 weeks from contract to go-live"
         - "Live at susdef.pianeta.green since 16 July 2026"
-        - "DocumentAI module: semantic search, AI-generated abstracts, automated ingestion"
+        - "The team manages content and archive independently"
 ---
 
-**TLDR.** We designed and built the new digital platform for Fondazione Sviluppo Sostenibile (Susdef): editorial site, a **33,000+ record** document archive built over twenty years, and a generative AI layer for querying the archive in natural language. **12 weeks · WCAG 2.1 AA · live at [susdef.pianeta.green](https://susdef.pianeta.green) since 16 July 2026.**
+**TLDR.** We designed the new digital platform for Fondazione Sviluppo Sostenibile (Susdef): an editorial site and an archive of **33,000+ documents** that Susdef's team manages independently. WCAG 2.1 AA accessibility integrated into the architecture from the start. **12 weeks · live at [susdef.pianeta.green](https://susdef.pianeta.green) since 16 July 2026.**
 
 ## The project
 
-Fondazione Sviluppo Sostenibile coordinates Italy's National Forum for Sustainable Development — one of the key actors in the Italian ecological transition. It produces policy reports, research documents, and Forum proceedings: years of editorial output that the old site could no longer manage or make accessible.
+Fondazione Sviluppo Sostenibile coordinates Italy's National Forum for Sustainable Development — one of the key actors in the Italian ecological transition. It has produced policy reports, research documents, and Forum proceedings for over twenty years. Thirty-two thousand documents built up over time, which the previous site could no longer make accessible.
 
 When Susdef opened a competitive selection to redesign the platform, we entered alongside Latte Creative — as co-producers, not as a subcontractor. We won the selection and delivered in 12 weeks.
 
 **Partner agency**: Latte Creative (creative direction and client relationship on the design side).
 
-## The stack
+## Who searches, and what they're really looking for
 
-The brief did not prescribe technology. The default answer for an editorial client is WordPress. We had a solid reason to propose something different.
+The problem was not technological: it was one of understanding. People who use an archive like Susdef's are not looking for "a document" — they are looking for an answer. A journalist needs the report on renewable energy taxation before 2020. A ministry official needs Susdef's position on a specific topic for a parliamentary hearing. A researcher wants to know whether Susdef has already written something on the subject they are about to tackle.
 
-We chose **Nuxt 3 (SSG) + Payload CMS + MeiliSearch**:
+Starting from this distinction — answer vs document — changed how we designed the search, the content structure, and the archive navigation.
 
-- **Payload CMS** — editorial management with live preview, native TypeScript, no plugin ecosystem to maintain. The application code is Susdef's property, delivered in full. No lock-in to us.
-- **MeiliSearch** — full-text search across the archive with sub-50ms latency even at that scale, configurable relevance.
-- **Nuxt 3 (SSG)** — performant, typed frontend with automatic asset optimisation.
-- **WCAG 2.1 AA** — a brief requirement, integrated into the architecture from the start, not bolted on afterwards.
-- **European hosting, GDPR-compliant** — servers in Europe, data under the client's jurisdiction.
+## Accessibility as a design decision
 
-## The migration
+The brief required WCAG 2.1 AA. The way you respond to that requirement is the difference between a constraint and a principle.
 
-The archive is the heart of the project: twenty years of annual reports, policy positions, and Forum materials — to be migrated, cleaned, and normalised into a coherent schema.
+We integrated accessibility into the architecture from the start — in the component hierarchy, typographic choices, and the semantic structure of pages — not as a layer added afterwards on top of a finished design. This means accessibility constraints informed design decisions rather than contradicting them. The result is a platform that is accessible because it is well designed, not in spite of its constraints.
 
-The number: **over 33,000 records migrated** at the handover on 16 July 2026.
+## The process with the client
 
-The migration pipeline was built as part of the project, not as an afterthought. Each record carries historical metadata to preserve and content relationships to maintain. The result is a structured archive built to last.
+Twelve weeks is a short time for a project of this complexity. It holds when there is clarity on what is being built and for whom.
 
-## The DocumentAI module
+We worked alongside Latte Creative on the creative direction and alongside Susdef's team to understand the real editorial workflows: who updates what, at what frequency, with what level of technical autonomy. This shaped content management decisions as much as the brief requirements did.
 
-Susdef uses the platform in its full configuration: alongside the core CMS and search, the **DocumentAI module** is live — the generative AI layer on top of the archive:
+Training the internal team is part of the project, not an appendix: Susdef's team manages the archive independently — uploading documents, updating categories, publishing new content — without depending on us for day-to-day operations.
 
-- **AI ingestion** — automated processing of PDFs and publications, structured extraction of content and metadata
-- **Automatic abstracts** — AI-generated summaries for each document, no manual editorial effort
-- **Semantic search** — query the archive in natural language, not just exact keyword matches
+## The result
 
-The module uses external AI provider APIs. The "zero data outside jurisdiction" claim applies to the core platform (European hosting, client data), not to the generative AI layer.
-
-## Three numbers
-
-**33,000+** records migrated &nbsp;·&nbsp; **12** weeks from contract to go-live &nbsp;·&nbsp; **WCAG 2.1 AA** verified
-
-## What Susdef keeps
-
-- **The full application codebase** — client's property, with technical architecture documentation. They can take it to another vendor without us having any leverage.
-- **A trained internal team** — capable of managing content, updating categories, and uploading documents independently.
-- **A stack with no licence lock-in** — Payload CMS and Nuxt are open-source frameworks with active communities. No vendor can unilaterally change the terms.
+**33,000+** documents in the archive &nbsp;·&nbsp; **12** weeks from contract to go-live &nbsp;·&nbsp; **WCAG 2.1 AA** verified &nbsp;·&nbsp; autonomous team from launch day
 
 ## Read more
 
-→ [How we won the Susdef pitch: Nuxt, Payload, and 33,000 records to search](/bulletin/percorso-susdef)
+The detail of the journey — the pitch, the technical choices, the data migration — lives in the bulletins:
+
+→ [How we won the Susdef pitch: method and process](/bulletin/percorso-susdef)
 
 ## FAQ
 
-**Do you only use this stack for large archives?**
-No. Nuxt + Payload + MeiliSearch scales in both directions. The principles — full-text search, code delivered in full, no lock-in — hold for smaller archives too. The cost scales down proportionally with complexity.
+**How do you reconcile WCAG 2.1 AA with design?**
+By integrating accessibility constraints from the beginning, not at the end. When accessibility is a sticky note on an already-completed design, it becomes a list of corrections. When it is part of the initial design decisions, it becomes a quality criterion like typography or visual hierarchy.
+
+**Was Susdef's team already equipped to manage a platform of this complexity?**
+The platform was designed for the team that uses it, not for an ideal team. The editorial interface, the publishing workflows, and the exit training were calibrated to Susdef's team's actual skills — not an imaginary technical user.
 
 **Does working with you require going through Latte Creative?**
-No. Susdef was a co-production with Latte Creative, who led the creative direction. We also work directly with foundations and research organisations on their own mandates.
+No. Susdef was a co-production with Latte Creative, who led the creative direction and client relationship on design. We also work directly with foundations and research organisations on their own mandates.
 
-**What happens if your studio closes?**
-The code is the client's property, delivered in full with technical documentation. The platform runs independently of us — there is no Pianeta.Studio-managed service that needs to stay active for the site to work.
-
-**Is the DocumentAI module available as a standalone service?**
-It is an add-on to the Terra platform, not a standalone product. It is evaluated case by case, on a custom quote, for organisations with archives similar to Susdef.
+**Does this approach work for smaller archives too?**
+Yes. The principles — understanding who is searching and for what, integrated accessibility, client team autonomy — hold regardless of scale. Costs scale with complexity, not the principles.
 
 ## For a similar project
 

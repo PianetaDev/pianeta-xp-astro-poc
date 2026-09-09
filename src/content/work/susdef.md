@@ -1,6 +1,6 @@
 ---
 title: "Una nuova piattaforma per Susdef"
-description: "Abbiamo progettato e sviluppato la nuova piattaforma di Fondazione Sviluppo Sostenibile: sito editoriale, archivio documentale di 33.000+ record, ricerca full-text e layer AI generativo. 12 settimane. Live dal 16 luglio 2026."
+description: "Abbiamo progettato la nuova piattaforma di Fondazione Sviluppo Sostenibile: ricerca, UX e accessibilità per un archivio di 33.000+ documenti. Live dal 16 luglio 2026."
 client: "Fondazione Sviluppo Sostenibile (Susdef)"
 category: "Platform"
 year: 2026
@@ -14,94 +14,80 @@ links:
 locale: it
 draft: true
 type: work
-tags: ["cms", "archivio", "nuxt", "payload-cms", "meilisearch", "accessibilità", "sostenibilità", "fondazioni"]
+tags: ["ux", "accessibilità", "archivio", "fondazioni", "sostenibilità", "wcag"]
 tour:
   enabled: true
   chapters:
     - title: "Il progetto"
       key_facts:
         - "Fondazione Sviluppo Sostenibile coordina il Forum Nazionale per lo Sviluppo Sostenibile"
-        - "Nuova piattaforma editoriale + archivio documentale ventennale"
+        - "Nuova piattaforma per un archivio ventennale di 33.000+ documenti"
         - "Co-produzione con Latte Creative"
-    - title: "Stack e migrazione"
+    - title: "Ricerca e UX"
       key_facts:
-        - "Nuxt 3 + Payload CMS + MeiliSearch"
-        - "33.000+ record migrati"
-        - "WCAG 2.1 AA · server europei · GDPR"
+        - "Utenti che cercano risposte, non solo documenti"
+        - "WCAG 2.1 AA come scelta progettuale, integrata dall'inizio"
+        - "Formazione del team interno per autonomia post-lancio"
     - title: "Il risultato"
       key_facts:
         - "12 settimane dalla firma al go-live"
         - "Live su susdef.pianeta.green dal 16 luglio 2026"
-        - "Modulo DocumentAI: ricerca semantica, abstract automatici, ingestione AI"
+        - "Il team gestisce in autonomia contenuti e archivio"
 ---
 
-**TLDR.** Abbiamo progettato e sviluppato la nuova piattaforma digitale di Fondazione Sviluppo Sostenibile (Susdef): sito editoriale, archivio documentale di **33.000+ record** costruito in vent'anni, e un layer AI generativo per interrogare l'archivio in linguaggio naturale. **12 settimane · WCAG 2.1 AA · live su [susdef.pianeta.green](https://susdef.pianeta.green) dal 16 luglio 2026.**
+**TLDR.** Abbiamo progettato la nuova piattaforma digitale di Fondazione Sviluppo Sostenibile (Susdef): un sito editoriale e un archivio di **33.000+ documenti** che il team di Susdef gestisce in autonomia. Accessibilità WCAG 2.1 AA integrata nell'architettura dall'inizio. **12 settimane · live su [susdef.pianeta.green](https://susdef.pianeta.green) dal 16 luglio 2026.**
 
 ## Il progetto
 
-Fondazione Sviluppo Sostenibile coordina il Forum Nazionale per lo Sviluppo Sostenibile — uno degli attori di riferimento per la transizione ecologica italiana. Produce report di policy, documenti di ricerca, atti del Forum: anni di produzione editoriale che il vecchio sito non riusciva più a gestire né a rendere accessibile.
+Fondazione Sviluppo Sostenibile coordina il Forum Nazionale per lo Sviluppo Sostenibile — uno degli attori di riferimento per la transizione ecologica italiana. Produce report di policy, documenti di ricerca, atti del Forum da oltre vent'anni. Trentaduemila documenti costruiti nel tempo, che il sito precedente non riusciva più a rendere accessibili.
 
-Quando Susdef ha aperto la selezione per riprogettare la piattaforma digitale, abbiamo partecipato insieme a Latte Creative — co-produttori, non subfornitori. Abbiamo vinto la selezione e consegnato in 12 settimane.
+Quando Susdef ha aperto la selezione per riprogettare la piattaforma, abbiamo partecipato insieme a Latte Creative — co-produttori, non subfornitori. Abbiamo vinto la selezione e consegnato in 12 settimane.
 
 **Agenzia partner**: Latte Creative (direction creativa e relazione cliente sul piano del design).
 
-## Lo stack
+## Chi cerca, e cosa cerca davvero
 
-Il capitolato non prescriveva tecnologia. La risposta di default per un cliente editoriale è WordPress. Avevamo un motivo solido per proporre altro.
+Il problema non era tecnologico: era di comprensione. Chi usa un archivio come quello di Susdef non cerca "un documento" — cerca una risposta. Il giornalista ha bisogno del rapporto sulla fiscalità delle rinnovabili prima del 2020. Il funzionario ministeriale cerca la posizione di Susdef su un tema specifico per un'audizione. Il ricercatore vuole sapere se Susdef ha già scritto qualcosa sull'argomento che sta affrontando.
 
-Abbiamo scelto **Nuxt 3 (SSG) + Payload CMS + MeiliSearch**:
+Partire da questa distinzione — risposta vs documento — ha cambiato il modo in cui abbiamo progettato la ricerca, la struttura dei contenuti e la navigazione dell'archivio.
 
-- **Payload CMS** — gestione editoriale con live preview, TypeScript nativo, nessun ecosistema di plugin da manutenere. Il codice applicativo è proprietà di Susdef, consegnato integralmente. Nessun lock-in verso di noi.
-- **MeiliSearch** — ricerca full-text sull'archivio con latenza sotto i 50ms anche a quella scala, rilevanza configurabile.
-- **Nuxt 3 (SSG)** — frontend performante e tipizzato, ottimizzazione automatica degli asset.
-- **WCAG 2.1 AA** — requisito del capitolato, integrato nell'architettura dall'inizio, non aggiunto a posteriori.
-- **Hosting europeo, GDPR-compliant** — server in Europa, dati sotto la giurisdizione del cliente.
+## Accessibilità come scelta progettuale
 
-## La migrazione
+Il capitolato richiedeva WCAG 2.1 AA. Il modo in cui si risponde a questo requisito è la differenza tra un vincolo e un principio.
 
-L'archivio è il cuore del progetto: vent'anni di report annuali, posizioni di policy, materiali del Forum — da migrare, pulire e normalizzare in uno schema coerente.
+Abbiamo integrato l'accessibilità nell'architettura dall'inizio — nella gerarchia dei componenti, nelle scelte tipografiche, nella struttura semantica delle pagine — non come layer aggiunto a posteriori su un design già fatto. Questo significa che i vincoli di accessibilità hanno informato le decisioni progettuali anziché contraddirle. Il risultato è una piattaforma che è accessibile perché è progettata bene, non nonostante i vincoli.
 
-Il numero: **oltre 33.000 record migrati** all'handover del 16 luglio 2026.
+## Il percorso con il cliente
 
-La pipeline di migrazione è stata costruita come parte del progetto, non come attività postuma. Ogni record porta metadati storici da preservare e relazioni tra contenuti da mantenere. Il risultato è un archivio strutturato che reggera nel tempo.
+Dodici settimane sono un tempo breve per un progetto di questa complessità. Reggono quando c'è chiarezza su cosa si sta costruendo e per chi.
 
-## Il modulo DocumentAI
+Abbiamo lavorato fianco a fianco con Latte Creative sulla direction creativa e con il team di Susdef per capire i flussi redazionali reali: chi aggiorna cosa, con quale frequenza, con quale livello di autonomia tecnica. Questo ha orientato le scelte di gestione dei contenuti tanto quanto i requisiti del capitolato.
 
-Susdef usa la piattaforma nella versione completa: oltre al core CMS + ricerca, è attivo il **modulo DocumentAI** — il layer AI generativo sull'archivio:
+La formazione al team interno è parte del progetto, non un'appendice: il team di Susdef gestisce l'archivio in autonomia — carica documenti, aggiorna categorie, pubblica nuovi contenuti — senza dipendere da noi per le operazioni ordinarie.
 
-- **Ingestione AI** — elaborazione automatica di PDF e pubblicazioni, estrazione strutturata di contenuto e metadati
-- **Abstract automatici** — sintesi generate per ogni documento senza intervento redazionale
-- **Ricerca semantica** — interrogazione dell'archivio in linguaggio naturale, non solo per parole chiave esatte
+## Il risultato
 
-Il modulo usa API di provider AI esterni. La claim "zero data fuori dalla giurisdizione" vale per il core della piattaforma (hosting europeo, dati del cliente), non per il layer AI generativo.
+**33.000+** documenti nell'archivio &nbsp;·&nbsp; **12** settimane dalla firma al go-live &nbsp;·&nbsp; **WCAG 2.1 AA** verificato &nbsp;·&nbsp; team autonomo dal giorno del lancio
 
-## Tre numeri
+## Approfondimenti
 
-**33.000+** record migrati &nbsp;·&nbsp; **12** settimane dalla firma al go-live &nbsp;·&nbsp; **WCAG 2.1 AA** verificato
+Il dettaglio del percorso — la gara, le scelte tecniche, la migrazione dei dati — vive nei bulletin:
 
-## Cosa resta a Susdef
-
-- **Il codice applicativo, per intero** — proprietà del cliente, con documentazione tecnica dell'architettura. Possono portarlo da un altro fornitore senza che Pianeta abbia leva.
-- **Un team interno formato** — in grado di gestire contenuti, aggiornare categorie e caricare documenti in autonomia.
-- **Uno stack senza lock-in di licenza** — Payload CMS e Nuxt sono framework open source con community attive. Nessun vendor può cambiare i termini unilateralmente.
-
-## Approfondimento
-
-→ [Come abbiamo vinto la gara Susdef: Nuxt, Payload, e 33.000 contenuti da interrogare](/bulletin/percorso-susdef)
+→ [Come abbiamo vinto la gara Susdef: metodo e percorso](/bulletin/percorso-susdef)
 
 ## FAQ
 
-**Usate questo stack solo per archivi grandi?**
-No. Nuxt + Payload + MeiliSearch scala in entrambe le direzioni. I principi — ricerca full-text, codice consegnato, nessun lock-in — restano gli stessi anche per archivi più piccoli. Il costo si riduce proporzionalmente alla complessità.
+**Come si concilia WCAG 2.1 AA con il design?**
+Integrando i vincoli di accessibilità dall'inizio, non alla fine. Quando l'accessibilità è un post-it su un design già completato, diventa una lista di correzioni. Quando è parte delle decisioni progettuali iniziali, diventa un criterio di qualità come la tipografia o la gerarchia visiva.
+
+**Il team di Susdef era già in grado di gestire una piattaforma di questa complessità?**
+La piattaforma è stata progettata per il team che la usa, non per il team ideale. L'interfaccia editoriale, i flussi di pubblicazione e la formazione in uscita sono stati calibrati sulle competenze reali del team di Susdef — non su un utente tecnico immaginario.
 
 **Lavorare con voi richiede di passare per Latte Creative?**
-No. Susdef è una co-produzione con Latte Creative, che ha curato la direction creativa. Lavoriamo anche direttamente con fondazioni e centri di ricerca su mandati propri.
+No. Susdef è una co-produzione con Latte Creative, che ha curato la direction creativa e la relazione cliente sul design. Lavoriamo anche direttamente con fondazioni e centri di ricerca su mandati propri.
 
-**Cosa succede se il vostro studio chiude o smette di esistere?**
-Il codice è proprietà del cliente, consegnato in toto con documentazione tecnica. La piattaforma funziona indipendentemente da noi — non c'è nessun servizio gestito da Pianeta.Studio che deve restare attivo per far girare il sito.
-
-**Il modulo DocumentAI è disponibile come servizio separato?**
-È un add-on della piattaforma Terra, non un prodotto standalone. Si valuta caso per caso, su preventivo, per organizzazioni con archivi documentali simili a Susdef.
+**Questo approccio funziona anche per archivi più piccoli?**
+Sì. I principi — capire chi cerca e cosa cerca, accessibilità integrata, autonomia del team cliente — valgono indipendentemente dalla scala. I costi scalano con la complessità, non i principi.
 
 ## Per un progetto simile
 
