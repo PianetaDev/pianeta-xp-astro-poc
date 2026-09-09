@@ -56,11 +56,11 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 
 ## Il Train Kiln — il Forno
 
-Sabato 1 agosto, dietro l'ex chiesa del Borgo di Santo Pietro, è stato inaugurato il Train Kiln: un forno a legna per ceramica, costruito durante il campus dagli artisti Domenico Mangano e Marieke van Rooy — attivi insieme dal 2014 — in continuità con le due edizioni precedenti di Bosco Colto.
+Sabato 1 agosto, dietro l'ex chiesa del Borgo di Santo Pietro, è stato inaugurato il Train Kiln: un forno a legna per la cottura della ceramica, costruito nell'ambito del campus BC26. Il progetto è la naturale prosecuzione del percorso artistico avviato da **Domenico Mangano e Marieke van Rooy** nelle due edizioni precedenti — il loro workshop *Sound, Ceramics and Communities*, parte dell'**Italian Council** del Ministero della Cultura, lavora sull'intreccio tra ceramica, comunità e performance.
 
 È il secondo Train Kiln costruito in Italia, e la prima infrastruttura permanente di Casa Bosco Colto.
 
-Il forno è stato progettato sotto la guida del Prof. Ted Neal (Ball State University, Indiana — tra i maggiori esperti mondiali di forni a legna) e del Prof. Michał Puszczyński (Accademia di Breslavia, Polonia — membro dell'International Academy of Ceramics). La sua costruzione recupera un legame storico: per secoli il Bosco di Santo Pietro aveva alimentato i forni di Caltagirone, rendendo celebre la tradizione ceramica della città. Il Train Kiln riporta la cottura dentro il bosco.
+Il forno è stato progettato e costruito sotto la guida tecnica dei ceramisti Prof. **Ted Neal** (Ball State University, Indiana — tra i massimi esperti mondiali di Train Kiln) e Prof. **Michał Puszczyński** (Accademia di Belle Arti e Design di Breslavia, Polonia — membro dell'International Academy of Ceramics). La sua costruzione recupera un legame storico: per secoli il Bosco di Santo Pietro aveva alimentato i forni di Caltagirone, rendendo celebre la tradizione ceramica della città. Il Train Kiln riporta la cottura dentro il bosco.
 
 Il forno può raggiungere temperature fino a 1.350 °C. I depositi naturali di cenere sulle superfici ceramiche creano texture e cromatismi caratteristici della cottura a legna — un processo chimico che trasforma in magia ciò che gli occhi vedono come semplice materia.
 

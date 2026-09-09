@@ -56,11 +56,11 @@ Eight workshops ran in parallel for eleven days, constructing structures, instal
 
 ## The Train Kiln
 
-On Saturday, August 1st, behind the former church of the Village of Santo Pietro, the Train Kiln was inaugurated: a wood-fired kiln for ceramic firing, built during the campus by artists Domenico Mangano and Marieke van Rooy — working together since 2014 — in continuity with the two previous editions of Bosco Colto.
+On Saturday, August 1st, behind the former church of the Village of Santo Pietro, the Train Kiln was inaugurated: a wood-fired kiln for ceramic firing, built as part of the BC26 campus. The project is the natural continuation of the artistic path initiated by **Domenico Mangano and Marieke van Rooy** in the two previous editions — their workshop *Sound, Ceramics and Communities*, part of the **Italian Council** programme of the Ministry of Culture, works on the intersection of ceramics, community and performance.
 
 It is the second Train Kiln built in Italy, and the first permanent infrastructure of Casa Bosco Colto.
 
-The kiln was designed under the guidance of Prof. Ted Neal (Ball State University, Indiana — one of the world's leading experts on wood-fired kilns) and Prof. Michał Puszczyński (Academy of Wrocław, Poland — member of the International Academy of Ceramics). Its construction reclaims a historical bond: for centuries, the Bosco di Santo Pietro fuelled the kilns of Caltagirone, making the city's ceramic tradition famous. The Train Kiln brings firing back into the forest.
+The kiln was designed and built under the technical guidance of ceramicists Prof. **Ted Neal** (Ball State University, Indiana — one of the world's leading experts in Train Kilns) and Prof. **Michał Puszczyński** (Academy of Art and Design in Wrocław, Poland — member of the International Academy of Ceramics). Its construction reclaims a historical bond: for centuries, the Bosco di Santo Pietro fuelled the kilns of Caltagirone, making the city's ceramic tradition famous. The Train Kiln brings firing back into the forest.
 
 The kiln can reach temperatures up to 1,350 °C. Natural ash deposits on ceramic surfaces create textures and colour effects characteristic of wood firing — a chemical process that transforms what the eye sees as simple matter into something unexpected.
 

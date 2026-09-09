@@ -52,7 +52,7 @@ The Boschi di Santo Pietro are in a remote area with limited connectivity. We br
 
 One of the most significant stories of BC26 is the **Train Kiln** — the wood-fire kiln inaugurated on 1 August behind the old church of the Borgo di Santo Pietro.
 
-It is not our work: it was built by artists **Domenico Mangano and Marieke van Rooy**, with the technical guidance of Prof. **Ted Neal** (Ball State University, Indiana — among the world's leading experts in wood-fired kilns) and Prof. **Michał Puszczyński** (Academy of Art and Design in Wrocław, member of the International Academy of Ceramics).
+It is not our work: the kiln was designed and built under the technical guidance of ceramicists Prof. **Ted Neal** (Ball State University, Indiana — one of the world's leading experts in Train Kilns) and Prof. **Michał Puszczyński** (Academy of Art and Design in Wrocław, member of the International Academy of Ceramics). The artistic journey that led to the kiln was initiated by **Domenico Mangano and Marieke van Rooy** in previous editions: their workshop *Sound, Ceramics and Communities* — part of the **Italian Council** programme of the Ministry of Culture — works on ceramics, community and performance.
 
 It is the **second Train Kiln built in Italy** and the **first permanent infrastructure of Casa Bosco Colto**. The kiln can reach temperatures of up to **1,350°C**, and its construction recovers a historical bond: for centuries the Bosco di Santo Pietro fed the kilns of Caltagirone, making the city's ceramic tradition renowned. The Train Kiln brings firing back into the forest.
 
