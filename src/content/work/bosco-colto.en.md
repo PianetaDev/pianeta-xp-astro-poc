@@ -59,11 +59,11 @@ We arrived with knowledge and people to run an independent team.
 
 Largely a team of volunteers, who believed in the project. That is not a detail: it is how we work when the mission is worth it.
 
-## Deliverables — a growing list
+## Deliverables
 
 Photo archive · podcast · booklet · print materials · social campaigns
 
-The list is open. Each edition adds new formats, new stories, new tools. We do not enumerate them all because not all of them have been born yet.
+Each edition has added new formats, new stories, new tools. The relationship continues.
 
 ## Digital continuity: the field does not end on the last day of the campus
 

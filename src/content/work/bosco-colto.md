@@ -59,11 +59,11 @@ Siamo arrivati con conoscenze e persone per gestire un team autonomo.
 
 Un team in larga parte di volontari, che ha creduto nel progetto. Non è un dettaglio: è il modo in cui lavoriamo quando la missione vale.
 
-## I deliverable — una lista che cresce
+## I deliverable
 
 Archivio fotografico · podcast · booklet · materiali stampa · campagne social
 
-La lista è aperta. Ogni edizione aggiunge nuovi formati, nuove storie, nuovi strumenti. Non li elenchiamo tutti perché non sono ancora tutti nati.
+Ogni edizione ha aggiunto formati nuovi, storie nuove, strumenti nuovi. La relazione continua.
 
 ## Continuità digitale: il campo non finisce il giorno del campus
 
