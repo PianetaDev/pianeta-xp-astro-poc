@@ -185,7 +185,7 @@
 .prose-eclag blockquote { margin: 1.7em 0; line-height: 1.7; }
 .prose-eclag a { text-decoration: underline; text-underline-offset: 3px; }
 .prose-eclag strong { font-weight: 600; }
-.prose-eclag em { font-style: normal; color: var(--cta-primary); }
+.prose-eclag em { font-style: normal; color: var(--cta-primary); font-weight: 600; }
 
 /* CTA buttons — pill shape, arancio primario, blu secondario */
 .cta-btn {
