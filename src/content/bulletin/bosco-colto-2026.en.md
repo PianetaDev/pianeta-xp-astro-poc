@@ -40,7 +40,7 @@ Eight workshops ran in parallel for eleven days, constructing structures, instal
 
 **Sicilian Satoyama** (w/ Yoshiharu Tsukamoto, Atelier Bow-Wow — Wolf Prize in Architecture 2022) — a vegetable garden within ancient stone walls, a gazebo of eight chestnut columns, a mulberry grove transformed into a cool resting place through pruning and dry-stone terracing. Addition and subtraction as recomposition of landscape.
 
-**Sound, Ceramics and Communities** (w/ Domenico Mangano and Marieke van Rooy, curated by Salvatore Lacagnina) — ceramic whistles made from clay, olive ash and Sicilian sand. The moment when a clear note brings shared joy to everyone. A work about people and their stories, not just clay.
+**Sound, Ceramics and Communities** (w/ Domenico Mangano and Marieke van Rooy, curated by Salvatore Lacagnina) — ceramic whistles made from clay, olive ash and Sicilian sand. The moment when a clear note brings shared joy to everyone. A work about people and their stories, not just clay. The project is a winner of the [Italian Council XIV edition](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) by the Ministry of Culture. [Project page on Makramè →](https://makrame.org/2025/11/26/sounds-ceramics-communities/)
 
 **Observatories** (w/ Food Hack Lab, Basque Country) — nine "witnesses" made from cork and 3D-printed PETG, inhabiting nine forest sites across the Bosco di Santo Pietro and the Sughereta di Niscemi. Their ESP32 sensors measure temperature, humidity and ambient sound, transmitting small data packets via LoRa network. A discreet, shared form of listening — which does not speak on behalf of the forest, but proposes a way of hearing it.
 
@@ -56,7 +56,7 @@ Eight workshops ran in parallel for eleven days, constructing structures, instal
 
 ## The Train Kiln
 
-On Saturday, August 1st, behind the former church of the Village of Santo Pietro, the Train Kiln was inaugurated: a wood-fired kiln for ceramic firing, built as part of the BC26 campus. The project is the natural continuation of the artistic path initiated by **Domenico Mangano and Marieke van Rooy** in the two previous editions — their workshop *Sound, Ceramics and Communities*, part of the **Italian Council** programme of the Ministry of Culture, works on the intersection of ceramics, community and performance.
+On Saturday, August 1st, behind the former church of the Village of Santo Pietro, the Train Kiln was inaugurated: a wood-fired kiln for ceramic firing, built as part of the BC26 campus. The project is the natural continuation of the artistic path initiated by **Domenico Mangano and Marieke van Rooy** in the two previous editions — their workshop *Sound, Ceramics and Communities* continues to explore the intersection of ceramics, community and performance.
 
 It is the second Train Kiln built in Italy, and the first permanent infrastructure of Casa Bosco Colto.
 

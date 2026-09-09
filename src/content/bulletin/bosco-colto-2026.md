@@ -40,7 +40,7 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 
 **Sicilian Satoyama** (w/ Yoshiharu Tsukamoto, Atelier Bow-Wow — Wolf Prize in Architecture 2022) — un orto dentro un muro a secco, una gazebo di otto colonne di castagno, un boschetto di gelso trasformato in luogo di sosta attraverso potatura e terrazzamenti. Addizione e sottrazione come ricomposizione del paesaggio.
 
-**Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbia della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla.
+**Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbia della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla. Il progetto è vincitore dell'[Italian Council XIV edizione](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) del Ministero della Cultura. [Scheda progetto su Makramè →](https://makrame.org/2025/11/26/sounds-ceramics-communities/)
 
 **Observatories** (w/ Food Hack Lab, Paesi Baschi) — nove "testimoni" in sughero e PETG stampato in 3D, disseminati in nove siti forestali tra il Bosco di Santo Pietro e la Sughereta di Niscemi. I loro sensori ESP32 misurano temperatura, umidità e livelli sonori, trasmettendo piccoli pacchetti di dati via rete LoRa. Un ascolto discreto e condiviso del bosco — che non parla a nome della foresta, ma propone una forma di ascolto.
 
@@ -56,7 +56,7 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 
 ## Il Train Kiln — il Forno
 
-Sabato 1 agosto, dietro l'ex chiesa del Borgo di Santo Pietro, è stato inaugurato il Train Kiln: un forno a legna per la cottura della ceramica, costruito nell'ambito del campus BC26. Il progetto è la naturale prosecuzione del percorso artistico avviato da **Domenico Mangano e Marieke van Rooy** nelle due edizioni precedenti — il loro workshop *Sound, Ceramics and Communities*, parte dell'**Italian Council** del Ministero della Cultura, lavora sull'intreccio tra ceramica, comunità e performance.
+Sabato 1 agosto, dietro l'ex chiesa del Borgo di Santo Pietro, è stato inaugurato il Train Kiln: un forno a legna per la cottura della ceramica, costruito nell'ambito del campus BC26. Il progetto è la naturale prosecuzione del percorso artistico avviato da **Domenico Mangano e Marieke van Rooy** nelle due edizioni precedenti — il loro workshop *Sound, Ceramics and Communities* continua a esplorare l'intreccio tra ceramica, comunità e performance.
 
 È il secondo Train Kiln costruito in Italia, e la prima infrastruttura permanente di Casa Bosco Colto.
 
