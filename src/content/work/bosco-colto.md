@@ -1,11 +1,11 @@
 ---
-title: "Con Bosco Colto — media, design e strategia"
-description: "Dal catalogo stampa 2022 al campus embedded nel 2026: quattro anni di partnership con Bosco Colto come media e tech partner. Presenza sul campo, executive design, segnaletica, strategia comunicativa per i prossimi anni."
+title: "Con Bosco Colto — amplificare chi opera nella sostenibilità"
+description: "Media e tech partner di Bosco Colto dal 2025: copertura editoriale, presenza sul campo, logistica in zone remote, strategia comunicativa. Archivio fotografico, podcast, booklet, materiali stampa, campagne social — e ancora molto in crescita."
 client: "Bosco Colto / Makramè APS"
 category: "Partnership"
 year: 2026
 date: 2026-09-04
-sector: "Cultura · Campus · Architettura · Design"
+sector: "Cultura · Campus · Sostenibilità · Territorio"
 services: ["editorial-educational-design", "app-prodotti-digitali", "piattaforme-dashboard"]
 team: ["max", "foss", "ludovica"]
 links:
@@ -13,57 +13,69 @@ links:
 locale: it
 draft: true
 type: work
-tags: ["partnership", "media", "design", "campus", "cultura", "sicilia"]
+tags: ["partnership", "media", "sostenibilità", "campus", "sicilia", "territorio"]
 ---
 
-**TLDR.** Media e tech partner di Bosco Colto — campus internazionale di ricerca, design e architettura nel Bosco di Santo Pietro, Caltagirone, Sicilia. Dal 2022, quando abbiamo curato il catalogo stampa dell'evento, al 2026, quando il team di Pianeta.Studio era sul campo per la copertura editoriale del campus, l'executive design, e il tavolo strategico per i prossimi anni. **4 anni di partnership · media partner BC26 · executive design**
+**TLDR.** Il nostro motto è amplificare la voce di chi opera nella sostenibilità. Con Bosco Colto — campus internazionale di ricerca, design e architettura nei Boschi di Santo Pietro, Caltagirone — siamo media e tech partner dal 2025. Copertura editoriale, presenza sul campo, Starlink per portare connettività nelle zone remote, strategia comunicativa. **2025→2026 · media partner · archivio fotografico, podcast, booklet, stampa, social — e tanto altro ancora**
 
 ## Il progetto
 
-Bosco Colto è un campus annuale di progetto e costruzione istantanea che si tiene nei Boschi di Santo Pietro, nel territorio di Caltagirone, in Sicilia. Organizzato da Makramè APS, ogni edizione porta insieme tutor internazionali, studenti di architettura, design e arte, e la comunità locale attorno a un tema centrale.
+Bosco Colto è un campus annuale che si tiene nei Boschi di Santo Pietro, Caltagirone, Sicilia. Organizzato da Makramè APS, porta insieme tutor internazionali, studenti di architettura, design e arte, e la comunità locale attorno a un tema centrale. Non è una conferenza: è un cantiere temporaneo in cui si costruisce fisicamente, con materiali del luogo, tecniche tradizionali e ibridazioni contemporanee.
 
-Il campus non è una conferenza: è un cantiere temporaneo. In dieci giorni si costruisce — strutture, installazioni, oggetti — usando materiali del luogo, tecniche tradizionali e ibridazioni contemporanee. Il 2026 era dedicato a *Pensare animale*: come imparare dai non-umani per ripensare il progetto, l'abitare, le relazioni con il territorio.
+Per capire meglio cos'è il progetto e cosa è successo a BC26: [Bosco Colto 2026 — Pensare animale, costruire comunità →](/bulletin/bosco-colto-2026)
 
-Per il racconto completo del campus e del suo tema: [Bosco Colto 2026 — Pensare animale, costruire comunità →](/bulletin/bosco-colto-2026)
+## Come è iniziata: Nutrimenti, 2025
 
-## Come è nata la partnership
+Tutto inizia con un invito. Nel 2025, Max viene invitato da Marco Falcone e Fabrizio Foti a partecipare al corso **Nutrimenti** — un programma dentro l'ecosistema Bosco Colto dedicato a cibo, territorio e cambiamento climatico.
 
-2022. Il primo contatto è stato operativo: il catalogo stampa dell'edizione di quell'anno. Un lavoro di editorial design che si è ripetuto nelle edizioni successive, costruendo anno dopo anno la continuità visiva del progetto — catalogo, media kit, asset grafici, materiali di comunicazione.
+Da quell'invito nasce un progetto: una mostra e una serie di video interviste ai produttori locali — persone che stanno cambiando il modo di lavorare la terra per rispondere ai cambiamenti climatici. Il video è online:
 
-Non è stato un brief unico. È stata una relazione che si è approfondita a ogni edizione. Fino al 2026, quando Pianeta.Studio è diventato media e tech partner ufficiale — riconoscimento che nei credits del booklet ufficiale BC26 si traduce in due voci distinte: *media partner* e *executive design*.
+→ [Nutrimenti — video interviste ai produttori (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
 
-La differenza non è solo di ruolo. È di postura: Pianeta.Studio non lavora *per* Bosco Colto. Lavora *con* Bosco Colto.
+Nutrimenti merita probabilmente un racconto a sé. È il momento in cui capiamo cosa significa stare dentro Bosco Colto, non solo coprirlo da fuori.
 
-## BC26: la presenza sul campo
+## 2025: Data Highway, comunicazione, presenza
 
-Il 2026 è stato l'anno in cui il lavoro è diventato presenza fisica.
+La partnership si rafforza nel 2025 su più fronti in parallelo.
 
-Il team di Pianeta.Studio — Massimiliano Mauro, Francesca Fossati, Ludovica Ranzini, insieme a un gruppo di fotografi e creator autonomi — era a Caltagirone per tutto il campus (30 luglio – 9 agosto). Non come osservatori. Come parte del progetto.
+Lavoriamo assieme alla **web app Bosco Colto** per il bando siciliano Data Highway — un progetto di infrastruttura digitale per il territorio. Affianco al lato tecnico, lavoriamo sulla **comunicazione e sulla strategia**: come raccontare Bosco Colto, a chi, con quale voce.
 
-**Executive design**: la segnaletica del campus, i template per i canali social di Bosco Colto, i materiali grafici per gli eventi. Tutto quello che fa sì che un campus internazionale si veda, si navighi, si racconti.
+E siamo presenti fisicamente al campus, come abbiamo fatto di nuovo nel 2026.
 
-**Copertura editoriale**: il team ha seguito Italian Council, il Forno — il Train Kiln inaugurato il 1 agosto, forno a legna permanente costruito nel bosco dagli artisti Domenico Mangano e Marieke van Rooy — Makramè APS e il campus nel suo complesso. Fotografi e creator autonomi coordinati da Pianeta.Studio, non una copertura estemporanea.
+## Sul campo: 2025 e 2026
 
-**Strategia**: assieme a Salvatore Lacagnina (contemporary art consultancy del campus) e alla direzione scientifica — Marco Navarra, Dario Felice, Antonio Scarponi e Beatrice Fontana — abbiamo sviluppato i principi comunicativi di Bosco Colto per i prossimi anni. Non un piano editoriale: una visione che sta diventando sempre più ambiziosa a ogni conversazione.
+Proprio come nel 2025, nel 2026 torniamo a Caltagirone per documentare l'evento. Non solo come media partner: portiamo anche infrastruttura operativa.
 
-## I prossimi passi — una relazione in crescita
+I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Portiamo il nostro **Starlink** per garantire connessione ai workshop e al team. E ci muoviamo con il **furgone dedicato ETPS BYD elettrico** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
 
-La partnership con Bosco Colto non è un progetto chiuso. È una relazione in costruzione, con impegni concreti già definiti.
+## Il team
 
-**Impact report** — Pianeta.Studio organizzerà l'impact report di Bosco Colto: misurare e comunicare il valore generato dal campus sul territorio, sulla comunità locale, sull'ecosistema culturale e scientifico che vi gravitano attorno.
+Siamo arrivati con conoscenze e persone per gestire un team autonomo.
 
-**Sviluppo sito** — boscocolto.org continuerà a crescere con noi. Il sito istituzionale è uno strumento operativo, non un dépliant: deve tenere il passo con l'evoluzione del progetto e della sua comunità.
+**Fotografi**: Giuliana Lo Presti, Davide Piro
+**Executive design e materiali**: Gloria Pulvirenti, Alessandra Gervasio
+**Podcast**: Giulio Domina, Salvatore Peluso
+**Coordinamento**: Massimiliano Mauro, Francesca Fossati, Ludovica Ranzini
 
-**Innovazione tecnologica** — il bosco-observatory, la piattaforma digitale che abbiamo costruito nel 2026 (archivio fotografico esplorabile con ricerca per somiglianza AI, Knowledge Graph del campus, digitalizzazione interattiva del booklet), è il primo esempio di piattaforma dedicata al progetto. Porteremo innovazione tecnologica come layer permanente della partnership.
+Un team in larga parte di volontari, che ha creduto nel progetto. Non è un dettaglio: è il modo in cui lavoriamo quando la missione vale.
 
-**Stratosferica** — Bosco Colto sarà presente al festival Stratosferica di Torino. Saremo lì con loro, a raccontare il progetto in un contesto nuovo.
+## I deliverable — una lista che cresce
 
-## Tre numeri
+Archivio fotografico · podcast · booklet · materiali stampa · campagne social
 
-**4** anni di partnership (2022→2026) · **2** ruoli nei credits ufficiali BC26 (*media partner* e *executive design*) · **1** piattaforma digitale costruita per il campus (bosco-observatory)
+La lista è aperta. Ogni edizione aggiunge nuovi formati, nuove storie, nuovi strumenti. Non li elenchiamo tutti perché non sono ancora tutti nati.
+
+## Continuità digitale: il campo non finisce il giorno del campus
+
+Una cosa che abbiamo imparato: il lavoro sul campo deve avere un luogo digitale dove continuare a vivere.
+
+Abbiamo aiutato i workshop a portare i loro materiali online — per chi non era presente, per chi vuole tornare sull'esperienza, per costruire un archivio che duri oltre il campus. Due esempi di cosa significa in pratica:
+
+→ [observatories.boscocolto.org](https://observatories.boscocolto.org/) — archivio fotografico esplorabile del campus
+→ [More-Than-Human Audio Worlds](https://observatories.boscocolto.org/morethanhumanaudioworlds) — i paesaggi sonori del campus, ascoltabili online
 
 ## Per un progetto simile
 
-Lavoriamo con organizzazioni culturali, campus di ricerca e enti no-profit che vogliono un partner con cui costruire nel tempo — non un fornitore a cui commissionare un lavoro singolo.
+Lavoriamo con organizzazioni culturali, campus di ricerca e progetti di territorio che vogliono amplificare la loro voce — non un fornitore a cui commissionare contenuti, ma un partner che porta conoscenza, presenza e rete.
 
 **[Parla con Alba →](/)**

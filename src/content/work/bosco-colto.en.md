@@ -1,11 +1,11 @@
 ---
-title: "With Bosco Colto — media, design and strategy"
-description: "From the 2022 print catalogue to an embedded campus presence in 2026: four years of partnership with Bosco Colto as media and tech partner. On-the-ground team, executive design, wayfinding, communication strategy for the years ahead."
+title: "With Bosco Colto — amplifying voices in sustainability"
+description: "Media and tech partner of Bosco Colto since 2025: editorial coverage, on-the-ground presence, remote connectivity, communication strategy. Photo archive, podcast, booklet, print materials, social campaigns — and much more to come."
 client: "Bosco Colto / Makramè APS"
 category: "Partnership"
 year: 2026
 date: 2026-09-04
-sector: "Culture · Campus · Architecture · Design"
+sector: "Culture · Campus · Sustainability · Territory"
 services: ["editorial-educational-design", "app-prodotti-digitali", "piattaforme-dashboard"]
 team: ["max", "foss", "ludovica"]
 links:
@@ -13,57 +13,69 @@ links:
 locale: en
 draft: true
 type: work
-tags: ["partnership", "media", "design", "campus", "culture", "sicily"]
+tags: ["partnership", "media", "sustainability", "campus", "sicily", "territory"]
 ---
 
-**TLDR.** Media and tech partner of Bosco Colto — an international campus for research, design and architecture in the Bosco di Santo Pietro, Caltagirone, Sicily. From 2022, when we produced the event's print catalogue, to 2026, when the Pianeta.Studio team was on the ground for the full editorial coverage of the campus, executive design, and the strategic table for the years ahead. **4 years of partnership · media partner BC26 · executive design**
+**TLDR.** Our purpose is to amplify the voices of those working in sustainability. With Bosco Colto — an international campus for research, design and architecture in the Boschi di Santo Pietro, Caltagirone — we have been media and tech partner since 2025. Editorial coverage, on-the-ground presence, Starlink to bring connectivity to remote areas, communication strategy. **2025→2026 · media partner · photo archive, podcast, booklet, print, social — and much more still growing**
 
 ## The project
 
-Bosco Colto is an annual campus of design and instant construction held in the Boschi di Santo Pietro, in the territory of Caltagirone, Sicily. Organized by Makramè APS, each edition brings together international tutors, students of architecture, design and art, and the local community around a central theme.
+Bosco Colto is an annual campus held in the Boschi di Santo Pietro, Caltagirone, Sicily. Organized by Makramè APS, it brings together international tutors, students of architecture, design and art, and the local community around a central theme. It is not a conference: it is a temporary construction site where things are built physically, using local materials, traditional techniques and contemporary hybridizations.
 
-The campus is not a conference: it is a temporary construction site. In ten days, things get built — structures, installations, objects — using local materials, traditional techniques and contemporary hybridizations. The 2026 edition was dedicated to *Thinking with Animals*: learning from non-humans to rethink design, dwelling, and our relationships with territory.
+For a fuller account of the project and what happened at BC26: [Bosco Colto 2026 — Thinking with Animals, building community →](/bulletin/bosco-colto-2026)
 
-For the full account of the campus and its theme: [Bosco Colto 2026 — Thinking with Animals, building community →](/bulletin/bosco-colto-2026)
+## How it started: Nutrimenti, 2025
 
-## How the partnership began
+Everything begins with an invitation. In 2025, Max is invited by Marco Falcone and Fabrizio Foti to participate in **Nutrimenti** — a programme within the Bosco Colto ecosystem dedicated to food, territory and climate change.
 
-2022. The first contact was operational: the print catalogue for that year's edition. A piece of editorial design that was repeated in subsequent editions, building year by year the visual continuity of the project — catalogue, media kit, graphic assets, communication materials.
+From that invitation comes a project: an exhibition and a series of video interviews with local producers — people who are changing the way they work the land in response to climate change. The video is online:
 
-It was not a single brief. It was a relationship that deepened with each edition. Until 2026, when Pianeta.Studio became official media and tech partner — an acknowledgement that in the official BC26 booklet credits appears as two distinct entries: *media partner* and *executive design*.
+→ [Nutrimenti — video interviews with producers (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
 
-The difference is not just one of role. It is one of posture: Pianeta.Studio does not work *for* Bosco Colto. It works *with* Bosco Colto.
+Nutrimenti probably deserves a story of its own. It is the moment when we understand what it means to be inside Bosco Colto, not just covering it from the outside.
 
-## BC26: on the ground
+## 2025: Data Highway, communication, presence
 
-2026 was the year the work became physical presence.
+The partnership deepens in 2025 on multiple fronts.
 
-The Pianeta.Studio team — Massimiliano Mauro, Francesca Fossati, Ludovica Ranzini, alongside a group of independent photographers and creators — was in Caltagirone for the full campus (July 30 – August 9). Not as observers. As part of the project.
+We work together on the **Bosco Colto web app** for the Sicilian Data Highway grant — a digital infrastructure project for the territory. Alongside the technical side, we work on **communication and strategy**: how to tell the story of Bosco Colto, to whom, with what voice.
 
-**Executive design**: campus wayfinding, social media templates for Bosco Colto's channels, graphic materials for events. Everything that makes an international campus visible, navigable, and worth telling.
+And we are physically present at the campus — as we were again in 2026.
 
-**Editorial coverage**: the team followed Italian Council, the Kiln — the Train Kiln inaugurated on August 1st, a permanent wood-fired kiln built in the forest by artists Domenico Mangano and Marieke van Rooy — Makramè APS, and the campus as a whole. Independent photographers and creators, coordinated by Pianeta.Studio.
+## On the ground: 2025 and 2026
 
-**Strategy**: together with Salvatore Lacagnina (contemporary art consultancy for the campus) and the scientific direction — Marco Navarra, Dario Felice, Antonio Scarponi and Beatrice Fontana — we developed Bosco Colto's communication principles for the years ahead. Not an editorial calendar: a vision that grows more ambitious with each conversation.
+Just as in 2025, in 2026 we return to Caltagirone to document the event. Not just as a media partner: we also bring operational infrastructure.
 
-## Next steps — a relationship in growth
+The Boschi di Santo Pietro are in a remote area with limited connectivity. We bring our **Starlink** to ensure connection for the workshops and team. And we move with a dedicated **ETPS BYD electric van** — a way of being present on the ground with a footprint consistent with the project we support.
 
-The partnership with Bosco Colto is not a closed project. It is a relationship under construction, with concrete commitments already in place.
+## The team
 
-**Impact report** — Pianeta.Studio will produce Bosco Colto's impact report: measuring and communicating the value generated by the campus for the territory, the local community, and the cultural and scientific ecosystem around it.
+We arrived with knowledge and people to run an independent team.
 
-**Site development** — boscocolto.org will keep growing with us. The institutional website is an operational tool, not a brochure.
+**Photographers**: Giuliana Lo Presti, Davide Piro
+**Executive design and materials**: Gloria Pulvirenti, Alessandra Gervasio
+**Podcast**: Giulio Domina, Salvatore Peluso
+**Coordination**: Massimiliano Mauro, Francesca Fossati, Ludovica Ranzini
 
-**Technology** — the bosco-observatory, the digital platform we built in 2026 (explorable photo archive with AI similarity search, a campus Knowledge Graph, interactive booklet digitization), is the first example of a dedicated digital platform for the project. We will bring technological innovation as a permanent layer of the partnership.
+Largely a team of volunteers, who believed in the project. That is not a detail: it is how we work when the mission is worth it.
 
-**Stratosferica** — Bosco Colto will be present at the Stratosferica festival in Turin. We will be there with them.
+## Deliverables — a growing list
 
-## Three numbers
+Photo archive · podcast · booklet · print materials · social campaigns
 
-**4** years of partnership (2022→2026) · **2** entries in the official BC26 credits (*media partner* and *executive design*) · **1** digital platform built for the campus (bosco-observatory)
+The list is open. Each edition adds new formats, new stories, new tools. We do not enumerate them all because not all of them have been born yet.
+
+## Digital continuity: the field does not end on the last day of the campus
+
+One thing we have learned: field work needs a digital place to keep living.
+
+We helped the workshops bring their materials online — for those who were not there, for those who want to return to the experience, to build an archive that lasts beyond the campus. Two examples of what this looks like in practice:
+
+→ [observatories.boscocolto.org](https://observatories.boscocolto.org/) — explorable photo archive of the campus
+→ [More-Than-Human Audio Worlds](https://observatories.boscocolto.org/morethanhumanaudioworlds) — campus soundscapes, listenable online
 
 ## For a similar project
 
-We work with cultural organizations, research campuses and non-profits that want a partner to build with over time — not a vendor to commission a one-off project from.
+We work with cultural organizations, research campuses and territorial projects that want to amplify their voice — not a vendor to commission content from, but a partner that brings knowledge, presence and network.
 
 **[Talk to Alba →](/)**
