@@ -38,7 +38,7 @@ Nutrimenti merita probabilmente un racconto a sé. È il momento in cui capiamo 
 
 La partnership si rafforza nel 2025 su più fronti in parallelo.
 
-Lavoriamo assieme alla **web app Bosco Colto** per il bando siciliano Data Highway — un progetto di infrastruttura digitale per il territorio. Affianco al lato tecnico, lavoriamo sulla **comunicazione e sulla strategia**: come raccontare Bosco Colto, a chi, con quale voce.
+Lavoriamo assieme alla **web app Bosco Colto** per il bando siciliano [Data Highway](https://www.datahighway.it/en/) — un progetto di infrastruttura digitale per il territorio. Affianco al lato tecnico, lavoriamo sulla **comunicazione e sulla strategia**: come raccontare Bosco Colto, a chi, con quale voce.
 
 E siamo presenti fisicamente al campus, come abbiamo fatto di nuovo nel 2026.
 

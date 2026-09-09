@@ -38,7 +38,7 @@ Nutrimenti probably deserves a story of its own. It is the moment when we unders
 
 The partnership deepens in 2025 on multiple fronts.
 
-We work together on the **Bosco Colto web app** for the Sicilian Data Highway grant — a digital infrastructure project for the territory. Alongside the technical side, we work on **communication and strategy**: how to tell the story of Bosco Colto, to whom, with what voice.
+We work together on the **Bosco Colto web app** for the Sicilian [Data Highway](https://www.datahighway.it/en/) grant — a digital infrastructure project for the territory. Alongside the technical side, we work on **communication and strategy**: how to tell the story of Bosco Colto, to whom, with what voice.
 
 And we are physically present at the campus — as we were again in 2026.
 
