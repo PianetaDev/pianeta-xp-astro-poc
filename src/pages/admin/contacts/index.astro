@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import ContactsBoard from '../../../components/vue/admin/ContactsBoard.vue';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+---
+<BaseLayout title="Admin — Contatti" description="Gestione gruppi newsletter/outreach" minimal={true} chrome={false}>
+  <AdminNav current="contacts" />
+  <main class="contacts-admin">
+    <header class="contacts-admin-head">
+      <p class="contacts-admin-eyebrow">Admin · Interno</p>
+      <h1 class="contacts-admin-title">Contatti</h1>
+      <p class="contacts-admin-deck">
+        I tre gruppi Resend usati per bulletin, network e pipeline pre-vendita. Aggiungi, importa in bulk, sposta tra gruppi.
+      </p>
+    </header>
+
+    <ContactsBoard client:load />
+  </main>
+
+  <style>
+    .contacts-admin {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .contacts-admin-head {
+      margin-bottom: 28px;
+    }
+    .contacts-admin-eyebrow {
+      margin: 0 0 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pianeta-muted);
+      font-weight: 600;
+    }
+    .contacts-admin-title {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--pianeta-text);
+    }
+    .contacts-admin-deck {
+      margin: 0;
+      max-width: 640px;
+      font-size: 14px;
+      color: var(--pianeta-muted);
+    }
+  </style>
+</BaseLayout>
