@@ -23,7 +23,11 @@ const eyebrowParts: Array<{label:string;href?:string}> = [{ label: 'Bulletin', h
 if (data.issue) eyebrowParts.push({ label: `#${data.issue}` });
 if (data.date) eyebrowParts.push({ label: formatDate(data.date) });
 
-const related = (data.relatedWork || []).map((slug: string) => ({ type: 'work', slug }));
+const workEntries = await getCollection('work');
+const related = (data.relatedWork || []).map((slug: string) => {
+  const entry = workEntries.find((e) => e.id === slug);
+  return { type: 'work', slug, label: entry?.data.title };
+});
 
 // Reading time: ~225 parole/min
 const bodyLen = item.body?.length ?? 0;

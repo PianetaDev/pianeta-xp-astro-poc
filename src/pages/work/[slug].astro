@@ -53,7 +53,11 @@ const eyebrowParts = [{ label: 'Work', href: '/work' }];
 if (data.category) eyebrowParts.push({ label: data.category });
 if (data.year) eyebrowParts.push({ label: String(data.year) });
 
-const related = bulletinRefs.map((slug) => ({ type: 'bulletin', slug }));
+const bulletinEntries = await getCollection('bulletin');
+const related = bulletinRefs.map((slug) => {
+  const entry = bulletinEntries.find((e) => e.id === slug);
+  return { type: 'bulletin', slug, label: entry?.data.title };
+});
 ---
 <BaseLayout title={`${title} — Pianeta.Studio`} description={data.description} ogImage={data.ogImage || cover} ogType="work" ogSlug={item.id} noindex={data.draft === true}>
   <DetailPage
