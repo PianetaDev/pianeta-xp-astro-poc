@@ -26,9 +26,9 @@ For a fuller account of the project and what happened at BC26: [Bosco Colto 2026
 
 ## How it started: Nutrimenti, 2025
 
-Everything begins with an invitation. In 2025, Max is invited by Marco Falcone and Fabrizio Foti to participate in **Nutrimenti** — a programme within the Bosco Colto ecosystem dedicated to food, territory and climate change.
+Everything begins with an invitation. In 2025, Marco Falcone and Fabrizio Foti — who run the programme — invite Max to take part in **Nutrimenti**: a programme within the Bosco Colto ecosystem dedicated to food, territory and climate change.
 
-From that invitation comes a project: an exhibition and a series of video interviews with local producers — people who are changing the way they work the land in response to climate change. The video is online:
+From that invitation comes our first operational contribution: an exhibition and a series of video interviews with local producers — people who are changing the way they work the land in response to climate change. The video is online:
 
 → [Nutrimenti — video interviews with producers (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
 
@@ -46,7 +46,7 @@ And we are physically present at the campus — as we were again in 2026.
 
 Just as in 2025, in 2026 we return to Caltagirone to document the event. Not just as a media partner: we also bring operational infrastructure.
 
-The Boschi di Santo Pietro are in a remote area with limited connectivity. We bring our **Starlink** to ensure connection for the workshops and team. And we move with a dedicated **ETPS BYD electric van** — a way of being present on the ground with a footprint consistent with the project we support.
+The Boschi di Santo Pietro are in a remote area with limited connectivity. We bring our **Starlink** to ensure connection for the workshops and team. We move with an **ETPS BYD electric van** and an **Askol XKP80 scooter** — a way of being present on the ground with a footprint consistent with the project we support.
 
 ## The team
 

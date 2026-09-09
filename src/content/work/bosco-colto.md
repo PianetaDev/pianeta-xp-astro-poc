@@ -26,9 +26,9 @@ Per capire meglio cos'è il progetto e cosa è successo a BC26: [Bosco Colto 202
 
 ## Come è iniziata: Nutrimenti, 2025
 
-Tutto inizia con un invito. Nel 2025, Max viene invitato da Marco Falcone e Fabrizio Foti a partecipare al corso **Nutrimenti** — un programma dentro l'ecosistema Bosco Colto dedicato a cibo, territorio e cambiamento climatico.
+Tutto inizia con un invito. Nel 2025, Marco Falcone e Fabrizio Foti invitano Max a partecipare a **Nutrimenti** — un programma dentro l'ecosistema Bosco Colto dedicato a cibo, territorio e cambiamento climatico, organizzato da loro.
 
-Da quell'invito nasce un progetto: una mostra e una serie di video interviste ai produttori locali — persone che stanno cambiando il modo di lavorare la terra per rispondere ai cambiamenti climatici. Il video è online:
+Da quell'invito nasce il nostro primo contributo operativo: una mostra e una serie di video interviste ai produttori locali — persone che stanno cambiando il modo di lavorare la terra per rispondere ai cambiamenti climatici. Il video è online:
 
 → [Nutrimenti — video interviste ai produttori (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
 
@@ -46,7 +46,7 @@ E siamo presenti fisicamente al campus, come abbiamo fatto di nuovo nel 2026.
 
 Proprio come nel 2025, nel 2026 torniamo a Caltagirone per documentare l'evento. Non solo come media partner: portiamo anche infrastruttura operativa.
 
-I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Portiamo il nostro **Starlink** per garantire connessione ai workshop e al team. E ci muoviamo con il **furgone dedicato ETPS BYD elettrico** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
+I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Portiamo il nostro **Starlink** per garantire connessione ai workshop e al team. Ci muoviamo con il **furgone ETPS BYD elettrico** e lo **scooter Askol XKP80** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
 
 ## Il team
 
