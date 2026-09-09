@@ -69,11 +69,16 @@ We arrived with knowledge and people to run an independent team.
 
 Largely a team of volunteers, who believed in the project. That is not a detail: it is how we work when the mission is worth it.
 
-## Deliverables
+## What we produced
 
-Photo archive · podcast · booklet · print materials · social campaigns
+- Photo archive
+- Podcast
+- Booklet
+- Print materials
+- Social campaigns
+- And more — the list grows with each edition
 
-Each edition has added new formats, new stories, new tools. The relationship continues.
+The relationship continues.
 
 ## Digital continuity: the field does not end on the last day of the campus
 

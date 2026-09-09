@@ -69,11 +69,16 @@ Siamo arrivati con conoscenze e persone per gestire un team autonomo.
 
 Un team in larga parte di volontari, che ha creduto nel progetto. Non è un dettaglio: è il modo in cui lavoriamo quando la missione vale.
 
-## I deliverable
+## Cosa abbiamo prodotto
 
-Archivio fotografico · podcast · booklet · materiali stampa · campagne social
+- Archivio fotografico
+- Podcast
+- Booklet
+- Materiali stampa
+- Campagne social
+- E altro ancora — la lista cresce con ogni edizione
 
-Ogni edizione ha aggiunto formati nuovi, storie nuove, strumenti nuovi. La relazione continua.
+La relazione continua.
 
 ## Continuità digitale: il campo non finisce il giorno del campus
 
