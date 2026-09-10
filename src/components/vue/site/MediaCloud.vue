@@ -254,12 +254,13 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
           <div v-if="selected.pianeta_media_usages?.length" class="media-detail-usages">
             <p class="media-detail-usages-label">Usata in</p>
             <ul class="media-detail-usages-list">
-              <li v-for="u in selected.pianeta_media_usages" :key="u.id">
+              <li v-for="u in selected.pianeta_media_usages" :key="u.id" class="media-usage-item">
                 <a :href="usageUrl(u)" class="media-usage-link">
                   <span class="media-usage-type">{{ CONTENT_TYPE_LABELS[u.content_type] ?? u.content_type }}</span>
-                  <span class="media-usage-slug">{{ u.content_slug }}</span>
                   <span v-if="u.field !== 'cover'" class="media-usage-field">({{ u.field }})</span>
+                  <span class="media-usage-title">{{ u.title ?? u.content_slug }}</span>
                 </a>
+                <p v-if="u.description" class="media-usage-description">{{ u.description }}</p>
               </li>
             </ul>
           </div>
@@ -494,24 +495,37 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
   flex-direction: column;
   gap: 0.25rem;
 }
+.media-usage-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
 .media-usage-link {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.35rem;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--cta-primary, #FF6B33);
   text-decoration: none;
+  flex-wrap: wrap;
 }
-.media-usage-link:hover { text-decoration: underline; }
+.media-usage-link:hover .media-usage-title { text-decoration: underline; }
 .media-usage-type {
   font-weight: 600;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--pianeta-muted, #999);
+  flex-shrink: 0;
 }
-.media-usage-slug { color: var(--cta-primary, #FF6B33); }
+.media-usage-title { color: var(--cta-primary, #FF6B33); font-weight: 500; }
 .media-usage-field { color: var(--pianeta-muted, #bbb); font-size: 0.75rem; }
+.media-usage-description {
+  font-size: 0.78rem;
+  color: var(--pianeta-muted, #666);
+  margin: 0;
+  line-height: 1.4;
+}
 .media-see-similar {
   margin-top: 1rem;
   display: block;

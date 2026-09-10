@@ -21,6 +21,10 @@ export interface MediaUsage {
   content_type: 'work' | 'bulletin' | 'services' | 'lab' | 'team' | 'careers';
   content_slug: string;
   field: 'cover' | 'inline' | 'og' | 'thumbnail';
+  /** Titolo del contenuto collegato (risolto server-side dal frontmatter Astro) */
+  title?: string;
+  /** Descrizione breve del contenuto collegato (risolto server-side) */
+  description?: string;
 }
 
 export interface MediaPhoto {

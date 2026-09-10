@@ -1,9 +1,31 @@
 // GET  /api/media/photos — list published Pianeta media photos (canvas load)
 // POST /api/media/photos — staff bulk ingest (bearer-token protected)
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
 import { mediaSupabaseService, PHOTO_SELECT_FIELDS } from '../../../lib/server/media-supabase';
 import { env } from '../../../lib/server/env';
 import { timingSafeEqual } from 'node:crypto';
+
+type ContentMeta = { title?: string; description?: string };
+type ContentLookup = Record<string, Record<string, ContentMeta>>;
+
+/**
+ * Build a lookup map { content_type: { slug: { title, description } } }
+ * from Astro content collections. Called once per GET request (fast: in-process).
+ */
+async function buildContentLookup(): Promise<ContentLookup> {
+  const types = ['work', 'bulletin', 'services', 'lab', 'team', 'careers'] as const;
+  const lookup: ContentLookup = {};
+  await Promise.all(
+    types.map(async (type) => {
+      const entries = await getCollection(type as any);
+      lookup[type] = Object.fromEntries(
+        entries.map((e: any) => [e.id, { title: e.data.title, description: e.data.description }])
+      );
+    })
+  );
+  return lookup;
+}
 
 export const prerender = false;
 
@@ -22,7 +44,10 @@ function tokenMatches(provided: string, expected: string): boolean {
 }
 
 export const GET: APIRoute = async () => {
-  const db = mediaSupabaseService();
+  const [db, contentLookup] = await Promise.all([
+    Promise.resolve(mediaSupabaseService()),
+    buildContentLookup(),
+  ]);
   const { data, error } = await db
     .from('pianeta_media_photos')
     .select(PHOTO_SELECT_FIELDS)
@@ -31,10 +56,19 @@ export const GET: APIRoute = async () => {
     .order('created_at', { ascending: true })
     .limit(2000);
   if (error) return json({ error: error.message }, 500);
-  const res = new Response(JSON.stringify({ photos: data ?? [] }), {
+
+  // Enrich each usage with title + description from Astro content frontmatter
+  const photos = (data ?? []).map((photo: any) => ({
+    ...photo,
+    pianeta_media_usages: (photo.pianeta_media_usages ?? []).map((u: any) => {
+      const meta = contentLookup[u.content_type]?.[u.content_slug];
+      return { ...u, title: meta?.title, description: meta?.description };
+    }),
+  }));
+
+  return new Response(JSON.stringify({ photos }), {
     headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
   });
-  return res;
 };
 
 export const POST: APIRoute = async ({ request }) => {
