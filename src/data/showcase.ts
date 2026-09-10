@@ -94,7 +94,7 @@ export function getShowcase(locale: 'it' | 'en' = 'it') {
     team: TEAM,
     clients: CLIENTS,
     about: locale === 'en' ? ABOUT_EN : ABOUT,
-    testimonials: locale === 'en' ? TESTIMONIALS_EN : TESTIMONIALS,
+    testimonials: (locale === 'en' ? TESTIMONIALS_EN : TESTIMONIALS).filter((t) => !t.draft),
     foundations: locale === 'en' ? FOUNDATIONS_EN : FOUNDATIONS,
   };
 }
