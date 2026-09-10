@@ -213,20 +213,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
         />
         <button type="submit" aria-label="Cerca" :disabled="searching">→</button>
       </form>
-      <div class="media-filter-row">
-        <button
-          type="button"
-          :class="['media-chip', { 'media-chip-active': projectFilter === null }]"
-          @click="projectFilter = null"
-        >Tutti</button>
-        <button
-          v-for="slug in projectsWithPhotos"
-          :key="slug"
-          type="button"
-          :class="['media-chip', { 'media-chip-active': projectFilter === slug }]"
-          @click="projectFilter = (projectFilter === slug ? null : slug)"
-        >{{ slug }}</button>
-      </div>
       <button
         v-if="matchedIds !== null || projectFilter !== null"
         type="button"
@@ -384,7 +370,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
 .media-search-bar form {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 .media-search-bar input {
   flex: 1;
@@ -400,25 +385,6 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
   background: #fff;
   padding: 0.4rem 0.75rem;
   cursor: pointer;
-}
-.media-filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-.media-chip {
-  padding: 0.25rem 0.65rem;
-  border: 1px solid var(--pianeta-border, #ddd);
-  border-radius: 100px;
-  background: transparent;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-}
-.media-chip-active {
-  background: var(--cta-primary, #FF6B33);
-  color: #fff;
-  border-color: var(--cta-primary, #FF6B33);
 }
 .media-search-clear {
   display: block;
