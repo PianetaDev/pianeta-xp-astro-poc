@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+const ANCHORS = [
+  { n: 1, phrase: 'Sustainable Creativity dal 2016', livello: 'Identitario', touchpoint: 'Home, footer, bio' },
+  { n: 2, phrase: 'Studio nomade · Pianeta-centric', livello: 'Identitario', touchpoint: 'About/Manifesto, "Chi siamo"' },
+  { n: 3, phrase: 'Co-autori dei vostri progetti', livello: 'Commerciale', touchpoint: 'Sales mail, pitch' },
+  { n: 4, phrase: 'Trasformiamo brief in opportunità', livello: 'Commerciale', touchpoint: 'Home, sales deck' },
+  { n: 5, phrase: 'Standard aperti. Codice consegnato', livello: 'Commerciale', touchpoint: 'Pianeta.Green/Tech, proposal tecnici' },
+  { n: 6, phrase: 'Carbon budget e performance budget come vincoli tecnici verificabili', livello: 'Commerciale', touchpoint: 'Green/Tech, landing direttive' },
+  { n: 7, phrase: 'Co-design · AI validation · UX validation', livello: 'Commerciale (metodo)', touchpoint: 'Sempre, quando si spiega il metodo' },
+  { n: 8, phrase: 'Design & Technology, una sola disciplina', livello: 'Identitario', touchpoint: 'About/Manifesto, Pianeta.Tech home' },
+  { n: 9, phrase: 'Human to Planet', livello: 'Identitario (claim alto)', touchpoint: 'Home, About, press kit' },
+];
+
+const POSIZIONI = [
+  {
+    titolo: 'La complessità è un territorio, non un ostacolo.',
+    testo: 'Lavoriamo con clienti i cui problemi restano problemi: la complessità non sparisce, si attraversa. Quello che cambia è la capacità di chi ci vive dentro di abitarla.',
+  },
+  {
+    titolo: 'Il design parte dal pianeta, non dal singolo utente.',
+    testo: "L'utente non è il punto di vista — è uno degli stakeholder di un sistema che include comunità, ambiente, generazioni future. Human to Planet.",
+  },
+  {
+    titolo: 'Le cose che costruiamo devono durare e si devono poter verificare.',
+    testo: 'Niente "fidati di noi". Piattaforme in produzione dopo anni, codice consegnato, documentazione consegnata, carbon budget e performance budget come vincoli tecnici.',
+  },
+  {
+    titolo: 'Il sapere si produce attraversando, non sintetizzando.',
+    testo: 'Il co-design non è una fase introduttiva: è il modo in cui conosciamo il problema. Le mappe sono output del cammino, non piano del cammino.',
+  },
+  {
+    titolo: 'Trasformiamo brief in opportunità.',
+    testo: 'Un progetto Pianeta non chiude il brief che arriva. Lo riconfigura: il redesign diventa un tool, il sito diventa una piattaforma, il report diventa un sistema.',
+  },
+];
+
+const NON_USARE = [
+  'Pattern "Non X — Y" in qualsiasi forma (es. "Non un fornitore — un co-autore")',
+  '"95% client retention" — resta dato interno, non pubblico',
+  'Frase-manifesto lunga in home — testata e scartata più volte, basta tagline + descriptor',
+  '"Design, Strategia & Impatto" come descriptor — valutato e scartato (meno iconico)',
+];
+---
+<BaseLayout title="Admin — Brief Strategico" description="Purpose, valori, voce e identità di Pianeta.Studio" chrome={true} minimal={false} noindex={true}>
+  <AdminNav current="brief" />
+
+  <div class="brief-page">
+    <header class="brief-head">
+      <img src="/brand/logo-horizontal-color.svg" alt="Pianeta.Studio" class="brief-logo" />
+      <p class="brief-eyebrow">Brief Strategico · Interno · condiviso col team</p>
+      <h1 class="brief-title">Chi siamo, cosa crediamo, come parliamo</h1>
+      <p class="brief-deck">
+        Riferimento unico per allineare contenuti, pitch e decisioni alla direzione Reworld. Curato dal materiale già approvato —
+        non è ancora un knowledge graph interrogabile, è la base da cui quel livello (in costruzione) partirà.
+      </p>
+    </header>
+
+    <section class="brief-section brief-hero">
+      <p class="brief-tagline">Sustainable Creativity <span>dal 2016</span></p>
+      <p class="brief-descriptor">Design &amp; Technology</p>
+      <p class="brief-claim">— Human to Planet —</p>
+    </section>
+
+    <section class="brief-section">
+      <h2 class="brief-section-title">Purpose</h2>
+      <p class="brief-body">
+        Pianeta.Studio non nasce nel 2023: nasce concettualmente nel 2022 con il manifesto MMXX e si riformula nel 2024 con
+        "Pianeta.Shaking.Hands", che sposta il focus dallo User-Centered Design al <strong>Planet-centric design</strong>. Il nome
+        "Pianeta" non è poetico — è programmatico: il design non parte dall'utente come unità isolata, ma dal pianeta come
+        sistema, dove l'utente è uno stakeholder tra altri.
+      </p>
+      <p class="brief-source">Fonte: <code>_KB_APPROVATA/studio/01_chi-siamo.md</code></p>
+    </section>
+
+    <section class="brief-section">
+      <h2 class="brief-section-title">Cosa crediamo</h2>
+      <p class="brief-section-sub">Cinque posizioni nette che orientano come scegliamo i progetti, come lavoriamo, e cosa rifiutiamo di fare.</p>
+      <div class="posizioni-grid">
+        {POSIZIONI.map((p) => (
+          <div class="posizione-card">
+            <p class="posizione-titolo">{p.titolo}</p>
+            <p class="posizione-testo">{p.testo}</p>
+          </div>
+        ))}
+      </div>
+      <p class="brief-source">Fonte: <code>_KB_APPROVATA/studio/01_chi-siamo.md</code> — sezione "Cosa crediamo"</p>
+    </section>
+
+    <section class="brief-section">
+      <h2 class="brief-section-title">Come lavoriamo — il metodo</h2>
+      <div class="metodo-grid">
+        <div class="metodo-card">
+          <p class="metodo-nome">Co-design</p>
+          <p class="metodo-testo">Il cliente è co-autore, non destinatario. Ascoltiamo, mappiamo i vincoli, formuliamo insieme le ipotesi.</p>
+        </div>
+        <div class="metodo-card">
+          <p class="metodo-nome">AI validation</p>
+          <p class="metodo-testo">Panel multi-agente e analisi neurale predittiva per scartare le scelte creative palesemente sbagliate prima di committarsi.</p>
+        </div>
+        <div class="metodo-card">
+          <p class="metodo-nome">UX validation</p>
+          <p class="metodo-testo">Mai consegniamo senza test con persone reali. Accessibilità (WCAG 2.1 AA) e performance sono vincoli di progetto, non controlli a posteriori.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="brief-section">
+      <h2 class="brief-section-title">Voce</h2>
+      <p class="brief-badge-draft">⚠️ Bozza — in attesa di conferma finale di Max (fonte non ancora marcata "Approvato" nel processo KB)</p>
+
+      <p class="brief-section-sub">Pilastri: <strong>Sistemico · Sociale · Long-term</strong>. Regola di stile più importante: niente pattern "Non X — Y", sempre in positivo.</p>
+
+      <table class="anchor-table">
+        <thead><tr><th>#</th><th>Anchor</th><th>Livello</th><th>Touchpoint</th></tr></thead>
+        <tbody>
+          {ANCHORS.map((a) => (
+            <tr>
+              <td>{a.n}</td>
+              <td>{a.phrase}</td>
+              <td>{a.livello}</td>
+              <td>{a.touchpoint}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div class="non-usare-box">
+        <p class="non-usare-title">Cosa NON usare (deciso e scartato)</p>
+        <ul class="non-usare-list">
+          {NON_USARE.map((n) => <li>{n}</li>)}
+        </ul>
+      </div>
+      <p class="brief-source">Fonte: <code>_KB_APPROVATA/brand/voice.md</code> — compilata 27/08/2026, da confermare</p>
+    </section>
+
+    <section class="brief-section">
+      <h2 class="brief-section-title">Ecosistema</h2>
+      <div class="eco-grid">
+        <div class="eco-card">
+          <p class="eco-nome">Pianeta.Studio</p>
+          <p class="eco-testo">Il polo digitale. Consulenza, design e ingegneria. Centro operativo del gruppo.</p>
+        </div>
+        <div class="eco-card">
+          <p class="eco-nome">Pianeta.Farm</p>
+          <p class="eco-testo">Il polo agricolo e produttivo, in formazione ad Ardea (Lazio). Divisione, non società separata.</p>
+        </div>
+        <div class="eco-card">
+          <p class="eco-nome">Pianeta.Lab</p>
+          <p class="eco-testo">Il polo di ricerca. R&amp;D su AI applicata al design, citizen science, framework di sostenibilità.</p>
+        </div>
+      </div>
+      <p class="brief-body">
+        Quattro brand: <strong>Pianeta.Studio</strong> (anchor) · <strong>Pianeta.Tech</strong> (sub-brand engineering, in costruzione) ·
+        <strong>Pianeta.Green</strong> (prodotto, live su pianeta.green) · <strong>Egregorae</strong> (citizen-action, POC su rete BoscoColto).
+        Holding unica: Pianeta.Studio S.r.l. Società Benefit. Farm e Lab sono divisioni, non entità legali separate.
+      </p>
+    </section>
+
+    <section class="brief-section">
+      <h2 class="brief-section-title">Identità legale</h2>
+      <p class="brief-body">
+        <strong>PIANETA.STUDIO S.R.L. SOCIETÀ BENEFIT</strong>, unipersonale · CF/P.IVA 06037730873 · REA CT-459996 ·
+        Sede legale San Giovanni La Punta (CT) · Sedi operative Milano e Ardea · Costituita il 14 settembre 2023.
+        Lo statuto impegna esplicitamente al planet-centric design come oggetto sociale (Art. 2) e all'astensione dal
+        lavorare per chi distrugge i valori adottati. Relazione di Impatto pubblicata ogni anno.
+      </p>
+      <p class="brief-source">Fonte: <code>_KB_APPROVATA/studio/01_chi-siamo.md</code> — sezione "Identità legale"</p>
+    </section>
+
+    <footer class="brief-footer">
+      <p>
+        Questa pagina è il layer L2 ("Lavoro") dell'architettura di conoscenza condivisa —
+        markdown curato su Drive, non ancora un Knowledge Graph interrogabile. Vedi
+        <code>26A11_Pianeta.Studio Reworld/08_knowledge_base_twin/01_Architettura_Conoscenza_Condivisa.md</code> per la roadmap
+        verso L3 (KG vero, Postgres+pgvector).
+      </p>
+    </footer>
+  </div>
+
+  <style>
+    .brief-page { max-width: 900px; margin: 0 auto; padding: 40px 24px 100px; }
+    .brief-head { margin-bottom: 40px; }
+    .brief-logo { height: 28px; width: auto; margin-bottom: 20px; display: block; }
+    .brief-eyebrow { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted); font-weight: 600; }
+    .brief-title { margin: 0 0 12px; font-size: 32px; font-weight: 900; color: var(--pianeta-text); line-height: 1.15; }
+    .brief-deck { margin: 0; max-width: 680px; font-size: 15px; line-height: 1.55; color: var(--pianeta-muted-strong); }
+
+    .brief-hero {
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 16px;
+      margin-bottom: 48px;
+    }
+    .brief-tagline { margin: 0 0 4px; font-size: 28px; font-weight: 900; color: var(--pianeta-text); }
+    .brief-tagline span { color: var(--cta-primary); }
+    .brief-descriptor { margin: 0 0 12px; font-size: 15px; font-weight: 600; color: var(--pianeta-muted-strong); text-transform: uppercase; letter-spacing: 1px; }
+    .brief-claim { margin: 0; font-size: 14px; font-style: italic; color: var(--pianeta-muted); }
+
+    .brief-section { margin-bottom: 48px; }
+    .brief-section-title {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+      color: var(--cta-primary); margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--pianeta-border);
+    }
+    .brief-section-sub { font-size: 14px; color: var(--pianeta-muted-strong); margin: 0 0 16px; }
+    .brief-body { font-size: 15px; line-height: 1.65; color: var(--pianeta-text); margin: 0 0 8px; }
+    .brief-source { font-size: 12px; color: var(--pianeta-muted); margin: 8px 0 0; }
+    .brief-source code { font-size: 11px; background: var(--pianeta-bg-card); padding: 2px 6px; border-radius: 4px; }
+
+    .brief-badge-draft {
+      display: inline-block; font-size: 12px; font-weight: 600; color: #856404;
+      background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 6px 12px; margin-bottom: 16px;
+    }
+
+    .posizioni-grid { display: flex; flex-direction: column; gap: 12px; }
+    .posizione-card { padding: 16px 20px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 10px; }
+    .posizione-titolo { margin: 0 0 4px; font-size: 14px; font-weight: 700; color: var(--pianeta-text); }
+    .posizione-testo { margin: 0; font-size: 13px; line-height: 1.5; color: var(--pianeta-muted-strong); }
+
+    .metodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 700px) { .metodo-grid { grid-template-columns: 1fr; } }
+    .metodo-card { padding: 18px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 10px; }
+    .metodo-nome { margin: 0 0 6px; font-size: 13px; font-weight: 700; color: var(--cta-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .metodo-testo { margin: 0; font-size: 13px; line-height: 1.5; color: var(--pianeta-muted-strong); }
+
+    .anchor-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 20px; }
+    .anchor-table th, .anchor-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--pianeta-border); }
+    .anchor-table th { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(14,17,22,0.5); font-weight: 600; }
+
+    .non-usare-box { padding: 16px 20px; background: rgba(204, 0, 0, 0.05); border: 1px solid rgba(204, 0, 0, 0.2); border-radius: 10px; }
+    .non-usare-title { margin: 0 0 8px; font-size: 12px; font-weight: 700; color: var(--pianeta-error); text-transform: uppercase; letter-spacing: 0.5px; }
+    .non-usare-list { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: var(--pianeta-muted-strong); }
+
+    .eco-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+    @media (max-width: 700px) { .eco-grid { grid-template-columns: 1fr; } }
+    .eco-card { padding: 18px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 10px; }
+    .eco-nome { margin: 0 0 6px; font-size: 14px; font-weight: 700; color: var(--pianeta-text); }
+    .eco-testo { margin: 0; font-size: 13px; line-height: 1.5; color: var(--pianeta-muted-strong); }
+
+    .brief-footer {
+      margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--pianeta-border);
+      font-size: 12px; line-height: 1.6; color: var(--pianeta-muted);
+    }
+    .brief-footer code { font-size: 11px; }
+  </style>
+</BaseLayout>
