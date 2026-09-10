@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+const PAPERCLIP_URL = 'https://macbook-air-di-massimiliano.tail05dd1c.ts.net';
+
+const PIPELINE = [
+  {
+    nome: 'Paperclip',
+    cosa: 'I 20 agenti AI che producono contenuti, codice e analisi — assegnati per specialità, revisionati da un agente indipendente prima del merge.',
+    stato: 'live',
+    link: PAPERCLIP_URL,
+    linkLabel: 'Apri la board →',
+    nota: 'Raggiungibile solo da chi è nel tailnet Tailscale (oggi: Max, Francesca). Passa dal Mac di Max — se è spento, il link non risponde a nessuno.',
+  },
+  {
+    nome: 'Contenuti',
+    cosa: 'Quello che Paperclip produce atterra come file nel repo del sito — bulletin, case study, servizi. Draft finché non è pronto per uscire.',
+    stato: 'live',
+    link: '/admin/content',
+    linkLabel: 'Vedi mappa contenuti →',
+  },
+  {
+    nome: 'Distribuzione',
+    cosa: 'I contenuti pubblicati vengono girati alla lista giusta — pubblico, network, pipeline commerciale — via newsletter.',
+    stato: 'live',
+    link: '/admin/contacts',
+    linkLabel: 'Gestisci contatti →',
+  },
+  {
+    nome: 'Media (Watchers)',
+    cosa: 'Libreria immagini esplorabile dei progetti — da cui si prendono foto per articoli, case study, social. Estratto da Bosco Colto come modulo riusabile.',
+    stato: 'in costruzione',
+    link: null,
+    linkLabel: null,
+  },
+];
+
+const FONDAZIONE = [
+  { nome: 'Voce', cosa: 'Tagline, anchor phrases, regole di stile — cosa dire e come.' },
+  { nome: 'Personas', cosa: 'Chi sono i nostri interlocutori tipo, cosa li convince, per quale offerta.' },
+  { nome: 'Strategy', cosa: 'Le offerte, i vincoli (es. clienti non nominabili), le decisioni prese.' },
+];
+---
+<BaseLayout title="Admin — Sistema" description="Come si tiene insieme tutto: Paperclip, contenuti, KG, Alba" chrome={true} minimal={false} noindex={true}>
+  <AdminNav current="sistema" />
+
+  <div class="sistema-page">
+    <header class="sistema-head">
+      <p class="sistema-eyebrow">Admin · Interno · Mappa del sistema</p>
+      <h1 class="sistema-title">Come funziona, in una pagina</h1>
+      <p class="sistema-deck">
+        Non uno strumento in più — la mappa di come gli altri si tengono insieme. Se non sai da dove iniziare, inizia da qui.
+      </p>
+    </header>
+
+    <section class="sistema-section">
+      <h2 class="sistema-section-title">Il flusso</h2>
+      <p class="sistema-flowline">
+        <strong>Paperclip</strong> produce → i <strong>contenuti</strong> atterrano nel sito → si <strong>distribuiscono</strong> → il <strong>media</strong> li illustra → <strong>Alba</strong> li racconta a chi arriva sul sito.
+      </p>
+
+      <div class="pipeline-row">
+        {PIPELINE.map((step, i) => (
+          <>
+            <div class="pipeline-card" data-stato={step.stato}>
+              <p class="pipeline-stato">{step.stato === 'live' ? '🟢 Live' : '🟡 In costruzione'}</p>
+              <p class="pipeline-nome">{step.nome}</p>
+              <p class="pipeline-cosa">{step.cosa}</p>
+              {step.nota && <p class="pipeline-nota">{step.nota}</p>}
+              {step.link && (
+                <a href={step.link} class="pipeline-link" target={step.link.startsWith('http') ? '_blank' : undefined} rel={step.link.startsWith('http') ? 'noopener' : undefined}>
+                  {step.linkLabel}
+                </a>
+              )}
+            </div>
+            {i < PIPELINE.length - 1 && <div class="pipeline-arrow">→</div>}
+          </>
+        ))}
+      </div>
+    </section>
+
+    <section class="sistema-section">
+      <h2 class="sistema-section-title">La fondazione — cosa alimenta il Knowledge Graph e Alba</h2>
+      <p class="sistema-section-sub">
+        Voce, personas e strategia non sono documenti a sé — sono la base dati su cui verrà costruito il Knowledge Graph
+        (progetti↔clienti↔servizi) e su cui Alba già si appoggia oggi per parlare con chi arriva sul sito.
+      </p>
+      <div class="fondazione-grid">
+        {FONDAZIONE.map((f) => (
+          <div class="fondazione-card">
+            <p class="fondazione-nome">{f.nome}</p>
+            <p class="fondazione-cosa">{f.cosa}</p>
+          </div>
+        ))}
+      </div>
+      <p class="sistema-source">
+        Tutto e tre insieme → <a href="/admin/brief" class="sistema-inline-link">Brief Strategico →</a>
+      </p>
+    </section>
+
+    <section class="sistema-section">
+      <h2 class="sistema-section-title">Alba</h2>
+      <p class="sistema-body">
+        È il punto dove tutto questo diventa conversazione pubblica. Alba accoglie chi arriva sul sito usando la stessa voce,
+        le stesse persona e la stessa strategia che vedi in questa pagina — non un copione a parte. Si dichiara sempre AI
+        (obbligo AI Act), non impersona mai un umano.
+      </p>
+    </section>
+
+    <footer class="sistema-footer">
+      <p>Pagina scritta a mano, non generata — aggiornarla quando un pezzo del sistema cambia stato o si aggiunge un pezzo nuovo.</p>
+    </footer>
+  </div>
+
+  <style>
+    .sistema-page { max-width: 1000px; margin: 0 auto; padding: 40px 24px 100px; }
+    .sistema-head { margin-bottom: 40px; }
+    .sistema-eyebrow { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted); font-weight: 600; }
+    .sistema-title { margin: 0 0 12px; font-size: 32px; font-weight: 900; color: var(--pianeta-text); line-height: 1.15; }
+    .sistema-deck { margin: 0; max-width: 640px; font-size: 15px; line-height: 1.55; color: var(--pianeta-muted-strong); }
+
+    .sistema-section { margin-bottom: 48px; }
+    .sistema-section-title {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+      color: var(--cta-primary); margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--pianeta-border);
+    }
+    .sistema-section-sub { font-size: 14px; color: var(--pianeta-muted-strong); margin: 0 0 16px; line-height: 1.5; }
+    .sistema-body { font-size: 15px; line-height: 1.65; color: var(--pianeta-text); margin: 0; }
+    .sistema-flowline { font-size: 15px; line-height: 1.7; color: var(--pianeta-text); margin: 0 0 24px; }
+    .sistema-source { font-size: 13px; color: var(--pianeta-muted); margin: 16px 0 0; }
+    .sistema-inline-link { color: var(--cta-primary); font-weight: 600; text-decoration: none; }
+    .sistema-inline-link:hover { text-decoration: underline; }
+
+    .pipeline-row { display: flex; align-items: stretch; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+    .pipeline-card {
+      flex: 0 0 220px; padding: 16px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border);
+      border-radius: 12px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .pipeline-card[data-stato='in costruzione'] { border-style: dashed; opacity: 0.85; }
+    .pipeline-stato { margin: 0; font-size: 11px; font-weight: 600; color: var(--pianeta-muted); }
+    .pipeline-nome { margin: 0; font-size: 15px; font-weight: 800; color: var(--pianeta-text); }
+    .pipeline-cosa { margin: 0; font-size: 12px; line-height: 1.5; color: var(--pianeta-muted-strong); flex: 1; }
+    .pipeline-nota { margin: 0; font-size: 11px; line-height: 1.5; color: var(--pianeta-muted); font-style: italic; }
+    .pipeline-link { margin-top: 4px; font-size: 12px; font-weight: 600; color: var(--cta-primary); text-decoration: none; }
+    .pipeline-link:hover { text-decoration: underline; }
+    .pipeline-arrow { display: flex; align-items: center; font-size: 18px; color: var(--pianeta-muted); flex: 0 0 auto; }
+
+    .fondazione-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 700px) { .fondazione-grid { grid-template-columns: 1fr; } .pipeline-row { flex-direction: column; } .pipeline-arrow { transform: rotate(90deg); align-self: center; } .pipeline-card { flex-basis: auto; } }
+    .fondazione-card { padding: 16px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 10px; }
+    .fondazione-nome { margin: 0 0 4px; font-size: 13px; font-weight: 700; color: var(--pianeta-text); }
+    .fondazione-cosa { margin: 0; font-size: 12px; line-height: 1.5; color: var(--pianeta-muted-strong); }
+
+    .sistema-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--pianeta-border); font-size: 12px; color: var(--pianeta-muted); }
+  </style>
+</BaseLayout>
