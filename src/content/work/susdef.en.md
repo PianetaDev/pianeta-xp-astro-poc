@@ -12,7 +12,7 @@ links:
   live: "https://susdef.pianeta.green"
   bulletin: ["percorso-susdef"]
 locale: en
-draft: true
+draft: false
 type: work
 tags: ["ux", "accessibility", "archive", "foundations", "sustainability", "wcag"]
 tour:
