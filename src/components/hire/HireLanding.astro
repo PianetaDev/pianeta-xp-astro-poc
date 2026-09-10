@@ -48,23 +48,6 @@ const cfg = {
     <span class="proof-names">{FOUNDATIONS.map((f) => f.name).join(' · ')}</span>
   </div></section>
 
-  <!-- OFFERTE -->
-  <section id="offerte" class="sec"><div class="wrap">
-    <h2 class="sec-h2">{S.offersTitle}</h2>
-    <div class="offers">
-      {OFFERS.map((o) => (
-        <a href={`${hirePrefix}/${o.slug}`} class="offer-card" style={`border-top:3px solid ${accents[o.accent]}`}>
-          <div class="offer-price">{o.price}</div>
-          <h3 class="offer-name">{o.emoji} {o.name}</h3>
-          <p class="offer-forwho">{o.forWho}</p>
-          <ul class="offer-bullets">{o.bullets.map((b) => <li>✓ {b}</li>)}</ul>
-          <span class="offer-link" style={`color:${accents[o.accent]}`}>{S.offerMore}</span>
-        </a>
-      ))}
-    </div>
-    <p class="risk-line">{S.riskLine}</p>
-  </div></section>
-
   <!-- LAVORI IN SCROLL -->
   <section id="lavori" class="sec sec-soft"><div class="wrap">
     <div class="sec-head">
@@ -104,6 +87,23 @@ const cfg = {
       </div>
       <span class="fond-cta-link">{S.platCta}</span>
     </a>
+  </div></section>
+
+  <!-- OFFERTE -->
+  <section id="offerte" class="sec"><div class="wrap">
+    <h2 class="sec-h2">{S.offersTitle}</h2>
+    <div class="offers">
+      {OFFERS.map((o) => (
+        <a href={`${hirePrefix}/${o.slug}`} class="offer-card" style={`border-top:3px solid ${accents[o.accent]}`}>
+          <div class="offer-price">{o.price}</div>
+          <h3 class="offer-name">{o.emoji} {o.name}</h3>
+          <p class="offer-forwho">{o.forWho}</p>
+          <ul class="offer-bullets">{o.bullets.map((b) => <li>✓ {b}</li>)}</ul>
+          <span class="offer-link" style={`color:${accents[o.accent]}`}>{S.offerMore}</span>
+        </a>
+      ))}
+    </div>
+    <p class="risk-line">{S.riskLine}</p>
   </div></section>
 
   <!-- CLIENTI -->
@@ -165,19 +165,20 @@ const cfg = {
   </div></section>
 
   <!-- TESTIMONIALS -->
-  <section class="sec"><div class="wrap wrap-narrow">
-    <h2 class="sec-h2 center">{S.testiTitle}</h2>
+  {TESTIMONIALS.length > 0 && (
+  <section class=”sec”><div class=”wrap wrap-narrow”>
+    <h2 class=”sec-h2 center”>{S.testiTitle}</h2>
     {TESTIMONIALS.map((tt) => (
-      <figure class="testi">
-        {tt.draft && <span class="testi-draft">{S.testiDraft}</span>}
-        <blockquote class="testi-quote">“{tt.quote}”</blockquote>
-        <figcaption class="testi-by">
-          <span class="testi-avatar">{tt.initials}</span>
-          <span><strong>{tt.name}</strong>{tt.url && <a href={tt.url} target="_blank" rel="noopener"> · {tt.org} ↗</a>}</span>
+      <figure class=”testi”>
+        <blockquote class=”testi-quote”>”{tt.quote}”</blockquote>
+        <figcaption class=”testi-by”>
+          <span class=”testi-avatar”>{tt.initials}</span>
+          <span><strong>{tt.name}</strong>{tt.url && <a href={tt.url} target=”_blank” rel=”noopener”> · {tt.org} ↗</a>}</span>
         </figcaption>
       </figure>
     ))}
   </div></section>
+  )}
 
   <!-- ALBA -->
   <section class="alba-band"><div class="wrap alba-inner">
