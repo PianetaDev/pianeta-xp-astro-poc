@@ -35,6 +35,7 @@ const searching = ref(false)
 const showLanding = ref(true)
 const landingClosing = ref(false)
 const similarLoading = ref(false)
+const copyLinkState = ref<'idle' | 'copied'>('idle')
 
 let engine: MediaCloudEngine | null = null
 
@@ -113,7 +114,12 @@ function clearFilters() {
 }
 
 onMounted(async () => {
+  // Deep-link: skip landing immediately before fetching so the user never sees it
+  const photoId = new URLSearchParams(window.location.search).get('photo')
+  if (photoId) showLanding.value = false
+
   await loadPhotos()
+
   if (containerRef.value) {
     engine = new MediaCloudEngine({
       container: containerRef.value,
@@ -122,6 +128,12 @@ onMounted(async () => {
       onProjectClick: (slug) => { projectFilter.value = slug },
     })
     syncEngine()
+  }
+
+  // After photos are loaded, open the deep-linked photo
+  if (photoId) {
+    const photo = photos.value.find((p) => p.id === photoId)
+    if (photo) selected.value = photo
   }
 })
 
@@ -172,6 +184,23 @@ function handleKeydown(e: KeyboardEvent) {
 
 onMounted(() => window.addEventListener('keydown', handleKeydown))
 onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
+
+// Permalink: sync ?photo=<id> in URL when selection changes
+watch(selected, (photo) => {
+  const url = new URL(window.location.href)
+  if (photo) {
+    url.searchParams.set('photo', photo.id)
+  } else {
+    url.searchParams.delete('photo')
+  }
+  window.history.pushState({}, '', url.toString())
+})
+
+function copyPhotoLink() {
+  navigator.clipboard.writeText(window.location.href)
+  copyLinkState.value = 'copied'
+  setTimeout(() => { copyLinkState.value = 'idle' }, 2000)
+}
 </script>
 
 <template>
@@ -224,7 +253,12 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
     <!-- Photo lightbox -->
     <div v-if="selected" class="media-detail-backdrop" @click="selected = null">
       <aside class="media-detail" @click.stop>
-        <button class="media-detail-close" @click="selected = null">✕</button>
+        <div class="media-detail-header">
+          <button class="media-detail-close" @click="selected = null">✕</button>
+          <button class="media-copy-link" @click="copyPhotoLink">
+            {{ copyLinkState === 'copied' ? 'Copiato!' : 'Copia link' }}
+          </button>
+        </div>
         <div class="media-detail-media">
           <img
             v-if="selected.thumbnail_path"
@@ -414,18 +448,32 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
   max-height: 90vh;
   overflow-y: auto;
   padding: 1.5rem;
-  position: relative;
+}
+.media-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
 }
 .media-detail-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   background: none;
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--pianeta-muted, #666);
+  padding: 0;
 }
+.media-copy-link {
+  background: none;
+  border: 1px solid var(--pianeta-border, #ddd);
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  color: var(--pianeta-muted, #666);
+  transition: color 0.15s, border-color 0.15s;
+}
+.media-copy-link:hover { color: var(--cta-primary, #FF6B33); border-color: var(--cta-primary, #FF6B33); }
 .media-detail-img {
   width: 100%;
   border-radius: 8px;
