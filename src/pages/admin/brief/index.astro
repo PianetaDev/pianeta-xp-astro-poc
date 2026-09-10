@@ -10,7 +10,7 @@ if (!isAdminAuthed(Astro.cookies)) {
 }
 
 const ANCHORS = [
-  { n: 1, phrase: 'Sustainable Creativity dal 2016', livello: 'Identitario', touchpoint: 'Home, footer, bio' },
+  { n: 1, phrase: 'Sustainable Creativity', livello: 'Identitario', touchpoint: 'Home, footer, bio' },
   { n: 2, phrase: 'Studio nomade · Pianeta-centric', livello: 'Identitario', touchpoint: 'About/Manifesto, "Chi siamo"' },
   { n: 3, phrase: 'Co-autori dei vostri progetti', livello: 'Commerciale', touchpoint: 'Sales mail, pitch' },
   { n: 4, phrase: 'Trasformiamo brief in opportunità', livello: 'Commerciale', touchpoint: 'Home, sales deck' },
@@ -66,7 +66,7 @@ const NON_USARE = [
     </header>
 
     <section class="brief-section brief-hero">
-      <p class="brief-tagline">Sustainable Creativity <span>dal 2016</span></p>
+      <p class="brief-tagline">Sustainable Creativity</p>
       <p class="brief-descriptor">Design &amp; Technology</p>
       <p class="brief-claim">— Human to Planet —</p>
     </section>
@@ -204,7 +204,6 @@ const NON_USARE = [
       margin-bottom: 48px;
     }
     .brief-tagline { margin: 0 0 4px; font-size: 28px; font-weight: 900; color: var(--pianeta-text); }
-    .brief-tagline span { color: var(--cta-primary); }
     .brief-descriptor { margin: 0 0 12px; font-size: 15px; font-weight: 600; color: var(--pianeta-muted-strong); text-transform: uppercase; letter-spacing: 1px; }
     .brief-claim { margin: 0; font-size: 14px; font-style: italic; color: var(--pianeta-muted); }
 
