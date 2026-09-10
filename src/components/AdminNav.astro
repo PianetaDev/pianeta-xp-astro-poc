@@ -1,11 +1,12 @@
 ---
 interface Props {
-  current: 'leads' | 'campaigns' | 'content' | 'contacts' | 'brief';
+  current: 'sistema' | 'leads' | 'campaigns' | 'content' | 'contacts' | 'brief';
 }
 
 const { current } = Astro.props;
 
 const LINKS = [
+  { key: 'sistema', href: '/admin/sistema', label: 'Sistema' },
   { key: 'leads', href: '/admin/leads', label: 'Leads' },
   { key: 'campaigns', href: '/admin/campaigns', label: 'Campagne' },
   { key: 'content', href: '/admin/content', label: 'Contenuti' },
