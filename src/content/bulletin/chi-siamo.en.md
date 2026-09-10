@@ -60,4 +60,4 @@ For the Pianeta.Satellite freelance network: [satellite@pianeta.studio](mailto:s
 
 ---
 
-*Sustainable Creativity since 2016. A nomadic studio. Co-authors of your projects. Human to Planet.*
+*Sustainable Creativity. A nomadic studio. Co-authors of your projects. Human to Planet.*
