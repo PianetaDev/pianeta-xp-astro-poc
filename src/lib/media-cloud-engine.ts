@@ -34,6 +34,8 @@ export interface MediaPhoto {
   /** Cache per il clustering Three.js — fonte di verità: pianeta_media_usages */
   project_slug: string | null;
   tags: string[];
+  is_favorite: boolean;
+  metadata: Record<string, unknown>;
   photographer: string | null;
   captured_at: string | null;
   /** Pagine del sito che usano questa foto (many-to-many) */

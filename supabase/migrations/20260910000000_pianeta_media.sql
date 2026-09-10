@@ -25,6 +25,10 @@ CREATE TABLE IF NOT EXISTS pianeta_media_photos (
   project_slug      text,
   -- Tag liberi per filtri UI (es. "branding", "web", "print")
   tags              text[] DEFAULT '{}',
+  -- Segnala le foto migliori per articoli / selezione editoriale
+  is_favorite       boolean DEFAULT false,
+  -- Escape-hatch per metadati futuri non ancora tipizzati (EXIF extra, ecc.)
+  metadata          jsonb DEFAULT '{}',
   photographer      text,
   captured_at       timestamptz,
   gps_lat           double precision,
