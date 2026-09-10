@@ -2,7 +2,7 @@
 title: "Il percorso Susdef: dall'ascolto alla proposta che va oltre"
 description: "Fondazione Sviluppo Sostenibile aveva esigenze chiare e trent'anni di archivio documentale da far funzionare meglio. Siamo partiti da lì — non dalla nostra soluzione preferita. Il percorso, e cosa ha aperto."
 date: 2026-08-27
-draft: true
+draft: false
 locale: it
 tags: ["cms", "archivio", "nuxt", "payload-cms", "sostenibilità", "metodo"]
 type: bulletin
