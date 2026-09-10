@@ -8,7 +8,8 @@ interface Props { locale?: Locale; }
 const { locale = 'it' } = Astro.props;
 const S = HIRE_STRINGS[locale];
 const OFFERS = getOffers(locale);
-const { works: WORKS, team: TEAM, clients: CLIENTS, about: ABOUT, testimonials: TESTIMONIALS, foundations: FOUNDATIONS } = getShowcase(locale);
+const { works: WORKS, team: TEAM, clients: CLIENTS, about: ABOUT, testimonials: ALL_TESTIMONIALS, foundations: FOUNDATIONS } = getShowcase(locale);
+const TESTIMONIALS = ALL_TESTIMONIALS.filter((t) => !t.draft);
 
 const accents: Record<string, string> = { green: '#1f7a3a', orange: '#FF6B33', dark: '#5a4fcf', blue: '#1f5b8f' };
 const R = 43;
@@ -38,7 +39,7 @@ const cfg = {
     <div class="wrap">
       <h1 class="hero-h1">{S.heroPre}<em>{S.heroEm}</em>{S.heroPost}</h1>
       <p class="hero-sub">{S.heroSub}</p>
-      <a href="#offerte" class="hero-cta">{S.heroCta}</a>
+      <a href="#lavori" class="hero-cta">{S.heroCta}</a>
     </div>
   </section>
 
@@ -46,23 +47,6 @@ const cfg = {
   <section class="proof-band"><div class="wrap proof-inner">
     <span class="proof-label">{S.proofBand}</span>
     <span class="proof-names">{FOUNDATIONS.map((f) => f.name).join(' · ')}</span>
-  </div></section>
-
-  <!-- OFFERTE -->
-  <section id="offerte" class="sec"><div class="wrap">
-    <h2 class="sec-h2">{S.offersTitle}</h2>
-    <div class="offers">
-      {OFFERS.map((o) => (
-        <a href={`${hirePrefix}/${o.slug}`} class="offer-card" style={`border-top:3px solid ${accents[o.accent]}`}>
-          <div class="offer-price">{o.price}</div>
-          <h3 class="offer-name">{o.emoji} {o.name}</h3>
-          <p class="offer-forwho">{o.forWho}</p>
-          <ul class="offer-bullets">{o.bullets.map((b) => <li>✓ {b}</li>)}</ul>
-          <span class="offer-link" style={`color:${accents[o.accent]}`}>{S.offerMore}</span>
-        </a>
-      ))}
-    </div>
-    <p class="risk-line">{S.riskLine}</p>
   </div></section>
 
   <!-- LAVORI IN SCROLL -->
@@ -104,6 +88,23 @@ const cfg = {
       </div>
       <span class="fond-cta-link">{S.platCta}</span>
     </a>
+  </div></section>
+
+  <!-- OFFERTE -->
+  <section id="offerte" class="sec"><div class="wrap">
+    <h2 class="sec-h2">{S.offersTitle}</h2>
+    <div class="offers">
+      {OFFERS.map((o) => (
+        <a href={`${hirePrefix}/${o.slug}`} class="offer-card" style={`border-top:3px solid ${accents[o.accent]}`}>
+          <div class="offer-price">{o.price}</div>
+          <h3 class="offer-name">{o.emoji} {o.name}</h3>
+          <p class="offer-forwho">{o.forWho}</p>
+          <ul class="offer-bullets">{o.bullets.map((b) => <li>✓ {b}</li>)}</ul>
+          <span class="offer-link" style={`color:${accents[o.accent]}`}>{S.offerMore}</span>
+        </a>
+      ))}
+    </div>
+    <p class="risk-line">{S.riskLine}</p>
   </div></section>
 
   <!-- CLIENTI -->
@@ -164,20 +165,21 @@ const cfg = {
     </div>
   </div></section>
 
-  <!-- TESTIMONIALS -->
-  <section class="sec"><div class="wrap wrap-narrow">
-    <h2 class="sec-h2 center">{S.testiTitle}</h2>
-    {TESTIMONIALS.map((tt) => (
-      <figure class="testi">
-        {tt.draft && <span class="testi-draft">{S.testiDraft}</span>}
-        <blockquote class="testi-quote">“{tt.quote}”</blockquote>
-        <figcaption class="testi-by">
-          <span class="testi-avatar">{tt.initials}</span>
-          <span><strong>{tt.name}</strong>{tt.url && <a href={tt.url} target="_blank" rel="noopener"> · {tt.org} ↗</a>}</span>
-        </figcaption>
-      </figure>
-    ))}
-  </div></section>
+  <!-- TESTIMONIALS — nascosto se non ci sono testimonianze pubblicate -->
+  {TESTIMONIALS.length > 0 && (
+    <section class=”sec”><div class=”wrap wrap-narrow”>
+      <h2 class=”sec-h2 center”>{S.testiTitle}</h2>
+      {TESTIMONIALS.map((tt) => (
+        <figure class=”testi”>
+          <blockquote class=”testi-quote”>”{tt.quote}”</blockquote>
+          <figcaption class=”testi-by”>
+            <span class=”testi-avatar”>{tt.initials}</span>
+            <span><strong>{tt.name}</strong>{tt.url && <a href={tt.url} target=”_blank” rel=”noopener”> · {tt.org} ↗</a>}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div></section>
+  )}
 
   <!-- ALBA -->
   <section class="alba-band"><div class="wrap alba-inner">
