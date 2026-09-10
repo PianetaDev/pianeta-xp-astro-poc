@@ -16,6 +16,13 @@ import * as THREE from 'three';
 // Types
 // ---------------------------------------------------------------------------
 
+export interface MediaUsage {
+  id: string;
+  content_type: 'work' | 'bulletin' | 'services' | 'lab' | 'team' | 'careers';
+  content_slug: string;
+  field: 'cover' | 'inline' | 'og' | 'thumbnail';
+}
+
 export interface MediaPhoto {
   id: string;
   storage_path: string;
@@ -24,10 +31,13 @@ export interface MediaPhoto {
   pos_x: number | null;
   pos_y: number | null;
   color_avg_hex: string | null;
+  /** Cache per il clustering Three.js — fonte di verità: pianeta_media_usages */
   project_slug: string | null;
   tags: string[];
   photographer: string | null;
   captured_at: string | null;
+  /** Pagine del sito che usano questa foto (many-to-many) */
+  pianeta_media_usages: MediaUsage[];
 }
 
 export interface CloudEngineOptions {

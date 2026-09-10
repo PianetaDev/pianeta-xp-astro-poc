@@ -1,7 +1,7 @@
 // GET  /api/media/photos — list published Pianeta media photos (canvas load)
 // POST /api/media/photos — staff bulk ingest (bearer-token protected)
 import type { APIRoute } from 'astro';
-import { mediaSupabaseService, MEDIA_BUCKET, PHOTO_SELECT_FIELDS } from '../../../lib/server/media-supabase';
+import { mediaSupabaseService, PHOTO_SELECT_FIELDS } from '../../../lib/server/media-supabase';
 import { env } from '../../../lib/server/env';
 import { timingSafeEqual } from 'node:crypto';
 
@@ -45,7 +45,13 @@ export const POST: APIRoute = async ({ request }) => {
   const provided = authorization.startsWith('Bearer ') ? authorization.slice(7).trim() : '';
   if (!provided || !tokenMatches(provided, uploadToken)) return json({ error: 'Unauthorized' }, 401);
 
-  let body: { photos?: { storagePath: string; projectSlug?: string | null }[] };
+  type UsageInput = { contentType: string; contentSlug: string; field?: string };
+  type PhotoInput = {
+    storagePath: string;
+    /** Usages many-to-many: dove viene usata questa foto sul sito */
+    usages?: UsageInput[];
+  };
+  let body: { photos?: PhotoInput[] };
   try {
     body = await request.json();
   } catch {
@@ -54,16 +60,18 @@ export const POST: APIRoute = async ({ request }) => {
   if (!body?.photos?.length) return json({ error: 'photos array required' }, 400);
 
   const db = mediaSupabaseService();
-  const bucket = MEDIA_BUCKET();
   const results = [];
 
   for (const item of body.photos) {
-    // Insert placeholder row first to get the ID for pipeline
+    // Derive project_slug cache from first usage (for Three.js clustering)
+    const firstUsage = item.usages?.[0];
+    const projectSlugCache = firstUsage ? `${firstUsage.contentType}/${firstUsage.contentSlug}` : null;
+
     const { data: row, error: insertErr } = await db
       .from('pianeta_media_photos')
       .insert({
         storage_path: item.storagePath,
-        project_slug: item.projectSlug ?? null,
+        project_slug: projectSlugCache,
         source: 'staff',
         status: 'published',
       })
@@ -73,6 +81,24 @@ export const POST: APIRoute = async ({ request }) => {
       results.push({ storagePath: item.storagePath, error: insertErr?.message || 'insert failed' });
       continue;
     }
+
+    // Insert usages (ignore duplicates via upsert)
+    if (item.usages?.length) {
+      const usageRows = item.usages.map((u) => ({
+        photo_id: row.id,
+        content_type: u.contentType,
+        content_slug: u.contentSlug,
+        field: u.field ?? 'cover',
+      }));
+      const { error: usageErr } = await db
+        .from('pianeta_media_usages')
+        .upsert(usageRows, { onConflict: 'photo_id,content_type,content_slug,field' });
+      if (usageErr) {
+        results.push({ id: row.id, storagePath: item.storagePath, usageError: usageErr.message });
+        continue;
+      }
+    }
+
     results.push({ id: row.id, storagePath: item.storagePath });
   }
 

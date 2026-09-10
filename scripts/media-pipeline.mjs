@@ -236,6 +236,30 @@ async function computePosition(db, photoId, embeddingInput, projectSlug) {
 // Process one photo
 // ---------------------------------------------------------------------------
 
+/**
+ * Inserisce o aggiorna le righe in pianeta_media_usages per una foto.
+ * usages = [{ content_type, content_slug, field }]
+ * Usa upsert (conflitto su unique key) — idempotente.
+ */
+async function upsertUsages(db, photoId, usages) {
+  if (!usages || usages.length === 0) return;
+  const VALID_TYPES = ['work', 'bulletin', 'services', 'lab', 'team', 'careers'];
+  const VALID_FIELDS = ['cover', 'inline', 'og', 'thumbnail'];
+  const rows = usages
+    .filter((u) => VALID_TYPES.includes(u.content_type) && u.content_slug)
+    .map((u) => ({
+      photo_id: photoId,
+      content_type: u.content_type,
+      content_slug: u.content_slug,
+      field: VALID_FIELDS.includes(u.field) ? u.field : 'cover',
+    }));
+  if (rows.length === 0) return;
+  const { error } = await db.from('pianeta_media_usages').upsert(rows, {
+    onConflict: 'photo_id,content_type,content_slug,field',
+  });
+  if (error) console.error(`upsertUsages failed for ${photoId}:`, error.message);
+}
+
 async function processPhoto(photoId, options = {}) {
   const db = supabase();
 
@@ -247,8 +271,19 @@ async function processPhoto(photoId, options = {}) {
     .single();
   if (fetchErr || !row) throw new Error(`Photo not found: ${photoId} — ${fetchErr?.message}`);
 
-  const { storage_path: storagePath, project_slug: projectSlug } = row;
+  const { storage_path: storagePath } = row;
   console.log(`Processing ${photoId} (${storagePath})…`);
+
+  // Upsert usages if provided (source of truth for "where is this photo used")
+  // and derive project_slug cache from first usage for Three.js clustering.
+  let projectSlug = row.project_slug;
+  if (options.usages?.length) {
+    await upsertUsages(db, photoId, options.usages);
+    const first = options.usages[0];
+    projectSlug = `${first.content_type}/${first.content_slug}`;
+    // Persist the updated cache immediately so computePosition sees it
+    await db.from(TABLE).update({ project_slug: projectSlug }).eq('id', photoId);
+  }
 
   // Download from Supabase Storage
   const { data: blob, error: dlErr } = await db.storage.from(BUCKET).download(storagePath);
@@ -299,6 +334,15 @@ async function processPhoto(photoId, options = {}) {
     .eq('id', photoId);
   if (updateErr) throw new Error(`Update failed: ${updateErr.message}`);
 
+  // Upsert usages se passati come opzione
+  if (options.usages?.length) {
+    await upsertUsages(db, photoId, options.usages);
+    // Aggiorna project_slug come cache dal primo usage (tipo:slug più significativo)
+    const primaryUsage = options.usages[0];
+    const cacheSlug = `${primaryUsage.content_type}:${primaryUsage.content_slug}`;
+    await db.from(TABLE).update({ project_slug: cacheSlug }).eq('id', photoId);
+  }
+
   console.log(`Done: ${photoId} → pos (${position.x.toFixed(1)}, ${position.y.toFixed(1)})`);
   return { photoId, pos: position };
 }
@@ -334,10 +378,19 @@ const args = process.argv.slice(2);
 const photoIdArg = args.find((a) => a.startsWith('--photo-id='))?.split('=')[1];
 const isBatch = args.includes('--batch');
 const skipAnalysis = args.includes('--skip-analysis');
+// --usages='[{"content_type":"work","content_slug":"eclag","field":"cover"}]'
+const usagesArg = args.find((a) => a.startsWith('--usages='))?.split('=').slice(1).join('=');
+let usages = [];
+if (usagesArg) {
+  try { usages = JSON.parse(usagesArg); } catch { console.error('Invalid --usages JSON'); process.exit(1); }
+}
 
 if (!photoIdArg && !isBatch) {
-  console.error('Usage: node scripts/media-pipeline.mjs --photo-id=<uuid>');
+  console.error('Usage: node scripts/media-pipeline.mjs --photo-id=<uuid> [--usages=\'[...]\'] [--skip-analysis]');
   console.error('       node scripts/media-pipeline.mjs --batch [--skip-analysis]');
+  console.error('');
+  console.error('  --usages  JSON array of {content_type,content_slug,field} objects');
+  console.error('            es: --usages=\'[{"content_type":"work","content_slug":"eclag","field":"cover"}]\'');
   process.exit(1);
 }
 
@@ -345,7 +398,7 @@ try {
   if (isBatch) {
     await processBatch({ skipAnalysis });
   } else {
-    await processPhoto(photoIdArg, { skipAnalysis });
+    await processPhoto(photoIdArg, { skipAnalysis, usages });
   }
 } catch (err) {
   console.error('Pipeline error:', err.message);

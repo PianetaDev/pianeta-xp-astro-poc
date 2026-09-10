@@ -29,5 +29,7 @@ export function mediaSupabaseService(): SupabaseClient {
 
 export const MEDIA_BUCKET = () => env('PIANETA_MEDIA_BUCKET') || 'pianeta-media-photos';
 
+// Seleziona i campi foto + usages annidati (join via Supabase embedded select).
+// usages è la fonte di verità per "dove viene usata questa foto".
 export const PHOTO_SELECT_FIELDS =
-  'id, storage_path, thumbnail_path, caption, pos_x, pos_y, color_avg_hex, project_slug, tags, photographer, captured_at, gps_lat, gps_lng';
+  'id, storage_path, thumbnail_path, caption, pos_x, pos_y, color_avg_hex, project_slug, tags, photographer, captured_at, gps_lat, gps_lng, pianeta_media_usages(id, content_type, content_slug, field)';

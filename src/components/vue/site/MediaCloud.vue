@@ -6,8 +6,23 @@
  * Pattern: stessa struttura di ContactsBoard.vue — thin wrapper Vue su logica
  * TS pura, senza dipendenze React o Vue aggiuntive rispetto allo stack esistente.
  */
-import { ref, onMounted, onUnmounted, watch } from 'vue'
-import { MediaCloudEngine, type MediaPhoto } from '../../../lib/media-cloud-engine'
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
+import { MediaCloudEngine, type MediaPhoto, type MediaUsage } from '../../../lib/media-cloud-engine'
+
+/** Costruisce l'URL interno per un usage — /work/slug, /bulletin/slug, ecc. */
+function usageUrl(u: MediaUsage): string {
+  return `/${u.content_type}/${u.content_slug}`
+}
+
+/** Label human-readable del content_type */
+const CONTENT_TYPE_LABELS: Record<string, string> = {
+  work: 'Work',
+  bulletin: 'Bulletin',
+  services: 'Servizi',
+  lab: 'Lab',
+  team: 'Team',
+  careers: 'Careers',
+}
 
 const containerRef = ref<HTMLDivElement | null>(null)
 const photos = ref<MediaPhoto[]>([])
@@ -234,8 +249,20 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
         </div>
         <div class="media-detail-info">
           <p class="media-detail-caption">{{ selected.caption || 'Nessuna didascalia' }}</p>
-          <p v-if="selected.project_slug" class="media-detail-project">{{ selected.project_slug }}</p>
           <p v-if="selected.photographer" class="media-detail-photographer">{{ selected.photographer }}</p>
+          <!-- Usages: link cliccabili alle pagine del sito che usano questa foto -->
+          <div v-if="selected.pianeta_media_usages?.length" class="media-detail-usages">
+            <p class="media-detail-usages-label">Usata in</p>
+            <ul class="media-detail-usages-list">
+              <li v-for="u in selected.pianeta_media_usages" :key="u.id">
+                <a :href="usageUrl(u)" class="media-usage-link">
+                  <span class="media-usage-type">{{ CONTENT_TYPE_LABELS[u.content_type] ?? u.content_type }}</span>
+                  <span class="media-usage-slug">{{ u.content_slug }}</span>
+                  <span v-if="u.field !== 'cover'" class="media-usage-field">({{ u.field }})</span>
+                </a>
+              </li>
+            </ul>
+          </div>
           <button
             type="button"
             class="media-see-similar"
@@ -442,12 +469,49 @@ onUnmounted(() => window.removeEventListener('keydown', handleKeydown))
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
 }
-.media-detail-project,
 .media-detail-photographer {
   font-size: 0.8rem;
   color: var(--pianeta-muted, #666);
   margin: 0.2rem 0;
 }
+.media-detail-usages {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--pianeta-border, #eee);
+}
+.media-detail-usages-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pianeta-muted, #999);
+  margin-bottom: 0.4rem;
+}
+.media-detail-usages-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.media-usage-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--cta-primary, #FF6B33);
+  text-decoration: none;
+}
+.media-usage-link:hover { text-decoration: underline; }
+.media-usage-type {
+  font-weight: 600;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pianeta-muted, #999);
+}
+.media-usage-slug { color: var(--cta-primary, #FF6B33); }
+.media-usage-field { color: var(--pianeta-muted, #bbb); font-size: 0.75rem; }
 .media-see-similar {
   margin-top: 1rem;
   display: block;

@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS pianeta_media_photos (
   color_palette     text[] DEFAULT '{}',
   pos_x             double precision,
   pos_y             double precision,
-  -- Raggruppamento per progetto (slug del case study, es. "bc-rebrand")
+  -- Cache di clustering derivata dal primo usage (content_type:content_slug).
+  -- Fonte di verità: pianeta_media_usages. Serve solo per il layout Three.js.
   project_slug      text,
   -- Tag liberi per filtri UI (es. "branding", "web", "print")
   tags              text[] DEFAULT '{}',
@@ -35,6 +36,37 @@ CREATE TABLE IF NOT EXISTS pianeta_media_photos (
   created_at        timestamptz DEFAULT now(),
   updated_at        timestamptz DEFAULT now()
 );
+
+-- Tabella many-to-many: dove ogni foto viene usata sul sito.
+-- Una foto può essere cover di un work, inline in un bulletin, ecc.
+-- content_type rispecchia la struttura delle collezioni Astro di xp.pianeta.studio.
+CREATE TABLE IF NOT EXISTS pianeta_media_usages (
+  id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  photo_id      uuid NOT NULL REFERENCES pianeta_media_photos(id) ON DELETE CASCADE,
+  content_type  text NOT NULL
+                CHECK (content_type IN ('work','bulletin','services','lab','team','careers')),
+  content_slug  text NOT NULL,
+  field         text NOT NULL DEFAULT 'cover'
+                CHECK (field IN ('cover','inline','og','thumbnail')),
+  created_at    timestamptz DEFAULT now(),
+  UNIQUE (photo_id, content_type, content_slug, field)
+);
+
+CREATE INDEX IF NOT EXISTS idx_pianeta_media_usages_photo
+  ON pianeta_media_usages(photo_id);
+CREATE INDEX IF NOT EXISTS idx_pianeta_media_usages_content
+  ON pianeta_media_usages(content_type, content_slug);
+
+-- RLS usages: lettura pubblica (segue la stessa policy dei published photos).
+ALTER TABLE pianeta_media_usages ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "pianeta_media_usages_public_read" ON pianeta_media_usages
+  FOR SELECT USING (
+    EXISTS (
+      SELECT 1 FROM pianeta_media_photos p
+      WHERE p.id = photo_id AND p.status = 'published'
+    )
+  );
 
 CREATE INDEX IF NOT EXISTS idx_pianeta_media_photos_status
   ON pianeta_media_photos(status);
