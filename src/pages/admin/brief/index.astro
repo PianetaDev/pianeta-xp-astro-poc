@@ -2,12 +2,32 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import AdminNav from '../../../components/AdminNav.astro';
 import { isAdminAuthed } from '../../../lib/server/admin-session';
+import fs from 'node:fs';
+import path from 'node:path';
+import MarkdownIt from 'markdown-it';
 
 export const prerender = false;
 
 if (!isAdminAuthed(Astro.cookies)) {
   return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
 }
+
+const md = new MarkdownIt({ html: false, linkify: true, typographer: true });
+
+const projectRoot = process.cwd();
+
+function readDoc(relPath: string): { html: string; available: boolean } {
+  const abs = path.join(projectRoot, relPath);
+  try {
+    const raw = fs.readFileSync(abs, 'utf-8');
+    return { html: md.render(raw), available: true };
+  } catch {
+    return { html: '', available: false };
+  }
+}
+
+const personasDoc = readDoc('docs/strategy/personas-pianeta.md');
+const voiceDoc = readDoc('_KB_APPROVATA/brand/voice.md');
 
 const ANCHORS = [
   { n: 1, phrase: 'Sustainable Creativity', livello: 'Identitario', touchpoint: 'Home, footer, bio' },
@@ -177,6 +197,42 @@ const NON_USARE = [
       <p class="brief-source">Fonte: <code>_KB_APPROVATA/studio/01_chi-siamo.md</code> — sezione "Identità legale"</p>
     </section>
 
+    <section class="brief-section doc-completi">
+      <h2 class="brief-section-title">Documenti completi</h2>
+      <p class="brief-section-sub">Testo integrale dei documenti sorgente — non solo il riassunto curato sopra.</p>
+
+      <details class="doc-block">
+        <summary class="doc-summary">
+          <span class="doc-summary-name">docs/strategy/personas-pianeta.md</span>
+          <span class="doc-summary-meta">Personas Pianeta — Libreria brand-level · COMPASS (PIA-1358)</span>
+          {!personasDoc.available && <span class="doc-badge-missing">file non disponibile</span>}
+        </summary>
+        <div class="doc-body">
+          {personasDoc.available
+            ? <div class="doc-markdown" set:html={personasDoc.html} />
+            : <p class="doc-missing-msg">File <code>docs/strategy/personas-pianeta.md</code> non trovato in questo ambiente.</p>
+          }
+        </div>
+      </details>
+
+      <details class="doc-block">
+        <summary class="doc-summary">
+          <span class="doc-summary-name">_KB_APPROVATA/brand/voice.md</span>
+          <span class="doc-summary-meta">Voce Pianeta — anchor di comunicazione · da confermare</span>
+          {!voiceDoc.available && <span class="doc-badge-missing">file non nel repo</span>}
+        </summary>
+        <div class="doc-body">
+          {voiceDoc.available
+            ? <div class="doc-markdown" set:html={voiceDoc.html} />
+            : <p class="doc-missing-msg">
+                File <code>_KB_APPROVATA/brand/voice.md</code> non presente in questo repo (Drive Reworld non sincronizzato).
+                Per visualizzare il documento completo, incolla il contenuto del file nel commento di <a href="/PIA/issues/PIA-1359" target="_blank">PIA-1359</a>.
+              </p>
+          }
+        </div>
+      </details>
+    </section>
+
     <footer class="brief-footer">
       <p>
         Questa pagina è il layer L2 ("Lavoro") dell'architettura di conoscenza condivisa —
@@ -246,6 +302,68 @@ const NON_USARE = [
     .eco-card { padding: 18px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 10px; }
     .eco-nome { margin: 0 0 6px; font-size: 14px; font-weight: 700; color: var(--pianeta-text); }
     .eco-testo { margin: 0; font-size: 13px; line-height: 1.5; color: var(--pianeta-muted-strong); }
+
+    /* Documenti completi */
+    .doc-block {
+      border: 1px solid var(--pianeta-border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .doc-summary {
+      display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+      padding: 14px 18px; cursor: pointer; list-style: none;
+      background: var(--pianeta-bg-card);
+      font-size: 13px; font-weight: 600; color: var(--pianeta-text);
+      user-select: none;
+    }
+    .doc-summary::-webkit-details-marker { display: none; }
+    .doc-summary::before {
+      content: '▶'; font-size: 9px; color: var(--pianeta-muted);
+      flex-shrink: 0; transition: transform 0.15s;
+    }
+    details[open] > .doc-summary::before { transform: rotate(90deg); }
+    .doc-summary-name { font-family: monospace; font-size: 12px; color: var(--pianeta-text); font-weight: 700; }
+    .doc-summary-meta { font-size: 12px; color: var(--pianeta-muted); font-weight: 400; }
+    .doc-badge-missing {
+      font-size: 11px; font-weight: 600; color: #856404;
+      background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 2px 8px;
+    }
+    .doc-body {
+      padding: 20px 24px;
+      border-top: 1px solid var(--pianeta-border);
+      max-height: 600px; overflow-y: auto;
+    }
+    .doc-missing-msg {
+      font-size: 13px; color: var(--pianeta-muted-strong); margin: 0;
+    }
+    .doc-missing-msg code { font-size: 11px; background: var(--pianeta-bg-card); padding: 2px 6px; border-radius: 4px; }
+    .doc-missing-msg a { color: var(--cta-primary); }
+
+    /* Markdown rendering inside doc-block */
+    .doc-markdown { font-size: 13px; line-height: 1.65; color: var(--pianeta-text); }
+    .doc-markdown h1 { font-size: 18px; font-weight: 900; margin: 0 0 12px; color: var(--pianeta-text); }
+    .doc-markdown h2 { font-size: 14px; font-weight: 700; margin: 20px 0 8px; color: var(--pianeta-text); padding-bottom: 4px; border-bottom: 1px solid var(--pianeta-border); }
+    .doc-markdown h3 { font-size: 13px; font-weight: 700; margin: 16px 0 6px; color: var(--cta-primary); }
+    .doc-markdown p { margin: 0 0 10px; }
+    .doc-markdown ul, .doc-markdown ol { margin: 0 0 10px; padding-left: 20px; }
+    .doc-markdown li { margin-bottom: 4px; }
+    .doc-markdown blockquote {
+      margin: 12px 0; padding: 10px 16px;
+      border-left: 3px solid var(--cta-primary);
+      background: var(--pianeta-bg-card); border-radius: 0 8px 8px 0;
+      color: var(--pianeta-muted-strong);
+    }
+    .doc-markdown blockquote p { margin: 0; }
+    .doc-markdown code { font-size: 11px; background: var(--pianeta-bg-card); padding: 2px 5px; border-radius: 4px; }
+    .doc-markdown pre { background: var(--pianeta-bg-card); padding: 12px 16px; border-radius: 8px; overflow-x: auto; margin: 0 0 12px; }
+    .doc-markdown pre code { background: none; padding: 0; }
+    .doc-markdown table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 12px; }
+    .doc-markdown th, .doc-markdown td { padding: 8px 10px; border-bottom: 1px solid var(--pianeta-border); text-align: left; }
+    .doc-markdown th { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--pianeta-muted); }
+    .doc-markdown hr { border: none; border-top: 1px solid var(--pianeta-border); margin: 16px 0; }
+    .doc-markdown strong { font-weight: 700; }
+    .doc-markdown em { font-style: italic; }
 
     .brief-footer {
       margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--pianeta-border);
