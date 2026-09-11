@@ -1,0 +1,238 @@
+---
+/**
+ * /admin/progetti — Registro clienti e progetti Pianeta.Studio
+ * Raggruppa i progetti sotto il loro cliente (client_organization) quando presente.
+ * PIA-1384
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+import { supabaseService } from '../../../lib/server/supabase';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+interface OrgRow {
+  id: string;
+  name: string;
+  slug: string;
+  created_at: string;
+}
+
+interface ProjectRow {
+  id: string;
+  name: string;
+  slug: string;
+  client_org_id: string | null;
+  created_at: string;
+}
+
+let orgs: OrgRow[] = [];
+let projects: ProjectRow[] = [];
+let fetchError: string | null = null;
+
+try {
+  const sb = supabaseService().schema('pianeta' as any);
+
+  const [orgsResult, projectsResult] = await Promise.all([
+    (sb as any).from('client_organizations').select('id, name, slug, created_at').order('name'),
+    (sb as any).from('client_projects').select('id, name, slug, client_org_id, created_at').order('name'),
+  ]);
+
+  if (orgsResult.error) throw new Error(orgsResult.error.message);
+  if (projectsResult.error) throw new Error(projectsResult.error.message);
+
+  orgs = (orgsResult.data ?? []) as OrgRow[];
+  projects = (projectsResult.data ?? []) as ProjectRow[];
+} catch (err: any) {
+  fetchError = err?.message ?? 'Errore sconosciuto';
+}
+
+// Raggruppa per org
+const orgMap = new Map<string, OrgRow>(orgs.map((o) => [o.id, o]));
+const byOrg = new Map<string, ProjectRow[]>();
+const unlinked: ProjectRow[] = [];
+
+for (const p of projects) {
+  if (p.client_org_id && orgMap.has(p.client_org_id)) {
+    const list = byOrg.get(p.client_org_id) ?? [];
+    list.push(p);
+    byOrg.set(p.client_org_id, list);
+  } else {
+    unlinked.push(p);
+  }
+}
+---
+
+<BaseLayout title="Admin · Progetti" description="Registro clienti e progetti" minimal={true} chrome={false}>
+  <AdminNav current="progetti" />
+  <main class="progetti-admin">
+    <header class="pa-head">
+      <p class="pa-eyebrow">Admin · Interno</p>
+      <h1 class="pa-title">Progetti</h1>
+      <p class="pa-deck">Registro clienti e progetti attivi. I progetti con un'organizzazione cliente sono raggruppati per cliente.</p>
+    </header>
+
+    {fetchError && (
+      <div class="pa-error">
+        <strong>Errore nel caricare i progetti:</strong> {fetchError}
+      </div>
+    )}
+
+    {!fetchError && (
+      <div class="pa-body">
+        {/* Organizzazioni con progetti */}
+        {orgs.map((org) => {
+          const orgProjects = byOrg.get(org.id) ?? [];
+          return (
+            <section class="pa-org-group">
+              <header class="pa-org-header">
+                <span class="pa-org-name">{org.name}</span>
+                <span class="pa-org-count">{orgProjects.length} {orgProjects.length === 1 ? 'progetto' : 'progetti'}</span>
+              </header>
+              {orgProjects.length === 0 ? (
+                <p class="pa-org-empty">Nessun progetto collegato.</p>
+              ) : (
+                <ul class="pa-project-list">
+                  {orgProjects.map((p) => (
+                    <li class="pa-project-item">
+                      <span class="pa-project-name">{p.name}</span>
+                      <span class="pa-project-slug">/{p.slug}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          );
+        })}
+
+        {/* Progetti senza org */}
+        {unlinked.length > 0 && (
+          <section class="pa-org-group pa-unlinked">
+            <header class="pa-org-header">
+              <span class="pa-org-name">Senza organizzazione</span>
+              <span class="pa-org-count">{unlinked.length} {unlinked.length === 1 ? 'progetto' : 'progetti'}</span>
+            </header>
+            <ul class="pa-project-list">
+              {unlinked.map((p) => (
+                <li class="pa-project-item">
+                  <span class="pa-project-name">{p.name}</span>
+                  <span class="pa-project-slug">/{p.slug}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {orgs.length === 0 && unlinked.length === 0 && (
+          <p class="pa-empty">Nessun progetto trovato.</p>
+        )}
+      </div>
+    )}
+  </main>
+
+  <style>
+    .progetti-admin {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .pa-head {
+      margin-bottom: 32px;
+    }
+    .pa-eyebrow {
+      margin: 0 0 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pianeta-muted);
+      font-weight: 600;
+    }
+    .pa-title {
+      margin: 0 0 8px;
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--pianeta-text);
+    }
+    .pa-deck {
+      margin: 0;
+      max-width: 640px;
+      font-size: 14px;
+      color: var(--pianeta-muted);
+    }
+    .pa-error {
+      padding: 16px 20px;
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 10px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: #856404;
+    }
+    .pa-body {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .pa-org-group {
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .pa-unlinked {
+      opacity: 0.75;
+    }
+    .pa-org-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--pianeta-border);
+    }
+    .pa-org-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--pianeta-text);
+    }
+    .pa-org-count {
+      font-size: 12px;
+      color: var(--pianeta-muted);
+    }
+    .pa-project-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .pa-project-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 12px 20px;
+      border-top: 1px solid var(--pianeta-border);
+    }
+    .pa-project-item:first-child {
+      border-top: none;
+    }
+    .pa-project-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pianeta-text);
+    }
+    .pa-project-slug {
+      font-size: 12px;
+      color: var(--pianeta-muted);
+      font-family: monospace;
+    }
+    .pa-org-empty,
+    .pa-empty {
+      padding: 16px 20px;
+      font-size: 13px;
+      color: var(--pianeta-muted);
+      margin: 0;
+    }
+  </style>
+</BaseLayout>
