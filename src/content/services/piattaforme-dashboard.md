@@ -19,7 +19,7 @@ deliverables:
   - "Repo del cliente"
 relatedServices: ["web-sostenibile", "design-system-multi-brand"]
 locale: it
-draft: false
+draft: true
 type: service
 date: 2026-06-27
 ---
