@@ -1,7 +1,7 @@
 ---
 title: "GreenMeter CO₂ audit"
 description: "Measure your website's CO₂ footprint. Page weight, A+→F grade, page-by-page breakdown. Live tool on pianeta.green, assisted audit for implementation."
-category: "data-ai"
+category: "technology"
 processPhase: 4
 icon: "⚡"
 cover: "/og/placeholder.svg"

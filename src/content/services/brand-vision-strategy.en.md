@@ -1,7 +1,7 @@
 ---
 title: "Brand vision & strategy"
 description: "We define the brand vision and a 3-5 year strategic trajectory. Leadership workshops, audit of current positioning, narrative architecture, operational manifesto."
-category: "strategic-design-consultancy"
+category: "creativity"
 processPhase: 1
 icon: "🎯"
 cover: "/og/placeholder.svg"

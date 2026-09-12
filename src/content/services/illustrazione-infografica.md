@@ -1,7 +1,7 @@
 ---
 title: "Illustrazione & infografica"
 description: "Illustrazione editoriale e infografiche scientifiche. Pensate per essere lette, non solo viste — con sistemi di lettura a più livelli."
-category: "visualization-storytelling"
+category: "design"
 processPhase: 2
 icon: "✏️"
 cover: "/og/placeholder.svg"
