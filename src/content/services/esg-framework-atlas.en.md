@@ -19,7 +19,7 @@ deliverables:
   - "12-month roadmap"
 relatedServices: ["pianeta-centric-design-strategy", "greenmeter-audit-co2"]
 locale: en
-draft: false
+draft: true
 type: service
 date: 2026-06-27
 ---
