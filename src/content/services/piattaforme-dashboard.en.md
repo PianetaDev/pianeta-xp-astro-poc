@@ -1,7 +1,7 @@
 ---
 title: "Platforms & dashboards"
 description: "Custom web platforms and business intelligence dashboards. Modular architecture, enterprise authentication, verifiable performance."
-category: "products-systems"
+category: "technology"
 processPhase: 3
 icon: "📊"
 cover: "/og/placeholder.svg"

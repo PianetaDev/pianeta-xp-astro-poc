@@ -1,7 +1,7 @@
 ---
 title: "Brand audit"
 description: "Diagnosi completa dell'identità attuale — consistency, riconoscibilità, gap rispetto agli obiettivi. Report con priorità d'intervento."
-category: "strategic-design-consultancy"
+category: "creativity"
 processPhase: 1
 icon: "🔍"
 cover: "/og/placeholder.svg"

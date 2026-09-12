@@ -1,7 +1,7 @@
 ---
 title: "Apps & digital products"
 description: "End-to-end mobile apps and digital products. Discovery, design, build, launch, evolution — with technical and sustainability constraints in the same brief."
-category: "products-systems"
+category: "technology"
 processPhase: 3
 icon: "📱"
 cover: "/og/placeholder.svg"

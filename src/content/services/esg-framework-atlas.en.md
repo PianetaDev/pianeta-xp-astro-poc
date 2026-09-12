@@ -1,7 +1,7 @@
 ---
 title: "ESG framework — Atlas"
 description: "Proprietary ESG framework that provides a common language between studio, clients, and suppliers. Indicators, metrics, operational guidelines."
-category: "data-ai"
+category: "technology"
 processPhase: 1
 icon: "🗺️"
 cover: "/og/placeholder.svg"

@@ -12,7 +12,7 @@ ogImage: "/og/placeholder.svg"
 hero:
   type: "image"
   src: "/og/placeholder.svg"
-services: ["strategic-design-consultancy"]
+services: ["creativity"]
 team: ["max"]
 links:
   relatedWork: ["aries-towards-smarter-sustainable-world"]

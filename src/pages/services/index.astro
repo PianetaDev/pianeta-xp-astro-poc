@@ -21,14 +21,14 @@ const jsonLd = {
       itemOffered: {
         '@type': 'Service',
         name: s.data.title,
-        category: c.title,
+        category: c.titleIT,
         url: new URL(`/services/${s.id}`, Astro.site).toString(),
       },
     }))
   ),
 };
 ---
-<BaseLayout title="Servizi — Pianeta.Studio" description="Quattro categorie di pratica: Strategic Design Consultancy · Visualization & Storytelling · Products & Systems · Data & AI.">
+<BaseLayout title="Servizi — Pianeta.Studio" description="Tre pilastri: Creatività · Design · Tecnologia. Co-design + AI validation + standard aperti. Niente lock-in.">
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
@@ -37,7 +37,7 @@ const jsonLd = {
     <header class="index-head">
       <p class="index-eyebrow">Sustainable Creativity · Design & Technology</p>
       <h1 class="index-title">I servizi</h1>
-      <p class="index-deck">Quattro aree di pratica che si parlano. Co-design + AI validation + standard aperti. Niente lock-in.</p>
+      <p class="index-deck">Tre pilastri che si parlano. Co-design + AI validation + standard aperti. Niente lock-in.</p>
       <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">Lavoriamo insieme</button>
         <a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>
@@ -62,8 +62,8 @@ const jsonLd = {
         return (
           <article class="services-macro" id={cat.key}>
             <header class="services-macro-head">
-              <h2 class="services-macro-title">{cat.title}</h2>
-              <p class="services-macro-intro">{cat.intro}</p>
+              <h2 class="services-macro-title">{cat.titleIT}</h2>
+              <p class="services-macro-intro">{cat.introIT}</p>
             </header>
 
             <ul class="services-l2-list">

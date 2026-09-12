@@ -13,7 +13,7 @@ const baseSchema = z.object({
 }).passthrough();
 
 const servicesSchemaExt = baseSchema.extend({
-  category: z.enum(['strategic-design-consultancy', 'visualization-storytelling', 'products-systems', 'data-ai']).optional(),
+  category: z.enum(['creativity', 'design', 'technology']).optional(),
   processPhase: z.union([z.number().int().min(1).max(4), z.string()]).optional(),
   icon: z.string().optional(),
   inputClient: z.array(z.string()).optional(),

@@ -1,7 +1,7 @@
 ---
 title: "Neuromarketing Lab"
 description: "AI validation of video and audio campaigns with Swarm Intelligence and Neural Prediction. A quantitative second opinion on creative choices — before you render the video, before you go into production."
-category: "data-ai"
+category: "creativity"
 processPhase: 2
 icon: "🧠"
 cover: "/og/service-creativita-neuromarketing.png"
