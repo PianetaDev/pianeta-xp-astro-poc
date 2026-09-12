@@ -167,14 +167,14 @@ const cfg = {
 
   <!-- TESTIMONIALS — nascosto se non ci sono testimonianze pubblicate -->
   {TESTIMONIALS.length > 0 && (
-    <section class=”sec”><div class=”wrap wrap-narrow”>
-      <h2 class=”sec-h2 center”>{S.testiTitle}</h2>
+    <section class="sec"><div class="wrap wrap-narrow">
+      <h2 class="sec-h2 center">{S.testiTitle}</h2>
       {TESTIMONIALS.map((tt) => (
-        <figure class=”testi”>
-          <blockquote class=”testi-quote”>”{tt.quote}”</blockquote>
-          <figcaption class=”testi-by”>
-            <span class=”testi-avatar”>{tt.initials}</span>
-            <span><strong>{tt.name}</strong>{tt.url && <a href={tt.url} target=”_blank” rel=”noopener”> · {tt.org} ↗</a>}</span>
+        <figure class="testi">
+          <blockquote class="testi-quote">”{tt.quote}”</blockquote>
+          <figcaption class="testi-by">
+            <span class="testi-avatar">{tt.initials}</span>
+            <span><strong>{tt.name}</strong>{tt.url && <a href={tt.url} target="_blank" rel="noopener"> · {tt.org} ↗</a>}</span>
           </figcaption>
         </figure>
       ))}
