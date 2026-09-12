@@ -1,83 +1,70 @@
 ---
-issue: PIA-1386
+issue: PIA-1387
 compiled: 2026-09-12
 author: COMPASS
 status: decisione-emessa
 scope: Naming tecnico (slug enum) — 3 pilastri di /services
 unblocks: Pianeta.Engineer (config.ts + frontmatter) · MUSE (copy intro IT+EN)
+canonical-source: piano in PIA-1387 (Paperclip)
 ---
 
 # Slug enum — 3 pilastri Creatività · Design · Tecnologia
 
+> **Nota:** questo file è il riferimento permanente nel repo per la decisione di naming. La fonte primaria e authoritative è il documento `plan` su [PIA-1387](/PIA/issues/PIA-1387#document-plan).
+
 ## Decisione
 
-I nuovi valori `category` in `config.ts` (enum Zod) sono:
-
-| Pilastro | Slug |
-|---|---|
-| Creatività | `creativita` |
-| Design | `design` |
-| Tecnologia | `tecnologia` |
+| Pilastro IT (label visibile) | Slug enum (`content.config.ts`) | Label EN (`/en/services`) |
+|---|---|---|
+| **Creatività** | `creativity` | Creativity |
+| **Design** | `design` | Design |
+| **Tecnologia** | `technology` | Technology |
 
 ## Ragionamento
 
-**1. Dove compare lo slug**
+### `creativity` — Creatività
 
-Il campo `category` appare in due posti nel codice:
+Gli slug attuali del codebase sono tutti inglesi kebab-case (`strategic-design-consultancy`, `visualization-storytelling`, `products-systems`, `data-ai`). Usare `creativita` (senza accento — gli accenti non appartengono agli slug) introdurrebbe un identifier ibrido IT in un sistema EN. `creativity` è consistente con la convenzione esistente, non ha ambiguità di encoding, e mappa direttamente alla EN label senza strato di traduzione aggiuntivo.
 
-- Come filtro interno: `all.filter((i) => i.data.category === key)` — invisibile all'utente.
-- Come attributo `id` sull'`<article>` in `src/pages/services/index.astro` riga 63: `<article id={cat.key}>` — diventa ancora HTML (`/services#creativita`). Non è un segmento di URL path.
+### `design` — Design
 
-Il label mostrato in UI viene sempre da `SERVICE_CATEGORIES[].title` in `services-categories.ts` — completamente disaccoppiato dallo slug.
+Invariante IT/EN: la stessa stringa funziona sia come identifier tecnico sia come label visibile in entrambe le lingue. Nessuna alternativa da valutare.
 
-**2. Perché italiano (non inglese)**
+### `technology` — Tecnologia
 
-Lo slug attuale è inglese (`strategic-design-consultancy`, `data-ai`, ecc.) come convenzione. Cambiarla a italiano è una scelta consapevole, non un'inconsistenza:
+Stesso ragionamento di `creativity`: `tecnologia` è un ibrido rispetto al pattern EN del codebase. `technology` è il termine tecnico consolidato, privo di ambiguità, e si presta a essere usato direttamente come label EN senza ulteriore mapping.
 
-- I pilastri nascono da un reframe brand-first ("Creatività · Design · Tecnologia"), non da una refactoring tecnica. Lo slug deve riflettere questa rottura.
-- Il sito è bilingue IT+EN, ma entrambe le collection (`services` e `servicesEn`) usano lo stesso campo `category`. Lo slug è un identificatore interno, non una stringa localizzata — va scelto una volta sola.
-- "design" è invariante tra IT e EN: nessuna ambiguità.
-- Slug italiani più corti e leggibili nei tool di debug rispetto agli equivalenti EN (`creativity`, `technology`).
+## Dove appare lo slug nel codice
 
-**3. Accent stripping**
+- **`src/content/config.ts` riga 16** — Zod enum (schema validation):
+  ```ts
+  // DA:
+  category: z.enum(['strategic-design-consultancy', 'visualization-storytelling', 'products-systems', 'data-ai']).optional(),
+  // A:
+  category: z.enum(['creativity', 'design', 'technology']).optional(),
+  ```
+  (stesso change per `servicesEn`)
 
-`creatività` → `creativita` (no accent) — standard per slug tecnici, evita encoding issues nel DOM id e in eventuali query string future.
+- **`src/lib/services-categories.ts`** — `ServiceCategory.key` type union e array `SERVICE_CATEGORIES`:
+  ```ts
+  key: 'creativity' | 'design' | 'technology'
+  ```
+
+- **`src/pages/services/index.astro` riga 63** — attributo `id` su `<article>` → diventa HTML anchor `/services#creativity`. Non è un segmento di URL path.
+
+- **Frontmatter di tutti i 16 file `src/content/services/*.md` e `*.en.md`** — campo `category`.
+
+## Mappatura servizi → slug
+
+Già fissata nella spec `docs/superpowers/specs/2026-09-12-tre-pilastri-servizi-design.md` ([PR #122](https://github.com/PianetaDev/pianeta-xp-astro-poc/pull/122)):
+
+| Slug | Servizi |
+|---|---|
+| `creativity` | brand-audit, brand-positioning, brand-vision-strategy, pianeta-centric-design-strategy, ai-validation-swarm, neuromarketing-lab |
+| `design` | brand-identity-rebranding, editorial-educational-design, illustrazione-infografica, microsites-data-stories, design-system-multi-brand |
+| `technology` | app-prodotti-digitali, web-sostenibile, greenmeter-audit-co2 (+ piattaforme-dashboard, esg-framework-atlas in `draft: true`) |
 
 ## Cosa NON è deciso qui
 
-- Label UI (`title`, `intro`) per ciascun pilastro — spetta a MUSE, separatamente (IT+EN).
-- Mappatura esatta dei 16 servizi → pilastro: già stabilita nella spec `docs/superpowers/specs/2026-09-12-tre-pilastri-servizi-design.md` (PR #122).
-- Posizionamento AI (`ai-validation-swarm`, `neuromarketing-lab`) — restano in `creativita` come placeholder, fuori scope.
-
-## Cosa deve fare Pianeta.Engineer con questo
-
-1. **`src/content/config.ts` riga 16** — sostituire enum:
-   ```ts
-   // DA:
-   category: z.enum(['strategic-design-consultancy', 'visualization-storytelling', 'products-systems', 'data-ai']).optional(),
-   // A:
-   category: z.enum(['creativita', 'design', 'tecnologia']).optional(),
-   ```
-   (stesso change in `servicesEn` — stessa schema)
-
-2. **`src/lib/services-categories.ts`** — sostituire le 4 voci con 3:
-   ```ts
-   key: 'creativita' | 'design' | 'tecnologia'
-   ```
-   Titoli e intro: da brief MUSE (non ancora disponibile — Engineer aspetta entrambe le deliverable).
-
-3. **Frontmatter di tutti i 16 file `src/content/services/*.md` e `*.en.md`** — aggiornare il campo `category` con la mappatura definita nella spec:
-   - `creativita`: brand-audit, brand-positioning, brand-vision-strategy, pianeta-centric-design-strategy, ai-validation-swarm, neuromarketing-lab
-   - `design`: brand-identity-rebranding, editorial-educational-design, illustrazione-infografica, microsites-data-stories, design-system-multi-brand
-   - `tecnologia`: app-prodotti-digitali, web-sostenibile, greenmeter-audit-co2 (+ piattaforme-dashboard e esg-framework-atlas quando torneranno da `draft: true`)
-
-4. **`src/pages/services/index.astro` + `en/services/index.astro`** — aggiornare titolo page (`title`, `description` meta, deck) per riflettere i 3 pilastri. Testo da brief MUSE.
-
-## Dipendenze per Engineer
-
-| Deliverable | Owner | Status |
-|---|---|---|
-| Slug enum (questo doc) | COMPASS | ✅ pronto |
-| Copy IT+EN per ciascun pilastro | MUSE | ⏳ da emettere |
-
-Engineer può iniziare i punti 1, 2 (struttura schema senza titoli definitivi) e 3 (frontmatter) non appena ha questo documento. Il punto 4 (copy UI) richiede il brief MUSE.
+- Label UI (`title`, `intro`) per ciascun pilastro su `/services` — spetta a MUSE (PIA-1388, completato).
+- Posizionamento AI (`ai-validation-swarm`, `neuromarketing-lab`) — restano in `creativity` come placeholder, workstream dedicato separato.
