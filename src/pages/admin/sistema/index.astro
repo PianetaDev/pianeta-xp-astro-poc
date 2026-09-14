@@ -116,28 +116,12 @@ const FONDAZIONE = [
     </section>
 
     <section class="sistema-section">
-      <h2 class="sistema-section-title">Portare Claude Code su Paperclip (nuovo membro del team)</h2>
+      <h2 class="sistema-section-title">Lavorare con Claude + Paperclip</h2>
       <p class="sistema-section-sub">
-        Ogni persona che lavora con gli agenti parla con la propria sessione Claude Code — non condivide quella di Max. Claude scrive su Paperclip per suo conto, come sta succedendo in questa pagina stessa.
-      </p>
-      <ol class="setup-steps">
-        <li>
-          <strong>Account Paperclip</strong> — invitato da un owner (Settings → Team nella board). Serve un account utente normale, non una chiave API: le chiavi API sono solo per gli agenti.
-        </li>
-        <li>
-          <strong>Claude Code installato</strong> sulla propria macchina, e la propria macchina sul tailnet Tailscale del team (Paperclip gira solo in locale sul Mac di Max — senza tailnet non è raggiungibile da nessun'altra macchina).
-        </li>
-        <li>
-          <strong>Connessione</strong> — da terminale, una tantum:
-          <pre class="setup-code"><code>npx paperclipai connect --persona board --api-base {PAPERCLIP_URL}:3100</code></pre>
-          Login interattivo con le proprie credenziali. Salva la sessione in locale sulla propria macchina — non tocca né condivide quella di Max.
-        </li>
-      </ol>
-      <p class="sistema-nota-block">
-        Se il Mac di Max è spento o fuori tailnet, la connessione fallisce per chiunque — stesso limite già indicato per l'accesso diretto alla board.
+        Claude è il modo normale di lavorare con tutto questo sistema — parli con lui, e lui orchestra Paperclip (issue, agenti, PR) per conto tuo. Un solo documento, dalla connessione al primo giro di prova:
       </p>
       <p class="sistema-source">
-        Fatta la connessione → <a href="/admin/sistema/lavorare-con-claude" class="sistema-inline-link">Come lavorare con Claude Code, giorno per giorno →</a>
+        → <a href="/admin/sistema/lavorare-con-claude" class="sistema-inline-link">Lavorare con Claude + Paperclip →</a>
       </p>
     </section>
 
@@ -186,14 +170,5 @@ const FONDAZIONE = [
     .fondazione-cosa { margin: 0; font-size: 12px; line-height: 1.5; color: var(--pianeta-muted-strong); }
 
     .sistema-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--pianeta-border); font-size: 12px; color: var(--pianeta-muted); }
-
-    .setup-steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 14px; }
-    .setup-steps li { font-size: 14px; line-height: 1.6; color: var(--pianeta-text); }
-    .setup-code {
-      margin: 8px 0 0; padding: 12px 14px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border);
-      border-radius: 8px; font-size: 12px; overflow-x: auto; color: var(--pianeta-text);
-    }
-    .setup-code code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
-    .sistema-nota-block { margin: 16px 0 0; font-size: 12px; line-height: 1.5; color: var(--pianeta-muted); font-style: italic; }
   </style>
 </BaseLayout>
