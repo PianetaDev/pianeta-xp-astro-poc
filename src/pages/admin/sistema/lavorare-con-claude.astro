@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+---
+<BaseLayout title="Admin — Lavorare con Claude Code" description="Guida operativa: cartella locale, ciclo di lavoro, primo tutorial, come usare Paperclip" chrome={true} minimal={false} noindex={true}>
+  <AdminNav current="sistema" />
+
+  <div class="guide-page">
+    <header class="guide-head">
+      <p class="guide-eyebrow">Admin · Interno · Guida operativa</p>
+      <h1 class="guide-title">Lavorare con Claude Code</h1>
+      <p class="guide-deck">
+        Non "usare uno strumento" — parlare con Claude come si parla con una persona, e lasciare che sia lui a toccare file, aprire PR, scrivere su Paperclip. Questa pagina spiega il meccanismo, con un giro di prova alla fine.
+      </p>
+      <p class="guide-back"><a href="/admin/sistema">← Torna a Sistema</a></p>
+    </header>
+
+    <section class="guide-section">
+      <h2 class="guide-section-title">1. Il tuo spazio di lavoro</h2>
+      <p class="guide-body">
+        Ogni repo del sito vive in una cartella sul tuo Mac. Per i case study, i bulletin e i servizi è <code class="guide-inline-code">pianeta-xp-astro-poc</code> — te lo clona chi ti fa l'onboarding la prima volta, dopo resta lì.
+      </p>
+      <p class="guide-body">
+        Apri Claude Code <strong>dentro quella cartella</strong>: è da lì che legge i file esistenti e scrive quelli nuovi. Se Claude non trova un file di cui parli, la causa più comune è che la cartella aperta non è quella giusta — dillo, si corregge subito.
+      </p>
+    </section>
+
+    <section class="guide-section">
+      <h2 class="guide-section-title">2. Da dove arrivano le richieste</h2>
+      <p class="guide-body"><strong>A) Un'issue Paperclip assegnata a te</strong> — chiedi a Claude "controlla le mie issue su Paperclip" e te le riassume, oppure incollagli direttamente il link dell'issue.</p>
+      <p class="guide-body"><strong>B) A voce o per iscritto, direttamente a Claude</strong> — come in questa conversazione. Non serve passare da Paperclip per ogni cosa: se sai già cosa ti serve, chiediglielo e basta.</p>
+    </section>
+
+    <section class="guide-section">
+      <h2 class="guide-section-title">3. Il ciclo di lavoro (sempre uguale)</h2>
+      <ol class="guide-steps">
+        <li>Claude crea un branch nuovo — non si lavora mai direttamente su <code class="guide-inline-code">main</code>.</li>
+        <li>Modifica i file necessari.</li>
+        <li>Build locale pulita prima di aprire qualsiasi PR — se la build si rompe, non si apre la PR finché non è a posto.</li>
+        <li>Apre una PR su GitHub.</li>
+        <li><strong>Mai mergiare la propria PR</strong> — serve una revisione indipendente (un agente diverso, o un'altra persona) prima del merge. Regola valida per tutti, incluso Claude quando lavora per me.</li>
+        <li>Dopo il merge, il sito si aggiorna da solo (deploy automatico) — con rarissime eccezioni che Claude ti segnala esplicitamente se capitano.</li>
+      </ol>
+    </section>
+
+    <section class="guide-section">
+      <h2 class="guide-section-title">4. Pubblicare o nascondere un contenuto</h2>
+      <p class="guide-body">
+        Ogni case study, bulletin o servizio ha un campo <code class="guide-inline-code">draft: true</code> o <code class="guide-inline-code">draft: false</code> nel file. <code class="guide-inline-code">true</code> = nascosto da liste, menu e motori di ricerca, ma il link diretto funziona ancora (utile per farlo vedere prima di pubblicare davvero). <code class="guide-inline-code">false</code> = pubblico. Basta chiedere a Claude di cambiarlo.
+      </p>
+    </section>
+
+    <section class="guide-section guide-tutorial">
+      <h2 class="guide-section-title">5. Il tuo primo giro di prova</h2>
+      <p class="guide-body">Quattro cose sicure da provare, in ordine — nessuna tocca nulla di pubblico finché non arrivi al punto 4.</p>
+      <div class="tutorial-steps">
+        <div class="tutorial-step">
+          <p class="tutorial-n">Prova 1 — leggere</p>
+          <p class="tutorial-ask">"Controlla se /work/eclag è online e mostrami il titolo che c'è oggi."</p>
+          <p class="tutorial-what">Claude verifica il sito live, non tocca nulla. Serve a vedere come legge lo stato reale invece di supporre.</p>
+        </div>
+        <div class="tutorial-step">
+          <p class="tutorial-n">Prova 2 — esplorare un file</p>
+          <p class="tutorial-ask">"Apri il file del case study Susdef e dimmi cosa c'è scritto nella descrizione."</p>
+          <p class="tutorial-what">Claude legge un file del repo e te lo riassume — utile per capire come è fatto un contenuto prima di modificarlo.</p>
+        </div>
+        <div class="tutorial-step">
+          <p class="tutorial-n">Prova 3 — una modifica reversibile</p>
+          <p class="tutorial-ask">"Trova un refuso o una frase migliorabile in [scegli un bulletin] e correggila."</p>
+          <p class="tutorial-what">Claude apre branch + PR. Si guarda insieme la PR su GitHub prima di chiedere il merge — è il momento giusto per capire cosa è cambiato e perché.</p>
+        </div>
+        <div class="tutorial-step">
+          <p class="tutorial-n">Prova 4 — vedere il risultato live</p>
+          <p class="tutorial-ask">Dopo la revisione e il merge: "Controlla che la modifica sia online."</p>
+          <p class="tutorial-what">Chiudi il cerchio — richiesta → modifica → revisione → pubblicazione → verifica. Da qui in poi è lo stesso ciclo per qualsiasi cosa, piccola o grande.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section">
+      <h2 class="guide-section-title">6. Usare Paperclip al meglio</h2>
+      <ul class="guide-tips">
+        <li><strong>Un'issue, un obiettivo chiaro.</strong> Meglio tre issue piccole e precise che una grande e vaga — gli agenti lavorano meglio con uno scope netto.</li>
+        <li><strong>Assegna all'agente giusto.</strong> Contenuti → MUSE, decisioni di prodotto/target → COMPASS, codice → Pianeta.Engineer. Se non sai chi, chiedi a Claude — lo sa.</li>
+        <li><strong>Controlla prima di aprirne una nuova.</strong> Cerca se un'issue simile esiste già (anche chiusa) — evita lavoro duplicato.</li>
+        <li><strong>Leggi i commenti, non solo lo stato.</strong> Un'issue "done" ha nel thread cosa è stato fatto davvero e perché — utile prima di fidarsi al 100%.</li>
+        <li><strong>Non serve dare conferme per ogni passo.</strong> Il flusso (branch → PR → revisione indipendente → merge) è già la garanzia — chiedere "procedo?" ad ogni passaggio rallenta senza aggiungere sicurezza reale.</li>
+      </ul>
+    </section>
+
+    <section class="guide-section">
+      <h2 class="guide-section-title">7. Usare Paperclip dalla UI, senza Claude</h2>
+      <p class="guide-body">
+        Non serve sempre aprire Claude Code. Per controllare stato, leggere, commentare o approvare, la board web basta da sola — via browser, allo stesso indirizzo a cui punta Claude (<code class="guide-inline-code">http://macbook-air-di-massimiliano.tail05dd1c.ts.net:3100</code>, serve comunque essere sul tailnet).
+      </p>
+      <p class="guide-body">Cosa puoi fare direttamente da lì, senza nessuna sessione Claude aperta:</p>
+      <ul class="guide-tips">
+        <li><strong>Vedere le tue issue assegnate</strong> — cosa c'è da fare, in che stato è (todo, in corso, in revisione, bloccata, fatta).</li>
+        <li><strong>Leggere i thread</strong> — cosa ha scritto e fatto un agente, con link a PR/documenti.</li>
+        <li><strong>Commentare</strong> — scrivere una risposta o una richiesta di modifica direttamente sull'issue; l'agente si sveglia e legge il commento anche senza che tu apra Claude.</li>
+        <li><strong>Approvare o rifiutare</strong> — quando un'issue chiede una conferma (es. "approvi il merge di questa PR?"), si risponde con un clic dalla board.</li>
+        <li><strong>Creare una nuova issue a mano</strong> — utile per una richiesta semplice, senza bisogno di spiegarla in chat prima.</li>
+      </ul>
+      <p class="guide-body">
+        Quando invece serve davvero Claude: qualsiasi cosa che richiede leggere/scrivere file del sito, aprire una PR, verificare qualcosa sul sito live, o semplicemente quando è più comodo spiegare a voce cosa serve invece di scriverlo in un form.
+      </p>
+    </section>
+
+    <footer class="guide-footer">
+      <p>Pagina scritta a mano, non generata — aggiornarla se il ciclo di lavoro cambia.</p>
+    </footer>
+  </div>
+
+  <style>
+    .guide-page { max-width: 900px; margin: 0 auto; padding: 40px 24px 100px; }
+    .guide-head { margin-bottom: 40px; }
+    .guide-eyebrow { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted); font-weight: 600; }
+    .guide-title { margin: 0 0 12px; font-size: 32px; font-weight: 900; color: var(--pianeta-text); line-height: 1.15; }
+    .guide-deck { margin: 0 0 16px; max-width: 640px; font-size: 15px; line-height: 1.55; color: var(--pianeta-muted-strong); }
+    .guide-back a { font-size: 13px; color: var(--cta-primary); font-weight: 600; text-decoration: none; }
+    .guide-back a:hover { text-decoration: underline; }
+
+    .guide-section { margin-bottom: 48px; }
+    .guide-section-title {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+      color: var(--cta-primary); margin: 0 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--pianeta-border);
+    }
+    .guide-body { font-size: 15px; line-height: 1.65; color: var(--pianeta-text); margin: 0 0 12px; }
+    .guide-inline-code {
+      font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border); border-radius: 4px; padding: 1px 6px;
+    }
+
+    .guide-steps { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .guide-steps li { font-size: 14px; line-height: 1.6; color: var(--pianeta-text); }
+
+    .guide-tips { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .guide-tips li { font-size: 14px; line-height: 1.6; color: var(--pianeta-text); }
+
+    .tutorial-steps { display: flex; flex-direction: column; gap: 12px; }
+    .tutorial-step { padding: 16px; background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border); border-radius: 10px; }
+    .tutorial-n { margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--pianeta-muted); }
+    .tutorial-ask { margin: 0 0 6px; font-size: 14px; font-weight: 700; color: var(--pianeta-text); font-style: italic; }
+    .tutorial-what { margin: 0; font-size: 13px; line-height: 1.5; color: var(--pianeta-muted-strong); }
+
+    .guide-footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--pianeta-border); font-size: 12px; color: var(--pianeta-muted); }
+  </style>
+</BaseLayout>
