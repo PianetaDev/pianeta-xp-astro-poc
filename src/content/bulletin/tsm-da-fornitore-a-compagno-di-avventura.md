@@ -71,6 +71,8 @@ Nel caso TSM, le tre settimane di discovery prima del progetto UX hanno:
 
 Il brief tecnico è rimasto lo stesso. L'angolo da cui abbiamo lavorato era completamente diverso.
 
+![Processo UX TSM: sitemap, documentazione, wireframe a bassa e alta fedeltà](/work/tsm/tsm-bulletin-inline-0.png)
+
 ## La direzione visiva: tre strade, una scelta
 
 Dopo il workshop, la ricerca visiva ha esplorato tre direzioni, ognuna con un'ipotesi identitaria diversa:
