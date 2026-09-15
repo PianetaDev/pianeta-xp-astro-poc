@@ -4,7 +4,7 @@ description: "Full diagnosis of the current identity — consistency, recognizab
 category: "creativity"
 processPhase: 1
 icon: "🔍"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 3
 inputClient:

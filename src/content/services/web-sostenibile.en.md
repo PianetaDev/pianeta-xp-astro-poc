@@ -4,7 +4,7 @@ description: "Websites with carbon budget as a verifiable constraint in CI. Carb
 category: "technology"
 processPhase: 3
 icon: "🌱"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 1
 inputClient:

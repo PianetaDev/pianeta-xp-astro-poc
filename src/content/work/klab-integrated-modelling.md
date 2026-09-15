@@ -7,7 +7,7 @@ year: 2022
 date: 2022-09-15
 updated: 2026-08-26
 sector: "Ricerca scientifica · AI · Sostenibilità"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 hero:
   type: "image"

@@ -4,7 +4,7 @@ description: "Competitive map, white space, distinctive attributes. We build a d
 category: "creativity"
 processPhase: 1
 icon: "🧭"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 2
 inputClient:

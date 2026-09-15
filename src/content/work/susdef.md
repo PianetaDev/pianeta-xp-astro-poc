@@ -1,5 +1,6 @@
 ---
 title: "Una nuova piattaforma per Susdef"
+cover: "/og/placeholder-brand.png"
 description: "Abbiamo progettato la nuova piattaforma di Fondazione Sviluppo Sostenibile: ricerca, UX e accessibilità per un archivio di 33.000+ documenti. Live dal 16 luglio 2026."
 client: "Fondazione Sviluppo Sostenibile (Susdef)"
 category: "Platform"

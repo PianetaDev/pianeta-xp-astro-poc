@@ -1,5 +1,6 @@
 ---
 title: "Susdef prima e dopo: cosa cambia quando 33.000 documenti diventano trovabili"
+cover: "/og/placeholder-brand.png"
 description: "Fondazione per lo Sviluppo Sostenibile aveva 33.000 contenuti su un WordPress costruito in vent'anni. Nessuno riusciva più a trovarli. Abbiamo migrato tutto su Nuxt + Payload + MeiliSearch in 12 settimane. I numeri prima e dopo."
 date: 2026-09-07
 draft: true

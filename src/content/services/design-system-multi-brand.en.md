@@ -4,7 +4,7 @@ description: "Replicable systems for organizations with multiple brands under on
 category: "design"
 processPhase: 2
 icon: "🧩"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 2
 inputClient:
