@@ -60,11 +60,11 @@ Tre lezioni che portiamo fuori dal progetto Morsy:
 
 **Il piano editoriale è un documento operativo, non una presentazione.** Il valore reale del Google Sheet non era nella fase di planning, ma nella retrospettiva: capire cosa aveva funzionato, perché, e come replicarlo il mese successivo. I contenuti migliori del secondo anno erano versioni più raffinate di quelli che avevano funzionato nel primo.
 
-## Il lavoro di prodotto
+## Il lavoro di prodotto — Pianeta.Studio
 
-Il lavoro di brand strategy e content management si è affiancato a un progetto più ampio che includeva CX experience, UX research, visual direction e design system. Il risultato è una presenza di brand coerente dall'interfaccia ai contenuti.
+Va detto chiaramente: la content strategy raccontata in questo articolo è stata curata con la collaborazione di Matteo Cardamone, un professionista esterno con cui abbiamo lavorato su Morsy. Il lavoro che Pianeta.Studio ha condotto direttamente è un altro: CX experience, UX research, architettura dell'informazione, visual direction e design system — tutto ciò che riguarda il prodotto digitale. I due scope si sono affiancati per costruire una presenza di brand coerente dall'interfaccia ai contenuti. Se vuoi capire cosa abbiamo fatto sul prodotto, il case study è il posto giusto.
 
-![Wireflow dell'app Morsy: schermate collegate dalla home ai PDP, alle collections e al checkout — brand identity gialla su sfondo neutro](/work/morsy/morsy-wireflow-completo.png)
+![Artefatti del processo UX su Morsy: griglia con Roadmap, User-flow, Sitemap, Wireframe, Research e Prototype](/work/morsy/morsy-artefatti-ux.png)
 
 → [Morsy — il case study](/work/morsy) *(in arrivo)*
 
