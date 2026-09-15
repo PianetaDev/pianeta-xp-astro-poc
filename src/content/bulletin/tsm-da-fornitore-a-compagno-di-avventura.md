@@ -24,17 +24,23 @@ Con TSM siamo partiti dalla domanda opposta. Non "come costruiamo la piattaforma
 
 Il workshop discovery — che in Pianeta.Studio chiamiamo *What did you ask?* — serve esattamente a questo: rallentare prima di accelerare. Forzare il team a mettere in chiaro le assunzioni non dette prima che si solidifichino in wireframe e database.
 
-## Il finding centrale: "il nuovo Campari"
+## Il finding centrale: "Siamo alla ricerca di chi inventerà il nuovo Campari"
 
-Nella prima sessione del workshop è emersa una frase che ha cambiato il registro dell'intero progetto. Il cliente l'ha detto senza troppo preambolo: "Vogliamo essere come il nuovo Campari — non un fornitore, un nome che le persone nel mondo degli spirits riconoscono come parte del loro mondo."
+Nella prima sessione del workshop, abbiamo portato ogni partecipante a scrivere quello che voleva davvero — senza mediazioni. Le sticky notes che sono uscite dal tavolo hanno cambiato il registro dell'intero progetto:
 
-"Il nuovo Campari" non è un obiettivo di business ordinario. È una dichiarazione identitaria. Significa che TSM non vuole essere l'infrastruttura invisibile su cui le distillerie lavorano — vuole essere il tessuto connettivo visibile, la piattaforma che i produttori citano quando parlano della loro comunità.
+> *"Comunicare che TSM = innovazione spirits. Rapporto di collaborazione e non fornitore-cliente."*
 
-Questa frase ha reindirizzato tutto. Non stavamo progettando uno strumento. Stavamo progettando un'appartenenza.
+> *"Avere un sito che parli ad investitori e future realtà interessate ad acquisire TSM, rendendo chiaro che TSM è la rivoluzione nel campo spirits."*
+
+> *"Riuscire a far capire in 10 secondi di visita che cosa è TSM."*
+
+Da queste note, quando abbiamo lavorato alla direzione visiva, è emerso il concept di hero copy che catturava tutto in una frase: **"Siamo alla ricerca di chi inventerà il nuovo Campari."**
+
+Questa non è la frase di chi vuole diventare Campari. È la frase di chi cerca i fondatori del prossimo grande brand spirits — e si posiziona come il luogo dove quella storia inizia. È una dichiarazione identitaria. Non stavamo progettando uno strumento. Stavamo progettando un'appartenenza.
 
 ## Da fornitore a compagno di avventura
 
-La seconda svolta è arrivata quando abbiamo chiesto: "Come vorreste che un produttore artigianale descrivesse TSM a un collega?" La risposta: "Come il tuo compagno di avventura — non come il tuo fornitore."
+La svolta più operativa è arrivata da un'altra sticky note — quella di Francesco: *"Riposizionamento: TSM come il tuo compagno di avventura più che un fornitore."*
 
 Fornitore e compagno di avventura sembrano sfumature, ma sono modelli relazionali opposti.
 
@@ -64,6 +70,16 @@ Nel caso TSM, le tre settimane di discovery prima del progetto UX hanno:
 - Ridotto a zero le iterazioni sul "perché questa feature esiste"
 
 Il brief tecnico è rimasto lo stesso. L'angolo da cui abbiamo lavorato era completamente diverso.
+
+## La direzione visiva: tre strade, una scelta
+
+Dopo il workshop, la ricerca visiva ha esplorato tre direzioni, ognuna con un'ipotesi identitaria diversa:
+
+- **Type + foto** — tipografia forte, fotografia di prodotto/persone. Il brand parla con autorevolezza, quasi editoriale.
+- **Foto + type + illustrazione** — un mix di linguaggi, più caldo, più handcrafted. Richiama l'artigianalità degli spirits senza rinunciare alla struttura.
+- **Illustrazione pura** — disegno a mano, ingredienti botanici, scene conviviali. Il brand si fa racconto, quasi un'etichetta d'autore.
+
+Ogni direzione era compatibile con il posizionamento "compagno di avventura" — ma con registri molto diversi. La scelta finale ha informato l'UI, il sistema di icone, il tono fotografico dell'intera piattaforma.
 
 ## Il lavoro di prodotto
 

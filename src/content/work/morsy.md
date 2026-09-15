@@ -45,6 +45,8 @@ Il mercato del food delivery B2B è competitivo e affollato di proposta standard
 
 Il rischio era classico: un servizio davvero diverso percepito come "un altro catering". Ogni punto di contatto — dal sito all'onboarding, dal tono dei copy all'interfaccia dell'app — spiegava la meccanica del servizio senza comunicare perché Morsy esisteva e per chi.
 
+A livello di prodotto, la sfida era ancora più concreta: il sito di delivery aveva un flusso d'acquisto disorganizzato e non intuitivo, e mancava di raccogliere le informazioni essenziali per la gestione degli ordini (dati per zona, preferenze, profilo HR del dipendente). Due problemi diversi — identità e UX — che si amplificavano a vicenda.
+
 ## La tesi
 
 Prima di toccare wireframe o moodboard, abbiamo messo a fuoco un'ipotesi di lavoro: **la flessibilità di Morsy non era un'offerta commerciale, era un'identità**. Un servizio che funziona come il suo cliente — presente quando serve, assente quando non serve, senza costi fissi, senza lock-in — non si racconta con feature list. Si racconta con coerenza: ogni touchpoint deve restituire la stessa sensazione di libertà che il servizio promette.
@@ -57,7 +59,7 @@ Da questa tesi è disceso tutto il resto.
 
 **CX experience e ricerca UX.** Mapping dell'esperienza utente end-to-end: dal primo contatto all'ordine ricorrente, su entrambi i profili (azienda e dipendente). Analisi della sitemap, user flow completi, identificazione dei punti di attrito. La ricerca non è rimasta in un documento: ha informato direttamente le scelte di architettura e priorità nelle fasi successive.
 
-**Wireframe, wireflow e prototipazione.** Dall'architettura ai flussi navigabili: wireframe ad alta fedeltà, wireflow delle interazioni principali, prototipi testabili. Il metodo *Hot or Not* — usato per calibrare la direzione visiva prima di investire in mockup — ha ridotto le iterazioni nella fase grafica e accelerato la validazione interna con il team Morsy.
+**Wireframe, wireflow e prototipazione.** Dall'architettura ai flussi navigabili: wireframe ad alta fedeltà, wireflow delle interazioni principali, prototipi testabili. Il flusso d'acquisto è stato riorganizzato in step chiari — selezione piatto/dessert/bibita, personalizzazione carrello, indirizzo di consegna, toggle smart working, coupon, pagamento (carta o Satispay) — con microcopy mirato per rendere ogni azione inequivocabile. Il pannello HR aziendale ha ricevuto un flusso dedicato: creazione profilo dipendente con ticket, import lista via CSV, report spese scaricabile per dipendente. Il metodo *Hot or Not* — usato per calibrare la direzione visiva prima di investire in mockup — ha ridotto le iterazioni nella fase grafica.
 
 **Visual direction e design system.** Dalla direzione visiva validata al sistema: styleGuide, DSL, mockup di pagina, page template. Un design system coerente che Morsy può estendere senza rompere la coerenza visiva, anche lavorando con altri fornitori in futuro. Codice consegnato al cliente, nessun lock-in.
 
@@ -74,6 +76,8 @@ Da questa tesi è disceso tutto il resto.
 Morsy ha oggi un'identità di brand chiara, un'esperienza utente coerente e un sistema di contenuto che si mantiene nel tempo. La proposta di flessibilità — che era il punto di forza reale del servizio — è finalmente leggibile in pochi secondi, a ogni punto di contatto.
 
 Il design system consegnato permette a Morsy di crescere senza ripartire da zero a ogni aggiornamento. È un'infrastruttura visiva, non una dipendenza dall'agenzia.
+
+Il sito di delivery è live su [app.morsy.it](https://app.morsy.it/auth/sign-up).
 
 ## FAQ
 
