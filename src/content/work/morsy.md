@@ -12,6 +12,9 @@ hero:
   type: "image"
   src: "/og/work-morsy.png"
 services: ["brand-positioning", "brand-vision-strategy", "app-prodotti-digitali", "pianeta-centric-design-strategy"]
+links:
+  bulletin:
+    - morsy-brand-content-strategy
 locale: it
 draft: true
 type: work
