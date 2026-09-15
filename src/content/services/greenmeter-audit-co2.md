@@ -4,7 +4,7 @@ description: "Misura l'impronta CO₂ del tuo sito web. Page weight, grade A+→
 category: "technology"
 processPhase: 4
 icon: "⚡"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 4
 inputClient:

@@ -4,7 +4,7 @@ description: "Definiamo la visione di marca e la traiettoria strategica a 3-5 an
 category: "creativity"
 processPhase: 1
 icon: "🎯"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 1
 inputClient:

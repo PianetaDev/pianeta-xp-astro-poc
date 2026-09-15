@@ -7,7 +7,7 @@ team: "Studio direction"
 startDate: "Q3 2026"
 applyEmail: "people@pianeta.studio"
 ogImage: "/og/placeholder.svg"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 date: 2026-06-26
 locale: it
 draft: false

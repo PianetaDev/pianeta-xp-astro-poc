@@ -1,5 +1,6 @@
 ---
 title: "The Neuromarketing Lab: the method, and the ECLAG case"
+cover: "/og/placeholder-brand.png"
 description: "How Pianeta.Studio validates communication concepts with two complementary AI technologies — Swarm and Neural Prediction — while keeping the decision firmly in human hands."
 ogImage: "/og/bollettino-lab.png"
 date: 2026-05-15

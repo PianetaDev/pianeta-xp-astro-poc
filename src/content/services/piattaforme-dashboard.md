@@ -4,7 +4,7 @@ description: "Piattaforme web custom e dashboard di business intelligence. Archi
 category: "technology"
 processPhase: 3
 icon: "📊"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 3
 inputClient:

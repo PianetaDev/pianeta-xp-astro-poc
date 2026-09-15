@@ -1,5 +1,6 @@
 ---
 title: "Il Lab di Neuromarketing: il metodo, e il caso ECLAG"
+cover: "/og/placeholder-brand.png"
 description: "Come Pianeta.Studio valida i concept di comunicazione con due tecnologie AI complementari — Swarm e Neural Prediction — mantenendo la decisione sempre in mano umana."
 ogImage: "/og/bollettino-lab.png"
 date: 2026-05-15
