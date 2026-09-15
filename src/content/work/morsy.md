@@ -59,11 +59,21 @@ Da questa tesi è disceso tutto il resto.
 
 **CX experience e ricerca UX.** Mapping dell'esperienza utente end-to-end: dal primo contatto all'ordine ricorrente, su entrambi i profili (azienda e dipendente). Analisi della sitemap, user flow completi, identificazione dei punti di attrito. La ricerca non è rimasta in un documento: ha informato direttamente le scelte di architettura e priorità nelle fasi successive.
 
+![Scheda prodotto dell'app Morsy: selezione piatto con varianti, ingredienti e aggiunta al carrello](/work/morsy/morsy-desktop-scheda-prodotto.png)
+
 **Wireframe, wireflow e prototipazione.** Dall'architettura ai flussi navigabili: wireframe ad alta fedeltà, wireflow delle interazioni principali, prototipi testabili. Il flusso d'acquisto è stato riorganizzato in step chiari — selezione piatto/dessert/bibita, personalizzazione carrello, indirizzo di consegna, toggle smart working, coupon, pagamento (carta o Satispay) — con microcopy mirato per rendere ogni azione inequivocabile. Il pannello HR aziendale ha ricevuto un flusso dedicato: creazione profilo dipendente con ticket, import lista via CSV, report spese scaricabile per dipendente. Il metodo *Hot or Not* — usato per calibrare la direzione visiva prima di investire in mockup — ha ridotto le iterazioni nella fase grafica.
+
+![Mockup mobile del flusso d'acquisto Morsy: schermata Best Seller e checkout con personalizzazione piatto](/work/morsy/morsy-mobile-best-seller-checkout.png)
+
+![Mockup mobile del pannello utente Morsy: Carnet ticket e storico ordini personali](/work/morsy/morsy-mobile-carnet-ordini.png)
 
 **Visual direction e design system.** Dalla direzione visiva validata al sistema: styleGuide, DSL, mockup di pagina, page template. Un design system coerente che Morsy può estendere senza rompere la coerenza visiva, anche lavorando con altri fornitori in futuro. Codice consegnato al cliente, nessun lock-in.
 
+![Homepage dell'app Morsy: sezione "Pensati per te" con selezione piatti del giorno](/work/morsy/morsy-web-pensati-per-te.png)
+
 **Content strategy e content management.** Brand strategy e design system si sono tradotti in un sistema editoriale: value proposition nei copy, position statement nel tono di voce, piano editoriale mensile su Instagram e LinkedIn. Il lavoro di content management ha mantenuto la coerenza tra identità di brand e presenza social nel tempo — non come deliverable isolato ma come presidio continuativo.
+
+![Piano editoriale Morsy: contenuti Instagram con la partnership Tony's Chocolonely, Fusion Best Seller e Weekly Menu](/work/morsy/morsy-social-content-grid.png)
 
 **QA Test.** Prima della consegna finale, verifica sistematica dell'esperienza su device, browser e scenari d'uso reali.
 
