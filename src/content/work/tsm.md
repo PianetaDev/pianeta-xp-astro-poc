@@ -36,11 +36,19 @@ Le cinque aree funzionali che abbiamo progettato:
 
 **Bacheca cerco/offro.** Il cuore relazionale della piattaforma: un board dove chi produce può cercare distributori, collaborazioni tecniche, ingredienti — e offrire le proprie eccellenze al network.
 
+![Dashboard home TSM e bacheca cerco/offro: due schermate tablet che mostrano il feed community con messaggi e attività, e il board delle offerte di lavoro/collaborazione con filtri di ricerca](/work/tsm/tsm-community-bacheca.png)
+
 **Academy e masterclass.** Un hub formativo per contenuti educativi: distillazione, normativa, tecniche di blend, fermentazione. Progettato per scalare da pochi contenuti fondatori a un catalogo ampio.
 
 **Sistema punti e premi.** Un meccanismo di engagement che valorizza la partecipazione attiva alla community: commenti, condivisioni, contributi alla bacheca, completamento del profilo. I punti si convertono in premi concreti.
 
+![Profilo membro e sistema punti TSM: due schermate tablet che mostrano la pagina profilo con portfolio spirits e header arancio, e il pannello dei punti community con indicatori circolari di avanzamento per categoria](/work/tsm/tsm-profilo-sistema-punti.png)
+
 **UI coerente con il DSL esistente.** Tutto il lavoro UX è stato tradotto in UI mantenendo la coerenza con il design system di brand di TSM. Nessuna rottura visiva tra la comunicazione esterna e l'area riservata.
+
+![Dashboard TSM su tablet: schermata home completa con saluto personalizzato, feed notizie, sezione Academy con Distilling Club e anteprima Master Class — sfondo illustrato vintage in viola](/work/tsm/tsm-dashboard.png)
+
+![TSM su mobile: schermata articolo news su RTD wine-based e pagina Community con lista ultimi accessi dei membri — interfaccia adattata per smartphone su sfondo nero](/work/tsm/tsm-mobile-news-community.png)
 
 ## Tre numeri grandi
 
