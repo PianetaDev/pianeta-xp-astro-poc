@@ -64,7 +64,7 @@ Tre lezioni che portiamo fuori dal progetto Morsy:
 
 Il lavoro di brand strategy e content management si è affiancato a un progetto più ampio che includeva CX experience, UX research, visual direction e design system. Il risultato è una presenza di brand coerente dall'interfaccia ai contenuti.
 
-![Wireflow completo dell'app Morsy: architettura dei flussi d'acquisto, profilo utente e pannello HR](/work/morsy/morsy-wireflow-completo.png)
+![Wireflow dell'app Morsy: schermate collegate dalla home ai PDP, alle collections e al checkout — brand identity gialla su sfondo neutro](/work/morsy/morsy-wireflow-completo.png)
 
 → [Morsy — il case study](/work/morsy) *(in arrivo)*
 
