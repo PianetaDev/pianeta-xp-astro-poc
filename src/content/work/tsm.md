@@ -1,6 +1,6 @@
 ---
 title: "The Spiritual Machine — Progettare la community dei produttori di spirits"
-description: "UX e UI della piattaforma post-login TSM: profili, community, bacheca cerco/offro, sistema punti e direzione visiva per chi crea alcolici artigianali. UX + UI · 5 feature di prodotto · 1 piattaforma community."
+description: "UX e UI della piattaforma post-login TSM: profili, community, bacheca cerco/offro, sistema punti e direzione visiva per chi crea alcolici artigianali. 4 flussi di navigazione · ~30 schermate · 5 aree funzionali."
 client: "TSM — The Spiritual Machine"
 category: "Product Design"
 year: 2025
@@ -18,7 +18,7 @@ type: work
 tags: ["ux", "product-design", "community", "spirits", "design-system"]
 ---
 
-**TLDR.** TSM — The Spiritual Machine — è la piattaforma community per chi crea alcolici artigianali in Italia: un'area riservata che trasforma il cliente in membro attivo di una rete di produttori. Abbiamo progettato l'esperienza post-login end-to-end: **UX flow · 5 feature di prodotto · 1 design system coerente**. Profili, community feed, bacheca cerco/offro, academy/masterclass, sistema punti e premi.
+**TLDR.** TSM — The Spiritual Machine — è la piattaforma community per chi crea alcolici artigianali in Italia: un'area riservata che trasforma il cliente in membro attivo di una rete di produttori. Abbiamo progettato l'esperienza post-login end-to-end: **4 flussi di navigazione · ~30 schermate · 5 aree funzionali**. Profili, community feed, bacheca cerco/offro, academy/masterclass, sistema punti e premi. Consegnato e approvato.
 
 ## La sfida
 
@@ -44,11 +44,11 @@ Le cinque aree funzionali che abbiamo progettato:
 
 ## Tre numeri grandi
 
-**5** aree funzionali  ·  **1** design system  ·  **1** piattaforma community completa
+**4** flussi di navigazione  ·  **~30** schermate  ·  **5** aree funzionali
 
 ## Outcome
 
-L'outcome del progetto è un sistema di prodotto completo e navigabile — non un set di schermate isolate, ma un'esperienza che si tiene insieme. TSM ha oggi una piattaforma che rende tangibile la propria visione: trasformare il cliente in membro, il fornitore in compagno di avventura.
+L'outcome del progetto è un sistema di prodotto completo e navigabile — non un set di schermate isolate, ma un'esperienza che si tiene insieme. La piattaforma è stata consegnata e approvata da TSM: 4 flussi, circa 30 schermate, un design system coerente con il brand esistente. Rende tangibile la visione del cliente: trasformare chi entra in membro, non in utente; il rapporto con TSM in una relazione, non in una transazione.
 
 ## Per un progetto simile
 
