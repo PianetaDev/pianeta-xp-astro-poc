@@ -1,7 +1,7 @@
 ---
 title: "Se Pianeta domani sparisce, il tuo archivio continua a funzionare"
 cover: "/og/placeholder-brand.png"
-description: "Prima di firmare un progetto CMS o archivio documentale, la domanda giusta è: se il fornitore sparisce o cambia, cosa succede al sistema? Dipende da come è costruito. Qui spieghiamo come costruiamo noi — e perché la risposta è sì."
+description: "Prima di firmare un progetto CMS o archivio documentale, la domanda giusta è: se il fornitore sparisce o cambia, il sistema continua a funzionare? Con l'architettura che usiamo, la risposta è sì — per scelta tecnica e contrattuale."
 date: 2026-09-21
 draft: true
 locale: it
@@ -12,7 +12,7 @@ readingTime: "5 min"
 category: "Web sostenibile"
 ---
 
-**TLDR.** Prima di firmare un progetto CMS o archivio documentale, un referente IT dovrebbe porre una domanda sola: se il fornitore sparisce o decidiamo di cambiare, il sistema si ferma? La risposta dipende interamente da come è stato costruito. Con l'architettura che usiamo, la risposta è no — non per fiducia reciproca, ma per scelta tecnica e contrattuale.
+**TLDR.** Prima di firmare un progetto CMS o archivio documentale, un referente IT dovrebbe porre una domanda sola: se il fornitore sparisce o decidiamo di cambiare, il sistema continua a funzionare? Con l'architettura che usiamo, la risposta è sì — per scelta tecnica e contrattuale, a partire dal primo giorno di consegna.
 
 ## La domanda che dovresti fare prima della firma
 
@@ -20,41 +20,39 @@ C'è una domanda che spesso arriva tardi nel processo di valutazione, quando il 
 
 È la domanda giusta. Dovrebbe arrivare prima.
 
-La risposta non è una questione di buona volontà del fornitore — è una questione di architettura. Un sistema costruito con dipendenze strutturali dal fornitore non diventa indipendente perché il fornitore promette disponibilità futura. Un sistema costruito senza lock-in funziona in autonomia dal primo giorno di consegna.
+La risposta dipende dall'architettura del sistema, indipendentemente dalla disponibilità futura del fornitore. Un sistema costruito con dipendenze strutturali dal fornitore rimane dipendente anche quando il fornitore promette disponibilità futura. Un sistema costruito per essere consegnato funziona in autonomia dal primo giorno.
 
-La distinzione non è sottile. È la differenza tra un archivio che sopravvive al cambio di fornitore e uno che si blocca.
+La distinzione è concreta e verificabile prima della firma.
 
 ## Il codice è tuo
 
-Il codice applicativo che costruiamo — il sito, il CMS, le integrazioni, gli script di migrazione — viene consegnato integralmente al cliente alla fine del progetto. Non è un'opzione contrattuale aggiuntiva: è il modello di partenza.
+Il codice applicativo che costruiamo — il sito, il CMS, le integrazioni, gli script di migrazione — viene consegnato integralmente al cliente alla fine del progetto. È il modello di partenza, incluso nel contratto.
 
-Cosa significa in concreto: il repository è del cliente. Qualsiasi sviluppatore che conosce il framework può clonarlo, leggerlo, modificarlo, mandarlo in produzione. Non c'è codice sorgente che rimane da nostra parte, non c'è chiave di licenza che scade, non c'è funzionalità bloccata dietro un abbonamento a Pianeta.
+Il repository è interamente del cliente. Qualsiasi sviluppatore che conosce il framework può clonarlo, leggerlo, modificarlo, mandarlo in produzione. Il codice sorgente viene trasferito in toto — il sistema gira senza chiavi di licenza legate a Pianeta e senza funzionalità dipendenti da un abbonamento con noi.
 
-Consegniamo con il codice un **HANDOFF.md** — documentazione tecnica che descrive l'architettura, le dipendenze, le procedure operative: deploy, backup, aggiornamenti. Non è un documento formale scritto per metterlo in un cassetto. È scritto per il prossimo sviluppatore che deve mettere le mani sul sistema senza nessuno di noi disponibile.
+Con il codice consegniamo la documentazione tecnica di progetto: architettura, dipendenze, procedure operative (deploy, backup, aggiornamenti). Il modello che usiamo per questo trasferimento è pubblicato su [pianeta.green](https://pianeta.green). È documentazione pensata per il prossimo sviluppatore che deve lavorare sul sistema in autonomia.
 
-## I framework non hanno proprietari commerciali
+## I framework sono aperti
 
-Lo stack su cui costruiamo — **Payload CMS**, **MeiliSearch**, **Nuxt** — è open source nel senso tecnico corretto: licenza aperta, repository pubblici, comunità attiva, migliaia di sviluppatori che lo conoscono e lo mantengono. Nessuna licenza commerciale, nessun vendor che decide prezzi e roadmap in modo unilaterale.
+Lo stack su cui costruiamo — **Payload CMS**, **MeiliSearch**, **Nuxt** — è open source nel senso tecnico corretto: licenza aperta, repository pubblici, comunità attiva, migliaia di sviluppatori che lo conoscono e lo mantengono.
 
-Questo ha una conseguenza diretta per la business continuity: quando cerchi un nuovo sviluppatore che possa subentrare, stai cercando una competenza di mercato, non una competenza proprietaria. Non devi formare qualcuno su un sistema chiuso che esiste solo dentro la nostra agenzia. Non devi pagare un canone per continuare a usare il CMS. Non devi aspettare che un vendor decida di supportare la funzionalità che ti serve.
+Questo ha una conseguenza diretta per la business continuity: quando cerchi un nuovo sviluppatore che possa subentrare, stai cercando una competenza di mercato, disponibile e documentata pubblicamente. Il framework funziona con le stesse condizioni di licenza per chiunque usi lo stesso stack.
 
 Il codice applicativo che consegniamo è proprietà del cliente — i framework su cui si basa sono aperti. Le due cose insieme fanno sì che l'archivio continui a funzionare indipendentemente da quello che succede a Pianeta.
 
-## I dati sono su server che controlli tu
+## I dati sono su server europei
 
-Il sistema gira su un VPS europeo — di proprietà del cliente, o gestito da un provider che il cliente sceglie. I dati non vivono su infrastruttura Pianeta, non transitano da server americani, non dipendono da un account SaaS che scade se non si rinnova l'abbonamento.
+Il core del sistema — CMS, ricerca full-text, frontend — gira su server europei. I dati del tuo archivio documentale restano nell'infrastruttura europea, separata da quella di Pianeta.
 
-Per le fondazioni e gli enti pubblici che operano sotto GDPR, questo ha implicazioni concrete: il dato documentale rimane nella giurisdizione europea, è gestibile direttamente, e il suo ciclo di vita è completamente in mano al cliente. Il backup, la retention, l'accesso — tutto sotto il controllo dell'organizzazione, non del fornitore.
+Per le fondazioni e gli enti pubblici che operano sotto GDPR, questo ha implicazioni concrete: il dato documentale rimane nella giurisdizione europea e il suo ciclo di vita — backup, retention, accesso — è gestibile direttamente dall'organizzazione.
 
-**Un perimetro da chiarire sul layer AI**: quando il progetto include funzionalità di intelligenza artificiale — ingestione automatica di documenti, abstract generati, ricerca semantica — questi layer si appoggiano ad API di provider esterni. Il dato che transita per questi moduli segue regole di governance diverse dal core del sistema. Su questo punto siamo espliciti in fase contrattuale: quale provider, quali dati transitano, quali garanzie DPA. Il core dell'archivio — CMS, ricerca full-text, frontend — rimane self-hosted; il layer AI add-on no.
+**Un perimetro da chiarire sul layer AI**: quando il progetto include funzionalità di intelligenza artificiale — ingestione automatica di documenti, abstract generati, ricerca semantica — questi layer si appoggiano ad API di provider esterni. Il dato che transita per questi moduli segue regole di governance diverse dal core del sistema. Su questo punto siamo espliciti in fase contrattuale: quale provider, quali dati transitano, quali garanzie DPA. Il core dell'archivio rimane self-hosted su server europei; il layer AI add-on usa API esterne.
 
-## La business continuity non è una promessa, è un'architettura
+## Business continuity: una questione di architettura
 
-Abbiamo migrato archivi documentali con decine di migliaia di record e consegnato ogni volta un sistema che l'organizzazione può far girare in completa autonomia — con un altro fornitore, con un team interno, o semplicemente senza bisogno di nessuno finché non cambia qualcosa.
+La scelta di consegnare il codice integralmente parte da una convinzione pratica: costruire sistemi con lock-in verso il fornitore genera dipendenza senza fidelizzazione autentica. La differenza tra un cliente trattenuto e uno che sceglie di restare è strutturale — e si vede nel progetto, prima ancora che nel rapporto.
 
-Questo non nasce da una policy aziendale di generosità. Nasce dal fatto che costruire sistemi con lock-in verso noi stessi genera clienti dipendenti, non clienti soddisfatti. E un cliente che non può andarsene non è lo stesso di un cliente che sceglie di restare.
-
-Se stai valutando un progetto CMS o archivio documentale e vuoi capire come funziona il modello di consegna — cosa viene trasferito, cosa no, come è strutturata la documentazione tecnica, cosa succederebbe se dovesse subentrare un altro fornitore — parliamone prima di scrivere il capitolato.
+Se stai valutando un progetto CMS o archivio documentale e vuoi capire come funziona il modello di consegna — cosa viene trasferito, come è strutturata la documentazione tecnica, come funzionerebbe un eventuale subentro — parliamone prima di scrivere il capitolato.
 
 ## Parlane con Alba
 
