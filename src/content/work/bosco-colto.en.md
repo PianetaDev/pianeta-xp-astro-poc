@@ -20,7 +20,7 @@ tags: ["partnership", "media", "sustainability", "campus", "sicily", "territory"
 
 ## The project
 
-Bosco Colto is an annual campus held in the Boschi di Santo Pietro, Caltagirone, Sicily. Organized by Makramè APS, it brings together international tutors, students of architecture, design and art, and the local community around a central theme. It is not a conference: it is a temporary construction site where things are built physically, using local materials, traditional techniques and contemporary hybridizations.
+Bosco Colto is an annual campus held in the Boschi di Santo Pietro, Caltagirone, Sicily. Organized by Makramè APS, it brings together international tutors, students of architecture, design and art, and the local community around a central theme. It is a temporary construction site where things are built physically, using local materials, traditional techniques and contemporary hybridizations.
 
 For a fuller account of the project and what happened at BC26: [Bosco Colto 2026 — Thinking with Animals, building community →](/bulletin/bosco-colto-2026)
 
@@ -32,7 +32,7 @@ From that invitation comes our first operational contribution: an exhibition and
 
 → [Nutrimenti — video interviews with producers (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
 
-Nutrimenti probably deserves a story of its own. It is the moment when we understand what it means to be inside Bosco Colto, not just covering it from the outside.
+Nutrimenti probably deserves a story of its own. It is the moment when we understand what it means to be inside Bosco Colto, living it from within.
 
 ## 2025: Data Highway, communication, presence
 
@@ -44,7 +44,7 @@ And we are physically present at the campus — as we were again in 2026.
 
 ## On the ground: 2025 and 2026
 
-Just as in 2025, in 2026 we return to Caltagirone to document the event. Not just as a media partner: we also bring operational infrastructure.
+Just as in 2025, in 2026 we return to Caltagirone to document the event — as media partner and with operational infrastructure.
 
 The Boschi di Santo Pietro are in a remote area with limited connectivity. We bring our **Starlink** to ensure connection for the workshops and team. We move with an **ETPS BYD electric van** and an **Askol XKP80 scooter** — a way of being present on the ground with a footprint consistent with the project we support.
 
@@ -52,7 +52,7 @@ The Boschi di Santo Pietro are in a remote area with limited connectivity. We br
 
 One of the most significant stories of BC26 is the **Train Kiln** — the wood-fire kiln inaugurated on 1 August behind the old church of the Borgo di Santo Pietro.
 
-It is not our work: the kiln was designed and built under the technical guidance of ceramicists Prof. **Ted Neal** (Ball State University, Indiana — one of the world's leading experts in Train Kilns) and Prof. **Michał Puszczyński** (Academy of Art and Design in Wrocław, member of the International Academy of Ceramics). The artistic journey that led to the kiln was initiated by **Domenico Mangano and Marieke van Rooy** in previous editions, through their workshop *Sound, Ceramics and Communities* — a work on ceramics, community and performance.
+The kiln was designed and built under the technical guidance of ceramicists Prof. **Ted Neal** (Ball State University, Indiana — one of the world's leading experts in Train Kilns) and Prof. **Michał Puszczyński** (Academy of Art and Design in Wrocław, member of the International Academy of Ceramics). The artistic journey that led to the kiln was initiated by **Domenico Mangano and Marieke van Rooy** in previous editions, through their workshop *Sound, Ceramics and Communities* — a work on ceramics, community and performance.
 
 It is the **second Train Kiln built in Italy** and the **first permanent infrastructure of Casa Bosco Colto**. The kiln can reach temperatures of up to **1,350°C**, and its construction recovers a historical bond: for centuries the Bosco di Santo Pietro fed the kilns of Caltagirone, making the city's ceramic tradition renowned. The Train Kiln brings firing back into the forest.
 
@@ -67,7 +67,7 @@ We arrived with knowledge and people to run an independent team.
 **Podcast**: Giulio Domina, Salvatore Peluso
 **Coordination**: Massimiliano Mauro, Francesca Fossati, Ludovica Ranzini
 
-Largely a team of volunteers, who believed in the project. That is not a detail: it is how we work when the mission is worth it.
+A team that believed in the project — that is how we work when the mission is worth it.
 
 ## What we produced
 
@@ -91,6 +91,6 @@ We helped the workshops bring their materials online — for those who were not 
 
 ## For a similar project
 
-We work with cultural organizations, research campuses and territorial projects that want to amplify their voice — not a vendor to commission content from, but a partner that brings knowledge, presence and network.
+We work with cultural organizations, research campuses and territorial projects that want to amplify their voice — a partner that brings knowledge, presence and network — able to be inside a project, not just alongside it.
 
 **[Talk to Alba →](/)**

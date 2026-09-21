@@ -20,7 +20,7 @@ tags: ["partnership", "media", "sostenibilità", "campus", "sicilia", "territori
 
 ## Il progetto
 
-Bosco Colto è un campus annuale che si tiene nei Boschi di Santo Pietro, Caltagirone, Sicilia. Organizzato da Makramè APS, porta insieme tutor internazionali, studenti di architettura, design e arte, e la comunità locale attorno a un tema centrale. Non è una conferenza: è un cantiere temporaneo in cui si costruisce fisicamente, con materiali del luogo, tecniche tradizionali e ibridazioni contemporanee.
+Bosco Colto è un campus annuale che si tiene nei Boschi di Santo Pietro, Caltagirone, Sicilia. Organizzato da Makramè APS, porta insieme tutor internazionali, studenti di architettura, design e arte, e la comunità locale attorno a un tema centrale. È un cantiere temporaneo in cui si costruisce fisicamente, con materiali del luogo, tecniche tradizionali e ibridazioni contemporanee.
 
 Per capire meglio cos'è il progetto e cosa è successo a BC26: [Bosco Colto 2026 — Pensare animale, costruire comunità →](/bulletin/bosco-colto-2026)
 
@@ -32,7 +32,7 @@ Da quell'invito nasce il nostro primo contributo operativo: una mostra e una ser
 
 → [Nutrimenti — video interviste ai produttori (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
 
-Nutrimenti merita probabilmente un racconto a sé. È il momento in cui capiamo cosa significa stare dentro Bosco Colto, non solo coprirlo da fuori.
+Nutrimenti merita probabilmente un racconto a sé. È il momento in cui capiamo cosa significa stare dentro Bosco Colto, viverlo dall'interno.
 
 ## 2025: Data Highway, comunicazione, presenza
 
@@ -44,7 +44,7 @@ E siamo presenti fisicamente al campus, come abbiamo fatto di nuovo nel 2026.
 
 ## Sul campo: 2025 e 2026
 
-Proprio come nel 2025, nel 2026 torniamo a Caltagirone per documentare l'evento. Non solo come media partner: portiamo anche infrastruttura operativa.
+Proprio come nel 2025, nel 2026 torniamo a Caltagirone per documentare l'evento, come media partner e con infrastruttura operativa.
 
 I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Portiamo il nostro **Starlink** per garantire connessione ai workshop e al team. Ci muoviamo con il **furgone ETPS BYD elettrico** e lo **scooter Askol XKP80** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
 
@@ -52,7 +52,7 @@ I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Po
 
 Una delle storie più significative di BC26 è il **Train Kiln** — il forno a legna per ceramica inaugurato il 1° agosto dietro l'ex chiesa del Borgo di Santo Pietro.
 
-Non è opera nostra: il forno è stato progettato e costruito sotto la guida tecnica dei ceramisti Prof. **Ted Neal** (Ball State University, Indiana — tra i massimi esperti mondiali di Train Kiln) e Prof. **Michał Puszczyński** (Accademia di Belle Arti e Design di Breslavia, membro dell'International Academy of Ceramics). Il percorso artistico che ha portato al forno è stato avviato da **Domenico Mangano e Marieke van Rooy** nelle edizioni precedenti, attraverso il loro workshop *Sound, Ceramics and Communities* — un lavoro su ceramica, comunità e performance.
+Il forno è stato progettato e costruito sotto la guida tecnica dei ceramisti Prof. **Ted Neal** (Ball State University, Indiana — tra i massimi esperti mondiali di Train Kiln) e Prof. **Michał Puszczyński** (Accademia di Belle Arti e Design di Breslavia, membro dell'International Academy of Ceramics). Il percorso artistico che ha portato al forno è stato avviato da **Domenico Mangano e Marieke van Rooy** nelle edizioni precedenti, attraverso il loro workshop *Sound, Ceramics and Communities* — un lavoro su ceramica, comunità e performance.
 
 È il **secondo Train Kiln costruito in Italia** e la **prima infrastruttura permanente di Casa Bosco Colto**. Il forno può raggiungere temperature fino a **1.350°C**, e la sua costruzione recupera un legame storico: per secoli il Bosco di Santo Pietro aveva alimentato i forni di Caltagirone, rendendo celebre la tradizione ceramica della città. Il Train Kiln riporta la cottura dentro il bosco.
 
@@ -67,7 +67,7 @@ Siamo arrivati con conoscenze e persone per gestire un team autonomo.
 **Podcast**: Giulio Domina, Salvatore Peluso
 **Coordinamento**: Massimiliano Mauro, Francesca Fossati, Ludovica Ranzini
 
-Un team in larga parte di volontari, che ha creduto nel progetto. Non è un dettaglio: è il modo in cui lavoriamo quando la missione vale.
+Un team che ha creduto nel progetto — è il modo in cui lavoriamo quando la missione vale.
 
 ## Cosa abbiamo prodotto
 
@@ -91,6 +91,6 @@ Abbiamo aiutato i workshop a portare i loro materiali online — per chi non era
 
 ## Per un progetto simile
 
-Lavoriamo con organizzazioni culturali, campus di ricerca e progetti di territorio che vogliono amplificare la loro voce — non un fornitore a cui commissionare contenuti, ma un partner che porta conoscenza, presenza e rete.
+Lavoriamo con organizzazioni culturali, campus di ricerca e progetti di territorio che vogliono amplificare la loro voce — un partner che porta conoscenza, presenza e rete — capace di stare dentro il progetto oltre che affianco.
 
 **[Parla con Alba →](/)**

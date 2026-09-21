@@ -22,13 +22,13 @@ Il progetto promuove una rigenerazione del territorio e delle città a partire d
 
 Il campus si tiene ogni estate nei Boschi di Santo Pietro, a Caltagirone, in Sicilia. Organizzato da Makramè APS — associazione culturale con base a Catania, che lavora all'intersezione tra architettura, ecologia e pratiche partecipative — ogni edizione porta tutor internazionali, studenti di architettura, design e arte, e la comunità locale attorno a un tema centrale.
 
-Il campus non è una conferenza. È un cantiere temporaneo: in dieci giorni si costruisce fisicamente, con materiali del posto, tecniche tradizionali e ibridazioni tecnologiche.
+Il campus è un cantiere temporaneo: in undici giorni si costruisce fisicamente, con materiali del posto, tecniche tradizionali e ibridazioni tecnologiche.
 
 ## BC26 — Pensare animale
 
 L'edizione 2026 — dal 30 luglio al 9 agosto, nei Boschi di Santo Pietro — era dedicata a *Pensare animale*.
 
-Il tema non è decorativo. Nell'era del Nuovo Regime Climatico, pensare con gli animali diventa un esercizio di decentramento: osservare la natura dall'interno, lasciarsi attraversare da essa, fino a riconoscersi parte di un corpo terrestre condiviso. È un gesto politico — significa sottrarsi alle gerarchie che separano l'umano dal mondo, disattivare le economie di dominio ed estrazione che hanno ridotto la Terra a risorsa e il vivente a oggetto.
+Il tema ha un peso politico reale. Nell'era del Nuovo Regime Climatico, pensare con gli animali diventa un esercizio di decentramento: osservare la natura dall'interno, lasciarsi attraversare da essa, fino a riconoscersi parte di un corpo terrestre condiviso. È un gesto politico — significa sottrarsi alle gerarchie che separano l'umano dal mondo, disattivare le economie di dominio ed estrazione che hanno ridotto la Terra a risorsa e il vivente a oggetto.
 
 La direzione scientifica — Marco Navarra (Unict, NOWA), Dario Felice (Unipa, Analogique, Makramè APS), Antonio Scarponi e Beatrice Fontana (Institute for Spatial Thinking, Zurigo) — ha costruito un programma in cui ogni workshop declinava il tema in modo diverso: dall'architettura ai suoni, dalla ceramica alla fotografia, dall'ecologia alla ricerca storica.
 
@@ -42,7 +42,7 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 
 **Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbia della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla. Il progetto è vincitore dell'[Italian Council XIV edizione](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) del Ministero della Cultura. [Scheda progetto su Makramè →](https://makrame.org/2025/11/26/sounds-ceramics-communities/)
 
-**Observatories** (w/ Food Hack Lab, Paesi Baschi) — nove "testimoni" in sughero e PETG stampato in 3D, disseminati in nove siti forestali tra il Bosco di Santo Pietro e la Sughereta di Niscemi. I loro sensori ESP32 misurano temperatura, umidità e livelli sonori, trasmettendo piccoli pacchetti di dati via rete LoRa. Un ascolto discreto e condiviso del bosco — che non parla a nome della foresta, ma propone una forma di ascolto.
+**Observatories** (w/ Food Hack Lab, Paesi Baschi) — nove "testimoni" in sughero e PETG stampato in 3D, disseminati in nove siti forestali tra il Bosco di Santo Pietro e la Sughereta di Niscemi. I loro sensori ESP32 misurano temperatura, umidità e livelli sonori, trasmettendo piccoli pacchetti di dati via rete LoRa. Un ascolto discreto e condiviso del bosco — che lascia alla foresta la propria voce.
 
 **Lo Studio dell'Antico Ordine delle Querce di Santo Pietro** (w/ Fabio Ciaravella) — il rapporto tra il Bosco e le comunità di Caltagirone, le tracce di un antico gruppo di potere che potrebbe averne fondato la cura. Il bosco e il paese come legati da un rapporto complementare che offre un modello per nuove forme di coesistenza interspecie.
 
@@ -66,7 +66,7 @@ Il forno può raggiungere temperature fino a 1.350 °C. I depositi naturali di c
 
 ## Casa Bosco Colto — il progetto a lungo termine
 
-BC26 non è solo un campus. È una tappa di un percorso più lungo.
+BC26 è una tappa di un percorso più lungo.
 
 Quest'anno è stato avviato un processo di Partenariato Pubblico-Privato Speciale (PPPS) per valorizzare gli edifici e le aree del bosco-borgo dove il campus si svolge. Due siti pubblici — l'ex Casa Forestale e le ex Scuole — diventano i poli complementari di Casa Bosco Colto: un centro culturale diffuso che si estende tra edifici, sentieri, boschi e borgo, dedicato a cultura, cura ed educazione, aperto alla comunità locale tutto l'anno.
 

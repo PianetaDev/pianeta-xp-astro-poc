@@ -22,13 +22,13 @@ The project promotes a regeneration of territory and cities by valuing forgotten
 
 The campus takes place every summer in the Boschi di Santo Pietro, near Caltagirone, Sicily. Organized by Makramè APS — a cultural association based in Catania working at the intersection of architecture, ecology and participatory practices — each edition brings together international tutors, students of architecture, design and art, and the local community around a central theme.
 
-The campus is not a conference. It is a temporary construction site: in ten days, things are built, using local materials, traditional techniques and technological hybridizations.
+The campus is a temporary construction site: in eleven days, things are built, using local materials, traditional techniques and technological hybridizations.
 
 ## BC26 — Thinking with Animals
 
 The 2026 edition — July 30 to August 9, in the Boschi di Santo Pietro — was dedicated to *Thinking with Animals*.
 
-The theme is not decorative. In the era of the New Climatic Regime, thinking with animals becomes an exercise in decentering: observing nature from within, allowing ourselves to be traversed by it, until we recognize ourselves as part of a shared terrestrial body. It is a political gesture — withdrawing from the hierarchies that separate humans from the world, deactivating the economies of domination and extraction that have reduced the Earth to a resource and the living to an object.
+The theme carries real political weight. In the era of the New Climatic Regime, thinking with animals becomes an exercise in decentering: observing nature from within, allowing ourselves to be traversed by it, until we recognize ourselves as part of a shared terrestrial body. It is a political gesture — withdrawing from the hierarchies that separate humans from the world, deactivating the economies of domination and extraction that have reduced the Earth to a resource and the living to an object.
 
 The scientific direction — Marco Navarra (Unict, NOWA), Dario Felice (Unipa, Analogique, Makramè APS), Antonio Scarponi and Beatrice Fontana (Institute for Spatial Thinking, Zurich) — built a programme in which each workshop declined the theme in a different way: from architecture to sound, ceramics to photography, ecology to historical research.
 
@@ -42,7 +42,7 @@ Eight workshops ran in parallel for eleven days, constructing structures, instal
 
 **Sound, Ceramics and Communities** (w/ Domenico Mangano and Marieke van Rooy, curated by Salvatore Lacagnina) — ceramic whistles made from clay, olive ash and Sicilian sand. The moment when a clear note brings shared joy to everyone. A work about people and their stories, not just clay. The project is a winner of the [Italian Council XIV edition](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) by the Ministry of Culture. [Project page on Makramè →](https://makrame.org/2025/11/26/sounds-ceramics-communities/)
 
-**Observatories** (w/ Food Hack Lab, Basque Country) — nine "witnesses" made from cork and 3D-printed PETG, inhabiting nine forest sites across the Bosco di Santo Pietro and the Sughereta di Niscemi. Their ESP32 sensors measure temperature, humidity and ambient sound, transmitting small data packets via LoRa network. A discreet, shared form of listening — which does not speak on behalf of the forest, but proposes a way of hearing it.
+**Observatories** (w/ Food Hack Lab, Basque Country) — nine "witnesses" made from cork and 3D-printed PETG, inhabiting nine forest sites across the Bosco di Santo Pietro and the Sughereta di Niscemi. Their ESP32 sensors measure temperature, humidity and ambient sound, transmitting small data packets via LoRa network. A discreet, shared form of listening — that lets the forest speak in its own voice.
 
 **The Study of the Ancient Order of the Oaks of Santo Pietro** (w/ Fabio Ciaravella) — the relationship between the Forest and the communities of Caltagirone, the traces of an ancient power group that may have been its founding caretaker. The forest and the town as bound in a complementary relationship offering a model for new forms of interspecies coexistence.
 
@@ -66,7 +66,7 @@ The kiln can reach temperatures up to 1,350 °C. Natural ash deposits on ceramic
 
 ## Casa Bosco Colto — the long-term project
 
-BC26 is not only a campus. It is a step in a longer journey.
+BC26 is a step in a longer journey.
 
 This year, a Special Public-Private Partnership (PPPS) process was initiated to enhance buildings and areas within the forest-village ecosystem where the campus takes place. Two public sites — the former Forest Ranger House and the former Schools — become the complementary poles of Casa Bosco Colto: a distributed cultural centre spanning buildings, paths, forests and village, dedicated to culture, care and education, open to the local community year-round.
 
