@@ -56,4 +56,6 @@ Questo non nasce da una policy aziendale di generosità. Nasce dal fatto che cos
 
 Se stai valutando un progetto CMS o archivio documentale e vuoi capire come funziona il modello di consegna — cosa viene trasferito, cosa no, come è strutturata la documentazione tecnica, cosa succederebbe se dovesse subentrare un altro fornitore — parliamone prima di scrivere il capitolato.
 
-**[Parla con noi ↗](https://cal.com/maxmauro)**
+## Parlane con Alba
+
+**[info@pianeta.studio](mailto:info@pianeta.studio)**
