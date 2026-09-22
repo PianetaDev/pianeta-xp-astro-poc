@@ -27,7 +27,7 @@ Il capitolato non prescriveva tecnologia. La risposta più semplice sarebbe stat
 
 Ma guardando la scala dei dati di Susdef e la traiettoria che avevano davanti — un archivio che cresce, un team che vuole autonomia operativa, la necessità di non ritrovarsi tra tre anni con un sistema da rifare — WordPress avrebbe rimandato il problema, non risolto.
 
-Abbiamo proposto **Nuxt 3 + Payload CMS + MeiliSearch**. Non perché fosse la nostra scelta preferita in astratto: perché era la risposta ai loro vincoli concreti. Nessun vendor da cui dipendere per le licenze — Payload CMS è un framework open source con community attiva. Performance native su un dataset di questa dimensione. Codice applicativo che rimane proprietà di Susdef: possono portarlo da qualunque altro fornitore, senza che noi abbiamo leva. Nessun lock-in.
+Abbiamo proposto **Nuxt 3 + Payload CMS + MeiliSearch**. Non perché fosse la nostra scelta preferita in astratto: perché era la risposta ai loro vincoli concreti. Nessun vendor da cui dipendere per le licenze — Payload CMS è un framework open source con community attiva. Performance native su un dataset di questa dimensione. Codice applicativo consegnato in licenza d'uso a Susdef: possono portarlo da qualunque altro fornitore per farlo girare, senza che noi abbiamo leva tecnica. Nessun lock-in.
 
 Susdef ha riconosciuto la differenza tra uno stack che regge e uno che rinvia. L'ha scelta.
 
@@ -45,7 +45,7 @@ Questa proposta non era nel capitolato. Era emersa dall'ascolto.
 
 **12 settimane di sviluppo tecnico**, go-live il 16 luglio 2026. Oltre 33.000 record migrati con metadati puliti, relazioni preservate, categorizzazioni normalizzate. Formazione al team interno inclusa. Handover documentato.
 
-Susdef ha ora un archivio che il loro team gestisce in autonomia, su uno stack senza scadenze di licenza, con il codice applicativo interamente di loro proprietà — consegnato per l'uso nel loro progetto, non ceduto in licenza per rivendita o sublicenza a terzi.
+Susdef ha ora un archivio che il loro team gestisce in autonomia, su uno stack senza scadenze di licenza, con il codice applicativo consegnato in licenza d'uso per il loro progetto — non per rivendita o sublicenza a terzi.
 
 La parte più interessante, per noi, è quello che questo percorso ha aperto. Lavorare con un archivio di questa scala ha fatto emergere possibilità che non erano visibili all'inizio — e alcune si sono trasformate in proposte concrete per sviluppi successivi. Non erano nel contratto originale. Sono nate dall'ascolto di cosa serviva davvero, una volta che il sistema funzionava.
 
