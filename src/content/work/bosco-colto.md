@@ -76,9 +76,8 @@ Un team che ha creduto nel progetto — è il modo in cui lavoriamo quando la mi
 - Booklet
 - Materiali stampa
 - Campagne social
-- E altro ancora — la lista cresce con ogni edizione
 
-La relazione continua.
+La relazione continua — ogni edizione porta nuovi formati.
 
 ## Continuità digitale: il campo non finisce il giorno del campus
 
@@ -88,6 +87,17 @@ Abbiamo aiutato i workshop a portare i loro materiali online — per chi non era
 
 → [observatories.boscocolto.org](https://observatories.boscocolto.org/) — archivio fotografico esplorabile del campus
 → [More-Than-Human Audio Worlds](https://observatories.boscocolto.org/morethanhumanaudioworlds) — i paesaggi sonori del campus, ascoltabili online
+
+## FAQ
+
+**La partnership con Bosco Colto è continuativa o legata a un singolo evento?**
+È strutturata per durare. Siamo tornati a Caltagirone nel 2025 e nel 2026, e stiamo lavorando con Bosco Colto sulla strategia comunicativa per i prossimi anni. Non siamo fornitori di un servizio per un evento — siamo dentro il progetto.
+
+**Come garantite la presenza operativa in zone con connettività limitata?**
+Portiamo infrastruttura propria. Al campus 2025 e 2026 abbiamo portato il nostro Starlink per garantire connettività ai workshop e al team. Ci muoviamo con mezzi elettrici. Il campo funziona perché siamo attrezzati per farlo funzionare.
+
+**Cosa rimane di concreto dopo il campus?**
+Il lavoro editoriale — archivio fotografico, podcast, booklet, materiali stampa — non scompare con il campus. I siti che abbiamo aiutato a costruire (observatories.boscocolto.org, More-Than-Human Audio Worlds) restano accessibili dopo. Questo è il significato di "il campo non finisce il giorno del campus".
 
 ## Per un progetto simile
 
