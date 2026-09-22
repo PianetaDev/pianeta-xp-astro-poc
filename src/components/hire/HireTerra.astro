@@ -21,6 +21,9 @@ const S = TERRA_STRINGS[locale];
       ))}
     </div>
 
+    <h2 class="f-h2">{S.unifiedTitle}</h2>
+    <p class="f-unified">{S.unifiedBody}</p>
+
     <h2 class="f-h2">{S.stackTitle}</h2>
     <ol class="f-steps">
       {S.stack.map((st) => (
@@ -34,6 +37,7 @@ const S = TERRA_STRINGS[locale];
         <div class="f-win"><strong>{c.label}</strong><span>{c.desc}</span></div>
       ))}
     </div>
+    {S.complianceProof && <p class="f-compliance-proof">{S.complianceProof}</p>}
 
     <h2 class="f-h2">{S.proofTitle}</h2>
     <div class="f-proof">
@@ -96,6 +100,10 @@ const S = TERRA_STRINGS[locale];
   .f-proof-text { font-size: 15px; line-height: 1.6; color: var(--mut); margin: 0 0 16px; }
   .f-proof-link { color: var(--acc); font-weight: 700; font-size: 15px; text-decoration: none; }
   .f-proof-link:hover { text-decoration: underline; }
+
+  .f-unified { font-size: 16px; line-height: 1.7; color: var(--mut); margin: 0 0 4px; max-width: 680px; }
+
+  .f-compliance-proof { margin: 16px 0 0; font-size: 14px; line-height: 1.6; color: var(--mut); font-style: italic; border-left: 2px solid var(--line); padding-left: 14px; }
 
   .f-green-note { margin: 28px 0 0; color: var(--mut); font-size: 13px; line-height: 1.5; font-style: italic; border-left: 2px solid var(--line); padding-left: 14px; }
 
