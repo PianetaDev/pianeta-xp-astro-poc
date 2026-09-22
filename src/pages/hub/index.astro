@@ -1,0 +1,259 @@
+---
+/**
+ * /hub — griglia cronologica di post + reel + casi studio (PIA-1541 Fase 4).
+ * Filter pills: Tutti · Work · Post · Reel
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkCard from '../../components/hub/WorkCard.astro';
+import PostCard from '../../components/hub/PostCard.astro';
+import ReelCard from '../../components/hub/ReelCard.astro';
+import { getCollection } from 'astro:content';
+
+const works = (await getCollection('work'))
+  .filter((i: any) => i.data.draft !== true)
+  .map((i: any) => ({
+    kind: 'work' as const,
+    slug: i.id,
+    title: i.data.title || i.id,
+    date: i.data.date ? new Date(i.data.date) : new Date(0),
+    data: i.data,
+  }));
+
+const postItems = (await getCollection('posts'))
+  .filter((i: any) => i.data.draft !== true)
+  .map((i: any) => ({
+    kind: 'post' as const,
+    slug: i.id,
+    title: i.data.title || i.id,
+    date: i.data.date ? new Date(i.data.date) : new Date(0),
+    data: i.data,
+  }));
+
+const reelItems = (await getCollection('reels'))
+  .filter((i: any) => i.data.draft !== true)
+  .map((i: any) => ({
+    kind: 'reel' as const,
+    slug: i.id,
+    title: i.data.title || i.id,
+    date: i.data.date ? new Date(i.data.date) : new Date(0),
+    data: i.data,
+  }));
+
+// Pool unificato ordinato per data discendente
+const allItems = [...works, ...postItems, ...reelItems]
+  .sort((a, b) => b.date.getTime() - a.date.getTime());
+
+const totalWork = works.length;
+const totalPost = postItems.length;
+const totalReel = reelItems.length;
+---
+<BaseLayout
+  title="Hub — Pianeta.Studio"
+  description="Tutti i contenuti di Pianeta.Studio: casi studio, post visivi e reel."
+>
+  <div class="hub-page">
+    <header class="hub-head">
+      <h1 class="hub-title">Hub</h1>
+      <p class="hub-deck">Casi studio, post visivi e reel — tutto il lavoro in un posto.</p>
+
+      <!-- Filter pills (client-side via data attrs) -->
+      <div class="hub-filters" role="tablist" aria-label="Filtra per tipo">
+        <button class="hub-pill hub-pill--active" data-filter="all" role="tab" aria-selected="true">
+          Tutti <span class="hub-pill-count">{allItems.length}</span>
+        </button>
+        {totalWork > 0 && (
+          <button class="hub-pill" data-filter="work" role="tab" aria-selected="false">
+            Work <span class="hub-pill-count">{totalWork}</span>
+          </button>
+        )}
+        {totalPost > 0 && (
+          <button class="hub-pill" data-filter="post" role="tab" aria-selected="false">
+            Post <span class="hub-pill-count">{totalPost}</span>
+          </button>
+        )}
+        {totalReel > 0 && (
+          <button class="hub-pill" data-filter="reel" role="tab" aria-selected="false">
+            Reel <span class="hub-pill-count">{totalReel}</span>
+          </button>
+        )}
+      </div>
+    </header>
+
+    {allItems.length === 0 ? (
+      <div class="hub-empty">Nessun contenuto pubblicato.</div>
+    ) : (
+      <div class="hub-grid" id="hub-grid">
+        {allItems.map((item) => {
+          if (item.kind === 'work') {
+            const d = item.data as any;
+            return (
+              <div data-kind="work" class="hub-item">
+                <WorkCard
+                  href={`/work/${item.slug}`}
+                  title={item.title}
+                  cover={d.cover || d.ogImage}
+                  client={d.client}
+                  year={d.year}
+                  eclagVideo={item.slug === 'eclag'}
+                />
+              </div>
+            );
+          }
+          if (item.kind === 'post') {
+            const d = item.data as any;
+            return (
+              <div data-kind="post" class="hub-item">
+                <PostCard
+                  slug={item.slug}
+                  title={item.title}
+                  photoIds={d.photoIds ?? []}
+                  client={d.client}
+                />
+              </div>
+            );
+          }
+          if (item.kind === 'reel') {
+            const d = item.data as any;
+            return (
+              <div data-kind="reel" class="hub-item">
+                <ReelCard
+                  slug={item.slug}
+                  title={item.title}
+                  video={d.video}
+                  posterPhotoId={d.posterPhotoId}
+                  client={d.client}
+                  durationSec={d.durationSec}
+                />
+              </div>
+            );
+          }
+        })}
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  // Filter pills — mostra/nascondi hub-item per data-kind
+  const initHubFilters = () => {
+    const pills = document.querySelectorAll<HTMLButtonElement>('.hub-pill');
+    const items = document.querySelectorAll<HTMLElement>('.hub-item');
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const filter = pill.dataset.filter ?? 'all';
+        pills.forEach((p) => {
+          p.classList.toggle('hub-pill--active', p === pill);
+          p.setAttribute('aria-selected', p === pill ? 'true' : 'false');
+        });
+        items.forEach((item) => {
+          const visible = filter === 'all' || item.dataset.kind === filter;
+          item.hidden = !visible;
+        });
+      });
+    });
+  };
+
+  document.addEventListener('astro:page-load', initHubFilters);
+</script>
+
+<style>
+  .hub-page {
+    max-width: var(--wrap-max, 1200px);
+    margin: 0 auto;
+    padding: 80px 24px 96px;
+  }
+
+  .hub-head {
+    max-width: 880px;
+    margin: 0 0 48px;
+  }
+
+  .hub-title {
+    font-size: var(--ty-hero, 3rem);
+    font-weight: 600;
+    letter-spacing: var(--ty-hero-tracking, -0.03em);
+    line-height: var(--ty-hero-lh, 1.05);
+    margin: 0 0 18px;
+  }
+
+  .hub-deck {
+    font-size: var(--ty-sub, 1.125rem);
+    color: var(--pianeta-muted-strong);
+    line-height: var(--ty-sub-lh, 1.55);
+    margin: 0 0 28px;
+    max-width: 620px;
+  }
+
+  .hub-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hub-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    border: 1.5px solid var(--pianeta-border);
+    background: transparent;
+    color: var(--pianeta-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 140ms, border-color 140ms, color 140ms;
+  }
+
+  .hub-pill:hover {
+    border-color: var(--cta-primary, #FF6B33);
+    color: var(--cta-primary, #FF6B33);
+  }
+
+  .hub-pill--active {
+    background: var(--cta-primary, #FF6B33);
+    border-color: var(--cta-primary, #FF6B33);
+    color: var(--cta-primary-ink, #fff);
+  }
+
+  .hub-pill--active:hover {
+    color: var(--cta-primary-ink, #fff);
+  }
+
+  .hub-pill-count {
+    font-size: 0.75rem;
+    opacity: 0.75;
+  }
+
+  /* Il grid wrapper — item diretti sono .hub-item che usano display:contents
+     così le bento tile sono i veri grid item */
+  .hub-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 220px;
+    grid-auto-flow: dense;
+  }
+
+  @media (max-width: 1099px) {
+    .hub-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 699px) {
+    .hub-grid { grid-template-columns: 1fr; }
+  }
+
+  /* hub-item è solo un wrapper per data-kind — le bento tile diventano i grid item */
+  .hub-item { display: contents; }
+  /* hidden attr nasconde l'item (e il suo figlio) dalla griglia */
+  .hub-item[hidden] { display: none; }
+
+  .hub-empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--pianeta-muted);
+    border: 1px dashed var(--pianeta-border-strong);
+    border-radius: 16px;
+  }
+</style>

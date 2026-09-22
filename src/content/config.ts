@@ -1,6 +1,11 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const embedsField = z.array(z.object({
+  type: z.enum(['post', 'reel']),
+  slug: z.string(),
+})).optional();
+
 const baseSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
@@ -10,6 +15,7 @@ const baseSchema = z.object({
   draft: z.boolean().optional().default(false),
   locale: z.enum(['it', 'en']).optional(),
   tags: z.array(z.string()).optional(),
+  embeds: embedsField,
 }).passthrough();
 
 const servicesSchemaExt = baseSchema.extend({
@@ -26,6 +32,18 @@ const servicesSchemaExt = baseSchema.extend({
 const teamSchemaExt = baseSchema.extend({
   kind: z.enum(['core', 'satellite', 'ai']).optional(),
   discipline: z.string().optional(),
+});
+
+const postsSchemaExt = baseSchema.extend({
+  photoIds: z.array(z.string().uuid()).min(1),
+  client: z.string().optional(),
+});
+
+const reelsSchemaExt = baseSchema.extend({
+  video: z.string(),
+  posterPhotoId: z.string().uuid().optional(),
+  client: z.string().optional(),
+  durationSec: z.number().optional(),
 });
 
 const work = defineCollection({
@@ -56,6 +74,16 @@ const lab = defineCollection({
 const careers = defineCollection({
   loader: glob({ pattern: '!(*.en).md', base: './src/content/careers' }),
   schema: baseSchema,
+});
+
+const posts = defineCollection({
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/posts' }),
+  schema: postsSchemaExt,
+});
+
+const reels = defineCollection({
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/reels' }),
+  schema: reelsSchemaExt,
 });
 
 const enGenerateId = ({ entry }: { entry: string }) => entry.replace(/\.en\.md$/, '');
@@ -119,6 +147,8 @@ export const collections = {
   lab,
   careers,
   campaigns,
+  posts,
+  reels,
   workEn,
   bulletinEn,
   servicesEn,
