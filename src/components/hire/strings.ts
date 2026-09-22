@@ -219,14 +219,12 @@ export const FOUND_STRINGS: Record<Locale, FoundStrings> = {
 export interface TerraStrings {
   metaTitle: string; metaDesc: string;
   eyebrow: string; h1: string; deck: string;
-  painsTitle: string; pains: { label: string; desc: string }[];
-  unifiedTitle: string; unifiedBody: string;
-  stackTitle: string; stack: { n: string; t: string; d: string }[];
-  complianceTitle: string; compliance: { label: string; desc: string }[];
-  complianceProof: string;
-  proofTitle: string; proofStats: { n: string; d: string }[];
-  proofText: string; proofCta: string; proofHref: string;
-  greenNote: string;
+  heroCta: string;
+  proofStats: { n: string; d: string }[];
+  symptomsTitle: string; symptoms: string[]; symptomsClosure: string;
+  stackTitle: string; stack: { n: string; t: string; d: string }[]; stackSuffix: string;
+  faqTitle: string; faq: { q: string; aText?: string; aList?: string[] }[];
+  proofTitle: string; proofText: string; proofCta: string; proofHref: string;
   ctaTitle: string; ctaText: string; ctaCta: string;
   back: string; backHref: string;
 }
@@ -236,41 +234,57 @@ export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
     metaDesc: 'CMS strutturato e ricerca full-text su scala per archivi documentali. 33.000+ documenti, 12 settimane di sviluppo tecnico, go-live 16 luglio 2026. Server EU, GDPR, codice in licenza d\'uso.',
     eyebrow: 'Piattaforma documentale · Fondazioni · Enti di ricerca · Consorzi',
     h1: 'Una piattaforma documentale per archivi che nessuno riesce più a trovare.',
-    deck: 'Per fondazioni, enti di ricerca e consorzi con vent\'anni di documentazione — e un motore di ricerca che funziona solo se conosci già il titolo esatto. È un problema di architettura.',
-    painsTitle: 'Il problema che conosci già',
-    pains: [
-      { label: 'Ricercano su Google', desc: 'Il team usa site: sul motore di ricerca per trovare i propri documenti — il CMS interno non restituisce risultati utili.' },
-      { label: 'I partner rinunciano', desc: 'Chi accede dall\'esterno abbandona dopo il secondo tentativo. L\'archivio è innavigabile senza sapere dove guardare.' },
-      { label: 'Grant review: una settimana sprecata', desc: 'Ogni revisione di progetto UE richiede raccogliere a mano i link ai deliverable — lavoro ripetitivo che non produce nulla di nuovo.' },
-      { label: 'Cercano risposte, non file', desc: 'Il giornalista vuole il rapporto sulla fiscalità delle rinnovabili prima del 2020. Il sistema dovrebbe rispondere — adesso restituisce una lista di file.' },
-    ],
-    unifiedTitle: 'Tre cose in un sistema unico',
-    unifiedBody: 'Un CMS per gestire i nuovi contenuti. Un motore di ricerca per trovare quelli vecchi. Un modulo che li capisce, legge cosa significano. Di solito sono tre prodotti di tre fornitori diversi, con tre contratti, tre logiche di prezzo e nessuno che risponde quando qualcosa non torna tra i tre. Terra li unisce: CMS strutturato, ricerca full-text su scala, un layer AI che legge davvero i documenti — e l\'hosting che li fa girare, tutto in un sistema unico.',
-    stackTitle: 'Come funziona, in produzione',
-    stack: [
-      { n: '01', t: 'CMS strutturato', d: 'Payload CMS, TypeScript-first: bozza e pubblicato separati sempre, live preview su mobile/tablet/desktop, versioning su ogni modifica. Un errore si ripristina dal pannello, senza toccare il server. L\'interfaccia editoriale è costruita attorno ai flussi reali del team.' },
-      { n: '02', t: 'Ricerca full-text su scala', d: 'MeiliSearch nel core: ricerca full-text veloce, ordinata per rilevanza, su decine di migliaia di documenti. Quando serve andare oltre la parola esatta — capire cosa un documento significa — c\'è il modulo DocumentAI.' },
-      { n: '03', t: 'Modulo DocumentAI (add-on)', d: 'Ingestione automatica di PDF e pubblicazioni, abstract generati senza intervento redazionale, ricerca semantica in linguaggio naturale. In produzione con oltre 33.000 documenti migrati. Il layer AI usa API esterne — il provider è dichiarato per contratto, i dati del core Terra restano su server EU.' },
-      { n: '04', t: 'Hosting EU gestito', d: 'Server europei, backup giornalieri, SSL/HSTS/CSP. L\'opzione managed include la gestione dell\'infrastruttura — il team del cliente non ha bisogno di un DevOps dedicato.' },
-    ],
-    complianceTitle: 'La domanda che ti fai davvero',
-    compliance: [
-      { label: 'Server EU · GDPR', desc: 'Il core Terra gira self-hosted su server europei — i dati restano nella tua giurisdizione. Il modulo DocumentAI usa API esterne per l\'elaborazione semantica: lo dichiariamo per contratto (DPA), con trasparenza, prima di partire.' },
-      { label: 'Licenza d\'uso del codice', desc: 'Il codice applicativo viene consegnato in licenza d\'uso, con documentazione tecnica — un HANDOFF.md chiaro, senza dipendenza tecnica da noi. Payload CMS è un framework aperto: nessun lock-in verso il tool, nessuno verso di noi.' },
-      { label: 'WCAG 2.1 AA', desc: 'Accessibilità integrata nell\'architettura dall\'inizio, verificata a livello di componente. Obbligatoria per fondi pubblici UE — trattata come criterio progettuale, con lo stesso peso della tipografia e della gerarchia visiva.' },
-      { label: 'Auth a 3 livelli · embargo', desc: 'Controllo granulare per documento: accesso riservato, embargo, pubblicazione. Verificato su un consorzio di ricerca europeo (anonimizzato) con obblighi di open access e paper embargati.' },
-    ],
-    complianceProof: 'L\'abbiamo già consegnato su un consorzio di ricerca europeo: auth a 3 livelli con permessi granulari, backup automatici con ridondanza, privacy-by-design, hosting certificato ISO/IEC 27001 su energia rinnovabile, accessibilità WCAG 2.1 incorporata in ogni fase. È un framework che sappiamo già consegnare.',
-    proofTitle: 'La prova',
+    deck: 'Per fondazioni ed enti di ricerca con vent\'anni di documentazione che cercano i propri materiali su Google.',
+    heroCta: 'Parla con Alba',
     proofStats: [
-      { n: '33.000+', d: 'documenti nell\'archivio' },
+      { n: '33.000+', d: 'documenti' },
       { n: '12 sett.', d: 'di sviluppo tecnico' },
       { n: '16 lug 2026', d: 'go-live' },
     ],
-    proofText: 'Una fondazione per lo sviluppo sostenibile ha migrato oltre 33.000 documenti — archivio di vent\'anni, prima navigabile solo da chi sapeva già cosa cercare — su Terra + DocumentAI. Team autonomo dal giorno del lancio.',
-    proofCta: '',
-    proofHref: '',
-    greenNote: 'Stiamo costruendo la misurazione dei consumi — server e layer AI inclusi. Nessun fornitore di questo tipo di piattaforma pubblica dati di consumo energetico reale per singolo progetto: è la direzione in cui stiamo lavorando, non un rating che vendiamo oggi.',
+    symptomsTitle: 'Il problema che conosci già',
+    symptoms: [
+      'Il team cerca i propri documenti su Google — site: sul motore di ricerca.',
+      'I partner esterni rinunciano dopo il secondo tentativo.',
+      'Ogni grant review: raccogliere a mano i link ai deliverable, una settimana di lavoro ripetitivo.',
+      'Il sistema restituisce file. Il giornalista vuole risposte.',
+    ],
+    symptomsClosure: 'È un problema di architettura.',
+    stackTitle: 'Tre cose in un sistema unico',
+    stack: [
+      { n: 'CMS', t: 'CMS strutturato', d: 'Payload CMS, TypeScript-first. Bozza e pubblicato separati, live preview, versioning su ogni modifica. Un errore si ripristina dal pannello.' },
+      { n: 'Ricerca', t: 'Ricerca full-text', d: 'MeiliSearch nel core: ricerca veloce, ordinata per rilevanza, su decine di migliaia di documenti.' },
+      { n: 'AI', t: 'DocumentAI (add-on)', d: 'Ingestione automatica di PDF, abstract generati, ricerca semantica in linguaggio naturale. In produzione su 33.000+ documenti. Il provider AI è dichiarato per contratto.' },
+    ],
+    stackSuffix: 'Un solo fornitore, hosting EU incluso — CMS, ricerca e AI nello stesso sistema, con un unico referente.',
+    faqTitle: 'Domande',
+    faq: [
+      {
+        q: 'Un\'agenzia piccola regge la compliance UE?',
+        aList: [
+          'Server EU certificati ISO 27001 su energia rinnovabile',
+          'Backup automatici con ridondanza geografica',
+          'Auth a 3 livelli con permessi granulari per documento',
+          'Privacy-by-design integrata nell\'architettura',
+          'WCAG 2.1 AA verificata su ogni componente',
+        ],
+      },
+      {
+        q: 'E se smettiamo di lavorare con voi?',
+        aText: 'Il codice viene consegnato in licenza d\'uso con un HANDOFF.md chiaro. Payload CMS è un framework aperto. Nessuna dipendenza tecnica da noi per far girare la piattaforma.',
+      },
+      {
+        q: 'I dati dove stanno?',
+        aText: 'Il core Terra gira su server EU. Il modulo DocumentAI usa API esterne per l\'elaborazione semantica — il provider è dichiarato per contratto (DPA) prima di partire.',
+      },
+      {
+        q: 'Consumi energetici?',
+        aText: 'Li stiamo misurando — server e layer AI inclusi. Nessun competitor pubblica dati di consumo reale per singolo progetto. È la direzione in cui stiamo lavorando.',
+      },
+    ],
+    proofTitle: 'La prova',
+    proofText: 'La Fondazione per lo Sviluppo Sostenibile ha migrato oltre 33.000 documenti — vent\'anni di archivio — su Terra + DocumentAI. Go-live il 16 luglio 2026, dopo 12 settimane di sviluppo tecnico.',
+    proofCta: 'Leggi il case study →',
+    proofHref: '/work/susdef',
     ctaTitle: 'Scrivi ad Alba.',
     ctaText: 'Raccontaci il tuo archivio — ti diciamo se Terra è la risposta giusta. Preventivo gratuito.',
     ctaCta: 'Parla con Alba',
@@ -282,41 +296,57 @@ export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
     metaDesc: 'Structured CMS and full-text search at scale for document archives. 33,000+ documents, 12 weeks of technical development, go-live 16 July 2026. EU server, GDPR, code under use licence.',
     eyebrow: 'Documentary platform · Foundations · Research institutions · Consortia',
     h1: 'A documentary platform for archives no one can find anymore.',
-    deck: 'For foundations, research institutions and consortia with decades of documentation — and a search engine that only works if you already know the exact title. It is an architecture problem.',
-    painsTitle: 'The problem you already know',
-    pains: [
-      { label: 'Searching on Google', desc: 'The team uses site: on Google to find their own documents — the internal CMS returns nothing useful.' },
-      { label: 'Partners give up', desc: 'External users abandon after the second attempt. The archive is unnavigable without knowing where to look.' },
-      { label: 'Grant review: a wasted week', desc: 'Every EU project review means manually collecting links to deliverables — repetitive work that produces nothing new.' },
-      { label: 'They want answers, not files', desc: 'The journalist wants the renewables taxation report from before 2020. The system should answer — right now it returns a list of files.' },
-    ],
-    unifiedTitle: 'Three things in one system',
-    unifiedBody: 'A CMS to manage new content. A search engine to find old content. A module that understands it, reads what it means. Usually these are three products from three different vendors, with three contracts, three pricing models and no one to call when something breaks between them. Terra unifies them: structured CMS, full-text search at scale, an AI layer that truly reads the documents — and the hosting that runs them, all in one system.',
-    stackTitle: 'How it works, in production',
-    stack: [
-      { n: '01', t: 'Structured CMS', d: 'Payload CMS, TypeScript-first: draft and published states always separate, live preview on mobile/tablet/desktop, versioning on every change. A mistake is restored from the panel, without touching the server. The editorial interface is built around the team\'s real workflows.' },
-      { n: '02', t: 'Full-text search at scale', d: 'MeiliSearch in the core: fast full-text search, ranked by relevance, across tens of thousands of documents. When you need to go beyond the exact word — understand what a document means — there is the DocumentAI module.' },
-      { n: '03', t: 'DocumentAI module (add-on)', d: 'Automatic ingestion of PDFs and publications, abstracts generated without editorial intervention, semantic search in natural language. In production with over 33,000 documents migrated. The AI layer uses external APIs — the provider is declared by contract, core Terra data stays on EU servers.' },
-      { n: '04', t: 'Managed EU hosting', d: 'European servers, daily backups, SSL/HSTS/CSP. The managed option includes infrastructure management — the client team does not need a dedicated DevOps.' },
-    ],
-    complianceTitle: 'The question you are really asking',
-    compliance: [
-      { label: 'EU server · GDPR', desc: 'Core Terra runs self-hosted on European servers — data stays within your jurisdiction. The DocumentAI module uses external APIs for semantic processing: we declare this by contract (DPA), transparently, before starting.' },
-      { label: 'Code under use licence', desc: 'The application code is delivered under a use licence, with technical documentation — a clear HANDOFF.md, no technical dependency on us. Payload CMS is an open framework: no lock-in to the tool, none to us.' },
-      { label: 'WCAG 2.1 AA', desc: 'Accessibility integrated into the architecture from the start, verified at component level. Mandatory for EU public funding — treated as a design criterion, with the same weight as typography and visual hierarchy.' },
-      { label: '3-level auth · embargo', desc: 'Granular control per document: restricted access, embargo, publication. Verified on a European research consortium (anonymised) with open access obligations and embargoed papers.' },
-    ],
-    complianceProof: 'We have already delivered it on a European research consortium: 3-level auth with granular permissions, automatic backups with redundancy, privacy-by-design, ISO/IEC 27001-certified hosting on renewable energy, WCAG 2.1 built into every phase. It is a framework we already know how to deliver.',
-    proofTitle: 'The proof',
+    deck: 'For foundations and research institutions with decades of documentation that search their own materials on Google.',
+    heroCta: 'Talk to Alba',
     proofStats: [
-      { n: '33,000+', d: 'documents in the archive' },
+      { n: '33,000+', d: 'documents' },
       { n: '12 wks', d: 'of technical development' },
       { n: '16 Jul 2026', d: 'go-live' },
     ],
-    proofText: 'A sustainable development foundation migrated over 33,000 documents — a twenty-year archive, previously navigable only by those who already knew what to look for — onto Terra + DocumentAI. Team autonomous from launch day.',
-    proofCta: '',
-    proofHref: '',
-    greenNote: 'We are building consumption measurement — server and AI layer included. No provider of this type of platform publishes real energy consumption data per client project: that is the direction we are working towards, not a rating we sell today.',
+    symptomsTitle: 'The problem you already know',
+    symptoms: [
+      'The team searches their own documents on Google — site: on the search engine.',
+      'External partners give up after the second attempt.',
+      'Every grant review: collecting deliverable links by hand, a week of work that produces nothing.',
+      'The system returns files. The journalist wants answers.',
+    ],
+    symptomsClosure: 'It is an architecture problem.',
+    stackTitle: 'Three things in one system',
+    stack: [
+      { n: 'CMS', t: 'Structured CMS', d: 'Payload CMS, TypeScript-first. Draft and published states always separate, live preview, versioning on every change. A mistake is restored from the panel.' },
+      { n: 'Search', t: 'Full-text search', d: 'MeiliSearch in the core: fast search, ranked by relevance, across tens of thousands of documents.' },
+      { n: 'AI', t: 'DocumentAI (add-on)', d: 'Automatic PDF ingestion, generated abstracts, semantic search in natural language. In production on 33,000+ migrated documents. The AI provider is declared by contract.' },
+    ],
+    stackSuffix: 'One vendor, EU hosting included — CMS, search and AI in the same system, with a single point of contact.',
+    faqTitle: 'Questions',
+    faq: [
+      {
+        q: 'Can a small agency handle EU compliance?',
+        aList: [
+          'ISO 27001-certified EU servers on renewable energy',
+          'Automatic backups with geographic redundancy',
+          '3-level auth with granular per-document permissions',
+          'Privacy-by-design built into the architecture',
+          'WCAG 2.1 AA verified at component level',
+        ],
+      },
+      {
+        q: 'What if we stop working with you?',
+        aText: 'The code is delivered under a use licence with a clear HANDOFF.md. Payload CMS is an open framework. No technical dependency on us to run the platform.',
+      },
+      {
+        q: 'Where does the data live?',
+        aText: 'Core Terra runs on EU servers. The DocumentAI module uses external APIs for semantic processing — the provider is declared by contract (DPA) before starting.',
+      },
+      {
+        q: 'Energy consumption?',
+        aText: 'We are measuring it — server and AI layer included. No competitor publishes real consumption data per client project. That is the direction we are working towards.',
+      },
+    ],
+    proofTitle: 'The proof',
+    proofText: 'The Fondazione per lo Sviluppo Sostenibile migrated over 33,000 documents — a twenty-year archive — onto Terra + DocumentAI. Go-live on 16 July 2026, after 12 weeks of technical development.',
+    proofCta: 'Read the case study →',
+    proofHref: '/en/work/susdef',
     ctaTitle: 'Write to Alba.',
     ctaText: 'Tell us about your archive — we will tell you whether Terra is the right answer. Free quote.',
     ctaCta: 'Talk to Alba',
