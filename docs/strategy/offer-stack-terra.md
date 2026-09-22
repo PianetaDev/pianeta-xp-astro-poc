@@ -155,6 +155,18 @@ Consorzio finanziato con fondi pubblici UE, 10-40 partner europei, produzione do
 
 **Canale primario**: landing/service page con sezione governance dati + case study Susdef come proof
 
+> **Compliance framework verificato (contesto interno, aggiunto 22/09/2026)** — Max: "vedi il lavoro che abbiamo fatto di privacy e compliance per EPOS, è un punto fondamentale per i centri europei". Fonte: Technical Offer firmato da Latte Creative per EPOS ERIC (26/6/2025, Google Drive) — **non nominabile in nessun contenuto esterno**, vedi vincolo ghost in cima al documento. Pratiche concrete consegnate in quel progetto, riusabili come framework generico (non come case study citabile):
+> - TLS 1.3 full SSL su tutto il sito
+> - Autenticazione a tre livelli (Amministratore, Content Manager, Utente) con permessi granulari nel CMS
+> - Backup automatici regolari, retention 7 giorni, ripristino fino all'ultimo snapshot disponibile
+> - Ridondanza: replica dati in tempo reale su un secondo server, continuità in caso di guasto del server centrale
+> - Privacy-by-design: minimizzazione dei dati, anonimizzazione dove applicabile, log management GDPR-compliant
+> - Hosting EU certificato ISO/IEC 27001, energia 100% rinnovabile (quel progetto: Tilaa VPS, Paesi Bassi — nome del provider non vincolante per Terra, è lo standard di riferimento)
+> - WCAG 2.1 embedded in ogni fase (non un audit finale)
+> - Assistente di ricerca AI dichiarato "fully compliant with privacy and data protection requirements" — stesso principio del modulo DocumentAI di Terra
+>
+> **Come usarlo**: questo è un framework di pratiche che Pianeta sa già consegnare su un progetto reale per un consorzio di ricerca europeo — rafforza la credibilità della risposta all'obiezione di Marco ("può un'agenzia italiana piccola garantire compliance a livello europeo?") con un precedente vero, non solo con un'affermazione. Non citare mai la fonte (EPOS) né il progetto specifico in contenuto pubblico o brief MUSE — descrivere solo come "framework che applichiamo su progetti per consorzi/enti di ricerca europei".
+
 ---
 
 ---
