@@ -22,6 +22,8 @@ const CONTENT_TYPE_LABELS: Record<string, string> = {
   lab: 'Lab',
   team: 'Team',
   careers: 'Careers',
+  posts: 'Post',
+  reels: 'Reel',
 }
 
 const containerRef = ref<HTMLDivElement | null>(null)

@@ -1,5 +1,5 @@
 /**
- * Pianeta Media Cloud Engine — motore visivo Three.js per l'archivio foto.
+ * Pianeta.Watchers Cloud Engine — motore visivo Three.js per l'archivio foto.
  *
  * Classe TS pura, zero dipendenze React/Vue. Monta su un HTMLDivElement
  * qualsiasi; il wrapper Vue (MediaCloud.vue) fornisce il punto di montaggio
