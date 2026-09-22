@@ -224,8 +224,10 @@ export interface TerraStrings {
   symptomsTitle: string; symptoms: string[]; symptomsClosure: string;
   stackTitle: string; stack: { n: string; t: string; d: string }[]; stackSuffix: string;
   faqTitle: string; faq: { q: string; aText?: string; aList?: string[] }[];
+  stepsTitle: string; steps: { n: string; t: string; d: string }[];
   proofTitle: string; proofText: string; proofCta: string; proofHref: string;
   ctaTitle: string; ctaText: string; ctaCta: string;
+  ctaSecondaryCta: string; ctaSecondaryHref: string;
   back: string; backHref: string;
 }
 export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
@@ -235,7 +237,7 @@ export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
     eyebrow: 'Piattaforma documentale · Fondazioni · Enti di ricerca · Consorzi',
     h1: 'Una piattaforma documentale per archivi che nessuno riesce più a trovare.',
     deck: 'Per fondazioni ed enti di ricerca con trent\'anni di documentazione che cercano i propri materiali su Google.',
-    heroCta: 'Parla con Alba',
+    heroCta: 'Prenota una demo con Alba',
     proofStats: [
       { n: '33.000+', d: 'documenti' },
       { n: '12 sett.', d: 'di sviluppo tecnico' },
@@ -252,17 +254,17 @@ export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
     stackTitle: 'Tre cose in un sistema unico',
     stack: [
       { n: 'CMS', t: 'CMS strutturato', d: 'Payload CMS, TypeScript-first. Bozza e pubblicato separati, live preview, versioning su ogni modifica. Un errore si ripristina dal pannello.' },
-      { n: 'Ricerca', t: 'Ricerca full-text', d: 'MeiliSearch nel core: ricerca veloce, ordinata per rilevanza, su decine di migliaia di documenti.' },
+      { n: 'Ricerca', t: 'Ricerca full-text', d: 'MeiliSearch nel core: ricerca veloce, ordinata per rilevanza, su decine di migliaia di documenti. Latenza <50ms.' },
       { n: 'AI', t: 'DocumentAI (add-on)', d: 'Ingestione automatica di PDF, abstract generati, ricerca semantica in linguaggio naturale. In produzione su 33.000+ documenti. Il provider AI è dichiarato per contratto.' },
     ],
     stackSuffix: 'Un solo fornitore, hosting EU incluso — CMS, ricerca e AI nello stesso sistema, con un unico referente.',
     faqTitle: 'Domande',
     faq: [
       {
-        q: 'Un\'agenzia piccola regge la compliance UE?',
+        q: 'La compliance UE — già consegnata su un consorzio di ricerca europeo.',
         aList: [
-          'Server EU certificati ISO 27001 su energia rinnovabile',
-          'Backup automatici con ridondanza geografica',
+          'Server EU certificati ISO 27001',
+          'Backup automatici e ridondanza',
           'Auth a 3 livelli con permessi granulari per documento',
           'Privacy-by-design integrata nell\'architettura',
           'WCAG 2.1 AA verificata su ogni componente',
@@ -281,13 +283,21 @@ export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
         aText: 'Li stiamo misurando — server e layer AI inclusi. Nessun competitor pubblica dati di consumo reale per singolo progetto. È la direzione in cui stiamo lavorando.',
       },
     ],
+    stepsTitle: 'Come si lavora',
+    steps: [
+      { n: '01', t: 'Demo e diagnosi', d: 'Racconti l\'archivio. Valutiamo in 30 minuti se Terra è la risposta giusta — e lo diciamo chiaramente.' },
+      { n: '02', t: 'Sviluppo tecnico (12 settimane)', d: 'Prototipo nelle prime due settimane, sistema completo per il go-live. Team fisso, nessun subappalto, aggiornamenti settimanali.' },
+      { n: '03', t: 'Lancio e autonomia', d: 'Formazione, HANDOFF.md, accesso al codice in licenza d\'uso. Il team gestisce in autonomia dal primo giorno — come Susdef.' },
+    ],
     proofTitle: 'La prova',
-    proofText: 'La Fondazione per lo Sviluppo Sostenibile ha migrato oltre 33.000 documenti — trent\'anni di archivio — su Terra + DocumentAI. Go-live il 16 luglio 2026, dopo 12 settimane di sviluppo tecnico.',
+    proofText: 'La Fondazione per lo Sviluppo Sostenibile ha migrato oltre 33.000 documenti — trent\'anni di archivio — su Terra + DocumentAI. Go-live il 16 luglio 2026, dopo 12 settimane di sviluppo tecnico. Il team gestisce tutto in autonomia dal lancio.',
     proofCta: 'Leggi il case study →',
     proofHref: '/work/susdef',
-    ctaTitle: 'Scrivi ad Alba.',
-    ctaText: 'Raccontaci il tuo archivio — ti diciamo se Terra è la risposta giusta. Preventivo gratuito.',
-    ctaCta: 'Parla con Alba',
+    ctaTitle: 'Prenota una demo.',
+    ctaText: 'Raccontaci l\'archivio — valutiamo insieme se Terra è la risposta giusta. Senza impegno.',
+    ctaCta: 'Prenota una demo con Alba',
+    ctaSecondaryCta: 'Guarda il caso Susdef →',
+    ctaSecondaryHref: '/work/susdef',
     back: '← Lavoriamo insieme',
     backHref: '/hire',
   },
@@ -297,7 +307,7 @@ export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
     eyebrow: 'Documentary platform · Foundations · Research institutions · Consortia',
     h1: 'A documentary platform for archives no one can find anymore.',
     deck: 'For foundations and research institutions with decades of documentation that search their own materials on Google.',
-    heroCta: 'Talk to Alba',
+    heroCta: 'Book a demo with Alba',
     proofStats: [
       { n: '33,000+', d: 'documents' },
       { n: '12 wks', d: 'of technical development' },
@@ -314,17 +324,17 @@ export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
     stackTitle: 'Three things in one system',
     stack: [
       { n: 'CMS', t: 'Structured CMS', d: 'Payload CMS, TypeScript-first. Draft and published states always separate, live preview, versioning on every change. A mistake is restored from the panel.' },
-      { n: 'Search', t: 'Full-text search', d: 'MeiliSearch in the core: fast search, ranked by relevance, across tens of thousands of documents.' },
+      { n: 'Search', t: 'Full-text search', d: 'MeiliSearch in the core: fast search, ranked by relevance, across tens of thousands of documents. Latency <50ms.' },
       { n: 'AI', t: 'DocumentAI (add-on)', d: 'Automatic PDF ingestion, generated abstracts, semantic search in natural language. In production on 33,000+ migrated documents. The AI provider is declared by contract.' },
     ],
     stackSuffix: 'One vendor, EU hosting included — CMS, search and AI in the same system, with a single point of contact.',
     faqTitle: 'Questions',
     faq: [
       {
-        q: 'Can a small agency handle EU compliance?',
+        q: 'EU compliance — already delivered on a European research consortium.',
         aList: [
-          'ISO 27001-certified EU servers on renewable energy',
-          'Automatic backups with geographic redundancy',
+          'ISO 27001-certified EU servers',
+          'Automatic backups and redundancy',
           '3-level auth with granular per-document permissions',
           'Privacy-by-design built into the architecture',
           'WCAG 2.1 AA verified at component level',
@@ -344,12 +354,20 @@ export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
       },
     ],
     proofTitle: 'The proof',
-    proofText: 'The Fondazione per lo Sviluppo Sostenibile migrated over 33,000 documents — a thirty-year archive — onto Terra + DocumentAI. Go-live on 16 July 2026, after 12 weeks of technical development.',
+    stepsTitle: 'How it works',
+    steps: [
+      { n: '01', t: 'Demo & diagnosis', d: 'Tell us about your archive. We assess in 30 minutes whether Terra is the right answer — and say so clearly.' },
+      { n: '02', t: 'Technical build (12 weeks)', d: 'Working prototype in two weeks, full system by go-live. Dedicated team, no subcontracting, weekly updates.' },
+      { n: '03', t: 'Launch & autonomy', d: 'Training, HANDOFF.md, code under use licence. Your team runs it independently from day one — like Susdef.' },
+    ],
+    proofText: 'The Fondazione per lo Sviluppo Sostenibile migrated over 33,000 documents — a thirty-year archive — onto Terra + DocumentAI. Go-live on 16 July 2026, after 12 weeks of technical development. The team has run it independently since launch.',
     proofCta: 'Read the case study →',
     proofHref: '/en/work/susdef',
-    ctaTitle: 'Write to Alba.',
-    ctaText: 'Tell us about your archive — we will tell you whether Terra is the right answer. Free quote.',
-    ctaCta: 'Talk to Alba',
+    ctaTitle: 'Book a demo.',
+    ctaText: 'Tell us about your archive — we assess together whether Terra is the right answer. No commitment.',
+    ctaCta: 'Book a demo with Alba',
+    ctaSecondaryCta: 'See the Susdef case →',
+    ctaSecondaryHref: '/en/work/susdef',
     back: '← Work with us',
     backHref: '/en/hire',
   },

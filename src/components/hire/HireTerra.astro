@@ -14,6 +14,10 @@ const S = TERRA_STRINGS[locale];
     <h1 class="f-h1">{S.h1}</h1>
     <p class="f-deck">{S.deck}</p>
 
+    <div class="f-hero-img">
+      <img src="/images/hire/terra/hero.jpg" alt="Terra — interfaccia d'archivio Susdef" width="820" height="460" loading="eager" />
+    </div>
+
     <div class="f-hero-bar">
       <button class="f-hero-btn" data-action="open-alba">{S.heroCta}</button>
       <div class="f-hero-stats">
@@ -33,6 +37,9 @@ const S = TERRA_STRINGS[locale];
     <div class="f-stack-grid">
       {S.stack.map((st) => (
         <div class="f-stack-card">
+          <div class="f-stack-img">
+            <img src={`/images/hire/terra/${st.n.toLowerCase()}.jpg`} alt={`Terra — ${st.t}`} width="360" height="200" loading="lazy" />
+          </div>
           <span class="f-stack-label">{st.n}</span>
           <strong>{st.t}</strong>
           <p>{st.d}</p>
@@ -58,6 +65,13 @@ const S = TERRA_STRINGS[locale];
       ))}
     </div>
 
+    <h2 class="f-h2">{S.stepsTitle}</h2>
+    <ol class="f-steps">
+      {S.steps.map((st) => (
+        <li><span class="f-step-n">{st.n}</span><div><strong>{st.t}</strong><p>{st.d}</p></div></li>
+      ))}
+    </ol>
+
     <h2 class="f-h2">{S.proofTitle}</h2>
     <div class="f-proof">
       <div class="f-proof-stats">
@@ -74,7 +88,10 @@ const S = TERRA_STRINGS[locale];
         <h2 class="f-send-t">{S.ctaTitle}</h2>
         <p class="f-send-d">{S.ctaText}</p>
       </div>
-      <button class="f-send-btn" data-action="open-alba">{S.ctaCta}</button>
+      <div class="f-send-actions">
+        <button class="f-send-btn" data-action="open-alba">{S.ctaCta}</button>
+        <a href={S.ctaSecondaryHref} class="f-send-secondary">{S.ctaSecondaryCta}</a>
+      </div>
     </div>
   </main>
 </div>
@@ -94,6 +111,10 @@ const S = TERRA_STRINGS[locale];
   .f-h1 { font-size: clamp(32px, 5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 14px; }
   .f-deck { font-size: 19px; line-height: 1.5; color: var(--mut); margin: 0 0 28px; max-width: 680px; }
   .f-h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin: 44px 0 16px; }
+
+  /* Hero screenshot */
+  .f-hero-img { margin-bottom: 24px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--card); }
+  .f-hero-img img { width: 100%; height: auto; display: block; }
 
   /* Above-fold bar: CTA + 3 numbers */
   .f-hero-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px; margin-bottom: 4px; }
@@ -117,6 +138,8 @@ const S = TERRA_STRINGS[locale];
   .f-stack-card { display: flex; flex-direction: column; gap: 5px;
     background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
   .f-stack-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--acc); font-weight: 700; }
+  .f-stack-img { margin-bottom: 10px; border-radius: 8px; overflow: hidden; background: var(--pianeta-bg); border: 1px solid var(--line); }
+  .f-stack-img img { width: 100%; height: auto; display: block; }
   .f-stack-card strong { font-size: 15px; }
   .f-stack-card p { margin: 0; color: var(--mut); font-size: 13px; line-height: 1.5; }
   .f-stack-suffix { grid-column: 1 / -1; background: transparent; }
@@ -129,6 +152,13 @@ const S = TERRA_STRINGS[locale];
   .f-faq-list { margin: 0; padding: 0 0 0 18px; display: grid; gap: 4px; }
   .f-faq-list li { font-size: 13px; color: var(--mut); line-height: 1.5; }
   .f-faq-a { margin: 0; font-size: 14px; color: var(--mut); line-height: 1.6; }
+
+  /* Steps */
+  .f-steps { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0; }
+  .f-steps li { display: flex; gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .f-step-n { font-size: 13px; font-weight: 800; color: var(--cta-primary); min-width: 28px; }
+  .f-steps strong { display: block; margin-bottom: 5px; font-size: 16px; }
+  .f-steps p { margin: 0; color: var(--mut); font-size: 14px; line-height: 1.5; }
 
   /* Proof */
   .f-proof { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; margin-top: 4px; }
@@ -146,7 +176,10 @@ const S = TERRA_STRINGS[locale];
     background: var(--pianeta-text); color: var(--pianeta-bg); }
   .f-send-t { font-size: clamp(20px, 3vw, 26px); margin: 0 0 6px; color: var(--pianeta-bg); }
   .f-send-d { margin: 0; font-size: 15px; line-height: 1.5; opacity: .8; max-width: 520px; }
+  .f-send-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
   .f-send-btn { background: var(--cta-primary); color: #fff; font-weight: 700; padding: 13px 24px; border-radius: 999px;
     border: none; cursor: pointer; font-size: 15px; white-space: nowrap; font-family: inherit; }
   .f-send-btn:hover { opacity: .9; }
+  .f-send-secondary { color: rgba(255,255,255,.75); font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .f-send-secondary:hover { color: #fff; }
 </style>
