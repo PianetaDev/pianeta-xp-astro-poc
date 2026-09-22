@@ -1,0 +1,66 @@
+---
+/**
+ * WorkCard — bento tile per un caso studio.
+ * Usato sia nella home sia in /hub.
+ * Estratto dal markup ripetuto in src/pages/index.astro.
+ */
+interface Props {
+  href: string;
+  title: string;
+  cover?: string;
+  client?: string;
+  year?: number | string;
+  /** Dimensione della tile nel bento grid */
+  size?: 'tall' | 'medium';
+  /** Etichetta sopra il titolo. Default: "Work · {year}" */
+  kicker?: string;
+  /** true: video ECLAG inline invece di immagine di sfondo */
+  eclagVideo?: boolean;
+}
+
+const {
+  href,
+  title,
+  cover,
+  client,
+  year,
+  size = 'medium',
+  kicker,
+  eclagVideo = false,
+} = Astro.props;
+
+const tileClass = `bento-tile ${size === 'tall' ? 't-tall' : 't-medium'} t-dark`;
+const bgStyle = cover
+  ? `background-image:url('${cover.replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center;`
+  : '';
+const resolvedKicker = kicker ?? ('Work' + (year ? ` · ${year}` : ''));
+const sub = client || '';
+---
+{eclagVideo ? (
+  <a href={href} class={tileClass}>
+    <video
+      poster="/choosetoseethem/cover-v3.webp"
+      muted loop playsinline preload="none"
+      class="bento-video"
+      data-lazy-video
+      data-src="/choosetoseethem/video-restore-web-720.mp4"
+    ></video>
+    <div class="bento-grad" />
+    <div class="bento-content">
+      <p class="bento-kicker">{resolvedKicker}</p>
+      <div class="bento-spacer" />
+      <h2 class={size === 'tall' ? 'bento-title-xl' : 'bento-title'}>{title}</h2>
+      {sub && <p class="bento-sub">{sub}</p>}
+    </div>
+  </a>
+) : (
+  <a href={href} class={tileClass} style={bgStyle}>
+    {cover && <div class="bento-grad" />}
+    <div class="bento-content">
+      <p class="bento-kicker">{resolvedKicker}</p>
+      <div class="bento-spacer" />
+      <h2 class={size === 'tall' ? 'bento-title-xl' : 'bento-title'}>{title}</h2>
+      {sub && <p class="bento-sub">{sub}</p>}
+    </div>
+  </a>
+)}
