@@ -31,6 +31,8 @@ Una piattaforma CMS + ricerca documentale che trasforma un archivio statico (rep
 
 Stack verificato (da tre progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSearch**. Self-hosted su server europei, GDPR compliant, WCAG 2.1 AA. Il codice viene consegnato integralmente al cliente — nessun lock-in su Pianeta.Studio.
 
+**Restrizione d'uso (aggiunta 22/09/2026, da specificare in ogni contenuto pubblico che parla di consegna del codice):** il codice consegnato è per l'uso del cliente nel proprio progetto — hosting, modifica, subentro di un altro fornitore/sviluppatore. Non è concesso in licenza per finalità commerciali estranee al progetto (rivendita a terzi, riuso come base di un prodotto o servizio concorrente, sublicenza). "Nessun lock-in" descrive l'assenza di dipendenza tecnica da Pianeta — non un trasferimento di proprietà intellettuale senza restrizioni. Formulazione provvisoria: Max conferma la dicitura esatta prima che diventi contrattuale.
+
 **MeiliSearch** fornisce ricerca full-text veloce e ordinata per rilevanza — non è generative AI, è un motore di ricerca ad alte prestazioni. Il layer AI generativo (ingestione AI, abstract automatici, ricerca semantica) è disponibile come **modulo DocumentAI**, add-on di Terra — vedi sezione 1.5.
 
 ### Cosa NON è
