@@ -1,15 +1,59 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Subscribe to the Bulletin — Pianeta.Studio">
-  <section class="px-6 lg:px-12 pt-16 pb-16 max-w-[720px]">
-    <h1 class="text-4xl font-black mb-4">Subscribe to the Bulletin</h1>
-    <p class="text-black/70 mb-8">One email a month on sustainable creativity, design and technology.</p>
-    <form action="/api/newsletter/subscribe" method="post" class="flex flex-col gap-4 max-w-md">
+<BaseLayout title="Subscribe to the Bulletin — Pianeta.Studio" description="Articles, real cases, research. 1-2 per month from Pianeta.Studio.">
+  <div class="bulletin-subscribe">
+    <header class="bulletin-subscribe-head">
+      <p class="index-eyebrow">Bulletin</p>
+      <h1 class="index-title">Subscribe</h1>
+      <p class="index-deck">Articles, real cases, research. 1-2 per month from Pianeta.Studio.</p>
+    </header>
+    <form action="/api/newsletter/subscribe" method="post" class="bulletin-subscribe-form">
       <input type="hidden" name="locale" value="en" />
-      <input type="email" name="email" required placeholder="you@email.com" class="border border-black/20 rounded-md px-4 py-3 bg-white"/>
-      <button type="submit" class="bg-ink text-bg px-6 py-3 rounded-md font-semibold">Subscribe</button>
+      <input type="email" name="email" required placeholder="you@email.com" class="bulletin-subscribe-input" />
+      <button type="submit" class="cta-btn cta-primary">Subscribe</button>
     </form>
-    <p class="text-xs text-black/50 mt-4">By subscribing you accept our <a class="underline" href="/en/privacy">privacy policy</a>.</p>
-  </section>
+    <p class="bulletin-subscribe-note">By subscribing you accept our <a href="/en/privacy">privacy policy</a>.</p>
+  </div>
 </BaseLayout>
+
+<style>
+.bulletin-subscribe {
+  max-width: var(--wrap-max);
+  margin: 0 auto;
+  padding: 80px 24px 96px;
+}
+.bulletin-subscribe-head {
+  max-width: 560px;
+  margin: 0 0 40px;
+}
+.bulletin-subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 440px;
+}
+.bulletin-subscribe-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--pianeta-border-strong);
+  border-radius: 12px;
+  background: var(--pianeta-bg-card);
+  color: var(--pianeta-text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 150ms;
+}
+.bulletin-subscribe-input:focus {
+  border-color: var(--cta-primary);
+}
+.bulletin-subscribe-note {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: var(--pianeta-muted);
+}
+.bulletin-subscribe-note a {
+  color: inherit;
+  text-decoration: underline;
+}
+</style>

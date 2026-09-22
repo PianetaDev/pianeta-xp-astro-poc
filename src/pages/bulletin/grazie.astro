@@ -3,16 +3,53 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const email = Astro.url.searchParams.get('email') || '';
 ---
 <BaseLayout title="Grazie · Bulletin Pianeta" description="Controlla la casella email per confermare l'iscrizione.">
-  <div class="px-6 lg:px-10 py-16 md:py-24 max-w-[640px] mx-auto text-center">
-        <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">Controlla la tua casella</h1>
-    <p class="mt-6 text-lg text-black/70">
-      Ti abbiamo mandato un'email{email && ` a `}{email && <strong class="text-black">{email}</strong>} con il link per confermare l'iscrizione.
+  <div class="bulletin-flow">
+    <h1 class="bulletin-flow-title">Controlla la tua casella</h1>
+    <p class="bulletin-flow-body">
+      Ti abbiamo mandato un'email{email && ` a `}{email && <strong>{email}</strong>} con il link per confermare l'iscrizione.
     </p>
-    <p class="mt-4 text-sm text-black/55">
-      Se non la trovi in pochi minuti, controlla in spam o scrivici a <a href="mailto:bulletin@pianeta.studio" class="underline">bulletin@pianeta.studio</a>.
+    <p class="bulletin-flow-note">
+      Se non la trovi in pochi minuti, controlla in spam o scrivici a <a href="mailto:bulletin@pianeta.studio">bulletin@pianeta.studio</a>.
     </p>
-    <div class="mt-10">
-      <a href="/bulletin" class="inline-block bg-black text-white px-5 py-3 rounded-full text-sm font-medium hover:bg-black/85">← Torna al Bulletin</a>
+    <div class="bulletin-flow-actions">
+      <a href="/bulletin" class="cta-btn cta-ghost">← Torna al Bulletin</a>
     </div>
   </div>
 </BaseLayout>
+
+<style>
+.bulletin-flow {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 24px 96px;
+  text-align: center;
+}
+.bulletin-flow-title {
+  font-size: var(--ty-hero);
+  font-weight: 600;
+  letter-spacing: var(--ty-hero-tracking);
+  line-height: var(--ty-hero-lh);
+  margin: 0 0 24px;
+}
+.bulletin-flow-body {
+  font-size: 1.1rem;
+  color: var(--pianeta-muted-strong);
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+.bulletin-flow-note {
+  font-size: 0.875rem;
+  color: var(--pianeta-muted);
+  margin: 0 0 40px;
+}
+.bulletin-flow-note a {
+  color: inherit;
+  text-decoration: underline;
+}
+.bulletin-flow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+</style>
