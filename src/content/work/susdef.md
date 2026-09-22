@@ -14,7 +14,7 @@ links:
 locale: it
 draft: true
 type: work
-tags: ["ux", "accessibilità", "archivio", "fondazioni", "sostenibilità", "wcag"]
+tags: ["ux", "accessibilità", "archivio", "fondazioni", "sostenibilità", "wcag", "da-rifare"]
 tour:
   enabled: true
   chapters:
