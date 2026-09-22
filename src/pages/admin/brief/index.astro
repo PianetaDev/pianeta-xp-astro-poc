@@ -26,7 +26,6 @@ function readDoc(relPath: string): { html: string; available: boolean } {
   }
 }
 
-const personasDoc = readDoc('docs/strategy/personas-pianeta.md');
 const voiceDoc = readDoc('_KB_APPROVATA/brand/voice.md');
 
 const ANCHORS = [
@@ -201,19 +200,13 @@ const NON_USARE = [
       <h2 class="brief-section-title">Documenti completi</h2>
       <p class="brief-section-sub">Testo integrale dei documenti sorgente — non solo il riassunto curato sopra.</p>
 
-      <details class="doc-block">
-        <summary class="doc-summary">
-          <span class="doc-summary-name">docs/strategy/personas-pianeta.md</span>
-          <span class="doc-summary-meta">Personas Pianeta — Libreria brand-level · COMPASS (PIA-1358)</span>
-          {!personasDoc.available && <span class="doc-badge-missing">file non disponibile</span>}
-        </summary>
-        <div class="doc-body">
-          {personasDoc.available
-            ? <div class="doc-markdown" set:html={personasDoc.html} />
-            : <p class="doc-missing-msg">File <code>docs/strategy/personas-pianeta.md</code> non trovato in questo ambiente.</p>
-          }
-        </div>
-      </details>
+      <div class="doc-block doc-block-kb">
+        <p class="doc-kb-label">Personas Pianeta — Libreria brand-level · COMPASS (PIA-1358)</p>
+        <p class="doc-kb-msg">
+          I personas sono nel repo privato <strong>PianetaDev/pianeta-kb</strong> (<code>strategy/personas-pianeta.md</code>).
+          Questo repo pubblico non espone documenti strategici interni (rimossi in PIA-1573).
+        </p>
+      </div>
 
       <details class="doc-block">
         <summary class="doc-summary">
@@ -339,6 +332,11 @@ const NON_USARE = [
     }
     .doc-missing-msg code { font-size: 11px; background: var(--pianeta-bg-card); padding: 2px 6px; border-radius: 4px; }
     .doc-missing-msg a { color: var(--cta-primary); }
+
+    .doc-block-kb { padding: 16px 20px; }
+    .doc-kb-label { margin: 0 0 6px; font-size: 12px; font-weight: 700; color: var(--pianeta-text); font-family: monospace; }
+    .doc-kb-msg { margin: 0; font-size: 13px; line-height: 1.55; color: var(--pianeta-muted-strong); }
+    .doc-kb-msg code { font-size: 11px; background: var(--pianeta-bg-card); padding: 2px 6px; border-radius: 4px; }
 
     /* Markdown rendering inside doc-block */
     .doc-markdown { font-size: 13px; line-height: 1.65; color: var(--pianeta-text); }
