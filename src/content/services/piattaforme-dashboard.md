@@ -1,6 +1,6 @@
 ---
 title: "Piattaforme & dashboard"
-description: "Piattaforme web custom e dashboard di business intelligence. Architettura modulare, autenticazione enterprise, performance verificabili."
+description: "Terra: CMS strutturato + ricerca full-text per organizzazioni con archivi documentali grandi. Payload CMS, MeiliSearch, modulo DocumentAI opzionale. Self-hosted, server EU."
 category: "technology"
 processPhase: 3
 icon: "📊"
@@ -19,19 +19,17 @@ deliverables:
   - "Repo del cliente"
 relatedServices: ["web-sostenibile", "design-system-multi-brand"]
 locale: it
-draft: true
+draft: false
 type: service
 date: 2026-06-27
 ---
 
-## Per chi è
+Terra è la nostra piattaforma per organizzazioni con archivi documentali grandi: un CMS strutturato, una ricerca full-text veloce e ordinata per rilevanza, e un modulo DocumentAI opzionale — self-hosted su server europei, GDPR compliant, WCAG 2.1 AA.
 
-Per organizzazioni che hanno workflow specifici che gli strumenti off-the-shelf non coprono o lo fanno male.
+Serve a fondazioni, enti di ricerca e consorzi che hanno migliaia di pubblicazioni, report e paper scientifici che i propri collaboratori faticano a trovare. Quando l'archivio esiste ma è di fatto invisibile, Terra lo trasforma in una superficie navigabile e gestibile in autonomia dal team.
 
-## Come lavoriamo
+Il core include Payload CMS con live preview, MeiliSearch per la ricerca ad alte prestazioni, e infrastruttura consegnata in licenza al cliente: nessun abbonamento mensile a noi, nessuna dipendenza tecnica per far girare la piattaforma. Il modulo DocumentAI — disponibile come add-on — aggiunge ingestione automatica dei documenti, abstract generati e ricerca semantica in linguaggio naturale.
 
-Discovery con utenti chiave + prototipi navigabili + build iterativo. 20-32 settimane.
+Abbiamo un caso in produzione con la Fondazione per lo Sviluppo Sostenibile: oltre 33.000 record migrati, il team gestisce i contenuti in autonomia dal lancio, sito live in 12 settimane di sviluppo tecnico. [Leggi il case study →](/work/susdef)
 
-## Cosa ottiene il cliente
-
-Una piattaforma pensata sui propri workflow reali, non sull'immagine astratta del cliente generico.
+Per l'offerta completa, consulta la [landing Terra →](/hire/terra).
