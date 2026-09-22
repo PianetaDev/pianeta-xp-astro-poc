@@ -43,9 +43,9 @@ Questa proposta non era nel capitolato. Era emersa dall'ascolto.
 
 ## Il risultato e cosa ha aperto
 
-Dalla firma al go-live: **12 settimane**. Oltre 33.000 record migrati con metadati puliti, relazioni preservate, categorizzazioni normalizzate. Formazione al team interno inclusa. Handover documentato.
+**12 settimane di sviluppo tecnico**, go-live il 16 luglio 2026. Oltre 33.000 record migrati con metadati puliti, relazioni preservate, categorizzazioni normalizzate. Formazione al team interno inclusa. Handover documentato.
 
-Susdef ha ora un archivio che il loro team gestisce in autonomia, su uno stack senza scadenze di licenza, con il codice applicativo interamente di loro proprietà.
+Susdef ha ora un archivio che il loro team gestisce in autonomia, su uno stack senza scadenze di licenza, con il codice applicativo interamente di loro proprietà — consegnato per l'uso nel loro progetto, non ceduto in licenza per rivendita o sublicenza a terzi.
 
 La parte più interessante, per noi, è quello che questo percorso ha aperto. Lavorare con un archivio di questa scala ha fatto emergere possibilità che non erano visibili all'inizio — e alcune si sono trasformate in proposte concrete per sviluppi successivi. Non erano nel contratto originale. Sono nate dall'ascolto di cosa serviva davvero, una volta che il sistema funzionava.
 

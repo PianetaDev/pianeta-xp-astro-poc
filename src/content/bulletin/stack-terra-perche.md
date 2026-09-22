@@ -27,7 +27,7 @@ Abbiamo un motivo solido.
 
 **Payload CMS è open source, TypeScript-first, senza plugin.** Non ha un ecosistema di plugin di terze parti che invecchiano in modo incontrollato — l'API è definita in codice, non in configurazione. Questo significa che il progetto che consegniamo oggi è leggibile e modificabile da qualsiasi sviluppatore tra tre anni, senza dover capire quale versione di quale plugin era attiva nel 2026.
 
-Il codice applicativo che costruiamo è **proprietà del cliente** — consegnato integralmente con documentazione tecnica. Un altro dev può subentrare con un HANDOFF.md chiaro. Non c'è nessun lock-in verso di noi, e non c'è lock-in verso il CMS (Payload è framework aperto, non licenza commerciale).
+Il codice applicativo che costruiamo è **proprietà del cliente** — consegnato integralmente con documentazione tecnica, per l'uso nel progetto del cliente. Non per rivendita, sublicenza a terzi o come base di prodotti commerciali estranei. Un altro dev può subentrare con un HANDOFF.md chiaro. Non c'è nessun lock-in verso di noi, e non c'è lock-in verso il CMS (Payload è framework aperto, non licenza commerciale).
 
 Per archivi documentali: Payload gestisce schemi di dati strutturati complessi — relazioni tra documenti, metadati multipli per tipo di contenuto, controllo granulare degli accessi (utile per embargo, draft, contenuti per soli partner). Live preview nativo.
 
@@ -70,7 +70,7 @@ Il frontend Nuxt pre-genera le pagine dal dato Payload — il sito è veloce per
 Il risultato di questa architettura non è "tre buoni strumenti" — è un sistema che:
 - Si aggiorna in modo coerente tra CMS e ricerca
 - Ha performance verificabili in CI, non solo al lancio
-- Consegna il codice al cliente senza lock-in
+- Consegna il codice al cliente senza lock-in (per il progetto del cliente — non per rivendita o sublicenza a terzi)
 - Funziona su hosting europeo self-hosted, GDPR-compliant per struttura
 
 Verificato in produzione su archivi reali: Fondazione per lo Sviluppo Sostenibile, >33.000 contenuti, sito live dal 16 luglio 2026.

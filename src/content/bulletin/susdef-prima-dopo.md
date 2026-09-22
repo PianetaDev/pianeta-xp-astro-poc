@@ -37,7 +37,7 @@ category: "Web sostenibile"
 | Accessibilità interna | Il team gestisce tutto in autonomia dal CMS backoffice — carica documenti, aggiorna categorie, pubblica senza dipendere da noi |
 | Accessibilità esterna | Archivio navigabile e interrogabile per partner, ricercatori, giornalisti |
 | Accessibilità WCAG | WCAG 2.1 AA verificata a livello di componente — requisito del capitolato, integrato nell'architettura |
-| Dipendenza dal fornitore | **Zero**: codice applicativo di proprietà di Susdef, consegnato con documentazione tecnica completa. Un altro fornitore può subentrare domani con un HANDOFF.md chiaro. |
+| Dipendenza dal fornitore | **Zero**: codice applicativo di proprietà di Susdef, consegnato con documentazione tecnica completa — per l'uso nel progetto Susdef, non per rivendita o sublicenza a terzi. Un altro fornitore può subentrare domani con un HANDOFF.md chiaro. |
 
 ## I numeri che contano
 

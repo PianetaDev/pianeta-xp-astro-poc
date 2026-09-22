@@ -71,4 +71,4 @@ Il risultato ti dice dove sei rispetto al benchmark. Se il grade è C o peggio, 
 
 ---
 
-*Carbon budget verificabile, hosting rinnovabile, codice consegnato — senza lock-in. Se vuoi sapere come funziona in un progetto reale, parti da [come abbiamo costruito il sito di Susdef](/bulletin/percorso-susdef).*
+*Carbon budget verificabile, hosting rinnovabile, codice consegnato per il tuo progetto — senza lock-in verso di noi, non ceduto per rivendita o sublicenza a terzi. Se vuoi sapere come funziona in un progetto reale, parti da [come abbiamo costruito il sito di Susdef](/bulletin/percorso-susdef).*
