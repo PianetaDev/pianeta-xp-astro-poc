@@ -41,7 +41,7 @@ Il problema è che il volume non rimane gestibile.
 
 ## Come abbiamo lavorato su questo
 
-Nell'estate del 2026 abbiamo consegnato una piattaforma documentale per una fondazione per lo sviluppo sostenibile: 33.000+ documenti, 12 settimane di sviluppo tecnico, go-live 16 luglio 2026. L'archivio era ricco e inaccessibile — esattamente per le ragioni descritte sopra.
+Nell'estate del 2026 abbiamo consegnato una piattaforma documentale per la Fondazione per lo Sviluppo Sostenibile: 33.000+ documenti, 12 settimane di sviluppo tecnico, go-live 16 luglio 2026. L'archivio era ricco e inaccessibile — esattamente per le ragioni descritte sopra.
 
 L'approccio tecnico che abbiamo sviluppato — CMS strutturato, ricerca full-text, layer semantico su PDF — è descritto sulla landing [Terra](/hire/terra). Non lo ripeto qui.
 
