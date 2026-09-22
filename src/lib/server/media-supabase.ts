@@ -1,5 +1,5 @@
 /**
- * Supabase client per il modulo Pianeta Media (pianeta_media_photos).
+ * Supabase client per Pianeta.Watchers (pianeta_media_photos).
  * Vive sul progetto Supabase di Bosco Colto (zero costo aggiuntivo, schema
  * isolato) — usa env var distinte da quelle del progetto Pianeta per evitare
  * qualsiasi ambiguità.
