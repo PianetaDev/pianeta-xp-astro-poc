@@ -21,6 +21,8 @@ Quello che non avevano ancora risolto era l'archivio: **oltre 33.000 contenuti**
 
 Siamo partiti da lì.
 
+Abbiamo partecipato alla gara insieme a Latte Creative e l'abbiamo vinta con un concept preciso: Susdef non è un'organizzazione con un sito — è una galassia. Settori, persone, documenti interconnessi, cresciuti in trent'anni. Entità collegate invece di pagine statiche.
+
 ## Lo stack: non la risposta attesa, ma quella giusta
 
 Il capitolato non prescriveva tecnologia. La risposta più semplice sarebbe stata WordPress: è il default del settore, riduce la frizione nella valutazione, funziona benissimo per archivi più piccoli.
@@ -53,7 +55,7 @@ Non sempre il lavoro più interessante è quello che si vede nel capitolato.
 
 ## Vedi anche
 
-→ Case study Susdef — in arrivo
+→ [Case study Susdef →](/work/susdef)
 
 ## Parlane con noi
 
