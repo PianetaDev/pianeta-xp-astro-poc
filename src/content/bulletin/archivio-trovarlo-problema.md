@@ -1,6 +1,6 @@
 ---
 title: "L'archivio c'è. Trovarlo è il problema."
-description: "Quattro sintomi che abbiamo visto ripetersi in fondazioni ed enti con anni di produzione documentale. Non è un problema di quantità — è un problema di architettura."
+description: "Quattro sintomi che abbiamo visto ripetersi in fondazioni ed enti con anni di produzione documentale. Il punto non è quanti documenti ci sono — è se li trovi quando servono."
 date: 2026-09-22
 draft: true
 locale: it
@@ -41,7 +41,7 @@ Il problema è che il volume non rimane gestibile.
 
 ## Come abbiamo lavorato su questo
 
-Nell'estate del 2026 abbiamo consegnato una piattaforma documentale per la Fondazione per lo Sviluppo Sostenibile: 33.000+ documenti, 12 settimane di sviluppo tecnico, go-live 16 luglio 2026. L'archivio era ricco e inaccessibile — esattamente per le ragioni descritte sopra.
+Nell'estate del 2026 abbiamo consegnato una piattaforma documentale per una fondazione per lo sviluppo sostenibile: 33.000+ documenti, 12 settimane di sviluppo tecnico, go-live 16 luglio 2026. L'archivio era ricco e inaccessibile — esattamente per le ragioni descritte sopra.
 
 L'approccio tecnico che abbiamo sviluppato — CMS strutturato, ricerca full-text, layer semantico su PDF — è descritto sulla landing [Terra](/hire/terra). Non lo ripeto qui.
 
