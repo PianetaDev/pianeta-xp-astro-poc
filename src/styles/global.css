@@ -187,6 +187,37 @@
 .prose-eclag strong { font-weight: 600; }
 .prose-eclag em { font-style: normal; color: var(--cta-primary); font-weight: 600; }
 
+/* Prose tables — horizontal scroll on mobile, design-system tokens */
+.prose-eclag table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.75em;
+  font-size: 0.9375rem;
+}
+.prose-eclag th,
+.prose-eclag td {
+  padding: 10px 16px;
+  border: 1px solid var(--pianeta-border-strong);
+  vertical-align: top;
+  text-align: left;
+  line-height: 1.5;
+}
+.prose-eclag th {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--pianeta-muted-strong);
+  background: var(--pianeta-bg-card);
+  white-space: nowrap;
+}
+.prose-eclag tbody tr:nth-child(even) td {
+  background: var(--pianeta-bg-card);
+}
+
 /* CTA buttons — pill shape, arancio primario, blu secondario */
 .cta-btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
