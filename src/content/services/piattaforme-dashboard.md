@@ -30,6 +30,6 @@ Serve a fondazioni, enti di ricerca e consorzi che hanno migliaia di pubblicazio
 
 Il core include Payload CMS con live preview, MeiliSearch per la ricerca ad alte prestazioni, e infrastruttura consegnata in licenza al cliente: nessun abbonamento mensile a noi, nessuna dipendenza tecnica per far girare la piattaforma. Il modulo DocumentAI — disponibile come add-on — aggiunge ingestione automatica dei documenti, abstract generati e ricerca semantica in linguaggio naturale.
 
-Abbiamo costruito con Terra il portale documentale della Fondazione per lo Sviluppo Sostenibile: oltre 33.000 record migrati, sito live in 12 settimane, team che gestisce i contenuti in autonomia dal lancio. [Leggi il case study →](/work/susdef)
+Abbiamo un caso in produzione: oltre 33.000 record migrati, sito live in 12 settimane. [Leggi il case study →](/work/susdef)
 
 Per l'offerta completa, consulta la [landing Terra →](/hire/terra).
