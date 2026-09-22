@@ -12,6 +12,40 @@ const baseSchema = z.object({
   tags: z.array(z.string()).optional(),
 }).passthrough();
 
+// Embed di un post o reel dentro un caso studio / articolo bulletin
+const embedSchema = z.object({
+  type: z.enum(['post', 'reel']),
+  slug: z.string(),
+});
+
+// Schemi per le nuove collezioni atomiche
+const postsSchemaExt = baseSchema.extend({
+  /** ID di righe pianeta_media_photos (Pianeta.Watchers), in ordine di swipe */
+  photoIds: z.array(z.string().uuid()).min(1),
+  /** Stessa etichetta libera usata da work; chiave di deduplica in home */
+  client: z.string().optional(),
+  embeds: z.array(embedSchema).optional(),
+});
+
+const reelsSchemaExt = baseSchema.extend({
+  /** Path locale del file video (Pianeta.Watchers non gestisce video) */
+  video: z.string(),
+  /** ID di pianeta_media_photos come copertina poster, se disponibile */
+  posterPhotoId: z.string().uuid().optional(),
+  client: z.string().optional(),
+  durationSec: z.number().optional(),
+  embeds: z.array(embedSchema).optional(),
+});
+
+// Schema per work e bulletin con embed opzionale
+const workSchemaExt = baseSchema.extend({
+  embeds: z.array(embedSchema).optional(),
+});
+
+const bulletinSchemaExt = baseSchema.extend({
+  embeds: z.array(embedSchema).optional(),
+});
+
 const servicesSchemaExt = baseSchema.extend({
   category: z.enum(['creativity', 'design', 'technology']).optional(),
   processPhase: z.union([z.number().int().min(1).max(4), z.string()]).optional(),
@@ -30,12 +64,22 @@ const teamSchemaExt = baseSchema.extend({
 
 const work = defineCollection({
   loader: glob({ pattern: '!(*.en).md', base: './src/content/work' }),
-  schema: baseSchema,
+  schema: workSchemaExt,
 });
 
 const bulletin = defineCollection({
   loader: glob({ pattern: '!(*.en).md', base: './src/content/bulletin' }),
-  schema: baseSchema,
+  schema: bulletinSchemaExt,
+});
+
+const posts = defineCollection({
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/posts' }),
+  schema: postsSchemaExt,
+});
+
+const reels = defineCollection({
+  loader: glob({ pattern: '!(*.en).md', base: './src/content/reels' }),
+  schema: reelsSchemaExt,
 });
 
 const services = defineCollection({
@@ -62,12 +106,12 @@ const enGenerateId = ({ entry }: { entry: string }) => entry.replace(/\.en\.md$/
 
 const workEn = defineCollection({
   loader: glob({ pattern: '*.en.md', base: './src/content/work', generateId: enGenerateId }),
-  schema: baseSchema,
+  schema: workSchemaExt,
 });
 
 const bulletinEn = defineCollection({
   loader: glob({ pattern: '*.en.md', base: './src/content/bulletin', generateId: enGenerateId }),
-  schema: baseSchema,
+  schema: bulletinSchemaExt,
 });
 
 const servicesEn = defineCollection({
@@ -114,6 +158,8 @@ const campaigns = defineCollection({
 export const collections = {
   work,
   bulletin,
+  posts,
+  reels,
   services,
   team,
   lab,
