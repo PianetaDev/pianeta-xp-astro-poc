@@ -1,0 +1,110 @@
+---
+// Verticale Terra — piattaforma documentale per fondazioni ed enti di ricerca.
+// Condivisa IT/EN. La pagina fornisce BaseLayout.
+import { TERRA_STRINGS, type Locale } from './strings';
+
+interface Props { locale?: Locale; }
+const { locale = 'it' } = Astro.props;
+const S = TERRA_STRINGS[locale];
+---
+<div class="hire-page">
+  <main class="wrap">
+    <p class="f-back"><a href={S.backHref}>{S.back}</a></p>
+    <p class="f-eyebrow">{S.eyebrow}</p>
+    <h1 class="f-h1">{S.h1}</h1>
+    <p class="f-deck">{S.deck}</p>
+
+    <h2 class="f-h2">{S.painsTitle}</h2>
+    <div class="f-wins">
+      {S.pains.map((p) => (
+        <div class="f-win"><strong>{p.label}</strong><span>{p.desc}</span></div>
+      ))}
+    </div>
+
+    <h2 class="f-h2">{S.stackTitle}</h2>
+    <ol class="f-steps">
+      {S.stack.map((st) => (
+        <li><span class="f-step-n">{st.n}</span><div><strong>{st.t}</strong><p>{st.d}</p></div></li>
+      ))}
+    </ol>
+
+    <h2 class="f-h2">{S.complianceTitle}</h2>
+    <div class="f-wins f-compliance">
+      {S.compliance.map((c) => (
+        <div class="f-win"><strong>{c.label}</strong><span>{c.desc}</span></div>
+      ))}
+    </div>
+
+    <h2 class="f-h2">{S.proofTitle}</h2>
+    <div class="f-proof">
+      <div class="f-proof-stats">
+        {S.proofStats.map((s) => (
+          <div class="f-proof-stat"><span class="f-proof-n">{s.n}</span><span class="f-proof-d">{s.d}</span></div>
+        ))}
+      </div>
+      <p class="f-proof-text">{S.proofText}</p>
+      <a href={S.proofHref} class="f-proof-link">{S.proofCta}</a>
+    </div>
+
+    {S.greenNote && (
+      <p class="f-green-note">{S.greenNote}</p>
+    )}
+
+    <div class="f-send">
+      <div>
+        <h2 class="f-send-t">{S.ctaTitle}</h2>
+        <p class="f-send-d">{S.ctaText}</p>
+      </div>
+      <button class="f-send-btn" data-action="open-alba">{S.ctaCta}</button>
+    </div>
+  </main>
+</div>
+
+<style>
+  .hire-page {
+    --card: var(--pianeta-bg-card); --line: var(--pianeta-border);
+    --txt: var(--pianeta-text); --mut: var(--pianeta-muted); --acc: var(--cta-primary);
+  }
+  :global(.hub-hire-cta), :global(.hire-us-launcher) { display: none !important; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .f-back { margin: 24px 0 22px; }
+  .f-back a { color: var(--mut); text-decoration: none; font-size: 13px; }
+  .f-back a:hover { color: var(--txt); }
+  .f-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--acc); font-weight: 700; margin: 0 0 14px; }
+  .f-h1 { font-size: clamp(32px, 5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 18px; }
+  .f-deck { font-size: 19px; line-height: 1.6; color: var(--mut); margin: 0 0 44px; max-width: 680px; }
+  .f-h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin: 44px 0 16px; }
+
+  .f-wins { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 620px) { .f-wins { grid-template-columns: 1fr 1fr; } }
+  .f-win { display: flex; flex-direction: column; gap: 3px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .f-win strong { font-size: 15px; }
+  .f-win span { color: var(--mut); font-size: 13px; line-height: 1.5; }
+
+  .f-steps { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0; }
+  .f-steps li { display: flex; gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .f-step-n { font-size: 13px; font-weight: 800; color: var(--cta-primary); min-width: 28px; }
+  .f-steps strong { display: block; margin-bottom: 5px; font-size: 16px; }
+  .f-steps p { margin: 0; color: var(--mut); font-size: 14px; line-height: 1.5; }
+
+  .f-proof { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; margin-top: 4px; }
+  .f-proof-stats { display: flex; flex-wrap: wrap; gap: 20px 36px; margin-bottom: 18px; }
+  .f-proof-stat { display: flex; flex-direction: column; gap: 2px; }
+  .f-proof-n { font-size: clamp(22px, 4vw, 30px); font-weight: 800; letter-spacing: -0.02em; }
+  .f-proof-d { font-size: 13px; color: var(--mut); }
+  .f-proof-text { font-size: 15px; line-height: 1.6; color: var(--mut); margin: 0 0 16px; }
+  .f-proof-link { color: var(--acc); font-weight: 700; font-size: 15px; text-decoration: none; }
+  .f-proof-link:hover { text-decoration: underline; }
+
+  .f-green-note { margin: 28px 0 0; color: var(--mut); font-size: 13px; line-height: 1.5; font-style: italic; border-left: 2px solid var(--line); padding-left: 14px; }
+
+  .f-send { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;
+    border-radius: 18px; padding: 26px 30px; margin-top: 30px;
+    background: var(--pianeta-text); color: var(--pianeta-bg); }
+  .f-send-t { font-size: clamp(20px, 3vw, 26px); margin: 0 0 6px; color: var(--pianeta-bg); }
+  .f-send-d { margin: 0; font-size: 15px; line-height: 1.5; opacity: .8; max-width: 520px; }
+  .f-send-btn { background: var(--cta-primary); color: #fff; font-weight: 700; padding: 13px 24px; border-radius: 999px;
+    border: none; cursor: pointer; font-size: 15px; white-space: nowrap; font-family: inherit; }
+  .f-send-btn:hover { opacity: .9; }
+</style>

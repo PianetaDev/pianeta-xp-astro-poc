@@ -215,6 +215,108 @@ export const FOUND_STRINGS: Record<Locale, FoundStrings> = {
   },
 };
 
+// --- Pagina verticale Terra (piattaforma documentale) ---
+export interface TerraStrings {
+  metaTitle: string; metaDesc: string;
+  eyebrow: string; h1: string; deck: string;
+  painsTitle: string; pains: { label: string; desc: string }[];
+  stackTitle: string; stack: { n: string; t: string; d: string }[];
+  complianceTitle: string; compliance: { label: string; desc: string }[];
+  proofTitle: string; proofStats: { n: string; d: string }[];
+  proofText: string; proofCta: string; proofHref: string;
+  greenNote: string;
+  ctaTitle: string; ctaText: string; ctaCta: string;
+  back: string; backHref: string;
+}
+export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
+  it: {
+    metaTitle: 'Terra — Piattaforma documentale per fondazioni ed enti · Pianeta.Studio',
+    metaDesc: 'CMS strutturato e ricerca full-text su scala per archivi documentali. Abbiamo consegnato la piattaforma Susdef: 33.000+ documenti, 12 settimane. Server EU, GDPR, codice in licenza al cliente.',
+    eyebrow: 'Piattaforma documentale · Fondazioni · Enti di ricerca · Consorzi',
+    h1: 'L\'archivio c\'è. Trovarlo è il problema.',
+    deck: 'Abbiamo costruito e consegnato una piattaforma CMS strutturata con ricerca full-text su scala per Fondazione Sviluppo Sostenibile — 33.000+ documenti, 12 settimane dal contratto al go-live. Se il tuo team cerca i propri materiali su Google, sappiamo come aiutarti.',
+    painsTitle: 'Il problema che riconoscono',
+    pains: [
+      { label: 'Ricercano su Google', desc: 'Il team usa site: sul motore di ricerca per trovare i propri documenti — il CMS interno non restituisce risultati utili.' },
+      { label: 'I partner rinunciano', desc: 'Chi accede dall\'esterno abbandona dopo il secondo tentativo. L\'archivio è innavigabile senza sapere dove guardare.' },
+      { label: 'Grant review: una settimana sprecata', desc: 'Ogni revisione di progetto UE richiede raccogliere a mano i link ai deliverable — lavoro ripetitivo che non produce nulla di nuovo.' },
+      { label: 'Cercano risposte, non file', desc: 'Il giornalista vuole il rapporto sulla fiscalità delle rinnovabili prima del 2020. Il funzionario cerca la posizione dell\'ente su un tema. Il sistema dovrebbe rispondere — adesso restituisce una lista di file.' },
+    ],
+    stackTitle: 'Come funziona Terra',
+    stack: [
+      { n: '01', t: 'CMS strutturato', d: 'Payload CMS, TypeScript-first: bozza e pubblicato separati, live preview, versioning. L\'interfaccia editoriale è costruita attorno ai flussi reali del team — il team di Susdef gestisce l\'archivio in autonomia dal giorno del lancio.' },
+      { n: '02', t: 'Ricerca full-text su scala', d: 'MeiliSearch nel core: restituisce il documento giusto in millisecondi, ordinato per rilevanza. Testato su un archivio da 33.000+ record in produzione.' },
+      { n: '03', t: 'Modulo DocumentAI (add-on)', d: 'Ingestione AI di PDF e pubblicazioni, abstract automatici, ricerca semantica. Attivo in produzione su Susdef. Il layer AI usa API esterne — il provider è dichiarato per contratto, i dati del core Terra restano su server EU.' },
+      { n: '04', t: 'Hosting EU gestito', d: 'Server europei, backup giornalieri, SSL/HSTS/CSP. L\'opzione managed include la gestione dell\'infrastruttura — il team del cliente non ha bisogno di un DevOps dedicato.' },
+    ],
+    complianceTitle: 'Compliance e controllo dei dati',
+    compliance: [
+      { label: 'Server EU · GDPR', desc: 'Il core Terra è self-hosted su server europei. I dati restano nella giurisdizione del cliente. Il modulo DocumentAI usa API esterne (provider dichiarato per contratto) — distinzione rilevante per il DPA.' },
+      { label: 'Codice in licenza d\'uso al cliente', desc: 'Il codice viene consegnato in licenza d\'uso al cliente. Nessun vincolo tecnico verso di noi per far girare il sistema — non si paga un abbonamento Pianeta per continuare ad usarlo.' },
+      { label: 'WCAG 2.1 AA', desc: 'Accessibilità integrata nell\'architettura dall\'inizio, verificata a livello di componente. Obbligatoria per fondi pubblici UE — la trattiamo come criterio progettuale, con lo stesso peso della tipografia e della gerarchia visiva.' },
+      { label: 'Auth a 3 livelli · embargo', desc: 'Controllo granulare per documento: accesso riservato, embargo, pubblicazione. Verificato su un consorzio di ricerca europeo (anonimizzato) con obblighi di open access e paper embargati.' },
+    ],
+    proofTitle: 'La prova — Fondazione Sviluppo Sostenibile',
+    proofStats: [
+      { n: '33.000+', d: 'documenti nell\'archivio' },
+      { n: '12 sett.', d: 'dalla firma al go-live' },
+      { n: '16 lug 2026', d: 'data di lancio' },
+    ],
+    proofText: 'Susdef coordina il Forum Nazionale per lo Sviluppo Sostenibile — oltre vent\'anni di produzione documentale che il sito precedente non riusciva più a rendere accessibile. Abbiamo consegnato in 12 settimane: CMS strutturato, archivio da 33.000+ record, modulo DocumentAI attivo per ricerca semantica. Il team gestisce tutto in autonomia dal giorno del lancio.',
+    proofCta: 'Leggi il case study →',
+    proofHref: '/work/susdef',
+    greenNote: 'Stiamo costruendo la misurazione dei consumi energetici del sistema — server e layer AI inclusi. È un lavoro di roadmap, in via di sviluppo.',
+    ctaTitle: 'Il tuo archivio può essere trovabile.',
+    ctaText: 'Raccontaci il progetto. Alba — la nostra AI — ti aiuta a inquadrare la soluzione giusta e a fissare una call. Preventivo gratuito.',
+    ctaCta: 'Parla con Alba',
+    back: '← Lavoriamo insieme',
+    backHref: '/hire',
+  },
+  en: {
+    metaTitle: 'Terra — Documentary platform for foundations & institutions · Pianeta.Studio',
+    metaDesc: 'Structured CMS and full-text search at scale for document archives. We delivered the Susdef platform: 33,000+ documents, 12 weeks. EU server, GDPR, code licensed to the client.',
+    eyebrow: 'Documentary platform · Foundations · Research institutions · Consortia',
+    h1: 'The archive is there. Finding it is the problem.',
+    deck: 'We built and delivered a structured CMS platform with full-text search at scale for Fondazione Sviluppo Sostenibile — 33,000+ documents, 12 weeks from contract to go-live. If your team searches its own materials on Google, we know how to help.',
+    painsTitle: 'The problem they recognise',
+    pains: [
+      { label: 'Searching on Google', desc: 'The team uses site: on Google to find their own documents — the internal CMS returns nothing useful.' },
+      { label: 'Partners give up', desc: 'External users abandon after the second attempt. The archive is unnavigable without knowing where to look.' },
+      { label: 'Grant review: a wasted week', desc: 'Every EU project review means manually collecting links to deliverables — repetitive work that produces nothing new.' },
+      { label: 'They want answers, not files', desc: 'The journalist wants the renewables taxation report from before 2020. The official wants the organisation\'s position on a specific topic. The system should answer — right now it returns a list of files.' },
+    ],
+    stackTitle: 'How Terra works',
+    stack: [
+      { n: '01', t: 'Structured CMS', d: 'Payload CMS, TypeScript-first: draft and published states, live preview, versioning. The editorial interface is built around the team\'s real workflows — the Susdef team has managed the archive independently since launch day.' },
+      { n: '02', t: 'Full-text search at scale', d: 'MeiliSearch in the core: returns the right document in milliseconds, ranked by relevance. Tested on a 33,000+ record archive in production.' },
+      { n: '03', t: 'DocumentAI module (add-on)', d: 'AI ingestion of PDFs and publications, automatic abstracts, semantic search. Live in production on Susdef. The AI layer uses external APIs — the provider is declared by contract, core Terra data stays on EU servers.' },
+      { n: '04', t: 'Managed EU hosting', d: 'European servers, daily backups, SSL/HSTS/CSP. The managed option includes infrastructure management — the client team does not need a dedicated DevOps.' },
+    ],
+    complianceTitle: 'Compliance and data control',
+    compliance: [
+      { label: 'EU server · GDPR', desc: 'Core Terra is self-hosted on European servers. Data stays within the client\'s jurisdiction. The DocumentAI module uses external APIs (provider declared by contract) — a relevant distinction for the DPA.' },
+      { label: 'Code licensed to the client', desc: 'The code is delivered under a use licence to the client. No technical dependency on us to run the system — no Pianeta subscription required to keep using it.' },
+      { label: 'WCAG 2.1 AA', desc: 'Accessibility integrated into the architecture from the start, verified at component level. Mandatory for EU public funding — we treat it as a design criterion, with the same weight as typography and visual hierarchy.' },
+      { label: '3-level auth · embargo', desc: 'Granular control per document: restricted access, embargo, publication. Verified on a European research consortium (anonymised) with open access obligations and embargoed papers.' },
+    ],
+    proofTitle: 'The proof — Fondazione Sviluppo Sostenibile',
+    proofStats: [
+      { n: '33,000+', d: 'documents in the archive' },
+      { n: '12 wks', d: 'from contract to go-live' },
+      { n: '16 Jul 2026', d: 'launch date' },
+    ],
+    proofText: 'Susdef coordinates the National Forum for Sustainable Development — over twenty years of documentary output that the previous site could no longer make accessible. We delivered in 12 weeks: structured CMS, 33,000+ record archive, DocumentAI module live for semantic search. The team has managed everything independently since launch day.',
+    proofCta: 'Read the case study →',
+    proofHref: '/en/work/susdef',
+    greenNote: 'We are building energy consumption measurement for the system — server and AI layer included. This is roadmap work, in progress.',
+    ctaTitle: 'Your archive can be findable.',
+    ctaText: 'Tell us about the project. Alba — our AI — helps you frame the right solution and book a call. Free quote.',
+    ctaCta: 'Talk to Alba',
+    back: '← Work with us',
+    backHref: '/en/hire',
+  },
+};
+
 // --- Pagina verticale Piattaforme ---
 export interface PlatStrings {
   metaTitle: string; metaDesc: string;
