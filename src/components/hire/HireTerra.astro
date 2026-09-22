@@ -43,7 +43,7 @@ const S = TERRA_STRINGS[locale];
         ))}
       </div>
       <p class="f-proof-text">{S.proofText}</p>
-      <a href={S.proofHref} class="f-proof-link">{S.proofCta}</a>
+      {S.proofHref && <a href={S.proofHref} class="f-proof-link">{S.proofCta}</a>}
     </div>
 
     {S.greenNote && (
