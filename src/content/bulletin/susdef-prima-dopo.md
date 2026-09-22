@@ -4,7 +4,7 @@ description: "Fondazione per lo Sviluppo Sostenibile aveva 33.000 contenuti su u
 date: 2026-09-07
 draft: true
 locale: it
-tags: ["cms", "archivio", "nuxt", "payload-cms", "meilisearch", "sostenibilità", "prima-dopo", "susdef"]
+tags: ["cms", "archivio", "nuxt", "payload-cms", "meilisearch", "sostenibilità", "prima-dopo", "susdef", "da-rifare"]
 type: bulletin
 authors: ["max"]
 readingTime: "4 min"

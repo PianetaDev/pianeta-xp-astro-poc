@@ -4,7 +4,7 @@ description: "Fondazione Sviluppo Sostenibile aveva esigenze chiare e trent'anni
 date: 2026-08-27
 draft: true
 locale: it
-tags: ["cms", "archivio", "nuxt", "payload-cms", "sostenibilità", "metodo"]
+tags: ["cms", "archivio", "nuxt", "payload-cms", "sostenibilità", "metodo", "da-rifare"]
 type: bulletin
 authors: ["max"]
 readingTime: "6 min"

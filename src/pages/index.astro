@@ -203,8 +203,16 @@ const ldJson = {
         </a>
       )}
 
-      {/* Client wall — tile larga */}
-      <a href="/work" class="bento-tile t-tall t-cream bento-clientwall">
+      {/* Client wall — tile larga.
+          Regola link: per clienti con più casi studio, link al più recente per data.
+          - BC3 (3 lavori): /work/untwist (date 2025-09-01, il più recente).
+          - ARIES (2 lavori): /work/aries-towards-smarter-sustainable-world (branded primario).
+          - ChildFund e WeWorld: /work/childfund-world-index (caso studio condiviso).
+          - Susdef: esclusa (tag da-rifare, draft:true, da non pubblicare).
+          - Morsy: esclusa per ora (contenuto da rivalutare).
+          - Nomi senza caso studio: testo semplice, non cliccabili.
+      */}
+      <div class="bento-tile t-tall t-cream bento-clientwall">
         <div class="bento-content">
           <p class="bento-kicker">Hanno scelto di lavorare con noi</p>
           <div class="bento-spacer" />
@@ -214,21 +222,19 @@ const ldJson = {
             <li>La Repubblica</li>
             <li>Wired</li>
             <li>Plenitude</li>
-            <li>BC3</li>
-            <li>ChildFund</li>
-            <li>WeWorld</li>
-            <li>ECLAG</li>
+            <li><a href="/work/untwist">BC3</a></li>
+            <li><a href="/work/childfund-world-index">ChildFund</a></li>
+            <li><a href="/work/childfund-world-index">WeWorld</a></li>
+            <li><a href="/work/eclag">ECLAG</a></li>
             <li>Sant'Egidio</li>
-            <li>ARIES</li>
+            <li><a href="/work/aries-towards-smarter-sustainable-world">ARIES</a></li>
             <li>ArtPay</li>
-            <li>Morsy</li>
             <li>Latte Creative</li>
-            <li>Susdef</li>
             <li>Apotheke</li>
           </ul>
-          <p class="bento-sub" style="margin-top:16px;">Vedi i lavori →</p>
+          <p class="bento-sub" style="margin-top:16px;"><a href="/work" class="clientwall-cta">Vedi i lavori →</a></p>
         </div>
-      </a>
+      </div>
 
       {/* 9. Lab — black */}
       <a href="/lab" class="bento-tile t-medium t-dark">
@@ -487,6 +493,16 @@ const ldJson = {
     :root[data-theme="dark"] .bento-clientwall .clientwall-list li + li::before,
     :root[data-theme="auto"][data-sun="night"] .bento-clientwall .clientwall-list li + li::before {
       color: rgba(245,244,238,0.3);
+    }
+    .bento-clientwall .clientwall-list li a,
+    .bento-clientwall .clientwall-cta {
+      color: inherit;
+      text-decoration: none;
+    }
+    .bento-clientwall .clientwall-list li a:hover,
+    .bento-clientwall .clientwall-cta:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
   </style>
 </BaseLayout>
