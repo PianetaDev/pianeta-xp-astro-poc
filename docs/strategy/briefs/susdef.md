@@ -12,6 +12,8 @@ spoke: Pianeta.Studio
 
 Contratto **Latte Creative — Fondazione per lo Sviluppo Sostenibile** (firmato 8 settembre 2025). **Pianeta.Studio è co-produttore/partner tecnologico**, non ghost — stesso schema pubblico già usato per ChildFund Alliance World Index e Agesci ("Agenzia partner: Latte Creative"). **Si può nominare il progetto e Pianeta come autore**, con credito a Latte Creative come partner — diverso da EPOS-ERIC (quello sì ghost, mai nominabile, vedi `03_CMS-Documentale/00_brief/BRIEF.md`).
 
+**Confermato da Max (22/09/2026): il progetto è stato vinto tramite gara.** Risolve il punto aperto della pre-review (PIA-1516, punto 6) — "vinta la gara" è un claim corretto, non un'invenzione.
+
 ## Cosa sappiamo (aggiornato con il documento di handover reale, 16 luglio 2026)
 
 - **Cliente**: Fondazione per lo Sviluppo Sostenibile ("Susdef")
@@ -29,6 +31,24 @@ Contratto **Latte Creative — Fondazione per lo Sviluppo Sostenibile** (firmato
 ## Angolo narrativo proposto
 
 Non "abbiamo fatto un sito" — il salto è da un archivio WordPress statico (3.381 articoli invisibili a chi cerca) a un sistema che rende interrogabile in linguaggio naturale una library documentale enorme, con AI che genera abstract e protegge la proprietà intellettuale dei paper. La storia è "abbiamo reso trovabile un patrimonio documentale che nessuno riusciva più ad attraversare", non "abbiamo cambiato CMS".
+
+### Il concept di design — "la Fondazione come galassia" (Max, 22/09/2026, fonte primaria)
+
+La vinta della gara nasce dalla volontà di mostrare la Fondazione come **una galassia**: i suoi settori e progetti sono parte di un cosmo che si muove nella stessa direzione ma su orbite diverse. Da qui l'idea di **abbandonare il sito classico a pagine** e costruire invece **un insieme di entità e relazioni** — non un albero di pagine statiche, ma un sistema di oggetti collegati (settori, progetti, persone, documenti) che si richiamano a vicenda.
+
+**L'architettura dell'informazione è costruita attorno a tre obiettivi**, non attorno a un menu:
+1. Spiegare cos'è la Fondazione
+2. Far conoscere le novità
+3. Esplorare i suoi documenti
+
+**Struttura risultante**:
+- Un **lato istituzionale** che porta in un'unica vista tutte le informazioni tra settori, progetti e membri
+- Un **hub** che raccoglie tutti i materiali prodotti da questi settori
+- La **parte documentale**, resa visibile ed esplorabile (non più un archivio nascosto)
+
+**Design**: moderno, a card, coerente col design system Hederae (vedi pianeta.green come riferimento visivo/di componenti).
+
+**Perché conta per il case study**: questo è un angolo più forte di "abbiamo migrato un CMS" — è "abbiamo ripensato come si rappresenta online un ente di ricerca complesso", con la migrazione tecnica (Payload/MeiliSearch/DocumentAI) come conseguenza, non come punto di partenza. L'angolo narrativo sopra ("reso trovabile un patrimonio") resta valido per il taglio Bulletin/persona A; questo concept è il taglio giusto per il case study `/work/susdef` e per la sezione "La prova" della pagina Terra.
 
 ## Cosa manca — da chiedere prima di scrivere il contenuto finale
 
