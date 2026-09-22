@@ -3,13 +3,15 @@ issue: PIA-1536
 compiled: 2026-09-22
 author: COMPASS (32e38dee-85cb-456f-a467-9643c88a008e)
 status: in_review — da approvare da Max prima di usare come base brief MUSE
-scope: Terra (CMS Hub Editoriale + modulo DocumentAI) — segmento fondazioni/enti di ricerca/PA con archivi documentali grandi
-fonti: offer-stack-terra.md, personas-pianeta.md, briefs/cms-documentale.md, conoscenza diretta dei prodotti citati
+scope: Terra (Piattaforma Documentale: CMS + ricerca + AI documentale + hosting) — segmento fondazioni/enti di ricerca/PA con archivi documentali grandi
+fonti: offer-stack-terra.md, personas-pianeta.md, briefs/cms-documentale.md, briefs/presentazione-cms-traccia-call.html, conoscenza diretta dei prodotti citati
 ---
 
-# Ricerca di posizionamento — Terra CMS (Hub Editoriale + DocumentAI)
+# Ricerca di posizionamento — Terra (Piattaforma Documentale)
 
 > **Scopo**: definire dove si colloca Terra rispetto ai concorrenti prima che MUSE scriva una riga. Non è contenuto pubblicabile — è la mappa che informa il brief.
+
+> **Nota framing (Max, 22/09/2026)**: Terra non è un CMS — è una **piattaforma** (CMS + ricerca + AI documentale + hosting). Posizionarla come "CMS" sottovende. Il brief per MUSE deve riflettere questo: Terra si confronta con i CMS headless ma li supera in categoria, non compete sullo stesso piano.
 
 ---
 
@@ -24,7 +26,7 @@ fonti: offer-stack-terra.md, personas-pianeta.md, briefs/cms-documentale.md, con
 | **Strapi** | Open source (self-hosted o Strapi Cloud) | Self-hosted o Strapi Cloud | No (plugin community) | No | Richiede un dev dedicato per configurare e mantenere; nessuna funzione search/AI di base; non turn-key per fondazioni senza IT; Strapi Cloud = nuovo SaaS con lock-in crescente |
 | **Directus** | Open source (self-hosted o Directus Cloud) | Self-hosted o Directus Cloud | No | No | Orientato a dati/API, non a team editoriali; molto tecnico; nessuna funzione search/AI; UX non pensata per comms manager |
 
-**Insight chiave CMS headless**: nessuno dei quattro risolve il problema "archivio documentale trovabile". Sono tutti CMS per gestire contenuto editoriale corrente — non per portare in superficie decenni di documenti già esistenti. Contentful e Sanity sono SaaS con pricing che sale con il volume. Strapi e Directus richiedono IT competente per operarli. Nessuno ha una risposta per il dolore di Delia ("non troviamo più il paper che cerchiamo").
+**Insight chiave CMS headless**: nessuno dei quattro risolve il problema "archivio documentale trovabile". Sono tutti CMS per gestire contenuto editoriale corrente — non per portare in superficie decenni di documenti già esistenti. Contentful e Sanity sono SaaS con pricing che sale con il volume. Strapi e Directus richiedono IT competente per operarli. Nessuno ha una risposta per il dolore di Delia ("non troviamo più il paper che cerchiamo"). **Terra non è in questa categoria: li include e li supera.**
 
 ---
 
@@ -93,7 +95,7 @@ fonti: offer-stack-terra.md, personas-pianeta.md, briefs/cms-documentale.md, con
                               AI generativa integrata
                                       |
              Azure AI Search          |          Terra (Pianeta.Studio)
-             Algolia NeuralSearch     |          [self-hosted EU + DocumentAI]
+             Algolia NeuralSearch     |          [Piattaforma: CMS + ricerca + AI + hosting EU]
                                       |
 - - - - - - - - - - - - - - - - - - -|- - - - - - - - - - - - - - - - - - - -
 SaaS chiuso                           |                         Self-hosted/
@@ -113,28 +115,31 @@ dati al vendor                        |                         codice al client
 - **Quadrante sinistra-alto** (SaaS + AI forte): Azure AI Search e Algolia NeuralSearch hanno AI potente ma i dati sono al vendor (Microsoft / Algolia Inc.). Per fondazioni con obbligo GDPR severo o paper embargati, questo è un blocco non negoziabile.
 - **Quadrante sinistra-basso** (SaaS + no AI): Contentful e Sanity sono CMS eccellenti per gestire contenuto nuovo ma non risolvono il problema dell'archivio documentale. Nessuna AI su documenti.
 - **Quadrante destra-basso** (self-hosted + no AI): Strapi, Directus, Elasticsearch self-hosted, DSpace, Omeka. Controllo dei dati ok, ma nessuna AI generativa — il documento è cerabile solo per keyword esatte. Il problema "non troviamo il paper" non è risolto.
-- **Terra**: auto-hosted EU + codice consegnato al cliente + DocumentAI (ingestione, abstract automatici, ricerca semantica). Non esiste altro player in questo quadrante con un'offerta turn-key per fondazioni di medie dimensioni.
+- **Terra**: auto-hosted EU + codice consegnato al cliente + DocumentAI (ingestione, abstract automatici, ricerca semantica). Non esiste altro player in questo quadrante con un'offerta turn-key per fondazioni di medie dimensioni. La categoria giusta non è "CMS headless" ma "piattaforma documentale integrata": CMS + ricerca + AI + hosting gestito in un'unica soluzione.
 
 ### Posizionamento proposto (formulazione interna, non da usare as-is in contenuto)
 
-> Terra è l'unica piattaforma documentale che unisce controllo pieno del dato (self-hosted, EU, codice consegnato) e AI generativa integrata — senza imporre abbonamenti SaaS che scalano con il volume o dipendenze da ecosistemi US.
+> Terra è l'unica **piattaforma documentale** — CMS, ricerca, AI documentale e hosting in un'unica soluzione — che unisce controllo pieno del dato (self-hosted, EU, codice consegnato) e AI generativa integrata, senza abbonamenti SaaS che scalano con il volume o dipendenze da ecosistemi US.
 
 ---
 
 ## 4. Verifica dei tre differenziatori
 
-### D1 — "Sito in classe energetica A+, hosting sulla piattaforma green"
+### D1 — Consumi energetici di Terra (server + AI) — argomento di posizionamento green
 
-**Stato: DA VERIFICARE — non usare questo claim finché non è confermato**
+**Stato: ROADMAP — usabile come argomento di direzione, non come claim certificata**
 
-La claim "hosting green" applicata specificamente a Susdef (susdef.pianeta.green) non è verificabile da me senza una conferma da Pianeta.Engineer o GreenMachine. Due elementi distinti da verificare:
+**Aggiornamento Max (22/09/2026)**: l'obiettivo non è dichiarare "classe A+" ma **misurare davvero** i consumi del sistema (server + chiamate AI). Max ha aperto un item di roadmap per Pianeta.Engineer in questa direzione. Finché quella misura non esiste, non esiste nemmeno una claim da verificare — c'è un'intenzione di roadmap.
 
-1. **susdef.pianeta.green ha un rating GreenMeter?** Il GreenMeter è lo strumento proprietario di Pianeta.Green per la classe energetica dei siti. La claim "classe A+" deve essere supportata da un rating verificabile, non da un'assunzione che "gira sulla piattaforma green quindi dovrebbe essere A+". Hosting green e carbon-rating del sito specifico non sono la stessa cosa.
-2. **L'hosting di Terra è sulla piattaforma Pianeta.Green o su server generici europei?** `offer-stack-terra.md` descrive l'infrastruttura come "server europei, GDPR compliant, VPS con backup giornalieri gestiti da Fabrizio Ciampini" — senza specificare esplicitamente Pianeta.Green come piattaforma.
+**Come trattarlo nel brief e nel posizionamento**:
 
-**Azione richiesta prima di usare questa claim**: chiedere a Pianeta.Engineer (GreenMachine) se susdef.pianeta.green ha un rating GreenMeter attivo e verificabile. Se sì: claim usabile. Se no: la claim "green hosting" è una promessa, non un fatto verificato — non metterla nei contenuti rivolti a Davide (P2, IT) che la controllerebbe.
+- Non usare "classe energetica A+" come dato di fatto — la misura non è ancora disponibile.
+- Usare come argomento di posizionamento futuro: "ci stiamo costruendo la misura — nessun altro player nel nostro segmento lo sta facendo". Questo è già un differenziatore di approccio rispetto ai competitor SaaS che non misurano nulla.
+- Una volta che la misura esiste (output del roadmap item Engineering), diventa una claim reale e verificabile — e sarà un differenziatore forte: nessun competitor SaaS (Contentful, Algolia, Azure) pubblica dati di consumo energetico per account cliente.
 
-**Implicazione per il brief**: non dare questa claim a MUSE finché non è confermata. Se confermata, è un differenziatore reale rispetto a tutti i concorrenti SaaS (nessuno ha questa certificazione).
+**Nota su PIA-1537**: l'issue era stata aperta per verificare il GreenMeter rating su susdef.pianeta.green. Il contesto è cambiato — il focus non è "ha già un rating?" ma "stiamo costruendo la misura". PIA-1537 va aggiornata di conseguenza.
+
+**Implicazione per il brief**: non dare questa claim come fatto a MUSE. Nel brief, posizionarla come "stiamo costruendo la misura dei consumi — roadmap Q4" — che è già un argomento differenziante rispetto all'assenza totale di dati dei competitor.
 
 ---
 
@@ -173,7 +178,8 @@ Comunicare "Search AI integrato" senza questa distinzione crea aspettative errat
 
 | Gap | Azione richiesta | Owner | Blocca |
 |---|---|---|---|
-| Rating GreenMeter su susdef.pianeta.green | Chiedi a Pianeta.Engineer/GreenMachine: "susdef.pianeta.green ha un rating GreenMeter attivo?" | Max (pinga GreenMachine) | Claim D1 — non usare finché non confermato |
+| Misura consumi energetici Terra (server + AI) | Roadmap item aperto da Max per Pianeta.Engineer — quando la misura esiste diventa claim. Finché non esiste: argomento roadmap, non fatto. | Pianeta.Engineer | Claim D1 come dato di fatto — non blocca il posizionamento come argomento di direzione |
+| Aggiornare PIA-1537 | Il focus dell'issue era GreenMeter rating — ora il contesto è "costruire la misura". Aggiornare o chiudere l'issue con il nuovo framing. | COMPASS / Max | PIA-1537 (scope cambiato) |
 | Provider AI per modulo DocumentAI | Se serve per DPA/contratto cliente, nominare il provider. Non urgente per brief contenuto base. | Max | Non blocca il brief, ma blocca il DPA per P2/P3 |
 
 ---
@@ -182,12 +188,12 @@ Comunicare "Search AI integrato" senza questa distinzione crea aspettative errat
 
 Questi sono gli input che il brief dovrà riflettere — non è il brief, è la base:
 
-1. **Angolo principale**: non "un CMS migliore" ma "l'unico sistema che rende trovabile un archivio documentale esistente senza cedere il controllo del dato a un vendor SaaS". Questo posizionamento non ha concorrenti diretti nel quadrante target.
+1. **Angolo principale**: non "un CMS migliore" ma "l'unica piattaforma documentale — CMS + ricerca + AI + hosting — che rende trovabile un archivio esistente senza cedere il controllo del dato". Il framing "CMS" sottovende: Terra non compete con Contentful e Sanity, li include e risolve un problema che quelli non toccano.
 
 2. **Il differenziatore contro i competitor SaaS** (Contentful, Algolia, Azure): "il loro pricing scala con il tuo volume — più cresci, più paghi. Terra è una build: paghi una volta, il codice è tuo."
 
 3. **Il differenziatore contro i competitor open source non-AI** (DSpace, Omeka, Elasticsearch): "self-hosting e open source non bastano se l'AI non c'è. I documenti restano ricercabili solo per parola esatta."
 
-4. **Claim green**: non usare nel brief finché D1 non è verificato. Se confermato, diventa un differenziatore inatteso — nessun competitor lo ha.
+4. **Argomento green**: non usare come claim di fatto. Usare come argomento di posizionamento roadmap: "stiamo costruendo la misura dei consumi (server + AI) — nessun competitor SaaS lo fa". Quando la misura dell'Engineering esiste, diventa un differenziatore reale e verificabile.
 
 5. **Qualifica GDPR**: sempre distinguere core Terra (zero data fuori EU) da modulo DocumentAI (API esterne). Questa distinzione è un segno di credibilità con Davide (P2), non una debolezza — dimostra che conosciamo il prodotto meglio di chi fa promesse generiche.
