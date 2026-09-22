@@ -44,7 +44,7 @@ Un sito web medio produce 1.76g di CO₂ per visita. I nostri producono il 70% i
 
 Un sito che pesa meno, gira veloce, emette meno CO₂ a visita. Numeri tracciabili in dashboard, niente "ipse dixit".
 
-Il **codice applicativo è di proprietà del cliente**, consegnato integralmente con documentazione tecnica — per l'uso nel tuo progetto, non per rivendita, sublicenza a terzi o come base di prodotti commerciali estranei. Un altro dev può subentrare con un HANDOFF.md chiaro — nessun lock-in verso Pianeta.Studio, nessun lock-in verso il CMS (Payload è open source).
+Il **codice applicativo ti viene consegnato in licenza d'uso**, integralmente e con documentazione tecnica — per l'uso nel tuo progetto, non per rivendita, sublicenza a terzi o come base di prodotti commerciali estranei. Un altro dev può subentrare con un HANDOFF.md chiaro — nessun lock-in verso Pianeta.Studio, nessun lock-in verso il CMS (Payload è open source).
 
 ## Strumenti
 
