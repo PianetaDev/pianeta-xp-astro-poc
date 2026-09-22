@@ -10,9 +10,8 @@ services: ["piattaforme-dashboard", "app-prodotti-digitali"]
 team: ["max", "fabrizio"]
 links:
   live: "https://susdef.pianeta.green"
-  bulletin: ["percorso-susdef"]
 locale: it
-draft: true
+draft: false
 type: work
 tags: ["ux", "accessibilità", "archivio", "fondazioni", "sostenibilità", "wcag"]
 tour:
@@ -45,6 +44,17 @@ Quando Susdef ha aperto la selezione per riprogettare la piattaforma, abbiamo pa
 
 **Agenzia partner**: Latte Creative (direction creativa e relazione cliente sul piano del design).
 
+## Come si rappresenta online un ente di ricerca complesso
+
+Una fondazione come Susdef non è un insieme di pagine da sfogliare: è un sistema di entità in relazione — settori, progetti, persone, documenti che si richiamano a vicenda, su orbite diverse ma nella stessa direzione. La proposta che ha vinto la selezione nasce da qui: ripensare la rappresentazione online di un'organizzazione complessa prima di scegliere un CMS.
+
+Abbiamo costruito un sistema di oggetti collegati, organizzato attorno a tre obiettivi — non attorno a una gerarchia di pagine da sfogliare:
+1. **Spiegare cos'è la Fondazione** — un lato istituzionale che porta in un'unica vista settori, progetti e persone
+2. **Far conoscere le novità** — un hub editoriale che aggrega i materiali prodotti da questi settori
+3. **Esplorare l'archivio** — 33.000+ documenti resi visibili e interrogabili per la prima volta
+
+La migrazione tecnica — Payload CMS, MeiliSearch, redirect 301 su tutti gli URL storici — è la conseguenza di questa scelta progettuale, non il punto di partenza.
+
 ## Chi cerca, e cosa cerca davvero
 
 Il problema non era tecnologico: era di comprensione. Chi usa un archivio come quello di Susdef non cerca "un documento" — cerca una risposta. Il giornalista ha bisogno del rapporto sulla fiscalità delle rinnovabili prima del 2020. Il funzionario ministeriale cerca la posizione di Susdef su un tema specifico per un'audizione. Il ricercatore vuole sapere se Susdef ha già scritto qualcosa sull'argomento che sta affrontando.
@@ -68,12 +78,6 @@ La formazione al team interno è parte del progetto, non un'appendice: il team d
 ## Il risultato
 
 **33.000+** documenti nell'archivio &nbsp;·&nbsp; **12** settimane dalla firma al go-live &nbsp;·&nbsp; **WCAG 2.1 AA** verificato &nbsp;·&nbsp; team autonomo dal giorno del lancio
-
-## Approfondimenti
-
-Il dettaglio del percorso — la gara, le scelte tecniche, la migrazione dei dati — vive nei bulletin:
-
-→ [Come abbiamo vinto la gara Susdef: metodo e percorso](/bulletin/percorso-susdef)
 
 ## FAQ
 
