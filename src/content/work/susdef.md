@@ -10,9 +10,8 @@ services: ["piattaforme-dashboard", "app-prodotti-digitali"]
 team: ["max", "fabrizio"]
 links:
   live: "https://susdef.pianeta.green"
-  bulletin: ["percorso-susdef"]
 locale: it
-draft: true
+draft: false
 type: work
 tags: ["ux", "accessibilità", "archivio", "fondazioni", "sostenibilità", "wcag"]
 tour:
@@ -45,6 +44,16 @@ Quando Susdef ha aperto la selezione per riprogettare la piattaforma, abbiamo pa
 
 **Agenzia partner**: Latte Creative (direction creativa e relazione cliente sul piano del design).
 
+## La Fondazione come galassia
+
+Prima di scegliere il CMS, abbiamo fatto una domanda diversa: che tipo di organizzazione è Susdef, e come si rappresenta online?
+
+Una fondazione di ricerca ventennale non è un'organizzazione con un sito — è una galassia. Settori, progetti, persone, documenti che si richiamano a vicenda, prodotti su decine di temi nel corso di vent'anni. Un albero di pagine statiche cattura male questa struttura: appiattisce le relazioni, nasconde le connessioni, trasforma in silos quello che nella realtà è un sistema interconnesso.
+
+Il concept che abbiamo proposto — e che ha vinto la selezione — parte da qui: costruire un sistema di entità collegate invece di un catalogo di pagine. L'architettura dell'informazione è definita attorno a tre obiettivi concreti: spiegare cos'è la Fondazione, far conoscere le novità, permettere di esplorare i documenti. Da questi tre obiettivi discende la struttura: un lato istituzionale che mette in relazione settori, progetti e persone; un hub editoriale che raccoglie i materiali prodotti; una parte documentale navigabile, non più un archivio nascosto.
+
+La migrazione tecnica da WordPress a Nuxt+Payload+MeiliSearch è la conseguenza di questa scelta architetturale, non il suo contrario.
+
 ## Chi cerca, e cosa cerca davvero
 
 Il problema non era tecnologico: era di comprensione. Chi usa un archivio come quello di Susdef non cerca "un documento" — cerca una risposta. Il giornalista ha bisogno del rapporto sulla fiscalità delle rinnovabili prima del 2020. Il funzionario ministeriale cerca la posizione di Susdef su un tema specifico per un'audizione. Il ricercatore vuole sapere se Susdef ha già scritto qualcosa sull'argomento che sta affrontando.
@@ -68,12 +77,6 @@ La formazione al team interno è parte del progetto, non un'appendice: il team d
 ## Il risultato
 
 **33.000+** documenti nell'archivio &nbsp;·&nbsp; **12** settimane dalla firma al go-live &nbsp;·&nbsp; **WCAG 2.1 AA** verificato &nbsp;·&nbsp; team autonomo dal giorno del lancio
-
-## Approfondimenti
-
-Il dettaglio del percorso — la gara, le scelte tecniche, la migrazione dei dati — vive nei bulletin:
-
-→ [Come abbiamo vinto la gara Susdef: metodo e percorso](/bulletin/percorso-susdef)
 
 ## FAQ
 
