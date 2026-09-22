@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { pickRotatingHero } from '../lib/hero-rotation';
+import { pickRotatingSlots, pickRotatingHero } from '../lib/hero-rotation';
 
 // Sort helper: date desc, drafts excluded
 const byDateDesc = (a: any, b: any) => {
@@ -11,17 +11,48 @@ const byDateDesc = (a: any, b: any) => {
 };
 const live = (e: any) => e.data.draft !== true;
 
-const featuredWork = (await getCollection('work')).filter(live).sort(byDateDesc);
-const bulletin = (await getCollection('bulletin')).filter(live).sort(byDateDesc);
+const allWork = (await getCollection('work')).filter(live).sort(byDateDesc);
+const allBulletin = (await getCollection('bulletin')).filter(live).sort(byDateDesc);
+const allPosts = (await getCollection('posts')).filter(live).sort(byDateDesc);
+const allReels = (await getCollection('reels')).filter(live).sort(byDateDesc);
 const services = (await getCollection('services')).filter(live).sort(byDateDesc);
 const team = (await getCollection('team')).filter(live);
 const teamCount = team.length;
 
-const w0 = pickRotatingHero(featuredWork, Astro.cookies);
-const otherWork = featuredWork.filter((w) => w.id !== w0?.id); // tutti gli altri work, escluso il featured di turno
-const b0 = bulletin[0];
-const b1 = bulletin[1];
-const b2 = bulletin[2];
+// Unified content pool: bulletin + posts + reels + work, sorted by date desc.
+// Each item carries enough data to render the tile without a second lookup.
+type PoolKind = 'work' | 'bulletin' | 'post' | 'reel';
+interface HomePoolEntry {
+  kind: PoolKind;
+  id: string;
+  client?: string;
+  data: any; // original .data from the collection entry
+}
+
+const contentPool: HomePoolEntry[] = [
+  ...allWork.map((e) => ({ kind: 'work' as const, id: e.id, client: e.data.client as string | undefined, data: e.data })),
+  ...allBulletin.map((e) => ({ kind: 'bulletin' as const, id: e.id, client: e.data.client as string | undefined, data: e.data })),
+  ...allPosts.map((e) => ({ kind: 'post' as const, id: e.id, client: e.data.client as string | undefined, data: e.data })),
+  ...allReels.map((e) => ({ kind: 'reel' as const, id: e.id, client: e.data.client as string | undefined, data: e.data })),
+].sort((a, b) => {
+  const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+  const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+  return db - da;
+});
+
+// Pick 4 rotating slots with client deduplication (w0 + b0 + b1 + b2)
+const [slot0, slot1, slot2, slot3] = pickRotatingSlots(contentPool, Astro.cookies, 4);
+
+// Backward-compat aliases for the template
+const w0 = slot0;
+const b0 = slot1;
+const b1 = slot2;
+const b2 = slot3;
+
+// All work items not already in a chosen slot (for the "other work" section below)
+const slotIds = new Set([slot0, slot1, slot2, slot3].filter(Boolean).map((s) => s!.id));
+const otherWork = allWork.filter((w) => !slotIds.has(w.id));
+
 const s0 = services[0];
 
 const description = 'Studio di design & technology. Lavori, articoli, esperimenti.';
@@ -70,8 +101,9 @@ const ldJson = {
   <div class="home-page">
     <div class="bento-grid">
 
-      {/* 1. Featured work — tall portrait (col-1 row-span-3). Video ECLAG solo quando ECLAG è davvero il top item non-draft. */}
-      {w0?.id === 'eclag' ? (
+      {/* 1. Featured slot — tall portrait (col-1 row-span-3).
+             kind=work: cover image or ECLAG video; kind=bulletin/post/reel: content card. */}
+      {w0?.kind === 'work' && w0.id === 'eclag' ? (
         <a href={`/work/${w0.id}`} class="bento-tile t-tall t-dark">
           <video poster="/choosetoseethem/cover-v3.webp" muted loop playsinline preload="none" class="bento-video"
                  data-lazy-video data-src="/choosetoseethem/video-restore-web-720.mp4"></video>
@@ -83,7 +115,7 @@ const ldJson = {
             <p class="bento-sub">{(w0.data.client || 'ECLAG') + ' · ' + (w0.data.year || 2026)}</p>
           </div>
         </a>
-      ) : w0 && (
+      ) : w0?.kind === 'work' ? (
         <a href={`/work/${w0.id}`} class="bento-tile t-tall t-dark" style={`background-image:url('${(w0.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center;`}>
           <div class="bento-grad" />
           <div class="bento-content">
@@ -93,7 +125,34 @@ const ldJson = {
             <p class="bento-sub">{(w0.data.client || '') + (w0.data.client && w0.data.year ? ' · ' : '') + (w0.data.year || '')}</p>
           </div>
         </a>
-      )}
+      ) : w0?.kind === 'bulletin' ? (
+        <a href={`/bulletin/${w0.id}`} class="bento-tile t-tall t-dark">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Bulletin' + (w0.data.issue ? ' · #' + w0.data.issue : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-xl">{w0.data.title}</h2>
+            {w0.data.description && <p class="bento-sub">{w0.data.description}</p>}
+          </div>
+        </a>
+      ) : w0?.kind === 'post' ? (
+        <a href={`/posts/${w0.id}`} class="bento-tile t-tall t-dark">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Post' + (w0.data.client ? ' · ' + w0.data.client : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-xl">{w0.data.title}</h2>
+            {w0.data.description && <p class="bento-sub">{w0.data.description}</p>}
+          </div>
+        </a>
+      ) : w0?.kind === 'reel' ? (
+        <a href={`/reels/${w0.id}`} class="bento-tile t-tall t-dark">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Reel' + (w0.data.client ? ' · ' + w0.data.client : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title-xl">{w0.data.title}</h2>
+            {w0.data.description && <p class="bento-sub">{w0.data.description}</p>}
+          </div>
+        </a>
+      ) : null}
 
       {/* 2. Wordmark — square */}
       <div class="bento-tile t-square t-cream bento-wordmark">
@@ -107,8 +166,8 @@ const ldJson = {
         </div>
       </div>
 
-      {/* 3. Bulletin #1 — yellow medium */}
-      {b0 && (
+      {/* 3. Content slot #1 — yellow medium (bulletin / work / post / reel) */}
+      {b0?.kind === 'bulletin' ? (
         <a href={`/bulletin/${b0.id}`} class="bento-tile t-medium" style="background:#E9FF1F;">
           <div class="bento-content">
             <p class="bento-kicker">{'Bulletin' + (b0.data.issue ? ' · #' + b0.data.issue : '')}</p>
@@ -117,7 +176,35 @@ const ldJson = {
             {b0.data.description && <p class="bento-sub">{b0.data.description}</p>}
           </div>
         </a>
-      )}
+      ) : b0?.kind === 'work' ? (
+        <a href={`/work/${b0.id}`} class="bento-tile t-medium" style={`background-image:url('${(b0.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
+          <div class="bento-grad" />
+          <div class="bento-content">
+            <p class="bento-kicker">{'Work' + (b0.data.year ? ' · ' + b0.data.year : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b0.data.title}</h2>
+            {b0.data.client && <p class="bento-sub">{b0.data.client}</p>}
+          </div>
+        </a>
+      ) : b0?.kind === 'post' ? (
+        <a href={`/posts/${b0.id}`} class="bento-tile t-medium" style="background:#E9FF1F;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Post' + (b0.data.client ? ' · ' + b0.data.client : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b0.data.title}</h2>
+            {b0.data.description && <p class="bento-sub">{b0.data.description}</p>}
+          </div>
+        </a>
+      ) : b0?.kind === 'reel' ? (
+        <a href={`/reels/${b0.id}`} class="bento-tile t-medium" style="background:#E9FF1F;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Reel' + (b0.data.client ? ' · ' + b0.data.client : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b0.data.title}</h2>
+            {b0.data.description && <p class="bento-sub">{b0.data.description}</p>}
+          </div>
+        </a>
+      ) : null}
 
       {/* 4. Hire Us / Parla con Alba — orange CTA statica */}
       <button type="button" class="bento-tile t-medium t-orange" data-action="open-alba">
@@ -144,8 +231,8 @@ const ldJson = {
         });
       </script>
 
-      {/* 5. Bulletin #2 — blue */}
-      {b1 && (
+      {/* 5. Content slot #2 — blue (bulletin / work / post / reel) */}
+      {b1?.kind === 'bulletin' ? (
         <a href={`/bulletin/${b1.id}`} class="bento-tile t-medium t-blue">
           <div class="bento-content">
             <p class="bento-kicker">{'Bulletin' + (b1.data.issue ? ' · #' + b1.data.issue : '')}</p>
@@ -154,7 +241,34 @@ const ldJson = {
             {b1.data.description && <p class="bento-sub">{b1.data.description}</p>}
           </div>
         </a>
-      )}
+      ) : b1?.kind === 'work' ? (
+        <a href={`/work/${b1.id}`} class="bento-tile t-medium t-blue">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Work' + (b1.data.year ? ' · ' + b1.data.year : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b1.data.title}</h2>
+            {b1.data.client && <p class="bento-sub">{b1.data.client}</p>}
+          </div>
+        </a>
+      ) : b1?.kind === 'post' ? (
+        <a href={`/posts/${b1.id}`} class="bento-tile t-medium t-blue">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Post' + (b1.data.client ? ' · ' + b1.data.client : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b1.data.title}</h2>
+            {b1.data.description && <p class="bento-sub">{b1.data.description}</p>}
+          </div>
+        </a>
+      ) : b1?.kind === 'reel' ? (
+        <a href={`/reels/${b1.id}`} class="bento-tile t-medium t-blue">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Reel' + (b1.data.client ? ' · ' + b1.data.client : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b1.data.title}</h2>
+            {b1.data.description && <p class="bento-sub">{b1.data.description}</p>}
+          </div>
+        </a>
+      ) : null}
 
       {/* 6. Service — cream tall */}
       {s0 && (
@@ -168,7 +282,7 @@ const ldJson = {
         </a>
       )}
 
-      {/* 7. Tutti gli altri work (image cover) — auto-popola da featuredWork.slice(1) */}
+      {/* 7. Tutti gli altri work (image cover) — work items non già negli slot rotanti */}
       {otherWork.map((w: any, i: number) => (
         <a href={`/work/${w.id}`} class={`bento-tile ${i === 0 ? 't-tall' : 't-medium'}`} style={`background-image:url('${(w.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
           <div class="bento-grad" />
@@ -191,8 +305,8 @@ const ldJson = {
         </div>
       </a>
 
-      {/* 8. Bulletin #3 — green */}
-      {b2 && (
+      {/* 8. Content slot #3 — green (bulletin / work / post / reel) */}
+      {b2?.kind === 'bulletin' ? (
         <a href={`/bulletin/${b2.id}`} class="bento-tile t-medium" style="background:#1f7a3a; color:#fff;">
           <div class="bento-content">
             <p class="bento-kicker">{'Bulletin' + (b2.data.issue ? ' · #' + b2.data.issue : '')}</p>
@@ -201,7 +315,34 @@ const ldJson = {
             {b2.data.description && <p class="bento-sub">{b2.data.description}</p>}
           </div>
         </a>
-      )}
+      ) : b2?.kind === 'work' ? (
+        <a href={`/work/${b2.id}`} class="bento-tile t-medium" style="background:#1f7a3a; color:#fff;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Work' + (b2.data.year ? ' · ' + b2.data.year : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b2.data.title}</h2>
+            {b2.data.client && <p class="bento-sub">{b2.data.client}</p>}
+          </div>
+        </a>
+      ) : b2?.kind === 'post' ? (
+        <a href={`/posts/${b2.id}`} class="bento-tile t-medium" style="background:#1f7a3a; color:#fff;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Post' + (b2.data.client ? ' · ' + b2.data.client : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b2.data.title}</h2>
+            {b2.data.description && <p class="bento-sub">{b2.data.description}</p>}
+          </div>
+        </a>
+      ) : b2?.kind === 'reel' ? (
+        <a href={`/reels/${b2.id}`} class="bento-tile t-medium" style="background:#1f7a3a; color:#fff;">
+          <div class="bento-content">
+            <p class="bento-kicker">{'Reel' + (b2.data.client ? ' · ' + b2.data.client : '')}</p>
+            <div class="bento-spacer" />
+            <h2 class="bento-title">{b2.data.title}</h2>
+            {b2.data.description && <p class="bento-sub">{b2.data.description}</p>}
+          </div>
+        </a>
+      ) : null}
 
       {/* Client wall — tile larga */}
       <a href="/work" class="bento-tile t-tall t-cream bento-clientwall">

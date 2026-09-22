@@ -1,0 +1,198 @@
+---
+/**
+ * /reels/[slug] — pagina propria per un reel (video breve) (PIA-1541 Fase 4).
+ * Video player full-width con poster da Pianeta.Watchers.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { mediaSupabaseService } from '../../lib/server/media-supabase';
+
+export const prerender = true;
+export async function getStaticPaths() {
+  const items = await getCollection('reels');
+  return items.map((item) => ({ params: { slug: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props as any;
+const { Content } = await render(item);
+const data: any = item.data;
+const title = data.title || item.id;
+const formatDate = (d?: Date) =>
+  d ? new Date(d).toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
+
+// Risolvi thumbnail_path del poster, se fornito
+let posterUrl: string | undefined;
+if (data.posterPhotoId) {
+  try {
+    const db = mediaSupabaseService();
+    const { data: row } = await db
+      .from('pianeta_media_photos')
+      .select('thumbnail_path')
+      .eq('id', data.posterPhotoId)
+      .single();
+    if (row?.thumbnail_path) {
+      posterUrl = `/api/media/thumb?path=${encodeURIComponent(row.thumbnail_path)}`;
+    }
+  } catch {
+    // Degradazione silenziosa senza credenziali
+  }
+}
+
+const durationLabel = data.durationSec ? `${data.durationSec}s` : '';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'VideoObject',
+  name: title,
+  description: data.description,
+  url: new URL(`/reels/${item.id}`, Astro.site).toString(),
+  contentUrl: data.video,
+  thumbnailUrl: posterUrl,
+  uploadDate: data.date ? new Date(data.date).toISOString() : undefined,
+  duration: data.durationSec ? `PT${data.durationSec}S` : undefined,
+  author: { '@type': 'Organization', name: 'Pianeta.Studio', url: 'https://xp.pianeta.studio' },
+};
+---
+<BaseLayout
+  title={`${title} — Pianeta.Studio`}
+  description={data.description}
+  ogImage={posterUrl}
+  noindex={data.draft === true}
+>
+  {jsonLd && <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />}
+
+  <div class="reel-detail">
+
+    <!-- Video player -->
+    <div class="reel-player-wrap">
+      <video
+        src={data.video}
+        poster={posterUrl}
+        controls
+        playsinline
+        preload="metadata"
+        class="reel-player"
+        aria-label={title}
+      ></video>
+    </div>
+
+    <!-- Metadata -->
+    <div class="reel-body">
+      <header class="reel-head">
+        <p class="reel-eyebrow">
+          <a href="/hub">Hub</a>
+          {' · '}
+          <span>Reel</span>
+          {durationLabel && <span> · {durationLabel}</span>}
+        </p>
+        <h1 class="reel-title">{title}</h1>
+        {data.description && <p class="reel-deck">{data.description}</p>}
+        <div class="reel-meta">
+          {data.client && <span class="reel-meta-item">{data.client}</span>}
+          {data.date && <span class="reel-meta-item">{formatDate(data.date)}</span>}
+          {data.tags?.length > 0 && data.tags.map((tag: string) => (
+            <span class="reel-tag">#{tag}</span>
+          ))}
+        </div>
+      </header>
+
+      {item.body?.trim() && (
+        <div class="reel-prose">
+          <Content />
+        </div>
+      )}
+
+      <div class="reel-nav">
+        <a href="/hub" class="cta-btn cta-ghost">← Tutti i contenuti</a>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .reel-detail {
+    max-width: var(--wrap-max, 1200px);
+    margin: 0 auto;
+    padding: 80px 24px 96px;
+  }
+
+  .reel-player-wrap {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000;
+    margin-bottom: 40px;
+    aspect-ratio: 9 / 16;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 700px) {
+    .reel-player-wrap {
+      aspect-ratio: 16 / 9;
+      max-height: 560px;
+    }
+  }
+
+  .reel-player {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .reel-body { max-width: 720px; }
+
+  .reel-eyebrow {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--pianeta-muted);
+    margin: 0 0 16px;
+  }
+  .reel-eyebrow a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .reel-eyebrow a:hover { color: var(--cta-primary, #FF6B33); }
+
+  .reel-title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin: 0 0 14px;
+  }
+
+  .reel-deck {
+    font-size: var(--ty-sub, 1.125rem);
+    color: var(--pianeta-muted-strong);
+    line-height: 1.55;
+    margin: 0 0 20px;
+    max-width: 600px;
+  }
+
+  .reel-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    margin-bottom: 32px;
+  }
+
+  .reel-meta-item {
+    font-size: 0.8125rem;
+    color: var(--pianeta-muted);
+  }
+
+  .reel-tag {
+    font-size: 0.8125rem;
+    color: var(--cta-primary, #FF6B33);
+  }
+
+  .reel-prose { margin-bottom: 40px; }
+
+  .reel-nav { margin-top: 32px; }
+</style>
