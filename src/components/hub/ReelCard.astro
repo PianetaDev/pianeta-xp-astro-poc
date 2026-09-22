@@ -1,0 +1,101 @@
+---
+/**
+ * ReelCard — bento tile per un reel (video breve) (PIA-1541).
+ * Video con poster (posterPhotoId risolto via Supabase), autoplay muto al hover.
+ *
+ * Usato sia nella home sia in /hub.
+ */
+import { mediaSupabaseService } from '../../lib/server/media-supabase';
+
+interface Props {
+  slug: string;
+  title?: string;
+  video: string;
+  posterPhotoId?: string;
+  client?: string;
+  durationSec?: number;
+  /** Dimensione tile nel bento grid */
+  size?: 'tall' | 'medium';
+  /** Etichetta sopra il titolo. Default: "Reel" */
+  kicker?: string;
+}
+
+const { slug, title, video, posterPhotoId, client, durationSec, size = 'medium', kicker = 'Reel' } = Astro.props;
+
+// Risolvi thumbnail_path del poster da posterPhotoId, se fornito
+let posterThumbPath: string | null = null;
+
+if (posterPhotoId) {
+  try {
+    const db = mediaSupabaseService();
+    const { data } = await db
+      .from('pianeta_media_photos')
+      .select('thumbnail_path')
+      .eq('id', posterPhotoId)
+      .single();
+    posterThumbPath = data?.thumbnail_path ?? null;
+  } catch {
+    // Degradazione silenziosa senza credenziali
+  }
+}
+
+const posterUrl = posterThumbPath
+  ? `/api/media/thumb?path=${encodeURIComponent(posterThumbPath)}`
+  : undefined;
+
+const tileClass = `bento-tile reel-card ${size === 'tall' ? 't-tall' : 't-medium'} t-dark`;
+const sub = client ?? '';
+const durationLabel = durationSec ? `${durationSec}s` : '';
+---
+<a href={`/reels/${slug}`} class={tileClass}>
+  <video
+    src={video}
+    poster={posterUrl}
+    muted
+    loop
+    playsinline
+    preload="none"
+    class="reel-video"
+    data-reel-autoplay
+  ></video>
+  <div class="bento-grad" />
+  <div class="bento-content">
+    <p class="bento-kicker">{kicker}{durationLabel ? ` · ${durationLabel}` : ''}</p>
+    <div class="bento-spacer" />
+    {title && <h2 class="bento-title">{title}</h2>}
+    {sub && <p class="bento-sub">{sub}</p>}
+  </div>
+</a>
+
+<script>
+  // Autoplay muto al passaggio del mouse (reel-card)
+  document.querySelectorAll<HTMLAnchorElement>('.reel-card').forEach((card) => {
+    const video = card.querySelector<HTMLVideoElement>('[data-reel-autoplay]');
+    if (!video) return;
+    card.addEventListener('mouseenter', () => { video.play().catch(() => {}); });
+    card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+  });
+</script>
+
+<style>
+  .reel-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reel-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* bento-grad e bento-content sopra il video */
+  .reel-card :global(.bento-grad),
+  .reel-card :global(.bento-content) {
+    position: relative;
+    z-index: 1;
+  }
+</style>

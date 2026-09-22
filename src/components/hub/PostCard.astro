@@ -1,0 +1,122 @@
+---
+/**
+ * PostCard — bento tile per un post-carosello di foto (PIA-1541).
+ * Risolve photoIds → thumbnail_path tramite Supabase (server-side),
+ * poi serve le immagini via /api/media/thumb?path=<thumbnail_path>.
+ *
+ * Usato sia nella home sia in /hub.
+ */
+import { mediaSupabaseService } from '../../lib/server/media-supabase';
+
+interface Props {
+  slug: string;
+  title?: string;
+  photoIds: string[];
+  client?: string;
+  /** Dimensione tile nel bento grid */
+  size?: 'tall' | 'medium';
+  /** Etichetta sopra il titolo. Default: "Post" */
+  kicker?: string;
+}
+
+const { slug, title, photoIds, client, size = 'medium', kicker = 'Post' } = Astro.props;
+
+// Risolvi thumbnail_path per ogni photo_id (ordine preservato)
+interface ThumbRow { id: string; thumbnail_path: string | null; caption: string | null; }
+let photos: ThumbRow[] = [];
+
+if (photoIds.length > 0) {
+  try {
+    const db = mediaSupabaseService();
+    const { data } = await db
+      .from('pianeta_media_photos')
+      .select('id, thumbnail_path, caption')
+      .in('id', photoIds);
+    // Riordina secondo l'ordine originale di photoIds
+    const byId = Object.fromEntries((data ?? []).map((r: ThumbRow) => [r.id, r]));
+    photos = photoIds.map(id => byId[id]).filter(Boolean) as ThumbRow[];
+  } catch {
+    // Env vars mancanti (build locale senza credenziali) — degradazione silenziosa
+  }
+}
+
+const tileClass = `bento-tile post-card ${size === 'tall' ? 't-tall' : 't-medium'} t-dark`;
+const sub = client ?? '';
+const hasPhotos = photos.length > 0;
+---
+<a href={`/posts/${slug}`} class={tileClass}>
+  {hasPhotos ? (
+    <div class="post-carousel" aria-label="Carosello foto">
+      {photos.map((p) => (
+        <div class="post-carousel-slide">
+          {p.thumbnail_path ? (
+            <img
+              src={`/api/media/thumb?path=${encodeURIComponent(p.thumbnail_path)}`}
+              alt={p.caption ?? title ?? ''}
+              class="post-carousel-img"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <div class="post-carousel-placeholder" aria-hidden="true" />
+          )}
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="post-carousel-placeholder-full" aria-hidden="true" />
+  )}
+  <div class="bento-grad" />
+  <div class="bento-content">
+    <p class="bento-kicker">{kicker}{hasPhotos ? ` · ${photos.length} foto` : ''}</p>
+    <div class="bento-spacer" />
+    {title && <h2 class="bento-title">{title}</h2>}
+    {sub && <p class="bento-sub">{sub}</p>}
+  </div>
+</a>
+
+<style>
+  .post-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Carosello scroll-snap: scorre orizzontalmente dentro la tile */
+  .post-carousel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 2px;
+  }
+  .post-carousel::-webkit-scrollbar { display: none; }
+
+  .post-carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    overflow: hidden;
+  }
+
+  .post-carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .post-carousel-placeholder,
+  .post-carousel-placeholder-full {
+    width: 100%;
+    height: 100%;
+    background: var(--pianeta-bg-card, #1a1f2e);
+  }
+
+  /* Il bento-grad e bento-content si sovrappongono al carosello */
+  .post-card :global(.bento-grad),
+  .post-card :global(.bento-content) {
+    position: relative;
+    z-index: 1;
+  }
+</style>
