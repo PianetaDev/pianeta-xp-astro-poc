@@ -1,6 +1,6 @@
 ---
 interface Props {
-  current: 'sistema' | 'leads' | 'campaigns' | 'content' | 'contacts' | 'brief';
+  current: 'sistema' | 'leads' | 'campaigns' | 'content' | 'contacts' | 'brief' | 'progetti';
 }
 
 const { current } = Astro.props;
@@ -12,6 +12,7 @@ const LINKS = [
   { key: 'content', href: '/admin/content', label: 'Contenuti' },
   { key: 'contacts', href: '/admin/contacts', label: 'Contatti' },
   { key: 'brief', href: '/admin/brief', label: 'Brief' },
+  { key: 'progetti', href: '/admin/progetti', label: 'Progetti' },
 ] as const;
 ---
 <nav class="admin-nav">
