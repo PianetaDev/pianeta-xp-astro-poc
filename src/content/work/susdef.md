@@ -20,7 +20,7 @@ tour:
     - title: "Il progetto"
       key_facts:
         - "Fondazione Sviluppo Sostenibile coordina il Forum Nazionale per lo Sviluppo Sostenibile"
-        - "Nuova piattaforma per un archivio ventennale di 33.000+ documenti"
+        - "Nuova piattaforma per un archivio trentennale di 33.000+ documenti"
         - "Co-produzione con Latte Creative"
     - title: "Ricerca e UX"
       key_facts:
@@ -29,7 +29,7 @@ tour:
         - "Formazione del team interno per autonomia post-lancio"
     - title: "Il risultato"
       key_facts:
-        - "12 settimane dalla firma al go-live"
+        - "12 settimane di sviluppo tecnico, go-live 16 luglio 2026"
         - "Live su susdef.pianeta.green dal 16 luglio 2026"
         - "Il team gestisce in autonomia contenuti e archivio"
 ---
@@ -38,7 +38,7 @@ tour:
 
 ## Il progetto
 
-Fondazione Sviluppo Sostenibile coordina il Forum Nazionale per lo Sviluppo Sostenibile — uno degli attori di riferimento per la transizione ecologica italiana. Produce report di policy, documenti di ricerca, atti del Forum da oltre vent'anni. Trentaduemila documenti costruiti nel tempo, che il sito precedente non riusciva più a rendere accessibili.
+Fondazione Sviluppo Sostenibile coordina il Forum Nazionale per lo Sviluppo Sostenibile — uno degli attori di riferimento per la transizione ecologica italiana. Produce report di policy, documenti di ricerca, atti del Forum da trent'anni. Oltre 33.000 documenti costruiti nel tempo, che il sito precedente non riusciva più a rendere accessibili.
 
 Quando Susdef ha aperto la selezione per riprogettare la piattaforma, abbiamo partecipato insieme a Latte Creative — co-produttori, non subfornitori. Abbiamo vinto la selezione e consegnato in 12 settimane.
 
@@ -48,7 +48,7 @@ Quando Susdef ha aperto la selezione per riprogettare la piattaforma, abbiamo pa
 
 Prima di scegliere il CMS, abbiamo fatto una domanda diversa: che tipo di organizzazione è Susdef, e come si rappresenta online?
 
-Una fondazione di ricerca ventennale non è un'organizzazione con un sito — è una galassia. Settori, progetti, persone, documenti che si richiamano a vicenda, prodotti su decine di temi nel corso di vent'anni. Un albero di pagine statiche cattura male questa struttura: appiattisce le relazioni, nasconde le connessioni, trasforma in silos quello che nella realtà è un sistema interconnesso.
+Una fondazione di ricerca trentennale non è un'organizzazione con un sito — è una galassia. Settori, progetti, persone, documenti che si richiamano a vicenda, prodotti su decine di temi nel corso di trent'anni. Un albero di pagine statiche cattura male questa struttura: appiattisce le relazioni, nasconde le connessioni, trasforma in silos quello che nella realtà è un sistema interconnesso.
 
 Il concept che abbiamo proposto — e che ha vinto la selezione — parte da qui: costruire un sistema di entità collegate invece di un catalogo di pagine. L'architettura dell'informazione è definita attorno a tre obiettivi concreti: spiegare cos'è la Fondazione, far conoscere le novità, permettere di esplorare i documenti. Da questi tre obiettivi discende la struttura: un lato istituzionale che mette in relazione settori, progetti e persone; un hub editoriale che raccoglie i materiali prodotti; una parte documentale navigabile, non più un archivio nascosto.
 
@@ -76,7 +76,7 @@ La formazione al team interno è parte del progetto, non un'appendice: il team d
 
 ## Il risultato
 
-**33.000+** documenti nell'archivio &nbsp;·&nbsp; **12** settimane dalla firma al go-live &nbsp;·&nbsp; **WCAG 2.1 AA** verificato &nbsp;·&nbsp; team autonomo dal giorno del lancio
+**33.000+** documenti nell'archivio &nbsp;·&nbsp; **12 settimane** di sviluppo tecnico &nbsp;·&nbsp; go-live **16 luglio 2026** &nbsp;·&nbsp; **WCAG 2.1 AA** verificato &nbsp;·&nbsp; team autonomo dal giorno del lancio
 
 ## FAQ
 
