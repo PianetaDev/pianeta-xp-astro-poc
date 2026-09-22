@@ -84,58 +84,134 @@ onMounted(load)
 </script>
 
 <template>
-  <div class="px-6 lg:px-10 py-12 md:py-16 max-w-[640px] mx-auto">
-    <p class="text-xs uppercase tracking-wider text-black/50 mb-6">
-      <a :href="T.bulletinHref" class="hover:underline">Bulletin</a> · {{ T.prefLabel }}
+  <div class="pref-wrap">
+    <p class="pref-breadcrumb">
+      <a :href="T.bulletinHref">Bulletin</a> · {{ T.prefLabel }}
     </p>
-    <h1 class="text-3xl md:text-4xl font-black tracking-tight">{{ T.title }}</h1>
+    <h1 class="pref-title">{{ T.title }}</h1>
 
-    <p v-if="!loaded" class="mt-8 text-sm text-black/55">{{ T.loading }}</p>
+    <p v-if="!loaded" class="pref-loading">{{ T.loading }}</p>
 
-    <div v-else-if="notFound" class="mt-8 p-5 rounded-xl bg-black/[0.03] text-sm">
+    <div v-else-if="notFound" class="pref-notice">
       {{ T.notFound(email) }}
-      <a :href="T.resubscribeHref" class="underline ml-1">{{ T.resubscribe }}</a>
+      <a :href="T.resubscribeHref" class="pref-notice-link">{{ T.resubscribe }}</a>
     </div>
 
-    <div v-else-if="errorMsg" class="mt-8 p-5 rounded-xl bg-red-50 text-red-900 text-sm">
+    <div v-else-if="errorMsg" class="pref-notice pref-notice--error">
       {{ errorMsg }}
     </div>
 
     <div v-else>
-      <p class="mt-2 text-sm text-black/65">{{ T.subscriptionLabel }} <strong class="text-black">{{ email }}</strong></p>
-      <p v-if="unsubscribed" class="mt-4 p-4 rounded-lg bg-yellow-50 text-sm">
+      <p class="pref-email-line">{{ T.subscriptionLabel }} <strong>{{ email }}</strong></p>
+      <p v-if="unsubscribed" class="pref-notice pref-notice--warn">
         {{ T.unsubscribedNote }}
       </p>
 
-      <form @submit.prevent="save" class="mt-8 space-y-5">
-        <label class="flex items-start gap-3 p-4 rounded-xl border border-black/10 cursor-pointer hover:border-black/30">
-          <input type="checkbox" v-model="topics.bulletin" class="mt-1 w-4 h-4">
+      <form @submit.prevent="save" class="pref-form">
+        <label class="pref-topic-label">
+          <input type="checkbox" v-model="topics.bulletin" class="pref-checkbox">
           <span>
-            <span class="block font-semibold">{{ T.bulletinTitle }}</span>
-            <span class="block text-sm text-black/65">{{ T.bulletinDesc }}</span>
+            <span class="pref-topic-name">{{ T.bulletinTitle }}</span>
+            <span class="pref-topic-desc">{{ T.bulletinDesc }}</span>
           </span>
         </label>
-        <label class="flex items-start gap-3 p-4 rounded-xl border border-black/10 cursor-pointer hover:border-black/30">
-          <input type="checkbox" v-model="topics.announcements" class="mt-1 w-4 h-4">
+        <label class="pref-topic-label">
+          <input type="checkbox" v-model="topics.announcements" class="pref-checkbox">
           <span>
-            <span class="block font-semibold">{{ T.announceTitle }}</span>
-            <span class="block text-sm text-black/65">{{ T.announceDesc }}</span>
+            <span class="pref-topic-name">{{ T.announceTitle }}</span>
+            <span class="pref-topic-desc">{{ T.announceDesc }}</span>
           </span>
         </label>
 
-        <div class="flex flex-wrap items-center gap-3 pt-4">
+        <div class="pref-actions">
           <button
             type="submit"
             :disabled="saving"
-            class="bg-black text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-black/85 disabled:opacity-50"
+            class="cta-btn cta-primary"
+            :style="saving ? 'opacity:0.55;cursor:default' : ''"
           >{{ saving ? T.saving : T.save }}</button>
-          <span v-if="savedAt" class="text-xs text-green-700">{{ T.saved }}</span>
+          <span v-if="savedAt" class="pref-saved">{{ T.saved }}</span>
 
-          <span class="flex-1"></span>
+          <span style="flex:1"></span>
 
-          <a :href="unsubscribeHref" class="text-xs text-black/55 hover:text-red-700 underline">{{ T.unsubscribeAll }}</a>
+          <a :href="unsubscribeHref" class="pref-unsub-link">{{ T.unsubscribeAll }}</a>
         </div>
       </form>
     </div>
   </div>
 </template>
+
+<style scoped>
+.pref-wrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 24px 96px;
+}
+.pref-breadcrumb {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--pianeta-muted);
+  margin: 0 0 24px;
+}
+.pref-breadcrumb a { color: inherit; text-decoration: none; }
+.pref-breadcrumb a:hover { text-decoration: underline; }
+.pref-title {
+  font-size: var(--ty-hero);
+  font-weight: 600;
+  letter-spacing: var(--ty-hero-tracking);
+  line-height: var(--ty-hero-lh);
+  margin: 0 0 24px;
+}
+.pref-loading {
+  font-size: 0.875rem;
+  color: var(--pianeta-muted);
+  margin-top: 32px;
+}
+.pref-notice {
+  margin-top: 32px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(14,17,22,0.04);
+  font-size: 0.875rem;
+  color: var(--pianeta-text);
+}
+.pref-notice--error { background: #fef2f2; color: #7f1d1d; }
+.pref-notice--warn { background: #fefce8; color: #713f12; }
+.pref-notice-link { margin-left: 4px; text-decoration: underline; }
+.pref-email-line {
+  font-size: 0.875rem;
+  color: var(--pianeta-muted-strong);
+  margin: 0 0 8px;
+}
+.pref-form {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pref-topic-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--pianeta-border);
+  cursor: pointer;
+  transition: border-color 150ms;
+}
+.pref-topic-label:hover { border-color: var(--pianeta-border-strong); }
+.pref-checkbox { margin-top: 2px; width: 16px; height: 16px; flex-shrink: 0; }
+.pref-topic-name { display: block; font-weight: 600; }
+.pref-topic-desc { display: block; font-size: 0.875rem; color: var(--pianeta-muted-strong); }
+.pref-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+.pref-saved { font-size: 0.75rem; color: #15803d; }
+.pref-unsub-link { font-size: 0.75rem; color: var(--pianeta-muted); text-decoration: underline; }
+.pref-unsub-link:hover { color: #b91c1c; }
+</style>

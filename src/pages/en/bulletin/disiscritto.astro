@@ -3,19 +3,52 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 const email = Astro.url.searchParams.get('email') || '';
 ---
 <BaseLayout title="Unsubscribed · Pianeta Bulletin" description="Subscription removed.">
-  <div class="px-6 lg:px-10 py-16 md:py-24 max-w-[640px] mx-auto text-center">
-        <h1 class="text-3xl md:text-4xl font-black tracking-tight leading-tight">Confirmed</h1>
-    <p class="mt-6 text-lg text-black/70">
+  <div class="bulletin-flow">
+    <h1 class="bulletin-flow-title">Confirmed</h1>
+    <p class="bulletin-flow-body">
       {email ? (
-        <span><strong class="text-black">{email}</strong> has been removed from the list.</span>
+        <span><strong>{email}</strong> has been removed from the list.</span>
       ) : (
         <span>The subscription has been removed.</span>
       )}
     </p>
-    <p class="mt-4 text-sm text-black/55">You won't receive any more emails from us. Thanks for reading this far.</p>
-    <div class="mt-10 flex flex-wrap justify-center gap-3">
-      <a href="/en" class="inline-block bg-black text-white px-5 py-3 rounded-full text-sm font-medium hover:bg-black/85">Go to homepage</a>
-      <a href="/en/bulletin/iscrivimi" class="inline-block border border-black/15 px-5 py-3 rounded-full text-sm font-medium hover:border-black">Subscribe again</a>
+    <p class="bulletin-flow-note">You won't receive any more emails from us. Thanks for reading this far.</p>
+    <div class="bulletin-flow-actions">
+      <a href="/en" class="cta-btn cta-primary">Go to homepage</a>
+      <a href="/en/bulletin/iscrivimi" class="cta-btn cta-ghost">Subscribe again</a>
     </div>
   </div>
 </BaseLayout>
+
+<style>
+.bulletin-flow {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 80px 24px 96px;
+  text-align: center;
+}
+.bulletin-flow-title {
+  font-size: var(--ty-hero);
+  font-weight: 600;
+  letter-spacing: var(--ty-hero-tracking);
+  line-height: var(--ty-hero-lh);
+  margin: 0 0 24px;
+}
+.bulletin-flow-body {
+  font-size: 1.1rem;
+  color: var(--pianeta-muted-strong);
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+.bulletin-flow-note {
+  font-size: 0.875rem;
+  color: var(--pianeta-muted);
+  margin: 0 0 40px;
+}
+.bulletin-flow-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+</style>
