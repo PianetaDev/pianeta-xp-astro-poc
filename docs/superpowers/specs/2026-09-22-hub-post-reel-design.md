@@ -9,13 +9,15 @@ Il sito pianeta.studio (repo `pianeta-xp`, Astro) ha oggi sei collezioni Markdow
 
 **Correzione importante fatta durante il brainstorming**: il sito ha già un modulo dormiente ma funzionante per questo esatto scopo, scoperto guardando gli ultimi commit e verificato su Paperclip (issue PIA-1364, PIA-1365, PIA-1369, PIA-1370, tutte `done`) — **non un'ipotesi da ricontrollare, un fatto già verificato in diretta da un altro giro di lavoro**:
 
-- **"Pianeta Media"** (PR #111, 10/9/2026): un archivio fotografico esplorabile per i case study di xp.pianeta.studio, motore Three.js condiviso con Watchers ma estratto come modulo standalone (decisione presa apposta per non duplicare codice tra i due siti, PIA-1364). Vive sullo stesso progetto Supabase di Bosco Colto (`fyflddqouoqtdnilqhms`), ma isolato: tabella `pianeta_media_photos`, bucket `pianeta-media-photos`, **mai** `watchers_photos`/`watchers-photos`.
-- Pagina `/explore/media`, componente `MediaCloud.vue` (Astro island `client:only="vue"`), pipeline di ingest `scripts/media-pipeline.mjs` (thumbnail, colore dominante, didascalia AI, embedding, posizionamento KNN).
+- **"Pianeta Media" al momento della PR (10/9/2026, #111), rinominato "Pianeta.Watchers" durante questo brainstorming**: un archivio fotografico esplorabile per i case study di xp.pianeta.studio, motore Three.js condiviso con Watchers ma estratto come modulo standalone (decisione presa apposta per non duplicare codice tra i due siti, PIA-1364). Vive sullo stesso progetto Supabase di Bosco Colto (`fyflddqouoqtdnilqhms`), ma isolato: tabella `pianeta_media_photos`, bucket `pianeta-media-photos`, **mai** `watchers_photos`/`watchers-photos`.
+- Pagina `/explore/media`, componente `MediaCloud.vue` (Astro island `client:only="vue"`), pipeline di ingest `scripts/media-pipeline.mjs` (thumbnail, colore dominante, didascalia AI, embedding, posizionamento KNN). Nomi tecnici correnti, non ancora aggiornati al nuovo nome — vedi nota di rinomina sotto.
 - Tabella `pianeta_media_usages`: dove ogni foto è usata (`content_type` oggi limitato a `work/bulletin/services/lab/team/careers`, `field` in `cover/inline/og/thumbnail`) — è già il meccanismo di tracciamento riuso che serve per l'atomicità.
 - **Già live**: 10 foto reali (le cover di lavori/bulletin/servizi esistenti — Aries, BC3, ChildFund, ECLAG, Untwist, ecc.) ingerite e pubblicate (PIA-1369), con titolo/descrizione del contenuto collegato nel lightbox e permalink `?photo=<id>` (PIA-1364, PIA-1370). Non ancora nessuna foto di Watchers/Bosco Colto.
 - **Roadmap annotata nel codice, mai costruita**: "selezione multipla + export come animazione/video (ispirazione spiral.soot.com)" — è esattamente il flusso di curatela post/reel che serve qui.
 
-Decisione presa con Max: **costruire hub sopra Pianeta Media**, non come sistema parallelo. Questo elimina la necessità di uno script CLI di curatela inventato ad hoc: la selezione foto diventa un'interazione visiva dentro l'esploratore già esistente, come Max aveva immaginato fin dall'inizio ("sarà bello selezionare le foto da Watchers per creare content").
+Decisione presa con Max: **costruire hub sopra Pianeta.Watchers**, non come sistema parallelo. Questo elimina la necessità di uno script CLI di curatela inventato ad hoc: la selezione foto diventa un'interazione visiva dentro l'esploratore già esistente, come Max aveva immaginato fin dall'inizio ("sarà bello selezionare le foto da Watchers per creare content").
+
+**Nota di rinomina** (decisa con Max, da eseguire nel piano di implementazione, non fatta qui): il nome pubblico/di prodotto è **Pianeta.Watchers**, non più "Pianeta Media" — coerente col fatto che è letteralmente lo stesso motore di Watchers, solo applicato alle foto di Pianeta.Studio invece che a quelle di Bosco Colto. Questo è un rename di superficie (route, nome del componente, testi UI, eventualmente nomi di tabella/bucket per coerenza futura), non un cambio di architettura: gli identificatori tecnici attuali (`pianeta_media_photos`, `pianeta_media_usages`, `/explore/media`, `MediaCloud.vue`, `media-pipeline.mjs`) restano quelli citati in questa spec finché il rename non viene eseguito, per accuratezza tecnica — chi implementa decide se rinominare anche lo schema Supabase o solo la superficie visibile.
 
 ## Decisioni prese durante il brainstorming
 
@@ -26,9 +28,9 @@ Decisione presa con Max: **costruire hub sopra Pianeta Media**, non come sistema
 - La home non mostra tutto: resta un flusso editoriale stile Esplora di Instagram, che cambia in parte a ogni visita via cookie. È un hub & spoke — `/hub` è il centro con tutto il contenuto, la home è uno spoke editoriale che pesca da lì un sottoinsieme in rotazione. La direzione "flip book" futura è annotata, non progettata qui.
 - Il primo lotto di contenuti reali va ingerito da Watchers/Bosco Colto — è il primo compito concreto dell'implementazione, non un esempio teorico (vedi sezione dedicata sotto).
 
-## Architettura: estendere Pianeta Media, non duplicarlo
+## Architettura: estendere Pianeta.Watchers, non duplicarlo
 
-Le foto che finiscono in un post o in un reel sono righe di `pianeta_media_photos`, non file locali copiati nel repo del sito. Questo risolve anche meglio l'obiettivo di riusabilità su altri media rispetto a una copia statica: la foto ha già didascalia AI, embedding per la ricerca per similarità, e un permalink stabile.
+Le foto che finiscono in un post o in un reel sono righe della tabella foto di Pianeta.Watchers (`pianeta_media_photos`), non file locali copiati nel repo del sito. Questo risolve anche meglio l'obiettivo di riusabilità su altri media rispetto a una copia statica: la foto ha già didascalia AI, embedding per la ricerca per similarità, e un permalink stabile.
 
 **Estensione dello schema** (nuova migration sopra `20260910000000_pianeta_media.sql`):
 
@@ -56,7 +58,7 @@ const postsSchemaExt = baseSchema.extend({
 });
 
 const reelsSchemaExt = baseSchema.extend({
-  video: z.string(),          // path locale del file video (Pianeta Media non gestisce video, solo foto)
+  video: z.string(),          // path locale del file video (Pianeta.Watchers non gestisce video, solo foto)
   posterPhotoId: z.string().uuid().optional(), // id di pianeta_media_photos come copertina, se disponibile
   client: z.string().optional(),
   durationSec: z.number().optional(),
@@ -78,8 +80,8 @@ embeds: z.array(z.object({
 
 Non serve più uno script da riga di comando. Il flusso diventa:
 
-1. **Ingest**: le foto scelte da Watchers si caricano nel bucket `pianeta-media-photos` e si processano con `scripts/media-pipeline.mjs` (già scritto: thumbnail, colore, didascalia AI, embedding, posizionamento). Nota: `media-pipeline.mjs` non legge mai `watchers_photos` direttamente (per design, PIA-1364) — serve un passaggio esplicito di copia dell'originale nel bucket di Pianeta Media prima di lanciare la pipeline, non una sincronizzazione automatica continua.
-2. **Selezione**: dentro `/explore/media`, si implementa la funzione già annotata come roadmap nel motore Three.js — selezione multipla di foto nella nuvola, poi un'azione "crea post" che produce un blocco frontmatter pronto (elenco `photoIds` in ordine di selezione + didascalia AI suggerita da `caption`) da incollare in un nuovo file Markdown.
+1. **Ingest**: le foto scelte da Watchers si caricano nel bucket di Pianeta.Watchers (`pianeta-media-photos`) e si processano con `scripts/media-pipeline.mjs` (già scritto: thumbnail, colore, didascalia AI, embedding, posizionamento). Nota: `media-pipeline.mjs` non legge mai `watchers_photos` direttamente (per design, PIA-1364) — serve un passaggio esplicito di copia dell'originale nel bucket prima di lanciare la pipeline, non una sincronizzazione automatica continua.
+2. **Selezione**: dentro Pianeta.Watchers (`/explore/media`), si implementa la funzione già annotata come roadmap nel motore Three.js — selezione multipla di foto nella nuvola, poi un'azione "crea post" che produce un blocco frontmatter pronto (elenco `photoIds` in ordine di selezione + didascalia AI suggerita da `caption`) da incollare in un nuovo file Markdown.
 3. **Scrittura**: si crea il file in `src/content/posts/` o `reels/`, si apre una PR come per ogni altro contenuto — nel perimetro di Pianeta.Engineer.
 
 Per i reel in v1 (video caricati a mano, non generati), il passo 2 non si applica: il video si carica come asset e il file Markdown si scrive direttamente.
