@@ -3,7 +3,8 @@ title: "Da fornitore a compagno di avventura — il workshop di brand positionin
 description: "Come un workshop discovery cambia la domanda di fondo di un brief. Il caso TSM: un produttore di spirits artigianali che voleva capire non come comunicare, ma chi è davvero."
 date: 2026-09-15
 authors: ["max"]
-cover: "/og/bulletin-tsm.png"
+cover: "/photos/tsm/bulletin-cover-16x9.webp"
+coverMobile: "/photos/tsm/bulletin-cover-4x5.webp"
 ogImage: "/og/bulletin-tsm.png"
 tags: ["brand-positioning", "workshop", "discovery", "spirits", "metodo"]
 readingTime: "6 min"
@@ -71,7 +72,11 @@ Nel caso TSM, le tre settimane di discovery prima del progetto UX hanno:
 
 Il brief tecnico è rimasto lo stesso. L'angolo da cui abbiamo lavorato era completamente diverso.
 
-![Processo UX TSM: sitemap, documentazione, wireframe a bassa e alta fedeltà](/work/tsm/tsm-bulletin-inline-0.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/tsm/bulletin-img-0-16x9.webp" alt="Processo UX TSM: sitemap, documentazione, wireframe a bassa e alta fedeltà" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 ## La direzione visiva: tre strade, una scelta
 

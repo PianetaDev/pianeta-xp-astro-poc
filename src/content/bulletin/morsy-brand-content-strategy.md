@@ -3,7 +3,8 @@ title: "Morsy — Quando il prodotto deve sentire come il brand"
 description: "Come abbiamo progettato l'esperienza di Morsy partendo da un'identità, non da wireframe: B2B food delivery, due profili utente, un flusso che non era nel brief — e cosa abbiamo imparato."
 date: 2026-09-15
 authors: ["max"]
-cover: "/og/bulletin-morsy.png"
+cover: "/photos/morsy/bulletin-cover-16x9.webp"
+coverMobile: "/photos/morsy/bulletin-cover-4x5.webp"
 ogImage: "/og/bulletin-morsy.png"
 tags: ["ux", "product-design", "food-delivery", "metodo", "b2b"]
 readingTime: "7 min"
@@ -52,7 +53,11 @@ Prima di produrre mockup, abbiamo costruito una selezione di riferimenti visivi 
 
 Il vantaggio pratico: quando arrivi ai mockup con una direzione già condivisa, le iterazioni diminuiscono perché non stai indovinando. Stai costruendo su un accordo raggiunto prima di investire nel dettaglio.
 
-![Artefatti del processo UX su Morsy: griglia con Roadmap, User-flow, Sitemap, Wireframe, Research e Prototype](/work/morsy/morsy-artefatti-ux.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/morsy/bulletin-img-0-16x9.webp" alt="Artefatti del processo UX su Morsy: griglia con Roadmap, User-flow, Sitemap, Wireframe, Research e Prototype" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 ## La lezione che portiamo fuori
 

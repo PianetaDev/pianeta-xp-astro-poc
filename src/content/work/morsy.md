@@ -6,11 +6,12 @@ category: "Brand & Product Design"
 year: 2024
 date: 2026-09-15
 sector: "Food delivery · B2B · Smart working"
-cover: "/og/work-morsy.png"
+cover: "/photos/morsy/cover-16x9.webp"
+coverMobile: "/photos/morsy/cover-4x5.webp"
 ogImage: "/og/work-morsy.png"
 hero:
   type: "image"
-  src: "/og/work-morsy.png"
+  src: "/photos/morsy/cover-16x9.webp"
 services: ["brand-positioning", "brand-vision-strategy", "app-prodotti-digitali", "pianeta-centric-design-strategy"]
 links:
   bulletin:
@@ -62,21 +63,41 @@ Da questa tesi è disceso tutto il resto.
 
 **CX experience e ricerca UX.** Mapping dell'esperienza utente end-to-end: dal primo contatto all'ordine ricorrente, su entrambi i profili (azienda e dipendente). Analisi della sitemap, user flow completi, identificazione dei punti di attrito. La ricerca non è rimasta in un documento: ha informato direttamente le scelte di architettura e priorità nelle fasi successive.
 
-![Scheda prodotto dell'app Morsy: selezione piatto con varianti, ingredienti e aggiunta al carrello](/work/morsy/morsy-desktop-scheda-prodotto.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/morsy/img-0-16x9.webp" alt="Scheda prodotto dell'app Morsy: selezione piatto con varianti, ingredienti e aggiunta al carrello" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 **Wireframe, wireflow e prototipazione.** Dall'architettura ai flussi navigabili: wireframe ad alta fedeltà, wireflow delle interazioni principali, prototipi testabili. Il flusso d'acquisto è stato riorganizzato in step chiari — selezione piatto/dessert/bibita, personalizzazione carrello, indirizzo di consegna, toggle smart working, coupon, pagamento (carta o Satispay) — con microcopy mirato per rendere ogni azione inequivocabile. Il pannello HR aziendale ha ricevuto un flusso dedicato: creazione profilo dipendente con ticket, import lista via CSV, report spese scaricabile per dipendente. Il metodo *Hot or Not* — usato per calibrare la direzione visiva prima di investire in mockup — ha ridotto le iterazioni nella fase grafica.
 
-![Mockup mobile del flusso d'acquisto Morsy: schermata Best Seller e checkout con personalizzazione piatto](/work/morsy/morsy-mobile-best-seller-checkout.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/morsy/img-1-16x9.webp" alt="Mockup mobile del flusso d'acquisto Morsy: schermata Best Seller e checkout con personalizzazione piatto" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
-![Mockup mobile del pannello utente Morsy: Carnet ticket e storico ordini personali](/work/morsy/morsy-mobile-carnet-ordini.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/morsy/img-2-16x9.webp" alt="Mockup mobile del pannello utente Morsy: Carnet ticket e storico ordini personali" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 **Visual direction e design system.** Dalla direzione visiva validata al sistema: styleGuide, DSL, mockup di pagina, page template. Un design system coerente che Morsy può estendere senza rompere la coerenza visiva, anche lavorando con altri fornitori in futuro. Codice consegnato in licenza al cliente, senza vincoli tecnici da parte nostra.
 
-![Homepage dell'app Morsy: sezione "Pensati per te" con selezione piatti del giorno](/work/morsy/morsy-web-pensati-per-te.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/morsy/img-3-16x9.webp" alt="Homepage dell'app Morsy: sezione &quot;Pensati per te&quot; con selezione piatti del giorno" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 **Content strategy e content management.** Brand strategy e design system si sono tradotti in un sistema editoriale: value proposition nei copy, position statement nel tono di voce, piano editoriale mensile su Instagram e LinkedIn. Il lavoro di content management ha mantenuto la coerenza tra identità di brand e presenza social nel tempo — non come deliverable isolato ma come presidio continuativo.
 
-![Piano editoriale Morsy: contenuti Instagram con la partnership Tony's Chocolonely, Fusion Best Seller e Weekly Menu](/work/morsy/morsy-social-content-grid.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/morsy/img-4-16x9.webp" alt="Piano editoriale Morsy: contenuti Instagram con la partnership Tony's Chocolonely, Fusion Best Seller e Weekly Menu" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 **QA Test.** Prima della consegna finale, verifica sistematica dell'esperienza su device, browser e scenari d'uso reali.
 
