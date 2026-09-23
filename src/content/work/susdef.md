@@ -30,7 +30,7 @@ tour:
         - "Formazione del team interno per autonomia post-lancio"
     - title: "Il risultato"
       key_facts:
-        - "12 settimane dalla firma al go-live"
+        - "12 settimane di sviluppo tecnico"
         - "Live su susdef.pianeta.green dal 16 luglio 2026"
         - "Il team gestisce in autonomia contenuti e archivio"
 ---
@@ -39,7 +39,7 @@ tour:
 
 ## Il progetto
 
-Fondazione per lo Sviluppo Sostenibile coordina il Forum Nazionale per lo Sviluppo Sostenibile — uno degli attori di riferimento per la transizione ecologica italiana. Produce report di policy, documenti di ricerca, atti del Forum da oltre vent'anni. Trentaduemila documenti costruiti nel tempo, che il sito precedente non riusciva più a rendere accessibili.
+Fondazione per lo Sviluppo Sostenibile coordina il Forum Nazionale per lo Sviluppo Sostenibile — uno degli attori di riferimento per la transizione ecologica italiana. Produce report di policy, documenti di ricerca, atti del Forum da oltre trent'anni. Oltre 33.000 documenti costruiti nel tempo, che il sito precedente non riusciva più a rendere accessibili.
 
 Quando Susdef ha aperto la selezione per riprogettare la piattaforma, abbiamo partecipato insieme a Latte Creative — co-produttori, non subfornitori. Abbiamo vinto la selezione e consegnato in 12 settimane.
 
@@ -67,7 +67,7 @@ La formazione al team interno è parte del progetto, non un'appendice: il team d
 
 ## Il risultato
 
-**33.000+** documenti nell'archivio &nbsp;·&nbsp; **12** settimane dalla firma al go-live &nbsp;·&nbsp; **WCAG 2.1 AA** verificato &nbsp;·&nbsp; team autonomo dal giorno del lancio
+**33.000+** documenti nell'archivio &nbsp;·&nbsp; **12** settimane di sviluppo tecnico &nbsp;·&nbsp; **WCAG 2.1 AA** verificato &nbsp;·&nbsp; team autonomo dal giorno del lancio
 
 ## Approfondimenti
 
