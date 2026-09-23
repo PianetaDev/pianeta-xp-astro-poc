@@ -4,6 +4,7 @@ interface RelatedItem { type: string; slug: string; label?: string; }
 interface NextItem { type: string; slug: string; title: string; deck?: string; cover?: string; kicker?: string; }
 interface BylineProp { authors?: string[]; date?: string; meta?: string[]; }
 interface MetaItem { label: string; value: string; href?: string; external?: boolean; }
+interface CoverVideo { src16_9: string; src9_16?: string; src4_5?: string; src1_1?: string; poster?: string; }
 
 interface Props {
   eyebrowParts?: Array<{ label: string; href?: string }>;
@@ -11,6 +12,7 @@ interface Props {
   deck?: string;
   cover?: string;
   hideCover?: boolean;
+  coverVideo?: CoverVideo;
   heroPortrait?: boolean;
   primaryCta?: CtaProp;
   secondaryCta?: CtaProp;
@@ -31,6 +33,7 @@ const {
   deck,
   cover,
   hideCover = false,
+  coverVideo,
   heroPortrait = false,
   primaryCta,
   secondaryCta,
@@ -99,13 +102,33 @@ const renderCta = (c: CtaProp, cls: string) => {
   </header>
 
   {!hideCover && (
-    <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
-      <picture>
-        {/^.*\.(png|jpe?g)$/i.test(heroSrc) && (
-          <source srcset={heroSrc.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
-        )}
-        <img src={heroSrc} alt={title} loading="eager" fetchpriority="high" decoding="async" />
-      </picture>
+    <div class:list={['detail-hero', heroPortrait && 'is-portrait', coverVideo && 'has-video']}>
+      {coverVideo ? (
+        <>
+          <video
+            class="detail-hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            poster={coverVideo.poster || cover || ''}
+            data-src-wide={coverVideo.src16_9}
+            data-src-tall={coverVideo.src9_16 || coverVideo.src16_9}
+            data-src-mid={coverVideo.src4_5 || coverVideo.src16_9}
+            aria-hidden="true"
+          >
+            <source src={coverVideo.src16_9} type="video/mp4" />
+          </video>
+          <img class="detail-hero-poster" src={coverVideo.poster || cover || heroSrc} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+        </>
+      ) : (
+        <picture>
+          {/^.*\.(png|jpe?g)$/i.test(heroSrc) && (
+            <source srcset={heroSrc.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+          )}
+          <img src={heroSrc} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+        </picture>
+      )}
     </div>
   )}
 
@@ -196,6 +219,33 @@ const renderCta = (c: CtaProp, cls: string) => {
 
   <script is:inline>
     (() => {
+      // Cover video — responsive source + prefers-reduced-motion
+      const videoInit = () => {
+        const video = document.querySelector('.detail-hero-video');
+        if (!video) return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced) {
+          video.removeAttribute('autoplay');
+          video.pause && video.pause();
+          return;
+        }
+        const w = window.innerWidth;
+        let src;
+        if (w < 540) {
+          src = video.dataset.srcTall || video.dataset.srcWide;
+        } else if (w < 900) {
+          src = video.dataset.srcMid || video.dataset.srcWide;
+        } else {
+          src = video.dataset.srcWide;
+        }
+        const source = video.querySelector('source');
+        if (source && src && source.src !== new URL(src, location.href).href) {
+          source.src = src;
+          video.load();
+        }
+      };
+      document.addEventListener('astro:page-load', videoInit);
+
       // Audio "Ascolta" — Web Speech Synthesis, browser-native, zero cost
       const listenInit = () => {
         const btn = document.querySelector('[data-listen]');
