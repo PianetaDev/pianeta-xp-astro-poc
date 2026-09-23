@@ -29,36 +29,54 @@ const sections = [
 
     {sections.map((sec) => sec.items.length > 0 && (
       <section class="team-section">
-        <header class="team-section-head">
-          <h2 class="team-section-title">{sec.title}</h2>
-          <p class="team-section-intro">
-            {sec.intro}
-            {sec.contact && <> Contatto: <a href={`mailto:${sec.contact}`} class="meta-link">{sec.contact}</a></>}
-          </p>
-        </header>
-        <div class="team-grid">
-          {sec.items.map((it: any) => {
-            const name = it.data.name || it.data.title || it.id;
-            const photo = it.data.photo || it.data.cover;
-            const initials = String(name).split(/\s+/).map((s: string) => s[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
-            return (
-              <a
-                href={`/team/${it.id}`}
-                class="team-card team-open"
-                data-team-slug={it.id}
-                aria-label={name}
-              >
-                <div class="team-card-photo" style={photo ? `background-image:url('${photo}')` : ''}>
-                  {!photo && <span class="team-card-initials">{initials}</span>}
-                </div>
-                <div class="team-card-meta">
-                  <strong class="team-card-name">{name}</strong>
-                  {it.data.role && <span class="team-card-role">{it.data.role}</span>}
-                </div>
-              </a>
-            );
-          })}
-        </div>
+        {sec.key === 'ai' ? (
+          /* Alba: full-width banner across all columns */
+          <a
+            href="/team/alba"
+            class="alba-banner team-open"
+            data-team-slug="alba"
+            aria-label="Alba — AI di gruppo"
+          >
+            <div class="alba-banner-inner">
+              <span class="alba-banner-name">Alba</span>
+              <span class="alba-banner-sep">—</span>
+              <span class="alba-banner-desc">AI di gruppo · Sistemi AI che operano dentro Pianeta.Studio con disclosure esplicita. Niente "human disguised as AI", niente "AI disguised as human".</span>
+            </div>
+          </a>
+        ) : (
+          <>
+            <header class="team-section-head">
+              <h2 class="team-section-title">{sec.title}</h2>
+              <p class="team-section-intro">
+                {sec.intro}
+                {sec.contact && <> Contatto: <a href={`mailto:${sec.contact}`} class="meta-link">{sec.contact}</a></>}
+              </p>
+            </header>
+            <div class="team-grid">
+              {sec.items.map((it: any) => {
+                const name = it.data.name || it.data.title || it.id;
+                const photo = it.data.photo || it.data.cover;
+                const initials = String(name).split(/\s+/).map((s: string) => s[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
+                return (
+                  <a
+                    href={`/team/${it.id}`}
+                    class="team-card team-open"
+                    data-team-slug={it.id}
+                    aria-label={name}
+                  >
+                    <div class="team-card-photo" style={photo ? `background-image:url('${photo}')` : ''}>
+                      {!photo && <span class="team-card-initials">{initials}</span>}
+                    </div>
+                    <div class="team-card-meta">
+                      <strong class="team-card-name">{name}</strong>
+                      {it.data.role && <span class="team-card-role">{it.data.role}</span>}
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </>
+        )}
       </section>
     ))}
 
@@ -71,7 +89,7 @@ const sections = [
 
   <style>
     .team-section { margin-top: 64px; }
-    .team-section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
+    .team-section-head { max-width: 760px; margin: 0 0 32px; text-align: left; }
     .team-section-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); letter-spacing: -0.02em; margin: 0 0 10px; }
     .team-section-intro { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
 
@@ -119,6 +137,34 @@ const sections = [
     }
     .team-card-role {
       font-size: 12px; color: var(--pianeta-muted); line-height: 1.35;
+    }
+
+    /* Alba full-width banner */
+    .alba-banner {
+      display: block; width: 100%;
+      text-decoration: none; color: inherit;
+      border: 1px solid var(--pianeta-border);
+      border-radius: var(--radius-card-sm);
+      background: var(--pianeta-bg-card);
+      padding: 28px clamp(20px, 4vw, 40px);
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+    .alba-banner:hover {
+      border-color: var(--pianeta-border-strong);
+      box-shadow: 0 10px 24px rgba(14,17,22,.08);
+    }
+    .alba-banner-inner {
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px;
+    }
+    .alba-banner-name {
+      font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em;
+      color: var(--pianeta-text);
+    }
+    .alba-banner-sep {
+      color: var(--pianeta-muted); font-size: var(--ty-meta);
+    }
+    .alba-banner-desc {
+      font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55;
     }
   </style>
 </BaseLayout>
