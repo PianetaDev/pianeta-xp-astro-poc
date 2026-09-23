@@ -12,12 +12,10 @@ const byKind = (k: string) =>
 
 const core = byKind('core');
 const satellite = byKind('satellite');
-const ai = byKind('ai');
 
 const sections = [
   { key: 'core', title: 'Core', intro: 'Il team interno dello studio. Operations, design, tecnologia.', items: core, contact: '' },
-  { key: 'satellite', title: 'Pianeta.Satellite', intro: 'La community di freelance che orbita intorno al core team — designer, illustratori, sviluppatori che hanno scelto di lavorare con noi su progetti specifici.', items: satellite, contact: 'satellite@pianeta.studio' },
-  { key: 'ai', title: 'AI di gruppo', intro: 'Sistemi AI che operano dentro Pianeta.Studio con disclosure esplicita. Niente "human disguised as AI", niente "AI disguised as human".', items: ai, contact: '' },
+  { key: 'satellite', title: 'Satellite', intro: 'La community di freelance che orbita intorno al core team — designer, illustratori, sviluppatori che hanno scelto di lavorare con noi su progetti specifici.', items: satellite, contact: 'satellite@pianeta.studio' },
 ];
 ---
 <BaseLayout title="Team — Pianeta.Studio" description="Le persone dietro Pianeta.Studio: core team, rete Satellite, agenti AI.">
@@ -40,6 +38,7 @@ const sections = [
           {sec.items.map((it: any) => {
             const name = it.data.name || it.data.title || it.id;
             const photo = it.data.photo || it.data.cover;
+            const hasPhoto = photo && photo !== '/og/placeholder.svg';
             const initials = String(name).split(/\s+/).map((s: string) => s[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
             return (
               <a
@@ -48,8 +47,8 @@ const sections = [
                 data-team-slug={it.id}
                 aria-label={name}
               >
-                <div class="team-card-photo" style={photo ? `background-image:url('${photo}')` : ''}>
-                  {!photo && <span class="team-card-initials">{initials}</span>}
+                <div class="team-card-photo" style={hasPhoto ? `background-image:url('${photo}')` : ''}>
+                  {!hasPhoto && <span class="team-card-initials">{initials}</span>}
                 </div>
                 <div class="team-card-meta">
                   <strong class="team-card-name">{name}</strong>
@@ -65,15 +64,31 @@ const sections = [
     {all.length === 0 && (
       <div class="index-empty">Nessun profilo pubblicato.</div>
     )}
+
+    <!-- Alba full-width banner -->
+    <section class="alba-banner" aria-label="Alba — AI di gruppo">
+      <div class="alba-banner-inner">
+        <picture class="alba-banner-photo">
+          <source media="(min-width: 900px)" srcset="/team/alba-1_1.png" />
+          <img src="/team/alba-4_5.png" alt="Alba" loading="lazy" decoding="async" />
+        </picture>
+        <div class="alba-banner-body">
+          <p class="alba-banner-eyebrow">AI di gruppo</p>
+          <h2 class="alba-banner-name">Alba</h2>
+          <p class="alba-banner-desc">Sistemi AI che operano dentro Pianeta.Studio con disclosure esplicita. Niente &ldquo;human disguised as AI&rdquo;, niente &ldquo;AI disguised as human&rdquo;.</p>
+          <button type="button" class="cta-btn cta-primary" data-action="open-alba">Parla con Alba</button>
+        </div>
+      </div>
+    </section>
   </div>
 
   <TeamOverlay locale="it" />
 
   <style>
     .team-section { margin-top: 64px; }
-    .team-section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
+    .team-section-head { max-width: 760px; margin: 0 0 32px; text-align: left; }
     .team-section-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); letter-spacing: -0.02em; margin: 0 0 10px; }
-    .team-section-intro { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
+    .team-section-intro { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55; margin: 0; text-align: left; }
 
     .team-grid {
       display: grid;
@@ -120,5 +135,52 @@ const sections = [
     .team-card-role {
       font-size: 12px; color: var(--pianeta-muted); line-height: 1.35;
     }
+
+    /* Alba banner */
+    .alba-banner {
+      margin-top: 80px;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+    }
+    .alba-banner-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 900px) {
+      .alba-banner-inner { grid-template-columns: 280px 1fr; }
+    }
+    .alba-banner-photo { display: block; width: 100%; }
+    .alba-banner-photo img {
+      width: 100%; display: block;
+      aspect-ratio: 4/5; object-fit: cover;
+    }
+    @media (min-width: 900px) {
+      .alba-banner-photo img { aspect-ratio: 1/1; }
+    }
+    .alba-banner-body {
+      padding: clamp(24px, 4vw, 48px);
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 16px; text-align: left;
+    }
+    .alba-banner-eyebrow {
+      font-size: var(--ty-eyebrow); text-transform: uppercase;
+      letter-spacing: var(--ty-eyebrow-tracking);
+      color: var(--pianeta-muted); margin: 0;
+    }
+    .alba-banner-name {
+      font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.02em; margin: 0;
+    }
+    .alba-banner-desc {
+      font-size: var(--ty-sub); color: var(--pianeta-muted-strong);
+      line-height: 1.55; margin: 0; max-width: 52ch;
+    }
   </style>
+
+  <script is:inline>
+    document.querySelectorAll('[data-action="open-alba"]').forEach((b) => {
+      b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('alba:open')));
+    });
+  </script>
 </BaseLayout>

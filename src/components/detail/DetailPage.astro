@@ -1,4 +1,5 @@
 ---
+import SmallLinkCard from './SmallLinkCard.astro';
 interface CtaProp { label: string; href?: string; action?: string; external?: boolean; }
 interface RelatedItem { type: string; slug: string; label?: string; }
 interface NextItem { type: string; slug: string; title: string; deck?: string; cover?: string; kicker?: string; }
@@ -10,6 +11,7 @@ interface Props {
   title: string;
   deck?: string;
   cover?: string;
+  noCover?: boolean;
   heroPortrait?: boolean;
   primaryCta?: CtaProp;
   secondaryCta?: CtaProp;
@@ -18,6 +20,7 @@ interface Props {
   related?: RelatedItem[];
   relatedTitle?: string;
   nextItem?: NextItem;
+  nextStyle?: 'card' | 'small';
   byline?: BylineProp;
   metaInline?: MetaItem[];
   twoCol?: boolean;
@@ -29,6 +32,7 @@ const {
   title,
   deck,
   cover,
+  noCover = false,
   heroPortrait = false,
   primaryCta,
   secondaryCta,
@@ -37,6 +41,7 @@ const {
   related = [],
   relatedTitle = 'Approfondimenti',
   nextItem,
+  nextStyle = 'card',
   byline,
   metaInline = [],
   twoCol = false,
@@ -94,14 +99,16 @@ const renderCta = (c: CtaProp, cls: string) => {
     )}
   </header>
 
-  <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
-    <picture>
-      {/^.*\.(png|jpe?g)$/i.test(cover || '') && (
-        <source srcset={(cover || '').replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
-      )}
-      <img src={cover || '/og/placeholder.svg'} alt={title} loading="eager" fetchpriority="high" decoding="async" />
-    </picture>
-  </div>
+  {!noCover && (
+    <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
+      <picture>
+        {/^.*\.(png|jpe?g)$/i.test(cover || '') && (
+          <source srcset={(cover || '').replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+        )}
+        <img src={cover || '/img/placeholder-16_9.png'} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+      </picture>
+    </div>
+  )}
 
   {bylineParts.length > 0 && (
     <p class="detail-byline">{bylineParts.join(' · ')}</p>
@@ -143,7 +150,7 @@ const renderCta = (c: CtaProp, cls: string) => {
     </section>
   )}
 
-  {nextItem && (
+  {nextItem && nextStyle === 'card' && (
     <section class="detail-next">
       <p class="detail-next-eyebrow">Continua a leggere</p>
       <a href={`/${nextItem.type}/${nextItem.slug}`} class="detail-next-card">
@@ -164,6 +171,12 @@ const renderCta = (c: CtaProp, cls: string) => {
           <p class="detail-next-arrow">Leggi →</p>
         </div>
       </a>
+    </section>
+  )}
+  {nextItem && nextStyle === 'small' && (
+    <section class="detail-next-small">
+      <p class="detail-next-eyebrow">Continua a leggere</p>
+      <SmallLinkCard href={`/${nextItem.type}/${nextItem.slug}`} label={nextItem.kicker || nextItem.type} title={nextItem.title} />
     </section>
   )}
 

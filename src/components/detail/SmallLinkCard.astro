@@ -1,0 +1,60 @@
+---
+// Componente di collegamento piccolo: etichetta + titolo + freccia.
+// Usato in "Continua a leggere" e sezioni simili.
+interface Props {
+  href: string;
+  label?: string;
+  title: string;
+  external?: boolean;
+}
+const { href, label, title, external = false } = Astro.props;
+---
+<a
+  href={href}
+  class="small-link-card"
+  {...external ? { target: '_blank', rel: 'noopener' } : {}}
+>
+  {label && <span class="slc-label">{label}</span>}
+  <span class="slc-title">{title}</span>
+  <span class="slc-arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+  .small-link-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border: 1px solid var(--pianeta-border);
+    border-radius: var(--radius-chip);
+    text-decoration: none;
+    color: var(--pianeta-text);
+    background: var(--pianeta-bg-card);
+    transition: border-color 150ms ease, background 150ms ease;
+    font-size: var(--ty-meta);
+  }
+  .small-link-card:hover {
+    border-color: var(--cta-primary);
+    background: rgba(255, 107, 51, 0.04);
+  }
+  .slc-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--cta-primary);
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .slc-title {
+    flex: 1;
+    font-size: var(--ty-meta);
+    font-weight: 500;
+    color: var(--pianeta-text);
+  }
+  .slc-arrow {
+    color: var(--pianeta-muted);
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+</style>

@@ -1,7 +1,7 @@
 ---
 name: "Sara Amatista"
 title: "Sara Amatista"
-kind: "core"
+kind: "satellite"
 role: "Motion & Visual Designer"
 since: "2024-01-01"
 employment: "freelance"

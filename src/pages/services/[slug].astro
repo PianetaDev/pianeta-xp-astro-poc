@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DetailPage from '../../components/detail/DetailPage.astro';
+import SmallLinkCard from '../../components/detail/SmallLinkCard.astro';
+import ServicesOverlay from '../../components/services/ServicesOverlay.astro';
 import { getCollection, render } from 'astro:content';
 import { pickNextItem, toNextProp } from '../../lib/next-item';
 import { getCategoryByKey, getPhaseTag } from '../../lib/services-categories';
@@ -76,6 +78,7 @@ const jsonLd = {
     title={title}
     deck={data.description}
     cover={cover}
+    noCover={true}
     primaryCta={isNeuromarketing
       ? { label: 'Parla con Alba', action: 'open-alba' }
       : { label: 'Lavoriamo insieme', action: 'open-hire-us' }}
@@ -85,6 +88,7 @@ const jsonLd = {
     related={relatedFromCaseStudies}
     relatedTitle="Case study"
     nextItem={nextItem}
+    nextStyle="small"
     metaInline={metaInline}
     twoCol={(item.body?.length ?? 0) > 2400}
     jsonLd={jsonLd}
@@ -131,12 +135,12 @@ const jsonLd = {
         <ul class="service-siblings-list">
           {siblings.map((s: any) => (
             <li>
-              <a href={`/services/${s.id}`} class="service-sibling-card">
-                <span class="service-sibling-icon">{s.data.icon || '•'}</span>
-                <div>
-                  <span class="service-sibling-title">{s.data.title}</span>
-                  {s.data.description && <span class="service-sibling-deck">{s.data.description}</span>}
-                </div>
+              <a href={`/services/${s.id}`} class="services-l2-row services-open" data-service-slug={s.id}>
+                <span class="services-l2-content">
+                  <span class="services-l2-title">{s.data.title}</span>
+                  {s.data.description && <span class="services-l2-deck">{s.data.description}</span>}
+                </span>
+                <span class="services-l2-phase">→</span>
               </a>
             </li>
           ))}
@@ -193,24 +197,20 @@ const jsonLd = {
       font-weight: 600;
       margin: 0 0 16px;
     }
-    .service-siblings-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-    @media (min-width: 700px) { .service-siblings-list { grid-template-columns: 1fr 1fr 1fr; } }
-    .service-sibling-card {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: 12px;
-      padding: 16px;
-      background: var(--pianeta-bg-card);
-      border: 1px solid var(--pianeta-border);
-      border-radius: var(--radius-chip);
-      text-decoration: none;
-      color: inherit;
-      transition: border-color 150ms;
+    /* siblings as list (same style as services index) */
+    .service-siblings-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0; }
+    .services-l2-row {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 16px; align-items: start;
+      padding: 14px 8px; border-bottom: 1px solid var(--pianeta-border);
+      text-decoration: none; color: inherit;
+      transition: background 150ms; cursor: pointer;
     }
-    .service-sibling-card:hover { border-color: var(--cta-primary); }
-    .service-sibling-icon { font-size: var(--ty-sub); }
-    .service-sibling-title { display: block; font-size: var(--ty-meta); margin-bottom: 4px; }
-    .service-sibling-deck { display: block; font-size: 12px; color: var(--pianeta-muted); line-height: 1.4; }
+    .services-l2-row:hover { background: rgba(255,107,51,0.06); }
+    .services-l2-content { display: flex; flex-direction: column; gap: 4px; }
+    .services-l2-title { font-size: 15px; color: var(--pianeta-text); }
+    .services-l2-deck { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.45; }
+    .services-l2-phase { font-size: 14px; color: var(--cta-primary); align-self: center; }
 
     /* Neuromarketing-lab: inline Alba CTA block */
     .neuro-alba-cta {
@@ -243,5 +243,8 @@ const jsonLd = {
       margin: 0 0 20px;
     }
     .neuro-alba-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .detail-next-small { margin: 40px 0 32px; }
   </style>
+
+  <ServicesOverlay locale="it" />
 </BaseLayout>

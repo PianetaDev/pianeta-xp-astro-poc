@@ -1,7 +1,7 @@
 ---
 name: "Fabrizio Ciampini"
 title: "Fabrizio Ciampini"
-kind: "core"
+kind: "satellite"
 role: "CTO · R&D"
 since: "2024-01-01"
 employment: "R&D contract"
