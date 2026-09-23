@@ -14,7 +14,7 @@ cover: "/photos/bc26/zucca-gazebo-16x9.webp"
 coverMobile: "/photos/bc26/zucca-gazebo-4x5.webp"
 ---
 
-**TLDR.** Bosco Colto 2026 — *Pensare animale / Thinking with Animals* — undici giorni nel Bosco di Santo Pietro, Caltagirone: otto workshop internazionali tra architettura, design, arte e ricerca, un forno a legna inaugurato nel bosco, strutture costruite sul campo con materiali del luogo. Promosso da Makramè APS con la direzione scientifica di Marco Navarra, Dario Felice, Antonio Scarponi e Beatrice Fontana. **30 luglio – 9 agosto 2026 · Boschi di Santo Pietro · Caltagirone, Sicilia**
+**TLDR.** Bosco Colto 2026 — **Pensare animale / Thinking with Animals** — undici giorni nel Bosco di Santo Pietro, Caltagirone: otto workshop internazionali tra architettura, design, arte e ricerca, un forno a legna inaugurato nel bosco, strutture costruite sul campo con materiali del luogo. Promosso da Makramè APS con la direzione scientifica di Marco Navarra, Dario Felice, Antonio Scarponi e Beatrice Fontana. **30 luglio – 9 agosto 2026 · Boschi di Santo Pietro · Caltagirone, Sicilia**
 
 ## Bosco Colto — il progetto
 
@@ -28,7 +28,7 @@ Il campus è un cantiere temporaneo: in undici giorni si costruisce fisicamente,
 
 ## BC26 — Pensare animale / Thinking with Animals
 
-L'edizione 2026 — dal 30 luglio al 9 agosto, nei Boschi di Santo Pietro — era dedicata a *Pensare animale*.
+L'edizione 2026 — dal 30 luglio al 9 agosto, nei Boschi di Santo Pietro — era dedicata a **Pensare animale**.
 
 Il tema ha un peso politico reale. Nell'era del Nuovo Regime Climatico, pensare con gli animali diventa un esercizio di decentramento: osservare la natura dall'interno, lasciarsi attraversare da essa, fino a riconoscersi parte di un corpo terrestre condiviso. È un gesto politico — significa sottrarsi alle gerarchie che separano l'umano dal mondo, disattivare le economie di dominio ed estrazione che hanno ridotto la Terra a risorsa e il vivente a oggetto.
 
@@ -52,20 +52,11 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 
 **Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbie della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla. Il progetto è vincitore dell'[Italian Council XIV edizione](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) del Ministero della Cultura.
 
-<div class="scheda-card-pair">
-  <!-- Variante A — fondo beige, pulsante tondo nero: sceglie Max -->
-  <a class="scheda-card-a" href="https://makrame.org/2025/11/26/sounds-ceramics-communities/" target="_blank" rel="noopener">
-    <span class="card-label">Scheda progetto · Makramè</span>
-    <span class="card-title">Sound, Ceramics and Communities</span>
-    <span class="card-btn">↗ Vedi su Makramè</span>
-  </a>
-  <!-- Variante B — fondo bianco, bordo, icona arancio: sceglie Max -->
-  <a class="scheda-card-b" href="https://makrame.org/2025/11/26/sounds-ceramics-communities/" target="_blank" rel="noopener">
-    <span class="card-icon" aria-hidden="true">↗</span>
-    <span class="card-label">Scheda progetto · Makramè</span>
-    <span class="card-title">Sound, Ceramics and Communities</span>
-  </a>
-</div>
+<a class="scheda-card-b" href="https://makrame.org/2025/11/26/sounds-ceramics-communities/" target="_blank" rel="noopener">
+  <span class="card-icon" aria-hidden="true">↗</span>
+  <span class="card-label">Scheda progetto · Makramè</span>
+  <span class="card-title">Sound, Ceramics and Communities</span>
+</a>
 
 **Observatories** (w/ Food Hack Lab, Paesi Baschi) — nove "testimoni" in sughero e PETG stampato in 3D, disseminati in nove siti forestali tra il Bosco di Santo Pietro e la Sughereta di Niscemi. I loro sensori ESP32 misurano temperatura, umidità e livelli sonori, trasmettendo piccoli pacchetti di dati via rete LoRa. Un ascolto discreto e condiviso del bosco — che lascia alla foresta la propria voce.
 
