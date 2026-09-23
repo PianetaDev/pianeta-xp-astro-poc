@@ -1,6 +1,6 @@
 ---
 title: "Il percorso Susdef: dall'ascolto alla proposta che va oltre"
-description: "Fondazione Sviluppo Sostenibile aveva esigenze chiare e trent'anni di archivio documentale da far funzionare meglio. Siamo partiti da lì — non dalla nostra soluzione preferita. Il percorso, e cosa ha aperto."
+description: "Fondazione per lo Sviluppo Sostenibile aveva esigenze chiare e trent'anni di archivio documentale da far funzionare meglio. Siamo partiti da lì — non dalla nostra soluzione preferita. Il percorso, e cosa ha aperto."
 date: 2026-08-27
 draft: true
 locale: it
@@ -11,11 +11,11 @@ readingTime: "6 min"
 category: "Metodo"
 ---
 
-**TLDR.** Fondazione Sviluppo Sostenibile aveva requisiti definiti e un archivio di trent'anni che non riusciva a valorizzare. Siamo partiti dalle loro esigenze — non dalla nostra risposta standard. Da quella conversazione è emerso uno stack diverso da quello atteso, una migrazione di oltre 33.000 contenuti, e proposte che non erano nel capitolato originale.
+**TLDR.** Fondazione per lo Sviluppo Sostenibile aveva requisiti definiti e un archivio di trent'anni che non riusciva a valorizzare. Siamo partiti dalle loro esigenze — non dalla nostra risposta standard. Da quella conversazione è emerso uno stack diverso da quello atteso, una migrazione di oltre 33.000 contenuti, e proposte che non erano nel capitolato originale.
 
 ## Da dove siamo partiti
 
-La Fondazione Sviluppo Sostenibile — Susdef — coordina il Forum Nazionale per lo Sviluppo Sostenibile, produce da trent'anni report, documenti di policy e materiali di ricerca che ministeri e centri di ricerca usano come riferimento. Quando ci hanno coinvolto nella selezione, avevano le idee abbastanza chiare: sito rinnovato, CMS gestibile in autonomia dal team interno senza dipendere dal fornitore per ogni modifica, accessibilità WCAG 2.1 AA (requisito contrattuale, non opzionale), hosting europeo GDPR-compliant.
+La Fondazione per lo Sviluppo Sostenibile — Susdef — coordina il Forum Nazionale per lo Sviluppo Sostenibile, produce da trent'anni report, documenti di policy e materiali di ricerca che ministeri e centri di ricerca usano come riferimento. Quando ci hanno coinvolto nella selezione, avevano le idee abbastanza chiare: sito rinnovato, CMS gestibile in autonomia dal team interno senza dipendere dal fornitore per ogni modifica, accessibilità WCAG 2.1 AA (requisito contrattuale, non opzionale), hosting europeo GDPR-compliant.
 
 Quello che non avevano ancora risolto era l'archivio: **oltre 33.000 contenuti** costruiti in trent'anni di produzione editoriale — articoli, report, download, categorizzazioni stratificate nel tempo — difficili da trovare, difficili da connettere tra loro, difficili da tenere vivi.
 

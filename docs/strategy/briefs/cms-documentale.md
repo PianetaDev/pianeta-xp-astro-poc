@@ -1,7 +1,7 @@
 ---
 status: brief — non ancora contenuto pubblicabile
 compiled: 2026-08-27
-fonte: 25P19_Epos + 26P06_Epos Platform + 25P15_Fondazione Sviluppo Sostenibile (Drive)
+fonte: 25P19_Epos + 26P06_Epos Platform + 25P15_Fondazione per lo Sviluppo Sostenibile (Drive)
 canale proposto: Lab (asset/prodotto proprietario, non lavoro-cliente singolo)
 spoke: Pianeta.Studio (con possibile promozione a prodotto rivendibile — vedi nota strategica)
 ---
@@ -25,7 +25,7 @@ spoke: Pianeta.Studio (con possibile promozione a prodotto rivendibile — vedi 
   - Accessibilità: WCAG 2.1 AA nativa
   - Analytics: Matomo (privacy-first, self-hosted)
 - **Roadmap al 25 maggio 2026**: design completo, sviluppo in corso, go-live pianificato per la settimana del 7-13 luglio 2026 — **da verificare se già avvenuto** (oggi è il 27 agosto 2026, oltre un mese dopo la data target)
-- **Riuso su Susdef**: la stessa architettura documentale (ingestione AI, abstract automatici, ricerca semantica) è stata riproposta per la Fondazione Sviluppo Sostenibile — Susdef è quindi la **seconda applicazione** dello stesso prodotto, non un progetto scollegato
+- **Riuso su Susdef**: la stessa architettura documentale (ingestione AI, abstract automatici, ricerca semantica) è stata riproposta per la Fondazione per lo Sviluppo Sostenibile — Susdef è quindi la **seconda applicazione** dello stesso prodotto, non un progetto scollegato
 - **Nota strategica interna** (dal materiale Susdef): il prodotto è esplicitamente pensato come **"AI documentale rivendibile"** — non un one-off per un cliente, ma un asset riutilizzabile per qualunque organizzazione (centri di ricerca, fondazioni, enti) con un grande archivio documentale sottoutilizzato
 
 ## Target della pagina di vendita del CMS (deciso 2026-08-27)
