@@ -1,0 +1,443 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+import { supabaseService } from '../../../lib/server/supabase';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+const sb = supabaseService();
+const since7 = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+// Timeline ultimi 7 giorni: fatti e decisioni
+const [factsRecent, decisionsRecent, pendingProposals] = await Promise.all([
+  sb.schema('pianeta').from('kb_facts')
+    .select('id, testo, stato, recorded_at, entity_id, visibilita, kb_entities!entity_id(slug, name, type)')
+    .gte('recorded_at', since7)
+    .order('recorded_at', { ascending: false })
+    .limit(30),
+
+  sb.schema('pianeta').from('kb_decisions')
+    .select('id, titolo, stato, quando, chi, fonte')
+    .neq('stato', 'superata')
+    .gte('created_at', since7)
+    .order('quando', { ascending: false })
+    .limit(20),
+
+  sb.schema('pianeta').from('kb_proposals')
+    .select('id, kind, agente, created_at, payload')
+    .eq('stato', 'in_attesa')
+    .order('created_at', { ascending: false })
+    .limit(50),
+]);
+
+// Registro decisioni (tutte, con catena superseded)
+const { data: allDecisions } = await sb.schema('pianeta').from('kb_decisions')
+  .select('id, titolo, stato, quando, chi, fonte, superseded_by, decisione')
+  .order('quando', { ascending: false })
+  .limit(100);
+
+const recentFacts = factsRecent.data ?? [];
+const recentDecisions = decisionsRecent.data ?? [];
+const queue = pendingProposals.data ?? [];
+const decisions = allDecisions ?? [];
+
+const stateColor: Record<string, string> = {
+  'verità': '#16a34a',
+  'ipotesi': '#ca8a04',
+  'superato': '#6b7280',
+};
+const stateBadge: Record<string, string> = {
+  'verità': '🟢',
+  'ipotesi': '🟡',
+  'superato': '⚫',
+};
+const decisionStateBadge: Record<string, string> = {
+  'proposta': '🔵',
+  'approvata': '🟢',
+  'superata': '⚫',
+};
+---
+
+<BaseLayout title="Admin · Knowledge Base" description="Knowledge Graph interno di Pianeta.Studio" minimal={true} chrome={false}>
+  <AdminNav current="kb" />
+
+  <main class="kb-admin">
+    <!-- Header + ricerca -->
+    <header class="kb-header">
+      <div class="kb-header-title">
+        <p class="eyebrow">Admin · Interno</p>
+        <h1>Knowledge Base</h1>
+      </div>
+      <a href="/admin/kb/queue" class="kb-queue-btn">
+        Coda da confermare
+        {queue.length > 0 && <span class="kb-queue-badge">{queue.length}</span>}
+      </a>
+    </header>
+
+    <!-- Search box (client-side fetch) -->
+    <section class="kb-search-section">
+      <form class="kb-search-form" id="kb-search-form" action="/admin/kb/cerca" method="get">
+        <input
+          type="search"
+          name="q"
+          id="kb-search-input"
+          class="kb-search-input"
+          placeholder="Cerca entità, fatti, decisioni…"
+          autocomplete="off"
+        />
+        <button type="submit" class="kb-search-btn">Cerca</button>
+      </form>
+      <div id="kb-search-results" class="kb-search-results" hidden></div>
+    </section>
+
+    <div class="kb-grid">
+      <!-- Timeline ultimi 7 giorni -->
+      <section class="kb-card kb-timeline">
+        <h2 class="kb-section-title">Timeline — ultimi 7 giorni</h2>
+
+        {recentFacts.length === 0 && recentDecisions.length === 0 && (
+          <p class="kb-empty">Nessuna modifica negli ultimi 7 giorni.</p>
+        )}
+
+        {recentDecisions.map((d: any) => (
+          <div class="kb-timeline-item kb-timeline-decision">
+            <span class="kb-timeline-icon">{decisionStateBadge[d.stato] ?? '🔵'}</span>
+            <div class="kb-timeline-body">
+              <p class="kb-timeline-meta">Decisione · {d.quando ?? '—'}</p>
+              <p class="kb-timeline-text">{d.titolo}</p>
+              {d.fonte?.url && (
+                <a href={d.fonte.url} target="_blank" rel="noopener" class="kb-why-link">
+                  Perché? → {d.fonte.label ?? d.fonte.url}
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+
+        {recentFacts.map((f: any) => {
+          const entity = (f as any)['kb_entities'];
+          return (
+            <div class="kb-timeline-item">
+              <span class="kb-timeline-icon">{stateBadge[f.stato] ?? '⚪'}</span>
+              <div class="kb-timeline-body">
+                <p class="kb-timeline-meta">
+                  Fatto · {new Date(f.recorded_at).toLocaleDateString('it-IT')}
+                  {entity && (
+                    <> — <a href={`/admin/kb/entity/${entity.slug}`} class="kb-entity-link">{entity.name}</a></>
+                  )}
+                </p>
+                <p class="kb-timeline-text">{f.testo}</p>
+                {(f as any).fonte?.url && (
+                  <a href={(f as any).fonte.url} target="_blank" rel="noopener" class="kb-why-link">
+                    Perché? → {(f as any).fonte.label ?? (f as any).fonte.url}
+                  </a>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </section>
+
+      <!-- Registro decisioni -->
+      <section class="kb-card kb-decisions">
+        <h2 class="kb-section-title">Registro decisioni</h2>
+
+        {decisions.length === 0 && (
+          <p class="kb-empty">Nessuna decisione registrata.</p>
+        )}
+
+        {decisions.map((d: any) => (
+          <div class={`kb-decision-row ${d.stato === 'superata' ? 'kb-decision-superseded' : ''}`}>
+            <div class="kb-decision-header">
+              <span class="kb-decision-badge">{decisionStateBadge[d.stato] ?? '—'} {d.stato}</span>
+              <span class="kb-decision-date">{d.quando ?? '—'}</span>
+            </div>
+            <p class="kb-decision-title">{d.titolo}</p>
+            {d.decisione && <p class="kb-decision-body">{d.decisione}</p>}
+            {d.superseded_by && (
+              <p class="kb-decision-superseded-note">
+                Superata → <a href={`/admin/kb/decision/${d.superseded_by}`} class="kb-entity-link">vedi nuova</a>
+              </p>
+            )}
+            {d.fonte?.url && (
+              <a href={d.fonte.url} target="_blank" rel="noopener" class="kb-why-link">
+                Perché? → {d.fonte.label ?? d.fonte.url}
+              </a>
+            )}
+          </div>
+        ))}
+      </section>
+    </div>
+  </main>
+
+  <!-- Live search JS -->
+  <script>
+    const form = document.getElementById('kb-search-form') as HTMLFormElement;
+    const input = document.getElementById('kb-search-input') as HTMLInputElement;
+    const results = document.getElementById('kb-search-results') as HTMLDivElement;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
+    input?.addEventListener('input', () => {
+      if (timer) clearTimeout(timer);
+      const q = input.value.trim();
+      if (!q) { results.hidden = true; results.innerHTML = ''; return; }
+      timer = setTimeout(async () => {
+        try {
+          const res = await fetch(`/api/kb/search?q=${encodeURIComponent(q)}&limit=20`);
+          if (!res.ok) return;
+          const { results: items } = await res.json();
+          if (!items?.length) { results.hidden = true; results.innerHTML = ''; return; }
+          results.innerHTML = items.map((r: any) => {
+            const href = r.kind === 'entity'
+              ? `/admin/kb/entity/${r.slug}`
+              : r.kind === 'decision'
+              ? `/admin/kb/decision/${r.id}`
+              : r.entity_slug ? `/admin/kb/entity/${r.entity_slug}` : '#';
+            const badge = r.kind === 'entity' ? '📦' : r.kind === 'decision' ? '📋' : '💬';
+            return `<a href="${href}" class="kb-result-item">${badge} <strong>${r.title ?? r.slug}</strong>${r.excerpt ? ` <span class="kb-result-excerpt">${r.excerpt.slice(0,80)}</span>` : ''}</a>`;
+          }).join('');
+          results.hidden = false;
+        } catch {}
+      }, 300);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!results.contains(e.target as Node) && e.target !== input) {
+        results.hidden = true;
+      }
+    });
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const q = input.value.trim();
+      if (q) window.location.href = `/admin/kb/cerca?q=${encodeURIComponent(q)}`;
+    });
+  </script>
+
+  <style>
+    .kb-admin {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    .kb-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .eyebrow {
+      margin: 0 0 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pianeta-muted);
+      font-weight: 600;
+    }
+    .kb-header h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .kb-queue-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      background: var(--cta-primary, #FF6B33);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .kb-queue-badge {
+      background: #fff;
+      color: var(--cta-primary, #FF6B33);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 1px 7px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    /* Search */
+    .kb-search-section {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .kb-search-form {
+      display: flex;
+      gap: 8px;
+    }
+    .kb-search-input {
+      flex: 1;
+      padding: 11px 16px;
+      font-size: 15px;
+      border: 1px solid var(--pianeta-border-strong, #d1d5db);
+      border-radius: 12px;
+      background: var(--pianeta-bg, #fff);
+      color: var(--pianeta-text, #0e1116);
+      outline: none;
+    }
+    .kb-search-input:focus {
+      border-color: var(--cta-primary, #FF6B33);
+      box-shadow: 0 0 0 3px rgba(255,107,51,0.12);
+    }
+    .kb-search-btn {
+      padding: 11px 20px;
+      background: var(--pianeta-bg-card, #f9fafb);
+      border: 1px solid var(--pianeta-border, #e5e7eb);
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--pianeta-text, #0e1116);
+    }
+    .kb-search-results {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: var(--pianeta-bg, #fff);
+      border: 1px solid var(--pianeta-border, #e5e7eb);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      z-index: 50;
+      overflow: hidden;
+    }
+    .kb-result-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 16px;
+      text-decoration: none;
+      color: var(--pianeta-text, #0e1116);
+      font-size: 14px;
+      border-bottom: 1px solid var(--pianeta-border, #e5e7eb);
+    }
+    .kb-result-item:last-child { border-bottom: none; }
+    .kb-result-item:hover { background: var(--pianeta-bg-card, #f9fafb); }
+    .kb-result-excerpt { color: var(--pianeta-muted, #6b7280); font-size: 12px; }
+
+    /* Grid */
+    .kb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 720px) {
+      .kb-grid { grid-template-columns: 1fr; }
+    }
+
+    .kb-card {
+      background: var(--pianeta-bg, #fff);
+      border: 1px solid var(--pianeta-border, #e5e7eb);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .kb-section-title {
+      margin: 0 0 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pianeta-muted, #6b7280);
+      font-weight: 700;
+    }
+    .kb-empty {
+      color: var(--pianeta-muted, #6b7280);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    /* Timeline */
+    .kb-timeline-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--pianeta-border, #e5e7eb);
+    }
+    .kb-timeline-item:last-child { border-bottom: none; }
+    .kb-timeline-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .kb-timeline-body { flex: 1; min-width: 0; }
+    .kb-timeline-meta {
+      margin: 0 0 2px;
+      font-size: 11px;
+      color: var(--pianeta-muted, #6b7280);
+    }
+    .kb-timeline-text {
+      margin: 0 0 4px;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .kb-timeline-decision .kb-timeline-text { font-weight: 700; }
+
+    .kb-why-link {
+      font-size: 11px;
+      color: var(--cta-primary, #FF6B33);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .kb-why-link:hover { text-decoration: underline; }
+    .kb-entity-link {
+      color: var(--cta-primary, #FF6B33);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Decisions */
+    .kb-decision-row {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--pianeta-border, #e5e7eb);
+    }
+    .kb-decision-row:last-child { border-bottom: none; }
+    .kb-decision-superseded { opacity: 0.5; }
+    .kb-decision-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .kb-decision-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--pianeta-muted-strong, #374151);
+    }
+    .kb-decision-date {
+      font-size: 11px;
+      color: var(--pianeta-muted, #6b7280);
+    }
+    .kb-decision-title {
+      margin: 0 0 4px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .kb-decision-body {
+      margin: 0 0 4px;
+      font-size: 12px;
+      color: var(--pianeta-muted-strong, #374151);
+      line-height: 1.4;
+    }
+    .kb-decision-superseded-note {
+      margin: 0 0 4px;
+      font-size: 11px;
+      color: #ca8a04;
+    }
+  </style>
+</BaseLayout>

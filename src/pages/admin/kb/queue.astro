@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+import { supabaseService } from '../../../lib/server/supabase';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+const sb = supabaseService();
+const { data: proposals } = await sb.schema('pianeta').from('kb_proposals')
+  .select('*')
+  .eq('stato', 'in_attesa')
+  .order('created_at', { ascending: true })
+  .limit(100);
+
+const queue = proposals ?? [];
+---
+
+<BaseLayout title="Admin · KB Coda" description="Proposals da confermare" minimal={true} chrome={false}>
+  <AdminNav current="kb" />
+
+  <main class="kb-queue">
+    <div class="kb-nav">
+      <a href="/admin/kb" class="kb-back">← KB</a>
+    </div>
+
+    <header class="kb-queue-header">
+      <p class="eyebrow">Knowledge Base</p>
+      <h1>Coda da confermare</h1>
+      <p class="kb-queue-deck">{queue.length} {queue.length === 1 ? 'proposta' : 'proposte'} in attesa</p>
+    </header>
+
+    {queue.length === 0 && (
+      <div class="kb-card kb-empty-state">
+        <p>Nessuna proposta in attesa. Tutto confermato.</p>
+      </div>
+    )}
+
+    {queue.map((p: any) => (
+      <div class="kb-card kb-proposal" data-id={p.id}>
+        <div class="kb-proposal-header">
+          <span class={`kb-kind-badge kb-kind-${p.kind}`}>{p.kind === 'fact' ? '💬 Fatto' : '📋 Decisione'}</span>
+          <span class="kb-proposal-meta">
+            {p.agente} · {new Date(p.created_at).toLocaleString('it-IT', { dateStyle: 'short', timeStyle: 'short' })}
+          </span>
+        </div>
+
+        <div class="kb-payload-preview">
+          {p.kind === 'fact' ? (
+            <>
+              <p class="kb-payload-main">{p.payload?.testo ?? '—'}</p>
+              {p.payload?.entity_id && <p class="kb-payload-meta">Entità: <code>{p.payload.entity_id}</code></p>}
+              {p.payload?.stato && <p class="kb-payload-meta">Stato proposto: {p.payload.stato}</p>}
+              {p.payload?.fonte?.url && (
+                <a href={p.payload.fonte.url} target="_blank" rel="noopener" class="kb-why-link">
+                  Fonte: {p.payload.fonte.label ?? p.payload.fonte.url}
+                </a>
+              )}
+            </>
+          ) : (
+            <>
+              <p class="kb-payload-main">{p.payload?.titolo ?? '—'}</p>
+              {p.payload?.decisione && <p class="kb-payload-body">{p.payload.decisione}</p>}
+              {p.payload?.fonte?.url && (
+                <a href={p.payload.fonte.url} target="_blank" rel="noopener" class="kb-why-link">
+                  Fonte: {p.payload.fonte.label ?? p.payload.fonte.url}
+                </a>
+              )}
+            </>
+          )}
+        </div>
+
+        <div class="kb-proposal-actions">
+          <button
+            class="kb-action-btn kb-action-ok"
+            data-id={p.id}
+            data-action="approva"
+          >OK</button>
+          <button
+            class="kb-action-btn kb-action-no"
+            data-id={p.id}
+            data-action="respingi"
+          >No</button>
+          <button
+            class="kb-action-btn kb-action-edit"
+            data-id={p.id}
+            data-action="correggi"
+            data-payload={JSON.stringify(p.payload)}
+            data-kind={p.kind}
+          >Correggi</button>
+        </div>
+
+        <div class="kb-proposal-feedback" data-id={p.id} hidden></div>
+      </div>
+    ))}
+  </main>
+
+  <!-- Correction modal -->
+  <div id="correction-modal" class="kb-modal" hidden>
+    <div class="kb-modal-card">
+      <h2 class="kb-modal-title">Correggi proposta</h2>
+      <textarea id="correction-text" class="kb-correction-input" rows="8" placeholder="JSON della correzione (solo i campi da cambiare)"></textarea>
+      <div class="kb-modal-actions">
+        <button id="correction-submit" class="kb-action-btn kb-action-ok">Applica correzione</button>
+        <button id="correction-cancel" class="kb-action-btn kb-action-no">Annulla</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let pendingCorrectionId: string | null = null;
+
+    async function decide(id: string, action: string, correction?: object) {
+      const res = await fetch(`/api/admin/kb/${id}/decide`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ action, correction }),
+      });
+      return res.ok ? await res.json() : null;
+    }
+
+    function showFeedback(id: string, msg: string, ok: boolean) {
+      const el = document.querySelector<HTMLElement>(`.kb-proposal-feedback[data-id="${id}"]`);
+      const card = document.querySelector<HTMLElement>(`.kb-proposal[data-id="${id}"]`);
+      if (el) {
+        el.hidden = false;
+        el.textContent = msg;
+        el.style.color = ok ? '#16a34a' : '#dc2626';
+      }
+      if (ok && card) {
+        setTimeout(() => card.remove(), 1200);
+      }
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('.kb-action-btn[data-action]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.id!;
+        const action = btn.dataset.action!;
+
+        if (action === 'correggi') {
+          pendingCorrectionId = id;
+          const ta = document.getElementById('correction-text') as HTMLTextAreaElement;
+          ta.value = JSON.stringify(JSON.parse(btn.dataset.payload || '{}'), null, 2);
+          document.getElementById('correction-modal')!.hidden = false;
+          return;
+        }
+
+        btn.disabled = true;
+        const result = await decide(id, action);
+        if (result?.ok) {
+          showFeedback(id, action === 'approva' ? '✓ Approvato' : '✓ Respinto', true);
+        } else {
+          showFeedback(id, 'Errore — riprova', false);
+          btn.disabled = false;
+        }
+      });
+    });
+
+    document.getElementById('correction-submit')?.addEventListener('click', async () => {
+      if (!pendingCorrectionId) return;
+      let correction: object;
+      try {
+        correction = JSON.parse((document.getElementById('correction-text') as HTMLTextAreaElement).value);
+      } catch {
+        alert('JSON non valido');
+        return;
+      }
+      document.getElementById('correction-modal')!.hidden = true;
+      const result = await decide(pendingCorrectionId, 'correggi', correction);
+      if (result?.ok) {
+        showFeedback(pendingCorrectionId, '✓ Corretto e approvato', true);
+      } else {
+        showFeedback(pendingCorrectionId, 'Errore — riprova', false);
+      }
+      pendingCorrectionId = null;
+    });
+
+    document.getElementById('correction-cancel')?.addEventListener('click', () => {
+      document.getElementById('correction-modal')!.hidden = true;
+      pendingCorrectionId = null;
+    });
+  </script>
+
+  <style>
+    .kb-queue {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+    .kb-nav { margin-bottom: 16px; }
+    .kb-back { font-size: 13px; font-weight: 600; color: var(--pianeta-muted-strong, #374151); text-decoration: none; }
+    .kb-back:hover { color: var(--cta-primary, #FF6B33); }
+
+    .kb-queue-header { margin-bottom: 28px; }
+    .eyebrow { margin: 0 0 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted, #6b7280); font-weight: 600; }
+    .kb-queue-header h1 { margin: 0 0 6px; font-size: 28px; font-weight: 900; }
+    .kb-queue-deck { margin: 0; font-size: 14px; color: var(--pianeta-muted, #6b7280); }
+
+    .kb-card {
+      background: var(--pianeta-bg, #fff);
+      border: 1px solid var(--pianeta-border, #e5e7eb);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .kb-empty-state { text-align: center; color: var(--pianeta-muted, #6b7280); }
+
+    .kb-proposal-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    .kb-kind-badge { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--pianeta-bg-card, #f3f4f6); }
+    .kb-kind-fact { background: rgba(22,163,74,0.1); color: #15803d; }
+    .kb-kind-decision { background: rgba(37,99,235,0.1); color: #1d4ed8; }
+    .kb-proposal-meta { font-size: 11px; color: var(--pianeta-muted, #6b7280); }
+
+    .kb-payload-preview { margin-bottom: 16px; }
+    .kb-payload-main { margin: 0 0 6px; font-size: 15px; font-weight: 600; line-height: 1.4; }
+    .kb-payload-body { margin: 0 0 6px; font-size: 13px; color: var(--pianeta-muted-strong, #374151); }
+    .kb-payload-meta { margin: 0 0 4px; font-size: 11px; color: var(--pianeta-muted, #6b7280); }
+    .kb-why-link { font-size: 11px; color: var(--cta-primary, #FF6B33); text-decoration: none; font-weight: 600; }
+
+    .kb-proposal-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .kb-action-btn {
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      touch-action: manipulation;
+      min-height: 44px;
+    }
+    .kb-action-ok { background: #16a34a; color: #fff; }
+    .kb-action-no { background: #dc2626; color: #fff; }
+    .kb-action-edit { background: var(--pianeta-bg-card, #f3f4f6); color: var(--pianeta-text, #0e1116); border: 1px solid var(--pianeta-border, #e5e7eb); }
+    .kb-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .kb-proposal-feedback { margin-top: 8px; font-size: 13px; font-weight: 600; }
+
+    /* Modal */
+    .kb-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .kb-modal[hidden] { display: none; }
+    .kb-modal-card {
+      background: var(--pianeta-bg, #fff);
+      border-radius: 20px;
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 540px;
+    }
+    .kb-modal-title { margin: 0 0 16px; font-size: 18px; font-weight: 900; }
+    .kb-correction-input {
+      width: 100%;
+      padding: 12px;
+      font-size: 13px;
+      font-family: ui-monospace, 'Cascadia Code', monospace;
+      border: 1px solid var(--pianeta-border-strong, #d1d5db);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      resize: vertical;
+      box-sizing: border-box;
+    }
+    .kb-modal-actions { display: flex; gap: 8px; }
+  </style>
+</BaseLayout>
