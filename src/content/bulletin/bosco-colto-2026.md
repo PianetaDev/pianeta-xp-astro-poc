@@ -10,6 +10,8 @@ draft: true
 type: bulletin
 relatedWork: ["bosco-colto"]
 category: "Media"
+cover: "/photos/bc26/zucca-gazebo-16x9.webp"
+coverMobile: "/photos/bc26/zucca-gazebo-4x5.webp"
 ---
 
 **TLDR.** Bosco Colto 2026 — *Pensare animale / Thinking with Animals* — undici giorni nel Bosco di Santo Pietro, Caltagirone: otto workshop internazionali tra architettura, design, arte e ricerca, un forno a legna inaugurato nel bosco, strutture costruite sul campo con materiali del luogo. Promosso da Makramè APS con la direzione scientifica di Marco Navarra, Dario Felice, Antonio Scarponi e Beatrice Fontana. **30 luglio – 9 agosto 2026 · Boschi di Santo Pietro · Caltagirone, Sicilia**
@@ -34,13 +36,36 @@ La direzione scientifica — Marco Navarra (Unict, NOWA, Makramè APS), Dario Fe
 
 L'identità visiva 2026 è stata curata dal collettivo Brickbat: cinque movimenti animali, rappresentati in 5-6 passaggi, tradotti in una firma grafica con un font custom progettato per "ragionare come un animale". Una palette che evita i colori letterali — viola, grigio, azzurro chiaro — per restituire qualcosa di enigmatico e non ancora classificato.
 
+<figure class="photo-breakout">
+  <picture>
+    <source media="(max-width: 640px)" srcset="/photos/bc26/workshop-campo-4x5.webp" type="image/webp" />
+    <img src="/photos/bc26/workshop-campo-16x9.webp" alt="Workshop nel campo: persone al lavoro con strutture di canne e legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="720" height="405" />
+  </picture>
+  <figcaption class="photo-caption">© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
+</figure>
+
 ## I workshop
 
 Otto workshop hanno lavorato in parallelo per undici giorni, costruendo strutture, installazioni e ricerche site-specific nei boschi e nel borgo di Santo Pietro.
 
 **Sicilian Satoyama** (w/ Yoshiharu Tsukamoto, Atelier Bow-Wow — Wolf Prize in Architecture 2022) — un orto dentro un muro a secco, un gazebo (Zucca Gazebo) di otto colonne di castagno, un boschetto di gelso trasformato in luogo di sosta attraverso potatura e terrazzamenti. Addizione e sottrazione come ricomposizione del paesaggio.
 
-**Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbie della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla. Il progetto è vincitore dell'[Italian Council XIV edizione](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) del Ministero della Cultura. [Scheda progetto su Makramè →](https://makrame.org/2025/11/26/sounds-ceramics-communities/)
+**Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbie della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla. Il progetto è vincitore dell'[Italian Council XIV edizione](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) del Ministero della Cultura.
+
+<div class="scheda-card-pair">
+  <!-- Variante A — fondo beige, pulsante tondo nero: sceglie Max -->
+  <a class="scheda-card-a" href="https://makrame.org/2025/11/26/sounds-ceramics-communities/" target="_blank" rel="noopener">
+    <span class="card-label">Scheda progetto · Makramè</span>
+    <span class="card-title">Sound, Ceramics and Communities</span>
+    <span class="card-btn">↗ Vedi su Makramè</span>
+  </a>
+  <!-- Variante B — fondo bianco, bordo, icona arancio: sceglie Max -->
+  <a class="scheda-card-b" href="https://makrame.org/2025/11/26/sounds-ceramics-communities/" target="_blank" rel="noopener">
+    <span class="card-icon" aria-hidden="true">↗</span>
+    <span class="card-label">Scheda progetto · Makramè</span>
+    <span class="card-title">Sound, Ceramics and Communities</span>
+  </a>
+</div>
 
 **Observatories** (w/ Food Hack Lab, Paesi Baschi) — nove "testimoni" in sughero e PETG stampato in 3D, disseminati in nove siti forestali tra il Bosco di Santo Pietro e la Sughereta di Niscemi. I loro sensori ESP32 misurano temperatura, umidità e livelli sonori, trasmettendo piccoli pacchetti di dati via rete LoRa. Un ascolto discreto e condiviso del bosco — che lascia alla foresta la propria voce.
 
@@ -54,6 +79,14 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 
 **Processo (Off Program)** (w/ Collettivo Stilles Örtchen) — nato mentre si attendeva, sulla soglia. Una biopausa relazionale.
 
+<figure class="photo-breakout">
+  <picture>
+    <source media="(max-width: 640px)" srcset="/photos/bc26/struttura-telo-4x5.webp" type="image/webp" />
+    <img src="/photos/bc26/struttura-telo-16x9.webp" alt="Struttura in legno con telo verde — BC26, esterno, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="720" height="405" />
+  </picture>
+  <figcaption class="photo-caption">© Davide Piro · Bosco Colto 2026</figcaption>
+</figure>
+
 ## Il Train Kiln — il Forno
 
 Sabato 1 agosto, dietro l'ex chiesa del Borgo di Santo Pietro, è stato inaugurato il Train Kiln: un forno a legna per la cottura della ceramica, costruito nell'ambito del campus BC26. Il progetto è la naturale prosecuzione del percorso artistico avviato da **Domenico Mangano e Marieke van Rooy** nelle due edizioni precedenti.
@@ -63,6 +96,14 @@ Sabato 1 agosto, dietro l'ex chiesa del Borgo di Santo Pietro, è stato inaugura
 Il forno è stato progettato e costruito sotto la guida tecnica dei ceramisti Prof. **Ted Neal** (Ball State University, Indiana — tra i massimi esperti mondiali di Train Kiln) e Prof. **Michał Puszczyński** (Accademia di Belle Arti e Design di Breslavia, Polonia — membro dell'International Academy of Ceramics). La sua costruzione recupera un legame storico: per secoli il Bosco di Santo Pietro aveva alimentato i forni di Caltagirone, rendendo celebre la tradizione ceramica della città. Il Train Kiln riporta la cottura dentro il bosco.
 
 Il forno può raggiungere temperature fino a 1.350 °C. I depositi naturali di cenere sulle superfici ceramiche creano texture e cromatismi caratteristici della cottura a legna — un processo chimico che trasforma in magia ciò che gli occhi vedono come semplice materia.
+
+<figure class="photo-breakout">
+  <picture>
+    <source media="(max-width: 640px)" srcset="/photos/bc26/interno-pilastro-4x5.webp" type="image/webp" />
+    <img src="/photos/bc26/interno-pilastro-16x9.webp" alt="Interno con persone e pilastro in legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="720" height="405" />
+  </picture>
+  <figcaption class="photo-caption">© Marco Sciré · Bosco Colto 2026</figcaption>
+</figure>
 
 ## Casa Bosco Colto — il progetto a lungo termine
 
