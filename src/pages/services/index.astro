@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServicesOverlay from '../../components/services/ServicesOverlay.astro';
 import { getCollection } from 'astro:content';
 import { SERVICE_CATEGORIES, PROCESS_PHASES, getPhaseTag } from '../../lib/services-categories';
 
@@ -38,7 +39,7 @@ const jsonLd = {
       <p class="index-eyebrow">Sustainable Creativity · Design & Technology</p>
       <h1 class="index-title">I servizi</h1>
       <p class="index-deck">Tre pilastri che si parlano. Co-design + AI validation + standard aperti. Niente lock-in.</p>
-      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap;">
         <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">Lavoriamo insieme</button>
         <a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>
       </div>
@@ -69,8 +70,7 @@ const jsonLd = {
             <ul class="services-l2-list">
               {items.map((s: any) => (
                 <li>
-                  <a href={`/services/${s.id}`} class="services-l2-row">
-                    <span class="services-l2-icon">{s.data.icon || '•'}</span>
+                  <a href={`/services/${s.id}`} class="services-l2-row services-open" data-service-slug={s.id}>
                     <span class="services-l2-content">
                       <span class="services-l2-title">{s.data.title}</span>
                       {s.data.description && <span class="services-l2-deck">{s.data.description}</span>}
@@ -92,6 +92,8 @@ const jsonLd = {
     </footer>
   </div>
 
+  <ServicesOverlay locale="it" />
+
   <style>
     .process-bar {
       display: grid;
@@ -112,6 +114,8 @@ const jsonLd = {
       text-decoration: none;
       color: var(--pianeta-text);
       transition: border-color 150ms;
+      width: 100%;
+      box-sizing: border-box;
     }
     .process-chip:hover { border-color: var(--cta-primary); }
     .process-chip-num {
@@ -129,9 +133,7 @@ const jsonLd = {
       grid-template-columns: 1fr;
       gap: 28px;
       padding-bottom: 56px;
-      border-bottom: 1px solid var(--pianeta-border);
     }
-    .services-macro:last-child { border-bottom: 0; padding-bottom: 0; }
     @media (min-width: 900px) { .services-macro { grid-template-columns: 280px 1fr; gap: 56px; } }
     .services-macro-head { position: sticky; top: 24px; align-self: start; }
     .services-macro-title {
@@ -145,7 +147,7 @@ const jsonLd = {
     .services-l2-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
     .services-l2-row {
       display: grid;
-      grid-template-columns: 32px 1fr auto;
+      grid-template-columns: 1fr auto;
       gap: 16px;
       align-items: start;
       padding: 18px 8px;
@@ -153,9 +155,9 @@ const jsonLd = {
       text-decoration: none;
       color: inherit;
       transition: background 150ms;
+      cursor: pointer;
     }
     .services-l2-row:hover { background: rgba(255,107,51,0.06); }
-    .services-l2-icon { font-size: 20px; line-height: 1; }
     .services-l2-content { display: flex; flex-direction: column; gap: 4px; }
     .services-l2-title { font-size: 16px; color: var(--pianeta-text); }
     .services-l2-deck { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.45; }

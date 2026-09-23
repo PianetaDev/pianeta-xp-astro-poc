@@ -12,7 +12,7 @@ order: 110
 description: "Designer editoriale e illustratrice. Collabora con Pianeta.Studio nella rete Satellite su progetti scientifici e di sostenibilità — ha contribuito al sistema infografico ARIES."
 date: 2026-06-27
 locale: it
-draft: false
+draft: true
 type: team
 tags: ["satellite", "editorial", "infografica"]
 ---

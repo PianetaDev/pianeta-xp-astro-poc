@@ -1,0 +1,186 @@
+---
+// Overlay laterale destro per dettaglio servizio.
+// Il click su `.services-open` intercetta la navigazione e fetcha /api/services/<slug>.json.
+// Riusa lo stesso pattern estetico di TeamOverlay.
+// URLs /services/<slug> continuano a funzionare: se la pagina è aperta direttamente
+// il JavaScript apre l'overlay al load leggendo window.location.pathname.
+interface Props { locale?: 'it' | 'en'; }
+const { locale = 'it' } = Astro.props;
+const S = locale === 'en'
+  ? { loading: 'Loading…', fail: 'Service unavailable.', full: 'Open full page →', deliverables: 'Deliverables', close: 'Close' }
+  : { loading: 'Carico…', fail: 'Servizio non disponibile.', full: 'Apri la pagina completa →', deliverables: 'Deliverables Pianeta', close: 'Chiudi' };
+const cfg = { locale, S };
+---
+<div id="services-ov" class="services-ov" hidden>
+  <div class="services-ov-backdrop" data-close></div>
+  <aside class="services-ov-panel" role="dialog" aria-label="Dettaglio servizio">
+    <div class="services-ov-nav">
+      <button class="services-ov-x" data-close aria-label={S.close}>✕</button>
+    </div>
+    <div id="services-ov-body" class="services-ov-body"></div>
+  </aside>
+</div>
+
+<script type="application/json" id="services-ov-cfg" set:html={JSON.stringify(cfg)}></script>
+
+<style>
+  .services-ov { position: fixed; inset: 0; z-index: 60; }
+  .services-ov[hidden] { display: none; }
+  .services-ov-backdrop { position: absolute; inset: 0; background: rgba(14,17,22,.18); }
+  .services-ov-panel {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 100%; max-width: 600px;
+    background: var(--pianeta-bg);
+    box-shadow: -24px 0 70px rgba(14,17,22,.16);
+    overflow-y: auto; border-left: 1px solid var(--pianeta-border);
+  }
+  .services-ov-nav {
+    position: sticky; top: 0; z-index: 3;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 12px clamp(16px, 3vw, 24px);
+    background: var(--pianeta-bg); border-bottom: 1px solid var(--pianeta-border);
+  }
+  .services-ov-x {
+    background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border);
+    width: 38px; height: 38px; border-radius: var(--r-pill); cursor: pointer;
+    line-height: 1; color: var(--pianeta-text);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: var(--ty-meta);
+  }
+  .services-ov-x:hover { border-color: var(--pianeta-border-strong); }
+  .services-ov-body { padding: 24px clamp(24px, 4vw, 44px) 72px; }
+
+  :global(.sov-eyebrow) {
+    font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px;
+    color: var(--pianeta-muted); margin: 0 0 12px;
+  }
+  :global(.sov-title) {
+    font-size: clamp(26px, 3.4vw, 36px); letter-spacing: -.02em;
+    line-height: 1.05; margin: 0 0 12px;
+  }
+  :global(.sov-deck) { font-size: 16px; color: var(--pianeta-muted); line-height: 1.55; margin: 0 0 24px; }
+  :global(.sov-deliverables-title) {
+    font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px;
+    color: var(--pianeta-muted); font-weight: 600; margin: 24px 0 10px;
+  }
+  :global(.sov-deliverables-list) {
+    list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px;
+  }
+  :global(.sov-deliverables-list li) {
+    padding-left: 20px; position: relative;
+    font-size: var(--ty-meta); line-height: 1.5;
+  }
+  :global(.sov-deliverables-list li::before) {
+    content: '→'; position: absolute; left: 0; color: var(--cta-primary); font-weight: 600;
+  }
+  :global(.sov-content) { font-size: 16px; line-height: 1.7; }
+  :global(.sov-content p) { margin: 0 0 14px; }
+  :global(.sov-content h2), :global(.sov-content h3) {
+    font-size: var(--ty-h3-prose); letter-spacing: -.01em; margin: 28px 0 10px;
+  }
+  :global(.sov-content a) { color: var(--link-text); text-decoration: underline; text-underline-offset: 3px; }
+  :global(.sov-cta-row) { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+  :global(.sov-full) {
+    display: inline-block; margin-top: 20px;
+    color: var(--pianeta-muted); font-weight: 600; text-decoration: none; font-size: var(--ty-meta);
+  }
+  :global(.sov-full:hover) { color: var(--pianeta-text); }
+</style>
+
+<script is:inline>
+  (() => {
+    const init = () => {
+      const ov = document.getElementById('services-ov');
+      if (!ov || ov.dataset.bound) return;
+      ov.dataset.bound = '1';
+      const cfgEl = document.getElementById('services-ov-cfg');
+      const C = cfgEl ? JSON.parse(cfgEl.textContent) : { locale: 'it', S: {} };
+      const T = C.S || {};
+      const body = document.getElementById('services-ov-body');
+      const panel = ov.querySelector('.services-ov-panel');
+
+      const esc = (x) => String(x ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      const md = (s) => String(s || '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/^#{1,3} (.*)$/gm, '<h2>$1</h2>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .split(/\n{2,}/).map((b) => b.match(/^<h2>/) ? b : '<p>' + b.replace(/\n/g, '<br>') + '</p>').join('');
+
+      const loading = () => {
+        body.innerHTML = '<p style="padding:60px 0;text-align:center;color:var(--pianeta-muted)">' + (T.loading || 'Loading…') + '</p>';
+        ov.hidden = false; document.body.style.overflow = 'hidden';
+        if (panel) panel.scrollTop = 0;
+      };
+      const fail = () => { body.innerHTML = '<p style="padding:40px 0">' + (T.fail || 'Unavailable.') + '</p>'; };
+
+      const renderService = (d, slug) => {
+        const category = esc(d.category || '');
+        const deliverables = Array.isArray(d.deliverables) && d.deliverables.length > 0
+          ? '<p class="sov-deliverables-title">' + esc(T.deliverables || 'Deliverables') + '</p>' +
+            '<ul class="sov-deliverables-list">' + d.deliverables.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>'
+          : '';
+        const ctaRow = '<div class="sov-cta-row">' +
+          '<button type="button" class="cta-btn cta-primary sov-hire-btn">Lavoriamo insieme</button>' +
+          '</div>';
+
+        body.innerHTML =
+          (category ? '<p class="sov-eyebrow">' + category + '</p>' : '') +
+          '<h1 class="sov-title">' + esc(d.name) + '</h1>' +
+          (d.description ? '<p class="sov-deck">' + esc(d.description) + '</p>' : '') +
+          deliverables +
+          '<div class="sov-content">' + md(d.body || '') + '</div>' +
+          ctaRow +
+          '<br><a class="sov-full" href="/services/' + encodeURIComponent(slug) + '">' + (T.full || 'Apri la pagina completa →') + '</a>';
+
+        body.querySelectorAll('.sov-hire-btn').forEach((btn) => {
+          btn.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open')));
+        });
+      };
+
+      const openService = async (slug) => {
+        loading();
+        try {
+          const r = await fetch('/api/services/' + encodeURIComponent(slug) + '.json');
+          if (!r.ok) throw new Error('http ' + r.status);
+          const d = await r.json();
+          if (d && d.error) throw new Error(d.error);
+          renderService(d, slug);
+          if (history && history.replaceState) history.replaceState(null, '', '/services/' + slug);
+        } catch (e) { fail(); }
+      };
+
+      const close = () => {
+        ov.hidden = true; document.body.style.overflow = '';
+      };
+
+      document.addEventListener('click', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+        const el = t.closest('.services-open');
+        if (el) {
+          e.preventDefault();
+          const slug = el.dataset.serviceSlug || (el.getAttribute('href') || '').split('/').pop();
+          if (slug) openService(slug);
+          return;
+        }
+        if (t.closest('[data-close]')) { close(); return; }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (ov.hidden) return;
+        if (e.key === 'Escape') close();
+      });
+
+      // Deep-link: /services/<slug> opens overlay
+      const openFromPath = () => {
+        const m = location.pathname.match(/^(?:\/en)?\/services\/([a-z0-9-]+)$/);
+        if (m) openService(m[1]);
+      };
+      openFromPath();
+    };
+    init();
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>

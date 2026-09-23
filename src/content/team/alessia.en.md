@@ -12,7 +12,7 @@ order: 110
 description: "Editorial designer and illustrator. Works with Pianeta.Studio through the Satellite network on scientific and sustainability projects — contributed to the ARIES infographic system."
 date: 2026-06-27
 locale: en
-draft: false
+draft: true
 type: team
 tags: ["satellite", "editorial", "infographics"]
 ---
