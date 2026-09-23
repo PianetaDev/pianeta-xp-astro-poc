@@ -53,16 +53,26 @@ Proprio come nel 2025, nel 2026 torniamo a Caltagirone per documentare l'evento,
 
 I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Per questo predisponiamo una connessione satellitare, necessaria allo svolgimento dei workshop e delle attività del Campus. Ci muoviamo con il **furgone ETPS BYD elettrico** e lo **scooter Askol XKP80** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
 
-<figure class="prose-figure">
+<figure class="prose-figure prose-figure--breakout">
   <video autoplay muted loop playsinline aria-hidden="true" style="aspect-ratio:16/9;width:100%;object-fit:cover;border-radius:var(--radius-card)">
     <source src="/work/bosco-colto/bosco-colto-sul-campo-1.mp4" type="video/mp4" />
   </video>
+  <figcaption>Sul campo al Campus BC26, Boschi di Santo Pietro, Caltagirone. Foto: Giuliana Lo Presti / Davide Piro per Pianeta.Studio</figcaption>
 </figure>
 
-<figure class="prose-figure">
+<figure class="prose-figure prose-figure--breakout">
   <video autoplay muted loop playsinline aria-hidden="true" style="aspect-ratio:16/9;width:100%;object-fit:cover;border-radius:var(--radius-card)">
     <source src="/work/bosco-colto/bosco-colto-sul-campo-2.mp4" type="video/mp4" />
   </video>
+  <figcaption>Campus BC26 — workshop e attività sul campo. Foto: Marco Sciré per Pianeta.Studio</figcaption>
+</figure>
+
+<figure class="prose-figure prose-figure--breakout">
+  <picture>
+    <source srcset="/og/work-bosco-colto-foto-gruppo.webp" type="image/webp" />
+    <img src="/og/work-bosco-colto-foto-gruppo.jpg" alt="Team Pianeta.Studio con i partecipanti al Campus BC26, Boschi di Santo Pietro, Caltagirone" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+  <figcaption>Campus BC26 — Boschi di Santo Pietro, Caltagirone. Foto: Giuliana Lo Presti / Davide Piro per Pianeta.Studio</figcaption>
 </figure>
 
 ## Il Train Kiln — una storia che abbiamo seguito con cura
@@ -93,6 +103,14 @@ Siamo arrivati con conoscenze e persone per gestire un team autonomo.
 
 Un team che ha creduto nel progetto — è il modo in cui lavoriamo quando la missione vale.
 
+<figure class="prose-figure prose-figure--breakout">
+  <picture>
+    <source srcset="/og/work-bosco-colto-il-team.webp" type="image/webp" />
+    <img src="/og/work-bosco-colto-il-team.png" alt="Il team Pianeta.Studio al Campus BC26" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+  <figcaption>Il team BC26 — Boschi di Santo Pietro, Caltagirone. Foto: Giuliana Lo Presti per Pianeta.Studio</figcaption>
+</figure>
+
 ## Cosa abbiamo prodotto
 
 - Archivio fotografico
@@ -100,6 +118,13 @@ Un team che ha creduto nel progetto — è il modo in cui lavoriamo quando la mi
 - Booklet
 - Materiali stampa
 - Campagne social
+
+<figure class="prose-figure prose-figure--breakout">
+  <video autoplay muted loop playsinline aria-hidden="true" style="aspect-ratio:16/9;width:100%;object-fit:cover;border-radius:var(--radius-card)">
+    <source src="/work/bosco-colto/bosco-colto-cosa-abbiamo-prodotto.mp4" type="video/mp4" />
+  </video>
+  <figcaption>Materiali prodotti durante il Campus BC26 — archivio fotografico, booklet, stampa.</figcaption>
+</figure>
 
 La relazione continua — ogni edizione porta nuovi formati.
 
@@ -115,7 +140,7 @@ Una cosa che abbiamo imparato: il lavoro sul campo deve avere un luogo digitale 
 
 Abbiamo aiutato i workshop a portare i loro materiali online — per chi non era presente, per chi vuole tornare sull'esperienza, per costruire un archivio che duri oltre il campus. Due esempi di cosa significa in pratica:
 
-[Observatories: archivio fotografico esplorabile del campus](https://observatories.boscocolto.org/)
+[observatories.boscocolto.org — archivio fotografico esplorabile del campus](https://observatories.boscocolto.org/)
 
 [More-Than-Human Audio Worlds — i paesaggi sonori del campus, ascoltabili online](https://observatories.boscocolto.org/morethanhumanaudioworlds)
 
