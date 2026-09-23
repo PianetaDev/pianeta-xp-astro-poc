@@ -1,0 +1,261 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../../lib/server/admin-session';
+import { supabaseService } from '../../../../lib/server/supabase';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+const { slug } = Astro.params;
+if (!slug) return Astro.redirect('/admin/kb');
+
+const sb = supabaseService();
+
+const { data: entity } = await sb.schema('pianeta').from('kb_entities')
+  .select('*')
+  .eq('slug', slug)
+  .single();
+
+if (!entity) return Astro.redirect('/admin/kb');
+
+const [factsRes, supersededRes, relToRes, relFromRes, decisionLinksRes] = await Promise.all([
+  sb.schema('pianeta').from('kb_facts')
+    .select('*')
+    .eq('entity_id', entity.id)
+    .neq('stato', 'superato')
+    .order('recorded_at', { ascending: false }),
+
+  sb.schema('pianeta').from('kb_facts')
+    .select('*')
+    .eq('entity_id', entity.id)
+    .eq('stato', 'superato')
+    .order('recorded_at', { ascending: false }),
+
+  sb.schema('pianeta').from('kb_relations')
+    .select('*, kb_entities!from_id(id, slug, name, type)')
+    .eq('to_id', entity.id),
+
+  sb.schema('pianeta').from('kb_relations')
+    .select('*, kb_entities!to_id(id, slug, name, type)')
+    .eq('from_id', entity.id),
+
+  sb.schema('pianeta').from('kb_decision_entities')
+    .select('*, kb_decisions!decision_id(*)')
+    .eq('entity_id', entity.id),
+]);
+
+const facts = factsRes.data ?? [];
+const supersededFacts = supersededRes.data ?? [];
+const backlinks = relToRes.data ?? [];
+const relationsFrom = relFromRes.data ?? [];
+const decisions = (decisionLinksRes.data ?? []).map((l: any) => l['kb_decisions']).filter(Boolean);
+
+const stateBadge: Record<string, string> = {
+  'verità': '🟢',
+  'ipotesi': '🟡',
+  'superato': '⚫',
+};
+const decisionStateBadge: Record<string, string> = {
+  'proposta': '🔵',
+  'approvata': '🟢',
+  'superata': '⚫',
+};
+---
+
+<BaseLayout title={`KB · ${entity.name}`} description={`Entità: ${entity.name}`} minimal={true} chrome={false}>
+  <AdminNav current="kb" />
+
+  <main class="kb-entity">
+    <div class="kb-entity-nav">
+      <a href="/admin/kb" class="kb-back">← KB</a>
+    </div>
+
+    <header class="kb-entity-header">
+      <p class="eyebrow">{entity.type}</p>
+      <h1>{entity.name}</h1>
+      {entity.description && <p class="kb-entity-desc">{entity.description}</p>}
+    </header>
+
+    <!-- Fatti correnti -->
+    <section class="kb-card kb-section">
+      <h2 class="kb-section-title">Fatti correnti</h2>
+
+      {facts.length === 0 && <p class="kb-empty">Nessun fatto verificato per questa entità.</p>}
+
+      {facts.map((f: any) => (
+        <div class="kb-fact-row">
+          <div class="kb-fact-header">
+            <span class="kb-fact-badge">{stateBadge[f.stato] ?? '⚪'} {f.stato}</span>
+            <span class="kb-fact-date">{f.valid_from ?? new Date(f.recorded_at).toLocaleDateString('it-IT')}</span>
+          </div>
+          <p class="kb-fact-text">{f.testo}</p>
+          {f.fonte?.url && (
+            <a href={f.fonte.url} target="_blank" rel="noopener" class="kb-why-link">
+              Perché? → {f.fonte.label ?? f.fonte.url}
+            </a>
+          )}
+          {f.deciso_da && <p class="kb-fact-meta">Da: {f.deciso_da}</p>}
+        </div>
+      ))}
+    </section>
+
+    <!-- Decisioni collegate -->
+    {decisions.length > 0 && (
+      <section class="kb-card kb-section">
+        <h2 class="kb-section-title">Decisioni collegate</h2>
+        {decisions.map((d: any) => (
+          <div class={`kb-decision-row ${d.stato === 'superata' ? 'kb-superseded' : ''}`}>
+            <div class="kb-decision-header">
+              <span class="kb-fact-badge">{decisionStateBadge[d.stato] ?? '—'} {d.stato}</span>
+              <span class="kb-fact-date">{d.quando ?? '—'}</span>
+            </div>
+            <p class="kb-decision-title">{d.titolo}</p>
+            {d.fonte?.url && (
+              <a href={d.fonte.url} target="_blank" rel="noopener" class="kb-why-link">
+                Perché? → {d.fonte.label ?? d.fonte.url}
+              </a>
+            )}
+          </div>
+        ))}
+      </section>
+    )}
+
+    <!-- Backlinks (dove è citata questa entità) -->
+    {backlinks.length > 0 && (
+      <section class="kb-card kb-section">
+        <h2 class="kb-section-title">Dove è citata</h2>
+        {backlinks.map((r: any) => {
+          const from = r['kb_entities'];
+          return from ? (
+            <div class="kb-rel-row">
+              <span class="kb-rel-type">{r.type}</span>
+              <a href={`/admin/kb/entity/${from.slug}`} class="kb-entity-link">{from.name}</a>
+              <span class="kb-rel-etype">({from.type})</span>
+            </div>
+          ) : null;
+        })}
+      </section>
+    )}
+
+    <!-- Relazioni in uscita -->
+    {relationsFrom.length > 0 && (
+      <section class="kb-card kb-section">
+        <h2 class="kb-section-title">Relazioni</h2>
+        {relationsFrom.map((r: any) => {
+          const to = r['kb_entities'];
+          return to ? (
+            <div class="kb-rel-row">
+              <span class="kb-rel-type">{r.type}</span>
+              <a href={`/admin/kb/entity/${to.slug}`} class="kb-entity-link">{to.name}</a>
+              <span class="kb-rel-etype">({to.type})</span>
+            </div>
+          ) : null;
+        })}
+      </section>
+    )}
+
+    <!-- Fatti superati (storico) -->
+    {supersededFacts.length > 0 && (
+      <details class="kb-card kb-section kb-superseded-details">
+        <summary class="kb-section-title kb-summary">Storico (⚫ superati)</summary>
+        {supersededFacts.map((f: any) => (
+          <div class="kb-fact-row kb-superseded">
+            <div class="kb-fact-header">
+              <span class="kb-fact-badge">⚫ superato</span>
+              <span class="kb-fact-date">{f.valid_from ?? new Date(f.recorded_at).toLocaleDateString('it-IT')}</span>
+            </div>
+            <p class="kb-fact-text">{f.testo}</p>
+            {f.fonte?.url && (
+              <a href={f.fonte.url} target="_blank" rel="noopener" class="kb-why-link">
+                Perché? → {f.fonte.label ?? f.fonte.url}
+              </a>
+            )}
+          </div>
+        ))}
+      </details>
+    )}
+  </main>
+
+  <style>
+    .kb-entity {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+    .kb-entity-nav { margin-bottom: 16px; }
+    .kb-back {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--pianeta-muted-strong, #374151);
+      text-decoration: none;
+    }
+    .kb-back:hover { color: var(--cta-primary, #FF6B33); }
+
+    .kb-entity-header { margin-bottom: 28px; }
+    .eyebrow {
+      margin: 0 0 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pianeta-muted, #6b7280);
+      font-weight: 600;
+    }
+    .kb-entity-header h1 { margin: 0 0 8px; font-size: 28px; font-weight: 900; }
+    .kb-entity-desc { margin: 0; font-size: 14px; color: var(--pianeta-muted-strong, #374151); }
+
+    .kb-card {
+      background: var(--pianeta-bg, #fff);
+      border: 1px solid var(--pianeta-border, #e5e7eb);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .kb-section { margin-bottom: 20px; }
+    .kb-section-title {
+      margin: 0 0 14px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--pianeta-muted, #6b7280);
+      font-weight: 700;
+    }
+    .kb-empty { font-size: 13px; color: var(--pianeta-muted, #6b7280); margin: 0; }
+
+    .kb-fact-row {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--pianeta-border, #e5e7eb);
+    }
+    .kb-fact-row:last-child { border-bottom: none; }
+    .kb-fact-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+    .kb-fact-badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--pianeta-muted-strong, #374151); }
+    .kb-fact-date { font-size: 11px; color: var(--pianeta-muted, #6b7280); }
+    .kb-fact-text { margin: 0 0 4px; font-size: 14px; line-height: 1.4; }
+    .kb-fact-meta { margin: 0; font-size: 11px; color: var(--pianeta-muted, #6b7280); }
+
+    .kb-why-link {
+      font-size: 11px;
+      color: var(--cta-primary, #FF6B33);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .kb-why-link:hover { text-decoration: underline; }
+    .kb-entity-link { color: var(--cta-primary, #FF6B33); font-weight: 600; text-decoration: none; }
+
+    .kb-decision-row { padding: 10px 0; border-bottom: 1px solid var(--pianeta-border, #e5e7eb); }
+    .kb-decision-row:last-child { border-bottom: none; }
+    .kb-superseded { opacity: 0.5; }
+    .kb-decision-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+    .kb-decision-title { margin: 0 0 4px; font-size: 14px; font-weight: 700; }
+
+    .kb-rel-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--pianeta-border, #e5e7eb); }
+    .kb-rel-row:last-child { border-bottom: none; }
+    .kb-rel-type { font-size: 11px; background: var(--pianeta-bg-card, #f3f4f6); border-radius: 999px; padding: 2px 8px; font-weight: 600; color: var(--pianeta-muted-strong, #374151); }
+    .kb-rel-etype { font-size: 11px; color: var(--pianeta-muted, #6b7280); }
+
+    .kb-superseded-details summary { cursor: pointer; }
+    .kb-summary { display: block; }
+  </style>
+</BaseLayout>

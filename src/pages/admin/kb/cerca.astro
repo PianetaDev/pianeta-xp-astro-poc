@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AdminNav from '../../../components/AdminNav.astro';
+import { isAdminAuthed } from '../../../lib/server/admin-session';
+import { supabaseService } from '../../../lib/server/supabase';
+
+export const prerender = false;
+
+if (!isAdminAuthed(Astro.cookies)) {
+  return Astro.redirect(`/admin/login?redirect=${encodeURIComponent(Astro.url.pathname)}`);
+}
+
+const q = (Astro.url.searchParams.get('q') ?? '').trim();
+
+let results: any[] = [];
+let searchError: string | null = null;
+
+if (q) {
+  const sb = supabaseService();
+  const { data, error } = await sb.rpc('kb_search', {
+    query_text: q,
+    result_limit: 50,
+  }, { schema: 'pianeta' });
+
+  if (error) searchError = error.message;
+  else results = data ?? [];
+}
+
+const kindLabel: Record<string, string> = {
+  entity: '📦 Entità',
+  fact: '💬 Fatto',
+  decision: '📋 Decisione',
+};
+---
+
+<BaseLayout title={q ? `KB · "${q}"` : 'KB · Cerca'} description="Risultati ricerca Knowledge Base" minimal={true} chrome={false}>
+  <AdminNav current="kb" />
+
+  <main class="kb-cerca">
+    <div class="kb-nav">
+      <a href="/admin/kb" class="kb-back">← KB</a>
+    </div>
+
+    <form class="kb-search-form" method="get" action="/admin/kb/cerca">
+      <input
+        type="search"
+        name="q"
+        value={q}
+        class="kb-search-input"
+        placeholder="Cerca…"
+        autofocus
+      />
+      <button type="submit" class="kb-search-btn">Cerca</button>
+    </form>
+
+    {q && (
+      <p class="kb-results-count">
+        {results.length === 0 ? 'Nessun risultato per' : `${results.length} risultati per`} <strong>"{q}"</strong>
+      </p>
+    )}
+
+    {searchError && <p class="kb-error">{searchError}</p>}
+
+    <div class="kb-results">
+      {results.map((r: any) => {
+        const href = r.kind === 'entity'
+          ? `/admin/kb/entity/${r.slug}`
+          : r.kind === 'decision'
+          ? `/admin/kb/decision/${r.id}`
+          : r.entity_slug ? `/admin/kb/entity/${r.entity_slug}` : '#';
+        return (
+          <a href={href} class="kb-result-card">
+            <span class="kb-result-kind">{kindLabel[r.kind] ?? r.kind}</span>
+            <p class="kb-result-title">{r.title ?? r.slug}</p>
+            {r.excerpt && <p class="kb-result-excerpt">{r.excerpt}</p>}
+          </a>
+        );
+      })}
+    </div>
+  </main>
+
+  <style>
+    .kb-cerca {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+    .kb-nav { margin-bottom: 16px; }
+    .kb-back { font-size: 13px; font-weight: 600; color: var(--pianeta-muted-strong, #374151); text-decoration: none; }
+    .kb-back:hover { color: var(--cta-primary, #FF6B33); }
+
+    .kb-search-form { display: flex; gap: 8px; margin-bottom: 20px; }
+    .kb-search-input {
+      flex: 1;
+      padding: 11px 16px;
+      font-size: 15px;
+      border: 1px solid var(--pianeta-border-strong, #d1d5db);
+      border-radius: 12px;
+      background: var(--pianeta-bg, #fff);
+      color: var(--pianeta-text, #0e1116);
+      outline: none;
+    }
+    .kb-search-input:focus { border-color: var(--cta-primary, #FF6B33); }
+    .kb-search-btn {
+      padding: 11px 20px;
+      background: var(--cta-primary, #FF6B33);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .kb-results-count { margin: 0 0 20px; font-size: 14px; color: var(--pianeta-muted, #6b7280); }
+    .kb-error { color: #dc2626; font-size: 14px; }
+
+    .kb-results { display: flex; flex-direction: column; gap: 12px; }
+    .kb-result-card {
+      display: block;
+      padding: 16px 20px;
+      background: var(--pianeta-bg, #fff);
+      border: 1px solid var(--pianeta-border, #e5e7eb);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--pianeta-text, #0e1116);
+      transition: border-color 0.15s;
+    }
+    .kb-result-card:hover { border-color: var(--cta-primary, #FF6B33); }
+    .kb-result-kind { font-size: 11px; font-weight: 700; color: var(--pianeta-muted, #6b7280); display: block; margin-bottom: 4px; }
+    .kb-result-title { margin: 0 0 4px; font-size: 15px; font-weight: 700; line-height: 1.3; }
+    .kb-result-excerpt { margin: 0; font-size: 13px; color: var(--pianeta-muted-strong, #374151); line-height: 1.4; }
+  </style>
+</BaseLayout>
