@@ -215,6 +215,164 @@ export const FOUND_STRINGS: Record<Locale, FoundStrings> = {
   },
 };
 
+// --- Pagina verticale Terra (piattaforma documentale) ---
+export interface TerraStrings {
+  metaTitle: string; metaDesc: string;
+  eyebrow: string; h1: string; deck: string;
+  heroCta: string;
+  proofStats: { n: string; d: string }[];
+  symptomsTitle: string; symptoms: string[]; symptomsClosure: string;
+  stackTitle: string; stack: { n: string; t: string; d: string }[]; stackSuffix: string;
+  faqTitle: string; faq: { q: string; aText?: string; aList?: string[] }[];
+  stepsTitle: string; steps: { n: string; t: string; d: string }[];
+  proofTitle: string; proofText: string; proofCta: string; proofHref: string;
+  ctaTitle: string; ctaText: string; ctaCta: string;
+  ctaSecondaryCta: string; ctaSecondaryHref: string;
+  back: string; backHref: string;
+}
+export const TERRA_STRINGS: Record<Locale, TerraStrings> = {
+  it: {
+    metaTitle: 'Terra — Piattaforma documentale per fondazioni ed enti · Pianeta.Studio',
+    metaDesc: 'CMS strutturato e ricerca full-text su scala per archivi documentali. 33.000+ documenti, 12 settimane di sviluppo tecnico, go-live 16 luglio 2026. Server EU, GDPR, codice in licenza d\'uso.',
+    eyebrow: 'Piattaforma documentale · Fondazioni · Enti di ricerca · Consorzi',
+    h1: 'Una piattaforma documentale per archivi che nessuno riesce più a trovare.',
+    deck: 'Per fondazioni ed enti di ricerca con trent\'anni di documentazione che cercano i propri materiali su Google.',
+    heroCta: 'Prenota una demo con Alba',
+    proofStats: [
+      { n: '33.000+', d: 'documenti' },
+      { n: '12 sett.', d: 'di sviluppo tecnico' },
+      { n: '16 lug 2026', d: 'go-live' },
+    ],
+    symptomsTitle: 'Il problema che conosci già',
+    symptoms: [
+      'Il team cerca i propri documenti su Google — site: sul motore di ricerca.',
+      'I partner esterni rinunciano dopo il secondo tentativo.',
+      'Ogni grant review: raccogliere a mano i link ai deliverable, una settimana di lavoro ripetitivo.',
+      'Il sistema restituisce file. Il giornalista vuole risposte.',
+    ],
+    symptomsClosure: 'È un problema di architettura.',
+    stackTitle: 'Tre cose in un sistema unico',
+    stack: [
+      { n: 'CMS', t: 'CMS strutturato', d: 'Payload CMS, TypeScript-first. Bozza e pubblicato separati, live preview, versioning su ogni modifica. Un errore si ripristina dal pannello.' },
+      { n: 'Ricerca', t: 'Ricerca full-text', d: 'MeiliSearch nel core: ricerca veloce, ordinata per rilevanza, su decine di migliaia di documenti. Latenza <50ms.' },
+      { n: 'AI', t: 'DocumentAI (add-on)', d: 'Ingestione automatica di PDF, abstract generati, ricerca semantica in linguaggio naturale. In produzione su 33.000+ documenti. Il provider AI è dichiarato per contratto.' },
+    ],
+    stackSuffix: 'Un solo fornitore, hosting EU incluso — CMS, ricerca e AI nello stesso sistema, con un unico referente.',
+    faqTitle: 'Domande',
+    faq: [
+      {
+        q: 'La compliance UE — già consegnata su un consorzio di ricerca europeo.',
+        aList: [
+          'Server EU certificati ISO 27001',
+          'Backup automatici e ridondanza',
+          'Auth a 3 livelli con permessi granulari per documento',
+          'Privacy-by-design integrata nell\'architettura',
+          'WCAG 2.1 AA verificata su ogni componente',
+        ],
+      },
+      {
+        q: 'E se smettiamo di lavorare con voi?',
+        aText: 'Il codice viene consegnato in licenza d\'uso con un HANDOFF.md chiaro. Payload CMS è un framework aperto. Nessuna dipendenza tecnica da noi per far girare la piattaforma.',
+      },
+      {
+        q: 'I dati dove stanno?',
+        aText: 'Il core Terra gira su server EU. Il modulo DocumentAI usa API esterne per l\'elaborazione semantica — il provider è dichiarato per contratto (DPA) prima di partire.',
+      },
+      {
+        q: 'Consumi energetici?',
+        aText: 'Li stiamo misurando — server e layer AI inclusi. Nessun competitor pubblica dati di consumo reale per singolo progetto. È la direzione in cui stiamo lavorando.',
+      },
+    ],
+    stepsTitle: 'Come si lavora',
+    steps: [
+      { n: '01', t: 'Demo e diagnosi', d: 'Racconti l\'archivio. Valutiamo in 30 minuti se Terra è la risposta giusta — e lo diciamo chiaramente.' },
+      { n: '02', t: 'Sviluppo tecnico (12 settimane)', d: 'Prototipo nelle prime due settimane, sistema completo per il go-live. Team fisso, nessun subappalto, aggiornamenti settimanali.' },
+      { n: '03', t: 'Lancio e autonomia', d: 'Formazione, HANDOFF.md, accesso al codice in licenza d\'uso. Il team gestisce in autonomia dal primo giorno — come Susdef.' },
+    ],
+    proofTitle: 'La prova',
+    proofText: 'La Fondazione per lo Sviluppo Sostenibile ha migrato oltre 33.000 documenti — trent\'anni di archivio — su Terra + DocumentAI. Go-live il 16 luglio 2026, dopo 12 settimane di sviluppo tecnico. Il team gestisce tutto in autonomia dal lancio.',
+    proofCta: 'Leggi il case study →',
+    proofHref: '/work/susdef',
+    ctaTitle: 'Prenota una demo.',
+    ctaText: 'Raccontaci l\'archivio — valutiamo insieme se Terra è la risposta giusta. Senza impegno.',
+    ctaCta: 'Prenota una demo con Alba',
+    ctaSecondaryCta: 'Guarda il caso Susdef →',
+    ctaSecondaryHref: '/work/susdef',
+    back: '← Lavoriamo insieme',
+    backHref: '/hire',
+  },
+  en: {
+    metaTitle: 'Terra — Documentary platform for foundations & institutions · Pianeta.Studio',
+    metaDesc: 'Structured CMS and full-text search at scale for document archives. 33,000+ documents, 12 weeks of technical development, go-live 16 July 2026. EU server, GDPR, code under use licence.',
+    eyebrow: 'Documentary platform · Foundations · Research institutions · Consortia',
+    h1: 'A documentary platform for archives no one can find anymore.',
+    deck: 'For foundations and research institutions with decades of documentation that search their own materials on Google.',
+    heroCta: 'Book a demo with Alba',
+    proofStats: [
+      { n: '33,000+', d: 'documents' },
+      { n: '12 wks', d: 'of technical development' },
+      { n: '16 Jul 2026', d: 'go-live' },
+    ],
+    symptomsTitle: 'The problem you already know',
+    symptoms: [
+      'The team searches their own documents on Google — site: on the search engine.',
+      'External partners give up after the second attempt.',
+      'Every grant review: collecting deliverable links by hand, a week of work that produces nothing.',
+      'The system returns files. The journalist wants answers.',
+    ],
+    symptomsClosure: 'It is an architecture problem.',
+    stackTitle: 'Three things in one system',
+    stack: [
+      { n: 'CMS', t: 'Structured CMS', d: 'Payload CMS, TypeScript-first. Draft and published states always separate, live preview, versioning on every change. A mistake is restored from the panel.' },
+      { n: 'Search', t: 'Full-text search', d: 'MeiliSearch in the core: fast search, ranked by relevance, across tens of thousands of documents. Latency <50ms.' },
+      { n: 'AI', t: 'DocumentAI (add-on)', d: 'Automatic PDF ingestion, generated abstracts, semantic search in natural language. In production on 33,000+ migrated documents. The AI provider is declared by contract.' },
+    ],
+    stackSuffix: 'One vendor, EU hosting included — CMS, search and AI in the same system, with a single point of contact.',
+    faqTitle: 'Questions',
+    faq: [
+      {
+        q: 'EU compliance — already delivered on a European research consortium.',
+        aList: [
+          'ISO 27001-certified EU servers',
+          'Automatic backups and redundancy',
+          '3-level auth with granular per-document permissions',
+          'Privacy-by-design built into the architecture',
+          'WCAG 2.1 AA verified at component level',
+        ],
+      },
+      {
+        q: 'What if we stop working with you?',
+        aText: 'The code is delivered under a use licence with a clear HANDOFF.md. Payload CMS is an open framework. No technical dependency on us to run the platform.',
+      },
+      {
+        q: 'Where does the data live?',
+        aText: 'Core Terra runs on EU servers. The DocumentAI module uses external APIs for semantic processing — the provider is declared by contract (DPA) before starting.',
+      },
+      {
+        q: 'Energy consumption?',
+        aText: 'We are measuring it — server and AI layer included. No competitor publishes real consumption data per client project. That is the direction we are working towards.',
+      },
+    ],
+    proofTitle: 'The proof',
+    stepsTitle: 'How it works',
+    steps: [
+      { n: '01', t: 'Demo & diagnosis', d: 'Tell us about your archive. We assess in 30 minutes whether Terra is the right answer — and say so clearly.' },
+      { n: '02', t: 'Technical build (12 weeks)', d: 'Working prototype in two weeks, full system by go-live. Dedicated team, no subcontracting, weekly updates.' },
+      { n: '03', t: 'Launch & autonomy', d: 'Training, HANDOFF.md, code under use licence. Your team runs it independently from day one — like Susdef.' },
+    ],
+    proofText: 'The Fondazione per lo Sviluppo Sostenibile migrated over 33,000 documents — a thirty-year archive — onto Terra + DocumentAI. Go-live on 16 July 2026, after 12 weeks of technical development. The team has run it independently since launch.',
+    proofCta: 'Read the case study →',
+    proofHref: '/en/work/susdef',
+    ctaTitle: 'Book a demo.',
+    ctaText: 'Tell us about your archive — we assess together whether Terra is the right answer. No commitment.',
+    ctaCta: 'Book a demo with Alba',
+    ctaSecondaryCta: 'See the Susdef case →',
+    ctaSecondaryHref: '/en/work/susdef',
+    back: '← Work with us',
+    backHref: '/en/hire',
+  },
+};
+
 // --- Pagina verticale Piattaforme ---
 export interface PlatStrings {
   metaTitle: string; metaDesc: string;

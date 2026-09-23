@@ -1,0 +1,185 @@
+---
+// Verticale Terra — piattaforma documentale per fondazioni ed enti di ricerca.
+// Condivisa IT/EN. La pagina fornisce BaseLayout.
+import { TERRA_STRINGS, type Locale } from './strings';
+
+interface Props { locale?: Locale; }
+const { locale = 'it' } = Astro.props;
+const S = TERRA_STRINGS[locale];
+---
+<div class="hire-page">
+  <main class="wrap">
+    <p class="f-back"><a href={S.backHref}>{S.back}</a></p>
+    <p class="f-eyebrow">{S.eyebrow}</p>
+    <h1 class="f-h1">{S.h1}</h1>
+    <p class="f-deck">{S.deck}</p>
+
+    <div class="f-hero-img">
+      <img src="/images/hire/terra/hero.jpg" alt="Terra — interfaccia d'archivio Susdef" width="820" height="460" loading="eager" />
+    </div>
+
+    <div class="f-hero-bar">
+      <button class="f-hero-btn" data-action="open-alba">{S.heroCta}</button>
+      <div class="f-hero-stats">
+        {S.proofStats.map((s) => (
+          <div class="f-hero-stat"><span class="f-stat-n">{s.n}</span><span class="f-stat-d">{s.d}</span></div>
+        ))}
+      </div>
+    </div>
+
+    <h2 class="f-h2">{S.symptomsTitle}</h2>
+    <ul class="f-symptoms">
+      {S.symptoms.map((s) => <li>{s}</li>)}
+    </ul>
+    <p class="f-symptoms-close">{S.symptomsClosure}</p>
+
+    <h2 class="f-h2">{S.stackTitle}</h2>
+    <div class="f-stack-grid">
+      {S.stack.map((st) => (
+        <div class="f-stack-card">
+          <div class="f-stack-img">
+            <img src={`/images/hire/terra/${st.n.toLowerCase()}.jpg`} alt={`Terra — ${st.t}`} width="360" height="200" loading="lazy" />
+          </div>
+          <span class="f-stack-label">{st.n}</span>
+          <strong>{st.t}</strong>
+          <p>{st.d}</p>
+        </div>
+      ))}
+      <div class="f-stack-card f-stack-suffix">
+        <p>{S.stackSuffix}</p>
+      </div>
+    </div>
+
+    <h2 class="f-h2">{S.faqTitle}</h2>
+    <div class="f-faq">
+      {S.faq.map((f) => (
+        <div class="f-faq-item">
+          <strong class="f-faq-q">{f.q}</strong>
+          {f.aList && (
+            <ul class="f-faq-list">
+              {f.aList.map((a) => <li>{a}</li>)}
+            </ul>
+          )}
+          {f.aText && <p class="f-faq-a">{f.aText}</p>}
+        </div>
+      ))}
+    </div>
+
+    <h2 class="f-h2">{S.stepsTitle}</h2>
+    <ol class="f-steps">
+      {S.steps.map((st) => (
+        <li><span class="f-step-n">{st.n}</span><div><strong>{st.t}</strong><p>{st.d}</p></div></li>
+      ))}
+    </ol>
+
+    <h2 class="f-h2">{S.proofTitle}</h2>
+    <div class="f-proof">
+      <div class="f-proof-stats">
+        {S.proofStats.map((s) => (
+          <div class="f-proof-stat"><span class="f-proof-n">{s.n}</span><span class="f-proof-d">{s.d}</span></div>
+        ))}
+      </div>
+      <p class="f-proof-text">{S.proofText}</p>
+      {S.proofHref && <a href={S.proofHref} class="f-proof-link">{S.proofCta}</a>}
+    </div>
+
+    <div class="f-send">
+      <div>
+        <h2 class="f-send-t">{S.ctaTitle}</h2>
+        <p class="f-send-d">{S.ctaText}</p>
+      </div>
+      <div class="f-send-actions">
+        <button class="f-send-btn" data-action="open-alba">{S.ctaCta}</button>
+        <a href={S.ctaSecondaryHref} class="f-send-secondary">{S.ctaSecondaryCta}</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<style>
+  .hire-page {
+    --card: var(--pianeta-bg-card); --line: var(--pianeta-border);
+    --txt: var(--pianeta-text); --mut: var(--pianeta-muted); --acc: var(--cta-primary);
+  }
+  :global(.hub-hire-cta), :global(.hire-us-launcher) { display: none !important; }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .f-back { margin: 24px 0 22px; }
+  .f-back a { color: var(--mut); text-decoration: none; font-size: 13px; }
+  .f-back a:hover { color: var(--txt); }
+  .f-eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--acc); font-weight: 700; margin: 0 0 14px; }
+  .f-h1 { font-size: clamp(32px, 5vw, 46px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 14px; }
+  .f-deck { font-size: 19px; line-height: 1.5; color: var(--mut); margin: 0 0 28px; max-width: 680px; }
+  .f-h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mut); margin: 44px 0 16px; }
+
+  /* Hero screenshot */
+  .f-hero-img { margin-bottom: 24px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: var(--card); }
+  .f-hero-img img { width: 100%; height: auto; display: block; }
+
+  /* Above-fold bar: CTA + 3 numbers */
+  .f-hero-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 32px; margin-bottom: 4px; }
+  .f-hero-btn { background: var(--cta-primary); color: #fff; font-weight: 700; padding: 12px 22px;
+    border-radius: 999px; border: none; cursor: pointer; font-size: 15px; white-space: nowrap; font-family: inherit; }
+  .f-hero-btn:hover { opacity: .9; }
+  .f-hero-stats { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .f-hero-stat { display: flex; flex-direction: column; gap: 1px; }
+  .f-stat-n { font-size: clamp(18px, 3vw, 22px); font-weight: 800; letter-spacing: -0.02em; }
+  .f-stat-d { font-size: 12px; color: var(--mut); }
+
+  /* Symptoms */
+  .f-symptoms { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 6px; }
+  .f-symptoms li { font-size: 15px; line-height: 1.5; padding: 10px 14px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+  .f-symptoms-close { font-size: 15px; font-weight: 700; margin: 14px 0 0; }
+
+  /* Stack grid: 3 cards + suffix */
+  .f-stack-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 620px) { .f-stack-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .f-stack-card { display: flex; flex-direction: column; gap: 5px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .f-stack-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--acc); font-weight: 700; }
+  .f-stack-img { margin-bottom: 10px; border-radius: 8px; overflow: hidden; background: var(--pianeta-bg); border: 1px solid var(--line); }
+  .f-stack-img img { width: 100%; height: auto; display: block; }
+  .f-stack-card strong { font-size: 15px; }
+  .f-stack-card p { margin: 0; color: var(--mut); font-size: 13px; line-height: 1.5; }
+  .f-stack-suffix { grid-column: 1 / -1; background: transparent; }
+  @media (min-width: 620px) { .f-stack-suffix { grid-column: span 3; } }
+
+  /* FAQ */
+  .f-faq { display: grid; gap: 10px; }
+  .f-faq-item { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .f-faq-q { display: block; font-size: 15px; margin-bottom: 10px; }
+  .f-faq-list { margin: 0; padding: 0 0 0 18px; display: grid; gap: 4px; }
+  .f-faq-list li { font-size: 13px; color: var(--mut); line-height: 1.5; }
+  .f-faq-a { margin: 0; font-size: 14px; color: var(--mut); line-height: 1.6; }
+
+  /* Steps */
+  .f-steps { list-style: none; display: grid; gap: 12px; padding: 0; margin: 0; }
+  .f-steps li { display: flex; gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .f-step-n { font-size: 13px; font-weight: 800; color: var(--cta-primary); min-width: 28px; }
+  .f-steps strong { display: block; margin-bottom: 5px; font-size: 16px; }
+  .f-steps p { margin: 0; color: var(--mut); font-size: 14px; line-height: 1.5; }
+
+  /* Proof */
+  .f-proof { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px 28px; margin-top: 4px; }
+  .f-proof-stats { display: flex; flex-wrap: wrap; gap: 20px 36px; margin-bottom: 18px; }
+  .f-proof-stat { display: flex; flex-direction: column; gap: 2px; }
+  .f-proof-n { font-size: clamp(22px, 4vw, 30px); font-weight: 800; letter-spacing: -0.02em; }
+  .f-proof-d { font-size: 13px; color: var(--mut); }
+  .f-proof-text { font-size: 15px; line-height: 1.6; color: var(--mut); margin: 0 0 16px; }
+  .f-proof-link { color: var(--acc); font-weight: 700; font-size: 15px; text-decoration: none; }
+  .f-proof-link:hover { text-decoration: underline; }
+
+  /* Bottom CTA */
+  .f-send { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px;
+    border-radius: 18px; padding: 26px 30px; margin-top: 30px;
+    background: var(--pianeta-text); color: var(--pianeta-bg); }
+  .f-send-t { font-size: clamp(20px, 3vw, 26px); margin: 0 0 6px; color: var(--pianeta-bg); }
+  .f-send-d { margin: 0; font-size: 15px; line-height: 1.5; opacity: .8; max-width: 520px; }
+  .f-send-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .f-send-btn { background: var(--cta-primary); color: #fff; font-weight: 700; padding: 13px 24px; border-radius: 999px;
+    border: none; cursor: pointer; font-size: 15px; white-space: nowrap; font-family: inherit; }
+  .f-send-btn:hover { opacity: .9; }
+  .f-send-secondary { color: rgba(255,255,255,.75); font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .f-send-secondary:hover { color: #fff; }
+</style>

@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HireTerra from '../../components/hire/HireTerra.astro';
+import { TERRA_STRINGS } from '../../components/hire/strings';
+const S = TERRA_STRINGS.it;
+---
+<BaseLayout title={S.metaTitle} description={S.metaDesc} ogType="hire" ogSlug="terra" hideNewsletter>
+  <HireTerra locale="it" />
+</BaseLayout>
