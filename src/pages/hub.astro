@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import IndexCard from '../components/detail/IndexCard.astro';
+import SpokeBadge from '../components/detail/SpokeBadge.astro';
+import { getCollection } from 'astro:content';
+
+const all = await getCollection('bulletin');
+const items = all
+  .filter((i: any) => i.data.draft !== true)
+  .sort((a: any, b: any) => {
+    const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+    return db - da;
+  });
+
+const spokes = ['studio', 'green', 'egregorae', 'tech'] as const;
+const spokeLabels: Record<string, string> = {
+  studio: 'Studio',
+  green: 'Green',
+  egregorae: 'Egregorae',
+  tech: 'Tech',
+};
+
+const fmt = (d?: Date) =>
+  d ? new Date(d).toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+---
+<BaseLayout
+  title="Hub — Pianeta.Studio"
+  description="Tutti gli articoli del network Pianeta: Studio, Green, Egregorae, Tech."
+>
+  <div class="index-page">
+    <header class="index-head">
+      <h1 class="index-title">Hub</h1>
+      <p class="index-deck">
+        Articoli dal network Pianeta —
+        {spokes.map((s) => <SpokeBadge spoke={s} />)}{' '}
+      </p>
+    </header>
+
+    {items.length === 0 ? (
+      <div class="index-empty">Nessun articolo pubblicato.</div>
+    ) : (
+      <>
+        {spokes.map((spoke) => {
+          const filtered = items.filter((it: any) => (it.data.spoke ?? 'studio') === spoke);
+          if (filtered.length === 0) return null;
+          return (
+            <section class="hub-section">
+              <h2 class="hub-section-title">
+                <SpokeBadge spoke={spoke} />
+                <span>{spokeLabels[spoke]}</span>
+              </h2>
+              <div class="index-grid">
+                {filtered.map((it: any) => (
+                  <IndexCard
+                    href={`/bulletin/${it.id}`}
+                    title={it.data.title || it.id}
+                    deck={it.data.description}
+                    kicker={fmt(it.data.date)}
+                    image={it.data.cover || it.data.ogImage}
+                    spoke={it.data.spoke}
+                  />
+                ))}
+              </div>
+            </section>
+          );
+        })}
+      </>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .hub-section {
+    margin-top: 64px;
+  }
+
+  .hub-section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--ty-h2-sec);
+    letter-spacing: var(--ty-h2-sec-tracking, -0.01em);
+    margin: 0 0 32px;
+  }
+</style>

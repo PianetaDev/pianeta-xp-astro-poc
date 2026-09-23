@@ -34,6 +34,7 @@ const fmt = (d?: Date) => d ? new Date(d).toLocaleDateString('it-IT', { day: '2-
             deck={it.data.description}
             kicker={fmt(it.data.date)}
             image={it.data.cover || it.data.ogImage}
+            spoke={it.data.spoke}
           />
         ))}
       </div>
