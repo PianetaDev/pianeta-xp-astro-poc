@@ -6,7 +6,7 @@ authors: ["Pianeta.Studio"]
 tags: ["cultura", "campus", "architettura", "sicilia", "caltagirone", "bosco-colto"]
 readingTime: "6 min"
 locale: it
-draft: true
+draft: false
 type: bulletin
 relatedWork: ["bosco-colto"]
 category: "Media"
