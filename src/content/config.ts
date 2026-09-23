@@ -33,9 +33,14 @@ const work = defineCollection({
   schema: baseSchema,
 });
 
+const bulletinSchemaExt = baseSchema.extend({
+  spoke: z.enum(['studio', 'green', 'egregorae', 'tech']).optional().default('studio'),
+  topics: z.array(z.string()).optional(),
+});
+
 const bulletin = defineCollection({
   loader: glob({ pattern: '!(*.en).md', base: './src/content/bulletin' }),
-  schema: baseSchema,
+  schema: bulletinSchemaExt,
 });
 
 const services = defineCollection({
@@ -67,7 +72,7 @@ const workEn = defineCollection({
 
 const bulletinEn = defineCollection({
   loader: glob({ pattern: '*.en.md', base: './src/content/bulletin', generateId: enGenerateId }),
-  schema: baseSchema,
+  schema: bulletinSchemaExt,
 });
 
 const servicesEn = defineCollection({

@@ -1,4 +1,6 @@
 ---
+import SpokeBadge from './SpokeBadge.astro';
+
 interface Props {
   href: string;
   title: string;
@@ -6,8 +8,9 @@ interface Props {
   kicker?: string;
   image?: string;
   portrait?: boolean;
+  spoke?: string;
 }
-const { href, title, deck, kicker, image, portrait = false } = Astro.props;
+const { href, title, deck, kicker, image, portrait = false, spoke } = Astro.props;
 const cover = image || '/og/placeholder.svg';
 ---
 <a href={href} class:list={['index-card', portrait && 'is-portrait']}>
@@ -20,8 +23,20 @@ const cover = image || '/og/placeholder.svg';
     </picture>
   </div>
   <div class="index-card-body">
-    {kicker && <span class="index-card-kicker">{kicker}</span>}
+    <div class="index-card-meta-row">
+      {kicker && <span class="index-card-kicker">{kicker}</span>}
+      {spoke && <SpokeBadge spoke={spoke} />}
+    </div>
     <h3 class="index-card-title">{title}</h3>
     {deck && <p class="index-card-deck">{deck}</p>}
   </div>
 </a>
+
+<style>
+  .index-card-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+</style>

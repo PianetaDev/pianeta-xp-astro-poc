@@ -1,0 +1,62 @@
+---
+type Spoke = 'studio' | 'green' | 'egregorae' | 'tech';
+
+interface Props {
+  spoke?: Spoke | string;
+}
+
+const { spoke = 'studio' } = Astro.props;
+
+const labels: Record<string, string> = {
+  studio: 'Studio',
+  green: 'Green',
+  egregorae: 'Egregorae',
+  tech: 'Tech',
+};
+---
+<span class:list={['spoke-badge', `spoke-badge--${spoke}`]}>
+  {labels[spoke] ?? spoke}
+</span>
+
+<style>
+  .spoke-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill, 999px);
+    border: 1px solid transparent;
+    line-height: 1.6;
+    vertical-align: middle;
+  }
+
+  /* studio — subtle, muted */
+  .spoke-badge--studio {
+    background: var(--pianeta-border, rgba(14,17,22,.10));
+    color: var(--pianeta-muted-strong, rgba(14,17,22,.70));
+    border-color: var(--pianeta-border, rgba(14,17,22,.10));
+  }
+
+  /* green — Pianeta.Green brand */
+  .spoke-badge--green {
+    background: rgba(31,122,58,.10);
+    color: var(--green, #1f7a3a);
+    border-color: rgba(31,122,58,.20);
+  }
+
+  /* egregorae — warm cream accent */
+  .spoke-badge--egregorae {
+    background: var(--pianeta-cream, #f6efe4);
+    color: #7a4a1f;
+    border-color: rgba(122,74,31,.20);
+  }
+
+  /* tech — accent blue */
+  .spoke-badge--tech {
+    background: rgba(31,91,143,.10);
+    color: var(--pianeta-accent, #1f5b8f);
+    border-color: rgba(31,91,143,.20);
+  }
+</style>
