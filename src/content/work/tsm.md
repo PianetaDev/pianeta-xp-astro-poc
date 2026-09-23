@@ -6,11 +6,12 @@ category: "Product Design"
 year: 2025
 date: 2026-09-15
 sector: "Food & Beverage · Spirits artigianali · Community platform"
-cover: "/og/work-tsm.png"
+cover: "/photos/tsm/cover-16x9.webp"
+coverMobile: "/photos/tsm/cover-4x5.webp"
 ogImage: "/og/work-tsm.png"
 hero:
   type: "image"
-  src: "/og/work-tsm.png"
+  src: "/photos/tsm/cover-16x9.webp"
 services: ["app-prodotti-digitali", "pianeta-centric-design-strategy", "brand-positioning"]
 locale: it
 draft: true
@@ -36,19 +37,35 @@ Le cinque aree funzionali che abbiamo progettato:
 
 **Bacheca cerco/offro.** Il cuore relazionale della piattaforma: un board dove chi produce può cercare distributori, collaborazioni tecniche, ingredienti — e offrire le proprie eccellenze al network.
 
-![Dashboard home TSM e bacheca cerco/offro: due schermate tablet che mostrano il feed community con messaggi e attività, e il board delle offerte di lavoro/collaborazione con filtri di ricerca](/work/tsm/tsm-community-bacheca.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/tsm/img-0-16x9.webp" alt="Dashboard home TSM e bacheca cerco/offro: due schermate tablet con feed community e board offerte" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 **Academy e masterclass.** Un hub formativo per contenuti educativi: distillazione, normativa, tecniche di blend, fermentazione. Progettato per scalare da pochi contenuti fondatori a un catalogo ampio.
 
 **Sistema punti e premi.** Un meccanismo di engagement che valorizza la partecipazione attiva alla community: commenti, condivisioni, contributi alla bacheca, completamento del profilo. I punti si convertono in premi concreti.
 
-![Profilo membro e sistema punti TSM: due schermate tablet che mostrano la pagina profilo con portfolio spirits e header arancio, e il pannello dei punti community con indicatori circolari di avanzamento per categoria](/work/tsm/tsm-profilo-sistema-punti.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/tsm/img-1-16x9.webp" alt="Profilo membro e sistema punti TSM: pagina profilo con portfolio spirits e pannello punti community" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 **UI coerente con il DSL esistente.** Tutto il lavoro UX è stato tradotto in UI mantenendo la coerenza con il design system di brand di TSM. Nessuna rottura visiva tra la comunicazione esterna e l'area riservata.
 
-![Dashboard TSM su tablet: schermata home completa con saluto personalizzato, feed notizie, sezione Academy con Distilling Club e anteprima Master Class — sfondo illustrato vintage in viola](/work/tsm/tsm-dashboard.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/tsm/img-2-16x9.webp" alt="Dashboard TSM su tablet: home con feed notizie, sezione Academy e anteprima Master Class" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
-![TSM su mobile: schermata articolo news su RTD wine-based e pagina Community con lista ultimi accessi dei membri — interfaccia adattata per smartphone su sfondo nero](/work/tsm/tsm-mobile-news-community.png)
+<figure class="photo-breakout">
+  <picture>
+    <img src="/photos/tsm/img-3-16x9.webp" alt="TSM su mobile: schermata articolo news e pagina Community con lista membri" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 ## Tre numeri grandi
 
