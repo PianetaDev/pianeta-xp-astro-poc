@@ -28,6 +28,8 @@
   --pianeta-highlight: #E9FF1F;
   --pianeta-cream: #f6efe4;
   --pianeta-error: #cc0000;
+  /* Link in corpo testo — distinto dal CTA arancio */
+  --link-text: #D63900;
   /* CTA — arancio primario, blu secondario */
   --cta-primary: #FF6B33;
   --cta-primary-hover: #ff8458;
@@ -183,9 +185,42 @@
 .prose-eclag ul { list-style: disc; }
 .prose-eclag ul li, .prose-eclag ol li { margin-bottom: 0.425em; line-height: 1.7; }
 .prose-eclag blockquote { margin: 1.7em 0; line-height: 1.7; }
-.prose-eclag a { text-decoration: underline; text-underline-offset: 3px; }
+.prose-eclag a { color: var(--link-text); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Link card — paragrafi con solo un link diventano card bianche (allegato-1 PIA-1620) */
+.prose-eclag p:has(> a:only-child) {
+  margin: 0 0 1.25em;
+}
+.prose-eclag p:has(> a:only-child) > a {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 18px;
+  background: var(--pianeta-bg-card);
+  border: 1px solid var(--pianeta-border-strong);
+  border-radius: 12px;
+  color: var(--pianeta-text);
+  font-weight: 600;
+  font-size: var(--ty-body);
+  text-decoration: none;
+  transition: border-color 150ms;
+}
+.prose-eclag p:has(> a:only-child) > a:hover {
+  border-color: var(--link-text);
+}
+.prose-eclag p:has(> a:only-child) > a::after {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 18px;
+  flex-shrink: 0;
+  background-color: var(--link-text);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+}
 .prose-eclag strong { font-weight: 600; }
-.prose-eclag em { font-style: normal; color: var(--cta-primary); font-weight: 600; }
+.prose-eclag em { font-style: italic; }
 
 /* CTA buttons — pill shape, arancio primario, blu secondario */
 .cta-btn {
@@ -218,7 +253,7 @@
 .detail-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .detail-hero.is-portrait { aspect-ratio: 3/4; max-width: 480px; }
 .detail-byline { max-width: 880px; margin: -32px 0 56px; text-align: left; font-size: var(--ty-meta); letter-spacing: 1px; text-transform: uppercase; color: var(--pianeta-muted); font-weight: 500; }
-.detail-body { display: block; max-width: 720px; margin: 0 auto; }
+.detail-body { display: block; max-width: 720px; margin: 0; }
 
 /* Meta inline — pills sotto la cover */
 .detail-meta-inline { list-style: none; padding: 0; margin: 0 0 56px; max-width: 880px; display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: flex-start; align-items: baseline; }

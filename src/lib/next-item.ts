@@ -14,7 +14,7 @@ export function pickNextItem(items: any[], currentId: string) {
 export function toNextProp(item: any, type: string) {
   if (!item) return undefined;
   const d = item.data;
-  const cover = d.cover || d.photo || d.ogImage || '/og/placeholder.svg';
+  const cover = d.cover || d.photo || d.ogImage || '/og/placeholder-1_1.png';
   const title = d.name || d.title || item.id;
   let kicker = '';
   if (type === 'work') kicker = [d.client, d.year].filter(Boolean).join(' · ');
