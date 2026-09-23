@@ -4,7 +4,7 @@ description: "Editorial illustration and scientific infographics. Designed to be
 category: "design"
 processPhase: 2
 icon: "✏️"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 3
 inputClient:

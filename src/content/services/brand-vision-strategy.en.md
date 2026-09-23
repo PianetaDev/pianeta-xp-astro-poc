@@ -4,7 +4,7 @@ description: "We define the brand vision and a 3-5 year strategic trajectory. Le
 category: "creativity"
 processPhase: 1
 icon: "🎯"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 1
 inputClient:

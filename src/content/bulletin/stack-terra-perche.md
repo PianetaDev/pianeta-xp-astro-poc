@@ -1,5 +1,6 @@
 ---
 title: "Stack Terra: perché Payload CMS + Nuxt + MeiliSearch"
+cover: "/og/placeholder-brand.png"
 description: "Non ottimizziamo singoli componenti — progettiamo sistemi che si ottimizzano insieme. Perché abbiamo scelto questo stack specifico, cosa fa ogni pezzo, e perché la combinazione conta più delle singole parti."
 date: 2026-09-07
 draft: true

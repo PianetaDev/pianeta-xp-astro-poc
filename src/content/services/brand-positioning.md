@@ -4,7 +4,7 @@ description: "Mappa competitiva, white space, attributi distintivi. Costruiamo i
 category: "creativity"
 processPhase: 1
 icon: "🧭"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 2
 inputClient:

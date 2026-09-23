@@ -1,5 +1,6 @@
 ---
 title: "Il carbon footprint del tuo sito — cos'è, come si misura, dove si riduce"
+cover: "/og/placeholder-brand.png"
 description: "Un sito web medio produce 1.76g di CO₂ a visita. Dal 27 settembre 2026 la Direttiva UE 2024/825 rende sanzionabili i claim green non documentati. Come misurare l'impatto del tuo sito e dove agire."
 date: 2026-09-07
 draft: true

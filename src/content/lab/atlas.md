@@ -4,7 +4,7 @@ description: "Atlas è il framework con cui Pianeta misura, racconta e mette in 
 kind: "Framework"
 year: 2026
 status: "Live"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 date: 2026-04-01
 locale: it

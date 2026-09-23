@@ -4,7 +4,7 @@ description: "Trasformiamo il vincolo della sostenibilità in leva strategica. C
 category: "creativity"
 processPhase: 1
 icon: "🌍"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 4
 inputClient:

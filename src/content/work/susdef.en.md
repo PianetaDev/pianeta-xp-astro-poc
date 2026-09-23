@@ -1,5 +1,6 @@
 ---
 title: "A new platform for Susdef"
+cover: "/og/placeholder-brand.png"
 description: "We designed the new platform for Fondazione Sviluppo Sostenibile: research, UX, and accessibility for an archive of 33,000+ documents. Live since 16 July 2026."
 client: "Fondazione Sviluppo Sostenibile (Susdef)"
 category: "Platform"

@@ -4,7 +4,7 @@ description: "End-to-end mobile apps and digital products. Discovery, design, bu
 category: "technology"
 processPhase: 3
 icon: "📱"
-cover: "/og/placeholder.svg"
+cover: "/og/placeholder-brand.png"
 ogImage: "/og/placeholder.svg"
 order: 4
 inputClient:
