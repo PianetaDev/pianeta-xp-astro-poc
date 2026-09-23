@@ -1,12 +1,12 @@
 ---
 status: brief — non ancora contenuto pubblicabile
 compiled: 2026-08-27
-fonte: 25P15_Fondazione Sviluppo Sostenibile (Drive) + 25P19_Epos (per il contesto tecnico condiviso)
+fonte: 25P15_Fondazione per lo Sviluppo Sostenibile (Drive) + 25P19_Epos (per il contesto tecnico condiviso)
 canale proposto: Work (case study), quando il sito sarà live — nel frattempo eventualmente Lab per l'angolo prodotto
 spoke: Pianeta.Studio
 ---
 
-# Brief — Fondazione Sviluppo Sostenibile (Susdef)
+# Brief — Fondazione per lo Sviluppo Sostenibile (Susdef)
 
 ## Rapporto contrattuale — chiarito 2026-08-27
 
