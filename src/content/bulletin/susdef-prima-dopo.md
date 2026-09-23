@@ -1,6 +1,6 @@
 ---
 title: "Susdef prima e dopo: cosa cambia quando 33.000 documenti diventano trovabili"
-description: "Fondazione per lo Sviluppo Sostenibile aveva 33.000 contenuti su un WordPress costruito in vent'anni. Nessuno riusciva più a trovarli. Abbiamo migrato tutto su Nuxt + Payload + MeiliSearch in 12 settimane. I numeri prima e dopo."
+description: "Fondazione per lo Sviluppo Sostenibile aveva 33.000 contenuti su un WordPress costruito in trent'anni. Nessuno riusciva più a trovarli. Abbiamo migrato tutto su Nuxt + Payload + MeiliSearch in 12 settimane. I numeri prima e dopo."
 date: 2026-09-07
 draft: true
 locale: it
@@ -11,15 +11,15 @@ readingTime: "4 min"
 category: "Web sostenibile"
 ---
 
-**TLDR.** Fondazione per lo Sviluppo Sostenibile aveva oltre 33.000 contenuti su WordPress, costruiti in vent'anni di produzione editoriale. L'archivio era tecnicamente intatto e praticamente inaccessibile — anche al team interno. Abbiamo migrato tutto su Nuxt 3 + Payload CMS + MeiliSearch in 12 settimane. Qui i numeri concreti del prima e del dopo.
+**TLDR.** Fondazione per lo Sviluppo Sostenibile aveva oltre 33.000 contenuti su WordPress, costruiti in trent'anni di produzione editoriale. L'archivio era tecnicamente intatto e praticamente inaccessibile — anche al team interno. Abbiamo migrato tutto su Nuxt 3 + Payload CMS + MeiliSearch in 12 settimane. Qui i numeri concreti del prima e del dopo.
 
-> Nota: se cerchi la storia estesa — come è nata la selezione, perché abbiamo scelto questo stack, le scelte tecniche — è in [Come abbiamo vinto la gara Susdef](/bulletin/percorso-susdef). Questo articolo è solo i numeri.
+> Nota: se cerchi la storia estesa — come è nata la selezione, perché abbiamo scelto questo stack, le scelte tecniche — è in [Il percorso Susdef: dall'ascolto alla proposta che va oltre](/bulletin/percorso-susdef). Questo articolo è solo i numeri.
 
 ## Prima
 
 | Dato | Situazione |
 |---|---|
-| Piattaforma | WordPress — costruita nel corso di 20 anni |
+| Piattaforma | WordPress — costruita nel corso di trent'anni |
 | Volume archivio | >33.000 contenuti (articoli, documenti, pubblicazioni) |
 | Ricerca | Ricerca per titolo esatto — se non sai già come si chiama il documento, non lo trovi |
 | Accessibilità interna | Il team Susdef cercava manualmente nelle categorie o Google site: per trovare i propri materiali |
@@ -41,7 +41,7 @@ category: "Web sostenibile"
 
 ## I numeri che contano
 
-**12 settimane** dalla firma al go-live — con migrazione completa dell'archivio, test di accessibilità, formazione del team interno, redirect 301 su tutti gli URL storici.
+**12 settimane** di sviluppo tecnico, go-live **16 luglio 2026** — con migrazione completa dell'archivio, test di accessibilità, formazione del team interno, redirect 301 su tutti gli URL storici.
 
 **>33.000 record migrati** — non un'importazione grezza. Ogni record porta metadati storici da pulire, relazioni tra contenuti da preservare, tag e categorizzazioni da normalizzare in uno schema coerente.
 
@@ -51,7 +51,7 @@ category: "Web sostenibile"
 
 ## Cosa non è cambiato (nel senso giusto)
 
-Il contenuto che Susdef ha prodotto in vent'anni è intatto — con tutti i metadati, le relazioni tra documenti, le categorizzazioni originali dove ricostruibili. La migrazione non è stata un'approssimazione da rifinire in produzione: è stata parte del progetto, con la stessa attenzione alla qualità del dato che si dà allo sviluppo.
+Il contenuto che Susdef ha prodotto in trent'anni è intatto — con tutti i metadati, le relazioni tra documenti, le categorizzazioni originali dove ricostruibili. La migrazione non è stata un'approssimazione da rifinire in produzione: è stata parte del progetto, con la stessa attenzione alla qualità del dato che si dà allo sviluppo.
 
 Il team interno non ha perso continuità editoriale — ha guadagnato un ambiente di training dedicato (separato dalla produzione) su cui esercitarsi prima del go-live, e una formazione inclusa nel progetto.
 
