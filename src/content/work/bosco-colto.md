@@ -16,11 +16,11 @@ type: work
 tags: ["partnership", "media", "sostenibilità", "campus", "sicilia", "territorio"]
 ---
 
-**TLDR.** Il nostro motto è amplificare la voce di chi opera nella sostenibilità. Con Bosco Colto — campus internazionale di ricerca, design e architettura nei Boschi di Santo Pietro, Caltagirone — siamo media e tech partner dal 2025. Copertura editoriale, presenza sul campo, Starlink per portare connettività nelle zone remote, strategia comunicativa. **2025→2026 · media partner · archivio fotografico, podcast, booklet, stampa, social — e tanto altro ancora**
+**TLDR.** Il nostro motto è amplificare la voce di chi opera nella sostenibilità. Con Bosco Colto — campus internazionale di ricerca, design e architettura nei Boschi di Santo Pietro, Caltagirone — siamo media e tech partner dal 2025. Copertura editoriale, presenza sul campo, connessione satellitare per garantire connettività nelle zone remote, strategia comunicativa. **2025→2026 · media partner · archivio fotografico, podcast, booklet, stampa, social — e tanto altro ancora**
 
 ## Il progetto
 
-Bosco Colto è un campus annuale che si tiene nei Boschi di Santo Pietro, Caltagirone, Sicilia. Organizzato da Makramè APS, porta insieme tutor internazionali, studenti di architettura, design e arte, e la comunità locale attorno a un tema centrale. È un cantiere temporaneo in cui si costruisce fisicamente, con materiali del luogo, tecniche tradizionali e ibridazioni contemporanee.
+Bosco Colto è un progetto di ricerca che indaga le relazioni tra cultura, coltura e paesaggio nei Boschi di Santo Pietro, a Caltagirone, in Sicilia. La ricerca si sviluppa e viene sperimentata sul campo attraverso il Campus annuale, promosso da Makramè APS: un cantiere temporaneo in cui tutor internazionali, studenti di architettura, design e arte e comunità locale lavorano insieme attorno a un tema condiviso, utilizzando materiali del luogo, tecniche tradizionali e ibridazioni contemporanee.
 
 Per capire meglio cos'è il progetto e cosa è successo a BC26: [Bosco Colto 2026 — Pensare animale, costruire comunità →](/bulletin/bosco-colto-2026)
 
@@ -46,13 +46,13 @@ E siamo presenti fisicamente al campus, come abbiamo fatto di nuovo nel 2026.
 
 Proprio come nel 2025, nel 2026 torniamo a Caltagirone per documentare l'evento, come media partner e con infrastruttura operativa.
 
-I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Portiamo il nostro **Starlink** per garantire connessione ai workshop e al team. Ci muoviamo con il **furgone ETPS BYD elettrico** e lo **scooter Askol XKP80** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
+I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Per questo predisponiamo una connessione satellitare, necessaria allo svolgimento dei workshop e delle attività del Campus. Ci muoviamo con il **furgone ETPS BYD elettrico** e lo **scooter Askol XKP80** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
 
 ## Il Train Kiln — una storia che abbiamo seguito con cura
 
-Una delle storie più significative di BC26 è il **Train Kiln** — il forno a legna per ceramica inaugurato il 1° agosto dietro l'ex chiesa del Borgo di Santo Pietro.
+Una delle storie più significative di BC26 è il **Train Kiln** — il forno a legna per ceramica inaugurato il 1° agosto nella corte di Casa Bosco Colto, dietro l'ex chiesa del Borgo di Santo Pietro.
 
-Il forno è stato progettato e costruito sotto la guida tecnica dei ceramisti Prof. **Ted Neal** (Ball State University, Indiana — tra i massimi esperti mondiali di Train Kiln) e Prof. **Michał Puszczyński** (Accademia di Belle Arti e Design di Breslavia, membro dell'International Academy of Ceramics). Il percorso artistico che ha portato al forno è stato avviato da **Domenico Mangano e Marieke van Rooy** nelle edizioni precedenti, attraverso il loro workshop *Sound, Ceramics and Communities* — un lavoro su ceramica, comunità e performance.
+Il forno è stato progettato e costruito sotto la guida tecnica dei ceramisti Prof. **Ted Neal** (Ball State University, Indiana — tra i massimi esperti mondiali di Train Kiln) e Prof. **Michał Puszczyński** (Accademia di Belle Arti e Design di Breslavia, membro dell'International Academy of Ceramics). Il percorso artistico che ha portato al forno è stato avviato da **Domenico Mangano e Marieke van Rooy** nelle edizioni precedenti.
 
 È il **secondo Train Kiln costruito in Italia** e la **prima infrastruttura permanente di Casa Bosco Colto**. Il forno può raggiungere temperature fino a **1.350°C**, e la sua costruzione recupera un legame storico: per secoli il Bosco di Santo Pietro aveva alimentato i forni di Caltagirone, rendendo celebre la tradizione ceramica della città. Il Train Kiln riporta la cottura dentro il bosco.
 
@@ -91,10 +91,10 @@ Abbiamo aiutato i workshop a portare i loro materiali online — per chi non era
 ## FAQ
 
 **La partnership con Bosco Colto è continuativa o legata a un singolo evento?**
-È strutturata per durare. Siamo tornati a Caltagirone nel 2025 e nel 2026, e stiamo lavorando con Bosco Colto sulla strategia comunicativa per i prossimi anni. Non siamo fornitori di un servizio per un evento — siamo dentro il progetto.
+È strutturata per durare. Siamo tornati a Caltagirone nel 2025 e nel 2026, e stiamo lavorando con Makramè APS sulla strategia comunicativa per i prossimi anni per il progetto Bosco Colto. Non siamo fornitori di un servizio per un evento — siamo dentro il progetto.
 
 **Come garantite la presenza operativa in zone con connettività limitata?**
-Portiamo infrastruttura propria. Al campus 2025 e 2026 abbiamo portato il nostro Starlink per garantire connettività ai workshop e al team. Ci muoviamo con mezzi elettrici. Il campo funziona perché siamo attrezzati per farlo funzionare.
+Portiamo infrastruttura propria. Al campus 2025 e 2026 abbiamo predisposto una connessione satellitare per garantire connettività ai workshop e al team. Ci muoviamo con mezzi elettrici. Il campo funziona perché siamo attrezzati per farlo funzionare.
 
 **Cosa rimane di concreto dopo il campus?**
 Il lavoro editoriale — archivio fotografico, podcast, booklet, materiali stampa — non scompare con il campus. I siti che abbiamo aiutato a costruire (observatories.boscocolto.org, More-Than-Human Audio Worlds) restano accessibili dopo. Questo è il significato di "il campo non finisce il giorno del campus".

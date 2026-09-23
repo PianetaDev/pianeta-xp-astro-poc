@@ -12,25 +12,25 @@ relatedWork: ["bosco-colto"]
 category: "Media"
 ---
 
-**TLDR.** Bosco Colto 2026 — *Pensare animale* — undici giorni nel Bosco di Santo Pietro, Caltagirone: otto workshop internazionali tra architettura, design, arte e ricerca, un forno a legna inaugurato nel bosco, strutture costruite sul campo con materiali del luogo. Organizzato da Makramè APS con la direzione scientifica di Marco Navarra, Dario Felice, Antonio Scarponi e Beatrice Fontana. **30 luglio – 9 agosto 2026 · Boschi di Santo Pietro · Caltagirone, Sicilia**
+**TLDR.** Bosco Colto 2026 — *Pensare animale / Thinking with Animals* — undici giorni nel Bosco di Santo Pietro, Caltagirone: otto workshop internazionali tra architettura, design, arte e ricerca, un forno a legna inaugurato nel bosco, strutture costruite sul campo con materiali del luogo. Promosso da Makramè APS con la direzione scientifica di Marco Navarra, Dario Felice, Antonio Scarponi e Beatrice Fontana. **30 luglio – 9 agosto 2026 · Boschi di Santo Pietro · Caltagirone, Sicilia**
 
 ## Bosco Colto — il progetto
 
-Bosco Colto è un concetto prima che un campus. Esprime lo stretto legame tra *cultura* e *coltivazione* — le due parole che in italiano si intrecciano nel termine "colto": chi ha studiato, e il terreno che è stato lavorato.
+Bosco Colto è un concetto che esprime lo stretto legame tra cultura e coltura che la complessità dei boschi rappresenta come esempio emblematico di convivenza e alleanza multispecie. Le due parole traducono in un'immagine il significato del progetto: il bosco contamina e mette in discussione l'astrazione della cultura, mentre il "colto" — cultura e coltura insieme — mette in discussione l'idea di natura come realtà separata.
 
 Il progetto promuove una rigenerazione del territorio e delle città a partire da risorse dimenticate e vocazioni rimosse. Attiva processi di partecipazione civica moltiplicando relazioni e scambi per costruire comunità. Immagina la città come un bosco in cui culture e coltivazioni si intrecciano — e il bosco come una città in cui una comunità vive e si rappresenta.
 
-Il campus si tiene ogni estate nei Boschi di Santo Pietro, a Caltagirone, in Sicilia. Organizzato da Makramè APS — associazione culturale con base a Catania, che lavora all'intersezione tra architettura, ecologia e pratiche partecipative — ogni edizione porta tutor internazionali, studenti di architettura, design e arte, e la comunità locale attorno a un tema centrale.
+Il campus si tiene ogni estate nei Boschi di Santo Pietro, a Caltagirone, in Sicilia. Promosso da Makramè APS — associazione culturale con base a Caltagirone, che lavora all'intersezione tra architettura, ecologia e pratiche partecipative — ogni edizione porta tutor internazionali, studenti di architettura, design e arte, e la comunità locale attorno a un tema centrale.
 
 Il campus è un cantiere temporaneo: in undici giorni si costruisce fisicamente, con materiali del posto, tecniche tradizionali e ibridazioni tecnologiche.
 
-## BC26 — Pensare animale
+## BC26 — Pensare animale / Thinking with Animals
 
 L'edizione 2026 — dal 30 luglio al 9 agosto, nei Boschi di Santo Pietro — era dedicata a *Pensare animale*.
 
 Il tema ha un peso politico reale. Nell'era del Nuovo Regime Climatico, pensare con gli animali diventa un esercizio di decentramento: osservare la natura dall'interno, lasciarsi attraversare da essa, fino a riconoscersi parte di un corpo terrestre condiviso. È un gesto politico — significa sottrarsi alle gerarchie che separano l'umano dal mondo, disattivare le economie di dominio ed estrazione che hanno ridotto la Terra a risorsa e il vivente a oggetto.
 
-La direzione scientifica — Marco Navarra (Unict, NOWA), Dario Felice (Unipa, Analogique, Makramè APS), Antonio Scarponi e Beatrice Fontana (Institute for Spatial Thinking, Zurigo) — ha costruito un programma in cui ogni workshop declinava il tema in modo diverso: dall'architettura ai suoni, dalla ceramica alla fotografia, dall'ecologia alla ricerca storica.
+La direzione scientifica — Marco Navarra (Unict, NOWA, Makramè APS), Dario Felice (Unipa, Analogique, Makramè APS), Antonio Scarponi e Beatrice Fontana (Institute for Spatial Thinking, Zurigo) — ha costruito un programma in cui ogni workshop declinava il tema in modo diverso: dall'architettura ai suoni, dalla ceramica alla fotografia, dall'ecologia alla ricerca storica.
 
 L'identità visiva 2026 è stata curata dal collettivo Brickbat: cinque movimenti animali, rappresentati in 5-6 passaggi, tradotti in una firma grafica con un font custom progettato per "ragionare come un animale". Una palette che evita i colori letterali — viola, grigio, azzurro chiaro — per restituire qualcosa di enigmatico e non ancora classificato.
 
@@ -38,7 +38,7 @@ L'identità visiva 2026 è stata curata dal collettivo Brickbat: cinque moviment
 
 Otto workshop hanno lavorato in parallelo per undici giorni, costruendo strutture, installazioni e ricerche site-specific nei boschi e nel borgo di Santo Pietro.
 
-**Sicilian Satoyama** (w/ Yoshiharu Tsukamoto, Atelier Bow-Wow — Wolf Prize in Architecture 2022) — un orto dentro un muro a secco, una gazebo di otto colonne di castagno, un boschetto di gelso trasformato in luogo di sosta attraverso potatura e terrazzamenti. Addizione e sottrazione come ricomposizione del paesaggio.
+**Sicilian Satoyama** (w/ Yoshiharu Tsukamoto, Atelier Bow-Wow — Wolf Prize in Architecture 2022) — un orto dentro un muro a secco, un gazebo (Zucca Gazebo) di otto colonne di castagno, un boschetto di gelso trasformato in luogo di sosta attraverso potatura e terrazzamenti. Addizione e sottrazione come ricomposizione del paesaggio.
 
 **Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbia della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla. Il progetto è vincitore dell'[Italian Council XIV edizione](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) del Ministero della Cultura. [Scheda progetto su Makramè →](https://makrame.org/2025/11/26/sounds-ceramics-communities/)
 
@@ -68,14 +68,14 @@ Il forno può raggiungere temperature fino a 1.350 °C. I depositi naturali di c
 
 BC26 è una tappa di un percorso più lungo.
 
-Quest'anno è stato avviato un processo di Partenariato Pubblico-Privato Speciale (PPPS) per valorizzare gli edifici e le aree del bosco-borgo dove il campus si svolge. Due siti pubblici — l'ex Casa Forestale e le ex Scuole — diventano i poli complementari di Casa Bosco Colto: un centro culturale diffuso che si estende tra edifici, sentieri, boschi e borgo, dedicato a cultura, cura ed educazione, aperto alla comunità locale tutto l'anno.
+È in corso di definizione il Partenariato Speciale Pubblico-Privato (PSPP) con il Comune di Caltagirone per valorizzare gli edifici e le aree del bosco-borgo dove il campus si svolge. Due siti pubblici — l'ex Casa Forestale e le ex Scuole — diventano i poli complementari di Casa Bosco Colto: un centro culturale diffuso che si estende tra edifici, sentieri, boschi e borgo, dedicato a cultura, cura ed educazione, aperto alla comunità locale tutto l'anno.
 
 L'obiettivo è trasformare l'esperienza episodica del campus in una piattaforma stabile di ricerca e attivazione comunitaria — generatrice di nuove traiettorie professionali nelle aree interne, radicata negli ecosistemi del Mediterraneo.
 
 ## Credits BC26
 
-**Organizzazione**: Makramè APS
-**Direzione scientifica**: Marco Navarra (Unict, NOWA), Dario Felice (Unipa, Analogique, Makramè APS), Antonio Scarponi e Beatrice Fontana (Institute for Spatial Thinking, Zurigo)
+**Promosso da**: Makramè APS
+**Direzione scientifica**: Marco Navarra (Unict, NOWA, Makramè APS), Dario Felice (Unipa, Analogique, Makramè APS), Antonio Scarponi e Beatrice Fontana (Institute for Spatial Thinking, Zurigo)
 **Contemporary art consultancy**: Salvatore Lacagnina
 **Graphic design**: Brickbat (Francesca Barizza, Corinne Carlin, Maria Giulia Leonardi, Alice Teodorani, Tobia Farinati)
 **Executive design**: Francesca Fossati, Massimiliano Mauro, Gloria Pulvirenti, Alessandra Gervasio
