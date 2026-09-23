@@ -29,7 +29,32 @@ export const POST: APIRoute = async ({ request }) => {
     audienceId?: string;
     topic?: 'bulletin' | 'announcements';
     preview?: boolean;
+    custom?: boolean;
+    subject?: string;
+    html?: string;
+    text?: string;
   };
+
+  // Custom mode: pre-built HTML/text, bypasses content lookup
+  if (body.custom) {
+    const { to, subject, html, text } = body;
+    if (!to || !subject || !html) return json({ error: 'custom mode requires to, subject, html' }, 400);
+    const apiKey = env('RESEND_API_KEY');
+    if (!apiKey) return json({ error: 'RESEND_API_KEY missing' }, 500);
+    const resend = new Resend(apiKey);
+    const from = 'Pianeta.Studio <bulletin@pianeta.studio>';
+    const recipients = Array.isArray(to) ? to : [to];
+    const results: { to: string; ok: boolean; id?: string; error?: string }[] = [];
+    for (const recipient of recipients) {
+      const res = await resend.emails.send({
+        from, to: recipient, subject, html, text: text || '',
+        headers: { 'List-Unsubscribe': `<${unsubscribeUrl(SITE_URL, recipient)}>` },
+      });
+      if ((res as any).error) results.push({ to: recipient, ok: false, error: (res as any).error.message });
+      else results.push({ to: recipient, ok: true, id: (res as any).data?.id });
+    }
+    return json({ ok: results.every(r => r.ok), mode: 'custom', results });
+  }
 
   if (!body.type || !body.slug || !ALLOWED.includes(body.type)) {
     return json({ error: 'invalid type or slug' }, 400);
