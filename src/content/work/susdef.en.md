@@ -1,7 +1,7 @@
 ---
 title: "A new platform for Susdef"
-description: "We designed the new platform for Fondazione Sviluppo Sostenibile: research, UX, and accessibility for an archive of 33,000+ documents. Live since 16 July 2026."
-client: "Fondazione Sviluppo Sostenibile (Susdef)"
+description: "We designed the new platform for Fondazione per lo Sviluppo Sostenibile: research, UX, and accessibility for an archive of 33,000+ documents. Live since 16 July 2026."
+client: "Fondazione per lo Sviluppo Sostenibile (Susdef)"
 category: "Platform"
 year: 2026
 date: 2026-09-09
@@ -20,7 +20,7 @@ tour:
   chapters:
     - title: "The project"
       key_facts:
-        - "Fondazione Sviluppo Sostenibile coordinates Italy's National Forum for Sustainable Development"
+        - "Fondazione per lo Sviluppo Sostenibile coordinates Italy's National Forum for Sustainable Development"
         - "New platform for a twenty-year archive of 33,000+ documents"
         - "Co-produced with Latte Creative"
     - title: "Research and UX"
@@ -35,11 +35,11 @@ tour:
         - "The team manages content and archive independently"
 ---
 
-**TLDR.** We designed the new digital platform for Fondazione Sviluppo Sostenibile (Susdef): an editorial site and an archive of **33,000+ documents** that Susdef's team manages independently. WCAG 2.1 AA accessibility integrated into the architecture from the start. **12 weeks · live at [susdef.pianeta.green](https://susdef.pianeta.green) since 16 July 2026.**
+**TLDR.** We designed the new digital platform for Fondazione per lo Sviluppo Sostenibile (Susdef): an editorial site and an archive of **33,000+ documents** that Susdef's team manages independently. WCAG 2.1 AA accessibility integrated into the architecture from the start. **12 weeks · live at [susdef.pianeta.green](https://susdef.pianeta.green) since 16 July 2026.**
 
 ## The project
 
-Fondazione Sviluppo Sostenibile coordinates Italy's National Forum for Sustainable Development — one of the key actors in the Italian ecological transition. It has produced policy reports, research documents, and Forum proceedings for over twenty years. Thirty-two thousand documents built up over time, which the previous site could no longer make accessible.
+Fondazione per lo Sviluppo Sostenibile coordinates Italy's National Forum for Sustainable Development — one of the key actors in the Italian ecological transition. It has produced policy reports, research documents, and Forum proceedings for over twenty years. Thirty-two thousand documents built up over time, which the previous site could no longer make accessible.
 
 When Susdef opened a competitive selection to redesign the platform, we entered alongside Latte Creative — as co-producers, not as a subcontractor. We won the selection and delivered in 12 weeks.
 
