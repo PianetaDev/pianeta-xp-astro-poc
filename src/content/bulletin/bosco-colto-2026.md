@@ -10,8 +10,8 @@ draft: true
 type: bulletin
 relatedWork: ["bosco-colto"]
 category: "Media"
-cover: "/photos/bc26/zucca-gazebo-16x9.webp"
-coverMobile: "/photos/bc26/zucca-gazebo-4x5.webp"
+cover: "/photos/bc26/cover-16x9.webp"
+coverMobile: "/photos/bc26/cover-4x5.webp"
 ---
 
 **TLDR.** Bosco Colto 2026 — **Pensare animale / Thinking with Animals** — undici giorni nel Bosco di Santo Pietro, Caltagirone: otto workshop internazionali tra architettura, design, arte e ricerca, un forno a legna inaugurato nel bosco, strutture costruite sul campo con materiali del luogo. Promosso da Makramè APS con la direzione scientifica di Marco Navarra, Dario Felice, Antonio Scarponi e Beatrice Fontana. **30 luglio – 9 agosto 2026 · Boschi di Santo Pietro · Caltagirone, Sicilia**
@@ -38,8 +38,8 @@ L'identità visiva 2026 è stata curata dal collettivo Brickbat: cinque moviment
 
 <figure class="photo-breakout">
   <picture>
-    <source media="(max-width: 640px)" srcset="/photos/bc26/workshop-campo-4x5.webp" type="image/webp" />
-    <img src="/photos/bc26/workshop-campo-16x9.webp" alt="Workshop nel campo: persone al lavoro con strutture di canne e legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="720" height="405" />
+    <source media="(max-width: 640px)" srcset="/photos/bc26/workshop-4x5.webp" type="image/webp" />
+    <img src="/photos/bc26/workshop-16x9.webp" alt="Workshop nel campo: persone al lavoro con strutture di legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="1920" height="1080" />
   </picture>
   <figcaption class="photo-caption">© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
 </figure>
@@ -73,7 +73,7 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 <figure class="photo-breakout">
   <picture>
     <source media="(max-width: 640px)" srcset="/photos/bc26/struttura-telo-4x5.webp" type="image/webp" />
-    <img src="/photos/bc26/struttura-telo-16x9.webp" alt="Struttura in legno con telo verde — BC26, esterno, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="720" height="405" />
+    <img src="/photos/bc26/struttura-telo-16x9.webp" alt="Struttura in legno con copertura — BC26, esterno, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="1920" height="1080" />
   </picture>
   <figcaption class="photo-caption">© Davide Piro · Bosco Colto 2026</figcaption>
 </figure>
@@ -91,7 +91,7 @@ Il forno può raggiungere temperature fino a 1.350 °C. I depositi naturali di c
 <figure class="photo-breakout">
   <picture>
     <source media="(max-width: 640px)" srcset="/photos/bc26/interno-pilastro-4x5.webp" type="image/webp" />
-    <img src="/photos/bc26/interno-pilastro-16x9.webp" alt="Interno con persone e pilastro in legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="720" height="405" />
+    <img src="/photos/bc26/interno-pilastro-16x9.webp" alt="Interno con persone e colonna in legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="1920" height="1080" />
   </picture>
   <figcaption class="photo-caption">© Marco Sciré · Bosco Colto 2026</figcaption>
 </figure>
