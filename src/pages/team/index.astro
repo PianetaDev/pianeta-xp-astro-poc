@@ -17,7 +17,6 @@ const ai = byKind('ai');
 const sections = [
   { key: 'core', title: 'Core', intro: 'Il team interno dello studio. Operations, design, tecnologia.', items: core, contact: '' },
   { key: 'satellite', title: 'Pianeta.Satellite', intro: 'La community di freelance che orbita intorno al core team — designer, illustratori, sviluppatori che hanno scelto di lavorare con noi su progetti specifici.', items: satellite, contact: 'satellite@pianeta.studio' },
-  { key: 'ai', title: 'AI di gruppo', intro: 'Sistemi AI che operano dentro Pianeta.Studio con disclosure esplicita. Niente "human disguised as AI", niente "AI disguised as human".', items: ai, contact: '' },
 ];
 ---
 <BaseLayout title="Team — Pianeta.Studio" description="Le persone dietro Pianeta.Studio: core team, rete Satellite, agenti AI.">
@@ -86,6 +85,26 @@ const sections = [
         )}
       </section>
     ))}
+
+    {/* Alba banner — occupa tutte le colonne (PIA-1622) */}
+    {ai.length > 0 && ai.map((it: any) => {
+      const photo = it.data.photo || it.data.cover;
+      return (
+        <section class="alba-banner">
+          {photo && photo !== '/og/placeholder.svg' && (
+            <div class="alba-banner-img" style={`background-image:url('${photo}')`} aria-hidden="true"></div>
+          )}
+          <div class="alba-banner-body">
+            <p class="alba-banner-eyebrow">AI di gruppo</p>
+            <h2 class="alba-banner-title">{it.data.name || it.data.title}</h2>
+            <p class="alba-banner-desc">
+              Sistemi AI che operano dentro Pianeta.Studio con disclosure esplicita.
+              Niente &ldquo;human disguised as AI&rdquo;, niente &ldquo;AI disguised as human&rdquo;.
+            </p>
+          </div>
+        </section>
+      );
+    })}
 
     {all.length === 0 && (
       <div class="index-empty">Nessun profilo pubblicato.</div>

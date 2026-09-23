@@ -6,13 +6,9 @@ const drawer = useHireUsDrawer()
 const pathname = ref('')
 
 const EXCLUDED = ['/', '/choosetoseethem', '/hire-us']
-const shouldHide = computed(() => {
-  if (!pathname.value) return true
-  if (EXCLUDED.includes(pathname.value)) return true
-  if (pathname.value.startsWith('/orbit/')) return true
-  if (pathname.value.startsWith('/hire-us/')) return true
-  return false
-})
+// Nascosto ovunque: il pulsante arancio "Lavoriamo insieme" in BaseLayout.astro lo sostituisce.
+// PIA-1621: l'elemento nero che appariva sotto il pulsante fisso era questo componente.
+const shouldHide = computed(() => true)
 
 onMounted(() => {
   pathname.value = window.location.pathname
