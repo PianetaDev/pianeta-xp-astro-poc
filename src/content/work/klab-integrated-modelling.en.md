@@ -49,4 +49,6 @@ The work focused on three axes:
 
 ## Context
 
-Project realized as part of the collaboration with ARIES — the same ecosystem as the case study [Aries — Towards a smarter & more sustainable world](/work/aries-towards-smarter-sustainable-world).
+Project realized as part of the collaboration with ARIES — the same ecosystem as the case study:
+
+[Aries — Towards a smarter & more sustainable world](/work/aries-towards-smarter-sustainable-world)
