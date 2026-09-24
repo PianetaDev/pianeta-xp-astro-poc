@@ -141,10 +141,22 @@
 
 <script is:inline>
   (() => {
+    // Capture-phase listener fires before Astro's ClientRouter bubble-phase handler,
+    // so e.preventDefault() correctly blocks SPA navigation.
+    // We store the handler reference on document to remove stale closures on re-init
+    // (view transitions swap the DOM and call init() again via astro:page-load).
+    const HANDLER_KEY = '__sovClick';
+
     const init = () => {
       const ov = document.getElementById('service-ov');
-      if (!ov || ov.dataset.bound) return;
-      ov.dataset.bound = '1';
+      if (!ov) return;
+
+      // Remove stale handler from a previous init so we never accumulate listeners
+      if (document[HANDLER_KEY]) {
+        document.removeEventListener('click', document[HANDLER_KEY], true);
+        document[HANDLER_KEY] = null;
+      }
+
       const body = document.getElementById('service-ov-body');
       const panel = ov.querySelector('.service-ov-panel');
 
@@ -243,7 +255,7 @@
         }
       };
 
-      document.addEventListener('click', (e) => {
+      const clickHandler = (e) => {
         const t = e.target;
         if (!t || !t.closest) return;
         const el = t.closest('.service-open');
@@ -254,7 +266,9 @@
           return;
         }
         if (t.closest('[data-svc-close]')) { close(); return; }
-      });
+      };
+      document[HANDLER_KEY] = clickHandler;
+      document.addEventListener('click', clickHandler, true);
 
       document.addEventListener('keydown', (e) => {
         if (ov.hidden) return;
