@@ -141,7 +141,7 @@ function meta(item: ContentItem, type: string) {
             >
               <div class="w-16 h-16 rounded-md bg-black/5 overflow-hidden flex-shrink-0">
                 <NuxtImg
-                  v-if="item.cover || item.photo"
+                  v-if="(item.cover || item.photo) && open !== 'services'"
                   :src="item.cover || item.photo"
                   :alt="item.title || item.name"
                   width="64"

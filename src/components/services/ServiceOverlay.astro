@@ -224,11 +224,11 @@
           '<h1 class="sov-title">' + esc(d.name) + '</h1>' +
           (d.description ? '<p class="sov-deck">' + esc(d.description) + '</p>' : '') +
           metaHtml +
+          (d.body ? '<div class="sov-content">' + md(d.body) + '</div>' : '') +
           '<div class="sov-cta-row">' +
           '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'hire-us:open\'))">Lavoriamo insieme</button>' +
           '<a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>' +
           '</div>' +
-          (d.body ? '<div class="sov-content">' + md(d.body) + '</div>' : '') +
           blocksHtml +
           siblingsHtml +
           nextHtml +
