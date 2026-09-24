@@ -17,7 +17,7 @@ if (nextItem) nextItem.type = 'en/careers';
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.cover || data.ogImage;
+const cover = data.ogImage || data.cover;
 const applyEmail = data.applyEmail || 'people@pianeta.studio';
 
 const url = new URL(`/en/careers/${item.id}`, Astro.site).toString();
