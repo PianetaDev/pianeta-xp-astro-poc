@@ -7,11 +7,11 @@ year: 2022
 date: 2022-09-15
 updated: 2026-08-26
 sector: "Scientific research · AI · Sustainability"
-cover: "/og/placeholder-1_1.png"
-ogImage: "/og/placeholder-16_9.png"
+cover: "/og/work-klab-integrated-modelling.png"
+ogImage: "/og/work-klab-integrated-modelling.png"
 hero:
   type: "image"
-  src: "/og/placeholder-16_9.png"
+  src: "/og/work-klab-integrated-modelling.png"
 services: ["creativity"]
 team: ["max"]
 links:
@@ -28,6 +28,8 @@ k.LAB is the **integrated modelling platform** developed by integratedmodelling.
 
 The goal was to open the platform to a broader audience — researchers, policy makers, environmental technicians — without sacrificing scientific depth.
 
+![Before/after of the k.LAB redesign: comparison between the original interface and the redesigned version](/work/klab-integrated-modelling/klab-la-sfida.png)
+
 ## The approach
 
 The work focused on three axes:
@@ -43,6 +45,10 @@ The work focused on three axes:
 - UI prototype of key screens
 - Internal design system guidelines
 
+![Grid of the four main k.LAB prototype screens: dashboard, explore models, configure analysis, results](/work/klab-integrated-modelling/klab-cosa-abbiamo-prodotto.png)
+
 ## Context
 
-Project realized as part of the collaboration with ARIES — the same ecosystem as the case study [Aries — Towards a smarter & more sustainable world](/work/aries-towards-smarter-sustainable-world).
+Project realized as part of the collaboration with ARIES — the same ecosystem as the case study:
+
+[Aries — Towards a smarter & more sustainable world](/work/aries-towards-smarter-sustainable-world)
