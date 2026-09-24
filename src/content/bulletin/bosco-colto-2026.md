@@ -53,9 +53,8 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 **Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbie della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla. Il progetto è vincitore dell'[Italian Council XIV edizione](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) del Ministero della Cultura.
 
 <a class="scheda-card-b" href="https://makrame.org/2025/11/26/sounds-ceramics-communities/" target="_blank" rel="noopener">
-  <span class="card-icon" aria-hidden="true">↗</span>
-  <span class="card-label">Scheda progetto · Makramè</span>
   <span class="card-title">Sound, Ceramics and Communities</span>
+  <span class="card-icon" aria-hidden="true">↗</span>
 </a>
 
 **Observatories** (w/ Food Hack Lab, Paesi Baschi) — nove "testimoni" in sughero e PETG stampato in 3D, disseminati in nove siti forestali tra il Bosco di Santo Pietro e la Sughereta di Niscemi. I loro sensori ESP32 misurano temperatura, umidità e livelli sonori, trasmettendo piccoli pacchetti di dati via rete LoRa. Un ascolto discreto e condiviso del bosco — che lascia alla foresta la propria voce.
