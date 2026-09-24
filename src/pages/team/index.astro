@@ -97,8 +97,8 @@ const sections = [
   <style>
     .team-section { margin-top: 64px; }
     .team-section-head { max-width: 760px; margin: 0 0 32px; text-align: left; }
-    .team-section-title { font-size: 16px; letter-spacing: -0.02em; margin: 0 0 10px; }
-    .team-section-intro { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
+    .team-section-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); letter-spacing: -0.02em; margin: 0 0 10px; }
+    .team-section-intro { font-size: 16px; color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
 
     .team-grid {
       display: grid;
@@ -187,14 +187,14 @@ const sections = [
       align-self: center;
     }
     .alba-banner-name {
-      font-size: 16px; font-weight: 600; letter-spacing: -0.02em;
+      font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em;
       color: var(--pianeta-text);
     }
     .alba-banner-sep {
       color: var(--pianeta-muted); font-size: var(--ty-meta);
     }
     .alba-banner-desc {
-      font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55;
+      font-size: 16px; color: var(--pianeta-muted); line-height: 1.55;
       width: 100%;
     }
   </style>
