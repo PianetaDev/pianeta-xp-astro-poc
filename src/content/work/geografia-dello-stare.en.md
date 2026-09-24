@@ -6,8 +6,8 @@ category: "Data storytelling"
 year: 2026
 date: 2026-01-15
 sector: "Adolescence · Social well-being · Urban territory"
-cover: "https://superabile.pianeta.green/wp/wp-content/uploads/2026/01/Grafico1-1024x615.png"
-ogImage: "https://superabile.pianeta.green/wp/wp-content/uploads/2026/01/Grafico1-1024x615.png"
+cover: "/og/placeholder-16_9.png"
+ogImage: "/og/placeholder-16_9.png"
 services: ["microsites-data-stories", "editorial-educational-design", "web-sostenibile"]
 team: ["foss", "ludovica", "sara"]
 links:

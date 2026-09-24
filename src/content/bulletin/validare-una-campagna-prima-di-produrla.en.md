@@ -4,8 +4,8 @@ description: "How we integrated multi-agent simulation and a neural analysis sta
 date: 2026-06-24
 updated: 2026-06-24
 authors: ["max"]
-cover: "/og/bulletin-validare-campagna.png"
-ogImage: "/og/bulletin-validare-campagna.png"
+cover: "/og/placeholder-16_9.png"
+ogImage: "/og/placeholder-16_9.png"
 tags: ["neuromarketing", "ai-validation", "method", "swarm"]
 readingTime: "8 min"
 locale: en
