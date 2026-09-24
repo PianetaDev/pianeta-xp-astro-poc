@@ -6,6 +6,7 @@ import { useFormatters } from '~/composables/useFormatters'
 import { useRoute, useState, $fetch } from '~/lib/nuxt-shims'
 import Icon from '~/components/vue/shims/Icon.vue'
 import NuxtLink from '~/components/vue/shims/NuxtLink.vue'
+import NuxtImg from '~/components/vue/shims/NuxtImg.vue'
 
 const { open, hide } = useRailFlyout()
 const { formatDate } = useFormatters()
@@ -134,13 +135,41 @@ function meta(item: ContentItem, type: string) {
 
         <ul v-else>
           <li v-for="item in items" :key="item.path" class="border-b border-black/8 last:border-b-0">
+            <!-- Services: text-only. All other sections: image + text. -->
             <NuxtLink
+              v-if="open === 'services'"
               :to="item.path"
               class="flex flex-col px-3 py-3 hover:bg-black/5 transition"
             >
               <p class="text-sm font-medium line-clamp-1">{{ item.title || item.name }}</p>
               <p v-if="meta(item, open!)" class="text-xs text-black/50 mt-0.5 line-clamp-1">{{ meta(item, open!) }}</p>
               <p v-if="item.description" class="text-xs text-black/40 mt-1 line-clamp-2">{{ item.description }}</p>
+            </NuxtLink>
+            <NuxtLink
+              v-else
+              :to="item.path"
+              class="flex gap-3 p-2 hover:bg-black/5 transition group"
+            >
+              <div class="w-14 h-14 rounded-md bg-black/5 overflow-hidden flex-shrink-0">
+                <NuxtImg
+                  v-if="item.cover || item.photo"
+                  :src="item.cover || item.photo"
+                  :alt="item.title || item.name"
+                  width="56"
+                  height="56"
+                  format="webp"
+                  class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                  loading="lazy"
+                />
+                <div v-else class="w-full h-full flex items-center justify-center text-black/30">
+                  <Icon :name="current!.icon" :size="18" />
+                </div>
+              </div>
+              <div class="flex-1 min-w-0 py-0.5">
+                <p class="text-sm font-medium line-clamp-1">{{ item.title || item.name }}</p>
+                <p v-if="meta(item, open!)" class="text-xs text-black/50 mt-0.5 line-clamp-1">{{ meta(item, open!) }}</p>
+                <p v-if="item.description" class="text-xs text-black/40 mt-1 line-clamp-2">{{ item.description }}</p>
+              </div>
             </NuxtLink>
           </li>
         </ul>

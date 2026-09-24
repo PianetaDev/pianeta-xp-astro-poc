@@ -50,10 +50,13 @@
   :global(.sov-deck) {
     font-size: 16px; color: var(--pianeta-muted); line-height: 1.55; margin: 0 0 24px;
   }
+  :global(.sov-meta-block) {
+    border-top: 1px solid var(--pianeta-border); border-bottom: 1px solid var(--pianeta-border);
+    padding: 14px 0 16px; margin: 0 0 28px;
+  }
   :global(.sov-meta) {
     list-style: none; display: flex; flex-wrap: wrap; gap: 10px 24px;
-    padding: 16px 0; margin: 0 0 28px;
-    border-top: 1px solid var(--pianeta-border); border-bottom: 1px solid var(--pianeta-border);
+    padding: 0; margin: 0;
   }
   :global(.sov-meta li) { display: flex; flex-direction: column; gap: 2px; }
   :global(.sov-meta .k) {
@@ -128,8 +131,7 @@
 
   :global(.sov-cta-row) {
     display: flex; gap: 10px; flex-wrap: wrap;
-    margin-top: 32px; padding-top: 24px;
-    border-top: 1px solid var(--pianeta-border);
+    margin-top: 14px;
   }
 
   :global(.sov-full-link) {
@@ -146,6 +148,18 @@
     // We store the handler reference on document to remove stale closures on re-init
     // (view transitions swap the DOM and call init() again via astro:page-load).
     const HANDLER_KEY = '__sovClick';
+
+    // TTS: legge il corpo del servizio corrente. Click ripetuto interrompe.
+    window.__sovAscolta = () => {
+      if (!window.speechSynthesis) return;
+      if (window.speechSynthesis.speaking) { window.speechSynthesis.cancel(); return; }
+      const el = document.getElementById('service-ov-body')?.querySelector('.sov-content');
+      const text = el?.textContent?.trim();
+      if (!text) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'it-IT';
+      window.speechSynthesis.speak(u);
+    };
 
     const init = () => {
       const ov = document.getElementById('service-ov');
@@ -219,20 +233,26 @@
             '</a></section>'
           : '';
 
-        const isNeuro = d.slug === 'neuromarketing-lab';
-        const primaryBtn = isNeuro
-          ? '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'alba:open\'))">Parla con Alba</button>'
-          : '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'hire-us:open\'))">Lavoriamo insieme</button>';
+        const ctaRow =
+          '<div class="sov-cta-row">' +
+          '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'hire-us:open\'))">Lavoriamo insieme</button>' +
+          '<a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>' +
+          '<button type="button" class="cta-btn cta-ghost" onclick="window.__sovAscolta?.()">Ascolta</button>' +
+          '</div>';
+
+        // Buttons go inside the meta bordered block (between the two border lines)
+        const metaBlockHtml = meta.length
+          ? '<div class="sov-meta-block">' +
+            '<ul class="sov-meta">' + meta.map((m) => '<li><span class="k">' + m.k + '</span><span class="v">' + m.v + '</span></li>').join('') + '</ul>' +
+            ctaRow +
+            '</div>'
+          : ctaRow;
 
         body.innerHTML =
           '<p class="sov-eyebrow">' + esc(d.categoryLabel || 'Servizio') + '</p>' +
           '<h1 class="sov-title">' + esc(d.name) + '</h1>' +
           (d.description ? '<p class="sov-deck">' + esc(d.description) + '</p>' : '') +
-          metaHtml +
-          '<div class="sov-cta-row">' +
-          primaryBtn +
-          '<a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>' +
-          '</div>' +
+          metaBlockHtml +
           (d.body ? '<div class="sov-content">' + md(d.body) + '</div>' : '') +
           blocksHtml +
           siblingsHtml +
