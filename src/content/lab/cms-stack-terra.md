@@ -4,8 +4,8 @@ description: "Il CMS con cui costruiamo i siti dei nostri clienti: Payload CMS +
 kind: "Prodotto R&D"
 year: 2026
 status: "In commessa"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 date: 2026-05-01
 locale: it
 draft: false

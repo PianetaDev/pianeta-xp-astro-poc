@@ -4,8 +4,8 @@ description: "Full diagnosis of the current identity — consistency, recognizab
 category: "creativity"
 processPhase: 1
 icon: "🔍"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 3
 inputClient:
   - "All existing brand assets (logo, manuals, templates)"

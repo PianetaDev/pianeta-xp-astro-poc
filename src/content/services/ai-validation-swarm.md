@@ -4,8 +4,8 @@ description: "Simulazione multi-agente di pubblici per testare concept creativi 
 category: "creativity"
 processPhase: 2
 icon: "🐝"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 2
 inputClient:
   - "Concept creativi da testare (2-5 opzioni)"

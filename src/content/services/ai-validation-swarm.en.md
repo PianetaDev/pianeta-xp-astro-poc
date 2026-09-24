@@ -4,8 +4,8 @@ description: "Multi-agent audience simulation to test creative concepts before p
 category: "creativity"
 processPhase: 2
 icon: "🐝"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 2
 inputClient:
   - "Creative concepts to test (2-5 options)"

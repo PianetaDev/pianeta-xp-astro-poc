@@ -14,7 +14,7 @@ since: "2023-09-14"
 employment: "founder"
 location: "Catania · Milan · Rome"
 email: "max@pianeta.studio"
-photo: "/og/placeholder.svg"
+photo: "/og/placeholder-1_1.png"
 order: 1
 expertise: ["strategy", "ai-governance", "sustainability", "design"]
 ---

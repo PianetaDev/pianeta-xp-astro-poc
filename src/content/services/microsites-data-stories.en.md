@@ -4,8 +4,8 @@ description: "Narrative microsites that use data and visual storytelling to comm
 category: "design"
 processPhase: 3
 icon: "🌐"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 4
 inputClient:
   - "Dataset / content to tell"

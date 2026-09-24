@@ -4,8 +4,8 @@ description: "Strumento proprietario per misurare le emissioni di un sito web â€
 kind: "Tool live"
 year: 2026
 status: "Live"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 date: 2026-03-01
 locale: it
 draft: false
