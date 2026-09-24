@@ -1,8 +1,8 @@
 ---
 title: "About Us"
 description: "Pianeta.Studio is a Sustainable Creativity studio: Design & Technology in service of ideas that drive positive change for people and the planet."
-ogImage: "/og/chi-siamo.svg"
-cover: "/og/chi-siamo.svg"
+ogImage: "/og/placeholder-16_9.png"
+cover: "/og/placeholder-1_1.png"
 date: 2026-06-26
 draft: false
 locale: en
@@ -60,4 +60,4 @@ For the Pianeta.Satellite freelance network: [satellite@pianeta.studio](mailto:s
 
 ---
 
-*Sustainable Creativity since 2016. A nomadic studio. Co-authors of your projects. Human to Planet.*
+*Sustainable Creativity. A nomadic studio. Co-authors of your projects. Human to Planet.*

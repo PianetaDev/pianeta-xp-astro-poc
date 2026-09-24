@@ -1,11 +1,11 @@
 ---
 title: "Platforms & dashboards"
 description: "Custom web platforms and business intelligence dashboards. Modular architecture, enterprise authentication, verifiable performance."
-category: "products-systems"
+category: "technology"
 processPhase: 3
 icon: "📊"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 3
 inputClient:
   - "Functional specs / user stories"
@@ -19,7 +19,7 @@ deliverables:
   - "Client repo"
 relatedServices: ["web-sostenibile", "design-system-multi-brand"]
 locale: en
-draft: false
+draft: true
 type: service
 date: 2026-06-27
 ---

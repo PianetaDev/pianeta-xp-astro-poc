@@ -29,7 +29,9 @@ nota-pia-1309: DocumentAI non è un prodotto autonomo — è un modulo add-on di
 
 Una piattaforma CMS + ricerca documentale che trasforma un archivio statico (report, pubblicazioni, paper scientifici, atti) in una superficie interrogabile, navigabile e gestibile in autonomia dal team dell'organizzazione. Il sito è veloce, accessibile, e i documenti sono trovabili senza dover sapere esattamente dove sono salvati o come si chiama il file.
 
-Stack verificato (da tre progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSearch**. Self-hosted su server europei, GDPR compliant, WCAG 2.1 AA. Il codice viene consegnato integralmente al cliente — nessun lock-in su Pianeta.Studio.
+Stack verificato (da tre progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSearch**. Self-hosted su server europei, GDPR compliant, WCAG 2.1 AA. Il codice viene consegnato integralmente al cliente in licenza d'uso — nessun lock-in su Pianeta.Studio.
+
+**Licenza, non proprietà (corretto 22/09/2026, da specificare in ogni contenuto pubblico che parla di consegna del codice):** il codice consegnato resta **in licenza d'uso al cliente**, non in sua proprietà — Pianeta.Studio mantiene la titolarità del codice applicativo. La licenza copre l'uso del cliente nel proprio progetto — hosting, modifica, subentro di un altro fornitore/sviluppatore — senza dipendenza tecnica da Pianeta ("nessun lock-in" descrive questo: assenza di dipendenza tecnica, non un trasferimento di proprietà). La licenza non copre finalità commerciali estranee al progetto (rivendita a terzi, riuso come base di un prodotto o servizio concorrente, sublicenza a terzi). Non usare mai "il codice è tuo" o "proprietà del cliente" — usare "il codice ti viene consegnato in licenza, senza vincoli per farlo girare da solo". Formulazione provvisoria: Max conferma la dicitura esatta prima che diventi contrattuale.
 
 **MeiliSearch** fornisce ricerca full-text veloce e ordinata per rilevanza — non è generative AI, è un motore di ricerca ad alte prestazioni. Il layer AI generativo (ingestione AI, abstract automatici, ricerca semantica) è disponibile come **modulo DocumentAI**, add-on di Terra — vedi sezione 1.5.
 
@@ -38,7 +40,7 @@ Stack verificato (da tre progetti reali): **Nuxt 3 (SSG) + Payload CMS + MeiliSe
 - **Non è un sito generico con un CMS**. Il differenziatore non è Payload da solo — è la combinazione di CMS strutturato (live preview, no plugin, TypeScript), ricerca full-text su scala (MeiliSearch), e infrastruttura consegnata al cliente. Chi ha bisogno solo di un sito vetrina è il target sbagliato.
 - **Nel profilo base non include AI generativa**. Il core di Terra (Nuxt+Payload+MeiliSearch) non genera abstract né fa Q&A in linguaggio naturale. Queste funzionalità sono disponibili aggiungendo il modulo DocumentAI (vedi sezione 1.5) — è un add-on di Terra, non un prodotto separato con strategia di mercato autonoma.
 - **Non è un servizio SaaS**. È una build custom, self-hosted, consegnata al cliente. Non c'è abbonamento mensile a Pianeta (salvo contratti di manutenzione separati).
-- **Non è "open source"**. Il framework sottostante (Payload CMS) è open source, ma il codice applicativo è proprietario del cliente — formulazione corretta: "codice consegnato in toto, nessun lock-in".
+- **Non è "open source"**. Il framework sottostante (Payload CMS) è open source, ma il codice applicativo resta in licenza al cliente, non in sua proprietà — formulazione corretta: "codice consegnato in licenza, nessun lock-in tecnico" (non "codice di proprietà del cliente").
 
 ### Contesto di prodotto e nome
 
@@ -152,6 +154,18 @@ Consorzio finanziato con fondi pubblici UE, 10-40 partner europei, produzione do
 - Case Susdef come prova che il sistema regge >33.000 record e funziona in produzione
 
 **Canale primario**: landing/service page con sezione governance dati + case study Susdef come proof
+
+> **Compliance framework verificato (contesto interno, aggiunto 22/09/2026)** — Max: "vedi il lavoro che abbiamo fatto di privacy e compliance per EPOS, è un punto fondamentale per i centri europei". Fonte: Technical Offer firmato da Latte Creative per EPOS ERIC (26/6/2025, Google Drive) — **non nominabile in nessun contenuto esterno**, vedi vincolo ghost in cima al documento. Pratiche concrete consegnate in quel progetto, riusabili come framework generico (non come case study citabile):
+> - TLS 1.3 full SSL su tutto il sito
+> - Autenticazione a tre livelli (Amministratore, Content Manager, Utente) con permessi granulari nel CMS
+> - Backup automatici regolari, retention 7 giorni, ripristino fino all'ultimo snapshot disponibile
+> - Ridondanza: replica dati in tempo reale su un secondo server, continuità in caso di guasto del server centrale
+> - Privacy-by-design: minimizzazione dei dati, anonimizzazione dove applicabile, log management GDPR-compliant
+> - Hosting EU certificato ISO/IEC 27001, energia 100% rinnovabile (quel progetto: Tilaa VPS, Paesi Bassi — nome del provider non vincolante per Terra, è lo standard di riferimento)
+> - WCAG 2.1 embedded in ogni fase (non un audit finale)
+> - Assistente di ricerca AI dichiarato "fully compliant with privacy and data protection requirements" — stesso principio del modulo DocumentAI di Terra
+>
+> **Come usarlo**: questo è un framework di pratiche che Pianeta sa già consegnare su un progetto reale per un consorzio di ricerca europeo — rafforza la credibilità della risposta all'obiezione di Marco ("può un'agenzia italiana piccola garantire compliance a livello europeo?") con un precedente vero, non solo con un'affermazione. Non citare mai la fonte (EPOS) né il progetto specifico in contenuto pubblico o brief MUSE — descrivere solo come "framework che applichiamo su progetti per consorzi/enti di ricerca europei".
 
 ---
 

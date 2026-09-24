@@ -4,8 +4,8 @@ description: "Due famiglie di AI per validare creatività video — simulazione 
 date: 2026-06-26
 updated: 2026-06-26
 authors: ["Pianeta.Studio"]
-cover: "/og/bollettino-swarm.png"
-ogImage: "/og/bollettino-swarm.png"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 tags: ["neuromarketing", "ai-validation", "ricerca", "swarm", "neural-prediction"]
 readingTime: "10 min"
 locale: it
@@ -104,9 +104,11 @@ Il [bulletin sulla campagna ECLAG](/bulletin/validare-una-campagna-prima-di-prod
 
 ## Casi e collegamenti
 
-→ [Choose to See Them — ECLAG](/work/eclag): il caso studio applicato.
-→ [Validare una campagna video prima di produrla](/bulletin/validare-una-campagna-prima-di-produrla): la storia operativa, le sette lezioni, cosa applicheremo ai prossimi progetti.
-→ [Creatività e neuromarketing](/services/neuromarketing-lab): il servizio.
+[Choose to See Them — ECLAG: il caso studio applicato.](/work/eclag)
+
+[Validare una campagna video prima di produrla: la storia operativa, le sette lezioni, cosa applicheremo ai prossimi progetti.](/bulletin/validare-una-campagna-prima-di-produrla)
+
+[Creatività e neuromarketing: il servizio.](/services/neuromarketing-lab)
 
 ## Riferimenti
 

@@ -1,11 +1,11 @@
 ---
 title: "Piattaforme & dashboard"
 description: "Piattaforme web custom e dashboard di business intelligence. Architettura modulare, autenticazione enterprise, performance verificabili."
-category: "products-systems"
+category: "technology"
 processPhase: 3
 icon: "📊"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 3
 inputClient:
   - "Specifiche funzionali / user stories"
@@ -19,7 +19,7 @@ deliverables:
   - "Repo del cliente"
 relatedServices: ["web-sostenibile", "design-system-multi-brand"]
 locale: it
-draft: false
+draft: true
 type: service
 date: 2026-06-27
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Neuromarketing Lab"
 description: "AI validation of video and audio campaigns with Swarm Intelligence and Neural Prediction. A quantitative second opinion on creative choices — before you render the video, before you go into production."
-category: "data-ai"
+category: "creativity"
 processPhase: 2
 icon: "🧠"
 cover: "/og/service-creativita-neuromarketing.png"
@@ -61,9 +61,9 @@ Neuro validation is **part of our standard creative process**, not an optional a
 
 ## A concrete example
 
-→ [Choose to See Them — ECLAG](/en/work/eclag): a European video campaign on children's online rights, validated with our stack before production. **3 videos · 18 neuro analyses · 3 weeks**.
+[Choose to See Them — ECLAG: a European video campaign on children's online rights, validated with our stack before production. **3 videos · 18 neuro analyses · 3 weeks**.](/en/work/eclag)
 
-→ [Bulletin: Validating a video campaign before producing it](/en/bulletin/validare-una-campagna-prima-di-produrla): the long-form methodology piece, with the 7 operational lessons we apply as default.
+[Bulletin: Validating a video campaign before producing it — the long-form methodology piece, with the 7 operational lessons we apply as default.](/en/bulletin/validare-una-campagna-prima-di-produrla)
 
 ## FAQ
 

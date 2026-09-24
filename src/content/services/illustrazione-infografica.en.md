@@ -1,11 +1,11 @@
 ---
 title: "Illustration & infographics"
 description: "Editorial illustration and scientific infographics. Designed to be read, not just looked at — with multi-layered reading systems."
-category: "visualization-storytelling"
+category: "design"
 processPhase: 2
 icon: "✏️"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 3
 inputClient:
   - "Data or scientific content to visualize"

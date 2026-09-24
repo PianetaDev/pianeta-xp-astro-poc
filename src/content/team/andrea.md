@@ -6,7 +6,7 @@ role: "Developer"
 employment: "satellite"
 location: "Italia · remoto"
 email: "satellite@pianeta.studio"
-photo: "/og/placeholder.svg"
+photo: "/og/placeholder-1_1.png"
 order: 120
 description: "Developer della rete Satellite. Collabora con Pianeta.Studio su progetti web e prodotti digitali."
 date: 2026-06-27

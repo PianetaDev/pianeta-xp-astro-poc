@@ -1,0 +1,33 @@
+---
+/**
+ * /explore/media — Archivio fotografico esplorabile dei progetti Pianeta.Studio
+ *
+ * Placeholder funzionale: infrastruttura (schema DB, API, componente Vue)
+ * pronta a ricevere foto reali. Le foto arrivano in un task separato quando
+ * il materiale è curato.
+ *
+ * Powered by: MediaCloud.vue (Astro island client:only) + Three.js sprite cloud
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MediaCloud from '../../components/vue/site/MediaCloud.vue';
+---
+
+<BaseLayout
+  title="Esplora il portfolio — Pianeta.Studio"
+  description="Archivio visivo dei progetti Pianeta.Studio: branding, web, print e comunicazione. Esplora per prossimità visiva."
+  noindex={true}
+>
+  <style is:global>
+    /* Full-bleed canvas: nessun padding dal layout base */
+    main.media-explore-page {
+      padding: 0 !important;
+      margin: 0 !important;
+      max-width: none !important;
+      height: 100vh;
+      overflow: hidden;
+    }
+  </style>
+  <main class="media-explore-page">
+    <MediaCloud client:only="vue" />
+  </main>
+</BaseLayout>

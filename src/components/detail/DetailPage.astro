@@ -4,6 +4,7 @@ interface RelatedItem { type: string; slug: string; label?: string; }
 interface NextItem { type: string; slug: string; title: string; deck?: string; cover?: string; kicker?: string; }
 interface BylineProp { authors?: string[]; date?: string; meta?: string[]; }
 interface MetaItem { label: string; value: string; href?: string; external?: boolean; }
+interface CoverVideo { src16_9: string; src9_16?: string; src4_5?: string; src1_1?: string; poster?: string; }
 
 interface Props {
   eyebrowParts?: Array<{ label: string; href?: string }>;
@@ -11,6 +12,8 @@ interface Props {
   deck?: string;
   cover?: string;
   coverMobile?: string;
+  hideCover?: boolean;
+  coverVideo?: CoverVideo;
   heroPortrait?: boolean;
   primaryCta?: CtaProp;
   secondaryCta?: CtaProp;
@@ -31,6 +34,8 @@ const {
   deck,
   cover,
   coverMobile,
+  hideCover = false,
+  coverVideo,
   heroPortrait = false,
   primaryCta,
   secondaryCta,
@@ -45,6 +50,8 @@ const {
   jsonLd,
   fallbackBanner,
 } = Astro.props;
+
+const heroSrc = cover || (heroPortrait ? '/og/placeholder-4_5.png' : '/og/placeholder-16_9.png');
 
 const bylineParts: string[] = [];
 if (byline?.authors?.length) bylineParts.push('di ' + byline.authors.join(', '));
@@ -96,15 +103,37 @@ const renderCta = (c: CtaProp, cls: string) => {
     )}
   </header>
 
-  <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
-    <picture>
-      {coverMobile && <source media="(max-width: 640px)" srcset={coverMobile} type="image/webp" />}
-      {/^.*\.(png|jpe?g)$/i.test(cover || '') && (
-        <source srcset={(cover || '').replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+  {!hideCover && (
+    <div class:list={['detail-hero', heroPortrait && 'is-portrait', coverVideo && 'has-video']}>
+      {coverVideo ? (
+        <>
+          <video
+            class="detail-hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            poster={coverVideo.poster || cover || ''}
+            data-src-wide={coverVideo.src16_9}
+            data-src-tall={coverVideo.src9_16 || coverVideo.src16_9}
+            data-src-mid={coverVideo.src4_5 || coverVideo.src16_9}
+            aria-hidden="true"
+          >
+            <source src={coverVideo.src16_9} type="video/mp4" />
+          </video>
+          <img class="detail-hero-poster" src={coverVideo.poster || cover || heroSrc} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+        </>
+      ) : (
+        <picture>
+          {coverMobile && <source media="(max-width: 640px)" srcset={coverMobile} type="image/webp" />}
+          {/^.*\.(png|jpe?g)$/i.test(heroSrc) && (
+            <source srcset={heroSrc.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+          )}
+          <img src={heroSrc} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+        </picture>
       )}
-      <img src={cover || '/og/placeholder.svg'} alt={title} loading="eager" fetchpriority="high" decoding="async" />
-    </picture>
-  </div>
+    </div>
+  )}
 
   {bylineParts.length > 0 && (
     <p class="detail-byline">{bylineParts.join(' · ')}</p>
@@ -150,16 +179,19 @@ const renderCta = (c: CtaProp, cls: string) => {
     <section class="detail-next">
       <p class="detail-next-eyebrow">Continua a leggere</p>
       <a href={`/${nextItem.type}/${nextItem.slug}`} class="detail-next-card">
-        {nextItem.cover && (
-          <div class="detail-next-img">
-            <picture>
-              {/^.*\.(png|jpe?g)$/i.test(nextItem.cover) && (
-                <source srcset={nextItem.cover.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
-              )}
-              <img src={nextItem.cover} alt={nextItem.title} loading="lazy" decoding="async" />
-            </picture>
-          </div>
-        )}
+        {(() => {
+          const nSrc = nextItem.cover || '/og/placeholder-1_1.png';
+          return (
+            <div class="detail-next-img">
+              <picture>
+                {/^.*\.(png|jpe?g)$/i.test(nSrc) && (
+                  <source srcset={nSrc.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
+                )}
+                <img src={nSrc} alt={nextItem.title} loading="lazy" decoding="async" />
+              </picture>
+            </div>
+          );
+        })()}
         <div class="detail-next-body">
           {nextItem.kicker && <p class="detail-next-kicker">{nextItem.kicker}</p>}
           <h3 class="detail-next-title">{nextItem.title}</h3>
@@ -190,6 +222,33 @@ const renderCta = (c: CtaProp, cls: string) => {
 
   <script is:inline>
     (() => {
+      // Cover video — responsive source + prefers-reduced-motion
+      const videoInit = () => {
+        const video = document.querySelector('.detail-hero-video');
+        if (!video) return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced) {
+          video.removeAttribute('autoplay');
+          video.pause && video.pause();
+          return;
+        }
+        const w = window.innerWidth;
+        let src;
+        if (w < 540) {
+          src = video.dataset.srcTall || video.dataset.srcWide;
+        } else if (w < 900) {
+          src = video.dataset.srcMid || video.dataset.srcWide;
+        } else {
+          src = video.dataset.srcWide;
+        }
+        const source = video.querySelector('source');
+        if (source && src && source.src !== new URL(src, location.href).href) {
+          source.src = src;
+          video.load();
+        }
+      };
+      document.addEventListener('astro:page-load', videoInit);
+
       // Audio "Ascolta" — Web Speech Synthesis, browser-native, zero cost
       const listenInit = () => {
         const btn = document.querySelector('[data-listen]');

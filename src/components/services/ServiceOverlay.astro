@@ -1,0 +1,317 @@
+---
+// Pannello laterale destro per dettaglio servizi.
+// Il click su `.service-open` intercetta la navigazione e fetcha /api/services/<slug>.json.
+// Stessa estetica di TeamOverlay. Le URL dirette /services/<slug> continuano a funzionare.
+---
+<div id="service-ov" class="service-ov" hidden>
+  <div class="service-ov-backdrop" data-svc-close></div>
+  <aside class="service-ov-panel" role="dialog" aria-modal="true" aria-label="Dettaglio servizio">
+    <div class="service-ov-nav">
+      <button class="service-ov-x" data-svc-close aria-label="Chiudi">✕</button>
+    </div>
+    <div id="service-ov-body" class="service-ov-body"></div>
+  </aside>
+</div>
+
+<style>
+  .service-ov { position: fixed; inset: 0; z-index: 60; }
+  .service-ov[hidden] { display: none; }
+  .service-ov-backdrop { position: absolute; inset: 0; background: rgba(14,17,22,.18); }
+  .service-ov-panel {
+    position: absolute; top: 0; right: 0; bottom: 0; width: 100%; max-width: 600px;
+    background: var(--pianeta-bg);
+    box-shadow: -24px 0 70px rgba(14,17,22,.16);
+    overflow-y: auto; border-left: 1px solid var(--pianeta-border);
+  }
+  .service-ov-nav {
+    position: sticky; top: 0; z-index: 3;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 12px clamp(16px, 3vw, 24px);
+    background: var(--pianeta-bg); border-bottom: 1px solid var(--pianeta-border);
+  }
+  .service-ov-x {
+    background: var(--pianeta-bg-card); border: 1px solid var(--pianeta-border);
+    width: 38px; height: 38px; border-radius: var(--r-pill); cursor: pointer;
+    line-height: 1; color: var(--pianeta-text);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: var(--ty-meta);
+  }
+  .service-ov-x:hover { border-color: var(--pianeta-border-strong); }
+  .service-ov-body { padding: 32px clamp(24px, 4vw, 44px) 72px; }
+
+  :global(.sov-eyebrow) {
+    font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px;
+    color: var(--pianeta-muted); margin: 0 0 12px;
+  }
+  :global(.sov-title) {
+    font-size: clamp(22px, 3vw, 32px); letter-spacing: -.02em;
+    line-height: 1.1; margin: 0 0 10px;
+  }
+  :global(.sov-deck) {
+    font-size: 16px; color: var(--pianeta-muted); line-height: 1.55; margin: 0 0 24px;
+  }
+  :global(.sov-meta-block) {
+    border-top: 1px solid var(--pianeta-border); border-bottom: 1px solid var(--pianeta-border);
+    padding: 14px 0 16px; margin: 0 0 28px;
+  }
+  :global(.sov-meta) {
+    list-style: none; display: flex; flex-wrap: wrap; gap: 10px 24px;
+    padding: 0; margin: 0 0 14px;
+  }
+  :global(.sov-meta li) { display: flex; flex-direction: column; gap: 2px; }
+  :global(.sov-meta .k) {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted);
+  }
+  :global(.sov-meta .v) { font-size: var(--ty-meta); font-weight: 600; }
+  :global(.sov-content) { font-size: 16px; line-height: 1.7; max-width: 62ch; margin-bottom: 32px; }
+  :global(.sov-content h2), :global(.sov-content h3) {
+    font-size: var(--ty-h3-prose); letter-spacing: -.01em; margin: 28px 0 10px;
+  }
+  :global(.sov-content p) { margin: 0 0 14px; }
+  :global(.sov-content a) { color: var(--cta-primary); }
+
+  :global(.sov-blocks) {
+    display: grid; grid-template-columns: 1fr; gap: 20px; margin: 32px 0;
+  }
+  @media (min-width: 700px) { :global(.sov-blocks) { grid-template-columns: 1fr 1fr; } }
+  :global(.sov-block) {
+    padding: 20px 24px;
+    background: var(--pianeta-bg-card);
+    border: 1px solid var(--pianeta-border);
+    border-radius: 16px;
+  }
+  :global(.sov-block.is-highlight) { border-color: var(--cta-primary); }
+  :global(.sov-block-title) {
+    font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px;
+    color: var(--pianeta-muted); font-weight: 600; margin: 0 0 12px;
+  }
+  :global(.sov-block.is-highlight .sov-block-title) { color: var(--cta-primary); }
+  :global(.sov-block-list) { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  :global(.sov-block-list li) {
+    padding-left: 20px; position: relative;
+    font-size: var(--ty-meta); line-height: 1.5;
+  }
+  :global(.sov-block-list li::before) {
+    content: '→'; position: absolute; left: 0;
+    color: var(--cta-primary); font-weight: 600;
+  }
+
+  :global(.sov-siblings) { margin: 32px 0; padding-top: 28px; border-top: 1px solid var(--pianeta-border); }
+  :global(.sov-siblings-title) {
+    font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px;
+    color: var(--pianeta-muted); font-weight: 600; margin: 0 0 12px;
+  }
+  :global(.sov-siblings-list) { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+  :global(.sov-sibling-row) {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 16px; align-items: start;
+    padding: 14px 8px;
+    border-bottom: 1px solid var(--pianeta-border);
+    text-decoration: none; color: inherit; transition: background 150ms;
+  }
+  :global(.sov-sibling-row:last-of-type) { border-bottom: 0; }
+  :global(.sov-sibling-row:hover) { background: rgba(255,107,51,0.06); }
+  :global(.sov-sibling-title) { display: block; font-size: var(--ty-meta); margin-bottom: 3px; }
+  :global(.sov-sibling-deck) { display: block; font-size: 12px; color: var(--pianeta-muted); line-height: 1.4; }
+  :global(.sov-sibling-arrow) { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cta-primary); align-self: center; white-space: nowrap; }
+
+  :global(.sov-next) { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--pianeta-border); }
+  :global(.sov-next-eyebrow) {
+    font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px;
+    color: var(--pianeta-muted); margin: 0 0 8px;
+  }
+  :global(.sov-next-link) {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    text-decoration: none; color: inherit;
+    padding: 12px 0;
+  }
+  :global(.sov-next-link:hover .sov-next-title) { color: var(--cta-primary); }
+  :global(.sov-next-title) { font-size: 16px; font-weight: 500; transition: color 150ms; }
+  :global(.sov-next-arrow) { color: var(--cta-primary); font-size: 18px; flex-shrink: 0; }
+
+  :global(.sov-cta-row) {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 0; padding-top: 14px;
+    border-top: 1px solid var(--pianeta-border);
+  }
+
+  :global(.sov-full-link) {
+    display: inline-block; margin-top: 20px;
+    color: var(--pianeta-muted); font-weight: 600; text-decoration: none; font-size: var(--ty-meta);
+  }
+  :global(.sov-full-link:hover) { color: var(--pianeta-text); }
+</style>
+
+<script is:inline>
+  (() => {
+    // Capture-phase listener fires before Astro's ClientRouter bubble-phase handler,
+    // so e.preventDefault() correctly blocks SPA navigation.
+    // We store the handler reference on document to remove stale closures on re-init
+    // (view transitions swap the DOM and call init() again via astro:page-load).
+    const HANDLER_KEY = '__sovClick';
+
+    // TTS: legge il corpo del servizio corrente. Click ripetuto interrompe.
+    window.__sovAscolta = () => {
+      if (!window.speechSynthesis) return;
+      if (window.speechSynthesis.speaking) { window.speechSynthesis.cancel(); return; }
+      const el = document.getElementById('service-ov-body')?.querySelector('.sov-content');
+      const text = el?.textContent?.trim();
+      if (!text) return;
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'it-IT';
+      window.speechSynthesis.speak(u);
+    };
+
+    const init = () => {
+      const ov = document.getElementById('service-ov');
+      if (!ov) return;
+
+      // Remove stale handler from a previous init so we never accumulate listeners
+      if (document[HANDLER_KEY]) {
+        document.removeEventListener('click', document[HANDLER_KEY], true);
+        document[HANDLER_KEY] = null;
+      }
+
+      const body = document.getElementById('service-ov-body');
+      const panel = ov.querySelector('.service-ov-panel');
+
+      const esc = (x) => String(x ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+      const md = (s) => String(s || '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/^#{1,3} (.*)$/gm, '<h2>$1</h2>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .split(/\n{2,}/).map((b) => b.match(/^<h2>/) ? b : '<p>' + b.replace(/\n/g, '<br>') + '</p>').join('');
+
+      const loading = () => {
+        body.innerHTML = '<p style="padding:60px 0;text-align:center;color:var(--pianeta-muted)">Carico…</p>';
+        ov.hidden = false;
+        document.body.style.overflow = 'hidden';
+        if (panel) panel.scrollTop = 0;
+      };
+      const fail = () => {
+        body.innerHTML = '<p style="padding:40px 0;color:var(--pianeta-muted)">Servizio non disponibile.</p>';
+      };
+
+      const renderService = (d) => {
+        const meta = [
+          d.categoryLabel ? { k: 'Categoria', v: esc(d.categoryLabel) } : null,
+          d.phaseTag ? { k: 'Processo', v: esc(d.phaseTag) } : null,
+        ].filter(Boolean);
+
+        const metaHtml = meta.length
+          ? '<ul class="sov-meta">' + meta.map((m) => '<li><span class="k">' + m.k + '</span><span class="v">' + m.v + '</span></li>').join('') + '</ul>'
+          : '';
+
+        const blocksHtml = (d.inputClient?.length || d.deliverables?.length)
+          ? '<div class="sov-blocks">' +
+            (d.inputClient?.length ? '<div class="sov-block"><p class="sov-block-title">Input Client</p><ul class="sov-block-list">' + d.inputClient.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></div>' : '') +
+            (d.deliverables?.length ? '<div class="sov-block is-highlight"><p class="sov-block-title">Deliverables Pianeta</p><ul class="sov-block-list">' + d.deliverables.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></div>' : '') +
+            '</div>'
+          : '';
+
+        const siblingsHtml = d.siblings?.length
+          ? '<section class="sov-siblings"><p class="sov-siblings-title">Altri servizi in ' + esc(d.categoryLabel || 'questa categoria') + '</p>' +
+            '<ul class="sov-siblings-list">' +
+            d.siblings.map((s) =>
+              '<li><a href="/services/' + esc(s.slug) + '" class="sov-sibling-row service-open" data-service-slug="' + esc(s.slug) + '">' +
+              '<span><span class="sov-sibling-title">' + esc(s.title) + '</span>' + (s.description ? '<span class="sov-sibling-deck">' + esc(s.description) + '</span>' : '') + '</span>' +
+              '<span class="sov-sibling-arrow">→</span>' +
+              '</a></li>'
+            ).join('') +
+            '</ul></section>'
+          : '';
+
+        const nextHtml = d.nextItem
+          ? '<section class="sov-next"><p class="sov-next-eyebrow">Continua a leggere</p>' +
+            '<a href="/services/' + esc(d.nextItem.slug) + '" class="sov-next-link service-open" data-service-slug="' + esc(d.nextItem.slug) + '">' +
+            '<span class="sov-next-title">' + esc(d.nextItem.title) + '</span>' +
+            '<span class="sov-next-arrow">→</span>' +
+            '</a></section>'
+          : '';
+
+        const ctaRow =
+          '<div class="sov-cta-row">' +
+          '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'hire-us:open\'))">Lavoriamo insieme</button>' +
+          '<a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>' +
+          '<button type="button" class="cta-btn cta-ghost" onclick="window.__sovAscolta?.()">Ascolta</button>' +
+          '</div>';
+
+        // Buttons go inside the meta bordered block (between the two border lines)
+        const metaBlockHtml = meta.length
+          ? '<div class="sov-meta-block">' +
+            '<ul class="sov-meta">' + meta.map((m) => '<li><span class="k">' + m.k + '</span><span class="v">' + m.v + '</span></li>').join('') + '</ul>' +
+            ctaRow +
+            '</div>'
+          : ctaRow;
+
+        body.innerHTML =
+          '<p class="sov-eyebrow">' + esc(d.categoryLabel || 'Servizio') + '</p>' +
+          '<h1 class="sov-title">' + esc(d.name) + '</h1>' +
+          (d.description ? '<p class="sov-deck">' + esc(d.description) + '</p>' : '') +
+          metaBlockHtml +
+          (d.body ? '<div class="sov-content">' + md(d.body) + '</div>' : '') +
+          blocksHtml +
+          siblingsHtml +
+          nextHtml +
+          '<a class="sov-full-link" href="/services/' + esc(d.slug) + '">Apri pagina completa →</a>';
+      };
+
+      const openService = async (slug) => {
+        loading();
+        try {
+          const r = await fetch('/api/services/' + encodeURIComponent(slug) + '.json');
+          if (!r.ok) throw new Error('http ' + r.status);
+          const d = await r.json();
+          if (d && d.error) throw new Error(d.error);
+          renderService(d);
+          if (history && history.replaceState) history.replaceState(null, '', '/services#' + slug);
+        } catch { fail(); }
+      };
+
+      const close = () => {
+        ov.hidden = true;
+        document.body.style.overflow = '';
+        if (location.hash && history && history.replaceState) {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+      };
+
+      const clickHandler = (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+        const el = t.closest('.service-open');
+        if (el) {
+          e.preventDefault();
+          const slug = el.dataset.serviceSlug || (el.getAttribute('href') || '').split('/').filter(Boolean).pop();
+          if (slug) openService(slug);
+          return;
+        }
+        if (t.closest('[data-svc-close]')) { close(); return; }
+      };
+      document[HANDLER_KEY] = clickHandler;
+      document.addEventListener('click', clickHandler, true);
+
+      document.addEventListener('keydown', (e) => {
+        if (ov.hidden) return;
+        if (e.key === 'Escape') close();
+      });
+
+      // Deep-link: /services#slug apre l'overlay al load
+      const openFromHash = () => {
+        if (!location.pathname.startsWith('/services')) return;
+        const h = (location.hash || '').replace(/^#/, '');
+        if (h && /^[a-z0-9-]+$/i.test(h)) openService(h);
+      };
+      openFromHash();
+      window.addEventListener('hashchange', openFromHash);
+    };
+
+    init();
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>

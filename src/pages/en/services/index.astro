@@ -12,12 +12,12 @@ const byCategory = (key: string) =>
     .filter((i: any) => i.data.category === key)
     .sort((a: any, b: any) => (a.data.order ?? 999) - (b.data.order ?? 999));
 ---
-<BaseLayout title="Services — Pianeta.Studio" description="Four practice categories: Strategic Design Consultancy · Visualization & Storytelling · Products & Systems · Data & AI.">
+<BaseLayout title="Services — Pianeta.Studio" description="Three pillars: Creativity · Design · Technology. Co-design + AI validation + open standards. No lock-in.">
   <div class="index-page" style="max-width:1180px;">
     <header class="index-head">
       <p class="index-eyebrow">Sustainable Creativity · Design & Technology</p>
       <h1 class="index-title">Services</h1>
-      <p class="index-deck">Four practice areas that talk to each other. Co-design + AI validation + open standards. No lock-in.</p>
+      <p class="index-deck">Three pillars that talk to each other. Co-design + AI validation + open standards. No lock-in.</p>
       <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">{t('en', 'cta_lavoriamo')}</button>
         <a href="/en/processo" class="cta-btn cta-ghost">{t('en', 'cta_come_lavoriamo')} →</a>
@@ -32,10 +32,11 @@ const byCategory = (key: string) =>
       if (!items.length) return null;
       return (
         <section id={cat.key} class="services-cat" style="margin-top:64px;">
-          <h2 style="font-size:clamp(1.4rem,2.2vw,1.85rem);letter-spacing:-0.02em;margin:0 0 24px;text-align:center;">{cat.title}</h2>
+          <h2 style="font-size:clamp(1.4rem,2.2vw,1.85rem);letter-spacing:-0.02em;margin:0 0 12px;text-align:center;">{cat.titleEN}</h2>
+          <p style="font-size:var(--ty-meta);color:var(--pianeta-muted);line-height:1.55;margin:0 0 24px;text-align:center;max-width:680px;margin-left:auto;margin-right:auto;">{cat.introEN}</p>
           <div class="index-grid">
             {items.map((it: any) => (
-              <IndexCard href={`/en/services/${it.id}`} title={it.data.title || it.id} deck={it.data.description} kicker={it.data.icon || cat.title} image={it.data.cover || it.data.ogImage} />
+              <IndexCard href={`/en/services/${it.id}`} title={it.data.title || it.id} deck={it.data.description} kicker={it.data.icon || cat.titleEN} image={it.data.cover || it.data.ogImage} />
             ))}
           </div>
         </section>

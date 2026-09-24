@@ -7,7 +7,7 @@ since: "2025-09-01"
 employment: "collaborator"
 location: "Milan (nomadic, remote-first)"
 email: "ludovica@pianeta.studio"
-photo: "/og/placeholder.svg"
+photo: "/og/placeholder-1_1.png"
 order: 40
 description: "Designer · illustration, data viz, UX/UI for sustainability"
 date: 2026-06-23

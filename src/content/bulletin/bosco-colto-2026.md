@@ -52,7 +52,11 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
 
 **Sound, Ceramics and Communities** (w/ Domenico Mangano e Marieke van Rooy, a cura di Salvatore Lacagnina) — fischietti di ceramica prodotti con argilla, cenere di olivo, sabbie della Sicilia. Il momento in cui sentire una nota chiara porta gioia condivisa a tutti. Un lavoro che riguardava le persone e le loro storie, non solo l'argilla. Il progetto è vincitore dell'[Italian Council XIV edizione](https://creativitacontemporanea.cultura.gov.it/italiancouncil-edizione14-vincitori/) del Ministero della Cultura.
 
-[Sound, Ceramics and Communities — Makramè](https://makrame.org/2025/11/26/sounds-ceramics-communities/)
+<a class="scheda-card-b" href="https://makrame.org/2025/11/26/sounds-ceramics-communities/" target="_blank" rel="noopener">
+  <span class="card-icon" aria-hidden="true">↗</span>
+  <span class="card-label">Scheda progetto · Makramè</span>
+  <span class="card-title">Sound, Ceramics and Communities</span>
+</a>
 
 **Observatories** (w/ Food Hack Lab, Paesi Baschi) — nove "testimoni" in sughero e PETG stampato in 3D, disseminati in nove siti forestali tra il Bosco di Santo Pietro e la Sughereta di Niscemi. I loro sensori ESP32 misurano temperatura, umidità e livelli sonori, trasmettendo piccoli pacchetti di dati via rete LoRa. Un ascolto discreto e condiviso del bosco — che lascia alla foresta la propria voce.
 
@@ -71,7 +75,7 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
     <source media="(max-width: 640px)" srcset="/photos/bc26/struttura-telo-4x5.webp" type="image/webp" />
     <img src="/photos/bc26/struttura-telo-16x9.webp" alt="Struttura in legno con copertura — BC26, esterno, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="1920" height="1080" />
   </picture>
-  <figcaption class="photo-caption">© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
+  <figcaption class="photo-caption">© Davide Piro · Bosco Colto 2026</figcaption>
 </figure>
 
 ## Il Train Kiln — il Forno
@@ -89,7 +93,7 @@ Il forno può raggiungere temperature fino a 1.350 °C. I depositi naturali di c
     <source media="(max-width: 640px)" srcset="/photos/bc26/interno-pilastro-4x5.webp" type="image/webp" />
     <img src="/photos/bc26/interno-pilastro-16x9.webp" alt="Interno con persone e colonna in legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="1920" height="1080" />
   </picture>
-  <figcaption class="photo-caption">© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
+  <figcaption class="photo-caption">© Marco Sciré · Bosco Colto 2026</figcaption>
 </figure>
 
 ## Casa Bosco Colto — il progetto a lungo termine
@@ -107,6 +111,10 @@ L'obiettivo è trasformare l'esperienza episodica del campus in una piattaforma 
 **Contemporary art consultancy**: Salvatore Lacagnina
 **Graphic design**: Brickbat (Francesca Barizza, Corinne Carlin, Maria Giulia Leonardi, Alice Teodorani, Tobia Farinati)
 **Executive design**: Francesca Fossati, Massimiliano Mauro, Gloria Pulvirenti, Alessandra Gervasio
-**Foto**: Giuliana Lo Presti
+**Foto**: Giuliana Lo Presti, Davide Piro, Marco Sciré
 **Media partner**: The Architecture Curator (Firenze), LetteraVentidue Edizioni (Siracusa), Pianeta.Studio
 
+---
+
+*Pianeta.Studio è media e tech partner di Bosco Colto.*
+*[Il contributo di Pianeta.Studio a BC26 →](/work/bosco-colto)*

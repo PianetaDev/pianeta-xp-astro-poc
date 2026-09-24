@@ -35,7 +35,7 @@ Il nome Pianeta non è poetico, è programmatico: il design non parte dall'utent
 **Sustainable Creativity**
 
 ### Anchor identitarie — valide su tutti gli spoke (uso primario)
-1. **Sustainable Creativity dal 2016**
+1. **Sustainable Creativity**
 2. **Studio nomade · Pianeta-centric**
 8. **Design & Technology, una sola disciplina**
 9. **Human to Planet**

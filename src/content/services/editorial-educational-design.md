@@ -1,7 +1,7 @@
 ---
 title: "Editorial & educational design"
 description: "Libri illustrati, sistemi educational, infografiche complesse. Trasformiamo ricerca scientifica in narrazione visiva attraversabile da bambini fino a decisori istituzionali."
-category: "visualization-storytelling"
+category: "design"
 processPhase: 2
 icon: "📖"
 cover: "/og/work-untwist.png"

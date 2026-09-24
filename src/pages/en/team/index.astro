@@ -24,6 +24,7 @@ const sections = [
   <div class="index-page">
     <header class="index-head">      <h1 class="index-title">Team</h1>
       <p class="index-deck">People who design, code, research. A nomadic studio with bases in Milan · Ardea · Sicily.</p>
+      <p class="team-locale-switch"><a href="/team"><strong>Versione italiana</strong></a> · <strong>Versione inglese</strong></p>
     </header>
 
     {sections.map((sec) => sec.items.length > 0 && (
@@ -67,6 +68,14 @@ const sections = [
   <TeamOverlay locale="en" />
 
   <style>
+    .team-locale-switch {
+      font-size: 16px; margin: 12px 0 0;
+      color: var(--pianeta-muted);
+    }
+    .team-locale-switch strong { color: var(--pianeta-text); font-weight: 600; }
+    .team-locale-switch a { color: var(--pianeta-muted); text-decoration: none; }
+    .team-locale-switch a:hover { color: var(--pianeta-text); text-decoration: underline; }
+
     .team-section { margin-top: 64px; }
     .team-section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
     .team-section-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); letter-spacing: -0.02em; margin: 0 0 10px; }

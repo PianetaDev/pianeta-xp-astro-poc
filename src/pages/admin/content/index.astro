@@ -23,16 +23,18 @@ interface Row {
 interface Section {
   name: string;
   label: string;
+  hasEn: boolean;
   rows: Row[];
 }
 
-const COLLECTIONS: Array<{ name: string; enName: string; label: string }> = [
+const COLLECTIONS: Array<{ name: string; enName?: string; label: string }> = [
   { name: 'lab', enName: 'labEn', label: 'Lab' },
   { name: 'work', enName: 'workEn', label: 'Work' },
   { name: 'bulletin', enName: 'bulletinEn', label: 'Bulletin' },
   { name: 'services', enName: 'servicesEn', label: 'Services' },
   { name: 'team', enName: 'teamEn', label: 'Team' },
   { name: 'careers', enName: 'careersEn', label: 'Careers' },
+  { name: 'campaigns', label: 'Campaigns' },
 ];
 
 const REPO_BASE = 'https://github.com/PianetaDev/pianeta-xp-astro-poc/blob/main/src/content';
@@ -52,7 +54,7 @@ const sections: Section[] = [];
 for (const { name, enName, label } of COLLECTIONS) {
   const [itItems, enItems] = await Promise.all([
     getCollection(name as any),
-    getCollection(enName as any),
+    enName ? getCollection(enName as any) : Promise.resolve([]),
   ]);
 
   const itById = new Map(itItems.map((e: any) => [e.id, e]));
@@ -72,14 +74,14 @@ for (const { name, enName, label } of COLLECTIONS) {
   }).sort((a, b) => a.title.localeCompare(b.title));
 
   if (rows.length > 0) {
-    sections.push({ name, label, rows });
+    sections.push({ name, label, hasEn: !!enName, rows });
   }
 }
 
 const allRows = sections.flatMap((s) => s.rows);
 const liveCount = allRows.filter((r) => r.statusIt === 'live' || r.statusEn === 'live').length;
 const draftCount = allRows.filter((r) => r.statusIt === 'draft' || r.statusEn === 'draft').length;
-const missingEnCount = allRows.filter((r) => r.statusEn === 'missing').length;
+const missingEnCount = sections.filter((s) => s.hasEn).flatMap((s) => s.rows).filter((r) => r.statusEn === 'missing').length;
 
 const statusBadge = (s: Status) => ({ live: '🟢 Live', draft: '📝 Draft', missing: '⚪ —' }[s]);
 
@@ -100,25 +102,34 @@ const fmtDate = (d: Date | null) => d ? d.toLocaleDateString('it-IT', { day: '2-
         <h2 class="content-section-title">{section.label}</h2>
         <table class="content-table">
           <thead>
-            <tr><th>Titolo</th><th>IT</th><th>EN</th><th>Data</th><th>Modifica IT</th><th>Modifica EN</th></tr>
+            <tr>
+              <th>Titolo</th>
+              <th>IT</th>
+              {section.hasEn && <th>EN</th>}
+              <th>Data</th>
+              <th>Modifica IT</th>
+              {section.hasEn && <th>Modifica EN</th>}
+            </tr>
           </thead>
           <tbody>
             {section.rows.map((row) => (
               <tr>
                 <td>{row.title}</td>
                 <td>{statusBadge(row.statusIt)}</td>
-                <td>{statusBadge(row.statusEn)}</td>
+                {section.hasEn && <td>{statusBadge(row.statusEn)}</td>}
                 <td>{fmtDate(row.date)}</td>
                 <td>
                   {row.statusIt !== 'missing'
                     ? <a href={`${REPO_BASE}/${section.name}/${row.id}.md`} class="content-edit-link" target="_blank" rel="noopener">Modifica →</a>
                     : '—'}
                 </td>
-                <td>
-                  {row.statusEn !== 'missing'
-                    ? <a href={`${REPO_BASE}/${section.name}/${row.id}.en.md`} class="content-edit-link" target="_blank" rel="noopener">Modifica →</a>
-                    : '—'}
-                </td>
+                {section.hasEn && (
+                  <td>
+                    {row.statusEn !== 'missing'
+                      ? <a href={`${REPO_BASE}/${section.name}/${row.id}.en.md`} class="content-edit-link" target="_blank" rel="noopener">Modifica →</a>
+                      : '—'}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

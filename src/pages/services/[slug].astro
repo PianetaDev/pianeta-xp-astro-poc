@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DetailPage from '../../components/detail/DetailPage.astro';
+import ServiceOverlay from '../../components/services/ServiceOverlay.astro';
 import { getCollection, render } from 'astro:content';
 import { pickNextItem, toNextProp } from '../../lib/next-item';
 import { getCategoryByKey, getPhaseTag } from '../../lib/services-categories';
@@ -15,7 +16,7 @@ const { item, allItems } = Astro.props as any;
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.cover || data.ogImage;
+const cover = data.ogImage || data.cover;
 const caseStudies: string[] = data.caseStudies || [];
 const relatedServiceSlugs: string[] = data.relatedServices || [];
 
@@ -75,7 +76,7 @@ const jsonLd = {
     eyebrowParts={eyebrowParts}
     title={title}
     deck={data.description}
-    cover={cover}
+    hideCover
     primaryCta={isNeuromarketing
       ? { label: 'Parla con Alba', action: 'open-alba' }
       : { label: 'Lavoriamo insieme', action: 'open-hire-us' }}
@@ -84,7 +85,6 @@ const jsonLd = {
     backLabel="Tutti i servizi"
     related={relatedFromCaseStudies}
     relatedTitle="Case study"
-    nextItem={nextItem}
     metaInline={metaInline}
     twoCol={(item.body?.length ?? 0) > 2400}
     jsonLd={jsonLd}
@@ -127,20 +127,30 @@ const jsonLd = {
 
     {siblings.length > 0 && (
       <section class="service-siblings">
-        <h3 class="service-siblings-title">Altri servizi in {category?.title || 'questa categoria'}</h3>
+        <h3 class="service-siblings-title">Altri servizi in {category?.titleIT || 'questa categoria'}</h3>
         <ul class="service-siblings-list">
           {siblings.map((s: any) => (
             <li>
-              <a href={`/services/${s.id}`} class="service-sibling-card">
-                <span class="service-sibling-icon">{s.data.icon || '•'}</span>
-                <div>
+              <a href={`/services/${s.id}`} class="service-sibling-row service-open" data-service-slug={s.id}>
+                <span class="service-sibling-content">
                   <span class="service-sibling-title">{s.data.title}</span>
                   {s.data.description && <span class="service-sibling-deck">{s.data.description}</span>}
-                </div>
+                </span>
+                <span class="service-sibling-arrow">→</span>
               </a>
             </li>
           ))}
         </ul>
+      </section>
+    )}
+
+    {nextItem && (
+      <section class="service-continue">
+        <p class="service-continue-eyebrow">Continua a leggere</p>
+        <a href={`/${nextItem.type}/${nextItem.slug}`} class="service-continue-link service-open" data-service-slug={nextItem.slug}>
+          <span class="service-continue-title">{nextItem.title}</span>
+          <span class="service-continue-arrow">→</span>
+        </a>
       </section>
     )}
   </DetailPage>
@@ -191,26 +201,38 @@ const jsonLd = {
       letter-spacing: 2px;
       color: var(--pianeta-muted);
       font-weight: 600;
-      margin: 0 0 16px;
+      margin: 0 0 8px;
     }
-    .service-siblings-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-    @media (min-width: 700px) { .service-siblings-list { grid-template-columns: 1fr 1fr 1fr; } }
-    .service-sibling-card {
+    .service-siblings-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
+    .service-sibling-row {
       display: grid;
-      grid-template-columns: 28px 1fr;
-      gap: 12px;
-      padding: 16px;
-      background: var(--pianeta-bg-card);
-      border: 1px solid var(--pianeta-border);
-      border-radius: var(--radius-chip);
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 8px;
+      border-bottom: 1px solid var(--pianeta-border);
       text-decoration: none;
       color: inherit;
-      transition: border-color 150ms;
+      transition: background 150ms;
     }
-    .service-sibling-card:hover { border-color: var(--cta-primary); }
-    .service-sibling-icon { font-size: var(--ty-sub); }
-    .service-sibling-title { display: block; font-size: var(--ty-meta); margin-bottom: 4px; }
-    .service-sibling-deck { display: block; font-size: 12px; color: var(--pianeta-muted); line-height: 1.4; }
+    .service-sibling-row:hover { background: rgba(255,107,51,0.06); }
+    .service-sibling-content { display: flex; flex-direction: column; gap: 3px; }
+    .service-sibling-title { font-size: var(--ty-meta); }
+    .service-sibling-deck { font-size: 12px; color: var(--pianeta-muted); line-height: 1.4; }
+    .service-sibling-arrow { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cta-primary); white-space: nowrap; }
+
+    .service-continue { margin: 32px 0; padding-top: 24px; border-top: 1px solid var(--pianeta-border); }
+    .service-continue-eyebrow {
+      font-size: var(--ty-eyebrow); text-transform: uppercase; letter-spacing: 2px;
+      color: var(--pianeta-muted); margin: 0 0 8px;
+    }
+    .service-continue-link {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      text-decoration: none; color: inherit; padding: 10px 0;
+    }
+    .service-continue-link:hover .service-continue-title { color: var(--cta-primary); }
+    .service-continue-title { font-size: 16px; font-weight: 500; transition: color 150ms; }
+    .service-continue-arrow { color: var(--cta-primary); font-size: 18px; flex-shrink: 0; }
 
     /* Neuromarketing-lab: inline Alba CTA block */
     .neuro-alba-cta {
@@ -244,4 +266,5 @@ const jsonLd = {
     }
     .neuro-alba-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
   </style>
+  <ServiceOverlay />
 </BaseLayout>

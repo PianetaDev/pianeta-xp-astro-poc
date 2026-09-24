@@ -4,8 +4,8 @@ description: "How we integrated multi-agent simulation and a neural analysis sta
 date: 2026-06-24
 updated: 2026-06-24
 authors: ["max"]
-cover: "/og/bulletin-validare-campagna.png"
-ogImage: "/og/bulletin-validare-campagna.png"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 tags: ["neuromarketing", "ai-validation", "method", "swarm"]
 readingTime: "8 min"
 locale: en
@@ -121,9 +121,11 @@ Yes. It works on single spots, educational content, fundraising assets, brand vi
 
 ## See also
 
-→ [Choose to See Them — the ECLAG case](/en/work/eclag)
-→ [Service · Creativity and neuromarketing](/en/services/neuromarketing-lab)
-→ The live campaign at [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com)
+[Choose to See Them — the ECLAG case](/en/work/eclag)
+
+[Service · Creativity and neuromarketing](/en/services/neuromarketing-lab)
+
+The live campaign: [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com)
 
 ## Talk to Alba
 

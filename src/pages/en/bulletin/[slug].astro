@@ -17,7 +17,7 @@ if (nextItem) nextItem.type = 'en/bulletin';
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.cover || data.ogImage;
+const cover = data.ogImage || data.cover;
 
 const formatDate = (d?: Date) => d ? new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
 

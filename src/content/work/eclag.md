@@ -77,7 +77,7 @@ Ma l'outcome più rilevante è metodologico: il processo applicato a ECLAG è og
 
 Il dettaglio metodologico — cosa misura lo stack di analisi neurale, come si itera, le sette lezioni operative — vive nel Bulletin:
 
-→ [Validare una campagna video prima di produrla — il caso ECLAG](/bulletin/validare-una-campagna-prima-di-produrla)
+[Validare una campagna video prima di produrla — il caso ECLAG](/bulletin/validare-una-campagna-prima-di-produrla)
 
 ## FAQ
 

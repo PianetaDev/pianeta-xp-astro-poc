@@ -4,8 +4,8 @@ description: "The CMS we use to build our clients' sites: Payload CMS + Nuxt 3 +
 kind: "R&D product"
 year: 2026
 status: "In production"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 date: 2026-05-01
 locale: en
 draft: false

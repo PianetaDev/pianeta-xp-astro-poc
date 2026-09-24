@@ -1,13 +1,13 @@
 ---
 name: "Fabrizio Ciampini"
 title: "Fabrizio Ciampini"
-kind: "core"
+kind: "satellite"
 role: "CTO · R&D"
 since: "2024-01-01"
 employment: "contratto R&D"
 location: "Italia · remoto"
 email: "dev@pianeta.studio"
-photo: "/og/placeholder.svg"
+photo: "/og/placeholder-1_1.png"
 order: 15
 description: "CTO di Pianeta.Studio. Architettura di Stack Terra (Payload CMS + Nuxt 3), infrastruttura R&D, performance e sostenibilità tecnica come spec verificabili."
 date: 2026-06-27

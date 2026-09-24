@@ -1,11 +1,11 @@
 ---
 title: "ESG framework — Atlas"
 description: "Proprietary ESG framework that provides a common language between studio, clients, and suppliers. Indicators, metrics, operational guidelines."
-category: "data-ai"
+category: "technology"
 processPhase: 1
 icon: "🗺️"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 3
 inputClient:
   - "Existing ESG strategy"
@@ -19,7 +19,7 @@ deliverables:
   - "12-month roadmap"
 relatedServices: ["pianeta-centric-design-strategy", "greenmeter-audit-co2"]
 locale: en
-draft: false
+draft: true
 type: service
 date: 2026-06-27
 ---

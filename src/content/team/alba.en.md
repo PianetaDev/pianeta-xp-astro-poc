@@ -7,7 +7,7 @@ since: "2025-09-01"
 employment: "AI agent"
 location: "alba@pianeta.studio"
 email: "alba@pianeta.studio"
-photo: "/og/placeholder.svg"
+photo: "/og/placeholder-1_1.png"
 order: 5
 description: "Alba is Pianeta.Studio's first AI-assisted point of contact. She answers questions about our work, helps frame a brief, and hands things off to Max when a human decision is needed. She is an AI system, not a person — and she says so up front."
 date: 2026-06-01

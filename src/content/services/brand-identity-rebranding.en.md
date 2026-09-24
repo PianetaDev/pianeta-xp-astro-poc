@@ -1,7 +1,7 @@
 ---
 title: "Brand identity & rebranding"
 description: "Visual systems built to hold up over time and across sub-brands. Logo, brand manual, stationery, templates, social kits — designed to last well beyond go-live."
-category: "visualization-storytelling"
+category: "design"
 processPhase: 2
 icon: "🎨"
 cover: "/og/work-bc3-cover.png"

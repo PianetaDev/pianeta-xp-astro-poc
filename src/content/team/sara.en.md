@@ -1,13 +1,13 @@
 ---
 name: "Sara Amatista"
 title: "Sara Amatista"
-kind: "core"
+kind: "satellite"
 role: "Motion & Visual Designer"
 since: "2024-01-01"
 employment: "freelance"
 location: "Remote"
 email: "sara@pianeta.studio"
-photo: "/og/placeholder.svg"
+photo: "/og/placeholder-1_1.png"
 order: 30
 description: "Motion & Visual Designer · animation, visual translation, brand"
 date: 2026-06-23
