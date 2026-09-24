@@ -187,6 +187,8 @@
 .prose-eclag blockquote { margin: 1.7em 0; line-height: 1.7; }
 .prose-eclag a { color: var(--link-text); text-decoration: underline; text-underline-offset: 3px; }
 .prose-eclag img { display: block; width: 100%; border-radius: var(--radius-card); margin: 2em 0; }
+.prose-eclag hr { border: none; border-top: 1px solid var(--pianeta-border); margin: 2.5em 0 2em; }
+.photo-caption { font-size: var(--ty-meta); color: var(--pianeta-muted); margin: -1.25em 0 2em; font-style: italic; }
 
 /* Link card — paragrafi con solo un link diventano card bianche (allegato-1 PIA-1620) */
 .prose-eclag p:has(> a:only-child) {
