@@ -4,8 +4,8 @@ description: "Proprietary ESG framework that provides a common language between 
 category: "technology"
 processPhase: 1
 icon: "🗺️"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 3
 inputClient:
   - "Existing ESG strategy"

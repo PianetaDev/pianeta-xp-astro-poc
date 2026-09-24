@@ -4,8 +4,8 @@ description: "Definiamo la visione di marca e la traiettoria strategica a 3-5 an
 category: "creativity"
 processPhase: 1
 icon: "🎯"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 1
 inputClient:
   - "Documenti strategici esistenti (piano triennale, manifesti)"

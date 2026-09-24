@@ -4,8 +4,8 @@ description: "Measure your website's CO₂ footprint. Page weight, A+→F grade,
 category: "technology"
 processPhase: 4
 icon: "⚡"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 4
 inputClient:
   - "URL of the site to audit"

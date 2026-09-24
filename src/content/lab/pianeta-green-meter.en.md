@@ -4,8 +4,8 @@ description: "A proprietary tool for measuring a website's emissions — page we
 kind: "Live tool"
 year: 2026
 status: "Live"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 date: 2026-03-01
 locale: en
 draft: false

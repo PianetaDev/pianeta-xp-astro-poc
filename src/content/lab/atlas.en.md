@@ -4,8 +4,8 @@ description: "Atlas is the framework Pianeta uses to measure, tell, and put sust
 kind: "Framework"
 year: 2026
 status: "Live"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 date: 2026-04-01
 locale: en
 draft: false

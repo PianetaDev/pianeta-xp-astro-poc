@@ -4,8 +4,8 @@ description: "Trasformiamo il vincolo della sostenibilità in leva strategica. C
 category: "creativity"
 processPhase: 1
 icon: "🌍"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 4
 inputClient:
   - "Strategia ESG esistente (se disponibile)"

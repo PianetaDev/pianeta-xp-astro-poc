@@ -4,8 +4,8 @@ description: "Illustrazione editoriale e infografiche scientifiche. Pensate per 
 category: "design"
 processPhase: 2
 icon: "✏️"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 3
 inputClient:
   - "Dati o contenuti scientifici da visualizzare"

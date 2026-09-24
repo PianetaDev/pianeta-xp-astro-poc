@@ -7,7 +7,7 @@ since: "2025-09-01"
 employment: "agente AI"
 location: "alba@pianeta.studio"
 email: "alba@pianeta.studio"
-photo: "/og/placeholder.svg"
+photo: "/og/placeholder-1_1.png"
 order: 5
 description: "Alba è il primo punto di contatto AI-assistito di Pianeta.Studio. Risponde alle domande sui nostri lavori, aiuta a inquadrare un brief, gira a Max quando serve una decisione umana. È un sistema AI, non una persona — e lo dichiara sempre."
 date: 2026-06-01

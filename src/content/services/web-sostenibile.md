@@ -4,8 +4,8 @@ description: "Siti web con carbon budget come vincolo verificabile in CI. Hostin
 category: "technology"
 processPhase: 3
 icon: "🌱"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 1
 inputClient:
   - "Brief contenuti + tone of voice"

@@ -4,8 +4,8 @@ description: "We turn the constraint of sustainability into a strategic lever. C
 category: "creativity"
 processPhase: 1
 icon: "🌍"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 4
 inputClient:
   - "Existing ESG strategy (if available)"

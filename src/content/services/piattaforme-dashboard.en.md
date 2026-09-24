@@ -4,8 +4,8 @@ description: "Custom web platforms and business intelligence dashboards. Modular
 category: "technology"
 processPhase: 3
 icon: "📊"
-cover: "/og/placeholder.svg"
-ogImage: "/og/placeholder.svg"
+cover: "/og/placeholder-1_1.png"
+ogImage: "/og/placeholder-16_9.png"
 order: 3
 inputClient:
   - "Functional specs / user stories"
