@@ -41,7 +41,7 @@ L'identità visiva 2026 è stata curata dal collettivo Brickbat: cinque moviment
     <source media="(max-width: 640px)" srcset="/photos/bc26/workshop-4x5.webp" type="image/webp" />
     <img src="/photos/bc26/workshop-16x9.webp" alt="Workshop nel campo: persone al lavoro con strutture di legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="1920" height="1080" />
   </picture>
-  <figcaption>© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
+  <figcaption class="photo-caption">© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
 </figure>
 
 ## I workshop
@@ -71,7 +71,7 @@ Otto workshop hanno lavorato in parallelo per undici giorni, costruendo struttur
     <source media="(max-width: 640px)" srcset="/photos/bc26/struttura-telo-4x5.webp" type="image/webp" />
     <img src="/photos/bc26/struttura-telo-16x9.webp" alt="Struttura in legno con copertura — BC26, esterno, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="1920" height="1080" />
   </picture>
-  <figcaption>© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
+  <figcaption class="photo-caption">© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
 </figure>
 
 ## Il Train Kiln — il Forno
@@ -89,7 +89,7 @@ Il forno può raggiungere temperature fino a 1.350 °C. I depositi naturali di c
     <source media="(max-width: 640px)" srcset="/photos/bc26/interno-pilastro-4x5.webp" type="image/webp" />
     <img src="/photos/bc26/interno-pilastro-16x9.webp" alt="Interno con persone e colonna in legno — BC26, Bosco di Santo Pietro, luglio–agosto 2026" loading="lazy" decoding="async" width="1920" height="1080" />
   </picture>
-  <figcaption>© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
+  <figcaption class="photo-caption">© Giuliana Lo Presti · Bosco Colto 2026</figcaption>
 </figure>
 
 ## Casa Bosco Colto — il progetto a lungo termine
