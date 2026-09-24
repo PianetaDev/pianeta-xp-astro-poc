@@ -133,30 +133,41 @@ function meta(item: ContentItem, type: string) {
       <div class="flex-1 overflow-y-auto px-3 py-3">
         <p v-if="!items.length" class="px-3 py-6 text-xs text-black/40">Nessun contenuto ancora.</p>
 
-        <ul v-else class="space-y-1">
-          <li v-for="item in items" :key="item.path">
+        <ul v-else>
+          <li v-for="item in items" :key="item.path" class="border-b border-black/8 last:border-b-0">
+            <!-- Services: text-only. All other sections: image + text. -->
             <NuxtLink
+              v-if="open === 'services'"
               :to="item.path"
-              class="flex gap-3 p-2 rounded-lg hover:bg-black/5 transition group"
+              class="flex flex-col px-3 py-3 hover:bg-black/5 transition"
             >
-              <div class="w-16 h-16 rounded-md bg-black/5 overflow-hidden flex-shrink-0">
+              <p class="text-sm font-medium line-clamp-1">{{ item.title || item.name }}</p>
+              <p v-if="meta(item, open!)" class="text-xs text-black/50 mt-0.5 line-clamp-1">{{ meta(item, open!) }}</p>
+              <p v-if="item.description" class="text-xs text-black/40 mt-1 line-clamp-2">{{ item.description }}</p>
+            </NuxtLink>
+            <NuxtLink
+              v-else
+              :to="item.path"
+              class="flex gap-3 p-2 hover:bg-black/5 transition group"
+            >
+              <div class="w-14 h-14 rounded-md bg-black/5 overflow-hidden flex-shrink-0">
                 <NuxtImg
                   v-if="item.cover || item.photo"
                   :src="item.cover || item.photo"
                   :alt="item.title || item.name"
-                  width="64"
-                  height="64"
+                  width="56"
+                  height="56"
                   format="webp"
                   class="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                   loading="lazy"
                 />
                 <div v-else class="w-full h-full flex items-center justify-center text-black/30">
-                  <Icon :name="current.icon" :size="20" />
+                  <Icon :name="current!.icon" :size="18" />
                 </div>
               </div>
               <div class="flex-1 min-w-0 py-0.5">
                 <p class="text-sm font-medium line-clamp-1">{{ item.title || item.name }}</p>
-                <p class="text-xs text-black/50 mt-0.5 line-clamp-1">{{ meta(item, open!) }}</p>
+                <p v-if="meta(item, open!)" class="text-xs text-black/50 mt-0.5 line-clamp-1">{{ meta(item, open!) }}</p>
                 <p v-if="item.description" class="text-xs text-black/40 mt-1 line-clamp-2">{{ item.description }}</p>
               </div>
             </NuxtLink>
