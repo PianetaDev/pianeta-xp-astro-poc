@@ -286,12 +286,11 @@ a.detail-meta-value:hover { text-decoration: underline; }
 /* Cover hero — responsive aspect ratio (4:5 on mobile) */
 @media (max-width: 640px) { .detail-hero:not(.has-video) { aspect-ratio: 4 / 5 !important; } }
 
-/* Scheda progetto — card B (variante selezionata) */
-.scheda-card-b { display: flex; flex-direction: column; gap: 10px; background: var(--pianeta-bg-card, #fff); border: 1.5px solid var(--pianeta-border-strong, rgba(14,17,22,0.2)); border-radius: var(--radius-card); padding: var(--pad-card, 20px); text-decoration: none; color: var(--pianeta-text); transition: border-color var(--transition-base), transform var(--transition-base); margin: 1.5rem 0 2rem; }
-.scheda-card-b:hover { border-color: var(--cta-primary); transform: translateY(-2px); }
-.scheda-card-b .card-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--cta-primary); color: #fff; font-size: 14px; }
-.scheda-card-b .card-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--pianeta-muted); font-weight: 500; }
-.scheda-card-b .card-title { font-weight: 600; font-size: 0.9375rem; line-height: 1.3; }
+/* Scheda progetto — card B (link card orizzontale) */
+.scheda-card-b { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 16px; background: var(--pianeta-bg-card, #fff); border: 1.5px solid var(--pianeta-border-strong, rgba(14,17,22,0.2)); border-radius: var(--radius-card); padding: 18px 20px; text-decoration: none; color: var(--pianeta-text); transition: border-color var(--transition-base), transform var(--transition-base); margin: 1.5rem 0 2rem; }
+.scheda-card-b:hover { border-color: var(--link-text); transform: translateY(-2px); }
+.scheda-card-b .card-title { font-weight: 600; font-size: 1rem; line-height: 1.3; flex: 1; }
+.scheda-card-b .card-icon { color: var(--link-text); font-size: 18px; flex-shrink: 0; }
 @media (prefers-color-scheme: dark) { .scheda-card-b { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.15); } }
 
 .detail-related { max-width: 1080px; margin: 96px auto 48px; padding-top: 48px; border-top: 1px solid var(--pianeta-border); }
