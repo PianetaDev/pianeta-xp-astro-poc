@@ -28,6 +28,13 @@ coverVideo:
 
 Bosco Colto è un progetto di ricerca che indaga le relazioni tra cultura, coltura e paesaggio nei Boschi di Santo Pietro, a Caltagirone, in Sicilia. La ricerca si sviluppa e viene sperimentata sul campo attraverso il Campus annuale, promosso da Makramè APS: un cantiere temporaneo in cui tutor internazionali, studenti di architettura, design e arte e comunità locale lavorano insieme attorno a un tema condiviso, utilizzando materiali del luogo, tecniche tradizionali e ibridazioni contemporanee.
 
+Per capire meglio cos'è il progetto e cosa è successo a BC26:
+
+<a class="scheda-card-b" href="/bulletin/bosco-colto-2026">
+  <span class="card-icon" aria-hidden="true">↗</span>
+  <span class="card-label">Bulletin · Pianeta.Studio</span>
+  <span class="card-title">Bosco Colto 2026 — Pensare animale, costruire comunità</span>
+</a>
 
 ## Come è iniziata: Nutrimenti, 2025
 

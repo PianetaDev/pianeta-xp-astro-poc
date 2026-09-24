@@ -11,6 +11,7 @@ interface Props {
   title: string;
   deck?: string;
   cover?: string;
+  coverMobile?: string;
   hideCover?: boolean;
   coverVideo?: CoverVideo;
   heroPortrait?: boolean;
@@ -32,6 +33,7 @@ const {
   title,
   deck,
   cover,
+  coverMobile,
   hideCover = false,
   coverVideo,
   heroPortrait = false,
@@ -123,6 +125,7 @@ const renderCta = (c: CtaProp, cls: string) => {
         </>
       ) : (
         <picture>
+          {coverMobile && <source media="(max-width: 640px)" srcset={coverMobile} type="image/webp" />}
           {/^.*\.(png|jpe?g)$/i.test(heroSrc) && (
             <source srcset={heroSrc.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
           )}
