@@ -325,7 +325,7 @@ a.detail-meta-value:hover { text-decoration: underline; }
 .index-card-img video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .index-card:hover .index-card-img img { transform: scale(1.03); }
 .index-card.is-portrait .index-card-img { aspect-ratio: 3/4; }
-.index-card.has-video .index-card-img { aspect-ratio: 4/5; }
+.index-card.has-video .index-card-img { aspect-ratio: 1/1; }
 .index-card-poster { display: none !important; }
 @media (prefers-reduced-motion: reduce) { .index-card-video { display: none !important; } .index-card-poster { display: block !important; } }
 .index-card-body { padding: 18px 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 6px; }

@@ -29,7 +29,6 @@ const items = all
             deck={it.data.description}
             kicker={[it.data.client, it.data.year].filter(Boolean).join(' · ')}
             image={it.data.cover || it.data.ogImage}
-            video={(it.data as any).coverVideo?.src4_5}
           />
         ))}
       </div>

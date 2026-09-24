@@ -15,7 +15,7 @@ const nextItem = toNextProp(pickNextItem(allItems, item.id), 'lab');
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.cover || data.ogImage;
+const cover = data.ogImage || data.cover;
 
 const metaInline = [
   data.kind && { label: 'Tipo', value: data.kind },
