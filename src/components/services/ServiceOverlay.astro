@@ -219,16 +219,21 @@
             '</a></section>'
           : '';
 
+        const isNeuro = d.slug === 'neuromarketing-lab';
+        const primaryBtn = isNeuro
+          ? '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'alba:open\'))">Parla con Alba</button>'
+          : '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'hire-us:open\'))">Lavoriamo insieme</button>';
+
         body.innerHTML =
           '<p class="sov-eyebrow">' + esc(d.categoryLabel || 'Servizio') + '</p>' +
           '<h1 class="sov-title">' + esc(d.name) + '</h1>' +
           (d.description ? '<p class="sov-deck">' + esc(d.description) + '</p>' : '') +
           metaHtml +
-          (d.body ? '<div class="sov-content">' + md(d.body) + '</div>' : '') +
           '<div class="sov-cta-row">' +
-          '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'hire-us:open\'))">Lavoriamo insieme</button>' +
+          primaryBtn +
           '<a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>' +
           '</div>' +
+          (d.body ? '<div class="sov-content">' + md(d.body) + '</div>' : '') +
           blocksHtml +
           siblingsHtml +
           nextHtml +
