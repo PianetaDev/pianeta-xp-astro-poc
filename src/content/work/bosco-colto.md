@@ -12,6 +12,14 @@ locale: it
 draft: false
 type: work
 tags: ["partnership", "media", "sostenibilità", "campus", "sicilia", "territorio"]
+cover: "/og/work-bosco-colto-cover.jpg"
+ogImage: "/og/work-bosco-colto-cover.jpg"
+coverVideo:
+  src16_9: "/work/bosco-colto/bosco-colto-cover-16_9.mp4"
+  src9_16: "/work/bosco-colto/bosco-colto-cover-9_16.mp4"
+  src4_5: "/work/bosco-colto/bosco-colto-cover-4_5.mp4"
+  src1_1: "/work/bosco-colto/bosco-colto-cover-1_1.mp4"
+  poster: "/work/bosco-colto/bosco-colto-cover-poster.jpg"
 ---
 
 **TLDR.** Il nostro motto è amplificare la voce di chi opera nella sostenibilità. Con Bosco Colto — campus internazionale di ricerca, design e architettura nei Boschi di Santo Pietro, Caltagirone — siamo media e tech partner dal 2025. Copertura editoriale, presenza sul campo, connessione satellitare per garantire connettività nelle zone remote, strategia comunicativa. **2025→2026 · media partner · archivio fotografico, podcast, booklet, stampa, social — e tanto altro ancora**
@@ -45,6 +53,18 @@ Proprio come nel 2025, nel 2026 torniamo a Caltagirone per documentare l'evento,
 
 I Boschi di Santo Pietro sono in una zona remota, con connettività limitata. Per questo predisponiamo una connessione satellitare, necessaria allo svolgimento dei workshop e delle attività del Campus. Ci muoviamo con il **furgone ETPS BYD elettrico** e lo **scooter Askol XKP80** — un modo di essere presenti sul campo con un'impronta coerente con il progetto che supportiamo.
 
+<figure class="prose-figure">
+  <video autoplay muted loop playsinline aria-hidden="true" style="aspect-ratio:16/9;width:100%;object-fit:cover;border-radius:var(--radius-card)">
+    <source src="/work/bosco-colto/bosco-colto-sul-campo-1.mp4" type="video/mp4" />
+  </video>
+</figure>
+
+<figure class="prose-figure">
+  <video autoplay muted loop playsinline aria-hidden="true" style="aspect-ratio:16/9;width:100%;object-fit:cover;border-radius:var(--radius-card)">
+    <source src="/work/bosco-colto/bosco-colto-sul-campo-2.mp4" type="video/mp4" />
+  </video>
+</figure>
+
 ## Il Train Kiln — una storia che abbiamo seguito con cura
 
 Una delle storie più significative di BC26 è il **Train Kiln** — il forno a legna per ceramica inaugurato il 1° agosto nella corte di Casa Bosco Colto, dietro l'ex chiesa del Borgo di Santo Pietro.
@@ -54,6 +74,13 @@ Il forno è stato progettato e costruito sotto la guida tecnica dei ceramisti Pr
 È il **secondo Train Kiln costruito in Italia** e la **prima infrastruttura permanente di Casa Bosco Colto**. Il forno può raggiungere temperature fino a **1.350°C**, e la sua costruzione recupera un legame storico: per secoli il Bosco di Santo Pietro aveva alimentato i forni di Caltagirone, rendendo celebre la tradizione ceramica della città. Il Train Kiln riporta la cottura dentro il bosco.
 
 Documentare la sua costruzione, la sua inaugurazione, il suo significato — è parte del lavoro editoriale che il nostro team ha fatto durante il campus.
+
+<figure class="prose-figure">
+  <picture>
+    <source srcset="/og/work-bosco-colto-il-team.webp" type="image/webp" />
+    <img src="/og/work-bosco-colto-il-team.png" alt="Il team Pianeta.Studio al Campus BC26" loading="lazy" decoding="async" width="1920" height="1080" />
+  </picture>
+</figure>
 
 ## Il team
 
@@ -76,13 +103,19 @@ Un team che ha creduto nel progetto — è il modo in cui lavoriamo quando la mi
 
 La relazione continua — ogni edizione porta nuovi formati.
 
+<figure class="prose-figure">
+  <video autoplay muted loop playsinline aria-hidden="true" style="aspect-ratio:16/9;width:100%;object-fit:cover;border-radius:var(--radius-card)">
+    <source src="/work/bosco-colto/bosco-colto-cosa-abbiamo-prodotto.mp4" type="video/mp4" />
+  </video>
+</figure>
+
 ## Continuità digitale: il campo non finisce il giorno del campus
 
 Una cosa che abbiamo imparato: il lavoro sul campo deve avere un luogo digitale dove continuare a vivere.
 
 Abbiamo aiutato i workshop a portare i loro materiali online — per chi non era presente, per chi vuole tornare sull'esperienza, per costruire un archivio che duri oltre il campus. Due esempi di cosa significa in pratica:
 
-[observatories.boscocolto.org — archivio fotografico esplorabile del campus](https://observatories.boscocolto.org/)
+[Observatories: archivio fotografico esplorabile del campus](https://observatories.boscocolto.org/)
 
 [More-Than-Human Audio Worlds — i paesaggi sonori del campus, ascoltabili online](https://observatories.boscocolto.org/morethanhumanaudioworlds)
 
