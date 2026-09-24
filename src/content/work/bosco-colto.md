@@ -31,9 +31,8 @@ Bosco Colto è un progetto di ricerca che indaga le relazioni tra cultura, coltu
 Per capire meglio cos'è il progetto e cosa è successo a BC26:
 
 <a class="scheda-card-b" href="/bulletin/bosco-colto-2026">
-  <span class="card-icon" aria-hidden="true">↗</span>
-  <span class="card-label">Bulletin · Pianeta.Studio</span>
   <span class="card-title">Bosco Colto 2026 — Pensare animale, costruire comunità</span>
+  <span class="card-icon" aria-hidden="true">↗</span>
 </a>
 
 ## Come è iniziata: Nutrimenti, 2025
@@ -42,7 +41,10 @@ Tutto inizia con un invito. Nel 2025, Marco Falcone e Fabrizio Foti invitano Max
 
 Da quell'invito nasce il nostro primo contributo operativo: una mostra e una serie di video interviste ai produttori locali — persone che stanno cambiando il modo di lavorare la terra per rispondere ai cambiamenti climatici. Il video è online:
 
-[Nutrimenti — video interviste ai produttori (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
+<a class="scheda-card-b" href="https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s" target="_blank" rel="noopener">
+  <span class="card-title">Nutrimenti — video interviste ai produttori (YouTube)</span>
+  <span class="card-icon" aria-hidden="true">↗</span>
+</a>
 
 Nutrimenti merita probabilmente un racconto a sé. È il momento in cui capiamo cosa significa stare dentro Bosco Colto, viverlo dall'interno.
 
@@ -122,9 +124,15 @@ Una cosa che abbiamo imparato: il lavoro sul campo deve avere un luogo digitale 
 
 Abbiamo aiutato i workshop a portare i loro materiali online — per chi non era presente, per chi vuole tornare sull'esperienza, per costruire un archivio che duri oltre il campus. Due esempi di cosa significa in pratica:
 
-[Observatories: archivio fotografico esplorabile del campus](https://observatories.boscocolto.org/)
+<a class="scheda-card-b" href="https://observatories.boscocolto.org/" target="_blank" rel="noopener">
+  <span class="card-title">Observatories: archivio fotografico esplorabile del campus</span>
+  <span class="card-icon" aria-hidden="true">↗</span>
+</a>
 
-[More-Than-Human Audio Worlds — i paesaggi sonori del campus, ascoltabili online](https://observatories.boscocolto.org/morethanhumanaudioworlds)
+<a class="scheda-card-b" href="https://observatories.boscocolto.org/morethanhumanaudioworlds" target="_blank" rel="noopener">
+  <span class="card-title">More-Than-Human Audio Worlds — i paesaggi sonori del campus, ascoltabili online</span>
+  <span class="card-icon" aria-hidden="true">↗</span>
+</a>
 
 ## FAQ
 
