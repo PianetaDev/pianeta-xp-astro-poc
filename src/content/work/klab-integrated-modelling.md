@@ -7,11 +7,11 @@ year: 2022
 date: 2022-09-15
 updated: 2026-08-26
 sector: "Ricerca scientifica · AI · Sostenibilità"
-cover: "/og/placeholder-1_1.png"
-ogImage: "/og/placeholder-16_9.png"
+cover: "/og/work-klab-integrated-modelling.png"
+ogImage: "/og/work-klab-integrated-modelling.png"
 hero:
   type: "image"
-  src: "/og/placeholder-16_9.png"
+  src: "/og/work-klab-integrated-modelling.png"
 services: ["creativity"]
 team: ["max"]
 links:
@@ -28,6 +28,8 @@ k.LAB è la piattaforma di **modellazione integrata** sviluppata da integratedmo
 
 L'obiettivo era aprire la piattaforma a una platea più ampia — ricercatori, policy maker, tecnici ambientali — senza sacrificare la profondità scientifica.
 
+![Before/after del redesign k.LAB: confronto tra l'interfaccia originale e la versione riprogettata](/work/klab-integrated-modelling/klab-la-sfida.png)
+
 ## L'approccio
 
 Il lavoro si è concentrato su tre assi:
@@ -42,6 +44,8 @@ Il lavoro si è concentrato su tre assi:
 - Architettura dell'informazione rivista
 - Prototipo UI delle schermate chiave
 - Linee guida per il design system interno
+
+![Griglia delle quattro schermate principali del prototipo k.LAB: dashboard, esplora modelli, configurazione analisi, risultati](/work/klab-integrated-modelling/klab-cosa-abbiamo-prodotto.png)
 
 ## Contesto
 
