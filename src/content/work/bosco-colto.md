@@ -27,7 +27,7 @@ Tutto inizia con un invito. Nel 2025, Marco Falcone e Fabrizio Foti invitano Max
 
 Da quell'invito nasce il nostro primo contributo operativo: una mostra e una serie di video interviste ai produttori locali — persone che stanno cambiando il modo di lavorare la terra per rispondere ai cambiamenti climatici. Il video è online:
 
-→ [Nutrimenti — video interviste ai produttori (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
+[Nutrimenti — video interviste ai produttori (YouTube)](https://www.youtube.com/watch?v=4tKVX5MrBmk&t=176s)
 
 Nutrimenti merita probabilmente un racconto a sé. È il momento in cui capiamo cosa significa stare dentro Bosco Colto, viverlo dall'interno.
 
@@ -82,8 +82,9 @@ Una cosa che abbiamo imparato: il lavoro sul campo deve avere un luogo digitale 
 
 Abbiamo aiutato i workshop a portare i loro materiali online — per chi non era presente, per chi vuole tornare sull'esperienza, per costruire un archivio che duri oltre il campus. Due esempi di cosa significa in pratica:
 
-→ [observatories.boscocolto.org](https://observatories.boscocolto.org/) — archivio fotografico esplorabile del campus
-→ [More-Than-Human Audio Worlds](https://observatories.boscocolto.org/morethanhumanaudioworlds) — i paesaggi sonori del campus, ascoltabili online
+[observatories.boscocolto.org — archivio fotografico esplorabile del campus](https://observatories.boscocolto.org/)
+
+[More-Than-Human Audio Worlds — i paesaggi sonori del campus, ascoltabili online](https://observatories.boscocolto.org/morethanhumanaudioworlds)
 
 ## FAQ
 
