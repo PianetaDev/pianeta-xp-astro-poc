@@ -4,7 +4,7 @@ description: "Due famiglie di AI per validare creatività video — simulazione 
 date: 2026-06-26
 updated: 2026-06-26
 authors: ["Pianeta.Studio"]
-cover: "/og/placeholder-16_9.png"
+cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 tags: ["neuromarketing", "ai-validation", "ricerca", "swarm", "neural-prediction"]
 readingTime: "10 min"

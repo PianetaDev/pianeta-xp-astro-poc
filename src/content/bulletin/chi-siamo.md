@@ -2,7 +2,7 @@
 title: "Chi siamo"
 description: "Pianeta.Studio è uno studio di Sustainable Creativity: Design & Technology al servizio di idee che generano cambiamento positivo per le persone e per il pianeta."
 ogImage: "/og/placeholder-16_9.png"
-cover: "/og/placeholder-16_9.png"
+cover: "/og/placeholder-1_1.png"
 date: 2026-06-26
 draft: false
 locale: it

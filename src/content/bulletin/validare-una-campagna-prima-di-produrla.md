@@ -4,7 +4,7 @@ description: "Come abbiamo integrato simulazione multi-agente e stack di analisi
 date: 2026-06-24
 updated: 2026-06-24
 authors: ["max"]
-cover: "/og/placeholder-16_9.png"
+cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 tags: ["neuromarketing", "ai-validation", "metodo", "swarm"]
 readingTime: "8 min"
