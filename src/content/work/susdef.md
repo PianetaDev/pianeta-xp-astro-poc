@@ -73,7 +73,7 @@ La formazione al team interno è parte del progetto, non un'appendice: il team d
 
 Il dettaglio del percorso — la gara, le scelte tecniche, la migrazione dei dati — vive nei bulletin:
 
-→ [Come abbiamo vinto la gara Susdef: metodo e percorso](/bulletin/percorso-susdef)
+[Come abbiamo vinto la gara Susdef: metodo e percorso](/bulletin/percorso-susdef)
 
 ## FAQ
 
