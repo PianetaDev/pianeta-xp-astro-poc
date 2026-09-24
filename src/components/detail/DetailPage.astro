@@ -10,6 +10,7 @@ interface Props {
   title: string;
   deck?: string;
   cover?: string;
+  hideCover?: boolean;
   heroPortrait?: boolean;
   primaryCta?: CtaProp;
   secondaryCta?: CtaProp;
@@ -29,6 +30,7 @@ const {
   title,
   deck,
   cover,
+  hideCover = false,
   heroPortrait = false,
   primaryCta,
   secondaryCta,
@@ -43,6 +45,8 @@ const {
   jsonLd,
   fallbackBanner,
 } = Astro.props;
+
+const heroSrc = cover || (heroPortrait ? '/og/placeholder-4_5.png' : '/og/placeholder-16_9.png');
 
 const bylineParts: string[] = [];
 if (byline?.authors?.length) bylineParts.push('di ' + byline.authors.join(', '));
@@ -94,14 +98,16 @@ const renderCta = (c: CtaProp, cls: string) => {
     )}
   </header>
 
-  <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
-    <picture>
-      {/^.*\.(png|jpe?g)$/i.test(cover || '') && (
-        <source srcset={(cover || '').replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
-      )}
-      <img src={cover || '/og/placeholder.svg'} alt={title} loading="eager" fetchpriority="high" decoding="async" />
-    </picture>
-  </div>
+  {!hideCover && (
+    <div class:list={['detail-hero', heroPortrait && 'is-portrait']}>
+      <picture>
+        {/^.*\.(png|jpe?g)$/i.test(heroSrc) && (
+          <source srcset={heroSrc.replace(/\.(png|jpe?g)$/i, '.webp')} type="image/webp" />
+        )}
+        <img src={heroSrc} alt={title} loading="eager" fetchpriority="high" decoding="async" />
+      </picture>
+    </div>
+  )}
 
   {bylineParts.length > 0 && (
     <p class="detail-byline">{bylineParts.join(' · ')}</p>
@@ -147,16 +153,19 @@ const renderCta = (c: CtaProp, cls: string) => {
     <section class="detail-next">
       <p class="detail-next-eyebrow">Continua a leggere</p>
       <a href={`/${nextItem.type}/${nextItem.slug}`} class="detail-next-card">
-        {nextItem.cover && (
-          <div class="detail-next-img">
-            <picture>
-              {/^.*\.(png|jpe?g)$/i.test(nextItem.cover) && (
-                <source srcset={nextItem.cover.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
-              )}
-              <img src={nextItem.cover} alt={nextItem.title} loading="lazy" decoding="async" />
-            </picture>
-          </div>
-        )}
+        {(() => {
+          const nSrc = nextItem.cover || '/og/placeholder-1_1.png';
+          return (
+            <div class="detail-next-img">
+              <picture>
+                {/^.*\.(png|jpe?g)$/i.test(nSrc) && (
+                  <source srcset={nSrc.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
+                )}
+                <img src={nSrc} alt={nextItem.title} loading="lazy" decoding="async" />
+              </picture>
+            </div>
+          );
+        })()}
         <div class="detail-next-body">
           {nextItem.kicker && <p class="detail-next-kicker">{nextItem.kicker}</p>}
           <h3 class="detail-next-title">{nextItem.title}</h3>

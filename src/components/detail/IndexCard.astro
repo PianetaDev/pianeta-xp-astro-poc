@@ -8,7 +8,7 @@ interface Props {
   portrait?: boolean;
 }
 const { href, title, deck, kicker, image, portrait = false } = Astro.props;
-const cover = image || '/og/placeholder.svg';
+const cover = image || (portrait ? '/og/placeholder-4_5.png' : '/og/placeholder-1_1.png');
 ---
 <a href={href} class:list={['index-card', portrait && 'is-portrait']}>
   <div class="index-card-img">

@@ -44,7 +44,7 @@ const description = 'Design & technology studio. Work, articles, experiments.';
           </div>
         </a>
       ) : w0 && (
-        <a href={`/en/work/${w0.id}`} class="bento-tile t-tall t-dark" style={`background-image:url('${(w0.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center;`}>
+        <a href={`/en/work/${w0.id}`} class="bento-tile t-tall t-dark" style={`background-image:url('${(w0.data.cover || '/og/placeholder-16_9.png').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center;`}>
           <div class="bento-grad" />
           <div class="bento-content">
             <p class="bento-kicker">Featured</p>
@@ -106,7 +106,7 @@ const description = 'Design & technology studio. Work, articles, experiments.';
       )}
 
       {otherWork.map((w: any, i: number) => (
-        <a href={`/en/work/${w.id}`} class={`bento-tile ${i === 0 ? 't-tall' : 't-medium'}`} style={`background-image:url('${(w.data.cover || '/og/placeholder.svg').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
+        <a href={`/en/work/${w.id}`} class={`bento-tile ${i === 0 ? 't-tall' : 't-medium'}`} style={`background-image:url('${(w.data.cover || '/og/placeholder-16_9.png').replace(/\.(png|jpe?g)$/i, '-card.webp')}'); background-size:cover; background-position:center; color:#fff;`}>
           <div class="bento-grad" />
           <div class="bento-content">
             <p class="bento-kicker">{'Work · ' + (w.data.year || '')}</p>
