@@ -73,7 +73,10 @@ Training the internal team is part of the project, not an appendix: Susdef's tea
 
 The detail of the journey — the pitch, the technical choices, the data migration — lives in the bulletins:
 
-[How we won the Susdef pitch: method and process](/bulletin/percorso-susdef)
+<a class="scheda-card-b" href="/bulletin/percorso-susdef">
+  <span class="card-title">How we won the Susdef pitch: method and process</span>
+  <span class="card-icon">↗</span>
+</a>
 
 ## FAQ
 

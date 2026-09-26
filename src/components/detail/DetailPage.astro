@@ -178,26 +178,9 @@ const renderCta = (c: CtaProp, cls: string) => {
   {nextItem && (
     <section class="detail-next">
       <p class="detail-next-eyebrow">Continua a leggere</p>
-      <a href={`/${nextItem.type}/${nextItem.slug}`} class="detail-next-card">
-        {(() => {
-          const nSrc = nextItem.cover || '/og/placeholder-1_1.png';
-          return (
-            <div class="detail-next-img">
-              <picture>
-                {/^.*\.(png|jpe?g)$/i.test(nSrc) && (
-                  <source srcset={nSrc.replace(/\.(png|jpe?g)$/i, '-card.webp')} type="image/webp" />
-                )}
-                <img src={nSrc} alt={nextItem.title} loading="lazy" decoding="async" />
-              </picture>
-            </div>
-          );
-        })()}
-        <div class="detail-next-body">
-          {nextItem.kicker && <p class="detail-next-kicker">{nextItem.kicker}</p>}
-          <h3 class="detail-next-title">{nextItem.title}</h3>
-          {nextItem.deck && <p class="detail-next-deck">{nextItem.deck}</p>}
-          <p class="detail-next-arrow">Leggi →</p>
-        </div>
+      <a href={`/${nextItem.type}/${nextItem.slug}`} class="detail-next-link">
+        <span class="detail-next-title">{nextItem.title}</span>
+        <span class="detail-next-arrow">→</span>
       </a>
     </section>
   )}

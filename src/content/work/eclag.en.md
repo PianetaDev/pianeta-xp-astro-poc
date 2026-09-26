@@ -77,7 +77,10 @@ But the most relevant outcome is methodological: the process applied to ECLAG is
 
 The methodological detail — what the neural-analysis stack measures, how you iterate, the seven operating lessons — lives in the Bulletin:
 
-[Validating a video campaign before producing it — the ECLAG case](/en/bulletin/validare-una-campagna-prima-di-produrla)
+<a class="scheda-card-b" href="/en/bulletin/validare-una-campagna-prima-di-produrla">
+  <span class="card-title">Validating a video campaign before producing it — the ECLAG case</span>
+  <span class="card-icon">↗</span>
+</a>
 
 ## FAQ
 

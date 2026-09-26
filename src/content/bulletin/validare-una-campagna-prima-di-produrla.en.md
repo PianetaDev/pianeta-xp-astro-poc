@@ -121,9 +121,15 @@ Yes. It works on single spots, educational content, fundraising assets, brand vi
 
 ## See also
 
-[Choose to See Them — the ECLAG case](/en/work/eclag)
+<a class="scheda-card-b" href="/en/work/eclag">
+  <span class="card-title">Choose to See Them — the ECLAG case</span>
+  <span class="card-icon">↗</span>
+</a>
 
-[Service · Creativity and neuromarketing](/en/services/neuromarketing-lab)
+<a class="scheda-card-b" href="/en/services/neuromarketing-lab">
+  <span class="card-title">Service · Creativity and neuromarketing</span>
+  <span class="card-icon">↗</span>
+</a>
 
 The live campaign: [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com)
 

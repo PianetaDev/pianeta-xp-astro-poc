@@ -121,9 +121,15 @@ Sì. Funziona su singoli spot, contenuti formativi, asset fundraising, brand vid
 
 ## Vedi anche
 
-[Choose to See Them — il caso ECLAG](/work/eclag)
+<a class="scheda-card-b" href="/work/eclag">
+  <span class="card-title">Choose to See Them — il caso ECLAG</span>
+  <span class="card-icon">↗</span>
+</a>
 
-[Service · Creatività e neuromarketing](/services/neuromarketing-lab)
+<a class="scheda-card-b" href="/services/neuromarketing-lab">
+  <span class="card-title">Service · Creatività e neuromarketing</span>
+  <span class="card-icon">↗</span>
+</a>
 
 La campagna live: [choosetoseethem.childsafetyineurope.com](https://choosetoseethem.childsafetyineurope.com)
 
