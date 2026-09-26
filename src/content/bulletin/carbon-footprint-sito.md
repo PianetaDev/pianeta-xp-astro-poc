@@ -1,6 +1,6 @@
 ---
 title: "Il carbon footprint del tuo sito — cos'è, come si misura, dove si riduce"
-description: "Un sito web medio produce 1.76g di CO₂ a visita. Dal 27 settembre 2026 la Direttiva UE 2024/825 rende sanzionabili i claim green non documentati. Come misurare l'impatto del tuo sito e dove agire."
+description: "Un sito web medio produce 0,36 g di CO₂ a visita (GreenMeter, metodo Green Web Foundation). Dal 27 settembre 2026 la Direttiva UE 2024/825 rende sanzionabili i claim green non documentati. Come misurare l'impatto del tuo sito e dove agire."
 date: 2026-09-07
 draft: true
 locale: it
@@ -11,13 +11,13 @@ readingTime: "5 min"
 category: "Web sostenibile"
 ---
 
-**TLDR.** Un sito web medio produce 1.76g di CO₂ per visita. I nostri producono il 70% in meno. Ma prima ancora del numero, conta il metodo: carbon budget e performance budget come vincoli tecnici verificabili, definiti a monte, non dichiarazioni di intenti post-lancio. Dal 27 settembre 2026 la Direttiva UE 2024/825 rende sanzionabili i claim ambientali non documentati — fino al 4% del fatturato. Ecco come misurare e dove ridurre.
+**TLDR.** Un sito web medio produce 0,36 g di CO₂ per visita (GreenMeter, metodo Green Web Foundation). I nostri producono fino al 70% in meno. Ma prima ancora del numero, conta il metodo: carbon budget e performance budget come vincoli tecnici verificabili, definiti a monte, non dichiarazioni di intenti post-lancio. Dal 27 settembre 2026 la Direttiva UE 2024/825 rende sanzionabili i claim ambientali non documentati — fino al 4% del fatturato. Ecco come misurare e dove ridurre.
 
 ## Quanto pesa davvero un sito web
 
 Ogni volta che qualcuno apre una pagina del tuo sito accade qualcosa di fisico: server che rispondono, dati che viaggiano su cavi e antenne, dispositivi che elaborano. Tutto questo consuma energia. Una parte di quell'energia — dipende da dove viene prodotta — genera CO₂.
 
-Il numero di riferimento: **1.76g di CO₂ per visita** è la media globale (fonte: Website Carbon Calculator, 2023). Per un sito con 50.000 visite al mese sono circa 1.05 tonnellate di CO₂ l'anno — l'equivalente di tre voli Roma-Londra a settimana.
+Il numero di riferimento: **0,36 g di CO₂ per visita** è la media attuale (fonte: GreenMeter, metodo Green Web Foundation / Sustainable Web Design, 2026). Per un sito con 50.000 visite al mese sono circa 0,22 tonnellate di CO₂ l'anno — l'equivalente di un volo Roma-Londra al mese.
 
 Per un'organizzazione che fa del posizionamento sostenibile il proprio business, questo numero è rilevante in due modi:
 1. **Coerenza**: un sito pesante e lento contraddice il messaggio

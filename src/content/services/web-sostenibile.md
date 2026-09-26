@@ -38,7 +38,7 @@ Ogni progetto ha un **performance budget e un carbon budget** definiti a monte, 
 
 Audit performance esistente + design system + build con budget verificabili in CI. 12-20 settimane.
 
-Un sito web medio produce 1.76g di CO₂ per visita. I nostri producono il 70% in meno — grazie a hosting su energie rinnovabili certificate (Mycelium), architettura headless con Nuxt + Payload CMS (Terra) e design system ottimizzato (Hederae).
+Un sito web medio produce **0,36 g di CO₂ per visita** (GreenMeter, metodo Green Web Foundation / Sustainable Web Design). I nostri producono fino al 70% in meno — grazie a hosting su energie rinnovabili certificate (Mycelium), architettura headless con Nuxt + Payload CMS (Terra) e design system ottimizzato (Hederae).
 
 ## Cosa ottiene il cliente
 
