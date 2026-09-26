@@ -86,12 +86,12 @@
     color: var(--pianeta-muted); font-weight: 600; margin: 0 0 12px;
   }
   :global(.sov-block.is-highlight .sov-block-title) { color: var(--cta-primary); }
-  :global(.sov-block-list) { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-  :global(.sov-block-list li) {
+  :global(.sov-block-list) { padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  :global(.sov-block-list > div) {
     padding-left: 20px; position: relative;
     font-size: var(--ty-meta); line-height: 1.5;
   }
-  :global(.sov-block-list li::before) {
+  :global(.sov-block-list > div::before) {
     content: '→'; position: absolute; left: 0;
     color: var(--cta-primary); font-weight: 600;
   }
@@ -209,8 +209,8 @@
 
         const blocksHtml = (d.inputClient?.length || d.deliverables?.length)
           ? '<div class="sov-blocks">' +
-            (d.inputClient?.length ? '<div class="sov-block"><p class="sov-block-title">Input Client</p><ul class="sov-block-list">' + d.inputClient.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></div>' : '') +
-            (d.deliverables?.length ? '<div class="sov-block is-highlight"><p class="sov-block-title">Deliverables Pianeta</p><ul class="sov-block-list">' + d.deliverables.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></div>' : '') +
+            (d.inputClient?.length ? '<div class="sov-block"><p class="sov-block-title">Input Client</p><div class="sov-block-list">' + d.inputClient.map((x) => '<div>' + esc(x) + '</div>').join('') + '</div></div>' : '') +
+            (d.deliverables?.length ? '<div class="sov-block is-highlight"><p class="sov-block-title">Deliverables Pianeta</p><div class="sov-block-list">' + d.deliverables.map((x) => '<div>' + esc(x) + '</div>').join('') + '</div></div>' : '') +
             '</div>'
           : '';
 
