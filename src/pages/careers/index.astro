@@ -22,7 +22,7 @@ const items = all.filter((i: any) => i.data.draft !== true);
             title={it.data.title || it.id}
             deck={it.data.description}
             kicker={[it.data.employmentType, it.data.location].filter(Boolean).join(' · ')}
-            image={it.data.cover || it.data.ogImage}
+            image={it.data.cover1_1 || it.data.cover || it.data.ogImage}
           />
         ))}
       </div>

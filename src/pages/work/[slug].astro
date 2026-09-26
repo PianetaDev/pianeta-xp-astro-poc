@@ -21,7 +21,7 @@ const nextItem = toNextProp(pickNextItem(allItems, item.id), 'work');
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.ogImage || data.cover;
+const cover = data.cover16_9 || data.ogImage || data.cover;
 const coverVideo = data.coverVideo || undefined;
 const live = data.live || data.links?.live;
 const bulletinRefs: string[] = data.links?.bulletin || [];
@@ -66,6 +66,7 @@ const related = bulletinRefs.map((slug) => {
     title={title}
     deck={data.description}
     cover={cover}
+    coverMobile={data.cover9_16}
     coverVideo={coverVideo}
     primaryCta={{ label: 'Lavoriamo insieme', action: 'open-hire-us' }}
     secondaryCta={live ? { label: 'Visita il sito ↗', href: live, external: true } : undefined}
