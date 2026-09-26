@@ -3,7 +3,6 @@ title: "AI validation with Swarm Intelligence"
 description: "Multi-agent audience simulation to test creative concepts before production. Quantitative validation that complements (rather than replaces) creative judgment."
 category: "creativity"
 processPhase: 2
-icon: "🐝"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 2

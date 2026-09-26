@@ -3,7 +3,6 @@ title: "Brand positioning"
 description: "Mappa competitiva, white space, attributi distintivi. Costruiamo il posizionamento difendibile e i messaggi chiave che lo sostengono nei canali."
 category: "creativity"
 processPhase: 1
-icon: "🧭"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 2

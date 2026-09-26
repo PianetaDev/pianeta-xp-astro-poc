@@ -4,11 +4,20 @@ import { getCategoryByKey, PROCESS_PHASES } from '../../../lib/services-categori
 
 export const prerender = false;
 
-// GET /api/services/[slug].json — dettaglio singolo servizio
-export const GET: APIRoute = async ({ params, site }) => {
+// GET /api/services/[slug].json?locale=it|en — dettaglio singolo servizio
+// locale=en reads from servicesEn collection; falls back to IT if EN sidecar doesn't exist.
+export const GET: APIRoute = async ({ params, site, url }) => {
   const slug = params.slug;
-  const all = (await getCollection('services')).filter((i: any) => i.data.draft !== true);
-  const item = all.find((i: any) => i.id === slug);
+  const locale = (url.searchParams.get('locale') || 'it').toLowerCase() === 'en' ? 'en' : 'it';
+
+  const primary = locale === 'en' ? 'servicesEn' : 'services';
+  const allPrimary = (await getCollection(primary as any)).filter((i: any) => i.data.draft !== true);
+  const allFallback = locale === 'en'
+    ? (await getCollection('services')).filter((i: any) => i.data.draft !== true)
+    : allPrimary;
+
+  const all = allFallback; // used for siblings/next (always IT ordering)
+  const item = allPrimary.find((i: any) => i.id === slug) ?? allFallback.find((i: any) => i.id === slug);
   if (!item) {
     return new Response(JSON.stringify({ error: 'not found' }), {
       status: 404,
@@ -52,7 +61,7 @@ export const GET: APIRoute = async ({ params, site }) => {
     url: `${base}/services/${item.id}`,
     body: item.body || '',
     category: data.category || null,
-    categoryLabel: category?.titleIT || null,
+    categoryLabel: (locale === 'en' ? category?.titleEN : category?.titleIT) || null,
     phaseTag,
     inputClient: data.inputClient ?? [],
     deliverables: data.deliverables ?? [],

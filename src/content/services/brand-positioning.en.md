@@ -3,7 +3,6 @@ title: "Brand positioning"
 description: "Competitive map, white space, distinctive attributes. We build a defensible position and the key messages that carry it across channels."
 category: "creativity"
 processPhase: 1
-icon: "🧭"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 2

@@ -2,16 +2,30 @@
 // Pannello laterale destro per dettaglio servizi.
 // Il click su `.service-open` intercetta la navigazione e fetcha /api/services/<slug>.json.
 // Stessa estetica di TeamOverlay. Le URL dirette /services/<slug> continuano a funzionare.
+interface Props { locale?: 'it' | 'en'; }
+const { locale = 'it' } = Astro.props;
+const S = locale === 'en'
+  ? { loading: 'Loading…', fail: 'Service unavailable.', catLabel: 'Category', processLabel: 'Process', otherServicesIn: 'Other services in ', continueReading: 'Read more', ctaLavoriamo: "Let's work together", ctaComeLavoriamo: 'How we work →', listen: 'Listen', serviceLabel: 'Service', openFull: 'Open full page →' }
+  : { loading: 'Carico…', fail: 'Servizio non disponibile.', catLabel: 'Categoria', processLabel: 'Processo', otherServicesIn: 'Altri servizi in ', continueReading: 'Continua a leggere', ctaLavoriamo: 'Lavoriamo insieme', ctaComeLavoriamo: 'Come lavoriamo →', listen: 'Ascolta', serviceLabel: 'Servizio', openFull: 'Apri pagina completa →' };
+const cfg = {
+  locale,
+  servicesPrefix: locale === 'en' ? '/en/services' : '/services',
+  processHref: locale === 'en' ? '/en/processo' : '/processo',
+  lang: locale === 'en' ? 'en-US' : 'it-IT',
+  S,
+};
 ---
 <div id="service-ov" class="service-ov" hidden>
   <div class="service-ov-backdrop" data-svc-close></div>
-  <aside class="service-ov-panel" role="dialog" aria-modal="true" aria-label="Dettaglio servizio">
+  <aside class="service-ov-panel" role="dialog" aria-modal="true" aria-label={locale === 'en' ? 'Service detail' : 'Dettaglio servizio'}>
     <div class="service-ov-nav">
       <button class="service-ov-x" data-svc-close aria-label="Chiudi">✕</button>
     </div>
     <div id="service-ov-body" class="service-ov-body"></div>
   </aside>
 </div>
+
+<script type="application/json" id="service-ov-cfg" set:html={JSON.stringify(cfg)}></script>
 
 <style>
   .service-ov { position: fixed; inset: 0; z-index: 60; }
@@ -150,6 +164,11 @@
     // (view transitions swap the DOM and call init() again via astro:page-load).
     const HANDLER_KEY = '__sovClick';
 
+    // Read locale config injected at build time
+    const cfgEl = document.getElementById('service-ov-cfg');
+    const cfg = cfgEl ? JSON.parse(cfgEl.textContent || '{}') : { locale: 'it', servicesPrefix: '/services', processHref: '/processo', lang: 'it-IT', S: { loading: 'Carico…', fail: 'Servizio non disponibile.', catLabel: 'Categoria', processLabel: 'Processo', otherServicesIn: 'Altri servizi in ', continueReading: 'Continua a leggere', ctaLavoriamo: 'Lavoriamo insieme', ctaComeLavoriamo: 'Come lavoriamo →', listen: 'Ascolta', serviceLabel: 'Servizio', openFull: 'Apri pagina completa →' } };
+    const S = cfg.S;
+
     // TTS: legge il corpo del servizio corrente. Click ripetuto interrompe.
     window.__sovAscolta = () => {
       if (!window.speechSynthesis) return;
@@ -158,7 +177,7 @@
       const text = el?.textContent?.trim();
       if (!text) return;
       const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'it-IT';
+      u.lang = cfg.lang;
       window.speechSynthesis.speak(u);
     };
 
@@ -188,19 +207,19 @@
         .split(/\n{2,}/).map((b) => b.match(/^<h2>/) ? b : '<p>' + b.replace(/\n/g, '<br>') + '</p>').join('');
 
       const loading = () => {
-        body.innerHTML = '<p style="padding:60px 0;text-align:center;color:var(--pianeta-muted)">Carico…</p>';
+        body.innerHTML = '<p style="padding:60px 0;text-align:center;color:var(--pianeta-muted)">' + S.loading + '</p>';
         ov.hidden = false;
         document.body.style.overflow = 'hidden';
         if (panel) panel.scrollTop = 0;
       };
       const fail = () => {
-        body.innerHTML = '<p style="padding:40px 0;color:var(--pianeta-muted)">Servizio non disponibile.</p>';
+        body.innerHTML = '<p style="padding:40px 0;color:var(--pianeta-muted)">' + S.fail + '</p>';
       };
 
       const renderService = (d) => {
         const meta = [
-          d.categoryLabel ? { k: 'Categoria', v: esc(d.categoryLabel) } : null,
-          d.phaseTag ? { k: 'Processo', v: esc(d.phaseTag) } : null,
+          d.categoryLabel ? { k: S.catLabel, v: esc(d.categoryLabel) } : null,
+          d.phaseTag ? { k: S.processLabel, v: esc(d.phaseTag) } : null,
         ].filter(Boolean);
 
         const metaHtml = meta.length
@@ -210,15 +229,15 @@
         const blocksHtml = (d.inputClient?.length || d.deliverables?.length)
           ? '<div class="sov-blocks">' +
             (d.inputClient?.length ? '<div class="sov-block"><p class="sov-block-title">Input Client</p><ul class="sov-block-list">' + d.inputClient.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></div>' : '') +
-            (d.deliverables?.length ? '<div class="sov-block is-highlight"><p class="sov-block-title">Deliverables Pianeta</p><ul class="sov-block-list">' + d.deliverables.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></div>' : '') +
+            (d.deliverables?.length ? '<div class="sov-block is-highlight"><p class="sov-block-title">Pianeta deliverables</p><ul class="sov-block-list">' + d.deliverables.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></div>' : '') +
             '</div>'
           : '';
 
         const siblingsHtml = d.siblings?.length
-          ? '<section class="sov-siblings"><p class="sov-siblings-title">Altri servizi in ' + esc(d.categoryLabel || 'questa categoria') + '</p>' +
+          ? '<section class="sov-siblings"><p class="sov-siblings-title">' + S.otherServicesIn + esc(d.categoryLabel || '') + '</p>' +
             '<ul class="sov-siblings-list">' +
             d.siblings.map((s) =>
-              '<li><a href="/services/' + esc(s.slug) + '" class="sov-sibling-row service-open" data-service-slug="' + esc(s.slug) + '">' +
+              '<li><a href="' + cfg.servicesPrefix + '/' + esc(s.slug) + '" class="sov-sibling-row service-open" data-service-slug="' + esc(s.slug) + '">' +
               '<span><span class="sov-sibling-title">' + esc(s.title) + '</span>' + (s.description ? '<span class="sov-sibling-deck">' + esc(s.description) + '</span>' : '') + '</span>' +
               '<span class="sov-sibling-arrow">→</span>' +
               '</a></li>'
@@ -227,8 +246,8 @@
           : '';
 
         const nextHtml = d.nextItem
-          ? '<section class="sov-next"><p class="sov-next-eyebrow">Continua a leggere</p>' +
-            '<a href="/services/' + esc(d.nextItem.slug) + '" class="sov-next-link service-open" data-service-slug="' + esc(d.nextItem.slug) + '">' +
+          ? '<section class="sov-next"><p class="sov-next-eyebrow">' + S.continueReading + '</p>' +
+            '<a href="' + cfg.servicesPrefix + '/' + esc(d.nextItem.slug) + '" class="sov-next-link service-open" data-service-slug="' + esc(d.nextItem.slug) + '">' +
             '<span class="sov-next-title">' + esc(d.nextItem.title) + '</span>' +
             '<span class="sov-next-arrow">→</span>' +
             '</a></section>'
@@ -236,9 +255,9 @@
 
         const ctaRow =
           '<div class="sov-cta-row">' +
-          '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'hire-us:open\'))">Lavoriamo insieme</button>' +
-          '<a href="/processo" class="cta-btn cta-ghost">Come lavoriamo →</a>' +
-          '<button type="button" class="cta-btn cta-ghost" onclick="window.__sovAscolta?.()">Ascolta</button>' +
+          '<button type="button" class="cta-btn cta-primary" onclick="window.dispatchEvent(new CustomEvent(\'hire-us:open\'))">' + S.ctaLavoriamo + '</button>' +
+          '<a href="' + cfg.processHref + '" class="cta-btn cta-ghost">' + S.ctaComeLavoriamo + '</a>' +
+          '<button type="button" class="cta-btn cta-ghost" onclick="window.__sovAscolta?.()">' + S.listen + '</button>' +
           '</div>';
 
         // Buttons go inside the meta bordered block (between the two border lines)
@@ -250,7 +269,7 @@
           : ctaRow;
 
         body.innerHTML =
-          '<p class="sov-eyebrow">' + esc(d.categoryLabel || 'Servizio') + '</p>' +
+          '<p class="sov-eyebrow">' + esc(d.categoryLabel || S.serviceLabel) + '</p>' +
           '<h1 class="sov-title">' + esc(d.name) + '</h1>' +
           (d.description ? '<p class="sov-deck">' + esc(d.description) + '</p>' : '') +
           metaBlockHtml +
@@ -258,18 +277,18 @@
           blocksHtml +
           siblingsHtml +
           nextHtml +
-          '<a class="sov-full-link" href="/services/' + esc(d.slug) + '">Apri pagina completa →</a>';
+          '<a class="sov-full-link" href="' + cfg.servicesPrefix + '/' + esc(d.slug) + '">' + S.openFull + '</a>';
       };
 
       const openService = async (slug) => {
         loading();
         try {
-          const r = await fetch('/api/services/' + encodeURIComponent(slug) + '.json');
+          const r = await fetch('/api/services/' + encodeURIComponent(slug) + '.json?locale=' + cfg.locale);
           if (!r.ok) throw new Error('http ' + r.status);
           const d = await r.json();
           if (d && d.error) throw new Error(d.error);
           renderService(d);
-          if (history && history.replaceState) history.replaceState(null, '', '/services#' + slug);
+          if (history && history.replaceState) history.replaceState(null, '', cfg.servicesPrefix + '#' + slug);
         } catch { fail(); }
       };
 
@@ -301,9 +320,9 @@
         if (e.key === 'Escape') close();
       });
 
-      // Deep-link: /services#slug apre l'overlay al load
+      // Deep-link: /services#slug or /en/services#slug apre l'overlay al load
       const openFromHash = () => {
-        if (!location.pathname.startsWith('/services')) return;
+        if (!location.pathname.startsWith(cfg.servicesPrefix)) return;
         const h = (location.hash || '').replace(/^#/, '');
         if (h && /^[a-z0-9-]+$/i.test(h)) openService(h);
       };

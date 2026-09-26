@@ -15,7 +15,6 @@ const baseSchema = z.object({
 const servicesSchemaExt = baseSchema.extend({
   category: z.enum(['creativity', 'design', 'technology']).optional(),
   processPhase: z.union([z.number().int().min(1).max(4), z.string()]).optional(),
-  icon: z.string().optional(),
   inputClient: z.array(z.string()).optional(),
   deliverables: z.array(z.string()).optional(),
   relatedServices: z.array(z.string()).optional(),

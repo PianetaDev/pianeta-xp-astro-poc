@@ -3,7 +3,6 @@ title: "AI validation con Swarm Intelligence"
 description: "Simulazione multi-agente di pubblici per testare concept creativi prima della produzione. Validation quantitativa che integra (non sostituisce) il giudizio dei creativi."
 category: "creativity"
 processPhase: 2
-icon: "🐝"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 2

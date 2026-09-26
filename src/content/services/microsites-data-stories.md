@@ -3,7 +3,6 @@ title: "Microsites & data stories"
 description: "Microsites narrativi che usano dati e visual storytelling per comunicare ricerca, report, campagne. Stack leggero, performance budget, carbon-aware."
 category: "design"
 processPhase: 3
-icon: "🌐"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 4

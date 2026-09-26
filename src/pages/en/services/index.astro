@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import IndexCard from '../../../components/detail/IndexCard.astro';
+import ServiceOverlay from '../../../components/services/ServiceOverlay.astro';
 import { getCollection } from 'astro:content';
-import { SERVICE_CATEGORIES } from '../../../lib/services-categories';
-import { t } from '../../../lib/i18n/strings';
+import { SERVICE_CATEGORIES, PROCESS_PHASES } from '../../../lib/services-categories';
 
 const all = (await getCollection('servicesEn')).filter((i: any) => !i.data.draft);
 
@@ -18,29 +17,132 @@ const byCategory = (key: string) =>
       <p class="index-eyebrow">Sustainable Creativity · Design & Technology</p>
       <h1 class="index-title">Services</h1>
       <p class="index-deck">Three pillars that talk to each other. Co-design + AI validation + open standards. No lock-in.</p>
-      <div style="margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">{t('en', 'cta_lavoriamo')}</button>
-        <a href="/en/processo" class="cta-btn cta-ghost">{t('en', 'cta_come_lavoriamo')} →</a>
+      <div style="margin-top:24px;display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap;">
+        <button type="button" class="cta-btn cta-primary" data-action="open-hire-us">Let's work together</button>
+        <a href="/en/processo" class="cta-btn cta-ghost">How we work →</a>
       </div>
       <script is:inline>
         document.querySelectorAll('[data-action="open-hire-us"]').forEach(b => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('hire-us:open'))));
       </script>
     </header>
 
-    {SERVICE_CATEGORIES.map((cat) => {
-      const items = byCategory(cat.key);
-      if (!items.length) return null;
-      return (
-        <section id={cat.key} class="services-cat" style="margin-top:64px;">
-          <h2 style="font-size:clamp(1.4rem,2.2vw,1.85rem);letter-spacing:-0.02em;margin:0 0 12px;text-align:center;">{cat.titleEN}</h2>
-          <p style="font-size:var(--ty-meta);color:var(--pianeta-muted);line-height:1.55;margin:0 0 24px;text-align:center;max-width:680px;margin-left:auto;margin-right:auto;">{cat.introEN}</p>
-          <div class="index-grid">
-            {items.map((it: any) => (
-              <IndexCard href={`/en/services/${it.id}`} title={it.data.title || it.id} deck={it.data.description} kicker={it.data.icon || cat.titleEN} image={it.data.cover || it.data.ogImage} />
-            ))}
-          </div>
-        </section>
-      );
-    })}
+    <section class="process-bar" aria-label="The 4 phases of the process">
+      {PROCESS_PHASES.map((p) => (
+        <a href={`/en/processo#${p.anchor}`} class="process-chip">
+          <span class="process-chip-num">{p.num}</span>
+          <span class="process-chip-title">{p.title}</span>
+        </a>
+      ))}
+    </section>
+
+    <section class="services-macros">
+      {SERVICE_CATEGORIES.map((cat) => {
+        const items = byCategory(cat.key);
+        return (
+          <article class="services-macro" id={cat.key}>
+            <header class="services-macro-head">
+              <h2 class="services-macro-title">{cat.titleEN}</h2>
+              <p class="services-macro-intro">{cat.introEN}</p>
+            </header>
+
+            <ul class="services-l2-list">
+              {items.map((s: any) => (
+                <li>
+                  <a href={`/en/services/${s.id}`} class="services-l2-row service-open" data-service-slug={s.id}>
+                    <span class="services-l2-content">
+                      <span class="services-l2-title">{s.data.title}</span>
+                      {s.data.description && <span class="services-l2-deck">{s.data.description}</span>}
+                    </span>
+                    {s.data.processPhase != null && (
+                      <span class="services-l2-phase">→ Phase {s.data.processPhase}</span>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        );
+      })}
+    </section>
+
+    <footer class="detail-foot" style="border-top:1px solid var(--pianeta-border); padding-top:48px; margin-top:96px;">
+      <a href="/en/processo" class="cta-btn cta-ghost">See the full process →</a>
+    </footer>
   </div>
+  <ServiceOverlay locale="en" />
+
+  <style>
+    .process-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 40px 0 0;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--pianeta-border);
+    }
+    @media (min-width: 800px) { .process-bar { grid-template-columns: repeat(4, 1fr); } }
+    .process-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      width: 100%;
+      background: var(--pianeta-bg-card);
+      border: 1px solid var(--pianeta-border);
+      border-radius: var(--r-pill);
+      text-decoration: none;
+      color: var(--pianeta-text);
+      transition: border-color 150ms;
+    }
+    .process-chip:hover { border-color: var(--cta-primary); }
+    .process-chip-num {
+      color: var(--cta-primary);
+      font-size: var(--ty-sub);
+      line-height: 1;
+    }
+    .process-chip-title {
+      font-size: 12px;
+    }
+
+    .services-macros { margin-top: 32px; display: flex; flex-direction: column; gap: 64px; }
+    .services-macro {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    @media (min-width: 900px) { .services-macro { grid-template-columns: 280px 1fr; gap: 56px; } }
+    .services-macro-head { position: sticky; top: 24px; align-self: start; }
+    .services-macro-title {
+      font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 0 0 12px;
+    }
+    .services-macro-intro { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
+
+    .services-l2-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .services-l2-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+      padding: 18px 8px;
+      border-bottom: 1px solid var(--pianeta-border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 150ms;
+    }
+    .services-l2-row:hover { background: rgba(255,107,51,0.06); }
+    .services-l2-content { display: flex; flex-direction: column; gap: 4px; }
+    .services-l2-title { font-size: 16px; color: var(--pianeta-text); }
+    .services-l2-deck { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.45; }
+    .services-l2-phase {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--cta-primary);
+      align-self: center;
+      white-space: nowrap;
+    }
+  </style>
 </BaseLayout>

@@ -3,7 +3,6 @@ title: "Brand identity & rebranding"
 description: "Sistemi visivi che reggono nel tempo e nei sotto-brand. Logo, brand manual, stationery, template, kit social — pensati per durare oltre il primo go-live."
 category: "design"
 processPhase: 2
-icon: "🎨"
 cover: "/og/work-bc3-cover.png"
 ogImage: "/og/work-bc3-cover.png"
 order: 1

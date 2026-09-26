@@ -3,7 +3,6 @@ title: "Pianeta-centric design strategy"
 description: "We turn the constraint of sustainability into a strategic lever. Carbon budget, accessibility, and delivered code as verifiable standards written into specs, not PowerPoint."
 category: "creativity"
 processPhase: 1
-icon: "🌍"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 4
