@@ -17,7 +17,7 @@ if (nextItem) nextItem.type = 'en/lab';
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.ogImage || data.cover;
+const cover = data.cover16_9 || data.ogImage || data.cover;
 
 const metaInline = [
   data.kind && { label: 'Type', value: data.kind },
@@ -51,6 +51,7 @@ const secondaryCta = data.links?.client && data.links?.external
     title={title}
     deck={data.description}
     cover={cover}
+    coverMobile={data.cover9_16}
     primaryCta={primaryCta}
     secondaryCta={secondaryCta}
     backHref="/en/lab"

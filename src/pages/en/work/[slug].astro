@@ -23,7 +23,7 @@ if (nextItem) nextItem.type = 'en/work';
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.ogImage || data.cover;
+const cover = data.cover16_9 || data.ogImage || data.cover;
 const live = data.live || data.links?.live;
 const bulletinRefs: string[] = data.links?.bulletin || [];
 
@@ -67,6 +67,7 @@ const related = bulletinRefs.map((slug) => {
     title={title}
     deck={data.description}
     cover={cover}
+    coverMobile={data.cover9_16}
     primaryCta={{ label: t('en', 'cta_lavoriamo'), action: 'open-hire-us' }}
     secondaryCta={live ? { label: 'Visit site ↗', href: live, external: true } : undefined}
     backHref="/en/work"

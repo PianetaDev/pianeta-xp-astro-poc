@@ -29,7 +29,7 @@ const items = all
             title={it.data.title || it.id}
             deck={it.data.description}
             kicker={[it.data.client, it.data.year].filter(Boolean).join(' · ')}
-            image={it.data.cover || it.data.ogImage}
+            image={it.data.cover1_1 || it.data.cover || it.data.ogImage}
           />
         ))}
       </div>

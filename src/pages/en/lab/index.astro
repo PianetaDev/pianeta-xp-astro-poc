@@ -24,7 +24,7 @@ const items = all
     ) : (
       <div class="index-grid">
         {items.map((it: any) => (
-          <IndexCard href={`/en/lab/${it.id}`} title={it.data.title || it.id} deck={it.data.description} kicker={it.data.kind} image={it.data.cover || it.data.ogImage} />
+          <IndexCard href={`/en/lab/${it.id}`} title={it.data.title || it.id} deck={it.data.description} kicker={it.data.kind} image={it.data.cover1_1 || it.data.cover || it.data.ogImage} />
         ))}
       </div>
     )}

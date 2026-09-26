@@ -17,7 +17,7 @@ if (nextItem) nextItem.type = 'en/bulletin';
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.ogImage || data.cover;
+const cover = data.cover16_9 || data.ogImage || data.cover;
 
 const formatDate = (d?: Date) => d ? new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' }) : '';
 
@@ -66,6 +66,7 @@ const jsonLd = {
     title={title}
     deck={data.description}
     cover={cover}
+    coverMobile={data.cover9_16 || data.coverMobile}
     secondaryCta={{ label: 'Subscribe to the Bulletin', href: '/bulletin/iscrivimi' }}
     backHref="/en/bulletin"
     backLabel="All articles"

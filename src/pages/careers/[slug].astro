@@ -15,7 +15,7 @@ const nextItem = toNextProp(pickNextItem(allItems, item.id), 'careers');
 const { Content } = await render(item);
 const data: any = item.data;
 const title = data.title || item.id;
-const cover = data.ogImage || data.cover;
+const cover = data.cover16_9 || data.ogImage || data.cover;
 const applyEmail = data.applyEmail || 'people@pianeta.studio';
 
 const url = new URL(`/careers/${item.id}`, Astro.site).toString();
@@ -62,6 +62,7 @@ if (data.location) eyebrowParts.push({ label: data.location });
     title={title}
     deck={data.description}
     cover={cover}
+    coverMobile={data.cover9_16}
     primaryCta={{ label: 'Candidati', href: `mailto:${applyEmail}?subject=${encodeURIComponent('Candidatura — ' + title)}` }}
     backHref="/careers"
     backLabel="Tutte le posizioni"
