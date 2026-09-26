@@ -13,6 +13,7 @@ draft: false
 type: work
 tags: ["partnership", "media", "sostenibilità", "campus", "sicilia", "territorio"]
 cover: "/og/work-bosco-colto-cover.jpg"
+cover4_5: "/og/work-bosco-colto-cover-4_5.jpg"
 ogImage: "/og/work-bosco-colto-cover.jpg"
 coverVideo:
   src16_9: "/work/bosco-colto/bosco-colto-cover-16_9.mp4"
