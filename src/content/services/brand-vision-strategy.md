@@ -3,7 +3,6 @@ title: "Brand vision & strategy"
 description: "Definiamo la visione di marca e la traiettoria strategica a 3-5 anni. Workshop con leadership, audit del posizionamento attuale, narrative architecture, manifesto operativo."
 category: "creativity"
 processPhase: 1
-icon: "🎯"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 1

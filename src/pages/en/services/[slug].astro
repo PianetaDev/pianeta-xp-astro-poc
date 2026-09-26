@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import DetailPage from '../../../components/detail/DetailPage.astro';
+import ServiceOverlay from '../../../components/services/ServiceOverlay.astro';
 import { getCollection, render } from 'astro:content';
 import { pickNextItem, toNextProp } from '../../../lib/next-item';
 import { getCategoryByKey, getPhaseTag } from '../../../lib/services-categories';
@@ -63,7 +64,7 @@ const jsonLd = {
     eyebrowParts={eyebrowParts}
     title={title}
     deck={data.description}
-    cover={cover}
+    hideCover
     primaryCta={isNeuromarketing
       ? { label: 'Talk to Alba', action: 'open-alba' }
       : { label: t('en', 'cta_lavoriamo'), action: 'open-hire-us' }}
@@ -102,16 +103,16 @@ const jsonLd = {
 
     {siblings.length > 0 && (
       <section class="service-siblings">
-        <h3 class="service-siblings-title">Other services in {category?.title || 'this category'}</h3>
+        <h3 class="service-siblings-title">Other services in {category?.titleEN || 'this category'}</h3>
         <ul class="service-siblings-list">
           {siblings.map((s: any) => (
             <li>
-              <a href={`/en/services/${s.id}`} class="service-sibling-card">
-                <span class="service-sibling-icon">{s.data.icon || '•'}</span>
-                <div>
+              <a href={`/en/services/${s.id}`} class="service-sibling-row service-open" data-service-slug={s.id}>
+                <span class="service-sibling-content">
                   <span class="service-sibling-title">{s.data.title}</span>
                   {s.data.description && <span class="service-sibling-deck">{s.data.description}</span>}
-                </div>
+                </span>
+                <span class="service-sibling-arrow">→</span>
               </a>
             </li>
           ))}
@@ -119,4 +120,5 @@ const jsonLd = {
       </section>
     )}
   </DetailPage>
+  <ServiceOverlay locale="en" />
 </BaseLayout>

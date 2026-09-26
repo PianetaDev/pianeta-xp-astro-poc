@@ -3,7 +3,6 @@ title: "Sustainable web (Stack Terra)"
 description: "Websites with carbon budget as a verifiable constraint in CI. Carbon-neutral hosting, performance budget, integrated GreenMeter. Open standards, delivered code, client repo."
 category: "technology"
 processPhase: 3
-icon: "🌱"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 1

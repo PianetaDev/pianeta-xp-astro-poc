@@ -3,7 +3,6 @@ title: "Multi-brand design system"
 description: "Replicable systems for organizations with multiple brands under one umbrella. Semantic tokens, reusable components, system governance."
 category: "design"
 processPhase: 2
-icon: "🧩"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 2

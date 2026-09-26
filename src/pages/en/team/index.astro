@@ -29,36 +29,61 @@ const sections = [
 
     {sections.map((sec) => sec.items.length > 0 && (
       <section class="team-section">
-        <header class="team-section-head">
-          <h2 class="team-section-title">{sec.title}</h2>
-          <p class="team-section-intro">
-            {sec.intro}
-            {sec.contact && <> Contact: <a href={`mailto:${sec.contact}`} class="meta-link">{sec.contact}</a></>}
-          </p>
-        </header>
-        <div class="team-grid">
-          {sec.items.map((it: any) => {
-            const name = it.data.name || it.data.title || it.id;
-            const photo = it.data.photo || it.data.cover;
-            const initials = String(name).split(/\s+/).map((s: string) => s[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
-            return (
-              <a
-                href={`/en/team/${it.id}`}
-                class="team-card team-open"
-                data-team-slug={it.id}
-                aria-label={name}
-              >
-                <div class="team-card-photo" style={photo ? `background-image:url('${photo}')` : ''}>
-                  {!photo && <span class="team-card-initials">{initials}</span>}
-                </div>
-                <div class="team-card-meta">
-                  <strong class="team-card-name">{name}</strong>
-                  {it.data.role && <span class="team-card-role">{it.data.role}</span>}
-                </div>
-              </a>
-            );
-          })}
-        </div>
+        {sec.key === 'ai' ? (
+          /* Alba: full-width banner across all columns */
+          <a
+            href="/en/team/alba"
+            class="alba-banner team-open"
+            data-team-slug="alba"
+            aria-label="Alba — Group AI"
+          >
+            <div class="alba-banner-img">
+              <picture>
+                <source media="(max-width: 639px)" srcset="/team/alba/alba-4_5.webp" type="image/webp" />
+                <source srcset="/team/alba/alba-1_1.webp" type="image/webp" />
+                <img src="/team/alba/alba-1_1.webp" alt="Alba" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <div class="alba-banner-text">
+              <span class="alba-banner-name">Alba</span>
+              <span class="alba-banner-sep"> — </span>
+              <span class="alba-banner-desc">Group AI · AI systems operating inside Pianeta.Studio with explicit disclosure. No "human disguised as AI", no "AI disguised as human".</span>
+            </div>
+          </a>
+        ) : (
+          <>
+            <header class="team-section-head">
+              <h2 class="team-section-title">{sec.title}</h2>
+              <p class="team-section-intro">
+                {sec.intro}
+                {sec.contact && <> Contact: <a href={`mailto:${sec.contact}`} class="meta-link">{sec.contact}</a></>}
+              </p>
+            </header>
+            <div class="team-grid">
+              {sec.items.map((it: any) => {
+                const name = it.data.name || it.data.title || it.id;
+                const photo = it.data.photo || it.data.cover;
+                const initials = String(name).split(/\s+/).map((s: string) => s[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
+                return (
+                  <a
+                    href={`/en/team/${it.id}`}
+                    class="team-card team-open"
+                    data-team-slug={it.id}
+                    aria-label={name}
+                  >
+                    <div class="team-card-photo" style={photo ? `background-image:url('${photo}')` : ''}>
+                      {!photo && <span class="team-card-initials">{initials}</span>}
+                    </div>
+                    <div class="team-card-meta">
+                      <strong class="team-card-name">{name}</strong>
+                      {it.data.role && <span class="team-card-role">{it.data.role}</span>}
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </>
+        )}
       </section>
     ))}
 
@@ -77,9 +102,61 @@ const sections = [
     .team-locale-switch a:hover { color: var(--pianeta-text); text-decoration: underline; }
 
     .team-section { margin-top: 64px; }
-    .team-section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
+    .team-section-head { max-width: 760px; margin: 0 0 32px; text-align: left; }
     .team-section-title { font-size: clamp(1.4rem, 2.2vw, 1.85rem); letter-spacing: -0.02em; margin: 0 0 10px; }
-    .team-section-intro { font-size: var(--ty-meta); color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
+    .team-section-intro { font-size: 16px; color: var(--pianeta-muted); line-height: 1.55; margin: 0; }
+
+    /* Alba full-width banner */
+    .alba-banner {
+      display: flex; flex-direction: column; width: 100%;
+      text-decoration: none; color: inherit;
+      border: 1px solid var(--pianeta-border);
+      border-radius: var(--radius-card-sm);
+      background: var(--pianeta-bg-card);
+      overflow: hidden;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+    .alba-banner:hover {
+      border-color: var(--pianeta-border-strong);
+      box-shadow: 0 10px 24px rgba(14,17,22,.08);
+    }
+    /* Desktop: image left, text right */
+    @media (min-width: 640px) {
+      .alba-banner { flex-direction: row; align-items: stretch; }
+    }
+    .alba-banner-img {
+      flex-shrink: 0;
+      width: 100%;
+    }
+    @media (min-width: 640px) {
+      .alba-banner-img { width: clamp(180px, 22vw, 300px); }
+    }
+    .alba-banner-img picture,
+    .alba-banner-img img {
+      display: block; width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+    }
+    /* Mobile: 4:5 aspect ratio */
+    @media (max-width: 639px) {
+      .alba-banner-img { aspect-ratio: 4 / 5; }
+      .alba-banner-img img { height: auto; max-height: 400px; object-fit: cover; }
+    }
+    .alba-banner-text {
+      display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
+      padding: 24px clamp(16px, 4vw, 36px);
+      align-self: center;
+    }
+    .alba-banner-name {
+      font-size: clamp(1.2rem, 2vw, 1.5rem); font-weight: 600; letter-spacing: -0.02em;
+      color: var(--pianeta-text);
+    }
+    .alba-banner-sep {
+      color: var(--pianeta-muted); font-size: var(--ty-meta);
+    }
+    .alba-banner-desc {
+      font-size: 16px; color: var(--pianeta-muted); line-height: 1.55;
+      width: 100%;
+    }
 
     .team-grid {
       display: grid;

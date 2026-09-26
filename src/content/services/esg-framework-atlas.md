@@ -3,7 +3,6 @@ title: "ESG framework — Atlas"
 description: "Framework ESG proprietario che dà un linguaggio comune tra studio, clienti e fornitori. Indicatori, metriche, linee guida operative."
 category: "technology"
 processPhase: 1
-icon: "🗺️"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 3

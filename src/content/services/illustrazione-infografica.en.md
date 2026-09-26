@@ -3,7 +3,6 @@ title: "Illustration & infographics"
 description: "Editorial illustration and scientific infographics. Designed to be read, not just looked at — with multi-layered reading systems."
 category: "design"
 processPhase: 2
-icon: "✏️"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 3

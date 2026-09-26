@@ -3,7 +3,6 @@ title: "Neuromarketing Lab"
 description: "Validation AI di campagne video e audio con Swarm Intelligence e Neural Prediction. Un secondo parere quantitativo sulle scelte creative — prima di rendere il video, prima di andare in produzione."
 category: "creativity"
 processPhase: 2
-icon: "🧠"
 cover: "/og/service-creativita-neuromarketing.png"
 ogImage: "/og/service-creativita-neuromarketing.png"
 order: 1

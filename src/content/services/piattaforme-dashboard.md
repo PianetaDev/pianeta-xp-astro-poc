@@ -3,7 +3,6 @@ title: "Piattaforme & dashboard"
 description: "Piattaforme web custom e dashboard di business intelligence. Architettura modulare, autenticazione enterprise, performance verificabili."
 category: "technology"
 processPhase: 3
-icon: "📊"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 3

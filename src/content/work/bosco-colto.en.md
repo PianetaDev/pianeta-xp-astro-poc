@@ -22,7 +22,12 @@ tags: ["partnership", "media", "sustainability", "campus", "sicily", "territory"
 
 Bosco Colto is an annual campus held in the Boschi di Santo Pietro, Caltagirone, Sicily. Organized by Makramè APS, it brings together international tutors, students of architecture, design and art, and the local community around a central theme. It is a temporary construction site where things are built physically, using local materials, traditional techniques and contemporary hybridizations.
 
-For a fuller account of the project and what happened at BC26: [Bosco Colto 2026 — Thinking with Animals, building community →](/bulletin/bosco-colto-2026)
+For a fuller account of the project and what happened at BC26:
+
+<a class="scheda-card-b" href="/en/bulletin/bosco-colto-2026">
+  <span class="card-title">Bosco Colto 2026 — Thinking with Animals, building community</span>
+  <span class="card-icon" aria-hidden="true">↗</span>
+</a>
 
 ## How it started: Nutrimenti, 2025
 

@@ -3,7 +3,6 @@ title: "Web sostenibile (Stack Terra)"
 description: "Siti web con carbon budget come vincolo verificabile in CI. Hosting carbon-neutral, performance budget, GreenMeter integrato. Standard aperti, codice consegnato, repo del cliente."
 category: "technology"
 processPhase: 3
-icon: "🌱"
 cover: "/og/placeholder-1_1.png"
 ogImage: "/og/placeholder-16_9.png"
 order: 1
