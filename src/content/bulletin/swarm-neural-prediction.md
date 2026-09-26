@@ -104,11 +104,20 @@ Il [bulletin sulla campagna ECLAG](/bulletin/validare-una-campagna-prima-di-prod
 
 ## Casi e collegamenti
 
-[Choose to See Them — ECLAG: il caso studio applicato.](/work/eclag)
+<a class="scheda-card-b" href="/work/eclag">
+  <span class="card-title">Choose to See Them — ECLAG: il caso studio applicato.</span>
+  <span class="card-icon">↗</span>
+</a>
 
-[Validare una campagna video prima di produrla: la storia operativa, le sette lezioni, cosa applicheremo ai prossimi progetti.](/bulletin/validare-una-campagna-prima-di-produrla)
+<a class="scheda-card-b" href="/bulletin/validare-una-campagna-prima-di-produrla">
+  <span class="card-title">Validare una campagna video prima di produrla: la storia operativa, le sette lezioni, cosa applicheremo ai prossimi progetti.</span>
+  <span class="card-icon">↗</span>
+</a>
 
-[Creatività e neuromarketing: il servizio.](/services/neuromarketing-lab)
+<a class="scheda-card-b" href="/services/neuromarketing-lab">
+  <span class="card-title">Creatività e neuromarketing: il servizio.</span>
+  <span class="card-icon">↗</span>
+</a>
 
 ## Riferimenti
 

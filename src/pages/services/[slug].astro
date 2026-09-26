@@ -131,12 +131,12 @@ const jsonLd = {
         <ul class="service-siblings-list">
           {siblings.map((s: any) => (
             <li>
-              <a href={`/services/${s.id}`} class="service-sibling-row service-open" data-service-slug={s.id}>
-                <span class="service-sibling-content">
-                  <span class="service-sibling-title">{s.data.title}</span>
-                  {s.data.description && <span class="service-sibling-deck">{s.data.description}</span>}
+              <a href={`/services/${s.id}`} class="sibling-row service-open" data-service-slug={s.id}>
+                <span>
+                  <span class="sibling-title">{s.data.title}</span>
+                  {s.data.description && <span class="sibling-deck">{s.data.description}</span>}
                 </span>
-                <span class="service-sibling-arrow">→</span>
+                <span class="sibling-arrow">→</span>
               </a>
             </li>
           ))}
@@ -204,22 +204,7 @@ const jsonLd = {
       margin: 0 0 8px;
     }
     .service-siblings-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
-    .service-sibling-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
-      padding: 14px 8px;
-      border-bottom: 1px solid var(--pianeta-border);
-      text-decoration: none;
-      color: inherit;
-      transition: background 150ms;
-    }
-    .service-sibling-row:hover { background: rgba(255,107,51,0.06); }
-    .service-sibling-content { display: flex; flex-direction: column; gap: 3px; }
-    .service-sibling-title { font-size: var(--ty-meta); }
-    .service-sibling-deck { font-size: 12px; color: var(--pianeta-muted); line-height: 1.4; }
-    .service-sibling-arrow { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cta-primary); white-space: nowrap; }
+    /* .sibling-row, .sibling-title, .sibling-deck, .sibling-arrow → global.css */
 
     .service-continue { margin: 32px 0; padding-top: 24px; border-top: 1px solid var(--pianeta-border); }
     .service-continue-eyebrow {

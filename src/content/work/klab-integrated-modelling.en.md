@@ -51,4 +51,7 @@ The work focused on three axes:
 
 Project realized as part of the collaboration with ARIES — the same ecosystem as the case study:
 
-[Aries — Towards a smarter & more sustainable world](/work/aries-towards-smarter-sustainable-world)
+<a class="scheda-card-b" href="/work/aries-towards-smarter-sustainable-world">
+  <span class="card-title">Aries — Towards a smarter & more sustainable world</span>
+  <span class="card-icon">↗</span>
+</a>
