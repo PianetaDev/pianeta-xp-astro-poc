@@ -1,6 +1,6 @@
 ---
 title: "Il percorso Susdef: dall'ascolto alla proposta che va oltre"
-description: "Fondazione per lo Sviluppo Sostenibile aveva esigenze chiare e trent'anni di archivio documentale da far funzionare meglio. Siamo partiti da lì — non dalla nostra soluzione preferita. Il percorso, e cosa ha aperto."
+description: "Fondazione Sviluppo Sostenibile aveva esigenze chiare e trent'anni di archivio documentale da far funzionare meglio. Siamo partiti da lì — non dalla nostra soluzione preferita. Il percorso, e cosa ha aperto."
 date: 2026-08-27
 draft: true
 locale: it
@@ -11,17 +11,15 @@ readingTime: "6 min"
 category: "Metodo"
 ---
 
-**TLDR.** Fondazione per lo Sviluppo Sostenibile aveva requisiti definiti e un archivio di trent'anni che non riusciva a valorizzare. Siamo partiti dalle loro esigenze — non dalla nostra risposta standard. Da quella conversazione è emerso uno stack diverso da quello atteso, una migrazione di oltre 33.000 contenuti, e proposte che non erano nel capitolato originale.
+**TLDR.** Fondazione Sviluppo Sostenibile aveva requisiti definiti e un archivio di trent'anni che non riusciva a valorizzare. Siamo partiti dalle loro esigenze — non dalla nostra risposta standard. Da quella conversazione è emerso uno stack diverso da quello atteso, una migrazione di oltre 33.000 contenuti, e proposte che non erano nel capitolato originale.
 
 ## Da dove siamo partiti
 
-La Fondazione per lo Sviluppo Sostenibile — Susdef — coordina il Forum Nazionale per lo Sviluppo Sostenibile, produce da trent'anni report, documenti di policy e materiali di ricerca che ministeri e centri di ricerca usano come riferimento. Quando ci hanno coinvolto nella selezione, avevano le idee abbastanza chiare: sito rinnovato, CMS gestibile in autonomia dal team interno senza dipendere dal fornitore per ogni modifica, accessibilità WCAG 2.1 AA (requisito contrattuale, non opzionale), hosting europeo GDPR-compliant.
+La Fondazione Sviluppo Sostenibile — Susdef — coordina il Forum Nazionale per lo Sviluppo Sostenibile, produce da trent'anni report, documenti di policy e materiali di ricerca che ministeri e centri di ricerca usano come riferimento. Quando ci hanno coinvolto nella selezione, avevano le idee abbastanza chiare: sito rinnovato, CMS gestibile in autonomia dal team interno senza dipendere dal fornitore per ogni modifica, accessibilità WCAG 2.1 AA (requisito contrattuale, non opzionale), hosting europeo GDPR-compliant.
 
 Quello che non avevano ancora risolto era l'archivio: **oltre 33.000 contenuti** costruiti in trent'anni di produzione editoriale — articoli, report, download, categorizzazioni stratificate nel tempo — difficili da trovare, difficili da connettere tra loro, difficili da tenere vivi.
 
 Siamo partiti da lì.
-
-Il progetto è nato dalla partnership tra Latte Creative e la Fondazione per lo Sviluppo Sostenibile, con Pianeta come co-produttore tecnico. Prima ancora di scegliere lo stack, la domanda era: che tipo di organizzazione è Susdef? Una fondazione di ricerca da trent'anni non ha un sito da aggiornare — ha una galassia. Settori, persone, documenti interconnessi nel corso di trent'anni di produzione. L'architettura parte da qui: costruire un sistema di entità collegate, non un catalogo di pagine statiche.
 
 ## Lo stack: non la risposta attesa, ma quella giusta
 
@@ -55,10 +53,10 @@ Non sempre il lavoro più interessante è quello che si vede nel capitolato.
 
 ## Vedi anche
 
-→ [Case study Susdef →](/work/susdef)
+→ Case study Susdef — in arrivo
 
 ## Parlane con noi
 
 Se hai un archivio documentale che non riesce a valorizzare quello che contiene — per dimensione, complessità, o uno stack che è diventato un ostacolo — scrivici prima di scrivere il capitolato.
 
-**[info@pianeta.studio](mailto:info@pianeta.studio)**
+**[max@pianeta.studio](mailto:max@pianeta.studio)**
